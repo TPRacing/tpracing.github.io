@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ✏️ SEO : titre affiché dans Google + onglet du navigateur -->
+  <title>TPRacing — Thomas Papone Racing | Association de sport automobile</title>
+  <meta name="description" content="TPRacing est une association de sport automobile fondée en 2021 par un père pilote et son fils : karting de compétition, simracing, et le championnat Caterham en ligne de mire.">
+
+  <link rel="canonical" href="https://tpracing.github.io/">
+  <meta property="og:title" content="TPRacing — Thomas Papone Racing">
+  <meta property="og:description" content="Le volant se transmet. Association de sport automobile : karting de compétition, simracing, cap sur la Caterham.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tpracing.github.io/">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:image" content="https://tpracing.github.io/assets/img/hero-2022.jpg">
+
+  <link rel="icon" type="image/png" href="assets/logo-couleur-degrade.png">
+  <link rel="preload" href="assets/fonts/korataki-bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/bebas-neue-pro-middle.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": "TPRacing — Thomas Papone Racing",
+    "alternateName": "TPRacing",
+    "description": "Association de sport automobile fondée en 2021 : karting de compétition, simracing, objectif championnat Caterham.",
+    "foundingDate": "2021-12",
+    "sport": "Sport automobile",
+    "founder": { "@type": "Person", "name": "Thomas Papone", "jobTitle": "Pilote, co-fondateur" },
+    "sameAs": [ "https://www.linkedin.com/company/tpracing/" ]
+  }
+  </script>
+
+  <style>
+    /* ---------- Hero accueil ---------- */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background: var(--marine-deep);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/img/hero-2022.jpg') 72% 32% / cover no-repeat;
+      animation: kenburns 24s ease-in-out infinite alternate;
+    }
+    @keyframes kenburns {
+      from { transform: scale(1); }
+      to { transform: scale(1.08); }
+    }
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(75deg, rgba(7,11,29,.92) 0%, rgba(7,11,29,.62) 44%, rgba(7,11,29,.06) 78%),
+        linear-gradient(0deg, rgba(7,11,29,.82) 0%, transparent 50%);
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1180px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 150px 6% 130px;
+      color: var(--blanc);
+    }
+    .hero h1 {
+      color: var(--blanc);
+      max-width: 940px;
+      font-size: clamp(2.2rem, 5.4vw, 4.3rem);
+      line-height: 1.04;
+    }
+    .hero h1 .or { color: var(--or); }
+    .hero .lead { color: #c7cddb; margin: 24px 0 38px; max-width: 560px; }
+    .hero .btn-rangee { display: flex; gap: 16px; flex-wrap: wrap; }
+    @media (max-width: 560px) { .hero h1 { font-size: 2.15rem; } }
+
+    /* ---------- Bande chiffres ---------- */
+    .chiffres {
+      display: flex;
+      justify-content: center;
+      gap: clamp(34px, 9vw, 130px);
+      flex-wrap: wrap;
+      padding: 64px 6% 50px;
+      background: var(--blanc);
+      position: relative;
+    }
+    .chiffres .bloc { text-align: center; }
+    .chiffres .label {
+      font-family: var(--f-label);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gris);
+      font-size: .95rem;
+      margin-top: 8px;
+    }
+
+    /* ---------- L'association ---------- */
+    #association { padding-top: 70px; }
+    .asso-grille {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: clamp(30px, 5vw, 70px);
+      align-items: center;
+      max-width: 1180px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .asso-txt .logo-asso { width: min(200px, 44%); margin-bottom: 26px; }
+    .asso-txt p + p { margin-top: 14px; }
+    .heritage { display: grid; gap: 36px; }
+    .heritage figure:nth-child(2) { margin-left: 12%; }
+    .heritage figure:nth-child(3) { margin-left: 5%; }
+    .heritage figcaption {
+      font-family: var(--f-label);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: .95rem;
+      color: var(--gris);
+      margin-top: 12px;
+    }
+    @media (max-width: 860px) { .asso-grille { grid-template-columns: 1fr; } }
+
+    /* ---------- Disciplines ---------- */
+    .disciplines { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; max-width: 1180px; margin: 44px auto 0; position: relative; z-index: 1; }
+    .disc {
+      position: relative;
+      background: rgba(39, 49, 68, .4);
+      border: 1px solid rgba(246,247,252,.12);
+      overflow: hidden;
+    }
+    .disc .photo { height: 340px; overflow: hidden; }
+    .disc .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .disc:hover .photo img { transform: scale(1.05); }
+    .disc::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: 0;
+      height: 3px; width: 0;
+      background: var(--or);
+      transition: width .45s ease;
+    }
+    .disc:hover::after { width: 100%; }
+    .disc .corps { padding: 22px 22px 26px; }
+    .disc h3 { color: var(--blanc); margin-bottom: 8px; }
+    .disc p { color: #aeb6c8; font-size: .95rem; }
+    .disc .puce {
+      position: absolute; top: 14px; left: 14px;
+      z-index: 2;
+      background: var(--or); color: var(--marine-deep);
+      font-family: var(--f-titre); font-weight: 700; font-size: 1.05rem;
+      width: 46px; height: 46px;
+      display: flex; align-items: center; justify-content: center;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    }
+    @media (max-width: 900px) { .disciplines { grid-template-columns: 1fr; } .disc .photo { height: 300px; } }
+
+    /* ---------- Partenaires ---------- */
+    .part-duo {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: clamp(28px, 4.5vw, 64px);
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 860px) { .part-duo { grid-template-columns: 1fr; } }
+    .part-duo figcaption {
+      font-family: var(--f-label);
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      font-size: .92rem;
+      color: var(--gris);
+      margin-top: 12px;
+    }
+    .part-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1180px; margin: 40px auto; position: relative; z-index: 1; }
+    .part-carte {
+      background: #fff;
+      border: 1px solid rgba(30,38,53,.1);
+      border-top: 3px solid var(--or);
+      padding: 26px 24px;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .part-carte:hover { transform: translateY(-5px); box-shadow: 0 16px 34px rgba(30,38,53,.1); }
+    .part-carte h3 { color: var(--marine); margin-bottom: 8px; }
+    .part-carte p { color: var(--gris); font-size: .95rem; }
+    @media (max-width: 900px) { .part-grille { grid-template-columns: 1fr; } }
+    .part-cta {
+      max-width: 1180px;
+      margin: 0 auto;
+      background:
+        radial-gradient(rgba(246,247,252,.04) 1px, transparent 1.5px),
+        var(--marine);
+      background-size: 22px 22px, 100% 100%;
+      color: var(--blanc);
+      padding: 34px 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+    }
+    .part-cta strong { font-family: var(--f-label); font-weight: 400; font-size: 1.55rem; letter-spacing: .06em; text-transform: uppercase; }
+
+    /* ---------- Galerie ---------- */
+    .galerie {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px 24px;
+      margin-top: 46px;
+    }
+    .galerie figure { margin: 0; }
+    .galerie figcaption {
+      font-family: var(--f-label);
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      font-size: .92rem;
+      color: #aeb6c8;
+      margin-top: 12px;
+    }
+    .galerie .frame { overflow: visible; }
+    .galerie .frame img { aspect-ratio: 3 / 2; transition: transform .45s ease, filter .45s ease; }
+    .galerie .frame:hover img { transform: scale(1.03); filter: saturate(1.15); }
+    @media (max-width: 900px) { .galerie { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 620px) { .galerie { grid-template-columns: 1fr; } }
+
+    /* ---------- Teaser pilote ---------- */
+    .pilote-grille {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: clamp(30px, 5vw, 80px);
+      align-items: center;
+      max-width: 1180px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .pilote-grille .frame { max-width: 400px; }
+    @media (max-width: 860px) { .pilote-grille { grid-template-columns: 1fr; } .pilote-grille .frame { margin: 0 auto; } }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav id="navbar">
+    <a class="logo" href="index.html">
+      <img class="logo-sombre" src="assets/logo-secondaire-blanc.png" alt="TPRacing — Thomas Papone Racing">
+      <img class="logo-clair" src="assets/logo-secondaire-couleur.png" alt="">
+    </a>
+    <ul>
+      <li class="masque-mobile"><a href="#association">L'association</a></li>
+      <li class="masque-mobile"><a href="#trajectoire">La trajectoire</a></li>
+      <li><a href="pilote.html">Le pilote</a></li>
+      <li><a class="nav-cta" href="#partenaires">Devenir partenaire</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <p class="kicker rvl">Association de sport automobile</p>
+      <!-- ✏️ MODIFIABLE : accroche principale -->
+      <h1 class="rvl" data-d="1">Le volant se <span class="or">transmet</span></h1>
+      <p class="lead rvl" data-d="2">Patrice a couru dans les années 80. Thomas reprend la piste. TPRacing construit la suite, avec un cap assumé : la course automobile en Caterham.</p>
+      <div class="btn-rangee rvl" data-d="3">
+        <a class="btn btn-or" href="#partenaires">Devenir partenaire</a>
+        <a class="btn btn-blanc" href="pilote.html">Découvrir le pilote</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MARQUEE ===== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="piste">
+      <span>Road to Caterham</span><i></i>
+      <span>Karting de compétition</span><i></i>
+      <span>Père et fils</span><i></i>
+      <span>Depuis 2021</span><i></i>
+      <span>FEED Racing France</span><i></i>
+      <span>Chaque dixième compte</span><i></i>
+      <span>Road to Caterham</span><i></i>
+      <span>Karting de compétition</span><i></i>
+      <span>Père et fils</span><i></i>
+      <span>Depuis 2021</span><i></i>
+      <span>FEED Racing France</span><i></i>
+      <span>Chaque dixième compte</span><i></i>
+    </div>
+  </div>
+
+  <!-- ===== CHIFFRES ===== -->
+  <div class="chiffres">
+    <div class="bloc rvl"><div class="num-outline">2021</div><div class="label">Naissance de l'association</div></div>
+    <div class="bloc rvl" data-d="1"><div class="num-outline">3</div><div class="label">Disciplines en parallèle</div></div>
+    <div class="bloc rvl" data-d="2"><div class="num-outline">1</div><div class="label">Objectif, la Caterham</div></div>
+  </div>
+
+  <!-- ===== L'ASSOCIATION ===== -->
+  <section id="association">
+    <span class="mot-geant" style="top: 18px; right: -3%;">Héritage</span>
+    <div class="asso-grille">
+      <div class="asso-txt rvl">
+        <img class="logo-asso" src="assets/logo-couleur-degrade.png" alt="Logo TPRacing">
+        <p class="kicker">Qui sommes nous</p>
+        <h2>Une histoire de famille,<br>un projet de course</h2>
+        <!-- ✏️ MODIFIABLE : texte de présentation -->
+        <p class="lead">Chez les Papone, la piste se transmet. Des paddocks de karting des années 80 à la Formule Ford, Patrice a couru avant de passer le volant. En 2021, père et fils fondent <strong>TPRacing, Thomas Papone Racing</strong>, pour structurer la progression de Thomas vers la course automobile.</p>
+        <p class="lead">TPRacing n'est pas qu'une structure sportive : c'est un projet qui se développe <strong>comme une marque</strong>, avec sa communication, ses contenus, ses partenaires et sa communauté. Suivre l'association, c'est voir un projet de course se construire pour de vrai, étape par étape.</p>
+      </div>
+      <div class="heritage">
+        <figure class="rvl">
+          <span class="frame"><img src="assets/img/heritage-1980.jpg" alt="Paddock karting au Mans en 1980, époque Papone"></span>
+          <figcaption>Le Mans 1980 / l'époque Papone</figcaption>
+        </figure>
+        <figure class="rvl" data-d="1">
+          <span class="frame"><img src="assets/img/heritage-1987.jpg" alt="Patrice Papone en course de karting dans les années 80"></span>
+          <figcaption>Karting années 80 / Patrice Papone</figcaption>
+        </figure>
+        <figure class="rvl" data-d="2">
+          <span class="frame"><img src="assets/img/heritage-1988.jpg" alt="Patrice Papone en Formule Ford en 1988"></span>
+          <figcaption>Formule Ford 1988 / la piste en héritage</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LA TRAJECTOIRE ===== -->
+  <section id="trajectoire" class="section-marine diag-haut">
+    <span class="mot-geant" style="bottom: 30px; left: -2%;">En piste</span>
+    <div class="contenu">
+      <p class="kicker rvl">La trajectoire</p>
+      <h2 class="rvl" data-d="1">Trois disciplines, un seul cap</h2>
+      <p class="lead rvl" data-d="2">Chaque discipline prépare la suivante : le combat en piste s'apprend en karting, la rigueur se travaille sur simulateur, et la course automobile guide tout le projet.</p>
+      <div class="disciplines">
+        <article class="disc rvl">
+          <div class="puce">01</div>
+          <div class="photo"><img src="assets/img/karting-pluie.jpg" alt="Thomas Papone en course de karting sous la pluie"></div>
+          <div class="corps">
+            <h3>Karting</h3>
+            <p>La compétition réelle, du sec à la pluie : départs, dépassements, gestion de course. L'école du corps à corps en piste.</p>
+          </div>
+        </article>
+        <article class="disc rvl" data-d="1">
+          <div class="puce">02</div>
+          <div class="photo"><img src="assets/img/pilote-simu.jpg" alt="Thomas Papone sur le simulateur TPRacing"></div>
+          <div class="corps">
+            <h3>Simracing</h3>
+            <p>L'entraînement permanent sur iRacing : régularité, trajectoires, setups. Le laboratoire du pilotage, disponible chaque semaine.</p>
+          </div>
+        </article>
+        <article class="disc rvl" data-d="2">
+          <div class="puce">03</div>
+          <div class="photo"><img src="assets/img/feed-racing.jpg" alt="Monoplace de l'école FEED Racing France en piste"></div>
+          <div class="corps">
+            <h3>Automobile</h3>
+            <p>Le passage en voiture, engagé à l'école FEED Racing France, avec un objectif clair : courir en championnat via le programme Caterham.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARTENAIRES ===== -->
+  <section id="partenaires">
+    <span class="mot-geant" style="top: 26px; right: -4%;">Partenaires</span>
+    <div class="part-duo">
+      <div class="rvl">
+        <p class="kicker">Nous soutenir</p>
+        <h2>Des partenaires embarqués dans l'histoire</h2>
+        <p class="lead">Le sponsoring sportif ne se limite plus à un logo sur une carrosserie : la valeur est dans le contenu. En soutenant TPRacing, votre marque s'intègre à une histoire suivie au quotidien et bénéficie d'un suivi transparent de son partenariat.</p>
+      </div>
+      <figure class="rvl" data-d="1">
+        <span class="frame"><img src="assets/img/partenaires-stickers.jpg" alt="Kart TPRacing en course, stickers des partenaires visibles"></span>
+        <figcaption>Vos couleurs en piste / Valence 2022</figcaption>
+      </figure>
+    </div>
+    <div class="part-grille">
+      <div class="part-carte rvl">
+        <h3>Visibilité contenu</h3>
+        <p>Présence dans les contenus publiés autour du projet : publications, vidéos, coulisses. Votre marque vit dans l'histoire, pas seulement sur un sticker.</p>
+      </div>
+      <div class="part-carte rvl" data-d="1">
+        <h3>Image &amp; valeurs</h3>
+        <p>Un projet familial, authentique et rigoureux : la progression d'un jeune pilote qui se construit sans raccourcis.</p>
+      </div>
+      <div class="part-carte rvl" data-d="2">
+        <h3>Suivi transparent</h3>
+        <p>Des comptes rendus réguliers publiés par l'association : vous savez ce que votre soutien finance et ce qu'il vous rapporte en visibilité.</p>
+      </div>
+    </div>
+    <div class="part-cta rvl">
+      <strong>Envie d'écrire la suite avec nous ?</strong>
+      <a class="btn btn-or" href="https://www.linkedin.com/company/tpracing/" target="_blank" rel="noopener">Contacter l'association</a>
+    </div>
+  </section>
+
+  <!-- ===== GALERIE EN PISTE ===== -->
+  <section id="galerie" class="section-marine diag-haut">
+    <span class="mot-geant" style="top: 40px; left: -2%;">47</span>
+    <div class="contenu">
+      <p class="kicker rvl">En piste</p>
+      <h2 class="rvl" data-d="1">La course, en images</h2>
+      <div class="galerie">
+        <figure class="rvl">
+          <span class="frame"><img src="assets/img/galerie-pluie.jpg" alt="Kart de Thomas Papone sous la pluie, gerbes d'eau" loading="lazy"></span>
+          <figcaption>Sous la pluie / Château Gaillard</figcaption>
+        </figure>
+        <figure class="rvl" data-d="1">
+          <span class="frame"><img src="assets/img/galerie-duel-324.jpg" alt="Le kart TPRacing défend sa position en virage" loading="lazy"></span>
+          <figcaption>Défense de la position / Valence 2022</figcaption>
+        </figure>
+        <figure class="rvl" data-d="2">
+          <span class="frame"><img src="assets/img/galerie-soleil-2021.jpg" alt="Duel au soleil au Trophée de Ligue Valence 2021" loading="lazy"></span>
+          <figcaption>Trophée de Ligue / Valence 2021</figcaption>
+        </figure>
+        <figure class="rvl">
+          <span class="frame"><img src="assets/img/galerie-trois-karts.jpg" alt="Trois karts imbriqués dans le même virage" loading="lazy"></span>
+          <figcaption>Trois de front / corps à corps</figcaption>
+        </figure>
+        <figure class="rvl" data-d="1">
+          <span class="frame"><img src="assets/img/galerie-leader.jpg" alt="Thomas Papone en tête d'un peloton de karts" loading="lazy"></span>
+          <figcaption>En tête de peloton / Lyon 2020</figcaption>
+        </figure>
+        <figure class="rvl" data-d="2">
+          <span class="frame"><img src="assets/img/galerie-file-324.jpg" alt="Filé du kart TPRacing en pleine vitesse" loading="lazy"></span>
+          <figcaption>Pleine charge / Valence 2022</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TEASER PILOTE ===== -->
+  <section>
+    <span class="mot-geant" style="bottom: 24px; right: -3%;">Papone</span>
+    <div class="pilote-grille">
+      <span class="frame rvl"><img src="assets/img/poster-pilote.jpg" alt="Poster du pilote Thomas Papone, casque Arai, en course de karting"></span>
+      <div class="rvl" data-d="1">
+        <p class="kicker">Le pilote</p>
+        <h2>Thomas Papone</h2>
+        <p class="lead">Pilote et co-fondateur de l'association. Formé en karting de compétition, affûté sur simulateur, passé par l'école FEED Racing France. Il partage son parcours et les coulisses du projet sur ses réseaux.</p>
+        <p style="margin-top: 26px;"><a class="btn btn-or" href="pilote.html">Découvrir le pilote</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="foot-grille">
+      <img src="assets/logo-blanc.png" alt="TPRacing">
+      <div class="foot-liens">
+        <a href="pilote.html">Le pilote</a>
+        <a href="index.html#partenaires">Partenaires</a>
+        <a href="https://www.linkedin.com/company/tpracing/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="foot-bas">
+      <span>© 2026 TPRacing — Thomas Papone Racing. Tous droits réservés.</span>
+      <span>Association de sport automobile, Lapeyrouse, France</span>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('vu'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.rvl').forEach(el => io.observe(el));
+
+    const navbar = document.getElementById('navbar');
+    const majNav = () => navbar.classList.toggle('solide', scrollY > 60);
+    addEventListener('scroll', majNav, { passive: true });
+    majNav();
+  </script>
+</body>
+</html>

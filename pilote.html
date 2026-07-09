@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ✏️ SEO -->
+  <title>Thomas Papone — Pilote | TPRacing</title>
+  <meta name="description" content="Thomas Papone, pilote et co-fondateur de l'association TPRacing : karting de compétition, simracing, école FEED Racing France, et un cap clair, la course automobile en Caterham.">
+
+  <link rel="canonical" href="https://tpracing.github.io/pilote.html">
+  <meta property="og:title" content="Thomas Papone — Pilote TPRacing">
+  <meta property="og:description" content="Karting, simracing, FEED Racing France : le parcours d'un pilote qui construit sa route vers la course automobile.">
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://tpracing.github.io/pilote.html">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:image" content="https://tpracing.github.io/assets/img/poster-pilote.jpg">
+
+  <link rel="icon" type="image/png" href="assets/logo-couleur-degrade.png">
+  <link rel="preload" href="assets/fonts/korataki-bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/bebas-neue-pro-middle.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Thomas Papone",
+    "jobTitle": "Pilote",
+    "affiliation": { "@type": "SportsOrganization", "name": "TPRacing — Thomas Papone Racing" },
+    "sameAs": [
+      "https://www.instagram.com/thomaspaponeracing",
+      "https://www.tiktok.com/@thomaspaponeracing",
+      "https://www.youtube.com/@thomaspaponeracing",
+      "https://www.twitch.tv/thomaspaponeracing",
+      "https://www.linkedin.com/in/thomas-papone-b98327292"
+    ]
+  }
+  </script>
+
+  <style>
+    /* ---------- Hero pilote ---------- */
+    .hero-pilote {
+      position: relative;
+      background:
+        radial-gradient(rgba(246,247,252,.03) 1px, transparent 1.5px),
+        linear-gradient(180deg, #070B1D 0%, #0a1023 68%, var(--marine) 100%);
+      background-size: 24px 24px, 100% 100%;
+      color: var(--blanc);
+      overflow: hidden;
+    }
+    .hero-pilote .mot-geant {
+      top: 90px; right: -4%;
+      -webkit-text-stroke-color: rgba(246,247,252,.05);
+    }
+    .hero-pilote .grille {
+      position: relative;
+      z-index: 1;
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: end;
+      gap: clamp(10px, 3vw, 50px);
+      padding: 140px 6% 0;
+    }
+    .hero-pilote .txt { padding-bottom: 80px; }
+    .hero-pilote h1 {
+      color: var(--blanc);
+      font-size: clamp(2.5rem, 6.4vw, 4.7rem);
+      line-height: .98;
+    }
+    .hero-pilote h1 .or { color: var(--or); }
+    .hero-pilote .lead { color: #aeb6c8; margin: 22px 0 30px; }
+    .hero-pilote .photo img { width: 100%; max-width: 470px; display: block; margin: 0 auto; }
+    .hero-pilote .btn-rangee { display: flex; gap: 14px; flex-wrap: wrap; }
+    @media (max-width: 860px) {
+      .hero-pilote .grille { grid-template-columns: 1fr; }
+      .hero-pilote .txt { padding-bottom: 30px; }
+    }
+    .liseret-damier {
+      height: 10px;
+      background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%);
+      background-size: 10px 10px;
+      opacity: .85;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ---------- Chips réseaux ---------- */
+    .reseaux { display: flex; flex-wrap: wrap; gap: 12px; }
+    .reseaux a {
+      font-family: var(--f-label);
+      font-size: 1.05rem;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--marine);
+      padding: 10px 18px;
+      box-shadow: inset 0 0 0 1.5px rgba(30,38,53,.4);
+      clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
+      transition: box-shadow .2s, color .2s, transform .15s, background .2s;
+    }
+    .reseaux a:hover {
+      box-shadow: inset 0 0 0 1.5px var(--or);
+      color: var(--or);
+      transform: translateY(-2px);
+      background: rgba(212,151,38,.06);
+    }
+
+    /* ---------- Parcours ---------- */
+    .etapes { max-width: 1180px; margin: 46px auto 0; display: grid; gap: 0; position: relative; z-index: 1; }
+    .etape {
+      display: grid;
+      grid-template-columns: 72px 1fr 380px;
+      gap: clamp(18px, 3vw, 40px);
+      align-items: start;
+      position: relative;
+      padding-bottom: 58px;
+    }
+    .etape:last-child { padding-bottom: 0; }
+    .etape::before {
+      content: "";
+      position: absolute;
+      left: 35px; top: 74px; bottom: 6px;
+      width: 2px;
+      background: repeating-linear-gradient(180deg, var(--or) 0 8px, transparent 8px 16px);
+      opacity: .55;
+    }
+    .etape:last-child::before { display: none; }
+    .etape .no {
+      width: 72px; height: 72px;
+      background: var(--marine);
+      color: var(--or);
+      font-family: var(--f-titre); font-weight: 700; font-size: 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+      clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+    }
+    .etape.finale .no { background: var(--or); color: var(--marine-deep); }
+    .etape h3 { color: var(--marine); padding-top: 6px; }
+    .etape .badge {
+      display: inline-block;
+      font-family: var(--f-label);
+      font-size: .95rem;
+      letter-spacing: .16em;
+      color: var(--marine-deep);
+      background: var(--or);
+      padding: 2px 12px;
+      margin-left: 12px;
+      vertical-align: middle;
+      clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 7px 100%, 0 calc(100% - 7px));
+    }
+    .etape p { color: var(--gris); max-width: 560px; margin-top: 6px; }
+    .etape .frame { align-self: center; }
+    @media (max-width: 960px) {
+      .etape { grid-template-columns: 56px 1fr; }
+      .etape .no { width: 56px; height: 56px; font-size: 1.2rem; }
+      .etape::before { left: 27px; top: 60px; }
+      .etape .frame { grid-column: 2; max-width: 420px; }
+    }
+
+    /* ---------- CTA final ---------- */
+    .cta-final {
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-final .damier {
+      width: 90px; height: 10px;
+      margin: 0 auto 26px;
+      background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%);
+      background-size: 10px 10px;
+    }
+    .cta-final h2 { color: var(--blanc); }
+    .cta-final p { color: #aeb6c8; margin: 14px 0 30px; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav id="navbar">
+    <a class="logo" href="index.html">
+      <img class="logo-sombre" src="assets/logo-secondaire-blanc.png" alt="TPRacing — Thomas Papone Racing">
+      <img class="logo-clair" src="assets/logo-secondaire-couleur.png" alt="">
+    </a>
+    <ul>
+      <li class="masque-mobile"><a href="index.html#association">L'association</a></li>
+      <li class="masque-mobile"><a href="index.html#trajectoire">La trajectoire</a></li>
+      <li><a class="active" href="pilote.html">Le pilote</a></li>
+      <li><a class="nav-cta" href="index.html#partenaires">Devenir partenaire</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== HERO PILOTE ===== -->
+  <header class="hero-pilote">
+    <span class="mot-geant">Papone</span>
+    <div class="grille">
+      <div class="txt">
+        <p class="kicker rvl">Pilote et co-fondateur de TPRacing</p>
+        <h1 class="rvl" data-d="1">Thomas <span class="or">Papone</span></h1>
+        <!-- ✏️ MODIFIABLE : bio courte -->
+        <p class="lead rvl" data-d="2">Formé en karting de compétition, entraîné chaque semaine sur simulateur, passé en monoplace à l'école FEED Racing France. Un cap assumé : rejoindre la course automobile via le programme Caterham, une étape à la fois.</p>
+        <div class="btn-rangee rvl" data-d="3">
+          <a class="btn btn-or" href="index.html#partenaires">Soutenir le projet</a>
+          <a class="btn btn-blanc" href="#parcours">Voir le parcours</a>
+        </div>
+      </div>
+      <div class="photo rvl" data-d="2">
+        <img src="assets/img/pilote-simu.jpg" alt="Thomas Papone au volant du simulateur TPRacing">
+      </div>
+    </div>
+    <div class="liseret-damier"></div>
+  </header>
+
+  <!-- ===== MARQUEE ===== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="piste">
+      <span>Thomas Papone</span><i></i>
+      <span>Karting</span><i></i>
+      <span>iRacing</span><i></i>
+      <span>FEED Racing France</span><i></i>
+      <span>Objectif Caterham</span><i></i>
+      <span>Chaque dixième compte</span><i></i>
+      <span>Thomas Papone</span><i></i>
+      <span>Karting</span><i></i>
+      <span>iRacing</span><i></i>
+      <span>FEED Racing France</span><i></i>
+      <span>Objectif Caterham</span><i></i>
+      <span>Chaque dixième compte</span><i></i>
+    </div>
+  </div>
+
+  <!-- ===== RÉSEAUX ===== -->
+  <section style="padding: 58px 6%;">
+    <div class="contenu" style="display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
+      <div class="rvl">
+        <p class="kicker" style="margin-bottom: 6px;">Suivre le parcours</p>
+        <p class="lead">Entraînements, courses et coulisses du projet, sans filtre : <strong>@thomaspaponeracing</strong> sur tous les réseaux.</p>
+      </div>
+      <!-- ✏️ MODIFIABLE : liens réseaux du pilote -->
+      <div class="reseaux rvl" data-d="1">
+        <a href="https://www.instagram.com/thomaspaponeracing" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@thomaspaponeracing" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.youtube.com/@thomaspaponeracing" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.twitch.tv/thomaspaponeracing" target="_blank" rel="noopener">Twitch</a>
+        <a href="https://www.linkedin.com/in/thomas-papone-b98327292" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARCOURS ===== -->
+  <section id="parcours" style="padding-top: 30px;">
+    <span class="mot-geant" style="top: 0; right: -4%;">Parcours</span>
+    <div class="contenu">
+      <p class="kicker rvl">Le parcours</p>
+      <h2 class="rvl" data-d="1">Une progression construite<br>étape par étape</h2>
+      <div class="etapes">
+        <div class="etape rvl">
+          <div class="no">01</div>
+          <div>
+            <h3>Karting de compétition</h3>
+            <p>Les bases se posent en kart : courses de ligue, roulages d'entraînement, du sec à la pluie. C'est là que s'apprennent les départs, les dépassements et la lecture de course.</p>
+          </div>
+          <span class="frame"><img src="assets/img/karting-pluie.jpg" alt="Thomas Papone en karting sous la pluie, châssis Tony Kart"></span>
+        </div>
+        <div class="etape rvl">
+          <div class="no">02</div>
+          <div>
+            <h3>Simracing</h3>
+            <p>Entre deux roulages, l'entraînement continue sur iRacing : régularité, trajectoires, gestion des courses longues. Le simulateur TPRacing est le laboratoire du projet.</p>
+          </div>
+          <span class="frame"><img src="assets/img/pilote-simu.jpg" alt="Thomas Papone sur le simulateur TPRacing" style="max-height: 300px; object-fit: cover; object-position: top;"></span>
+        </div>
+        <div class="etape rvl">
+          <div class="no">03</div>
+          <div>
+            <h3>FEED Racing France</h3>
+            <p>Le passage en monoplace à l'école fondée par Jacques Villeneuve et Patrick Lemarié : premiers tours de roues en voiture de course, et la confirmation que la suite s'écrit sur quatre roues.</p>
+          </div>
+          <span class="frame"><img src="assets/img/feed-racing.jpg" alt="Monoplace FEED Racing France en piste"></span>
+        </div>
+        <div class="etape finale rvl">
+          <div class="no">04</div>
+          <div>
+            <h3>Caterham <span class="badge">Objectif</span></h3>
+            <p>Le cap du projet : entrer en course automobile via le programme Caterham et disputer un championnat sur circuit. C'est le chapitre que TPRacing construit aujourd'hui, avec ses partenaires.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA FINAL ===== -->
+  <section class="section-marine diag-haut">
+    <span class="mot-geant" style="bottom: 20px; left: -2%;">La suite</span>
+    <div class="cta-final rvl">
+      <div class="damier"></div>
+      <h2>La suite s'écrit maintenant</h2>
+      <p>Partenaires, passionnés, curieux : le projet avance et tout se partage. Rejoignez l'aventure au bon moment, avant le passage en voiture.</p>
+      <a class="btn btn-or" href="index.html#partenaires">Devenir partenaire</a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="foot-grille">
+      <img src="assets/logo-blanc.png" alt="TPRacing">
+      <div class="foot-liens">
+        <a href="index.html">L'association</a>
+        <a href="index.html#partenaires">Partenaires</a>
+        <a href="https://www.linkedin.com/company/tpracing/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="foot-bas">
+      <span>© 2026 TPRacing — Thomas Papone Racing. Tous droits réservés.</span>
+      <span>Association de sport automobile, Lapeyrouse, France</span>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('vu'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.rvl').forEach(el => io.observe(el));
+
+    const navbar = document.getElementById('navbar');
+    const majNav = () => navbar.classList.toggle('solide', scrollY > 60);
+    addEventListener('scroll', majNav, { passive: true });
+    majNav();
+  </script>
+</body>
+</html>
