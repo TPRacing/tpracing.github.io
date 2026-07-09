@@ -1,32 +1,31 @@
 # Site TPRacing — mode d'emploi
 
+## 🌐 Le site est EN LIGNE : https://tpracing.github.io/
+
+Hébergé gratuitement sur GitHub Pages (compte GitHub : **TPRacing**).
+Dépôt : https://github.com/TPRacing/tpracing.github.io
+
 ## Structure
-- `index.html` — page d'accueil : **l'association TPRacing** (histoire, disciplines, partenaires)
-- `pilote.html` — page dédiée : **Thomas Papone, le pilote** (bio, réseaux @thomaspaponeracing, parcours)
-- `assets/styles.css` — le design (charte marine/or, polices Korataki + Bebas Neue Pro embarquées)
-- `assets/img/` — photos optimisées pour le web · `assets/fonts/` — polices woff2
+- `index.html` — accueil : **l'association TPRacing** (héritage, trajectoire, partenaires, galerie)
+- `pilote.html` — **Thomas Papone, le pilote** (bio, réseaux, parcours)
+- `assets/styles.css` — le design (charte marine/or, Korataki + Bebas Neue Pro embarquées)
+- `assets/img/` — photos étalonnées pour le web · `assets/fonts/` — polices woff2
+- `sitemap.xml` + `robots.txt` — pour Google
 
-Pour voir le site : double-clique sur `index.html`.
-
-## Modifier le contenu
-1. **Demander à Claude** (le plus simple).
-2. **Toi-même** : ouvre le fichier .html avec TextEdit. Les zones de texte sont marquées
-   `<!-- ✏️ MODIFIABLE -->`. Modifie, enregistre, recharge la page.
-
-## Liens déjà en place
-- Association → page LinkedIn TPRacing : `linkedin.com/company/tpracing`
-- Pilote → @thomaspaponeracing (Instagram, TikTok, YouTube, Twitch) + LinkedIn perso
-
-## Mettre en ligne gratuitement (GitHub Pages)
-1. Compte gratuit sur github.com
-2. Nouveau dépôt `tpracing` → Public → uploader TOUT le contenu du dossier
-   (`index.html`, `pilote.html`, le dossier `assets/`)
-3. Settings → Pages → Branch `main` → Save
-4. Site en ligne à `https://TONPSEUDO.github.io/tpracing/` en ~2 min
+## Modifier le site
+1. **Demander à Claude** (le plus simple) : il modifie les fichiers ET publie la mise à jour.
+2. **Toi-même** : édite le fichier .html (zones marquées `✏️ MODIFIABLE`), puis demande à
+   Claude de « publier la mise à jour du site » — ou dans le Terminal :
+   `cd "$HOME/Desktop/TPRacing/Site TPRacing" && git add -A && git commit -m "maj" && git push`
+   Le site en ligne se met à jour en 1 à 2 minutes.
 
 ## Référencement Google
-Après mise en ligne : Google Search Console (gratuit) pour accélérer l'indexation.
-Le SEO technique est déjà dans les pages (titres, descriptions, données structurées).
+- SEO technique : déjà en place (titres, descriptions, données structurées, sitemap, canonical).
+- Search Console : à connecter avec un compte Google → vérification par balise HTML
+  (Claude s'en occupe), puis soumission du sitemap et demande d'indexation.
+- Booster : mettre https://tpracing.github.io/ en lien sur la page LinkedIn TPRacing,
+  la bio Instagram @thomaspaponeracing et les autres réseaux.
 
 ## Nom de domaine (optionnel, ~10 €/an)
-`tpracing.fr` chez OVH/Gandi — seule dépense possible, facultative.
+`tpracing.fr` chez OVH/Gandi, branchable sur GitHub Pages sans rien casser
+(fichier CNAME + 4 enregistrements DNS — Claude peut guider).
