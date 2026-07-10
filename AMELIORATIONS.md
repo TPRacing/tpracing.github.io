@@ -5,7 +5,7 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 
 ## Backlog (par priorité)
 
-- [ ] Favicon propre multi-tailles depuis l'emblème (32px, 180px apple-touch) + meta theme-color marine
+- [x] Favicon propre multi-tailles depuis l'emblème (32px, 180px apple-touch) + meta theme-color marine
 - [ ] Image Open Graph dédiée 1200×630 (logo + photo duotone) pour les partages LinkedIn/WhatsApp
 - [ ] Micro-interaction nav : soulignement or animé qui glisse sous les liens
 - [ ] Page pilote : renforcer la cohérence avec l'accueil (47 outline animé ou emblème 3D discret dans le hero)
@@ -38,3 +38,9 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 - 2026-07-09 : v1 → v3 : création du site, deux pages, publication GitHub Pages, Search Console.
 - 2026-07-10 : v4 : DA charte (emblème 3D or, emblème contour en motif, bande origines, signature) ;
   vidéo SERA montée (fondus, étalonnage assorti, carton logo minimal) et intégrée à la galerie.
+- 2026-07-10 : Favicon de marque. Silhouette plate du monogramme TP rendue depuis le path
+  vectoriel de l'emblème (rasteriseur even-odd maison en PIL, contreformes correctes),
+  dégradé or F0CE7A→C0861E sur tuile marine arrondie. Jeu complet : favicon.svg (crisp, 1,3 Ko),
+  favicon.ico 16/32/48, favicon-32/16.png, apple-touch-icon 180 plein cadre (iOS remasque),
+  icon-192. Ajout meta theme-color #1E2635 sur les 2 pages. Vérifié local (SVG rendu OK,
+  5 fichiers en 200, pas d'overflow, console propre) puis prod. Poids total ~22 Ko.
