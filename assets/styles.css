@@ -204,7 +204,7 @@ a { color: inherit; }
 .embleme-3d {
   width: min(46vw, 560px);
   height: auto;
-  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, .55)) drop-shadow(0 0 90px rgba(212, 151, 38, .18));
+  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, .55)) drop-shadow(0 0 80px rgba(74, 122, 194, .22)) drop-shadow(0 0 26px rgba(212, 151, 38, .14));
   animation: flotte 7s ease-in-out infinite alternate;
   will-change: transform;
   transform-style: preserve-3d;
