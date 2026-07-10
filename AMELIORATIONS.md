@@ -20,6 +20,11 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [ ] Teaser pilote accueil : montage photo duotone dédié à la place du poster Insta
 - [ ] Performances : preload du hero, lazy strict du reste, passage Lighthouse consigné
 - [ ] Cartes disciplines : enrichir les survols (lieu, année en Bebas)
+- [ ] Complétude : page mentions légales sobre (obligatoire en France) + lien footer
+- [ ] Complétude : bloc contact clair sur l'accueil (LinkedIn asso mis en avant)
+- [ ] Déclinaison du sting AE (logo animé, /Volumes/ TPT7/TPRacing/sting.jsx) en format carré 1080 pour Insta/Shorts
+- [ ] Emblème 3D : version animée légère en hero (séquence AE ou sprite au scroll) si le poids reste raisonnable
+- [ ] Section actus/prochaines échéances (structure seulement, contenus à valider avec Thomas)
 
 ## Règles (rappel pour la routine)
 
