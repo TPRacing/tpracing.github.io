@@ -63,3 +63,9 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   + du remap de la texture or d'origine. Supprimés : dégradés désormais VERTICAUX propres (marine
   acier 4468A2→0B1220, or F0C963→B67C1E), relief conservé (extrusion bas-droite + biseau rim).
   Rendu brossé métal net, zéro ondulation. webp 50 Ko. Vérifié desktop + mobile 375.
+- 2026-07-10 : Emblème 3D, version APLATS (retour Thomas « le bord jaune/bleu n'est pas droit, utilise
+  l'emblème sans dégradé du logo principal »). La frontière ondulée venait des masques mous du T7 :
+  re-source depuis `logo couleur.ai` rasterisé net en fitz (zoom 20), séparation or/bleu PAR COULEUR
+  (bords vectoriels droits), RACING recadré par détection du gap. Faces en APLATS (marine 24314 9,
+  or D49726, aucun dégradé de surface), relief par biseau de bord + extrusion 3D bas-droite. Bord
+  or/bleu maintenant droit et franc. webp 37 Ko (1561×1106, attrs MàJ). Vérifié desktop + mobile 375.
