@@ -50,3 +50,11 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   (le logo couleur est fait pour fond clair). Tuile or sur marine + favicon.svg supprimés.
   theme-color marine conservé. Règle retenue : icône du site = logo principal, jamais un monogramme
   or inventé (voir mémoire feedback).
+- 2026-07-10 : Emblème 3D du hero repensé (retour Thomas « pas tout doré, le bleu brillant en 3D
+  pour qu'il se démarque, dans la charte »). Re-render PIL depuis les masques séparés du logo
+  (logo_navy_full + logo_gold_overlay du T7) : corps marine en BLEU MÉTALLISÉ brillant (dégradé
+  acier 40639C→0B1220, sheen diagonale + streak spéculaire, biseau rim clair haut-gauche / sombre
+  bas-droite), élan + damier en OR propre (remap luminance vers rampe métallique, fini le bout noir
+  bavé de l'original), extrusion 3D bas-droite (flancs acier sombre). embleme-3d.webp 54 Ko
+  (1511×1093), attrs width/height + alt MàJ, halo hero passé en bleu froid + fin rim or.
+  Vérifié desktop + mobile 375 (pas d'overflow, console propre).
