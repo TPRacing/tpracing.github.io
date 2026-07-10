@@ -38,7 +38,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: var(--f-texte);
@@ -152,6 +152,80 @@ a { color: inherit; }
 .section-marine .mot-geant {
   -webkit-text-stroke-color: rgba(246, 247, 252, .05);
 }
+
+/* emblème TP contour géant : LE motif signature de la charte */
+.embleme-fond {
+  position: absolute;
+  z-index: 0;
+  width: clamp(420px, 52vw, 860px);
+  height: auto;
+  color: rgba(30, 38, 53, .08);
+  pointer-events: none;
+  user-select: none;
+}
+.embleme-fond {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+}
+.embleme-fond--plein { fill: currentColor; stroke: none; }
+.section-marine .embleme-fond { color: rgba(246, 247, 252, .06); }
+.embleme-fond--or { color: rgba(212, 151, 38, .13); }
+
+/* ---------- Bande origine des couleurs (collage damier charte p.25) ---------- */
+.bande-origines {
+  position: relative;
+  background: url('img/collage-origines.jpg') center / cover no-repeat, var(--marine);
+  padding: 104px 6%;
+  overflow: hidden;
+}
+.bande-origines::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(7,11,29,.55), rgba(7,11,29,.28) 45%, rgba(7,11,29,.62));
+}
+.bande-origines .contenu {
+  text-align: center;
+  color: var(--blanc);
+}
+.bande-origines p.origines {
+  font-family: var(--f-label);
+  font-size: clamp(1.25rem, 2.6vw, 1.9rem);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  line-height: 1.9;
+  text-shadow: 0 2px 18px rgba(7, 11, 29, .8);
+}
+.bande-origines .c-or { color: var(--or-clair); }
+.bande-origines .c-rouge { color: #E06450; }
+.bande-origines .c-vert { color: #6FBA9C; }
+
+/* ---------- Emblème 3D du hero ---------- */
+.embleme-3d {
+  width: min(46vw, 560px);
+  height: auto;
+  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, .55)) drop-shadow(0 0 90px rgba(212, 151, 38, .18));
+  animation: flotte 7s ease-in-out infinite alternate;
+  will-change: transform;
+  transform-style: preserve-3d;
+  transition: transform .25s ease-out;
+}
+@keyframes flotte {
+  from { translate: 0 -10px; }
+  to { translate: 0 14px; }
+}
+
+/* ---------- Signature de bas de page (comme les pages de la charte) ---------- */
+.signature-charte {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-top: 8px;
+}
+.signature-charte .filet { flex: 1; height: 1px; background: rgba(246, 247, 252, .22); }
+.signature-charte svg { width: 34px; height: auto; color: var(--or); fill: currentColor; stroke: none; flex-shrink: 0; }
 
 /* ---------- Bandeau défilant (marquee) ---------- */
 .marquee {

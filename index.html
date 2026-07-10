@@ -39,52 +39,53 @@
   </script>
 
   <style>
-    /* ---------- Hero accueil ---------- */
+    /* ---------- Hero accueil : page de charte vivante ---------- */
     .hero {
       position: relative;
       min-height: 92vh;
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       overflow: hidden;
-      background: var(--marine-deep);
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: url('assets/img/hero-2022.jpg') 72% 32% / cover no-repeat;
-      animation: kenburns 24s ease-in-out infinite alternate;
-    }
-    @keyframes kenburns {
-      from { transform: scale(1); }
-      to { transform: scale(1.08); }
-    }
-    .hero::before {
-      content: "";
-      position: absolute; inset: 0;
-      z-index: 1;
+      color: var(--blanc);
       background:
-        linear-gradient(75deg, rgba(7,11,29,.92) 0%, rgba(7,11,29,.62) 44%, rgba(7,11,29,.06) 78%),
-        linear-gradient(0deg, rgba(7,11,29,.82) 0%, transparent 50%);
+        radial-gradient(ellipse 62% 52% at 74% 44%, rgba(212, 151, 38, .16), transparent 62%),
+        radial-gradient(rgba(246, 247, 252, .035) 1px, transparent 1.5px),
+        linear-gradient(180deg, #070B1D 0%, #0d1526 68%, var(--marine) 100%);
+      background-size: auto, 26px 26px, auto;
     }
-    .hero-inner {
+    .hero .grille {
       position: relative;
-      z-index: 2;
+      z-index: 1;
       max-width: 1180px;
       margin: 0 auto;
       width: 100%;
-      padding: 150px 6% 130px;
-      color: var(--blanc);
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      align-items: center;
+      gap: clamp(20px, 4vw, 60px);
+      padding: 150px 6% 110px;
     }
     .hero h1 {
       color: var(--blanc);
-      max-width: 940px;
       font-size: clamp(2.2rem, 5.4vw, 4.3rem);
       line-height: 1.04;
     }
     .hero h1 .or { color: var(--or); }
     .hero .lead { color: #c7cddb; margin: 24px 0 38px; max-width: 560px; }
     .hero .btn-rangee { display: flex; gap: 16px; flex-wrap: wrap; }
-    @media (max-width: 560px) { .hero h1 { font-size: 2.15rem; } }
+    .hero .visuel { display: flex; justify-content: center; perspective: 900px; }
+    @media (max-width: 860px) {
+      .hero .grille { grid-template-columns: 1fr; padding-top: 120px; }
+      .hero .visuel { order: -1; }
+      .embleme-3d { width: min(64vw, 340px); }
+    }
+    @media (max-width: 560px) { .hero h1 { font-size: 1.9rem; } }
+    .hero .liseret {
+      position: absolute; left: 0; right: 0; bottom: 0; height: 12px; z-index: 2;
+      background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%);
+      background-size: 12px 12px;
+      opacity: .85;
+    }
 
     /* ---------- Bande chiffres ---------- */
     .chiffres {
@@ -258,6 +259,9 @@
 </head>
 <body>
 
+  <!-- Symbole emblème TP (réutilisé en motif de fond) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="tp-embleme"><path transform="matrix(1,0,0,-1,105.048,39.8827)" d="M0 0H-14.843-18.39-21.927-25.487-30.224-70.716L-74.338-12.077H-49.812L-63.958-59.256H-50.253L-37.921-18.123C-36.845-14.535-33.542-12.077-29.796-12.077H-29.102-25.551-22.003-18.452-4.093C-.63-12.134-.985-19.39-5.576-19.337L-5.579-19.345H-6.003-27.964C-30.013-19.345-31.82-20.689-32.408-22.652L-43.383-59.252C-43.018-59.26-42.659-59.265-42.305-59.267-39.871-59.278-37.698-59.14-35.994-58.998-28.609-58.383-27.605-53.078-27.578-53.025L-20.986-31.423C-20.986-31.423-13.091-31.433-10.015-31.425-9.883-31.425-9.757-31.425-9.644-31.424-9.449-31.424-9.282-31.423-9.151-31.422L-9.148-31.414C-5.016-31.476-3.249-31.223-2.109-31.072 2.242-30.498 10.766-25.789 11.352-10.582 11.389-9.611 11.546 .017 0 0"/></g></defs></svg>
+
   <!-- ===== NAVIGATION ===== -->
   <nav id="navbar">
     <a class="logo" href="index.html">
@@ -274,17 +278,22 @@
 
   <!-- ===== HERO ===== -->
   <header class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-inner">
-      <p class="kicker rvl">Association de sport automobile</p>
-      <!-- ✏️ MODIFIABLE : accroche principale -->
-      <h1 class="rvl" data-d="1">Le volant se <span class="or">transmet</span></h1>
-      <p class="lead rvl" data-d="2">Patrice a couru dans les années 80. Thomas reprend la piste. TPRacing construit la suite, avec un cap assumé : la course automobile en Caterham.</p>
-      <div class="btn-rangee rvl" data-d="3">
-        <a class="btn btn-or" href="#partenaires">Devenir partenaire</a>
-        <a class="btn btn-blanc" href="pilote.html">Découvrir le pilote</a>
+    <div class="grille">
+      <div class="txt">
+        <p class="kicker rvl">Association de sport automobile</p>
+        <!-- ✏️ MODIFIABLE : accroche principale -->
+        <h1 class="rvl" data-d="1">Le volant se <span class="or">transmet</span></h1>
+        <p class="lead rvl" data-d="2">Patrice a couru dans les années 80. Thomas reprend la piste. TPRacing construit la suite, avec un cap assumé : la course automobile en Caterham.</p>
+        <div class="btn-rangee rvl" data-d="3">
+          <a class="btn btn-or" href="#partenaires">Devenir partenaire</a>
+          <a class="btn btn-blanc" href="pilote.html">Découvrir le pilote</a>
+        </div>
+      </div>
+      <div class="visuel rvl" data-d="2">
+        <img class="embleme-3d tilt3d" src="assets/img/embleme-3d.webp" alt="Emblème TP de TPRacing, rendu métal or en trois dimensions" width="1456" height="1075">
       </div>
     </div>
+    <div class="liseret"></div>
   </header>
 
   <!-- ===== MARQUEE ===== -->
@@ -314,7 +323,7 @@
 
   <!-- ===== L'ASSOCIATION ===== -->
   <section id="association">
-    <span class="mot-geant" style="top: 18px; right: -3%;">Héritage</span>
+    <svg class="embleme-fond" viewBox="29 38 90 63" style="top: 40px; right: -9%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
     <div class="asso-grille">
       <div class="asso-txt rvl">
         <img class="logo-asso" src="assets/logo-couleur-degrade.png" alt="Logo TPRacing">
@@ -341,9 +350,18 @@
     </div>
   </section>
 
+  <!-- ===== ORIGINE DES COULEURS (collage damier de la charte) ===== -->
+  <div class="bande-origines">
+    <div class="contenu rvl">
+      <!-- ✏️ MODIFIABLE : le sens des couleurs de la charte -->
+      <p class="origines">L'<span class="c-or">or</span> de Senna. Le <span style="color:#9fb2d4">marine</span> de la rigueur.<br>
+      Le <span class="c-rouge">rouge</span> de la persévérance. Le <span class="c-vert">vert</span> des racines Papone.</p>
+    </div>
+  </div>
+
   <!-- ===== LA TRAJECTOIRE ===== -->
   <section id="trajectoire" class="section-marine diag-haut">
-    <span class="mot-geant" style="bottom: 30px; left: -2%;">En piste</span>
+    <svg class="embleme-fond" viewBox="29 38 90 63" style="bottom: -40px; left: -10%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
     <div class="contenu">
       <p class="kicker rvl">La trajectoire</p>
       <h2 class="rvl" data-d="1">Trois disciplines, un seul cap</h2>
@@ -379,7 +397,7 @@
 
   <!-- ===== PARTENAIRES ===== -->
   <section id="partenaires">
-    <span class="mot-geant" style="top: 26px; right: -4%;">Partenaires</span>
+    <svg class="embleme-fond embleme-fond--or" viewBox="29 38 90 63" style="top: 30px; right: -10%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
     <div class="part-duo">
       <div class="rvl">
         <p class="kicker">Nous soutenir</p>
@@ -448,7 +466,7 @@
 
   <!-- ===== TEASER PILOTE ===== -->
   <section>
-    <span class="mot-geant" style="bottom: 24px; right: -3%;">Papone</span>
+    <svg class="embleme-fond" viewBox="29 38 90 63" style="bottom: -30px; right: -9%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
     <div class="pilote-grille">
       <span class="frame rvl"><img src="assets/img/poster-pilote.jpg" alt="Poster du pilote Thomas Papone, casque Arai, en course de karting"></span>
       <div class="rvl" data-d="1">
@@ -462,6 +480,10 @@
 
   <!-- ===== FOOTER ===== -->
   <footer>
+    <div class="signature-charte" aria-hidden="true">
+      <span class="filet"></span>
+      <svg viewBox="29 38 90 63"><use href="#tp-embleme"/></svg>
+    </div>
     <div class="foot-grille">
       <img src="assets/logo-blanc.png" alt="TPRacing">
       <div class="foot-liens">
@@ -488,6 +510,19 @@
     const majNav = () => navbar.classList.toggle('solide', scrollY > 60);
     addEventListener('scroll', majNav, { passive: true });
     majNav();
+
+    // Emblème 3D : inclinaison qui suit la souris
+    const t3 = document.querySelector('.tilt3d');
+    if (t3 && matchMedia('(pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const zone = t3.closest('.hero');
+      zone.addEventListener('mousemove', e => {
+        const r = t3.getBoundingClientRect();
+        const dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+        const dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+        t3.style.transform = `perspective(900px) rotateY(${(dx * 10).toFixed(2)}deg) rotateX(${(-dy * 8).toFixed(2)}deg)`;
+      });
+      zone.addEventListener('mouseleave', () => { t3.style.transform = ''; });
+    }
   </script>
 </body>
 </html>
