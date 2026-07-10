@@ -239,16 +239,39 @@
     .galerie .frame { overflow: visible; }
     .galerie .frame img { aspect-ratio: 3 / 2; transition: transform .45s ease, filter .45s ease; }
     .galerie .frame:hover img { transform: scale(1.03); filter: saturate(1.15); }
-    .video-bloc { margin: 46px 0 52px; }
-    .video-bloc video { width: 100%; display: block; aspect-ratio: 16 / 9; object-fit: cover; }
-    .video-bloc figcaption {
-      font-family: var(--f-label);
-      letter-spacing: .13em;
-      text-transform: uppercase;
-      font-size: .92rem;
-      color: #aeb6c8;
-      margin-top: 14px;
+    .galerie-video { grid-column: span 2; margin: 0; }
+    .galerie-video video { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
+    @media (max-width: 620px) { .galerie-video { grid-column: span 1; } }
+    .galerie-plus {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      aspect-ratio: 3 / 2;
+      padding: 26px;
+      text-decoration: none;
+      border: 1px solid rgba(246, 247, 252, .16);
+      background: rgba(39, 49, 68, .4);
+      transition: border-color .25s, transform .2s;
     }
+    .galerie-plus:hover { border-color: var(--or); transform: translateY(-4px); }
+    .galerie-plus .plus-kicker {
+      font-family: var(--f-label);
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      font-size: .95rem;
+      color: var(--or);
+    }
+    .galerie-plus .plus-handle {
+      font-family: var(--f-titre);
+      font-weight: 700;
+      font-size: clamp(.95rem, 1.35vw, 1.15rem);
+      color: var(--blanc);
+      text-transform: uppercase;
+      letter-spacing: .01em;
+      word-break: break-all;
+    }
+    .galerie-plus .plus-fleche { color: var(--or); font-size: 1.6rem; line-height: 1; }
     @media (max-width: 900px) { .galerie { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 620px) { .galerie { grid-template-columns: 1fr; } }
 
@@ -445,12 +468,12 @@
     <div class="contenu">
       <p class="kicker rvl">En piste</p>
       <h2 class="rvl" data-d="1">La course, en images</h2>
-      <!-- ✏️ Vidéo : montage de la journée de roulage monoplace avec SERA -->
-      <figure class="video-bloc rvl" data-d="1">
-        <span class="frame"><video src="assets/video/sera-roulage.mp4" poster="assets/img/video-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Montage vidéo : journée de roulage en monoplace avec SERA Racing Academy"></video></span>
-        <figcaption>Roulage monoplace / SERA Racing Academy 2024</figcaption>
-      </figure>
       <div class="galerie">
+        <!-- ✏️ Vidéo : montage de la journée de roulage monoplace avec SERA -->
+        <figure class="galerie-video rvl">
+          <span class="frame"><video src="assets/video/sera-roulage.mp4" poster="assets/img/video-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Montage vidéo : journée de roulage en monoplace avec SERA Racing Academy"></video></span>
+          <figcaption>Roulage monoplace / SERA Racing Academy, Le Luc 2024</figcaption>
+        </figure>
         <figure class="rvl">
           <span class="frame"><img src="assets/img/galerie-pluie.jpg" alt="Kart de Thomas Papone sous la pluie, gerbes d'eau" loading="lazy"></span>
           <figcaption>Sous la pluie / Château Gaillard</figcaption>
@@ -475,6 +498,11 @@
           <span class="frame"><img src="assets/img/galerie-file-324.jpg" alt="Filé du kart TPRacing en pleine vitesse" loading="lazy"></span>
           <figcaption>Pleine charge / Valence 2022</figcaption>
         </figure>
+        <a class="galerie-plus rvl" href="https://www.instagram.com/thomaspaponeracing" target="_blank" rel="noopener">
+          <span class="plus-kicker">Plus d'images</span>
+          <span class="plus-handle">@thomaspaponeracing</span>
+          <span class="plus-fleche">&#8599;</span>
+        </a>
       </div>
     </div>
   </section>
@@ -527,7 +555,7 @@
     majNav();
 
     // Vidéo : lecture seulement quand visible, contrôles si mouvement réduit
-    const vid = document.querySelector('.video-bloc video');
+    const vid = document.querySelector('.galerie-video video');
     if (vid) {
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
         vid.removeAttribute('autoplay');
