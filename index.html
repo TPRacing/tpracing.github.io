@@ -239,6 +239,16 @@
     .galerie .frame { overflow: visible; }
     .galerie .frame img { aspect-ratio: 3 / 2; transition: transform .45s ease, filter .45s ease; }
     .galerie .frame:hover img { transform: scale(1.03); filter: saturate(1.15); }
+    .video-bloc { margin: 46px 0 52px; }
+    .video-bloc video { width: 100%; display: block; aspect-ratio: 16 / 9; object-fit: cover; }
+    .video-bloc figcaption {
+      font-family: var(--f-label);
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      font-size: .92rem;
+      color: #aeb6c8;
+      margin-top: 14px;
+    }
     @media (max-width: 900px) { .galerie { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 620px) { .galerie { grid-template-columns: 1fr; } }
 
@@ -435,6 +445,11 @@
     <div class="contenu">
       <p class="kicker rvl">En piste</p>
       <h2 class="rvl" data-d="1">La course, en images</h2>
+      <!-- ✏️ Vidéo : montage de la journée de roulage monoplace avec SERA -->
+      <figure class="video-bloc rvl" data-d="1">
+        <span class="frame"><video src="assets/video/sera-roulage.mp4" poster="assets/img/video-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Montage vidéo : journée de roulage en monoplace avec SERA Racing Academy"></video></span>
+        <figcaption>Roulage monoplace / SERA Racing Academy 2024</figcaption>
+      </figure>
       <div class="galerie">
         <figure class="rvl">
           <span class="frame"><img src="assets/img/galerie-pluie.jpg" alt="Kart de Thomas Papone sous la pluie, gerbes d'eau" loading="lazy"></span>
@@ -510,6 +525,19 @@
     const majNav = () => navbar.classList.toggle('solide', scrollY > 60);
     addEventListener('scroll', majNav, { passive: true });
     majNav();
+
+    // Vidéo : lecture seulement quand visible, contrôles si mouvement réduit
+    const vid = document.querySelector('.video-bloc video');
+    if (vid) {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        vid.removeAttribute('autoplay');
+        vid.controls = true;
+      } else {
+        new IntersectionObserver(entries => {
+          entries.forEach(e => { e.isIntersecting ? vid.play().catch(() => {}) : vid.pause(); });
+        }, { threshold: 0.25 }).observe(vid);
+      }
+    }
 
     // Emblème 3D : inclinaison qui suit la souris
     const t3 = document.querySelector('.tilt3d');
