@@ -58,3 +58,8 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   bavé de l'original), extrusion 3D bas-droite (flancs acier sombre). embleme-3d.webp 54 Ko
   (1511×1093), attrs width/height + alt MàJ, halo hero passé en bleu froid + fin rim or.
   Vérifié desktop + mobile 375 (pas d'overflow, console propre).
+- 2026-07-10 : Emblème 3D, retouche (retour Thomas « gaffe au dégradé, ça fait une vaguelette »).
+  La vaguelette venait du voile spéculaire DIAGONAL (bande de lumière -28° traversant le T et l'élan)
+  + du remap de la texture or d'origine. Supprimés : dégradés désormais VERTICAUX propres (marine
+  acier 4468A2→0B1220, or F0C963→B67C1E), relief conservé (extrusion bas-droite + biseau rim).
+  Rendu brossé métal net, zéro ondulation. webp 50 Ko. Vérifié desktop + mobile 375.
