@@ -44,3 +44,9 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   favicon.ico 16/32/48, favicon-32/16.png, apple-touch-icon 180 plein cadre (iOS remasque),
   icon-192. Ajout meta theme-color #1E2635 sur les 2 pages. Vérifié local (SVG rendu OK,
   5 fichiers en 200, pas d'overflow, console propre) puis prod. Poids total ~22 Ko.
+- 2026-07-10 : Correction (retour Thomas « je préférais le logo principal en icône, trop doré »).
+  Favicon régénéré depuis le LOGO PRINCIPAL (logo-couleur-degrade.png, marine dominant + accent or) :
+  ico + 32/16 sur fond transparent (logo seul), apple-touch/icon-192 sur tuile blanc cassé #F6F7FC
+  (le logo couleur est fait pour fond clair). Tuile or sur marine + favicon.svg supprimés.
+  theme-color marine conservé. Règle retenue : icône du site = logo principal, jamais un monogramme
+  or inventé (voir mémoire feedback).
