@@ -6,7 +6,7 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 ## Backlog (par priorité)
 
 - [x] Favicon propre multi-tailles depuis l'emblème (32px, 180px apple-touch) + meta theme-color marine
-- [ ] Image Open Graph dédiée 1200×630 (logo + photo duotone) pour les partages LinkedIn/WhatsApp
+- [x] Image Open Graph dédiée 1200×630 (logo + photo duotone) pour les partages LinkedIn/WhatsApp
 - [ ] Micro-interaction nav : soulignement or animé qui glisse sous les liens
 - [ ] Page pilote : renforcer la cohérence avec l'accueil (47 outline animé ou emblème 3D discret dans le hero)
 - [ ] Section jalons/palmarès en badges chiffrés or sur marine (années de karting, sessions monoplace, licence…) à valider avec Thomas avant publication des chiffres
@@ -69,3 +69,14 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   (bords vectoriels droits), RACING recadré par détection du gap. Faces en APLATS (marine 24314 9,
   or D49726, aucun dégradé de surface), relief par biseau de bord + extrusion 3D bas-droite. Bord
   or/bleu maintenant droit et franc. webp 37 Ko (1561×1106, attrs MàJ). Vérifié desktop + mobile 375.
+- 2026-07-12 : Cartes Open Graph dédiées 1200×630 (une par page). Avant, le partage LinkedIn/WhatsApp/X
+  affichait une photo brute (hero-2022.jpg / poster-pilote.jpg) mal recadrée et sans marque. Créé 2 cartes
+  assorties en PIL (script scratchpad) : étalonnage split-tone marine dominant / or en accent comme les
+  photos du site (colorize + voile marine + vignette), scrim bas marine profond, logo BLANC (règle charte
+  fond sombre), kicker Bebas avec pastille damier or (pas de tiret), titre Korataki bold, filet or + url,
+  rim or. Accueil = kart 324 + « Le volant se transmet » ; pilote = simu (visage de Thomas) + « Thomas
+  Papone / Pilote / Karting / Simracing ». Supersampling ×2 pour la netteté du texte. Câblé og:image +
+  og:image:width/height/alt/type + og:site_name + carte Twitter (summary_large_image) sur les 2 pages.
+  Vérifié : pages + images en 200 (og-accueil 104 Ko, og-pilote 65 Ko), JPEG 1200×630 valides, HTML bien
+  formé, fichier Google intouché. NB : launch.json « site-tpracing » repointé vers le dossier sur le T7
+  (l'ancien chemin Desktop avait disparu après réorg du 11/07).
