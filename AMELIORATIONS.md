@@ -13,7 +13,7 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [ ] Galerie : lightbox légère au clic (vanilla JS, fermeture Échap, flèches clavier)
 - [ ] Photos en AVIF/WebP avec balise picture (poids −30 % environ)
 - [ ] Footer : icônes réseaux SVG maison en carré biseauté (reprendre le style de la carte de visite)
-- [ ] Page 404.html de marque (emblème contour géant + lien retour accueil)
+- [x] Page 404.html de marque (emblème contour géant + lien retour accueil)
 - [ ] Accessibilité : focus visibles or, contrastes AA, lien d'évitement, alt complets
 - [ ] Diagonales de sections : harmoniser les angles partout (même pente)
 - [ ] Bande origines : parallax léger au scroll (transform, désactivé reduced-motion)
@@ -80,3 +80,12 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   Vérifié : pages + images en 200 (og-accueil 104 Ko, og-pilote 65 Ko), JPEG 1200×630 valides, HTML bien
   formé, fichier Google intouché. NB : launch.json « site-tpracing » repointé vers le dossier sur le T7
   (l'ancien chemin Desktop avait disparu après réorg du 11/07).
+- 2026-07-13 : Page 404 de marque (complétude). Avant, une URL erronée sur tpracing.github.io tombait sur la
+  404 générique GitHub. Créé `404.html` sur mesure, dans la DA du site : fond marine dégradé + trame, gros
+  « 404 » en contour or (reprise des num-outline), emblème TP contour géant en filigrane derrière le chiffre,
+  pastille damier « Erreur 404 », titre Korataki « Sortie de piste » (métaphore course, zéro tiret), lead, et
+  deux boutons charte (Retour à l'accueil / Découvrir le pilote) + liseré damier bas. Réutilise styles.css, la
+  nav et le footer. ⚠️ Chemins TOUS root-relatifs (/assets, /index.html…) car GitHub Pages sert la 404 depuis
+  n'importe quel niveau de path ; page en noindex, hors sitemap. Vérifié local desktop 1280 + mobile 375 (aucun
+  débordement, console propre), puis prod : /404.html en 200, et une URL inexistante renvoie bien la page
+  « Sortie de piste » avec statut HTTP 404. Fichier Google intouché.
