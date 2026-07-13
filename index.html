@@ -592,6 +592,109 @@
       });
       zone.addEventListener('mouseleave', () => { t3.style.transform = ''; });
     }
+
+    // ===== Galerie : agrandissement au clic (lightbox) =====
+    (function () {
+      const figures = [...document.querySelectorAll('.galerie figure:not(.galerie-video)')];
+      const vues = figures.map(fig => {
+        const img = fig.querySelector('.frame img');
+        const cap = fig.querySelector('figcaption');
+        return img ? { src: img.currentSrc || img.src, alt: img.alt || '', legende: cap ? cap.textContent.trim() : '' } : null;
+      }).filter(Boolean);
+      if (!vues.length) return;
+
+      // Structure de la lightbox
+      const lb = document.createElement('div');
+      lb.className = 'lightbox';
+      lb.id = 'lightbox';
+      lb.setAttribute('role', 'dialog');
+      lb.setAttribute('aria-modal', 'true');
+      lb.setAttribute('aria-label', 'Galerie en grand');
+      lb.innerHTML =
+        '<div class="lb-fond" data-lb-fermer></div>' +
+        '<button class="lb-btn lb-fermer" type="button" aria-label="Fermer">×</button>' +
+        '<button class="lb-btn lb-nav lb-prec" type="button" aria-label="Image précédente">‹</button>' +
+        '<button class="lb-btn lb-nav lb-suiv" type="button" aria-label="Image suivante">›</button>' +
+        '<figure class="lb-scene">' +
+          '<span class="frame"><img class="lb-img" src="" alt=""></span>' +
+          '<figcaption class="lb-legende"></figcaption>' +
+          '<div class="lb-compteur"></div>' +
+        '</figure>';
+      document.body.appendChild(lb);
+
+      const img = lb.querySelector('.lb-img');
+      const legende = lb.querySelector('.lb-legende');
+      const compteur = lb.querySelector('.lb-compteur');
+      const btnFermer = lb.querySelector('.lb-fermer');
+      const btnPrec = lb.querySelector('.lb-prec');
+      const btnSuiv = lb.querySelector('.lb-suiv');
+      const focusables = [btnPrec, btnSuiv, btnFermer];
+      let index = 0, declencheur = null;
+      const pad = n => String(n).padStart(2, '0');
+
+      function afficher(i) {
+        index = (i + vues.length) % vues.length;
+        const v = vues[index];
+        img.src = v.src;
+        img.alt = v.alt;
+        legende.textContent = v.legende;
+        compteur.innerHTML = '<b>' + pad(index + 1) + '</b> / ' + pad(vues.length);
+        // Préchargement des voisines pour une navigation fluide
+        [index + 1, index - 1].forEach(j => { const u = vues[(j + vues.length) % vues.length].src; new Image().src = u; });
+      }
+      function ouvrir(i, source) {
+        declencheur = source || null;
+        afficher(i);
+        lb.classList.add('ouvert');
+        document.body.classList.add('lb-actif');
+        document.documentElement.style.overflow = 'hidden';
+        // Focus après application du style (l'élément est visibility:hidden avant .ouvert)
+        requestAnimationFrame(() => requestAnimationFrame(() => btnFermer.focus()));
+      }
+      function fermer() {
+        lb.classList.remove('ouvert');
+        document.body.classList.remove('lb-actif');
+        document.documentElement.style.overflow = '';
+        if (declencheur) declencheur.focus();
+      }
+
+      // Rendre chaque photo cliquable + repère « agrandir »
+      figures.forEach((fig, i) => {
+        const frame = fig.querySelector('.frame');
+        if (!frame) return;
+        frame.classList.add('gal-clic');
+        frame.setAttribute('role', 'button');
+        frame.setAttribute('tabindex', '0');
+        frame.setAttribute('aria-label', 'Agrandir : ' + vues[i].legende);
+        const loupe = document.createElement('span');
+        loupe.className = 'gal-loupe';
+        loupe.setAttribute('aria-hidden', 'true');
+        loupe.textContent = '⤢';
+        frame.appendChild(loupe);
+        frame.addEventListener('click', () => ouvrir(i, frame));
+        frame.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ouvrir(i, frame); }
+        });
+      });
+
+      btnFermer.addEventListener('click', fermer);
+      btnPrec.addEventListener('click', () => afficher(index - 1));
+      btnSuiv.addEventListener('click', () => afficher(index + 1));
+      lb.querySelector('.lb-fond').addEventListener('click', fermer);
+
+      document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('ouvert')) return;
+        if (e.key === 'Escape') { fermer(); }
+        else if (e.key === 'ArrowRight') { afficher(index + 1); }
+        else if (e.key === 'ArrowLeft') { afficher(index - 1); }
+        else if (e.key === 'Tab') {
+          // Piège à focus : garder le focus dans la lightbox
+          const premier = focusables[0], dernier = focusables[focusables.length - 1];
+          if (e.shiftKey && document.activeElement === premier) { e.preventDefault(); dernier.focus(); }
+          else if (!e.shiftKey && document.activeElement === dernier) { e.preventDefault(); premier.focus(); }
+        }
+      });
+    })();
   </script>
 </body>
 </html>
