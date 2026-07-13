@@ -10,7 +10,7 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [ ] Micro-interaction nav : soulignement or animé qui glisse sous les liens
 - [ ] Page pilote : renforcer la cohérence avec l'accueil (47 outline animé ou emblème 3D discret dans le hero)
 - [ ] Section jalons/palmarès en badges chiffrés or sur marine (années de karting, sessions monoplace, licence…) à valider avec Thomas avant publication des chiffres
-- [ ] Galerie : lightbox légère au clic (vanilla JS, fermeture Échap, flèches clavier)
+- [x] Galerie : lightbox légère au clic (vanilla JS, fermeture Échap, flèches clavier)
 - [ ] Photos en AVIF/WebP avec balise picture (poids −30 % environ)
 - [ ] Footer : icônes réseaux SVG maison en carré biseauté (reprendre le style de la carte de visite)
 - [x] Page 404.html de marque (emblème contour géant + lien retour accueil)
@@ -89,3 +89,22 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   n'importe quel niveau de path ; page en noindex, hors sitemap. Vérifié local desktop 1280 + mobile 375 (aucun
   débordement, console propre), puis prod : /404.html en 200, et une URL inexistante renvoie bien la page
   « Sortie de piste » avec statut HTTP 404. Fichier Google intouché.
+- 2026-07-13 : Galerie « En piste » — agrandissement au clic (lightbox). Avant, les 6 photos de course n'étaient
+  cliquables nulle part ; on ne pouvait pas les voir en grand. Ajout d'une lightbox maison en vanilla JS (aucune
+  dépendance, ~+80 lignes JS dans index.html + ~130 lignes CSS dans styles.css, poids négligeable, zéro image
+  nouvelle). Récit design conforme à la charte : fond marine profond (#060916) + trame carbone + halo or, photo
+  affichée en PLEIN CADRE (contain, jusqu'à 1120px / 74vh — révèle l'image entière alors que la grille la rogne en
+  3/2), cadre à brackets or (réutilise .frame), légende Bebas avec pastille damier or (reprise du kicker, zéro
+  tiret), compteur « 03 / 06 » en Korataki contour or, boutons carrés biseautés charte (fermer + flèches). Le fond
+  or/marine du dégradé n'est pas séparé : réutilise les tokens de la charte. Accessibilité soignée : chaque photo
+  devient role=button tabindex=0 avec aria-label « Agrandir : {légende} » + repère loupe ⤢ au survol/focus ;
+  dialog aria-modal ; ouverture au clic/Entrée/Espace ; Échap ferme ; flèches ←/→ naviguent (bouclage) ; piège à
+  focus (Tab reste dans la lightbox) ; focus mis sur « Fermer » à l'ouverture (via double rAF, sinon l'élément est
+  encore visibility:hidden) et RENDU à la photo d'origine à la fermeture ; scroll de page verrouillé pendant
+  l'ouverture ; préchargement des vignettes voisines pour une nav fluide ; transitions coupées en
+  prefers-reduced-motion. Progressive enhancement : tout est injecté en JS, donc sans JS la galerie reste des
+  images statiques (pas de repère trompeur). La vidéo SERA et la tuile Instagram @thomaspaponeracing sont exclues
+  (non cliquables, intactes). Vérifié local desktop 1280 (ouverture, ←/→ + bouclage, Échap, clic-fond, focus rendu)
+  ET mobile 375 (flèches repositionnées en bas, image dans le cadre, zéro débordement horizontal), console propre.
+  Puis prod : accueil 200, .lightbox présent dans styles.css et lb-scene dans index.html. Fichier Google intouché,
+  page pilote et sitemap non modifiés.
