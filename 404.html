@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Page introuvable — TPRacing</title>
+  <meta name="description" content="La page demandée est sortie de piste. Retour à l'accueil de TPRacing, association de sport automobile.">
+  <meta name="robots" content="noindex, follow">
+
+  <link rel="icon" href="/assets/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png?v=2">
+  <meta name="theme-color" content="#1E2635">
+  <link rel="preload" href="/assets/fonts/korataki-bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/bebas-neue-pro-middle.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/styles.css">
+
+  <style>
+    /* ---------- 404 : sortie de piste ---------- */
+    .hero-404 {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      color: var(--blanc);
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 40%, rgba(212, 151, 38, .15), transparent 62%),
+        radial-gradient(rgba(246, 247, 252, .035) 1px, transparent 1.5px),
+        linear-gradient(180deg, #070B1D 0%, #0d1526 68%, var(--marine) 100%);
+      background-size: auto, 26px 26px, auto;
+      padding: 140px 6% 96px;
+    }
+    .hero-404 .embleme-fond {
+      color: rgba(246, 247, 252, .05);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -46%);
+      width: clamp(460px, 64vw, 900px);
+    }
+    .err-contenu { position: relative; z-index: 2; max-width: 700px; }
+    .err-404 {
+      display: block;
+      font-family: var(--f-titre);
+      font-weight: 700;
+      font-size: clamp(6rem, 24vw, 15rem);
+      line-height: .88;
+      letter-spacing: .04em;
+      color: transparent;
+      -webkit-text-stroke: 2.5px var(--or);
+      text-stroke: 2.5px var(--or);
+      margin-bottom: 14px;
+    }
+    .hero-404 .kicker { justify-content: center; }
+    .hero-404 h1 {
+      color: var(--blanc);
+      font-size: clamp(1.7rem, 5vw, 3.1rem);
+      margin-bottom: 18px;
+    }
+    .hero-404 .lead {
+      color: #c7cddb;
+      margin: 0 auto 36px;
+      max-width: 480px;
+    }
+    .hero-404 .btn-rangee {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-404 .liseret {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 12px;
+      z-index: 3;
+      background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%);
+      background-size: 12px 12px;
+      opacity: .85;
+    }
+    @media (max-width: 560px) {
+      .hero-404 h1 { font-size: 1.5rem; }
+      .err-404 { -webkit-text-stroke-width: 2px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Symbole emblème TP (réutilisé en motif de fond) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="tp-embleme"><path transform="matrix(1,0,0,-1,105.048,39.8827)" d="M0 0H-14.843-18.39-21.927-25.487-30.224-70.716L-74.338-12.077H-49.812L-63.958-59.256H-50.253L-37.921-18.123C-36.845-14.535-33.542-12.077-29.796-12.077H-29.102-25.551-22.003-18.452-4.093C-.63-12.134-.985-19.39-5.576-19.337L-5.579-19.345H-6.003-27.964C-30.013-19.345-31.82-20.689-32.408-22.652L-43.383-59.252C-43.018-59.26-42.659-59.265-42.305-59.267-39.871-59.278-37.698-59.14-35.994-58.998-28.609-58.383-27.605-53.078-27.578-53.025L-20.986-31.423C-20.986-31.423-13.091-31.433-10.015-31.425-9.883-31.425-9.757-31.425-9.644-31.424-9.449-31.424-9.282-31.423-9.151-31.422L-9.148-31.414C-5.016-31.476-3.249-31.223-2.109-31.072 2.242-30.498 10.766-25.789 11.352-10.582 11.389-9.611 11.546 .017 0 0"/></g></defs></svg>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav id="navbar">
+    <a class="logo" href="/index.html">
+      <img class="logo-sombre" src="/assets/logo-secondaire-blanc.png" alt="TPRacing — Thomas Papone Racing">
+      <img class="logo-clair" src="/assets/logo-secondaire-couleur.png" alt="">
+    </a>
+    <ul>
+      <li class="masque-mobile"><a href="/index.html#association">L'association</a></li>
+      <li class="masque-mobile"><a href="/index.html#trajectoire">La trajectoire</a></li>
+      <li><a href="/pilote.html">Le pilote</a></li>
+      <li><a class="nav-cta" href="/index.html#partenaires">Devenir partenaire</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== HERO 404 ===== -->
+  <header class="hero-404">
+    <svg class="embleme-fond" viewBox="29 38 90 63" aria-hidden="true"><use href="#tp-embleme"/></svg>
+    <div class="err-contenu">
+      <span class="err-404">404</span>
+      <p class="kicker">Erreur 404</p>
+      <h1>Sortie de piste</h1>
+      <p class="lead">La page que vous cherchez n'est pas sur la grille. Reprenez la course depuis la ligne de départ.</p>
+      <div class="btn-rangee">
+        <a class="btn btn-or" href="/index.html">Retour à l'accueil</a>
+        <a class="btn btn-blanc" href="/pilote.html">Découvrir le pilote</a>
+      </div>
+    </div>
+    <div class="liseret"></div>
+  </header>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="signature-charte" aria-hidden="true">
+      <span class="filet"></span>
+      <svg viewBox="29 38 90 63"><use href="#tp-embleme"/></svg>
+    </div>
+    <div class="foot-grille">
+      <img src="/assets/logo-blanc.png" alt="TPRacing">
+      <div class="foot-liens">
+        <a href="/pilote.html">Le pilote</a>
+        <a href="/index.html#partenaires">Partenaires</a>
+        <a href="https://www.linkedin.com/company/tpracing/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="foot-bas">
+      <span>© 2026 TPRacing — Thomas Papone Racing. Tous droits réservés.</span>
+      <span>Association de sport automobile, Lapeyrouse, France</span>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    const majNav = () => navbar.classList.toggle('solide', scrollY > 60);
+    addEventListener('scroll', majNav, { passive: true });
+    majNav();
+  </script>
+</body>
+</html>
