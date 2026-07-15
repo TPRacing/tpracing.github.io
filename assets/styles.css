@@ -545,9 +545,74 @@ footer .foot-bas { max-width: 1180px; margin: 0 auto; border-top: 1px solid rgba
   .lb-legende { font-size: .92rem; padding: 0 12px; }
 }
 
+/* ---------- Accessibilité : parcours clavier ---------- */
+
+/* Lien d'évitement : premier arrêt de tabulation. Glisse de derrière la barre
+   de nav (z-index inférieur) et se pose juste dessous, sans masquer les liens. */
+.saut-contenu {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 90;
+  transform: translate(-50%, -180%);
+  font-family: var(--f-label);
+  font-size: 1.05rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: var(--or);
+  color: var(--marine-deep);
+  padding: 12px 26px;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: transform .22s cubic-bezier(.22, .61, .36, 1);
+}
+.saut-contenu:focus {
+  transform: translate(-50%, 84px);
+  box-shadow: inset 0 0 0 3px var(--marine-deep);
+  outline: none;
+}
+@media (max-width: 820px) {
+  .saut-contenu { font-size: .95rem; padding: 10px 20px; }
+  .saut-contenu:focus { transform: translate(-50%, 66px); }
+}
+
+/* Anneau de focus deux tons. Reprend la règle charte du logo (sombre sur fond
+   clair, or sur fond sombre) : l'or seul ne se détache pas du blanc cassé. */
+:focus-visible {
+  outline: 3px solid var(--marine);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(212, 151, 38, .9);
+}
+nav :focus-visible,
+footer :focus-visible,
+.hero :focus-visible,
+.hero-pilote :focus-visible,
+.section-marine :focus-visible,
+.bande-origines :focus-visible,
+.lightbox :focus-visible,
+.hero-404 :focus-visible {
+  outline-color: var(--or);
+  box-shadow: 0 0 0 3px rgba(7, 11, 29, .9);
+}
+/* La nav bascule sur fond clair au scroll : l'anneau repasse en marine. */
+nav.solide :focus-visible {
+  outline-color: var(--marine);
+  box-shadow: 0 0 0 3px rgba(212, 151, 38, .9);
+}
+
+/* Les boutons sont détourés au clip-path, qui rogne outline et ombre portée :
+   anneau posé à l'intérieur du bouton. Les deux variantes (or, blanc cassé) ont
+   un fond clair, l'anneau marine se détache sur les deux. */
+.btn:focus-visible,
+nav .nav-cta:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px var(--marine-deep);
+}
+
 /* ---------- Accessibilité mouvement ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .saut-contenu { transition: none; }
   .rvl { opacity: 1; transform: none; transition: none; }
   .marquee .piste { animation: none; }
   .lightbox, .lb-scene, .gal-loupe { transition: opacity .18s ease, visibility .18s ease; }
