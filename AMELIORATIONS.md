@@ -14,7 +14,8 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [ ] Photos en AVIF/WebP avec balise picture (poids −30 % environ)
 - [ ] Footer : icônes réseaux SVG maison en carré biseauté (reprendre le style de la carte de visite)
 - [x] Page 404.html de marque (emblème contour géant + lien retour accueil)
-- [ ] Accessibilité : focus visibles or, contrastes AA, lien d'évitement, alt complets
+- [x] Accessibilité : focus visibles or, contrastes AA, lien d'évitement, alt complets
+      (contraste de l'or sur fond clair : question posée à Thomas au Journal du 15/07)
 - [ ] Diagonales de sections : harmoniser les angles partout (même pente)
 - [ ] Bande origines : parallax léger au scroll (transform, désactivé reduced-motion)
 - [ ] Teaser pilote accueil : montage photo duotone dédié à la place du poster Insta
@@ -108,3 +109,36 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   ET mobile 375 (flèches repositionnées en bas, image dans le cadre, zéro débordement horizontal), console propre.
   Puis prod : accueil 200, .lightbox présent dans styles.css et lb-scene dans index.html. Fichier Google intouché,
   page pilote et sitemap non modifiés.
+- 2026-07-15 : Accessibilité, parcours clavier (complétude + finition, les 3 pages). Avant, seule la
+  lightbox d'hier avait un style de focus : en naviguant au clavier, les liens de nav, les boutons et le
+  footer n'avaient aucun repère fiable, et aucune page n'avait de `<main>` ni de lien d'évitement.
+  Ajouts : (1) lien d'évitement « Aller au contenu », premier arrêt de tabulation, en pastille or à
+  coin biseauté qui glisse de DERRIÈRE la barre de nav (z-index inférieur) et se pose juste dessous
+  (84 px desktop, 66 px mobile) sans jamais masquer les liens ; (2) anneau de focus deux tons qui
+  reprend la règle charte du logo, marine sur fond clair / or sur fond sombre, avec le filet de la
+  couleur opposée collé à l'élément (l'or seul ne se détache pas du blanc cassé) ; il bascule tout seul
+  quand la nav passe en solide au scroll ; (3) les boutons sont détourés au `clip-path`, qui rogne
+  outline ET ombre portée : anneau posé en `inset` à l'intérieur du bouton ; (4) `<main id="contenu">`
+  sur les 3 pages + `aria-label` sur la nav. Bug corrigé au passage : le lien du logo perdait son nom
+  accessible dès que la nav passait en solide (les 2 logos se relaient en `display:none`, et un `img`
+  masqué sort de l'arbre d'accessibilité, donc plus aucun `alt` lisible) → `aria-label` porté par le
+  lien, `alt=""` sur les deux images. Vérifié en local desktop 1280 + mobile 375 : 23 éléments
+  focusables sur l'accueil, 17 sur pilote, 11 sur la 404, TOUS avec un repère visible (mesuré au
+  navigateur, pas à l'œil) ; les deux états de nav testés ; lightbox d'hier intacte (ouverture,
+  légende, compteur, Échap) ; zéro débordement horizontal, console propre. Prod OK : les 3 pages,
+  styles.css, sitemap, robots et le fichier Google en 200, une URL inexistante rend toujours la 404
+  de marque. Zéro image ajoutée (CSS + attributs seulement).
+  ⚠️ NB technique : le T7 n'était pas branché, le dépôt (qui y vit depuis le 12/07) était donc
+  introuvable → travail fait sur un clone frais depuis GitHub, poussé normalement. Sur le T7, faire
+  un `git pull` avant toute nouvelle modif locale, sinon divergence.
+
+  ❓ QUESTION POUR THOMAS (décision de DA, rien n'a été touché) : l'or de la charte #D49726 sur le
+  fond blanc cassé ne donne que **2,38:1**, alors que le minimum légal/AA pour du petit texte est de
+  4,5:1. Ça concerne les kickers (« ASSOCIATION DE SPORT AUTOMOBILE », « LE PILOTE »…) en Bebas ~18 px
+  sur les sections claires : lisibles pour toi, pénibles en plein soleil ou pour une vue fatiguée.
+  Trois options, je n'en applique aucune sans ton accord :
+  1. Ne rien changer : fidélité totale à la charte, on assume le défaut de contraste.
+  2. Un or foncé UNIQUEMENT pour ces petits textes sur fond clair (ex. #8F661A, même teinte, 4,81:1) ;
+     l'or #D49726 reste partout ailleurs (aplats, filets, boutons, fonds sombres). C'est ma reco.
+  3. Passer les kickers sur fond clair en marine, l'or ne servant plus que de pastille damier.
+  À noter : sur fond sombre l'or est déjà bon (5,96:1), il n'y a donc rien à corriger là.
