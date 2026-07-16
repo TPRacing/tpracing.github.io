@@ -344,7 +344,28 @@ nav ul a {
   transition: color .25s;
 }
 nav ul a:hover { color: var(--or); }
-nav ul a.active { color: var(--or); border-bottom: 2px solid var(--or); }
+nav ul a.active { color: var(--or); }
+
+/* Soulignement or qui glisse : entre par la gauche au survol, ressort par la droite ;
+   reste plein sur le lien actif. Exclut le bouton CTA (aplat plein). */
+nav ul a:not(.nav-cta) { position: relative; padding-bottom: 5px; }
+nav ul a:not(.nav-cta)::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: var(--or);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform .32s cubic-bezier(.4, .15, .2, 1);
+}
+nav ul a:not(.nav-cta):hover::after,
+nav ul a:not(.nav-cta):focus-visible::after,
+nav ul a.active:not(.nav-cta)::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
 nav .nav-cta {
   background: var(--or);
   color: var(--marine-deep);
@@ -617,5 +638,6 @@ nav .nav-cta:focus-visible {
   .marquee .piste { animation: none; }
   .lightbox, .lb-scene, .gal-loupe { transition: opacity .18s ease, visibility .18s ease; }
   .lb-scene { transform: none; }
+  nav ul a:not(.nav-cta)::after { transition: none; }
   * { animation-duration: .01s !important; }
 }
