@@ -7,7 +7,7 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 
 - [x] Favicon propre multi-tailles depuis l'emblème (32px, 180px apple-touch) + meta theme-color marine
 - [x] Image Open Graph dédiée 1200×630 (logo + photo duotone) pour les partages LinkedIn/WhatsApp
-- [ ] Micro-interaction nav : soulignement or animé qui glisse sous les liens
+- [x] Micro-interaction nav : soulignement or animé qui glisse sous les liens
 - [ ] Page pilote : renforcer la cohérence avec l'accueil (47 outline animé ou emblème 3D discret dans le hero)
 - [ ] Section jalons/palmarès en badges chiffrés or sur marine (années de karting, sessions monoplace, licence…) à valider avec Thomas avant publication des chiffres
 - [x] Galerie : lightbox légère au clic (vanilla JS, fermeture Échap, flèches clavier)
@@ -142,3 +142,15 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
      l'or #D49726 reste partout ailleurs (aplats, filets, boutons, fonds sombres). C'est ma reco.
   3. Passer les kickers sur fond clair en marine, l'or ne servant plus que de pastille damier.
   À noter : sur fond sombre l'or est déjà bon (5,96:1), il n'y a donc rien à corriger là.
+- 2026-07-16 : Micro-interaction de nav (finition design, les 3 pages via styles.css seul). Avant, les
+  liens de nav n'avaient qu'un changement de couleur au survol et l'actif un simple `border-bottom`
+  statique. Ajout d'un soulignement or de 2 px en `::after` qui GLISSE : `scaleX(0)` au repos, entre par
+  la gauche au survol/focus (`transform-origin` gauche) et ressort par la droite (origin droite) quand on
+  quitte ; il reste plein sur le lien actif (« Le pilote » sur pilote.html). Le bouton plein « Devenir
+  partenaire » est exclu (`:not(.nav-cta)`), et la règle marche dans les deux états de nav (or sur le
+  hero sombre, or sur la barre claire au scroll). `padding-bottom` de 5 px pour aérer le trait sous le
+  texte ; transition coupée en `prefers-reduced-motion`. Vérifié en local desktop 1280 (repos = aucun
+  trait, état survol forcé = trait exactement à la largeur de chaque libellé et absent sous le CTA, nav
+  solide claire OK) ET mobile 375 (actif souligné, zéro débordement horizontal), console propre. Prod
+  après ~25 s : CSS à jour, les 3 pages + sitemap + robots + fichier Google en 200. Zéro image ajoutée
+  (CSS seul, poids négligeable).
