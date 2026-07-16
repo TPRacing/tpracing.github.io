@@ -26,6 +26,12 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [ ] Déclinaison du sting AE (logo animé, /Volumes/ TPT7/TPRacing/sting.jsx) en format carré 1080 pour Insta/Shorts
 - [ ] Emblème 3D : version animée légère en hero (séquence AE ou sprite au scroll) si le poids reste raisonnable
 - [ ] Section actus/prochaines échéances (structure seulement, contenus à valider avec Thomas)
+- [x] Accueil : mur de partenaires « Ils nous font confiance » (18 logos)
+- [x] Pilote : section « Derniers posts » Instagram (feed maison, réels prêts à jouer au scroll)
+- [ ] Accueil : section « Ils parlent de nous » (presse) — interview MyCitee trouvée (2 parties, reels
+      @myciteemedia) ; MANQUE les URL des articles du Progrès (à fournir par Thomas) avant publication
+- [ ] Feed Insta : automatiser le rafraîchissement via la routine (récupérer les derniers posts
+      dans le Chrome connecté + régénérer les vignettes) ; nécessite le navigateur connecté à Insta
 
 ## Règles (rappel pour la routine)
 
@@ -142,6 +148,29 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
      l'or #D49726 reste partout ailleurs (aplats, filets, boutons, fonds sombres). C'est ma reco.
   3. Passer les kickers sur fond clair en marine, l'or ne servant plus que de pastille damier.
   À noter : sur fond sombre l'or est déjà bon (5,96:1), il n'y a donc rien à corriger là.
+- 2026-07-16 : Accueil — mur de partenaires « Ils nous font confiance » (demande de Thomas). 18 logos
+  fournis dans ~/Desktop/Logo Partenaires, optimisés en WebP (trim des marges + flatten sur blanc +
+  resize 560px, total ~250 Ko) et posés sur des tuiles blanches à coin biseauté (grille 6/3/2 selon
+  l'écran, survol = lift + liseré or). Section insérée dans #partenaires entre les cartes de valeur et
+  le CTA, titre Korataki + kicker damier « Ils nous soutiennent » + « Et vous, pourquoi pas ? » qui
+  amène au CTA. 13 logos cliquables vers le site du partenaire (URL vérifiées en 200 ; DMPI, AMS, GPI,
+  Midas, Les Frang'Ain laissés non cliquables faute de site fiable). Note : tous les logos affichés
+  (actifs comme anciens soutiens) car Thomas a fourni les 18 ; GPI = Grayel Protection Incendie, SMD =
+  groupe Hexagone Motors. Vérifié desktop 1280 (6 col) + mobile 390 (2 col), zéro débordement, console
+  propre. En ligne.
+- 2026-07-16 : Pilote — section « Derniers posts » Instagram (demande de Thomas, « feed maison » choisi
+  parmi 3 options). Récupéré ses 2 publications actuelles via le Chrome connecté (@thomaspaponeracing) ;
+  vignettes téléchargées (endpoint /p/{code}/media/?size=l) et self-hébergées en WebP 4:5 (assets/insta/,
+  ~110 Ko). Grille 3 tuiles (2 posts + tuile marine « Tout voir @thomaspaponeracing ↗ »), pastille
+  Instagram maison en SVG, date en surimpression, survol = zoom + liseré or. Le JS rend n'importe quelle
+  tuile marquée « réel » en VIDÉO qui joue en muet au défilement (même mécanisme que la vidéo SERA,
+  coupé en prefers-reduced-motion) : prêt pour ses futurs réels, aucun aujourd'hui (il n'a que 2 posts
+  photo). Placé UNIQUEMENT sur pilote.html (règle de séparation des entités). Vérifié desktop 1280 (3 col)
+  + mobile 390 (2 col + bandeau pleine largeur), zéro débordement, console propre. En ligne.
+  ❓ EN ATTENTE DE THOMAS : (1) URL des articles du Progrès pour la section « Ils parlent de nous » (je
+  n'ai trouvé que l'interview MyCitee = 2 reels @myciteemedia via son taplink) ; (2) le feed Insta est
+  une photo à l'instant T : pour qu'il se rafraîchisse seul il faut brancher la routine sur le Chrome
+  connecté (noté au backlog).
 - 2026-07-16 : Micro-interaction de nav (finition design, les 3 pages via styles.css seul). Avant, les
   liens de nav n'avaient qu'un changement de couleur au survol et l'actif un simple `border-bottom`
   statique. Ajout d'un soulignement or de 2 px en `::after` qui GLISSE : `scaleX(0)` au repos, entre par
