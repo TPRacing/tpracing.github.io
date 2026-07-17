@@ -246,3 +246,13 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   presse, feed Insta). À revérifier dans quelques jours : statut sitemap « Réussite » + prise en compte
   des nouvelles sections dans le cache Google. Piège GSC récurrent : la barre d'inspection perd la
   saisie au clic/type → remplir l'input en JS (native setter + event input) puis Entrée.
+- 2026-07-17 (suite) : Sitemap, analyse approfondie après le doute de Thomas. Le détail GSC montre
+  « Dernière lecture : 17/07/2026 » → Google EST passé relire après la resoumission, mais répond
+  « Impossible de lire le sitemap » (0 page). Vérification au niveau octets du fichier servi : aucun
+  BOM, XML valide, 200 en application/xml, identique pour l'UA Googlebot → le fichier est parfait,
+  c'est le bug connu des propriétés GSC récentes sur *.github.io (statut erroné sur sitemap valide,
+  se résout seul sous quelques jours/semaines, n'affecte PAS l'indexation — preuve : les 2 pages sont
+  indexées et sortent en recherche). Remède appliqué : entrée SUPPRIMÉE (menu ⋮ du détail → Supprimer,
+  purge l'état en cache) puis RESOUMISE à neuf (« Sitemap envoyé », ligne du 17 juil., saisie vérifiée
+  à l'écran cette fois). À revérifier d'ici ~1 semaine ; si toujours « Impossible de lire » alors que
+  tout est indexé, ignorer (cosmétique).
