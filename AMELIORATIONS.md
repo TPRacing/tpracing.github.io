@@ -29,8 +29,8 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [x] Accueil : mur de partenaires « Ils nous font confiance » (18 logos)
 - [x] Pilote : section « Derniers posts » Instagram (feed maison, réels prêts à jouer au scroll)
 - [x] Accueil : section « Ils parlent de nous » (2 articles Le Progrès + interview MyCitee en 2 parties)
-- [ ] Feed Insta : automatiser le rafraîchissement via la routine (récupérer les derniers posts
-      dans le Chrome connecté + régénérer les vignettes) ; nécessite le navigateur connecté à Insta
+- [x] Feed Insta : automatiser le rafraîchissement (tâche planifiée dédiée maj-feed-insta-site,
+      quotidienne à 10 h, via le Chrome connecté ; validée par Thomas le 17/07)
 
 ## Règles (rappel pour la routine)
 
@@ -196,3 +196,12 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   solide claire OK) ET mobile 375 (actif souligné, zéro débordement horizontal), console propre. Prod
   après ~25 s : CSS à jour, les 3 pages + sitemap + robots + fichier Google en 200. Zéro image ajoutée
   (CSS seul, poids négligeable).
+- 2026-07-17 : Feed Insta automatisé (accord de Thomas). Nouvelle tâche planifiée dédiée
+  « maj-feed-insta-site » (quotidienne, 10 h, tourne quand l'app Claude est ouverte) : lit la grille
+  @thomaspaponeracing dans le Chrome connecté, compare les shortcodes à ceux de pilote.html, télécharge
+  les vignettes des nouveaux posts (endpoint /media/ pour les photos, rognage de screenshot pour les
+  réels), met à jour la grille (max 5 posts + « Tout voir »), vérifie en local, pousse, et ne journalise
+  que s'il y a du changement. Les réels restent en vignette + pastille lecture tant que Thomas ne fournit
+  pas le fichier vidéo source (autoplay possible ensuite via data-video). La routine design
+  amelioration-site-tpracing a aussi été corrigée (chemin T7 au lieu du Desktop disparu) et ne touche
+  plus à cette section. NB : premier « Run now » conseillé pour pré-approuver les outils (navigateur).
