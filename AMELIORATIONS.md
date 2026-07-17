@@ -222,3 +222,14 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   au-delà des 500 Ko de la règle mais justifié : demande explicite + lazy réel). Vérifié desktop +
   mobile 390 (ordre de la bande conforme, pause OK, diaporama avance et se réinitialise, 0 débordement,
   console propre) puis prod (~30 s : trust-band + data-slides + slides en 200, fichier Google intouché).
+- 2026-07-17 (soir) : Point SEO / Search Console (demande Thomas). Analyse du sitemap : le fichier est
+  VALIDE (XML bien formé, 200, content-type application/xml, déclaré dans robots.txt) — le « Impossible
+  de récupérer le sitemap » affiché depuis le 9 juil. est le statut GSC pas encore rafraîchi, pas un
+  défaut du fichier. Fait : lastmod passés au 17/07 + resoumission du sitemap dans GSC (ligne datée du
+  17 juil., relecture Google à venir). Constat clé : LES 2 PAGES SONT DÉJÀ INDEXÉES (« Cette URL est
+  sur Google » pour l'accueil et pilote.html) et sortent dans les résultats (site:tpracing.github.io =
+  2 résultats avec titres/descriptions propres) → le sitemap en erreur n'a rien bloqué. Réindexation
+  demandée pour les 2 pages (file d'attente prioritaire) pour pousser les nouveautés (bande partenaires,
+  presse, feed Insta). À revérifier dans quelques jours : statut sitemap « Réussite » + prise en compte
+  des nouvelles sections dans le cache Google. Piège GSC récurrent : la barre d'inspection perd la
+  saisie au clic/type → remplir l'input en JS (native setter + event input) puis Entrée.
