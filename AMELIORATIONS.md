@@ -8,7 +8,7 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [x] Favicon propre multi-tailles depuis l'emblème (32px, 180px apple-touch) + meta theme-color marine
 - [x] Image Open Graph dédiée 1200×630 (logo + photo duotone) pour les partages LinkedIn/WhatsApp
 - [x] Micro-interaction nav : soulignement or animé qui glisse sous les liens
-- [ ] Page pilote : renforcer la cohérence avec l'accueil (47 outline animé ou emblème 3D discret dans le hero)
+- [x] Page pilote : renforcer la cohérence avec l'accueil (47 outline animé ou emblème 3D discret dans le hero)
 - [ ] Section jalons/palmarès en badges chiffrés or sur marine (années de karting, sessions monoplace, licence…) à valider avec Thomas avant publication des chiffres
 - [x] Galerie : lightbox légère au clic (vanilla JS, fermeture Échap, flèches clavier)
 - [ ] Photos en AVIF/WebP avec balise picture (poids −30 % environ)
@@ -222,6 +222,19 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   au-delà des 500 Ko de la règle mais justifié : demande explicite + lazy réel). Vérifié desktop +
   mobile 390 (ordre de la bande conforme, pause OK, diaporama avance et se réinitialise, 0 débordement,
   console propre) puis prod (~30 s : trust-band + data-slides + slides en 200, fichier Google intouché).
+- 2026-07-18 : Pilote — signature identitaire dans le hero (cohérence avec l'accueil). Avant, le hero
+  de l'accueil avait son emblème 3D comme ancrage visuel fort, mais le hero pilote n'avait qu'une photo,
+  sans élément de marque signature. Ajout du NUMÉRO DE COURSE 47 (le vrai numéro de Thomas) en grand
+  contour or, posé DERRIÈRE la photo du simulateur (z-index 0 sous la grille) : le pilote passe devant le
+  chiffre, effet de profondeur type carte de pilote motorsport. Parallèle thématique voulu : l'association
+  se signe par son emblème, le pilote par son numéro. Le 47 se RÉVÈLE par un balayage gauche→droite au
+  chargement (clip-path inset, écho du sting où l'or « se peint »), 1,05 s. Desktop : contour or opacity
+  .42 qui bleede à droite (crop racé), hauteur du hero. Mobile 375 : version plus discrète (opacity .34)
+  gardée au même ancrage bas derrière la photo, le haut du hero (kicker + titre) reste propre ; le 7 peeke
+  en fin sliver à droite. Pur CSS + un seul <span> texte : ZÉRO nouvel asset, poids négligeable. Respecte
+  prefers-reduced-motion (pas d'animation, numéro visible d'emblée). Vérifié desktop 1280 (numéro lisible
+  derrière le pilote, pas de débordement, animation jouée) + mobile 375 (haut propre, accent bas discret,
+  0 débordement horizontal), console vide. Fichier Google, sitemap et section « Derniers posts » intacts.
 - 2026-07-17 (soir) : Point SEO / Search Console (demande Thomas). Analyse du sitemap : le fichier est
   VALIDE (XML bien formé, 200, content-type application/xml, déclaré dans robots.txt) — le « Impossible
   de récupérer le sitemap » affiché depuis le 9 juil. est le statut GSC pas encore rafraîchi, pas un
