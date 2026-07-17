@@ -28,8 +28,7 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [ ] Section actus/prochaines échéances (structure seulement, contenus à valider avec Thomas)
 - [x] Accueil : mur de partenaires « Ils nous font confiance » (18 logos)
 - [x] Pilote : section « Derniers posts » Instagram (feed maison, réels prêts à jouer au scroll)
-- [ ] Accueil : section « Ils parlent de nous » (presse) — interview MyCitee trouvée (2 parties, reels
-      @myciteemedia) ; MANQUE les URL des articles du Progrès (à fournir par Thomas) avant publication
+- [x] Accueil : section « Ils parlent de nous » (2 articles Le Progrès + interview MyCitee en 2 parties)
 - [ ] Feed Insta : automatiser le rafraîchissement via la routine (récupérer les derniers posts
       dans le Chrome connecté + régénérer les vignettes) ; nécessite le navigateur connecté à Insta
 
@@ -167,10 +166,24 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   coupé en prefers-reduced-motion) : prêt pour ses futurs réels, aucun aujourd'hui (il n'a que 2 posts
   photo). Placé UNIQUEMENT sur pilote.html (règle de séparation des entités). Vérifié desktop 1280 (3 col)
   + mobile 390 (2 col + bandeau pleine largeur), zéro débordement, console propre. En ligne.
-  ❓ EN ATTENTE DE THOMAS : (1) URL des articles du Progrès pour la section « Ils parlent de nous » (je
-  n'ai trouvé que l'interview MyCitee = 2 reels @myciteemedia via son taplink) ; (2) le feed Insta est
-  une photo à l'instant T : pour qu'il se rafraîchisse seul il faut brancher la routine sur le Chrome
-  connecté (noté au backlog).
+  ❓ EN ATTENTE DE THOMAS : le feed Insta est une photo à l'instant T : pour qu'il se rafraîchisse seul
+  il faut brancher la routine sur le Chrome connecté (noté au backlog).
+- 2026-07-16 : Accueil — section « Ils parlent de nous » (suite de la demande de Thomas). Les articles du
+  Progrès introuvables depuis mes recherches US ont été trouvés via une recherche Google DANS SON Chrome
+  (résultats géolocalisés France) : « Thomas, jeune espoir du sport automobile » (23/04/2024, /societe/) et
+  « Karting : un bel avenir se dessine pour le jeune Thomas Papone » (28/08/2024, /sport/), les 2 vérifiées
+  en 200 avec og:title conforme. L'interview MyCitee (2 reels @myciteemedia, trouvés via son
+  taplink.cc/thomaspaponeracing) : titres et liens vérifiés dans son Chrome connecté (caption « THOMAS
+  PAPONE, PILOTE DE KARTING — Nouvelle interview - Partie 1/2 »). Section posée entre #partenaires et la
+  galerie : mot géant « Presse » en fond, kicker damier « Dans les médias », 3 cartes blanches à liseré or
+  haut (écho des cartes partenaires) : média en Bebas or + date après slash (pas de tiret), titre de
+  l'article entre guillemets en Inter, « Lire l'article ↗ » ; la carte MyCitee porte 2 chips biseautées
+  « Partie 1 / Partie 2 » (reprise des chips réseaux de la page pilote). Cartes cliquables entières pour
+  Le Progrès. Pas de vignettes presse : les photos des articles sont © Le Progrès et les covers de reels
+  exigent un login — texte seul, zéro risque de droits. Liens vers médias EXTERNES donc conformes à la
+  séparation des entités (pas les réseaux du pilote). Vérifié desktop (3 cartes en ligne) + mobile 390
+  (1 colonne), zéro débordement, console propre, ordre des sections OK (partenaires → presse → galerie).
+  En ligne.
 - 2026-07-16 : Micro-interaction de nav (finition design, les 3 pages via styles.css seul). Avant, les
   liens de nav n'avaient qu'un changement de couleur au survol et l'actif un simple `border-bottom`
   statique. Ajout d'un soulignement or de 2 px en `::after` qui GLISSE : `scaleX(0)` au repos, entre par
