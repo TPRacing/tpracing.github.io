@@ -338,6 +338,60 @@
     a.trust-tile:hover::after, a.trust-tile:focus-visible::after { width: 100%; }
     @media (max-width: 900px) { .trust-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 480px) { .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+
+    /* ---------- Ils parlent de nous (presse) ---------- */
+    .presse-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 40px; }
+    .presse-carte {
+      background: #fff;
+      border: 1px solid rgba(30, 38, 53, .1);
+      border-top: 3px solid var(--or);
+      padding: 26px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      text-decoration: none;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    a.presse-carte:hover, a.presse-carte:focus-visible { transform: translateY(-5px); box-shadow: 0 16px 34px rgba(30, 38, 53, .1); }
+    .presse-carte .media {
+      font-family: var(--f-label);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      font-size: .95rem;
+      color: var(--or);
+    }
+    .presse-carte .media b { font-weight: 400; color: var(--gris); }
+    .presse-carte .titre { color: var(--marine); font-weight: 600; font-size: 1.04rem; line-height: 1.5; }
+    .presse-carte .lire {
+      margin-top: auto;
+      font-family: var(--f-label);
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      font-size: .98rem;
+      color: var(--marine);
+      transition: color .2s;
+    }
+    .presse-carte .lire i, .presse-carte .lire-duo i { font-style: normal; color: var(--or); }
+    a.presse-carte:hover .lire, a.presse-carte:focus-visible .lire { color: var(--or); }
+    .presse-carte .lire-duo { margin-top: auto; display: flex; gap: 12px; flex-wrap: wrap; }
+    .presse-carte .lire-duo a {
+      font-family: var(--f-label);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: .95rem;
+      text-decoration: none;
+      color: var(--marine);
+      padding: 7px 14px;
+      box-shadow: inset 0 0 0 1.5px rgba(30, 38, 53, .35);
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      transition: box-shadow .2s, color .2s, transform .15s;
+    }
+    .presse-carte .lire-duo a:hover, .presse-carte .lire-duo a:focus-visible {
+      box-shadow: inset 0 0 0 1.5px var(--or);
+      color: var(--or);
+      transform: translateY(-2px);
+    }
+    @media (max-width: 900px) { .presse-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -543,6 +597,35 @@
     <div class="part-cta rvl">
       <strong>Envie d'écrire la suite avec nous ?</strong>
       <a class="btn btn-or" href="https://www.linkedin.com/company/tpracing/" target="_blank" rel="noopener">Contacter l'association</a>
+    </div>
+  </section>
+
+  <!-- ===== ILS PARLENT DE NOUS ===== -->
+  <section id="presse">
+    <span class="mot-geant" style="top: 26px; left: -2%;">Presse</span>
+    <div class="contenu">
+      <p class="kicker rvl">Dans les médias</p>
+      <h2 class="rvl" data-d="1">Ils parlent de nous</h2>
+      <div class="presse-grid">
+        <a class="presse-carte rvl" href="https://www.leprogres.fr/societe/2024/04/23/thomas-jeune-espoir-du-sport-automobile" target="_blank" rel="noopener">
+          <span class="media">Le Progrès <b>/ 23 avril 2024</b></span>
+          <span class="titre">« Thomas, jeune espoir du sport automobile »</span>
+          <span class="lire">Lire l'article <i>&#8599;</i></span>
+        </a>
+        <a class="presse-carte rvl" data-d="1" href="https://www.leprogres.fr/sport/2024/08/28/karting-un-bel-avenir-se-dessine-pour-le-jeune-thomas-papone" target="_blank" rel="noopener">
+          <span class="media">Le Progrès <b>/ 28 août 2024</b></span>
+          <span class="titre">« Karting&nbsp;: un bel avenir se dessine pour le jeune Thomas Papone »</span>
+          <span class="lire">Lire l'article <i>&#8599;</i></span>
+        </a>
+        <div class="presse-carte rvl" data-d="2">
+          <span class="media">MyCitee <b>/ Interview vidéo</b></span>
+          <span class="titre">« Thomas Papone, pilote de karting »&nbsp;: l'interview en deux parties</span>
+          <span class="lire-duo">
+            <a href="https://www.instagram.com/reel/DPjkn4akYCr/" target="_blank" rel="noopener" aria-label="Interview MyCitee, partie 1, sur Instagram">Partie 1 <i>&#8599;</i></a>
+            <a href="https://www.instagram.com/reel/DPmC1-mAu9t/" target="_blank" rel="noopener" aria-label="Interview MyCitee, partie 2, sur Instagram">Partie 2 <i>&#8599;</i></a>
+          </span>
+        </div>
+      </div>
     </div>
   </section>
 
