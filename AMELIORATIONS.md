@@ -21,7 +21,7 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [ ] Teaser pilote accueil : montage photo duotone dédié à la place du poster Insta
 - [ ] Performances : preload du hero, lazy strict du reste, passage Lighthouse consigné
 - [ ] Cartes disciplines : enrichir les survols (lieu, année en Bebas)
-- [ ] Complétude : page mentions légales sobre (obligatoire en France) + lien footer
+- [x] Complétude : page mentions légales + politique de confidentialité (17/07, données officielles JOAFE)
 - [ ] Complétude : bloc contact clair sur l'accueil (LinkedIn asso mis en avant)
 - [ ] Déclinaison du sting AE (logo animé, /Volumes/ TPT7/TPRacing/sting.jsx) en format carré 1080 pour Insta/Shorts
 - [ ] Emblème 3D : version animée légère en hero (séquence AE ou sprite au scroll) si le poids reste raisonnable
@@ -256,3 +256,20 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   purge l'état en cache) puis RESOUMISE à neuf (« Sitemap envoyé », ligne du 17 juil., saisie vérifiée
   à l'écran cette fois). À revérifier d'ici ~1 semaine ; si toujours « Impossible de lire » alors que
   tout est indexé, ignorer (cosmétique).
+- 2026-07-17 (nuit) : Mentions légales + confidentialité (demande Thomas, complétude légale). Analyse
+  d'abord : données OFFICIELLES tirées du JOAFE via l'API journal-officiel (TPRACING (THOMAS PAPONE
+  RACING), RNA W012015296, déclarée préfecture de l'Ain le 15/12/2021, JO du 21/12/2021) et du dossier
+  de création sur le T7 (CR-ListeDirigeant.pdf : Patrice président, Sophie trésorière, Thomas
+  secrétaire). Décisions de Thomas : directeur de la publication = Patrice Papone ; adresse = commune
+  seule (01330 Lapeyrouse, protège le domicile — l'adresse complète reste publique au JO mais pas mise
+  en vitrine) ; contact = email asso + LinkedIn. Audit RGPD du site : AUCUNE collecte (pas de
+  formulaire/compte/analytics/cookie → pas de bandeau requis) ; seul point noir = Inter chargée depuis
+  Google Fonts (IP des visiteurs transmise à Google) → CORRIGÉ : Inter v20 auto-hébergée (police
+  VARIABLE, un seul woff2 latin de 48 Ko couvre 400→700), liens googleapis/gstatic retirés des 3 pages
+  → le site ne fait plus AUCUNE requête tierce (vérifié via performance.getEntriesByType : 0 requête
+  externe sur les 3 pages). Page mentions-legales.html dans la DA (en-tête marine + kicker damier,
+  titre Korataki, sections filet or : éditeur, contact, hébergeur GitHub, propriété intellectuelle,
+  données personnelles, cookies, droit applicable ; slash — jamais de tiret décoratif), lien footer
+  « / Mentions légales » sur les 4 pages, entrée sitemap (priority 0.3). Vérifié local desktop + mobile
+  390 (0 débordement, console propre, Inter chargée localement) puis prod (~51 s : page, woff2, sitemap
+  en 200, 0 googleapis, fichier Google intouché).
