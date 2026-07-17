@@ -27,6 +27,8 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [ ] Emblème 3D : version animée légère en hero (séquence AE ou sprite au scroll) si le poids reste raisonnable
 - [ ] Section actus/prochaines échéances (structure seulement, contenus à valider avec Thomas)
 - [x] Accueil : mur de partenaires « Ils nous font confiance » (18 logos)
+- [x] Partenaires : bande défilante automatique, actifs 2026 et plus gros soutiens en tête (demande Thomas 17/07)
+- [x] Feed Insta : carrousels, les photos du post défilent au survol de la tuile (demande Thomas 17/07)
 - [x] Pilote : section « Derniers posts » Instagram (feed maison, réels prêts à jouer au scroll)
 - [x] Accueil : section « Ils parlent de nous » (2 articles Le Progrès + interview MyCitee en 2 parties)
 - [x] Feed Insta : automatiser le rafraîchissement (tâche planifiée dédiée maj-feed-insta-site,
@@ -205,3 +207,18 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   pas le fichier vidéo source (autoplay possible ensuite via data-video). La routine design
   amelioration-site-tpracing a aussi été corrigée (chemin T7 au lieu du Desktop disparu) et ne touche
   plus à cette section. NB : premier « Run now » conseillé pour pré-approuver les outils (navigateur).
+- 2026-07-17 : Deux évolutions demandées par Thomas. (1) PARTENAIRES : le mur statique devient une
+  BANDE DÉFILANTE automatique (marquee CSS pur, boucle 58 s, fondu aux bords par mask-image, pause au
+  survol ET au focus clavier, copie du lot en aria-hidden/tabindex -1 pour la boucle, reduced-motion =
+  mur statique sans doublon). Ordre d'importance tiré du Suivi_Partenaires : actifs 2026 par soutien
+  cumulé décroissant (Combe, Bobinage Duclos, MBE, Savoie Transmissions, Alpes IS, F3C, Banque Populaire)
+  puis anciens soutiens décroissants (Grayel, Approtech, AMS, Hexagone/SMD, Frang'Ain, Lunatik, Pompes
+  Services, DMPI, Midas, Serv'EAU). (2) INSTAGRAM : les 2 posts sont des CARROUSELS (7 et 11 photos) ;
+  au survol d'une tuile les autres photos du post défilent en fondu (1,1 s par photo, retour couverture,
+  reset à la sortie, désactivé en reduced-motion), pictogramme carrousel façon Instagram en haut à
+  gauche, aria-label enrichi. Les 16 photos de slides ont été récupérées en pleine résolution via le
+  Chrome connecté (canvas CORS + presse-papiers, recette en mémoire projet) et self-hébergées en WebP
+  720 q76 (~1,1 Mo au total, chargées UNIQUEMENT au premier survol, rien au chargement de la page —
+  au-delà des 500 Ko de la règle mais justifié : demande explicite + lazy réel). Vérifié desktop +
+  mobile 390 (ordre de la bande conforme, pause OK, diaporama avance et se réinitialise, 0 débordement,
+  console propre) puis prod (~30 s : trust-band + data-slides + slides en 200, fichier Google intouché).
