@@ -245,6 +245,20 @@
       transition: transform .25s ease, box-shadow .25s ease;
     }
     .part-carte:hover { transform: translateY(-5px); box-shadow: 0 16px 34px rgba(30,38,53,.1); }
+    .part-carte, .presse-carte { position: relative; overflow: hidden; }
+    .part-carte::after, .presse-carte::after {
+      content: "";
+      position: absolute;
+      top: -30%; bottom: -30%;
+      left: -45%;
+      width: 26%;
+      background: linear-gradient(105deg, transparent, rgba(212, 151, 38, .13), transparent);
+      transform: skewX(-18deg);
+      transition: left .55s ease;
+      pointer-events: none;
+    }
+    .part-carte:hover::after, .presse-carte:hover::after, a.presse-carte:focus-visible::after { left: 130%; }
+    @media (prefers-reduced-motion: reduce) { .part-carte::after, .presse-carte::after { display: none; } }
     .part-carte h3 { color: var(--marine); margin-bottom: 8px; }
     .part-carte p { color: var(--gris); font-size: .95rem; }
     @media (max-width: 900px) { .part-grille { grid-template-columns: 1fr; } }
@@ -558,6 +572,7 @@
   <a class="saut-contenu" href="#contenu">Aller au contenu</a>
 
   <!-- ===== NAVIGATION ===== -->
+  <div class="ligne-course" aria-hidden="true"></div>
   <nav id="navbar" aria-label="Navigation principale">
     <a class="logo" href="index.html" aria-label="TPRacing, retour à l'accueil">
       <img class="logo-sombre" src="assets/logo-secondaire-blanc.png" alt="">
@@ -908,6 +923,18 @@
   </footer>
 
   <script>
+    // Ligne de course : progression de lecture (scroll)
+    (function () {
+      const lc = document.querySelector('.ligne-course');
+      if (!lc) return;
+      const maj = () => {
+        const max = document.documentElement.scrollHeight - innerHeight;
+        lc.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, scrollY / max) : 0).toFixed(4) + ')';
+      };
+      addEventListener('scroll', maj, { passive: true });
+      addEventListener('resize', maj, { passive: true });
+      maj();
+    })();
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('vu'); io.unobserve(e.target); }

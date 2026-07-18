@@ -72,6 +72,7 @@
   <a class="saut-contenu" href="#contenu">Aller au contenu</a>
 
   <!-- ===== NAVIGATION ===== -->
+  <div class="ligne-course" aria-hidden="true"></div>
   <nav id="navbar" aria-label="Navigation principale">
     <a class="logo" href="index.html" aria-label="TPRacing, retour à l'accueil">
       <img class="logo-sombre" src="assets/logo-secondaire-blanc.png" alt="">
@@ -172,6 +173,18 @@
   </footer>
 
   <script>
+    // Ligne de course : progression de lecture (scroll)
+    (function () {
+      const lc = document.querySelector('.ligne-course');
+      if (!lc) return;
+      const maj = () => {
+        const max = document.documentElement.scrollHeight - innerHeight;
+        lc.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, scrollY / max) : 0).toFixed(4) + ')';
+      };
+      addEventListener('scroll', maj, { passive: true });
+      addEventListener('resize', maj, { passive: true });
+      maj();
+    })();
     const navbar = document.getElementById('navbar');
     const majNav = () => navbar.classList.toggle('solide', scrollY > 60);
     addEventListener('scroll', majNav, { passive: true });
