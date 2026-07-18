@@ -423,81 +423,85 @@
     }
     @media (max-width: 900px) { .presse-grid { grid-template-columns: 1fr; } }
 
-    /* ---------- Intro « faisceaux » au lancement ----------
-       Traits de lumière charte (or dominant, blanc bleuté, un fil rouge) qui filent
-       derrière le logo comme des phares dans une ligne droite de nuit, logo qui se
-       résout net, puis le voile remonte avec un bord diagonal (langage des sections). */
+    /* ---------- Intro « tracé de circuit » au lancement ----------
+       Une piste se dessine en zigzag façon intro F1, parcourue par une
+       voiture-lumière (comète or) qui passe derrière l'emblème TP ; l'emblème se
+       résout net puis GLISSE se poser exactement à sa place dans le hero, et le
+       voile (même fond que le hero) s'efface : atterrissage invisible. */
     html.intro-active { overflow: hidden; }
     html.intro-off #intro { display: none; }
     #intro {
       position: fixed; inset: 0; z-index: 999;
       display: grid; place-items: center;
-      overflow: visible;
+      overflow: hidden;
+      /* même fond que .hero pour un fondu de sortie sans couture */
       background:
-        radial-gradient(ellipse 70% 55% at 50% 46%, rgba(212, 151, 38, .08), transparent 62%),
-        radial-gradient(rgba(246, 247, 252, .03) 1px, transparent 1.5px),
-        linear-gradient(180deg, #070B1D, #0A0F1F);
+        radial-gradient(ellipse 62% 52% at 74% 44%, rgba(212, 151, 38, .16), transparent 62%),
+        radial-gradient(rgba(246, 247, 252, .035) 1px, transparent 1.5px),
+        linear-gradient(180deg, #070B1D 0%, #0d1526 68%, var(--marine) 100%);
       background-size: auto, 26px 26px, auto;
     }
-    #intro::after {
-      /* lèvre diagonale sous l'écran : dessine le bord oblique pendant la sortie */
-      content: "";
-      position: absolute; top: 100%; left: 0; right: 0; height: 7vw;
-      background: #0A0F1F;
-      clip-path: polygon(0 0, 100% 0, 0 100%);
+    .intro-circuit {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
     }
-    .intro-piste { position: absolute; inset: 0; overflow: hidden; }
-    .intro-piste i {
-      position: absolute; left: 0;
-      width: 52vw;
-      height: var(--h, 3px);
-      background: linear-gradient(90deg, transparent, var(--c) 34%, var(--c) 72%, var(--tete, #FFF3D6) 93%, transparent);
-      border-radius: 999px;
-      filter: blur(var(--b, .5px));
-      box-shadow: 0 0 14px var(--c), 0 0 3px var(--tete, #FFF3D6);
-      opacity: 0;
-      transform: translateX(-60vw) rotate(-6deg);
-      animation: intro-file var(--d, .7s) cubic-bezier(.32, .05, .25, 1) var(--r, .1s) both;
-      mix-blend-mode: screen;
+    .intro-circuit .ic-glow,
+    .intro-circuit .ic-trace {
+      fill: none;
+      stroke-linecap: round;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: ic-dessin 1.5s cubic-bezier(.45, .05, .2, 1) .15s forwards;
     }
-    @keyframes intro-file {
-      0% { transform: translateX(-60vw) rotate(-6deg); opacity: 0; }
-      8% { opacity: var(--o, .9); }
-      84% { opacity: var(--o, .9); }
-      100% { transform: translateX(170vw) rotate(-6deg); opacity: 0; }
+    .intro-circuit .ic-glow { stroke: #D49726; stroke-width: 11; opacity: .3; filter: blur(6px); }
+    .intro-circuit .ic-trace { stroke: #E8B451; stroke-width: 3.5; }
+    @keyframes ic-dessin { to { stroke-dashoffset: 0; } }
+    .intro-circuit .ic-voiture { animation: ic-vie 1.9s linear forwards; opacity: 0; }
+    @keyframes ic-vie {
+      0%, 6% { opacity: 0; }
+      10% { opacity: 1; }
+      86% { opacity: 1; }
+      100% { opacity: 0; }
     }
-    .intro-piste .f1 { top: 19%; --c: #E8B451; --h: 2.5px; --d: .68s; --r: .1s; --o: 1; }
-    .intro-piste .f2 { top: 30%; --c: #cfd8ec; --tete: #fff; --h: 2px; --d: .62s; --r: .3s; --o: .85; }
-    .intro-piste .f3 { top: 46%; --c: #D49726; --h: 30px; --b: 16px; --d: 1s; --r: .2s; --o: .5; }
-    .intro-piste .f4 { top: 55%; --c: #E8B451; --h: 4px; --d: .7s; --r: .46s; --o: 1; }
-    .intro-piste .f5 { top: 67%; --c: #C13221; --tete: #ffc9bf; --h: 2px; --d: .64s; --r: .72s; --o: .85; }
-    .intro-piste .f6 { top: 79%; --c: #cfd8ec; --tete: #fff; --h: 2.5px; --d: .72s; --r: .55s; --o: .8; }
-    .intro-piste .f7 { top: 40%; --c: #D49726; --h: 5px; --d: .74s; --r: 1s; --o: 1; }
-    .intro-piste .f8 { top: 61%; --c: #E8B451; --h: 2px; --d: .66s; --r: .88s; --o: .9; }
-    .intro-piste .f9 { top: 25%; --c: #D49726; --h: 3px; --d: .7s; --r: .64s; --o: .95; }
+    .intro-circuit.efface { animation: ic-fade .4s ease .05s forwards; }
+    @keyframes ic-fade { to { opacity: 0; } }
     .intro-logo {
       position: relative; z-index: 2;
-      width: min(300px, 56vw); height: auto;
+      width: min(380px, 64vw); height: auto;
       opacity: 0;
-      animation: intro-logo .6s cubic-bezier(.2, .6, .2, 1) .45s forwards;
+      will-change: transform;
+      animation: intro-logo .6s cubic-bezier(.2, .6, .2, 1) .55s forwards;
     }
     @keyframes intro-logo {
       from { opacity: 0; transform: scale(1.08); filter: blur(10px); }
       60% { opacity: 1; }
       to { opacity: 1; transform: scale(1); filter: blur(0); }
     }
-    #intro.fin { animation: intro-sortie .6s cubic-bezier(.7, 0, .2, 1) forwards; }
-    @keyframes intro-sortie { to { transform: translateY(calc(-100% - 7vw)); } }
+    #intro.fin { opacity: 0; transition: opacity .4s ease; pointer-events: none; }
   </style>
 </head>
 <body>
 
   <!-- ===== INTRO AU LANCEMENT (1 fois par session) ===== -->
   <div id="intro" aria-hidden="true">
-    <div class="intro-piste">
-      <i class="f1"></i><i class="f2"></i><i class="f3"></i><i class="f4"></i><i class="f5"></i><i class="f6"></i><i class="f7"></i><i class="f8"></i><i class="f9"></i>
-    </div>
-    <img class="intro-logo" src="assets/logo-blanc.png" alt="" width="585" height="502">
+    <svg class="intro-circuit" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="ic-queue" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#D49726" stop-opacity="0"/>
+          <stop offset=".72" stop-color="#D49726" stop-opacity=".85"/>
+          <stop offset="1" stop-color="#FFF3D6"/>
+        </linearGradient>
+      </defs>
+      <path class="ic-glow" pathLength="1000" d="M -120,330 C 60,240 190,200 320,300 C 450,400 480,500 620,470 C 720,449 760,360 860,340 C 980,316 1060,430 1180,470 C 1280,505 1380,420 1560,380"/>
+      <path class="ic-trace" pathLength="1000" d="M -120,330 C 60,240 190,200 320,300 C 450,400 480,500 620,470 C 720,449 760,360 860,340 C 980,316 1060,430 1180,470 C 1280,505 1380,420 1560,380"/>
+      <g class="ic-voiture">
+        <ellipse rx="34" ry="4.5" cx="-26" cy="0" fill="url(#ic-queue)"/>
+        <circle r="9" fill="#D49726" opacity=".35"/>
+        <circle r="4.5" fill="#FFF3D6"/>
+        <animateMotion dur="1.5s" begin="0.15s" fill="freeze" rotate="auto" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines="0.45 0.05 0.2 1" path="M -120,330 C 60,240 190,200 320,300 C 450,400 480,500 620,470 C 720,449 760,360 860,340 C 980,316 1060,430 1180,470 C 1280,505 1380,420 1560,380"/>
+      </g>
+    </svg>
+    <img class="intro-logo" src="assets/img/embleme-3d.webp" alt="" width="1561" height="1106">
   </div>
 
   <!-- Symbole emblème TP (réutilisé en motif de fond) -->
@@ -856,13 +860,44 @@
         document.querySelectorAll('.rvl').forEach(el => io.observe(el));
       };
       if (intro && active) {
+        // 1) fin du tracé : la piste s'efface, l'emblème glisse se poser à sa place dans le hero
+        setTimeout(() => {
+          intro.querySelector('.intro-circuit').classList.add('efface');
+          const logo = intro.querySelector('.intro-logo');
+          const cible = document.querySelector('.hero .embleme-3d');
+          // révéler l'emblème du hero SANS transition avant la mesure : position finale exacte,
+          // et il est déjà visible sous le voile pour un atterrissage invisible
+          const vis = document.querySelector('.hero .visuel');
+          if (vis && !vis.classList.contains('vu')) {
+            vis.style.transition = 'none';
+            vis.classList.add('vu');
+            void vis.offsetHeight;
+            vis.style.transition = '';
+          }
+          if (logo && cible) {
+            const a = logo.getBoundingClientRect();
+            const b = cible.getBoundingClientRect();
+            const s = b.height / a.height;
+            const dx = (b.left + b.width / 2) - (a.left + a.width / 2);
+            const dy = (b.top + b.height / 2) - (a.top + a.height / 2);
+            // figer l'état final AVANT de couper l'animation (sinon retour à opacity 0)
+            logo.style.opacity = '1';
+            logo.style.filter = 'none';
+            logo.style.animation = 'none';
+            requestAnimationFrame(() => {
+              logo.style.transition = 'transform .6s cubic-bezier(.6, .05, .25, 1)';
+              logo.style.transform = 'translate(' + dx.toFixed(1) + 'px, ' + dy.toFixed(1) + 'px) scale(' + s.toFixed(4) + ')';
+            });
+          }
+        }, 1750);
+        // 2) le voile s'efface pendant que le logo se pose (fondu vers le logo de la nav)
         setTimeout(() => {
           intro.classList.add('fin');
           document.documentElement.classList.remove('intro-active');
           lancerReveals();
-          intro.addEventListener('animationend', e => { if (e.animationName === 'intro-sortie') intro.remove(); });
-        }, 1650);
-        setTimeout(() => { if (intro.isConnected) intro.remove(); lancerReveals(); }, 4000);
+          intro.addEventListener('transitionend', e => { if (e.propertyName === 'opacity' && e.target === intro) intro.remove(); });
+        }, 2250);
+        setTimeout(() => { if (intro.isConnected) intro.remove(); lancerReveals(); }, 4500);
       } else {
         if (intro) intro.remove();
         lancerReveals();
