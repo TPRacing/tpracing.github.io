@@ -192,7 +192,22 @@
       display: flex; align-items: center; justify-content: center;
       clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
     }
-    @media (max-width: 900px) { .disciplines { grid-template-columns: 1fr; } .disc .photo { height: 300px; } }
+    .disc .photo { position: relative; }
+    .disc-meta {
+      position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+      font-family: var(--f-label);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-size: .95rem;
+      color: var(--or-clair);
+      background: linear-gradient(0deg, rgba(7, 11, 29, .88), rgba(7, 11, 29, 0));
+      padding: 30px 16px 10px;
+      transform: translateY(101%);
+      transition: transform .35s ease;
+    }
+    .disc:hover .disc-meta, .disc:focus-within .disc-meta { transform: none; }
+    @media (max-width: 900px) { .disciplines { grid-template-columns: 1fr; } .disc .photo { height: 300px; } .disc-meta { transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .disc-meta { transform: none; transition: none; } }
 
     /* ---------- Partenaires ---------- */
     .part-duo {
@@ -479,6 +494,31 @@
       to { opacity: 1; transform: scale(1); filter: blur(0); }
     }
     #intro.fin { opacity: 0; transition: opacity .4s ease; pointer-events: none; }
+
+    /* ---------- Contact ---------- */
+    #contact .duo {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: clamp(28px, 5vw, 70px);
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    #contact .actions { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+    #contact .actions .btn { width: auto; }
+    .btn-marine { background: var(--marine); color: var(--blanc); }
+    .btn-marine:hover { background: #2b3650; }
+    #contact .note {
+      font-family: var(--f-label);
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      font-size: .95rem;
+      color: var(--gris);
+      margin-top: 6px;
+    }
+    @media (max-width: 860px) { #contact .duo { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -619,7 +659,7 @@
       <div class="disciplines">
         <article class="disc rvl">
           <div class="puce">01</div>
-          <div class="photo"><picture><source type="image/avif" srcset="assets/img/karting-pluie.avif"><img alt="Thomas Papone en course de karting sous la pluie" src="assets/img/karting-pluie.webp" width="745" height="931"></picture></div>
+          <div class="photo"><picture><source type="image/avif" srcset="assets/img/karting-pluie.avif"><img alt="Thomas Papone en course de karting sous la pluie" src="assets/img/karting-pluie.webp" width="745" height="931"></picture><span class="disc-meta">National / X30 Senior</span></div>
           <div class="corps">
             <h3>Karting</h3>
             <p>La compétition réelle, du sec à la pluie : départs, dépassements, gestion de course. L'école du corps à corps en piste.</p>
@@ -627,7 +667,7 @@
         </article>
         <article class="disc rvl" data-d="1">
           <div class="puce">02</div>
-          <div class="photo"><picture><source type="image/avif" srcset="assets/img/pilote-simu.avif"><img alt="Thomas Papone sur le simulateur TPRacing" src="assets/img/pilote-simu.webp" width="1400" height="1867"></picture></div>
+          <div class="photo"><picture><source type="image/avif" srcset="assets/img/pilote-simu.avif"><img alt="Thomas Papone sur le simulateur TPRacing" src="assets/img/pilote-simu.webp" width="1400" height="1867"></picture><span class="disc-meta">iRacing / entraînement hebdo</span></div>
           <div class="corps">
             <h3>Simracing</h3>
             <p>L'entraînement permanent sur iRacing : régularité, trajectoires, setups. Le laboratoire du pilotage, disponible chaque semaine.</p>
@@ -635,7 +675,7 @@
         </article>
         <article class="disc rvl" data-d="2">
           <div class="puce">03</div>
-          <div class="photo"><picture><source type="image/avif" srcset="assets/img/feed-racing.avif"><img alt="Monoplace de l'école FEED Racing France en piste" src="assets/img/feed-racing.webp" width="1400" height="935"></picture></div>
+          <div class="photo"><picture><source type="image/avif" srcset="assets/img/feed-racing.avif"><img alt="Monoplace de l'école FEED Racing France en piste" src="assets/img/feed-racing.webp" width="1400" height="935"></picture><span class="disc-meta">FEED Racing France / Magny-Cours 2024</span></div>
           <div class="corps">
             <h3>Automobile</h3>
             <p>Le passage en voiture, engagé à l'école FEED Racing France, avec un objectif clair : courir en championnat via le programme Caterham.</p>
@@ -821,6 +861,23 @@
     </div>
   </section>
 
+  <!-- ===== CONTACT ===== -->
+  <section id="contact">
+    <svg class="embleme-fond embleme-fond--or" viewBox="29 38 90 63" style="bottom: -36px; left: -10%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
+    <div class="duo">
+      <div class="rvl">
+        <p class="kicker">Contact</p>
+        <h2>Parlons de votre projet</h2>
+        <p class="lead">Partenariat, presse ou simple question : l'association répond sur LinkedIn et par email. Un dossier de partenariat détaillé est disponible sur demande.</p>
+      </div>
+      <div class="actions rvl" data-d="1">
+        <a class="btn btn-or" href="https://www.linkedin.com/company/tpracing/" target="_blank" rel="noopener">LinkedIn de l'association</a>
+        <a class="btn btn-marine" href="mailto:contact.tpracing@gmail.com">contact.tpracing@gmail.com</a>
+        <p class="note">Réponse la plus rapide / LinkedIn</p>
+      </div>
+    </div>
+  </section>
+
   </main>
 
   <!-- ===== FOOTER ===== -->
@@ -903,6 +960,22 @@
         if (intro) intro.remove();
         lancerReveals();
       }
+    })();
+
+    // Parallax léger de la bande origines (coupé en mouvement réduit)
+    (function () {
+      const bo = document.querySelector('.bande-origines');
+      if (!bo || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      let visible = false;
+      new IntersectionObserver(es => es.forEach(e => { visible = e.isIntersecting; })).observe(bo);
+      addEventListener('scroll', () => {
+        if (!visible) return;
+        requestAnimationFrame(() => {
+          const r = bo.getBoundingClientRect();
+          const p = (r.top + r.height / 2 - innerHeight / 2) * -0.08;
+          bo.style.backgroundPosition = 'center calc(50% + ' + p.toFixed(1) + 'px)';
+        });
+      }, { passive: true });
     })();
 
     const navbar = document.getElementById('navbar');
