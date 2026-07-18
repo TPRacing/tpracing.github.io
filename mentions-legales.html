@@ -63,6 +63,9 @@
     .legal-corps a { color: var(--marine); text-decoration: underline; text-decoration-color: rgba(212, 151, 38, .6); text-underline-offset: 3px; }
     .legal-corps a:hover { color: var(--or); }
     .legal-corps .detail { color: var(--gris); font-size: .95rem; }
+    /* mots longs (« confidentialité », « intellectuelle ») : borner par la largeur d'écran */
+    @media (max-width: 560px) { .legal-tete h1 { font-size: min(4.6vw, 1.7rem); } }
+    @media (max-width: 360px) { .legal-corps h2 { font-size: min(5vw, 1.05rem); } }
   </style>
 </head>
 <body>

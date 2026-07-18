@@ -94,15 +94,16 @@
       margin: 0 auto;
       width: 100%;
       display: grid;
-      grid-template-columns: 1.02fr .98fr;
+      grid-template-columns: 1.22fr .78fr;
       align-items: center;
       gap: clamp(20px, 4vw, 60px);
       padding: 150px 6% 110px;
     }
     .hero h1 {
       color: var(--blanc);
-      font-size: clamp(2.2rem, 5.4vw, 4.3rem);
-      line-height: 1.04;
+      /* 2 lignes maîtrisées : la ligne la plus large (« SE TRANSMET ») fait ~13,3× la taille de police */
+      font-size: min(3.25vw, 2.5rem);
+      line-height: 1.06;
     }
     .hero h1 .or { color: var(--or); }
     .hero .lead { color: #c7cddb; margin: 24px 0 38px; max-width: 560px; }
@@ -112,8 +113,8 @@
       .hero .grille { grid-template-columns: 1fr; padding-top: 120px; }
       .hero .visuel { order: -1; }
       .embleme-3d { width: min(64vw, 340px); }
+      .hero h1 { font-size: min(6.2vw, 2.5rem); }
     }
-    @media (max-width: 560px) { .hero h1 { font-size: 1.9rem; } }
     .hero .liseret {
       position: absolute; left: 0; right: 0; bottom: 0; height: 12px; z-index: 2;
       background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%);
@@ -231,7 +232,8 @@
       position: relative;
       z-index: 1;
     }
-    @media (max-width: 860px) { .part-duo { grid-template-columns: 1fr; } }
+    .h2-part { font-size: min(2.4vw, 2rem); }
+    @media (max-width: 860px) { .part-duo { grid-template-columns: 1fr; } .h2-part { font-size: min(4.7vw, 2rem); } }
     .part-duo figcaption {
       font-family: var(--f-label);
       letter-spacing: .13em;
@@ -601,7 +603,7 @@
       <div class="txt">
         <p class="kicker rvl">Association de sport automobile</p>
         <!-- ✏️ MODIFIABLE : accroche principale -->
-        <h1 class="rvl" data-d="1">Le volant se <span class="or">transmet</span></h1>
+        <h1 class="rvl" data-d="1"><span class="hl">Le volant</span><br><span class="hl">se <span class="or">transmet</span></span></h1>
         <p class="lead rvl" data-d="2">Patrice a couru dans les années 80. Thomas reprend la piste. TPRacing construit la suite, avec un cap assumé : la course automobile en Caterham.</p>
         <div class="btn-rangee rvl" data-d="3">
           <a class="btn btn-or" href="#partenaires">Devenir partenaire</a>
@@ -720,7 +722,7 @@
     <div class="part-duo">
       <div class="rvl">
         <p class="kicker">Nous soutenir</p>
-        <h2>Des partenaires embarqués dans l'histoire</h2>
+        <h2 class="h2-part"><span class="hl">Des partenaires</span> <span class="hl">embarqués</span> <span class="hl">dans l'histoire</span></h2>
         <p class="lead">Le sponsoring sportif ne se limite plus à un logo sur une carrosserie : la valeur est dans le contenu. En soutenant TPRacing, votre marque s'intègre à une histoire suivie au quotidien et bénéficie d'un suivi transparent de son partenariat.</p>
       </div>
       <figure class="rvl" data-d="1">
