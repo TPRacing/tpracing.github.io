@@ -273,3 +273,23 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   « / Mentions légales » sur les 4 pages, entrée sitemap (priority 0.3). Vérifié local desktop + mobile
   390 (0 débordement, console propre, Inter chargée localement) puis prod (~51 s : page, woff2, sitemap
   en 200, 0 googleapis, fichier Google intouché).
+- 2026-07-18 : Intro au lancement du site (demande Thomas : « faisceaux lumineux de la charte,
+  mouvements de vitesse derrière le logo »). Veille préalable sur Awwwards (préloaders primés +
+  recherche motorsport) : codes retenus = fond sombre + logo centré + révélation < 2 s + sortie en
+  wipe net + un accent couleur fort. Réalisation en CSS pur (pas de vidéo AE : un fichier vidéo
+  devrait lui-même se charger, contre-productif pour une intro instantanée ; 0 asset ajouté, le logo
+  blanc existant sert de pièce centrale). Chorégraphie ~2,2 s : voile marine profond + trame carbone,
+  9 faisceaux inclinés à -6° (langage du marquee) qui filent derrière le logo — or dominant, 2 blancs
+  bleutés, 1 fil rouge en micro-accent, 1 halo or large flouté (« passage proche ») — queues en
+  dégradé + tête claire + halo box-shadow en mode screen ; le logo blanc se « résout » (blur 10px +
+  scale 1.08 → net, recette des logo stings) ; à t≈1,25 s le dernier faisceau or épais semble jaillir
+  du logo ; sortie à t=1,65 s = le voile remonte avec une lèvre diagonale (même pente que les
+  sections), et les reveals du hero se déclenchent à cet instant précis (gate de l'IntersectionObserver)
+  pour que l'entrée se joue sous les yeux du visiteur. Garde-fous : 1 fois par session (sessionStorage,
+  décision AVANT le premier rendu par script inline dans le <head> → zéro flash), jamais en
+  prefers-reduced-motion, scroll verrouillé pendant l'intro (classe sur <html>), suppression du DOM
+  après sortie + failsafe 4 s, page d'accueil uniquement (l'entrée du site). Vérifié en local via gel
+  d'animation (Web Animations API, frames à 650/700/1250 ms — d'abord jugés trop timides, faisceaux
+  musclés : queues colorées plus tôt, halos, opacités relevées, 9 traits au lieu de 7) ; cycle complet
+  desktop + mobile 390 : intro jouée puis retirée du DOM, scroll rendu, hero révélé, 0 débordement,
+  console propre, rechargement sans re-jeu. Prod OK, fichier Google intouché.
