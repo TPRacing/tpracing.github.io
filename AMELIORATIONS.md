@@ -24,6 +24,7 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [x] Complétude : page mentions légales + politique de confidentialité (17/07, données officielles JOAFE)
 - [x] Complétude : bloc contact sur l'accueil (LinkedIn mis en avant + email, boutons charte)
 - [x] Déclinaison du sting AE en carré 1080 pour Insta/Shorts (18/07 : Communication/Réseaux/tp_sting_1080.mp4)
+- [x] Complétude PWA : manifeste web + icône 512 de marque (ajout sur écran d'accueil mobile, splash, theme-color) — 18/07
 - [ ] Emblème 3D : version animée légère en hero (séquence AE ou sprite au scroll) si le poids reste raisonnable
 - [ ] Section actus/prochaines échéances (structure seulement, contenus à valider avec Thomas)
 - [x] Accueil : mur de partenaires « Ils nous font confiance » (18 logos)
@@ -401,3 +402,18 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   (3) Parcours pilote : les 3 photos d'étapes passent au même 4/3 (object-fit cover) et suppression du
   hack inline max-height sur la photo simu. Ratios vérifiés au pixel (1.33/1.33/1.33 ; héritage
   428×241 + 2×203×152), overflow 0, prod OK.
+- 2026-07-18 (routine, complétude PWA) : le site avait un jeu de favicons complet (posé le 10/07) mais
+  aucun manifeste web, donc « ajouté à l'écran d'accueil » sur mobile donnait une icône/nom générique
+  et pas de splash de marque. Ajout de `assets/site.webmanifest` (name « TPRacing — Thomas Papone Racing »,
+  short_name TPRacing, display standalone, background #F6F7FC = tuile des icônes, theme_color #1E2635 marine
+  = cohérent avec le meta theme-color, categories sports/motorsport, description « Le volant se transmet »).
+  Pour un manifeste réellement installable il fallait une icône 512 : générée sur mesure en PIL depuis
+  logo-couleur.png, assortie AU PIXEL à l'icon-192 existante (carré plein #F6F7FC, logo à 68 % de large
+  centré → padding 16 %/20 %, dans la zone de sécurité maskable) — icon-512.png 30 Ko, LANCZOS net.
+  Manifeste déclaré (purpose any + maskable) et lien `rel="manifest"` ajouté sur LES 4 pages (chemins
+  relatifs sur index/pilote/mentions, root-relatif sur la 404). Aucun impact visuel (changement `<head>`
+  + 1 asset). Vérifié local : manifeste parsé par le navigateur, 4 icônes en 200, JSON valide,
+  content-type application/manifest+json, lien présent sur les 4 pages, overflow 0, console propre. Prod :
+  manifeste + icône 512 en 200 (bon MIME), liens en place, fichier Google intouché. NB infra : T7 non
+  monté → travail sur clone frais depuis GitHub, poussé de là (faire `git pull` sur le T7 avant la
+  prochaine modif locale).
