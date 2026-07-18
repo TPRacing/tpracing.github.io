@@ -33,6 +33,7 @@
   <link rel="preload" href="assets/fonts/korataki-bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/bebas-neue-pro-middle.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/img/embleme-3d.webp" as="image" fetchpriority="high">
   <link rel="stylesheet" href="assets/styles.css">
 
   <!-- Intro : décision AVANT le premier rendu (pas de flash), 1 fois par session, jamais en mouvement réduit -->
@@ -584,15 +585,15 @@
       </div>
       <div class="heritage">
         <figure class="rvl">
-          <span class="frame"><img src="assets/img/heritage-1980.jpg" alt="Paddock karting au Mans en 1980, époque Papone"></span>
+          <span class="frame"><picture><source type="image/avif" srcset="assets/img/heritage-1980.avif"><img alt="Paddock karting au Mans en 1980, époque Papone" src="assets/img/heritage-1980.webp" width="1200" height="801"></picture></span>
           <figcaption>Le Mans 1980 / l'époque Papone</figcaption>
         </figure>
         <figure class="rvl" data-d="1">
-          <span class="frame"><img src="assets/img/heritage-1987.jpg" alt="Patrice Papone en course de karting dans les années 80"></span>
+          <span class="frame"><picture><source type="image/avif" srcset="assets/img/heritage-1987.avif"><img alt="Patrice Papone en course de karting dans les années 80" src="assets/img/heritage-1987.webp" width="1200" height="778"></picture></span>
           <figcaption>Karting années 80 / Patrice Papone</figcaption>
         </figure>
         <figure class="rvl" data-d="2">
-          <span class="frame"><img src="assets/img/heritage-1988.jpg" alt="Patrice Papone en Formule Ford en 1988"></span>
+          <span class="frame"><picture><source type="image/avif" srcset="assets/img/heritage-1988.avif"><img alt="Patrice Papone en Formule Ford en 1988" src="assets/img/heritage-1988.webp" width="1200" height="675"></picture></span>
           <figcaption>Formule Ford 1988 / la piste en héritage</figcaption>
         </figure>
       </div>
@@ -618,7 +619,7 @@
       <div class="disciplines">
         <article class="disc rvl">
           <div class="puce">01</div>
-          <div class="photo"><img src="assets/img/karting-pluie.jpg" alt="Thomas Papone en course de karting sous la pluie"></div>
+          <div class="photo"><picture><source type="image/avif" srcset="assets/img/karting-pluie.avif"><img alt="Thomas Papone en course de karting sous la pluie" src="assets/img/karting-pluie.webp" width="745" height="931"></picture></div>
           <div class="corps">
             <h3>Karting</h3>
             <p>La compétition réelle, du sec à la pluie : départs, dépassements, gestion de course. L'école du corps à corps en piste.</p>
@@ -626,7 +627,7 @@
         </article>
         <article class="disc rvl" data-d="1">
           <div class="puce">02</div>
-          <div class="photo"><img src="assets/img/pilote-simu.jpg" alt="Thomas Papone sur le simulateur TPRacing"></div>
+          <div class="photo"><picture><source type="image/avif" srcset="assets/img/pilote-simu.avif"><img alt="Thomas Papone sur le simulateur TPRacing" src="assets/img/pilote-simu.webp" width="1400" height="1867"></picture></div>
           <div class="corps">
             <h3>Simracing</h3>
             <p>L'entraînement permanent sur iRacing : régularité, trajectoires, setups. Le laboratoire du pilotage, disponible chaque semaine.</p>
@@ -634,7 +635,7 @@
         </article>
         <article class="disc rvl" data-d="2">
           <div class="puce">03</div>
-          <div class="photo"><img src="assets/img/feed-racing.jpg" alt="Monoplace de l'école FEED Racing France en piste"></div>
+          <div class="photo"><picture><source type="image/avif" srcset="assets/img/feed-racing.avif"><img alt="Monoplace de l'école FEED Racing France en piste" src="assets/img/feed-racing.webp" width="1400" height="935"></picture></div>
           <div class="corps">
             <h3>Automobile</h3>
             <p>Le passage en voiture, engagé à l'école FEED Racing France, avec un objectif clair : courir en championnat via le programme Caterham.</p>
@@ -654,7 +655,7 @@
         <p class="lead">Le sponsoring sportif ne se limite plus à un logo sur une carrosserie : la valeur est dans le contenu. En soutenant TPRacing, votre marque s'intègre à une histoire suivie au quotidien et bénéficie d'un suivi transparent de son partenariat.</p>
       </div>
       <figure class="rvl" data-d="1">
-        <span class="frame"><img src="assets/img/partenaires-stickers.jpg" alt="Kart TPRacing en course, stickers des partenaires visibles"></span>
+        <span class="frame"><picture><source type="image/avif" srcset="assets/img/partenaires-stickers.avif"><img alt="Kart TPRacing en course, stickers des partenaires visibles" src="assets/img/partenaires-stickers.webp" width="1400" height="870"></picture></span>
         <figcaption>Vos couleurs en piste / Valence 2022</figcaption>
       </figure>
     </div>
@@ -770,31 +771,31 @@
       <div class="galerie">
         <!-- ✏️ Vidéo : montage de la journée de roulage monoplace avec SERA -->
         <figure class="galerie-video rvl">
-          <span class="frame"><video src="assets/video/sera-roulage.mp4" poster="assets/img/video-poster.jpg" muted loop playsinline autoplay preload="metadata" aria-label="Montage vidéo : journée de roulage en monoplace avec SERA Racing Academy"></video></span>
+          <span class="frame"><video src="assets/video/sera-roulage.mp4" poster="assets/img/video-poster.webp" muted loop playsinline autoplay preload="metadata" aria-label="Montage vidéo : journée de roulage en monoplace avec SERA Racing Academy"></video></span>
           <figcaption>Roulage monoplace / SERA Racing Academy, Le Luc 2024</figcaption>
         </figure>
         <figure class="rvl">
-          <span class="frame"><img src="assets/img/galerie-pluie.jpg" alt="Kart de Thomas Papone sous la pluie, gerbes d'eau" loading="lazy"></span>
+          <span class="frame"><picture><source type="image/avif" srcset="assets/img/galerie-pluie.avif"><img alt="Kart de Thomas Papone sous la pluie, gerbes d'eau" loading="lazy" src="assets/img/galerie-pluie.webp" width="1400" height="933"></picture></span>
           <figcaption>Sous la pluie / Château Gaillard</figcaption>
         </figure>
         <figure class="rvl" data-d="1">
-          <span class="frame"><img src="assets/img/galerie-duel-324.jpg" alt="Le kart TPRacing défend sa position en virage" loading="lazy"></span>
+          <span class="frame"><picture><source type="image/avif" srcset="assets/img/galerie-duel-324.avif"><img alt="Le kart TPRacing défend sa position en virage" loading="lazy" src="assets/img/galerie-duel-324.webp" width="1400" height="892"></picture></span>
           <figcaption>Défense de la position / Valence 2022</figcaption>
         </figure>
         <figure class="rvl" data-d="2">
-          <span class="frame"><img src="assets/img/galerie-soleil-2021.jpg" alt="Duel au soleil au Trophée de Ligue Valence 2021" loading="lazy"></span>
+          <span class="frame"><picture><source type="image/avif" srcset="assets/img/galerie-soleil-2021.avif"><img alt="Duel au soleil au Trophée de Ligue Valence 2021" loading="lazy" src="assets/img/galerie-soleil-2021.webp" width="1400" height="688"></picture></span>
           <figcaption>Trophée de Ligue / Valence 2021</figcaption>
         </figure>
         <figure class="rvl">
-          <span class="frame"><img src="assets/img/galerie-trois-karts.jpg" alt="Trois karts imbriqués dans le même virage" loading="lazy"></span>
+          <span class="frame"><picture><source type="image/avif" srcset="assets/img/galerie-trois-karts.avif"><img alt="Trois karts imbriqués dans le même virage" loading="lazy" src="assets/img/galerie-trois-karts.webp" width="1400" height="933"></picture></span>
           <figcaption>Trois de front / corps à corps</figcaption>
         </figure>
         <figure class="rvl" data-d="1">
-          <span class="frame"><img src="assets/img/galerie-leader.jpg" alt="Thomas Papone en tête d'un peloton de karts" loading="lazy"></span>
+          <span class="frame"><picture><source type="image/avif" srcset="assets/img/galerie-leader.avif"><img alt="Thomas Papone en tête d'un peloton de karts" loading="lazy" src="assets/img/galerie-leader.webp" width="1400" height="791"></picture></span>
           <figcaption>En tête de peloton / Lyon 2020</figcaption>
         </figure>
         <figure class="rvl" data-d="2">
-          <span class="frame"><img src="assets/img/galerie-file-324.jpg" alt="Filé du kart TPRacing en pleine vitesse" loading="lazy"></span>
+          <span class="frame"><picture><source type="image/avif" srcset="assets/img/galerie-file-324.avif"><img alt="Filé du kart TPRacing en pleine vitesse" loading="lazy" src="assets/img/galerie-file-324.webp" width="1400" height="913"></picture></span>
           <figcaption>Pleine charge / Valence 2022</figcaption>
         </figure>
         <a class="galerie-plus rvl" href="https://www.instagram.com/thomaspaponeracing" target="_blank" rel="noopener">
@@ -810,7 +811,7 @@
   <section>
     <svg class="embleme-fond" viewBox="29 38 90 63" style="bottom: -30px; right: -9%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
     <div class="pilote-grille">
-      <span class="frame rvl"><img src="assets/img/poster-pilote.jpg" alt="Poster du pilote Thomas Papone, casque Arai, en course de karting"></span>
+      <span class="frame rvl"><picture><source type="image/avif" srcset="assets/img/poster-pilote.avif"><img alt="Poster du pilote Thomas Papone, casque Arai, en course de karting" src="assets/img/poster-pilote.webp" width="1080" height="1350"></picture></span>
       <div class="rvl" data-d="1">
         <p class="kicker">Le pilote</p>
         <h2>Thomas Papone</h2>
@@ -941,7 +942,7 @@
       const vues = figures.map(fig => {
         const img = fig.querySelector('.frame img');
         const cap = fig.querySelector('figcaption');
-        return img ? { src: img.currentSrc || img.src, alt: img.alt || '', legende: cap ? cap.textContent.trim() : '' } : null;
+        return img ? { el: img, src: img.src, alt: img.alt || '', legende: cap ? cap.textContent.trim() : '' } : null;
       }).filter(Boolean);
       if (!vues.length) return;
 
@@ -977,7 +978,7 @@
       function afficher(i) {
         index = (i + vues.length) % vues.length;
         const v = vues[index];
-        img.src = v.src;
+        img.src = v.el.currentSrc || v.src;
         img.alt = v.alt;
         legende.textContent = v.legende;
         compteur.innerHTML = '<b>' + pad(index + 1) + '</b> / ' + pad(vues.length);
