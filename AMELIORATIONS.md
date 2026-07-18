@@ -429,3 +429,24 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   les 4 pages, console propre, fichier Google intouché. Note DA consignée : sur la bande origines,
   rouge #E06450 et vert #6FBA9C (versions éclaircies des couleurs charte pour lisibilité sur marine
   sombre) — choix assumé, seul endroit où le vert apparaît.
+- 2026-07-18 (retour Thomas : « le titre est sur 5 lignes ») : composition des titres reprise partout.
+  Cause : Korataki est une police très large ; dans les colonnes de grilles (hero 2 colonnes, section
+  partenaires), les grands titres n'avaient pas la place de poser deux mots par ligne → empilement
+  1 mot/ligne (le hero faisait 4 lignes en desktop, le h2 partenaires 5 lignes à 1024 et sur mobile).
+  Correctifs, sans changer aucun texte : (1) HERO : « Le volant / se transmet » sur 2 lignes forcées
+  (groupes insécables .hl + <br>), taille calibrée sur la ligne la plus large (« SE TRANSMET » ≈ 13,3×
+  la taille de police) : min(3.25vw, 2.5rem) en 2 colonnes, min(6.2vw, 2.5rem) en 1 colonne ; grille
+  élargie 1.22fr/.78fr ; l'emblème 3D absorbe le reste (max-width:100%, ~360px à 1680). Le nowrap fixe
+  le min-content du track → le layout s'auto-ajuste, zéro débordement possible. (2) PARTENAIRES :
+  h2 en 3 groupes insécables (« Des partenaires / embarqués / dans l'histoire »), min(2.4vw, 2rem) /
+  mobile min(4.7vw, 2rem). (3) PILOTE : titre progression en 3 groupes insécables + h2 mobile
+  min(4.75vw, 1.5rem). (4) MENTIONS : mots longs français (« confidentialité », « intellectuelle »)
+  bornés (h1 min(4.6vw, 1.7rem) sous 560, h2 min(5vw, 1.05rem) sous 360). (5) GLOBAL : h2 mobile
+  min(5.8vw, 1.5rem) (⚠️ déclaré APRÈS la règle générale h2, sinon la cascade l'écrase) + règle
+  utilitaire .hl { white-space: nowrap }. Vérifs : audit programmatique des ~40 titres × 8 largeurs
+  (320→1680) × 4 pages via iframes = zéro empilement, zéro débordement ; captures visuelles hero
+  desktop/mobile + partenaires desktop/mobile. Pièges outillage consignés : le Browser pane ne peint
+  plus quand il est masqué (visibilityState hidden → transitions gelées, captures blanches — re-fronter
+  l'onglet) ; Chrome headless --window-size=375 clampe la fenêtre à ~500px (captures mobiles fausses) ;
+  les sections en vh s'étirent dans les captures pleine hauteur ; le serveur local sert la CSS en cache
+  dans les iframes (recharger avec un ?fresh).
