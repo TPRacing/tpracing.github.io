@@ -293,3 +293,18 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   musclés : queues colorées plus tôt, halos, opacités relevées, 9 traits au lieu de 7) ; cycle complet
   desktop + mobile 390 : intro jouée puis retirée du DOM, scroll rendu, hero révélé, 0 débordement,
   console propre, rechargement sans re-jeu. Prod OK, fichier Google intouché.
+- 2026-07-18 (v2, retours Thomas « trop Star Wars » + « logo principal qui se place à sa position ») :
+  intro refaite en « tracé de circuit » : une piste OR se dessine en zigzag (SVG pathLength 1000 +
+  stroke-dashoffset, 1,5 s, double tracé fin + halo flouté) parcourue par une voiture-lumière (comète
+  = groupe SVG animateMotion SMIL, rotate="auto" pour orienter la traînée, MÊME durée/bézier que le
+  dessin → la comète est pile au front du tracé ; gel de test = svg.pauseAnimations()+setCurrentTime,
+  les SMIL n'apparaissent PAS dans getAnimations). L'EMBLÈME 3D (embleme-3d.webp, « celui en jaune »)
+  se résout au centre puis GLISSE se poser exactement à sa place dans le hero (FLIP runtime : rect
+  cible mesuré après avoir révélé .hero .visuel SANS transition — sinon la mesure attrape le décalage
+  du reveal —, translate+scale centre à centre, même image donc atterrissage 1:1) ; le voile reprend
+  EXACTEMENT le fond du hero → fondu de sortie sans couture. ⚠️ Bug corrigé : couper l'animation de
+  résolution (animation:none) faisait retomber le logo sur opacity:0 → figer opacity/filter en inline
+  AVANT. Timings : tracé 0,15→1,65 s, emblème 0,55→1,15 s, glissade 1,75→2,35 s, voile 2,25→2,65 s,
+  reveals du hero câblés sur la sortie. Garde-fous inchangés (1×/session, reduced-motion, failsafe).
+  Vérifié frames gelées (900/950 ms) + flux réel desktop et mobile 390 (intro jouée puis retirée,
+  emblème hero visible opacity 1, 0 débordement, console propre). Prod OK.
