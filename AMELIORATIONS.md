@@ -346,3 +346,22 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   .mp4 H.264 yuv420p social-ready, 827 Ko pour 3,4 s) ; frames de contrôle vérifiées (monogramme + or
   peint + RACING balayé + reflet). Livré : Communication/Réseaux/tp_sting_1080.mp4 ; script et pièces
   archivés avec les autres stings. Prod re-smokée après chaque salve, fichier Google intouché.
+- 2026-07-18 (3e salve, retours Thomas) : (1) BUG « inadmissible » du hero pilote corrigé : le reset CSS
+  ne posait pas height:auto sur les img → les nouveaux attributs width/height des <picture> étiraient la
+  photo du simu (1867 px de haut), gonflaient la grille align-items:end et poussaient le texte hors
+  écran (reveals jamais déclenchés). Fix : `img { height: auto }` global + `picture { display: contents }`.
+  Leçon retenue : passe COMPLÈTE des 4 pages (desktop + mobile + audit automatique des ratios de chaque
+  image affichée vs naturel) désormais OBLIGATOIRE avant chaque push — l'audit tourne en JS dans la page.
+  (2) FACEBOOK du pilote ajouté (https://www.facebook.com/thomas.pne.9/ — fourni par Thomas ; vérifié :
+  pas de page « thomaspaponeracing », et le « TPRacing » à 1,6 k abonnés sur FB = Tristan Pena Racing,
+  homonyme US à ne JAMAIS lier) : chip dans la rangée réseaux du hero + 6e icône carte-de-visite au
+  footer (rect arrondi + f, style stroke cohérent). (3) SITE VIVANT (benchmark landonorris.com : carte
+  next-race à tracé de circuit — idée notée pour la future section actus —, marquees géants, signature
+  accent, motifs continus) → pack appliqué partout : LIGNE DE COURSE de progression sous la nav (3 px or,
+  pointe damier, scroll passif, cachée en reduced-motion), ::selection or/marine, scrollbar marine/or,
+  reveals variés (photos .frame en léger dé-zoom 1.045→1, kickers balayés en clip-path façon drapeau),
+  sweep lumineux au survol des cartes partenaires/presse, marquee en pause au survol. ⚠️ Pièges notés :
+  injecter du JS « avant le premier <script> » peut tomber sur le script inline du head (index) → ancrer
+  sur le contenu ; le serveur local sert du cache → cache-buster ?v= pour vérifier ; scroll smooth =
+  scrollY encore à 0 juste après scrollTo (mesurer en instant). Vérifié : 4 pages × desktop/mobile,
+  audit ratios 0 anomalie, overflow 0, console propre, prod OK (ligne présente sur les 4 pages).
