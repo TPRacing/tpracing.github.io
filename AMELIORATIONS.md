@@ -450,3 +450,22 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   l'onglet) ; Chrome headless --window-size=375 clampe la fenêtre à ~500px (captures mobiles fausses) ;
   les sections en vh s'étirent dans les captures pleine hauteur ; le serveur local sert la CSS en cache
   dans les iframes (recharger avec un ?fresh).
+- 2026-07-18 (retour Thomas : « partout pareil, certains trop gros ou trop longs, reformuler si besoin ») :
+  SYSTÈME TYPOGRAPHIQUE UNIFIÉ + reformulations. Constats de l'inventaire (mesures réelles, 4 pages) :
+  h1 pilote à 75 px contre 40 px au hero accueil ; h2 partenaires à 31 px contre 38 px ailleurs (rustine
+  de la veille) ; « Une histoire de famille, un projet de course » rendu sur 4 lignes ; kickers de 31 et
+  34 caractères sur 2 lignes en mobile. Décisions : (1) UNE échelle h2 partout : clamp(1.4rem, 2.7vw,
+  2.15rem), soit 34 px desktop / 22 px mobile, toutes sections et toutes pages (rustines .h2-part et
+  override pilote supprimées ; l'échelle utilitaire de la page légale reste propre à cette page) ;
+  (2) h1 pilote aligné : clamp(2.1rem, 4vw, 3.2rem) → 51 px desktop, 34 px mobile (⚠️ min() sans
+  plancher = 15 px en mobile, attrapé à la vérif visuelle) ; (3) kickers compacts en mobile (.95rem,
+  letter-spacing .22em → 1 ligne) ; (4) REFORMULATIONS (panel de 3 rédacteurs + juge, gagnants posés) :
+  « Une histoire de famille, un projet de course » → « La piste en héritage » ; « Des partenaires
+  embarqués dans l'histoire » → « Roulez avec nous » ; « Une progression construite étape par étape »
+  → « Étape par étape » ; kicker pilote « Pilote et co-fondateur de TPRacing » → « Pilote /
+  Co-fondateur » (secondes options gardées en réserve : « Père et fils, même piste » / « Entrez dans
+  l'histoire » / « Aucun raccourci » / « Pilote / N°47 »). Contrainte géométrique documentée : dans les
+  demi-colonnes, une ligne de titre Korataki tient ~13 caractères max — les titres visent désormais
+  ≤ 2 lignes de ≤ 13 caractères. Vérifs : audit 4 pages × 8 largeurs (empilement, débordement, taille
+  planchère) = OK partout ; h2 mesurés identiques (34,4 px) sur accueil ET pilote ; captures desktop
+  (accueil sections + pilote hero/parcours) et mobile (hero pilote, kicker 1 ligne). En ligne.
