@@ -417,3 +417,15 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   manifeste + icône 512 en 200 (bon MIME), liens en place, fichier Google intouché. NB infra : T7 non
   monté → travail sur clone frais depuis GitHub, poussé de là (faire `git pull` sur le T7 avant la
   prochaine modif locale).
+- 2026-07-18 (audit charte demandé par Thomas, puis correctif validé) : audit complet des 4 pages
+  (desktop 1280, tablette 768, mobile 375) : polices 100 % conformes (Korataki titres / Bebas labels /
+  Inter texte, zéro retombée sur police système), couleurs charte exactes, aucun débordement ni texte
+  rogné, aucun mojibake, espaces fines avant les « : » correctes. Seul écart trouvé : 24 tirets
+  cadratins « — » résiduels (titres d'onglet, og:title/og:image:alt, JSON-LD, copyright des 4 footers,
+  2 phrases des mentions légales) + 1 dans un commentaire CSS — incohérents avec la règle maison
+  « slashes, jamais de tiret ». Correctif validé par Thomas : les 25 « — » remplacés par « / »
+  (footer désormais « © 2026 TPRacing / Thomas Papone Racing », cohérent avec « France / Mentions
+  légales » juste dessous). JSON-LD revalidé, zéro tiret restant vérifié en local puis en prod sur
+  les 4 pages, console propre, fichier Google intouché. Note DA consignée : sur la bande origines,
+  rouge #E06450 et vert #6FBA9C (versions éclaircies des couleurs charte pour lisibilité sur marine
+  sombre) — choix assumé, seul endroit où le vert apparaît.
