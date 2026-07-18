@@ -153,24 +153,6 @@
       background: rgba(212,151,38,.06);
     }
 
-    /* ---------- Icônes réseaux du footer (style carte de visite) ---------- */
-    .foot-reso { display: flex; gap: 10px; flex-wrap: wrap; }
-    .foot-reso a {
-      width: 42px; height: 42px;
-      display: grid; place-items: center;
-      color: var(--or);
-      box-shadow: inset 0 0 0 1.5px rgba(212, 151, 38, .55);
-      clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
-      transition: background .2s, color .2s, transform .15s, box-shadow .2s;
-    }
-    .foot-reso a:hover, .foot-reso a:focus-visible {
-      background: var(--or);
-      color: var(--marine-deep);
-      box-shadow: inset 0 0 0 1.5px var(--or);
-      transform: translateY(-2px);
-    }
-    .foot-reso svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-
     /* ---------- Parcours ---------- */
     .etapes { max-width: 1180px; margin: 46px auto 0; display: grid; gap: 0; position: relative; z-index: 1; }
     .etape {
@@ -368,6 +350,7 @@
       <li class="masque-mobile"><a href="index.html#association">L'association</a></li>
       <li class="masque-mobile"><a href="index.html#trajectoire">La trajectoire</a></li>
       <li><a class="active" aria-current="page" href="pilote.html">Le pilote</a></li>
+      <li><a href="contact.html">Contact</a></li>
       <li><a class="nav-cta" href="index.html#partenaires">Devenir partenaire</a></li>
     </ul>
   </nav>
@@ -542,6 +525,7 @@
       <div class="foot-liens">
         <a href="index.html">L'association</a>
         <a href="index.html#partenaires">Partenaires</a>
+        <a href="contact.html">Contact</a>
       </div>
     </div>
     <div class="foot-bas">
