@@ -154,9 +154,12 @@
     }
     .asso-txt .logo-asso { width: min(200px, 44%); margin-bottom: 26px; }
     .asso-txt p + p { margin-top: 14px; }
-    .heritage { display: grid; gap: 36px; }
-    .heritage figure:nth-child(2) { margin-left: 12%; }
-    .heritage figure:nth-child(3) { margin-left: 5%; }
+    /* héritage : 1980 en bandeau, puis les deux photos de Patrice côte à côte — ratios unifiés */
+    .heritage { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-content: center; }
+    .heritage figure:first-child { grid-column: 1 / -1; }
+    .heritage figure:first-child .frame img { aspect-ratio: 16 / 9; }
+    .heritage .frame img { aspect-ratio: 4 / 3; object-fit: cover; }
+    @media (max-width: 560px) { .heritage { grid-template-columns: 1fr; } .heritage .frame img { aspect-ratio: 3 / 2; } }
     .heritage figcaption {
       font-family: var(--f-label);
       letter-spacing: .14em;
@@ -286,7 +289,7 @@
     .galerie {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 36px 24px;
+      gap: 26px 24px;
       margin-top: 46px;
     }
     .galerie figure { margin: 0; }
@@ -297,6 +300,9 @@
       font-size: .92rem;
       color: #aeb6c8;
       margin-top: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .galerie .frame { overflow: visible; }
     .galerie .frame img { aspect-ratio: 3 / 2; transition: transform .45s ease, filter .45s ease; }
