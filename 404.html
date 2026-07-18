@@ -86,6 +86,82 @@
       .hero-404 h1 { font-size: 1.5rem; }
       .err-404 { -webkit-text-stroke-width: 2px; }
     }
+
+    /* ---------- Test de réaction « lights out » ---------- */
+    .depart {
+      background: var(--blanc);
+      padding: 74px 6% 84px;
+      position: relative;
+      overflow: hidden;
+    }
+    .depart .contenu { max-width: 760px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+    .depart h2 { color: var(--marine); margin-bottom: 8px; }
+    .depart .lead { color: var(--gris); margin-bottom: 30px; }
+    .portique {
+      display: flex;
+      justify-content: center;
+      gap: clamp(10px, 2.4vw, 22px);
+      padding: 26px clamp(14px, 4vw, 34px);
+      background:
+        radial-gradient(rgba(246, 247, 252, .045) 1px, transparent 1.5px),
+        linear-gradient(180deg, #070B1D, var(--marine));
+      background-size: 22px 22px, auto;
+      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .feu {
+      width: clamp(36px, 8vw, 62px);
+      height: clamp(36px, 8vw, 62px);
+      border-radius: 50%;
+      border: 2.5px solid rgba(212, 151, 38, .5);
+      background: transparent;
+      transition: background .08s, box-shadow .08s, border-color .08s;
+    }
+    .feu.on {
+      background: var(--rouge);
+      border-color: var(--rouge);
+      box-shadow: 0 0 18px rgba(193, 50, 33, .8);
+    }
+    .portique.pret .feu { border-color: var(--or); }
+    .depart .verdict {
+      min-height: 92px;
+      margin-top: 26px;
+    }
+    .depart .chrono {
+      font-family: var(--f-titre);
+      font-weight: 700;
+      font-size: clamp(2.2rem, 6vw, 3.6rem);
+      line-height: 1.1;
+      color: var(--marine);
+    }
+    .depart .chrono.faux { color: var(--rouge); }
+    .depart .comparatif {
+      font-family: var(--f-label);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: 1rem;
+      color: var(--gris);
+      margin-top: 6px;
+    }
+    .depart .consigne {
+      font-family: var(--f-label);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: 1.02rem;
+      color: var(--gris);
+      margin-top: 18px;
+    }
+    .depart .devise {
+      margin-top: 34px;
+      font-family: var(--f-label);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      font-size: .95rem;
+      color: var(--gris);
+    }
+    .depart .devise b { color: var(--or); font-weight: 400; }
   </style>
 </head>
 <body>
@@ -128,6 +204,25 @@
     <div class="liseret"></div>
   </header>
 
+  <!-- ===== TEST DE RÉACTION ===== -->
+  <section class="depart">
+    <svg class="embleme-fond" viewBox="29 38 90 63" style="bottom: -30px; right: -12%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
+    <div class="contenu">
+      <p class="kicker" style="justify-content:center">En attendant</p>
+      <h2>Teste tes réflexes de pilote</h2>
+      <p class="lead">Les cinq feux s'allument, puis s'éteignent : clique le plus vite possible à l'extinction. Comme un vrai départ.</p>
+      <div class="portique" id="portique" role="button" tabindex="0" aria-label="Zone de départ : cliquer pour lancer, puis cliquer à l'extinction des feux">
+        <span class="feu"></span><span class="feu"></span><span class="feu"></span><span class="feu"></span><span class="feu"></span>
+      </div>
+      <div class="verdict" aria-live="polite">
+        <p class="consigne" id="consigne">Clique sur le portique pour lancer le départ</p>
+        <p class="chrono" id="chrono" hidden></p>
+        <p class="comparatif" id="comparatif" hidden></p>
+      </div>
+      <p class="devise">Ce tracé ne mène nulle part. <b>Le volant, lui, se transmet.</b></p>
+    </div>
+  </section>
+
   </main>
 
   <!-- ===== FOOTER ===== -->
@@ -163,6 +258,55 @@
       addEventListener('resize', maj, { passive: true });
       maj();
     })();
+    // Test de réaction « lights out »
+    (function () {
+      const portique = document.getElementById('portique');
+      const feux = [...portique.querySelectorAll('.feu')];
+      const consigne = document.getElementById('consigne');
+      const chrono = document.getElementById('chrono');
+      const comparatif = document.getElementById('comparatif');
+      let etat = 'repos'; // repos | allumage | armé | fini
+      let timers = [], t0 = 0;
+      const reset = () => { timers.forEach(clearTimeout); timers = []; feux.forEach(f => f.classList.remove('on')); portique.classList.remove('pret'); };
+      const montrer = (c, cmp, faux) => {
+        chrono.hidden = false; comparatif.hidden = false;
+        chrono.textContent = c; comparatif.textContent = cmp;
+        chrono.classList.toggle('faux', !!faux);
+        consigne.textContent = 'Clique pour rejouer';
+      };
+      const lancer = () => {
+        reset();
+        etat = 'allumage';
+        chrono.hidden = true; comparatif.hidden = true;
+        consigne.textContent = 'Attends l\u2019extinction\u2026';
+        feux.forEach((f, i) => timers.push(setTimeout(() => f.classList.add('on'), 550 * (i + 1))));
+        const attente = 550 * 5 + 900 + Math.random() * 1800;
+        timers.push(setTimeout(() => {
+          feux.forEach(f => f.classList.remove('on'));
+          portique.classList.add('pret');
+          t0 = performance.now();
+          etat = 'armé';
+        }, attente));
+      };
+      const clic = () => {
+        if (etat === 'repos' || etat === 'fini') { etat = 'allumage'; lancer(); return; }
+        if (etat === 'allumage') { reset(); etat = 'fini'; montrer('JUMP START', 'Faux départ : les feux étaient encore allumés', true); return; }
+        if (etat === 'armé') {
+          const t = Math.round(performance.now() - t0);
+          etat = 'fini';
+          portique.classList.remove('pret');
+          let cmp;
+          if (t < 200) cmp = 'Réflexes de pro : un pilote F1 part entre 200 et 300 ms';
+          else if (t < 300) cmp = 'Dans la fenêtre d\u2019un départ F1 (200 à 300 ms)';
+          else if (t < 450) cmp = 'Solide. La grille n\u2019attend personne';
+          else cmp = 'Encore un tour de chauffe ?';
+          montrer(t + ' ms', cmp);
+        }
+      };
+      portique.addEventListener('click', clic);
+      portique.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clic(); } });
+    })();
+
     const navbar = document.getElementById('navbar');
     const majNav = () => navbar.classList.toggle('solide', scrollY > 60);
     addEventListener('scroll', majNav, { passive: true });

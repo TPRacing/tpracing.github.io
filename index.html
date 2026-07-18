@@ -923,6 +923,33 @@
   </footer>
 
   <script>
+    // Marquee asservi à la vitesse de scroll (inertie + cisaillement, façon vitesse réelle)
+    (function () {
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; // on garde l'animation CSS
+      const piste = document.querySelector('.marquee .piste');
+      if (!piste) return;
+      piste.style.animation = 'none';
+      let x = 0, vel = 0, lastY = scrollY, skew = 0, visible = true, moitie = 0, pause = false;
+      const mesurer = () => { moitie = piste.scrollWidth / 2; };
+      mesurer();
+      addEventListener('resize', mesurer, { passive: true });
+      new IntersectionObserver(es => es.forEach(e => { visible = e.isIntersecting; })).observe(piste.parentElement);
+      piste.parentElement.addEventListener('mouseenter', () => { pause = true; });
+      piste.parentElement.addEventListener('mouseleave', () => { pause = false; });
+      const tick = () => {
+        requestAnimationFrame(tick);
+        if (!visible || !moitie) { lastY = scrollY; return; }
+        const dy = scrollY - lastY; lastY = scrollY;
+        vel += (dy - vel) * 0.12;
+        if (!pause) x -= 0.65 + vel * 0.07;
+        else x -= vel * 0.07;
+        x = ((x % moitie) + moitie) % moitie - moitie;
+        const cible = Math.max(-3.5, Math.min(3.5, vel * 0.09));
+        skew += (cible - skew) * 0.1;
+        piste.style.transform = 'translateX(' + x.toFixed(1) + 'px) skewX(' + skew.toFixed(2) + 'deg)';
+      };
+      tick();
+    })();
     // Ligne de course : progression de lecture (scroll)
     (function () {
       const lc = document.querySelector('.ligne-course');

@@ -74,6 +74,20 @@ a { color: inherit; }
 /* Ancres : ne pas atterrir sous la nav fixe */
 section[id], div[id].bande-origines { scroll-margin-top: 76px; }
 
+/* ---------- Transitions de page : volet dans l'axe des diagonales ---------- */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-sortie .32s cubic-bezier(.7, 0, .3, 1) both; }
+::view-transition-new(root) { animation: vt-entree .38s cubic-bezier(.7, 0, .3, 1) both; }
+@keyframes vt-sortie { to { opacity: .35; } }
+@keyframes vt-entree {
+  from { clip-path: polygon(-14% 0, 0 0, -14% 100%, -28% 100%); }
+  to { clip-path: polygon(0 0, 114% 0, 100% 100%, -14% 100%); }
+}
+nav .logo { view-transition-name: tp-logo; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
+
 /* ---------- Détails de marque (site vivant) ---------- */
 ::selection { background: var(--or); color: var(--marine-deep); }
 html { scrollbar-color: var(--or) var(--marine); }
