@@ -34,6 +34,19 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [x] Feed Insta : automatiser le rafraîchissement (tâche planifiée dédiée maj-feed-insta-site,
       quotidienne à 10 h, via le Chrome connecté ; validée par Thomas le 17/07)
 
+
+### Idées du benchmark 18/07 (fan-out 4 agents : équipes F1, sites de pilotes, Awwwards, conversion sponsors)
+- [x] Transitions de page en volet diagonal (View Transitions cross-document, logo morphé entre pages)
+- [x] 404 « lights out » : test de réaction façon départ F1 (5 feux, jump start, verdicts)
+- [x] Marquee asservi à la vitesse de scroll (inertie + cisaillement, pause au survol conservée)
+- [ ] Bloc « Prochaine course » : countdown + tracé du circuit (comète de l'intro) + contexte perso + « présenté par [partenaire] » — ATTEND dates/circuits de Thomas
+- [ ] Bande « La saison » : cartes des manches avec résultats (P3…) et prochaine manche en or — ATTEND calendrier/résultats de Thomas
+- [ ] Paliers de partenariat chiffrés + PDF dossier téléchargeable + CTA mailto pré-rempli — ATTEND montants validés par Thomas et Patrice
+- [ ] Mur partenaires narratif : cartes d'activation + 2-3 citations de partenaires actuels — ATTEND citations à recueillir
+- [ ] Signature manuscrite de Thomas vectorisée, tracée au scroll + rituel de clôture « Le volant se transmet » sur les 4 pages — ATTEND un scan de sa signature
+- [ ] « Casques & machines » : hall of fame duotone → couleur révélée en balayage damier — ATTEND choix des objets/photos par saison
+- [ ] pilote.html en deux actes (rapide « Le pilote » / intime « Au-delà du volant ») — ATTEND anecdotes de Thomas (dans ses mots)
+
 ## Règles (rappel pour la routine)
 
 Charte : marine #1E2635, or #D49726, blanc #F6F7FC, rouge #C13221, vert #3E836E (micro-accent).
@@ -365,3 +378,18 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   sur le contenu ; le serveur local sert du cache → cache-buster ?v= pour vérifier ; scroll smooth =
   scrollY encore à 0 juste après scrollTo (mesurer en instant). Vérifié : 4 pages × desktop/mobile,
   audit ratios 0 anomalie, overflow 0, console propre, prod OK (ligne présente sur les 4 pages).
+- 2026-07-18 (4e salve) : détails signalés par Thomas corrigés (vrai « f » Facebook plein dans le carré
+  arrondi ; handles @thomaspaponeracing en nowrap + taille adaptative sur les 2 tuiles — index et
+  pilote). Puis BENCHMARK EN FAN-OUT (workflow 4 agents parallèles : sites d'équipes F1, sites perso de
+  pilotes, micro-interactions Awwwards, conversion sponsors → 32 idées, 10 retenues, toutes sourcées —
+  liste ajoutée au backlog). 3 idées sans dépendance éditoriale IMPLÉMENTÉES : (1) TRANSITIONS DE PAGE
+  en volet diagonal (View Transitions cross-document : @view-transition + clip-path incliné dans l'axe
+  charte, logo nav morphé entre les pages via view-transition-name, coupé en reduced-motion, dégradation
+  propre hors Chrome/Safari récents) ; (2) la 404 devient un TEST DE RÉACTION « lights out » : portique
+  marine 5 feux rouges, allumage séquentiel, extinction aléatoire, chrono ms + verdicts (fenêtre départ
+  F1 200-300 ms), détection JUMP START, accessible clavier, devise en clôture « Ce tracé ne mène nulle
+  part. Le volant, lui, se transmet. » ; (3) MARQUEE ASSERVI AU SCROLL : rAF + vélocité lissée,
+  cisaillement ±3,5° qui retombe par interpolation, pause au survol, l'animation CSS reste le fallback
+  reduced-motion. Vérifs : jeu 404 joué (vrai départ + faux départ), marquee sondé (translateX avance,
+  skew réagit), console propre, overflow 0, prod OK. ⚠️ Timers du Browser pane throttlés en arrière-plan
+  → les mesures de réaction dans le pane sont faussées (~2 s), le jeu est sain.
