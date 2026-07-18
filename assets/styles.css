@@ -70,6 +70,9 @@ body::after {
 img { max-width: 100%; display: block; }
 a { color: inherit; }
 
+/* Ancres : ne pas atterrir sous la nav fixe */
+section[id], div[id].bande-origines { scroll-margin-top: 76px; }
+
 /* ---------- Apparitions au scroll ---------- */
 .rvl {
   opacity: 0;
