@@ -11,18 +11,18 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [x] Page pilote : renforcer la cohérence avec l'accueil (47 outline animé ou emblème 3D discret dans le hero)
 - [ ] Section jalons/palmarès en badges chiffrés or sur marine (années de karting, sessions monoplace, licence…) à valider avec Thomas avant publication des chiffres
 - [x] Galerie : lightbox légère au clic (vanilla JS, fermeture Échap, flèches clavier)
-- [ ] Photos en AVIF/WebP avec balise picture (poids −30 % environ)
-- [ ] Footer : icônes réseaux SVG maison en carré biseauté (reprendre le style de la carte de visite)
+- [x] Photos en AVIF/WebP avec balise picture (fait 18/07 : −53 % réels)
+- [x] Footer : icônes réseaux SVG maison en carré biseauté (18/07, footer pilote uniquement — entités séparées)
 - [x] Page 404.html de marque (emblème contour géant + lien retour accueil)
 - [x] Accessibilité : focus visibles or, contrastes AA, lien d'évitement, alt complets
       (contraste de l'or sur fond clair : question posée à Thomas au Journal du 15/07)
-- [ ] Diagonales de sections : harmoniser les angles partout (même pente)
-- [ ] Bande origines : parallax léger au scroll (transform, désactivé reduced-motion)
-- [ ] Teaser pilote accueil : montage photo duotone dédié à la place du poster Insta
-- [ ] Performances : preload du hero, lazy strict du reste, passage Lighthouse consigné
-- [ ] Cartes disciplines : enrichir les survols (lieu, année en Bebas)
+- [x] Diagonales de sections : pente unifiée sur celle du marquee (2.3vw = 1,3 deg)
+- [x] Bande origines : parallax léger au scroll (18/07, background-position, coupé reduced-motion)
+- [x] Teaser pilote accueil : montage duotone dédié (IMG_3445, frontal grille, plaque 47)
+- [x] Performances : preload emblème (LCP + intro), lazy en place, images −53 % (AVIF), 0 requête tierce
+- [x] Cartes disciplines : méta au survol (National/X30, iRacing, FEED Magny-Cours 2024 — sourcé posts/presse)
 - [x] Complétude : page mentions légales + politique de confidentialité (17/07, données officielles JOAFE)
-- [ ] Complétude : bloc contact clair sur l'accueil (LinkedIn asso mis en avant)
+- [x] Complétude : bloc contact sur l'accueil (LinkedIn mis en avant + email, boutons charte)
 - [ ] Déclinaison du sting AE (logo animé, /Volumes/ TPT7/TPRacing/sting.jsx) en format carré 1080 pour Insta/Shorts
 - [ ] Emblème 3D : version animée légère en hero (séquence AE ou sprite au scroll) si le poids reste raisonnable
 - [ ] Section actus/prochaines échéances (structure seulement, contenus à valider avec Thomas)
@@ -308,3 +308,27 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   reveals du hero câblés sur la sortie. Garde-fous inchangés (1×/session, reduced-motion, failsafe).
   Vérifié frames gelées (900/950 ms) + flux réel desktop et mobile 390 (intro jouée puis retirée,
   emblème hero visible opacity 1, 0 débordement, console propre). Prod OK.
+- 2026-07-18 (session marathon, demande Thomas « améliore sans limite ») : sept chantiers.
+  (1) PERF IMAGES : les 14 photos affichées passent en AVIF + repli WebP via <picture> (2,1 Mo →
+  1,0 Mo, −53 %), poster vidéo et collage origines en WebP, jpg remplacés purgés du dépôt (les og-*
+  restent en JPEG pour les crawlers sociaux), hero-2022/hero-course morts supprimés, width/height
+  recalés sur les nouvelles dimensions, preload fetchpriority=high de l'emblème (LCP accueil + pièce
+  de l'intro), lightbox corrigée pour résoudre currentSrc à l'ouverture (sinon elle rate l'AVIF des
+  images lazy). (2) CONTACT : section dédiée sur l'accueil avant le footer (LinkedIn or + email marine
+  — .btn-blanc invisible sur fond clair, .btn-marine créé), emblème filigrane. (3) DISCIPLINES : méta
+  Bebas au survol (bandeau dégradé bas de photo, toujours visible en mobile/reduced-motion) — contenus
+  sourcés des posts et de la presse. (4) DIAGONALES : pente unique 2.3vw alignée sur le marquee
+  (1,3 deg) au lieu du 42px fixe qui variait selon la largeur. (5) PARALLAX bande origines
+  (background-position piloté au scroll, IObserver + rAF, coupé reduced-motion). (6) TEASER PILOTE :
+  montage duotone sur mesure depuis IMG_3445 (frontal grille, plaque 47) — recadrage 4:5, duotone
+  marine→or (colorize midpoint 150 + 12 % d'original + vignette + grain), remplace le poster Insta.
+  (7) SEO : JSON-LD de l'asso enrichi des données officielles (legalName JOAFE, RNA W012015296,
+  adresse commune, email, logo, président) + icônes réseaux « carte de visite » au footer pilote
+  (5 SVG maison carrés biseautés or). ⚠️ Leçons infra : le T7 s'est déconnecté en plein git add -A —
+  cause = hachage des 2,6 Go de rushes NON SUIVIS (« TPRacing Vidéo Site/ ») ; .gitignore complété
+  (rushes + .aep + ._*) pour que ça ne se reproduise plus ; index.lock orphelin à supprimer après un
+  crash. Tout vérifié en local (pictures 200, AVIF servi, lightbox, parallax, overflow 0, console
+  propre) puis smoke test prod complet : 12 URL en 200, fichier Google intouché.
+  RESTE AU BACKLOG (bloqué sur décisions/contenus de Thomas) : palmarès (chiffres à valider), actus
+  (contenus à valider), contraste de l'or sur fond clair (question du 15/07 toujours ouverte),
+  sting 1080 Insta (asset social, hors site), emblème 3D animé en hero (rendu redondant par l'intro).
