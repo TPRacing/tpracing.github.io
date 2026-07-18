@@ -35,6 +35,20 @@
   <link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/styles.css">
 
+  <!-- Intro : décision AVANT le premier rendu (pas de flash), 1 fois par session, jamais en mouvement réduit -->
+  <script>
+    (function () {
+      try {
+        if (sessionStorage.getItem('tp_intro') || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('intro-off');
+        } else {
+          sessionStorage.setItem('tp_intro', '1');
+          document.documentElement.classList.add('intro-active');
+        }
+      } catch (e) { document.documentElement.classList.add('intro-off'); }
+    })();
+  </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -408,9 +422,83 @@
       transform: translateY(-2px);
     }
     @media (max-width: 900px) { .presse-grid { grid-template-columns: 1fr; } }
+
+    /* ---------- Intro « faisceaux » au lancement ----------
+       Traits de lumière charte (or dominant, blanc bleuté, un fil rouge) qui filent
+       derrière le logo comme des phares dans une ligne droite de nuit, logo qui se
+       résout net, puis le voile remonte avec un bord diagonal (langage des sections). */
+    html.intro-active { overflow: hidden; }
+    html.intro-off #intro { display: none; }
+    #intro {
+      position: fixed; inset: 0; z-index: 999;
+      display: grid; place-items: center;
+      overflow: visible;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 46%, rgba(212, 151, 38, .08), transparent 62%),
+        radial-gradient(rgba(246, 247, 252, .03) 1px, transparent 1.5px),
+        linear-gradient(180deg, #070B1D, #0A0F1F);
+      background-size: auto, 26px 26px, auto;
+    }
+    #intro::after {
+      /* lèvre diagonale sous l'écran : dessine le bord oblique pendant la sortie */
+      content: "";
+      position: absolute; top: 100%; left: 0; right: 0; height: 7vw;
+      background: #0A0F1F;
+      clip-path: polygon(0 0, 100% 0, 0 100%);
+    }
+    .intro-piste { position: absolute; inset: 0; overflow: hidden; }
+    .intro-piste i {
+      position: absolute; left: 0;
+      width: 52vw;
+      height: var(--h, 3px);
+      background: linear-gradient(90deg, transparent, var(--c) 34%, var(--c) 72%, var(--tete, #FFF3D6) 93%, transparent);
+      border-radius: 999px;
+      filter: blur(var(--b, .5px));
+      box-shadow: 0 0 14px var(--c), 0 0 3px var(--tete, #FFF3D6);
+      opacity: 0;
+      transform: translateX(-60vw) rotate(-6deg);
+      animation: intro-file var(--d, .7s) cubic-bezier(.32, .05, .25, 1) var(--r, .1s) both;
+      mix-blend-mode: screen;
+    }
+    @keyframes intro-file {
+      0% { transform: translateX(-60vw) rotate(-6deg); opacity: 0; }
+      8% { opacity: var(--o, .9); }
+      84% { opacity: var(--o, .9); }
+      100% { transform: translateX(170vw) rotate(-6deg); opacity: 0; }
+    }
+    .intro-piste .f1 { top: 19%; --c: #E8B451; --h: 2.5px; --d: .68s; --r: .1s; --o: 1; }
+    .intro-piste .f2 { top: 30%; --c: #cfd8ec; --tete: #fff; --h: 2px; --d: .62s; --r: .3s; --o: .85; }
+    .intro-piste .f3 { top: 46%; --c: #D49726; --h: 30px; --b: 16px; --d: 1s; --r: .2s; --o: .5; }
+    .intro-piste .f4 { top: 55%; --c: #E8B451; --h: 4px; --d: .7s; --r: .46s; --o: 1; }
+    .intro-piste .f5 { top: 67%; --c: #C13221; --tete: #ffc9bf; --h: 2px; --d: .64s; --r: .72s; --o: .85; }
+    .intro-piste .f6 { top: 79%; --c: #cfd8ec; --tete: #fff; --h: 2.5px; --d: .72s; --r: .55s; --o: .8; }
+    .intro-piste .f7 { top: 40%; --c: #D49726; --h: 5px; --d: .74s; --r: 1s; --o: 1; }
+    .intro-piste .f8 { top: 61%; --c: #E8B451; --h: 2px; --d: .66s; --r: .88s; --o: .9; }
+    .intro-piste .f9 { top: 25%; --c: #D49726; --h: 3px; --d: .7s; --r: .64s; --o: .95; }
+    .intro-logo {
+      position: relative; z-index: 2;
+      width: min(300px, 56vw); height: auto;
+      opacity: 0;
+      animation: intro-logo .6s cubic-bezier(.2, .6, .2, 1) .45s forwards;
+    }
+    @keyframes intro-logo {
+      from { opacity: 0; transform: scale(1.08); filter: blur(10px); }
+      60% { opacity: 1; }
+      to { opacity: 1; transform: scale(1); filter: blur(0); }
+    }
+    #intro.fin { animation: intro-sortie .6s cubic-bezier(.7, 0, .2, 1) forwards; }
+    @keyframes intro-sortie { to { transform: translateY(calc(-100% - 7vw)); } }
   </style>
 </head>
 <body>
+
+  <!-- ===== INTRO AU LANCEMENT (1 fois par session) ===== -->
+  <div id="intro" aria-hidden="true">
+    <div class="intro-piste">
+      <i class="f1"></i><i class="f2"></i><i class="f3"></i><i class="f4"></i><i class="f5"></i><i class="f6"></i><i class="f7"></i><i class="f8"></i><i class="f9"></i>
+    </div>
+    <img class="intro-logo" src="assets/logo-blanc.png" alt="" width="585" height="502">
+  </div>
 
   <!-- Symbole emblème TP (réutilisé en motif de fond) -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="tp-embleme"><path transform="matrix(1,0,0,-1,105.048,39.8827)" d="M0 0H-14.843-18.39-21.927-25.487-30.224-70.716L-74.338-12.077H-49.812L-63.958-59.256H-50.253L-37.921-18.123C-36.845-14.535-33.542-12.077-29.796-12.077H-29.102-25.551-22.003-18.452-4.093C-.63-12.134-.985-19.39-5.576-19.337L-5.579-19.345H-6.003-27.964C-30.013-19.345-31.82-20.689-32.408-22.652L-43.383-59.252C-43.018-59.26-42.659-59.265-42.305-59.267-39.871-59.278-37.698-59.14-35.994-58.998-28.609-58.383-27.605-53.078-27.578-53.025L-20.986-31.423C-20.986-31.423-13.091-31.433-10.015-31.425-9.883-31.425-9.757-31.425-9.644-31.424-9.449-31.424-9.282-31.423-9.151-31.422L-9.148-31.414C-5.016-31.476-3.249-31.223-2.109-31.072 2.242-30.498 10.766-25.789 11.352-10.582 11.389-9.611 11.546 .017 0 0"/></g></defs></svg>
@@ -756,7 +844,30 @@
         if (e.isIntersecting) { e.target.classList.add('vu'); io.unobserve(e.target); }
       });
     }, { threshold: 0.15 });
-    document.querySelectorAll('.rvl').forEach(el => io.observe(el));
+
+    // Intro : chorégraphie de sortie, puis lancement des reveals (le hero s'anime au lever du voile)
+    (function () {
+      const intro = document.getElementById('intro');
+      const active = document.documentElement.classList.contains('intro-active');
+      let revealsLances = false;
+      const lancerReveals = () => {
+        if (revealsLances) return;
+        revealsLances = true;
+        document.querySelectorAll('.rvl').forEach(el => io.observe(el));
+      };
+      if (intro && active) {
+        setTimeout(() => {
+          intro.classList.add('fin');
+          document.documentElement.classList.remove('intro-active');
+          lancerReveals();
+          intro.addEventListener('animationend', e => { if (e.animationName === 'intro-sortie') intro.remove(); });
+        }, 1650);
+        setTimeout(() => { if (intro.isConnected) intro.remove(); lancerReveals(); }, 4000);
+      } else {
+        if (intro) intro.remove();
+        lancerReveals();
+      }
+    })();
 
     const navbar = document.getElementById('navbar');
     const majNav = () => navbar.classList.toggle('solide', scrollY > 60);
