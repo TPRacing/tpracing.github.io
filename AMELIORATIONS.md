@@ -393,3 +393,11 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   reduced-motion. Vérifs : jeu 404 joué (vrai départ + faux départ), marquee sondé (translateX avance,
   skew réagit), console propre, overflow 0, prod OK. ⚠️ Timers du Browser pane throttlés en arrière-plan
   → les mesures de réaction dans le pane sont faussées (~2 s), le jeu est sain.
+- 2026-07-18 (5e salve, retour Thomas « les photos c'est un peu le bazar ») : SYSTÈME D'IMAGES unifié.
+  (1) Héritage : fin des décalages irréguliers (12 %/5 %) et des 3 hauteurs libres → composition
+  éditoriale nette : Le Mans 1980 en bandeau 16/9 pleine largeur, puis les deux photos de Patrice côte
+  à côte en 4/3 strict, gouttière constante 22 px (mobile : pile en 3/2). (2) Galerie : gouttières
+  égalisées (26/24) + légendes verrouillées sur une ligne (ellipsis) pour des rangées stables.
+  (3) Parcours pilote : les 3 photos d'étapes passent au même 4/3 (object-fit cover) et suppression du
+  hack inline max-height sur la photo simu. Ratios vérifiés au pixel (1.33/1.33/1.33 ; héritage
+  428×241 + 2×203×152), overflow 0, prod OK.
