@@ -57,6 +57,23 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-07-19 (demandes Thomas : page contact + réseaux au footer partout) : (1) NOUVELLE PAGE
+  `contact.html` dans la DA du site : en-tête marine (kicker damier « Contact », h1 « Parlons de votre
+  projet » à l'échelle des pages secondaires, groupes insécables), 3 cartes blanches liseré or (Par
+  email / Sur LinkedIn avec note « réponse la plus rapide » / Sur les réseaux @thomaspaponeracing),
+  bandeau CTA marine « Envie d'écrire la suite avec nous ? » (mailto pré-rempli objet « Partenariat
+  TPRacing » + lien vers le mur partenaires), ligne info asso + lien mentions légales. PAS de
+  formulaire : cohérent avec la politique zéro collecte. JSON-LD ContactPage, canonical, og:,
+  sitemap (0.6). La section contact de l'accueil devient un PONT (bouton unique « Nous contacter »).
+  (2) FOOTER UNIFIÉ : les 6 icônes réseaux carrées biseautées (Insta, TikTok, YouTube, Twitch,
+  LinkedIn, Facebook) sont désormais au footer des 5 PAGES (décision Thomas 19/07, assouplit la
+  séparation stricte des entités) — nuance conservée : LinkedIn pointe vers la PAGE ASSOCIATION sur
+  les pages asso (accueil, contact, mentions, 404) et vers le PROFIL du pilote sur pilote.html ;
+  CSS .foot-reso migré du <style> de pilote vers styles.css. (3) NAV : lien « Contact » sur les
+  5 pages (visible aussi en mobile), actif sur la page. Vérifs : audit 5 pages × 8 largeurs (titres,
+  débordements, 6 icônes présentes) = OK partout ; h1 contact = 1 ligne à 1280, 2 lignes propres en
+  mobile ; captures desktop + mobile. Prod vérifiée, fichier Google intact.
+
 - 2026-07-09 : v1 → v3 : création du site, deux pages, publication GitHub Pages, Search Console.
 - 2026-07-10 : v4 : DA charte (emblème 3D or, emblème contour en motif, bande origines, signature) ;
   vidéo SERA montée (fondus, étalonnage assorti, carton logo minimal) et intégrée à la galerie.
