@@ -23,7 +23,7 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [x] Cartes disciplines : méta au survol (National/X30, iRacing, FEED Magny-Cours 2024 — sourcé posts/presse)
 - [x] Complétude : page mentions légales + politique de confidentialité (17/07, données officielles JOAFE)
 - [x] Complétude : bloc contact sur l'accueil (LinkedIn mis en avant + email, boutons charte)
-- [ ] Déclinaison du sting AE (logo animé, /Volumes/ TPT7/TPRacing/sting.jsx) en format carré 1080 pour Insta/Shorts
+- [x] Déclinaison du sting AE en carré 1080 pour Insta/Shorts (18/07 : Communication/Réseaux/tp_sting_1080.mp4)
 - [ ] Emblème 3D : version animée légère en hero (séquence AE ou sprite au scroll) si le poids reste raisonnable
 - [ ] Section actus/prochaines échéances (structure seulement, contenus à valider avec Thomas)
 - [x] Accueil : mur de partenaires « Ils nous font confiance » (18 logos)
@@ -332,3 +332,17 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   RESTE AU BACKLOG (bloqué sur décisions/contenus de Thomas) : palmarès (chiffres à valider), actus
   (contenus à valider), contraste de l'or sur fond clair (question du 15/07 toujours ouverte),
   sting 1080 Insta (asset social, hors site), emblème 3D animé en hero (rendu redondant par l'intro).
+- 2026-07-18 (2e salve « sans limite ») : (1) SRCSET RESPONSIVE : variantes 760 px AVIF+WebP pour les
+  13 grandes images (~25 Ko l'image au lieu de ~80) avec sizes par rôle — le mobile télécharge ~3× moins,
+  et même les écrans 1x en profitent ; la lightbox repasse en pleine taille explicite (sinon elle
+  hériterait de la variante réduite du srcset). (2) scroll-margin-top 76 px sur les sections ancrées
+  (fini le titre caché sous la nav fixe). (3) Compteurs de la bande chiffres (2021/3/1) : montée façon
+  tableau de bord au premier passage (rAF + ease-out cubic, coupé reduced-motion). (4) aria-current sur
+  le lien de nav actif. (5) STING CARRÉ 1080 (dernier item backlog réalisable) : les 4 pièces du logo
+  reconstruites depuis logo couleur.ai (fitz zoom 20, séparation par couleur, RACING au gap, canvas 2560²
+  auto-centré → placement simplifié), sting_1080.jsx adapté de sting3 (comp 1080×1080, échelle 36,6 %,
+  traits de vitesse et reflet recalés), rendu AE (⚠️ le DoScript envoyé pendant le boot d'AE est avalé
+  sans erreur → renvoyer une fois l'app prête ; le module de rendu FR par défaut sort directement un
+  .mp4 H.264 yuv420p social-ready, 827 Ko pour 3,4 s) ; frames de contrôle vérifiées (monogramme + or
+  peint + RACING balayé + reflet). Livré : Communication/Réseaux/tp_sting_1080.mp4 ; script et pièces
+  archivés avec les autres stings. Prod re-smokée après chaque salve, fichier Google intouché.
