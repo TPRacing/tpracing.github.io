@@ -469,3 +469,10 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   ≤ 2 lignes de ≤ 13 caractères. Vérifs : audit 4 pages × 8 largeurs (empilement, débordement, taille
   planchère) = OK partout ; h2 mesurés identiques (34,4 px) sur accueil ET pilote ; captures desktop
   (accueil sections + pilote hero/parcours) et mobile (hero pilote, kicker 1 ligne). En ligne.
+- 2026-07-18 (précision Thomas) : le nom officiel s'écrit avec un TIRET COURT « - » : « TPRacing -
+  Thomas Papone Racing ». Ce qui est banni, c'est le tiret cadratin « — » décoratif, pas le trait
+  d'union. Appliqué : les 4 <title>, og:title/twitter:title, og:image:alt, JSON-LD (name +
+  affiliation), manifeste PWA (qui portait encore un « — » oublié) et les 4 footers copyright
+  passent au « - » (18 remplacements). Le slash « / » reste UNIQUEMENT élément graphique du site
+  (kickers, dates, légendes, « France / Mentions légales »). Vérifié : 0 cadratin sur tout le site,
+  manifeste JSON valide, prod OK.
