@@ -731,3 +731,136 @@ nav .nav-cta:focus-visible {
   .part-carte::after, .presse-carte::after { display: none; }
   * { animation-duration: .01s !important; }
 }
+
+/* ---------- Impression / Enregistrer en PDF ----------
+   Sortie papier de marque : fond blanc, encre sobre, en-tête logo couleur,
+   décor animé retiré. Utile pour un dossier partenaire imprimé ou un PDF. */
+@media print {
+  /* Économie d'encre : on coupe fonds, dégradés, trames, ombres et halos */
+  *, *::before, *::after {
+    background-image: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -webkit-print-color-adjust: economy;
+    print-color-adjust: economy;
+  }
+  html, body {
+    background: #fff !important;
+    color: #20272f !important;
+  }
+  @page { margin: 15mm; }
+  body { font-size: 11pt; line-height: 1.5; }
+
+  /* Tout le contenu révélé au scroll doit apparaître à l'impression */
+  .rvl, .rvl.vu {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  .rvl .frame img, .rvl.frame img { transform: none !important; }
+
+  /* Décor et éléments interactifs retirés du papier */
+  #intro, .ligne-course, .marquee, .mot-geant, .saut-contenu,
+  .lightbox, .lb-scene, .gal-loupe, .car-glyph, .liseret,
+  .signature-charte, .bande-origines, .embleme-fond,
+  .hero .visuel, .hero-num, .btn-rangee,
+  .foot-reso, video, .foot-grille img[src*="logo-blanc"] {
+    display: none !important;
+  }
+
+  /* En-tête = papier à en-tête : logo couleur sur filet or, sans navigation */
+  nav#navbar {
+    position: static !important;
+    background: #fff !important;
+    border-bottom: 2px solid var(--or) !important;
+    padding: 6px 0 12px !important;
+    height: auto !important;
+    box-shadow: none !important;
+  }
+  nav#navbar ul { display: none !important; }
+  nav#navbar .logo { position: static !important; }
+  nav#navbar .logo-sombre { display: none !important; }
+  nav#navbar .logo-clair {
+    display: block !important;
+    height: 42px !important;
+    width: auto !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Sections sombres repassées en encre sur blanc */
+  .hero, .hero-pilote, .hero-404, .section-marine, .contact-tete, .legal-tete, .contact-cta {
+    background: #fff !important;
+    color: #20272f !important;
+    min-height: 0 !important;
+    padding: 14px 0 !important;
+  }
+  .hero *, .hero-pilote *, .hero-404 *, .section-marine *, .contact-tete *, .legal-tete *, .contact-cta * {
+    color: #20272f !important;
+  }
+  h1, h2, h3,
+  .hero h1, .hero-pilote h1, .section-marine h2, .contact-tete h1, .legal-tete h1 {
+    color: var(--marine) !important;
+  }
+  /* L'accent or reste imprimé en couleur (petits éléments, peu d'encre) */
+  .or, .kicker .pastille, .or-txt {
+    color: var(--or) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Boutons neutralisés : lisibles, sans aplat gourmand en encre */
+  .btn, .btn-or, .btn-blanc, .btn-marine {
+    background: none !important;
+    color: var(--marine) !important;
+    border: 1px solid #b7bcc4 !important;
+    clip-path: none !important;
+    padding: 4px 10px !important;
+  }
+
+  /* Partenaires : bande figée, un seul jeu de logos, réparti sur la page */
+  .trust-band { -webkit-mask-image: none !important; mask-image: none !important; }
+  .trust-piste { animation: none !important; width: auto !important; flex-wrap: wrap !important; justify-content: center !important; }
+  .trust-lot { flex-wrap: wrap !important; justify-content: center !important; }
+  .trust-lot.copie { display: none !important; }
+  .trust-tile img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* Photos et cartes : ne pas couper au milieu d'une page */
+  section, article, figure, .frame,
+  .part-carte, .presse-carte, .disc-carte, .contact-carte, .etape {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  img { max-width: 100% !important; height: auto !important; }
+
+  /* Liens de contenu : afficher l'adresse pour un papier exploitable */
+  main p a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: .82em;
+    color: #555;
+    word-break: break-all;
+  }
+
+  /* Pied de page sobre + rappel de l'adresse du site */
+  footer {
+    background: #fff !important;
+    color: #20272f !important;
+    border-top: 2px solid var(--or) !important;
+    padding: 12px 0 !important;
+  }
+  footer *, footer a { color: #20272f !important; }
+  footer .foot-liens { justify-content: center; }
+  footer::after {
+    content: "tpracing.github.io / contact.tpracing@gmail.com";
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Bebas Neue Pro', 'Bebas Neue', sans-serif;
+    letter-spacing: .1em;
+    font-size: 12pt;
+    color: var(--marine);
+  }
+}

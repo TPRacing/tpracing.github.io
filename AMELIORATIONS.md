@@ -25,6 +25,7 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [x] Complétude : bloc contact sur l'accueil (LinkedIn mis en avant + email, boutons charte)
 - [x] Déclinaison du sting AE en carré 1080 pour Insta/Shorts (18/07 : Communication/Réseaux/tp_sting_1080.mp4)
 - [x] Complétude PWA : manifeste web + icône 512 de marque (ajout sur écran d'accueil mobile, splash, theme-color) — 18/07
+- [x] Complétude : feuille de style impression / « Enregistrer en PDF » de marque (papier à en-tête logo couleur, encre sobre, décor retiré) — 19/07
 - [ ] Emblème 3D : version animée légère en hero (séquence AE ou sprite au scroll) si le poids reste raisonnable
 - [ ] Section actus/prochaines échéances (structure seulement, contenus à valider avec Thomas)
 - [x] Accueil : mur de partenaires « Ils nous font confiance » (18 logos)
@@ -56,6 +57,28 @@ Pas de crédit photo. Ne jamais supprimer google42175aef89d3ae74.html. Réseaux 
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-07-19 (routine, complétude : impression / PDF de marque) : nouvel item ajouté au backlog
+  puis réalisé. Le site n'avait aucune feuille d'impression : un partenaire ou un journaliste qui
+  imprimait le contact ou la page pilote (ou faisait « Enregistrer en PDF ») obtenait les fonds
+  marine sombres gourmands en encre, du texte blanc invisible sur papier et tout le décor animé.
+  Ajout d'un bloc `@media print` dans styles.css (aucun asset, ~130 lignes CSS) : (1) fond blanc,
+  encre sobre, coupe des dégradés/trames/ombres/halos ; (2) en-tête = papier à en-tête, nav
+  statique avec le LOGO COULEUR sur filet or, liens de nav masqués ; (3) sections sombres
+  (.hero, .hero-pilote, .hero-404, .section-marine, .contact-tete, .legal-tete, .contact-cta)
+  repassées en encre sur blanc, titres marine, accent or conservé en couleur ; (4) décor retiré
+  (#intro, marquee, mots géants, bande origines, emblèmes filigranes, ligne de course, lightbox,
+  numéro 47 déco, vidéo) ; (5) tous les `.rvl` forcés visibles (sinon le contenu sous la ligne de
+  flottaison, jamais révélé au scroll, manquerait à l'impression) ; (6) boutons neutralisés
+  (contour lisible au lieu d'aplats), liens de contenu suivis de leur URL, cartes/photos non
+  coupées entre deux pages ; (7) pied de page sobre + rappel « tpracing.github.io / email » en
+  Bebas. La section « Derniers posts » Instagram est laissée telle quelle (domaine de la routine
+  maj-feed-insta-site). Vérifié en simulant le média print à l'écran (bascule de la condition
+  @media) sur les 5 pages : en-tête logo couleur + filet or, titres marine, corps foncé, footer
+  blanc + URL, 18 logos partenaires en bande figée, 0 débordement horizontal ; rendu de contact
+  capturé (letterhead propre). Confirmé que l'écran n'est pas affecté (hero sombre, nav fixe,
+  console propre). BONUS corrigé au passage : le Facebook du pilote (affiché sur la page) manquait
+  dans le `sameAs` du JSON-LD Person → ajouté (6 profils, JSON revalidé).
 
 - 2026-07-19 (demandes Thomas : page contact + réseaux au footer partout) : (1) NOUVELLE PAGE
   `contact.html` dans la DA du site : en-tête marine (kicker damier « Contact », h1 « Parlons de votre
