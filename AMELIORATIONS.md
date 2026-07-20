@@ -26,6 +26,7 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [x] Déclinaison du sting AE en carré 1080 pour Insta/Shorts (18/07 : Communication/Réseaux/tp_sting_1080.mp4)
 - [x] Complétude PWA : manifeste web + icône 512 de marque (ajout sur écran d'accueil mobile, splash, theme-color) — 18/07
 - [x] Complétude : feuille de style impression / « Enregistrer en PDF » de marque (papier à en-tête logo couleur, encre sobre, décor retiré) — 19/07
+- [x] Cartes OG des pages secondaires (og-contact.jpg dédiée) + audit final de clôture 5 pages, 6 correctifs — 20/07
 - [ ] Emblème 3D : version animée légère en hero (séquence AE ou sprite au scroll) si le poids reste raisonnable
 - [ ] Section actus/prochaines échéances (structure seulement, contenus à valider avec Thomas)
 - [x] Accueil : mur de partenaires « Ils nous font confiance » (18 logos)
@@ -57,6 +58,46 @@ Pas de crédit photo. Ne jamais supprimer google42175aef89d3ae74.html. Réseaux 
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-07-20 (routine, dernier jour : cartes OG secondaires + audit final de clôture) : deux volets.
+  (1) CARTE OG CONTACT : contact.html partageait la carte de l'accueil (« Le volant se transmet »,
+  hors sujet) et mentions-legales.html n'avait AUCUNE image de partage. Créé og-contact.jpg
+  (1200×630, 100 Ko) avec la recette exacte des cartes du 12/07 : photo partenaires-stickers
+  (kart 324, stickers sponsors lisibles = le bon visuel pour un message « partenariat »), rognage
+  auto du cadre incrusté, étalonnage duotone marine dominant / or désaturé (gamma 1,5 pour tirer
+  les murs clairs vers les médiums marine), scrim bas, logo BLANC, kicker Bebas pastille damier
+  « Partenariat / Presse / Questions », titre Korataki « Parlons de / votre projet », filet or +
+  url, liseré or. Câblé og:image + twitter:image + alt sur contact.html ; mentions-legales.html
+  complétée (og:description, og:image carte accueil générique, bloc twitter entier).
+  (2) AUDIT FINAL 5 PAGES (workflow 5 dimensions : SEO/meta, intégrité des références, liens
+  externes, charte, a11y — chaque constat contre-vérifié par un agent chargé de le RÉFUTER) :
+  6 défauts confirmés, 4 réfutés (dont 2 déjà en cours de correction et SMD→Hexagone = choix
+  documenté). Corrigés : twitter:description manquant sur contact (ajouté aussi sur mentions) ;
+  lastmod du sitemap périmés (passés au 20/07) ; embleme-3d.png ORPHELIN de 210 Ko publié pour
+  rien (retiré du dépôt, récupérable dans l'historique git — seul le .webp est utilisé) ;
+  16 logos nav/footer sans width/height (attributs anti-layout-shift ajoutés sur les 5 pages) ;
+  pile print « Bebas Neue » hors charte (→ 'Arial Narrow' comme les autres piles) ; aria-label
+  posé sur des <div> génériques .foot-reso (nommage interdit par ARIA sur generic → role="group",
+  5 pages). ⚠️ PIÈGE DÉCOUVERT en vérifiant : ajouter width/height à un logo dont le CSS ne fixe
+  que la hauteur rend l'attribut width EFFECTIF (logo footer étiré 585×52) et, combiné à
+  max-width:100 % dans un parent dimensionné par le contenu, la largeur peut s'effondrer à 0 →
+  correctifs `nav .logo img, footer img { max-width:none }` + `footer img { width:auto }`, et
+  l'audit des ratios exclut désormais les images en object-fit:cover (recadrage éditorial voulu).
+  Vérifs : 5 pages × 1280 + 375 en iframes fraîches (cache CSS busté par fetch reload — un
+  ?fresh sur la PAGE ne rafraîchit PAS la feuille de style), 0 ratio faux, 0 débordement,
+  console vide, footer 61×52 et nav 97×42 mesurés au pixel. Prod smokée après push.
+
+  🏁 CLÔTURE DE LA ROUTINE (20/07/2026 = terme fixé) : la tâche planifiée quotidienne
+  amelioration-site-tpracing s'arrête aujourd'hui. En 11 jours : site passé de 2 à 5 pages
+  (+ 404 de marque), DA charte sur-mesure (emblème 3D, intro circuit, stings AE), bande
+  partenaires, presse, feed Insta automatisé (la routine maj-feed-insta-site CONTINUE, elle),
+  mentions légales, PWA, impression, accessibilité, perfs (AVIF+srcset, 0 requête tierce),
+  SEO (indexé, cartes OG partout). TOUT ce qui reste au backlog attend une décision ou un
+  contenu de Thomas : palmarès (chiffres), actus/prochaine course (dates), paliers de
+  partenariat (montants), citations partenaires, scan de signature, photos casques/machines,
+  anecdotes pilote, contraste de l'or sur fond clair (question du 15/07 toujours ouverte).
+  Pour relancer une amélioration : répondre à ces questions puis recréer une tâche planifiée
+  (ou demander la modif directement, le dépôt du T7 + ce fichier restent la référence).
 
 - 2026-07-19 (routine, complétude : impression / PDF de marque) : nouvel item ajouté au backlog
   puis réalisé. Le site n'avait aucune feuille d'impression : un partenaire ou un journaliste qui
