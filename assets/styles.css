@@ -411,6 +411,9 @@ nav {
   transition: background .35s ease, border-color .35s ease, padding .35s ease;
 }
 nav .logo img { height: 42px; width: auto; transition: height .35s ease; }
+/* les logos portent width/height (anti-CLS) : sans ceci, max-width:100% + parent
+   dimensionné par le contenu = pourcentage cyclique, largeur effondrée à 0 */
+nav .logo img, footer img { max-width: none; }
 nav .logo .logo-clair { display: none; }
 nav ul {
   display: flex;
@@ -518,7 +521,7 @@ footer .foot-grille {
   gap: 26px;
   padding-bottom: 26px;
 }
-footer img { height: 52px; }
+footer img { height: 52px; width: auto; }
 footer a { color: var(--blanc); text-decoration: none; font-family: var(--f-label); letter-spacing: .1em; font-size: 1.02rem; text-transform: uppercase; }
 footer a:hover { color: var(--or); }
 footer .foot-liens { display: flex; gap: 22px; flex-wrap: wrap; }
@@ -858,7 +861,7 @@ nav .nav-cta:focus-visible {
     display: block;
     text-align: center;
     margin-top: 10px;
-    font-family: 'Bebas Neue Pro', 'Bebas Neue', sans-serif;
+    font-family: 'Bebas Neue Pro', 'Arial Narrow', sans-serif;
     letter-spacing: .1em;
     font-size: 12pt;
     color: var(--marine);
