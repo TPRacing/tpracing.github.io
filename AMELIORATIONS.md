@@ -61,14 +61,24 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
-- 2026-07-21 (décision Thomas) : ROUTINE ROUVERTE EN PERMANENTE. La clôture du 20/07 est annulée :
-  Thomas veut que la routine quotidienne tourne « tous les jours et ne s'arrête jamais ». Le prompt
-  de la tâche planifiée amelioration-site-tpracing a été réécrit : clause de fin retirée, interdiction
-  de s'auto-supprimer/désactiver, et consignes pour les jours où le backlog est épuisé ou bloqué
-  (1. benchmarker de vrais sites et sourcer de nouvelles idées ; 2. préparer hors ligne les items en
-  attente de contenu ; 3. audit de santé des 5 pages en prod ; jamais de changement gratuit — si rien
-  d'utile, une ligne « RAS » au Journal suffit ; rappel des questions ouvertes au plus 1×/semaine).
-  Les questions en attente listées dans la clôture du 20/07 restent valables telles quelles.
+- 2026-07-21 (décision Thomas) : ROUTINE ROUVERTE EN PERMANENTE ET MISSION ÉLARGIE. La clôture du
+  20/07 est annulée : Thomas veut un site « continuellement mis à jour, corrections de défauts,
+  adapté aux tendances, avec des audits sur internet sur ce qui pourrait être ajouté/modifié ».
+  Le prompt de la tâche planifiée amelioration-site-tpracing a été réécrit en programme
+  d'amélioration continue à 3 AXES en rotation (pas le même axe plus de 2 jours de suite,
+  au moins 1 jour d'audit et 1 jour de veille par semaine, axe du jour noté au Journal) :
+  A. AMÉLIORER : backlog design + complétude, comme avant.
+  B. CORRIGER : audit approfondi d'une dimension en rotation (perf, a11y, SEO + résultats Google
+  réels, liens internes/externes, rendu 320→1680, console, qualité visuelle par captures zoomées)
+  puis correction le jour même.
+  C. S'ADAPTER : veille tendances sur internet avec de vrais liens (écuries F1/F2/F3/GT, pilotes
+  pros, karting, studios primés Awwwards/FWA/CSSDA, tendances webdesign, nouveautés CSS/JS
+  utilisables en statique) → idées concrètes sourcées au backlog, une implémentée si actionnable ;
+  les tendances s'adaptent à la charte, jamais l'inverse.
+  Garde-fous inchangés : interdiction de s'auto-supprimer/désactiver, items bloqués sur Thomas
+  préparés hors ligne seulement, jamais de changement gratuit (« RAS » au Journal sinon), rappel
+  des questions ouvertes au plus 1×/semaine. Les questions en attente listées dans la clôture
+  du 20/07 restent valables telles quelles.
 
 - 2026-07-20 (routine, dernier jour : cartes OG secondaires + audit final de clôture) : deux volets.
   (1) CARTE OG CONTACT : contact.html partageait la carte de l'accueil (« Le volant se transmet »,
