@@ -4,25 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Mentions légales - TPRacing</title>
-  <meta name="description" content="Mentions légales et politique de confidentialité du site de TPRacing (Thomas Papone Racing), association de sport automobile loi 1901.">
+  <title>Teste tes réflexes - TPRacing | Jeu de réaction</title>
+  <meta name="description" content="Cinq feux s'allument, puis s'éteignent : réagis le plus vite possible, comme sur un vrai départ. Bats ton record et défie tes amis sur le jeu de réaction TPRacing.">
 
-  <link rel="canonical" href="https://tpracing.github.io/mentions-legales.html">
+  <link rel="canonical" href="https://tpracing.github.io/jeu.html">
   <meta property="og:site_name" content="TPRacing">
-  <meta property="og:title" content="Mentions légales - TPRacing">
-  <meta property="og:description" content="Mentions légales et politique de confidentialité du site de l'association TPRacing.">
+  <meta property="og:title" content="Teste tes réflexes - TPRacing">
+  <meta property="og:description" content="Cinq feux, une extinction, ton temps de réaction en millisecondes. À toi de jouer.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tpracing.github.io/mentions-legales.html">
+  <meta property="og:url" content="https://tpracing.github.io/jeu.html">
   <meta property="og:locale" content="fr_FR">
-  <meta property="og:image" content="https://tpracing.github.io/assets/img/og-accueil.jpg">
+  <meta property="og:image" content="https://tpracing.github.io/assets/img/og-jeu.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="TPRacing - Le volant se transmet. Association de sport automobile.">
+  <meta property="og:image:alt" content="Teste tes réflexes. Le jeu de réaction TPRacing : cinq feux façon départ F1.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Mentions légales - TPRacing">
-  <meta name="twitter:description" content="Mentions légales et politique de confidentialité du site de l'association TPRacing.">
-  <meta name="twitter:image" content="https://tpracing.github.io/assets/img/og-accueil.jpg">
+  <meta name="twitter:title" content="Teste tes réflexes - TPRacing">
+  <meta name="twitter:description" content="Cinq feux, une extinction, ton temps de réaction en millisecondes. À toi de jouer.">
+  <meta name="twitter:image" content="https://tpracing.github.io/assets/img/og-jeu.jpg">
 
   <link rel="icon" href="assets/favicon.ico?v=2" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=2">
@@ -35,47 +35,102 @@
   <link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/styles.css">
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Teste tes réflexes - TPRacing",
+    "description": "Jeu de réaction façon procédure de départ : cinq feux s'allument puis s'éteignent, le joueur réagit le plus vite possible.",
+    "url": "https://tpracing.github.io/jeu.html",
+    "about": {
+      "@type": "SportsOrganization",
+      "name": "TPRacing - Thomas Papone Racing",
+      "url": "https://tpracing.github.io/"
+    }
+  }
+  </script>
+
   <style>
-    /* ---------- Page légale : sobre, lisible ---------- */
-    .legal-tete {
+    /* ---------- Page Réflexes : la procédure de départ ---------- */
+    .jeu-tete {
       background:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(212, 151, 38, .12), transparent 62%),
         radial-gradient(rgba(246, 247, 252, .035) 1px, transparent 1.5px),
         linear-gradient(180deg, #070B1D 0%, var(--marine) 100%);
-      background-size: 26px 26px, auto;
+      background-size: auto, 26px 26px, auto;
       color: var(--blanc);
-      padding: 150px 6% 56px;
+      padding: 150px 6% 64px;
       position: relative;
       overflow: hidden;
     }
-    .legal-tete .contenu { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
-    .legal-tete h1 { color: var(--blanc); font-size: clamp(1.7rem, 3.6vw, 2.6rem); }
-    .legal-tete .maj {
+    .jeu-tete .contenu { max-width: 1180px; margin: 0 auto; position: relative; z-index: 1; }
+    .jeu-tete h1 { color: var(--blanc); font-size: clamp(1.7rem, 3.6vw, 2.6rem); }
+    @media (max-width: 560px) { .jeu-tete h1 { font-size: min(5.9vw, 1.7rem); } }
+    .jeu-tete .lead { color: #aeb6c8; max-width: 640px; margin-top: 18px; }
+
+    /* Record personnel : chiffre Korataki contour or, à la façon des mots géants */
+    .record { margin-top: 10px; }
+    .record .etiquette {
       font-family: var(--f-label);
-      letter-spacing: .14em;
+      letter-spacing: .18em;
       text-transform: uppercase;
-      color: #aeb6c8;
-      font-size: .95rem;
-      margin-top: 14px;
+      font-size: 1rem;
+      color: var(--gris);
     }
-    .legal-corps { padding: 26px 6% 80px; }
-    .legal-corps .contenu { max-width: 860px; margin: 0 auto; }
-    .legal-corps section { padding: 30px 0 4px; position: static; }
-    .legal-corps h2 {
-      font-size: clamp(1.05rem, 1.9vw, 1.35rem);
-      color: var(--marine);
-      padding-bottom: 10px;
-      border-bottom: 2px solid rgba(212, 151, 38, .45);
-      margin-bottom: 14px;
+    .record .valeur {
+      font-family: var(--f-titre);
+      font-weight: 700;
+      font-size: clamp(2.4rem, 7vw, 4.2rem);
+      line-height: 1.05;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--or);
+      text-stroke: 2px var(--or);
     }
-    .legal-corps p { color: var(--encre); line-height: 1.75; margin: 0 0 10px; }
-    .legal-corps p + p { margin-top: 6px; }
-    .legal-corps ul { margin: 4px 0 10px 20px; color: var(--encre); line-height: 1.75; }
-    .legal-corps a { color: var(--marine); text-decoration: underline; text-decoration-color: rgba(212, 151, 38, .6); text-underline-offset: 3px; }
-    .legal-corps a:hover { color: var(--or); }
-    .legal-corps .detail { color: var(--gris); font-size: .95rem; }
-    /* mots longs (« confidentialité », « intellectuelle ») : borner par la largeur d'écran */
-    @media (max-width: 560px) { .legal-tete h1 { font-size: min(4.9vw, 1.7rem); } }
-    @media (max-width: 360px) { .legal-corps h2 { font-size: min(5vw, 1.05rem); } }
+    .record.nouveau .etiquette::after { content: " / nouveau"; color: var(--or); }
+
+    /* Défi : partage natif ou copie du lien */
+    .defier-rangee {
+      margin-top: 22px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .defier-statut {
+      font-family: var(--f-label);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-size: .98rem;
+      color: var(--or);
+      min-height: 1.2em;
+    }
+
+    /* Bandeau de sortie : retour au vrai sujet */
+    .jeu-cta {
+      background:
+        radial-gradient(rgba(246, 247, 252, .04) 1px, transparent 1.5px),
+        var(--marine);
+      background-size: 22px 22px, 100% 100%;
+      color: var(--blanc);
+      padding: 40px 6%;
+    }
+    .jeu-cta .contenu {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+    .jeu-cta p {
+      font-family: var(--f-label);
+      font-size: 1.35rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .jeu-cta .actions { display: flex; gap: 14px; flex-wrap: wrap; }
   </style>
 </head>
 <body>
@@ -96,7 +151,7 @@
       <li class="masque-mobile"><a href="index.html#association">L'association</a></li>
       <li class="masque-mobile"><a href="index.html#trajectoire">La trajectoire</a></li>
       <li><a href="pilote.html">Le pilote</a></li>
-      <li class="masque-mobile"><a href="jeu.html">Réflexes</a></li>
+      <li class="masque-mobile"><a class="active" aria-current="page" href="jeu.html">Réflexes</a></li>
       <li><a href="contact.html">Contact</a></li>
       <li><a class="nav-cta" href="index.html#partenaires">Devenir partenaire</a></li>
     </ul>
@@ -105,63 +160,51 @@
   <main id="contenu">
 
   <!-- ===== EN-TÊTE ===== -->
-  <header class="legal-tete">
-    <svg class="embleme-fond" viewBox="29 38 90 63" style="top: 30px; right: -10%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
+  <header class="jeu-tete">
+    <svg class="embleme-fond" viewBox="29 38 90 63" style="top: 24px; right: -10%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
     <div class="contenu">
-      <p class="kicker">Informations légales</p>
-      <h1>Mentions légales &amp; confidentialité</h1>
-      <p class="maj">Dernière mise à jour / 17 juillet 2026</p>
+      <p class="kicker">Pit stop</p>
+      <h1><span class="hl">Teste tes</span> <span class="hl">réflexes</span></h1>
+      <p class="lead">Le départ, ça se joue au millième. Les cinq feux s'allument, puis s'éteignent : réagis le plus vite possible, comme sur une vraie grille.</p>
     </div>
   </header>
 
-  <div class="legal-corps">
+  <!-- ===== LE JEU ===== -->
+  <section class="depart">
+    <svg class="embleme-fond" viewBox="29 38 90 63" style="bottom: -30px; right: -12%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
     <div class="contenu">
+      <p class="kicker" style="justify-content:center">Procédure de départ</p>
+      <h2>À l'extinction des feux</h2>
+      <p class="lead">Clique ou touche le portique pour armer la séquence. Réagis à l'extinction, pas avant : trop tôt, c'est le jump start.</p>
+      <div class="portique" id="portique" role="button" tabindex="0" aria-label="Zone de départ : cliquer pour lancer, puis cliquer à l'extinction des feux">
+        <span class="feu"></span><span class="feu"></span><span class="feu"></span><span class="feu"></span><span class="feu"></span>
+      </div>
+      <div class="verdict" aria-live="polite">
+        <p class="consigne" id="consigne">Clique sur le portique pour lancer le départ</p>
+        <p class="chrono" id="chrono" hidden></p>
+        <p class="comparatif" id="comparatif" hidden></p>
+      </div>
+      <div class="record" id="record-bloc" hidden>
+        <p class="etiquette">Ton record</p>
+        <p class="valeur" id="record"></p>
+      </div>
+      <div class="defier-rangee">
+        <button class="btn btn-marine" id="defier" type="button">Défier un ami</button>
+        <span class="defier-statut" id="defier-statut" aria-live="polite"></span>
+      </div>
+      <noscript><p class="consigne">Le jeu a besoin de JavaScript pour chronométrer tes départs.</p></noscript>
+      <p class="devise">Un départ ne se rejoue pas. <b>Ici, si.</b></p>
+    </div>
+  </section>
 
-      <section>
-        <h2>Éditeur du site</h2>
-        <p><strong>TPRACING (Thomas Papone Racing)</strong>, association régie par la loi du 1<sup>er</sup> juillet 1901, déclarée à la préfecture de l'Ain le 15 décembre 2021 (annonce publiée au Journal officiel des associations le 21 décembre 2021).</p>
-        <ul>
-          <li>Numéro RNA : W012015296</li>
-          <li>Siège social : 01330 Lapeyrouse (Ain), France</li>
-          <li>Directeur de la publication : Patrice Papone, président de l'association</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Contact</h2>
-        <p>Par email : <a href="mailto:contact.tpracing@gmail.com">contact.tpracing@gmail.com</a><br>
-        Sur LinkedIn : <a href="https://www.linkedin.com/company/tpracing/" target="_blank" rel="noopener">page de l'association TPRacing</a></p>
-      </section>
-
-      <section>
-        <h2>Hébergement</h2>
-        <p>Ce site est hébergé par le service GitHub Pages, fourni par GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis / <a href="https://pages.github.com" target="_blank" rel="noopener">pages.github.com</a>.</p>
-      </section>
-
-      <section>
-        <h2>Propriété intellectuelle</h2>
-        <p>L'ensemble des contenus de ce site (textes, logos, identité graphique, montages photo et vidéo) est la propriété de l'association TPRACING ou fait l'objet d'une autorisation d'utilisation. Toute reproduction, représentation ou diffusion, totale ou partielle, sans accord écrit préalable est interdite.</p>
-        <p class="detail">Photographies de course : droits réservés / photographes officiels de ligue et archives familiales Papone.</p>
-      </section>
-
-      <section>
-        <h2>Données personnelles</h2>
-        <p>Ce site ne collecte <strong>aucune donnée personnelle</strong> : il ne comporte ni formulaire, ni création de compte, ni newsletter, ni outil de mesure d'audience, et n'utilise aucun service tiers lors de la consultation (polices de caractères, images et vidéos sont hébergées avec le site).</p>
-        <p>Comme pour tout site internet, l'hébergeur (GitHub) peut traiter des journaux techniques, comprenant notamment l'adresse IP des visiteurs, aux seules fins de fourniture et de sécurité du service. Pour en savoir plus, consultez la <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">politique de confidentialité de GitHub</a>.</p>
-        <p>Ce site contient des liens vers des plateformes externes (Instagram, LinkedIn, sites de presse). Une fois sur ces plateformes, ce sont leurs propres politiques de confidentialité qui s'appliquent.</p>
-        <p>Conformément au règlement général sur la protection des données (RGPD) et à la loi Informatique et Libertés, vous pouvez exercer vos droits ou poser toute question relative aux données personnelles en écrivant à <a href="mailto:contact.tpracing@gmail.com">contact.tpracing@gmail.com</a>.</p>
-      </section>
-
-      <section>
-        <h2>Cookies</h2>
-        <p>Ce site ne dépose <strong>aucun cookie</strong> ni aucun autre traceur sur votre appareil. C'est pourquoi aucun bandeau de consentement ne vous est présenté.</p>
-      </section>
-
-      <section>
-        <h2>Droit applicable</h2>
-        <p>Le présent site et ses mentions légales sont soumis au droit français.</p>
-      </section>
-
+  <!-- ===== SORTIE DE STAND ===== -->
+  <div class="jeu-cta">
+    <div class="contenu rvl">
+      <p>Les vrais départs, c'est lui qui les prend.</p>
+      <div class="actions">
+        <a class="btn btn-or" href="pilote.html">Découvrir le pilote</a>
+        <a class="btn btn-blanc" href="index.html#partenaires">Devenir partenaire</a>
+      </div>
     </div>
   </div>
 
@@ -187,7 +230,6 @@
         <a href="index.html">L'association</a>
         <a href="pilote.html">Le pilote</a>
         <a href="index.html#partenaires">Partenaires</a>
-        <a href="jeu.html">Réflexes</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
@@ -214,6 +256,14 @@
     const majNav = () => navbar.classList.toggle('solide', scrollY > 60);
     addEventListener('scroll', majNav, { passive: true });
     majNav();
+    // Apparitions au scroll
+    (function () {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vu'); io.unobserve(e.target); } });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.rvl').forEach(el => io.observe(el));
+    })();
   </script>
+  <script src="assets/js/reflexes.js"></script>
 </body>
 </html>

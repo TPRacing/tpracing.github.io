@@ -549,6 +549,50 @@
       margin-top: 6px;
     }
     @media (max-width: 860px) { #contact .duo { grid-template-columns: 1fr; } }
+
+    /* ---------- Bande Pit stop : appel vers le jeu de réflexes ---------- */
+    .jeu-appel { padding: 84px 6% 0; }
+    .bande-jeu {
+      max-width: 1180px;
+      margin: 0 auto;
+      background:
+        radial-gradient(rgba(246, 247, 252, .045) 1px, transparent 1.5px),
+        linear-gradient(180deg, #070B1D, var(--marine));
+      background-size: 22px 22px, auto;
+      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+      color: var(--blanc);
+      text-decoration: none;
+      padding: 34px 38px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .bande-jeu .bj-feux { display: flex; gap: 9px; }
+    .bande-jeu .feu-mini {
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      border: 2px solid rgba(212, 151, 38, .55);
+      transition: background .14s ease, border-color .14s ease, box-shadow .14s ease;
+    }
+    .bande-jeu:hover .feu-mini,
+    .bande-jeu:focus-within .feu-mini {
+      background: var(--rouge);
+      border-color: var(--rouge);
+      box-shadow: 0 0 9px rgba(193, 50, 33, .7);
+    }
+    .bande-jeu:hover .feu-mini:nth-child(2), .bande-jeu:focus-within .feu-mini:nth-child(2) { transition-delay: .07s; }
+    .bande-jeu:hover .feu-mini:nth-child(3), .bande-jeu:focus-within .feu-mini:nth-child(3) { transition-delay: .14s; }
+    .bande-jeu:hover .feu-mini:nth-child(4), .bande-jeu:focus-within .feu-mini:nth-child(4) { transition-delay: .21s; }
+    .bande-jeu:hover .feu-mini:nth-child(5), .bande-jeu:focus-within .feu-mini:nth-child(5) { transition-delay: .28s; }
+    .bande-jeu .bj-texte { flex: 1; min-width: 250px; }
+    .bande-jeu .bj-texte .kicker { margin-bottom: 6px; }
+    .bande-jeu h2 { color: var(--blanc); margin-bottom: 4px; }
+    .bande-jeu .bj-texte p:last-child { color: #aeb6c8; font-size: .98rem; }
+    @media (prefers-reduced-motion: reduce) {
+      .bande-jeu .feu-mini { transition: none; }
+    }
   </style>
 </head>
 <body>
@@ -591,6 +635,7 @@
       <li class="masque-mobile"><a href="#association">L'association</a></li>
       <li class="masque-mobile"><a href="#trajectoire">La trajectoire</a></li>
       <li><a href="pilote.html">Le pilote</a></li>
+      <li class="masque-mobile"><a href="jeu.html">Réflexes</a></li>
       <li><a href="contact.html">Contact</a></li>
       <li><a class="nav-cta" href="#partenaires">Devenir partenaire</a></li>
     </ul>
@@ -879,6 +924,19 @@
     </div>
   </section>
 
+  <!-- ===== PIT STOP : LE JEU ===== -->
+  <section class="jeu-appel" id="pit-stop">
+    <a class="bande-jeu rvl" href="jeu.html">
+      <span class="bj-feux" aria-hidden="true"><span class="feu-mini"></span><span class="feu-mini"></span><span class="feu-mini"></span><span class="feu-mini"></span><span class="feu-mini"></span></span>
+      <div class="bj-texte">
+        <p class="kicker">Pit stop</p>
+        <h2>Teste tes réflexes</h2>
+        <p>Cinq feux, une extinction : ton temps de réaction en millisecondes, comme sur une vraie grille.</p>
+      </div>
+      <span class="btn btn-or">Jouer</span>
+    </a>
+  </section>
+
   <!-- ===== TEASER PILOTE ===== -->
   <section>
     <svg class="embleme-fond" viewBox="29 38 90 63" style="bottom: -30px; right: -9%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
@@ -930,6 +988,7 @@
       <div class="foot-liens">
         <a href="pilote.html">Le pilote</a>
         <a href="index.html#partenaires">Partenaires</a>
+        <a href="jeu.html">Réflexes</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
