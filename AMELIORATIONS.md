@@ -54,10 +54,21 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 
 Charte : marine #1E2635, or #D49726, blanc #F6F7FC, rouge #C13221, vert #3E836E (micro-accent).
 Typos : Korataki (titres) / Bebas Neue Pro (labels) / Inter (texte). Pas de tiret ni point médian décoratif.
-Pas de crédit photo. Ne jamais supprimer google42175aef89d3ae74.html. Réseaux pilote seulement sur pilote.html.
+Pas de crédit photo (sauf mention Thierry Chomel en place). Ne jamais supprimer google42175aef89d3ae74.html.
+Icônes réseaux au footer de toutes les pages (LinkedIn = asso sur les pages asso, perso sur pilote.html) ;
+feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-07-21 (décision Thomas) : ROUTINE ROUVERTE EN PERMANENTE. La clôture du 20/07 est annulée :
+  Thomas veut que la routine quotidienne tourne « tous les jours et ne s'arrête jamais ». Le prompt
+  de la tâche planifiée amelioration-site-tpracing a été réécrit : clause de fin retirée, interdiction
+  de s'auto-supprimer/désactiver, et consignes pour les jours où le backlog est épuisé ou bloqué
+  (1. benchmarker de vrais sites et sourcer de nouvelles idées ; 2. préparer hors ligne les items en
+  attente de contenu ; 3. audit de santé des 5 pages en prod ; jamais de changement gratuit — si rien
+  d'utile, une ligne « RAS » au Journal suffit ; rappel des questions ouvertes au plus 1×/semaine).
+  Les questions en attente listées dans la clôture du 20/07 restent valables telles quelles.
 
 - 2026-07-20 (routine, dernier jour : cartes OG secondaires + audit final de clôture) : deux volets.
   (1) CARTE OG CONTACT : contact.html partageait la carte de l'accueil (« Le volant se transmet »,
