@@ -846,7 +846,7 @@ nav .nav-cta:focus-visible {
   .lightbox, .lb-scene, .gal-loupe, .car-glyph, .liseret,
   .signature-charte, .bande-origines, .embleme-fond,
   .hero .visuel, .hero-num, .btn-rangee,
-  .portique, .depart .verdict, .defier-rangee, .bande-jeu,
+  .portique, .depart .verdict,
   .foot-reso, video, .foot-grille img[src*="logo-blanc"] {
     display: none !important;
   }
@@ -872,17 +872,17 @@ nav .nav-cta:focus-visible {
   }
 
   /* Sections sombres repassées en encre sur blanc */
-  .hero, .hero-pilote, .hero-404, .section-marine, .contact-tete, .legal-tete, .contact-cta, .jeu-tete, .jeu-cta {
+  .hero, .hero-pilote, .hero-404, .section-marine, .contact-tete, .legal-tete, .contact-cta {
     background: #fff !important;
     color: #20272f !important;
     min-height: 0 !important;
     padding: 14px 0 !important;
   }
-  .hero *, .hero-pilote *, .hero-404 *, .section-marine *, .contact-tete *, .legal-tete *, .contact-cta *, .jeu-tete *, .jeu-cta * {
+  .hero *, .hero-pilote *, .hero-404 *, .section-marine *, .contact-tete *, .legal-tete *, .contact-cta * {
     color: #20272f !important;
   }
   h1, h2, h3,
-  .hero h1, .hero-pilote h1, .section-marine h2, .contact-tete h1, .legal-tete h1, .jeu-tete h1 {
+  .hero h1, .hero-pilote h1, .section-marine h2, .contact-tete h1, .legal-tete h1 {
     color: var(--marine) !important;
   }
   /* L'accent or reste imprimé en couleur (petits éléments, peu d'encre) */

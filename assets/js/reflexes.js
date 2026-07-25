@@ -1,4 +1,4 @@
-// Test de réaction « lights out » : module partagé (404.html + jeu.html).
+// Test de réaction « lights out » (404.html).
 // Les cinq feux s'allument, s'éteignent après un délai aléatoire : on clique à l'extinction.
 (function () {
   const portique = document.getElementById('portique');
@@ -94,29 +94,4 @@
 
   afficherRecord();
 
-  // Bouton « Défier un ami » (page Réflexes) : partage natif, sinon copie du lien.
-  const defier = document.getElementById('defier');
-  if (defier) {
-    const statut = document.getElementById('defier-statut');
-    const copier = async (texte) => {
-      try { await navigator.clipboard.writeText(texte); return true; }
-      catch (e) { return false; }
-    };
-    defier.addEventListener('click', async () => {
-      const r = lireRecord();
-      const texte = (r ? 'J’ai réagi en ' + r + ' ms à l’extinction des feux. ' : '')
-        + 'Teste tes réflexes de pilote sur le site TPRacing.';
-      const url = 'https://tpracing.github.io/jeu.html';
-      if (navigator.share) {
-        try { await navigator.share({ title: 'Teste tes réflexes - TPRacing', text: texte, url: url }); return; }
-        catch (e) { if (e && e.name === 'AbortError') return; }
-      }
-      const ok = await copier(texte + ' ' + url);
-      if (statut) {
-        statut.textContent = ok ? 'Lien copié' : url;
-        defier.classList.add('copie');
-        setTimeout(() => { statut.textContent = ''; defier.classList.remove('copie'); }, 1800);
-      }
-    });
-  }
 })();

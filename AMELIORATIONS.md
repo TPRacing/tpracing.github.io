@@ -42,7 +42,8 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [x] Transitions de page en volet diagonal (View Transitions cross-document, logo morphé entre pages)
 - [x] 404 « lights out » : test de réaction façon départ F1 (5 feux, jump start, verdicts)
 - [x] Marquee asservi à la vitesse de scroll (inertie + cisaillement, pause au survol conservée)
-- [x] Rubrique « Réflexes » : le jeu de départ promu en vraie page jeu.html + carte d'appel sur l'accueil (21/07)
+- [x] ~~Rubrique « Réflexes » : le jeu de départ promu en vraie page jeu.html + carte d'appel sur l'accueil (21/07)~~
+      ANNULÉ par Thomas le 25/07 (« ça en fait trop ») : page retirée, le jeu reste sur la 404 uniquement
 - [ ] Bloc « Prochaine course » : countdown + tracé du circuit (comète de l'intro) + contexte perso + « présenté par [partenaire] » — ATTEND dates/circuits de Thomas
 - [ ] Bande « La saison » : cartes des manches avec résultats (P3…) et prochaine manche en or — ATTEND calendrier/résultats de Thomas
 - [ ] Paliers de partenariat chiffrés + PDF dossier téléchargeable + CTA mailto pré-rempli — ATTEND montants validés par Thomas et Patrice
@@ -61,6 +62,26 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-07-25 (soir, demandes Thomas : retrait de la page Réflexes + feed Insta à jour) :
+  (1) PAGE RÉFLEXES RETIRÉE (« ça en fait trop, laisse juste sur la page 404 ») : jeu.html et
+  og-jeu.jpg supprimés, liens « Réflexes » retirés de la nav et des pieds de page des 5 pages,
+  carte d'appel « Pit stop » et son CSS retirés de l'accueil, entrée sitemap supprimée, sélecteurs
+  orphelins purgés de styles.css, bloc « Défier un ami » (qui pointait vers l'URL supprimée) retiré
+  de reflexes.js. Le jeu VIT toujours sur la 404 (portique + reflexes.js + styles .depart partagés
+  dans styles.css) : testé en local, allumage + JUMP START OK, console vide.
+  (2) FEED INSTA MIS À JOUR à la demande : nouveau post du 21/07/2026 repéré sur
+  @thomaspaponeracing (shortcode DbDIlw9DNT-), « Retour sur mon premier roulage en Caterham ! »
+  au circuit d'Alès : carrousel de 5 slides (4 photos + 1 vidéo onboard, slide 4). Les 5 visuels
+  récupérés en pleine résolution via le Chrome connecté (recette presse-papiers), self-hébergés en
+  WebP 720 (assets/insta/post-2026-07-21*.webp, ~350 Ko dont l'essentiel chargé au survol
+  seulement) ; le poster de la slide vidéo sert d'image fixe dans le défilement au survol.
+  Tuile insérée en tête de grille (3 posts + « Tout voir »), reveals ré-échelonnés 0/1/2/3.
+  BONUS : la tuile « Tout voir » qui ouvrait seule la 2e rangée en 4:5 à côté de deux cases vides
+  passe en bandeau pleine largeur dans ce cas (règle :nth-child(3n+1), même traitement que le
+  mobile) : la grille reste équilibrée quel que soit le nombre de posts. Vérifs : 5 pages × 375 et
+  1280 (0 débordement, 0 ratio faux, 0 lien Réflexes résiduel), captures grille desktop + mobile,
+  console vide, prod smokée après push.
 
 - 2026-07-25 (routine, AXE B : CORRIGER, dimension auditée = LIENS INTERNES ET EXTERNES) : première
   passe complète sur les liens depuis leur mise en place. Périmètre : 6 pages, 111 assets référencés,
