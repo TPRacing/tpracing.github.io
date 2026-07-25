@@ -42,6 +42,7 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [x] Transitions de page en volet diagonal (View Transitions cross-document, logo morphé entre pages)
 - [x] 404 « lights out » : test de réaction façon départ F1 (5 feux, jump start, verdicts)
 - [x] Marquee asservi à la vitesse de scroll (inertie + cisaillement, pause au survol conservée)
+- [x] Rubrique « Réflexes » : le jeu de départ promu en vraie page jeu.html + carte d'appel sur l'accueil (21/07)
 - [ ] Bloc « Prochaine course » : countdown + tracé du circuit (comète de l'intro) + contexte perso + « présenté par [partenaire] » — ATTEND dates/circuits de Thomas
 - [ ] Bande « La saison » : cartes des manches avec résultats (P3…) et prochaine manche en or — ATTEND calendrier/résultats de Thomas
 - [ ] Paliers de partenariat chiffrés + PDF dossier téléchargeable + CTA mailto pré-rempli — ATTEND montants validés par Thomas et Patrice
@@ -60,6 +61,46 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-07-25 (routine, AXE B : CORRIGER, dimension auditée = LIENS INTERNES ET EXTERNES) : première
+  passe complète sur les liens depuis leur mise en place. Périmètre : 6 pages, 111 assets référencés,
+  36 liens externes, ancres, pieds de page, nommage accessible.
+  CE QUI EST SAIN : aucun lien interne cassé, aucune ancre morte (y compris les ancres cross-page
+  index.html#association / #partenaires depuis les 5 autres pages) ; les 111 assets référencés
+  (images AVIF/WebP + variantes 760 px, polices, JS, vidéo, favicons, manifeste) répondent 200 EN PROD
+  (contrôle utile : GitHub Pages est sensible à la casse, pas le Mac) ; les 12 sites de partenaires
+  répondent 200 ET appartiennent toujours à la bonne entreprise (titres de page relus un par un, pas
+  seulement le code HTTP : un domaine expiré ou parké répond 200 lui aussi) ; les 2 articles du
+  Progrès sont en ligne avec les bons titres ; les 2 posts Instagram liés existent toujours ; tous les
+  liens externes ont target=_blank + rel=noopener ; canonical et og:url cohérents sur les 5 pages
+  indexables, 404 en noindex, sitemap à jour (jeu.html inclus), mailto correctement encodé.
+  NB : LinkedIn (999) et Facebook (400) renvoient des codes anti-robot en ligne de commande, ce n'est
+  pas une rupture de lien ; les 2 reels MyCitee sont en ligne (compte et dates confirmés) mais leur
+  légende n'est plus relisible hors session connectée (mur de connexion) — l'intitulé Partie 1 / 2
+  avait été vérifié le 16/07.
+  CE QUI A ÉTÉ CORRIGÉ LE JOUR MÊME : (1) le pied de page de la 404 ne proposait AUCUN lien vers
+  l'accueil : la rangée avait été copiée de l'accueil, qui omet légitimement « L'association »
+  puisqu'on y est déjà — lien ajouté, la règle « le pied omet la page courante » vaut maintenant sur
+  les 6 pages ; (2) la page mentions légales se liait À ELLE-MÊME dans sa ligne de bas de page (seule
+  page du site dans ce cas) : passée en texte simple ; (3) l'intitulé « L'association » menait à deux
+  cibles différentes selon qu'on cliquait dans la nav (index.html#association) ou dans le pied
+  (index.html) : même libellé, même destination désormais, sur les 4 pages concernées ; (4) sur
+  contact.html deux liens « Devenir partenaire » coexistaient avec des destinations différentes (la
+  section partenaires depuis la nav, un email pré-rempli depuis le bandeau) : aria-label
+  « Devenir partenaire, nous écrire par email » sur le bouton, sans toucher au libellé affiché ;
+  (5) assets/logo-couleur.png (15 Ko) publié sans être référencé nulle part (c'était le fichier source
+  de l'icône PWA) : retiré du dépôt, récupérable dans l'historique git.
+  Vérifs : re-audit complet (0 défaut restant), 6 pages × 375 et 1280 en iframes fraîches (0
+  débordement, 0 ratio d'image faux, pied de page non débordant), console vide, captures des deux
+  pieds de page modifiés. ⚠️ Le pane navigateur était masqué (viewport 0×0, mesures fausses) →
+  contrôle visuel fait en Chrome headless via une page-cadre qui fait défiler la page en iframe
+  jusqu'au pied. NB : le T7 n'était pas monté, travail sur un clone frais depuis GitHub.
+
+- 2026-07-21 (routine, AXE A : rubrique « Réflexes », entrée de Journal rétablie le 25/07 — le commit
+  277951c n'avait pas journalisé) : le test de réaction façon départ F1 vivait caché sur la page 404,
+  où presque personne ne le voit. Promu en VRAIE page `jeu.html` (nav des 6 pages, sitemap 0.5,
+  canonical + carte OG dédiée og-jeu.jpg, JSON-LD), logique sortie dans assets/js/reflexes.js et
+  partagée avec la 404 qui garde une version courte, et carte d'appel ajoutée sur l'accueil.
 
 - 2026-07-21 (décision Thomas) : ROUTINE ROUVERTE EN PERMANENTE ET MISSION ÉLARGIE. La clôture du
   20/07 est annulée : Thomas veut un site « continuellement mis à jour, corrections de défauts,
