@@ -343,6 +343,11 @@ h2 { font-size: clamp(1.4rem, 2.7vw, 2.15rem); margin-bottom: 22px; }
 /* groupes de mots insécables (anti mot-orphelin dans les titres) */
 .hl { white-space: nowrap; }
 
+/* Calage des lignes (ignoré par les navigateurs qui ne connaissent pas) :
+   titres équilibrés, paragraphes sans dernière ligne orpheline */
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
 /* ---------- Icônes réseaux du footer (style carte de visite) ---------- */
 .foot-reso { display: flex; gap: 10px; flex-wrap: wrap; }
 .foot-reso a {

@@ -36,6 +36,17 @@
   <link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/styles.css">
 
+  <!-- Navigation instantanée : pré-rendu des pages internes au survol d'un lien
+       (Speculation Rules ; les navigateurs qui ne connaissent pas ignorent le bloc) -->
+  <script type="speculationrules">
+    {
+      "prerender": [{
+        "where": { "href_matches": "/*" },
+        "eagerness": "moderate"
+      }]
+    }
+  </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",

@@ -37,11 +37,24 @@
   <link rel="preload" href="assets/img/embleme-3d.webp" as="image" fetchpriority="high">
   <link rel="stylesheet" href="assets/styles.css">
 
+  <!-- Navigation instantanée : pré-rendu des pages internes au survol d'un lien
+       (Speculation Rules ; les navigateurs qui ne connaissent pas ignorent le bloc) -->
+  <script type="speculationrules">
+    {
+      "prerender": [{
+        "where": { "href_matches": "/*" },
+        "eagerness": "moderate"
+      }]
+    }
+  </script>
+
   <!-- Intro : décision AVANT le premier rendu (pas de flash), 1 fois par session, jamais en mouvement réduit -->
   <script>
     (function () {
       try {
-        if (sessionStorage.getItem('tp_intro') || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        // Page pré-rendue (Speculation Rules) = le visiteur navigue déjà dans le site : pas d'intro
+        if (document.prerendering || sessionStorage.getItem('tp_intro') || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          if (document.prerendering) sessionStorage.setItem('tp_intro', '1');
           document.documentElement.classList.add('intro-off');
         } else {
           sessionStorage.setItem('tp_intro', '1');
