@@ -45,12 +45,62 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [x] ~~Rubrique « Réflexes » : le jeu de départ promu en vraie page jeu.html + carte d'appel sur l'accueil (21/07)~~
       ANNULÉ par Thomas le 25/07 (« ça en fait trop ») : page retirée, le jeu reste sur la 404 uniquement
 - [ ] Bloc « Prochaine course » : countdown + tracé du circuit (comète de l'intro) + contexte perso + « présenté par [partenaire] » — ATTEND dates/circuits de Thomas
+      (enrichi par la veille du 26/07 : accordéons natifs details qui replient la trace via :has() comme audif1.com ;
+      micro-stats du tracé longueur/virages comme ironlynx.com ; une phrase d'analyse pilotage par circuit comme cadillacf1team.com)
 - [ ] Bande « La saison » : cartes des manches avec résultats (P3…) et prochaine manche en or — ATTEND calendrier/résultats de Thomas
 - [ ] Paliers de partenariat chiffrés + PDF dossier téléchargeable + CTA mailto pré-rempli — ATTEND montants validés par Thomas et Patrice
 - [ ] Mur partenaires narratif : cartes d'activation + 2-3 citations de partenaires actuels — ATTEND citations à recueillir
 - [ ] Signature manuscrite de Thomas vectorisée, tracée au scroll + rituel de clôture « Le volant se transmet » sur les 4 pages — ATTEND un scan de sa signature
 - [ ] « Casques & machines » : hall of fame duotone → couleur révélée en balayage damier — ATTEND choix des objets/photos par saison
 - [ ] pilote.html en deux actes (rapide « Le pilote » / intime « Au-delà du volant ») — ATTEND anecdotes de Thomas (dans ses mots)
+
+### Idées de la veille 26/07 (workflow 5 éclaireurs : écuries hors F1 vues, pilotes pros, sites primés, tendances 2026, plateforme web — chaque source fetchée avant citation)
+
+Actionnables sans contenu de Thomas :
+- [x] Navigation instantanée : Speculation Rules (pré-rendu des pages internes au survol, 5 pages) + calage typo
+      text-wrap: balance (titres) / pretty (paragraphes) — sources : developer.chrome.com/docs/web-platform/prerender-pages,
+      developer.mozilla.org (Speculation_Rules_API), webkit.org/blog/16547 ; idée convergente de 3 terrains sur 5 (fait 26/07)
+- [ ] Scroll-driven animations CSS : dérive lente des mots géants outline via animation-timeline: view() ; option = migrer la
+      ligne de course en scroll() pur CSS — sources : MDN Scroll-driven_animations, scroll-driven-animations.style (showcase
+      Chrome DevRel), cydstumpel.nl ; support Chrome 115+/Safari 26+/Firefox 155 → @supports + reduced-motion obligatoires
+- [ ] Mot géant outline→rempli au fil du scroll (UN seul par page : le principe charte « plein vs contour » animé, texte réel
+      dans le DOM) — source : studiomeyer.io/en/blog/kinetische-typografie (règles kinetic typo 2026)
+- [ ] @starting-style + transition-behavior: allow-discrete : fondu de FERMETURE de la lightbox galerie (aujourd'hui sèche),
+      réutilisable pour de futurs popovers — source : MDN @starting-style (Baseline 2024)
+- [ ] Popovers partenaires ancrés (attribut popover + CSS anchor positioning, zéro JS) sur la bande défilante : mini-carte
+      marine/filet or par logo (nom, statut, lien), marquee en pause via :has(:popover-open), accessible clavier/mobile là où
+      le survol seul ne l'est pas — sources : nexgismo.com (anchor positioning 2026), caniuse (Chrome 125+/Safari 26+/
+      Firefox 147+) → @supports requis, fallback = lien direct actuel
+- [ ] corner-shape: bevel en @supports : la version NATIVE des coins biseautés maison (aujourd'hui en clip-path qui rogne
+      outline et ombres) sur cartes/boutons/badges — source : smashingmagazine.com/2026/03 (corner-shape, Chrome 139+)
+- [ ] View Transitions directionnelles : types forward/back posés dans pageswap/pagereveal (glissement discret selon le sens
+      accueil↔pilote↔contact) + view-transition-class pour un futur morph galerie→lightbox — source :
+      developer.chrome.com/blog/view-transitions-in-2025 (Firefox 144 = same-document Baseline, SANS les types → enhancement)
+- [ ] Séparateurs SVG dans le marquee : glyphe or trait fin (damier/chevron) entre les mots, façon signalétique de bord de
+      piste — source : trionn.com (croix SVG inline entre les .marquee-text-item, vérifié dans le HTML)
+- [ ] Labels Bebas « décodés » façon écran de chronométrage au premier reveal (~400 ms, cycle A-Z/0-9, JAMAIS sur les titres
+      Korataki, coupé en reduced-motion) — source : cadillacf1team.com (composant ScrambleText, vérifié dans le HTML)
+- [ ] Overlay de barres skewées (même angle que le marquee, 1 barre or d'accent) pour l'ouverture lightbox/menu mobile —
+      source : charlesleclerc.com (Awwwards SOTD 24/04/2025 : 320 barres .rectangle--skew en stagger, vérifié dans le HTML)
+- [ ] /llms.txt à la racine (H1 + résumé + liens décrits des 5 pages, spec llmstxt.org) : la couche « lisibilité IA » qui
+      alimente les réponses ChatGPT/Perplexity/AI Overviews quand un sponsor cherche TPRacing — sources : llmstxt.org,
+      studiomeyer.io/en/blog/webdesign-trends-2026-reality-check
+
+À valider ou en attente de contenu :
+- [ ] Section « fronts » Karting / Simracing / Caterham : 3 cartes égales, chacune avec son état et sa prochaine échéance
+      (répond au principe « ne pas enfermer TPRacing dans une case ») — sources : dorianepin.com (« Quatre fronts »),
+      unitedautosports.com (la next race DE CHAQUE programme dans sa carte) — ATTEND validation du découpage + échéances
+- [ ] Déclinaison micro du numéro : chips « N.47 » Bebas contour or en tête des blocs de pilote.html, le 47 traité en marque
+      nommée — sources : pierregasly.com (« 10 CREW »), emilien-denner.com (monogramme ED21) — ATTEND accord (marque)
+- [ ] Contact à deux canaux (Partenariats / Médias-presse) + kit presse statique (logo, 3-4 photos HD, bio courte, fiche 47)
+      — source : theopourchaire.com (contact pilote + agence séparés) — ATTEND décision + contenus
+- [ ] Cartes photo « partenaires en situation » (crops des stickers sur kart/combinaison/casque) en complément de la bande
+      logos — source : audif1.com (alt « Sidepod of the R26 with the main sponsor logo… ») — ATTEND choix de photos nettes
+- [ ] Icônes animées « direction de course » (rampe de feux en séparateur, damier, feu vert) en SVG+CSS maison, fil rouge
+      avec le jeu de la 404 — source : williamsf1.com (bibliothèque de 28 Lottie race-control) — À DOSER, sobriété d'abord
+Écartés en connaissance de cause : passeport de fan gamifié d'alexalbon.com (contraire au « ça en fait trop » du 25/07),
+chrono de tour fictif dans l'intro (chiffre inventé), section inversée fond or de collabcapitolium.fr (bascule de DA à ne pas
+tenter sans accord), glassmorphism/Y2K/maximalisme (hors charte, cf. reality-check StudioMeyer).
 
 ## Règles (rappel pour la routine)
 
@@ -62,6 +112,36 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-07-26 (routine, AXE C : S'ADAPTER, veille tendances) : premier jour de veille depuis
+  l'élargissement de la mission. Workflow de 5 éclaireurs en parallèle (écuries hors F1 déjà vues /
+  sites persos de pilotes / sites primés Awwwards-CSSDA / tendances webdesign 2026 / nouveautés de la
+  plateforme web), consigne stricte : aucune URL citée sans avoir été fetchée. ~35 patterns récoltés,
+  distillés en 16 entrées sourcées au backlog (11 actionnables, 5 en attente de Thomas) + 4 écartés
+  assumés. Sites les plus riches : audif1.com (next-race aux accordéons qui replient la trace),
+  cadillacf1team.com (ScrambleText de chronométrage, analyse par circuit), charlesleclerc.com et
+  collabcapitolium.fr (SOTD Awwwards, HTML inspecté), dorianepin.com / emilien-denner.com /
+  theopourchaire.com (structuration des sites de pilotes), scroll-driven-animations.style et les docs
+  Chrome/MDN/WebKit pour la plateforme. Pièges de veille consignés : verstappen.com=403,
+  racingbulls.com=ECONNREFUSED, hyundai-motorsport.com=TLS mort, ferrari.com=rendu 100 % client,
+  teamwrt.com n'existe pas (vrai domaine : w-racingteam.com) ; méfiance envers les blogs SEO « guide
+  2026 » (un support navigateur faux corrigé par caniuse).
+  IMPLÉMENTÉ LE JOUR MÊME (l'idée convergente de 3 terrains sur 5) : NAVIGATION INSTANTANÉE par
+  Speculation Rules — bloc script type=speculationrules dans le head des 5 pages (prerender des liens
+  internes, eagerness moderate) : au survol d'un lien de nav, la page cible est pré-rendue en
+  arrière-plan et le morph du logo en View Transition se joue sans latence réseau ; les navigateurs
+  sans support ignorent le bloc (rien à dégrader). Garde-fou ajouté dans le script d'intro de
+  l'accueil : une page pré-rendue (document.prerendering) saute l'intro et pose le drapeau de session
+  (un pré-rendu = le visiteur navigue déjà dans le site). BONUS TYPO du même lot : text-wrap: balance
+  sur h1/h2/h3 et text-wrap: pretty sur les paragraphes (fini le mot orphelin en dernière ligne ;
+  valeurs ignorées par les navigateurs anciens, risque zéro).
+  Vérifs : audit 5 pages × 1280 et 375 en iframes fraîches (bloc présent + JSON valide partout,
+  0 débordement, 0 titre pathologique, 0 ratio d'image faux), hero toujours sur 2 lignes, intro jouée
+  puis retirée normalement, console vide, HTMLScriptElement.supports('speculationrules')=true dans le
+  pane. NB honnête : le pré-rendu effectif n'est PAS observable dans le pane piloté (DevTools attaché
+  inhibe le preloading, activationStart=0 même après survol réel) — la syntaxe est conforme aux
+  exemples MDN/Chrome et le mécanisme est un pur hint sans risque. Prod smokée après push : 5 pages en
+  200, bloc et règles text-wrap en ligne. T7 non monté → travail sur clone frais depuis GitHub.
 
 - 2026-07-25 (soir, demandes Thomas : retrait de la page Réflexes + feed Insta à jour) :
   (1) PAGE RÉFLEXES RETIRÉE (« ça en fait trop, laisse juste sur la page 404 ») : jeu.html et
