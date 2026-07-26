@@ -54,6 +54,18 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [ ] « Casques & machines » : hall of fame duotone → couleur révélée en balayage damier — ATTEND choix des objets/photos par saison
 - [ ] pilote.html en deux actes (rapide « Le pilote » / intime « Au-delà du volant ») — ATTEND anecdotes de Thomas (dans ses mots)
 
+### Idées de la veille 21/07 (workflow 6 angles : écuries, pilotes/karting, studios primés, tendances 2026, plateforme web, sport hors auto — 42 collectées, 8 retenues)
+Section RÉCUPÉRÉE le 27/07 : elle était restée non commitée sur le T7 depuis le run du 21/07 (annotations entre crochets = ce qui a évolué depuis).
+- [x] ~~« Teste tes réflexes » : le jeu de départ promu de la 404 en vraie rubrique jeu.html + carte d'appel accueil (Williams F1, rubrique PLAY de premier niveau — williamsf1.com) — FAIT 21/07~~ [ANNULÉ par Thomas le 25/07, page retirée]
+- [ ] Frise typographique « Ils ont commencé en kart » (Senna, Prost, Schumacher, Alonso, Hamilton, Verstappen, Leclerc… puis « n°47, la suite s'écrit ») — CRG « la fabbrica dei campioni » (kartcrg.com) ; faits publics, zéro photo [contenu engageant → à VALIDER avant publication]
+- [ ] Ligne de trajectoire or dessinée au scroll reliant disciplines et jalons de la filière (path SVG + animation-timeline: view(), zéro JS, fallback statique @supports/reduced-motion) — scroll-driven-animations.style + tuukkataponen.com
+- [ ] Plaque signalétique pilote façon plaque d'homologation CIK-FIA (rivets et filets or, champs Bebas gravés ; UNIQUEMENT infos déjà publiées) — oscarpiastri.com transposé à l'esthétique karting
+- [ ] « L'équipe derrière le 47 » : grille de cartes rôles/noms, place de figure fondatrice au père — tuukkataponen.com (page Taustatiimi) — ATTEND noms et rôles validés par Thomas
+- [ ] Contact en 3 portes PARTENARIAT / PRESSE / COMMUNAUTÉ (mailto pré-remplis) + email cliquer-copier flash « COPIÉ » — premaracing.com + Podium/studio San Rita (Awwwards SOTD 27/06/2026) [recoupe « contact 2 canaux » de la veille 26/07 : fusionner au moment de faire]
+- [ ] Galerie en planche-contact argentique 35 mm (bandes perforées SVG, numéros de vue « TP-47 / 03A », ±0,5° de rotation) — tendance « Imperfection is in » (lummi.ai/blog/2026-design-trend) ; prolonge le grain + récit héritage
+- [ ] T et P révélés en contour or dans un intertitre plein (« TRANSMETTRE LA PASSION ») ± manifeste 3 piliers — Team WRT « WE ARE A TEAM » (w-racingteam.com) + G2/100 Thieves ; vérifier la zone de protection T-P de la charte
+- [ ] Micro-tâches (trop petites pour une journée, à glisser dans un prochain chantier) : ~~text-wrap balance/pretty~~ [FAIT 26/07] ; ~~Speculation Rules~~ [FAIT 26/07] ; popover natif ancré sur les logos partenaires [repris au backlog 26/07] ; morph View Transition intra-page de la lightbox ; accordéon details/summary stylé pour mentions légales ; microcopie « voix radio d'écurie »
+
 ### Idées de la veille 26/07 (workflow 5 éclaireurs : écuries hors F1 vues, pilotes pros, sites primés, tendances 2026, plateforme web — chaque source fetchée avant citation)
 
 Actionnables sans contenu de Thomas :
