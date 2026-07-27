@@ -72,13 +72,14 @@ Actionnables sans contenu de Thomas :
 - [x] Navigation instantanée : Speculation Rules (pré-rendu des pages internes au survol, 5 pages) + calage typo
       text-wrap: balance (titres) / pretty (paragraphes) — sources : developer.chrome.com/docs/web-platform/prerender-pages,
       developer.mozilla.org (Speculation_Rules_API), webkit.org/blog/16547 ; idée convergente de 3 terrains sur 5 (fait 26/07)
-- [ ] Scroll-driven animations CSS : dérive lente des mots géants outline via animation-timeline: view() ; option = migrer la
-      ligne de course en scroll() pur CSS — sources : MDN Scroll-driven_animations, scroll-driven-animations.style (showcase
-      Chrome DevRel), cydstumpel.nl ; support Chrome 115+/Safari 26+/Firefox 155 → @supports + reduced-motion obligatoires
+- [x] Scroll-driven animations CSS : dérive lente des mots géants outline via animation-timeline: view() + migration de la
+      ligne de course en scroll(root) pur CSS (le JS devient repli) — sources : MDN Scroll-driven_animations,
+      scroll-driven-animations.style (showcase Chrome DevRel), cydstumpel.nl ; @supports + reduced-motion en place (fait 27/07)
 - [ ] Mot géant outline→rempli au fil du scroll (UN seul par page : le principe charte « plein vs contour » animé, texte réel
       dans le DOM) — source : studiomeyer.io/en/blog/kinetische-typografie (règles kinetic typo 2026)
-- [ ] @starting-style + transition-behavior: allow-discrete : fondu de FERMETURE de la lightbox galerie (aujourd'hui sèche),
-      réutilisable pour de futurs popovers — source : MDN @starting-style (Baseline 2024)
+- [x] ~~@starting-style : fondu de FERMETURE de la lightbox galerie~~ — vérifié le 27/07 : la fermeture FOND DÉJÀ
+      (transition opacity/visibility .3s dans les deux sens), l'hypothèse « fermeture sèche » de la veille était fausse ;
+      @starting-style reste utile pour de futurs popovers — source : MDN @starting-style (Baseline 2024)
 - [ ] Popovers partenaires ancrés (attribut popover + CSS anchor positioning, zéro JS) sur la bande défilante : mini-carte
       marine/filet or par logo (nom, statut, lien), marquee en pause via :has(:popover-open), accessible clavier/mobile là où
       le survol seul ne l'est pas — sources : nexgismo.com (anchor positioning 2026), caniuse (Chrome 125+/Safari 26+/
@@ -124,6 +125,40 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-07-27 (routine, AXE A : AMÉLIORER) : deux volets.
+  (1) RÉCUPÉRATION : le backlog de la veille du 21/07 (8 idées sourcées, workflow 6 angles) dormait
+  NON COMMITÉ sur le T7 depuis le run du 21 — retrouvé dans le diff local au moment du git pull,
+  réintégré au backlog avec annotations (jeu.html annulé depuis, text-wrap + Speculation Rules
+  refaits indépendamment le 26/07 et cochés). Leçon confirmée : toujours commiter le Journal AVEC
+  le changement, et regarder un diff local avant de l'écarter.
+  (2) IMPLÉMENTÉ (item de veille commun aux 21 et 26/07) : LE DÉCOR SUIT LE SCROLL EN CSS NATIF.
+  Les mots géants outline (Presse, 47 galerie, 47 parcours pilote) dérivent lentement (translate
+  3 % → -3 % de leur largeur) pendant la traversée du viewport via animation-timeline: view() +
+  animation-range entry/exit — la propriété translate est utilisée à part pour ne pas toucher au
+  positionnement absolu. La ligne de course passe en animation-timeline: scroll(root) pur CSS
+  (compositor) ; le listener JS des 5 pages ne sert plus que de repli (early return si
+  CSS.supports). Gardes : @supports + prefers-reduced-motion (mots statiques ; la ligne reste
+  masquée en reduced-motion comme avant).
+  BUG DE FOND DÉBUSQUÉ PAR LA VÉRIF : body avait overflow-x: hidden, ce qui fait de body un
+  SCROLL CONTAINER — les timelines view() se référaient à body (qui ne défile jamais) et
+  restaient figées sur des valeurs géométriques constantes. Correctif : body passe en
+  overflow-x: clip (clippe sans créer de scroll container, Baseline), avec le hidden conservé
+  au-dessus en repli pour les très vieux navigateurs ; html garde son overflow-x: hidden.
+  VÉRIFS (parcours du combattant instructif) : pane navigateur masqué toute la session (rAF gelé,
+  timeout) → headless : les timelines s'y résolvent mais NE SUIVENT PAS un scroll programmatique
+  sous virtual-time (elles ont bougé pendant le vol d'un smooth scroll d'ancre, preuve du câblage,
+  sans se stabiliser) → PREUVE FINALE dans le Chrome connecté : onglet d'abord en arrière-plan
+  (timelines INACTIVES, currentTime null — un onglet caché fige tout), une capture fronte
+  l'onglet et tout s'anime : scaleX de la ligne = 0,550 à 55 % de scroll et 0,850 à 85 %
+  (correspondance exacte), dérive mesurée 3 % (avant entrée) → 1,98 % (en traversée) → -3 %
+  (après sortie). Audit final headless 5 pages × 1280/375 : 0 débordement (important après le
+  passage à clip), 0 titre pathologique, 0 ratio faux, bloc speculationrules toujours présent ;
+  console vide (accueil + pilote, vrai Chrome). Onglet de test fermé, cadres de test supprimés.
+  Au passage : l'item @starting-style du backlog est réglé par la vérif (la fermeture de la
+  lightbox fond déjà, hypothèse de veille fausse) ; corner-shape évalué puis REPORTÉ en
+  connaissance de cause (bénéfice réel modeste vs risque de régression sur tous les composants
+  biseautés dans le navigateur dominant).
 
 - 2026-07-26 (routine, AXE C : S'ADAPTER, veille tendances) : premier jour de veille depuis
   l'élargissement de la mission. Workflow de 5 éclaireurs en parallèle (écuries hors F1 déjà vues /
