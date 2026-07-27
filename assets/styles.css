@@ -53,7 +53,10 @@ body {
   color: var(--encre);
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
+  /* clip et non hidden : hidden ferait de body un scroll container, ce qui volerait
+     les timelines view()/scroll() des animations pilotées par le défilement */
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Grain argentique global */
@@ -115,6 +118,17 @@ html { scrollbar-color: var(--or) var(--marine); }
   width: 14px; height: 3px;
   background: repeating-conic-gradient(var(--marine-deep) 0% 25%, var(--or-clair) 0% 50%);
   background-size: 7px 3px;
+}
+/* Ligne pilotée par le scroll en CSS pur (compositor) ; le JS des pages n'est plus qu'un repli */
+@supports (animation-timeline: scroll()) {
+  .ligne-course {
+    animation: ligne-avance linear both;
+    animation-timeline: scroll(root);
+  }
+}
+@keyframes ligne-avance {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 
 /* ---------- Apparitions au scroll ---------- */
@@ -211,6 +225,21 @@ html { scrollbar-color: var(--or) var(--marine); }
 }
 .section-marine .mot-geant {
   -webkit-text-stroke-color: rgba(246, 247, 252, .05);
+}
+/* Dérive lente au fil du scroll (timeline view(), zéro JS) ; sans support = mot statique.
+   translate (propriété à part) pour ne pas toucher au positionnement absolu. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .mot-geant {
+      animation: derive-mot linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+  }
+}
+@keyframes derive-mot {
+  from { translate: 3% 0; }
+  to { translate: -3% 0; }
 }
 
 /* emblème TP contour géant : LE motif signature de la charte */
