@@ -27,6 +27,8 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [x] Complétude PWA : manifeste web + icône 512 de marque (ajout sur écran d'accueil mobile, splash, theme-color) — 18/07
 - [x] Complétude : feuille de style impression / « Enregistrer en PDF » de marque (papier à en-tête logo couleur, encre sobre, décor retiré) — 19/07
 - [x] Cartes OG des pages secondaires (og-contact.jpg dédiée) + audit final de clôture 5 pages, 6 correctifs — 20/07
+- [x] Perf : vidéo galerie différée à l'approche (8,9 Mo économisés au chargement de l'accueil),
+      13 images sous la ligne de flottaison en lazy, fetchpriority sur le LCP de pilote.html — 27/07
 - [ ] Emblème 3D : version animée légère en hero (séquence AE ou sprite au scroll) si le poids reste raisonnable
 - [ ] Section actus/prochaines échéances (structure seulement, contenus à valider avec Thomas)
 - [x] Accueil : mur de partenaires « Ils nous font confiance » (18 logos)
@@ -125,6 +127,31 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-07-27 (après-midi, routine, AXE B : CORRIGER, dimension auditée = PERF / POIDS RÉELS) :
+  première passe perf approfondie depuis l'élargissement. MESURES : analyse statique des ressources
+  eager des 5 pages (script) + réseau réel (Performance API). CONSTAT MAJEUR : l'accueil pesait
+  ~9,4 Mo au chargement dont 8,88 Mo pour la vidéo galerie, téléchargée SANS aucun scroll — l'attribut
+  autoplay du markup lance le fetch dès le parse, avant que l'IntersectionObserver (qui gérait déjà
+  lecture/pause) ait pu servir ; preuve réseau : 2 requêtes mp4 au load. CORRIGÉ : autoplay retiré du
+  markup + preload="none" (le poster de marque s'affiche, zéro octet vidéo), observateur de chauffe
+  à 600 px (preload passe à auto → buffer à l'approche), play()/pause() à 25 % de visibilité comme
+  avant, reduced-motion = contrôles affichés. PREUVE après correctif : 0 requête mp4 au load, puis
+  sonde currentTime = lecture fluide dès que l'onglet est visible (readyState 4, +0,5 s par 500 ms).
+  AUSSI CORRIGÉ : 13 images sous la ligne de flottaison passées en loading="lazy" (~440 Ko différés :
+  héritage ×3, disciplines ×2, partenaires-stickers, logo asso, karting-pluie/simu/feed sur pilote,
+  logo blanc des 5 footers) — l'accueil ne garde en eager que intro + emblème hero + 2 logos nav ;
+  et le LCP de pilote.html (hero simulateur) reçoit fetchpriority="high" (l'accueil l'avait déjà pour
+  l'emblème). SAINS (vérifiés, rien à faire) : Korataki 400 déclarée mais jamais téléchargée (fonts
+  à la demande = coût nul), 3 fonts préchargées toutes utilisées, paire de logos nav volontairement
+  eager (swap transparent/solide instantané, 54 Ko), pages secondaires ~215 Ko, insta-slides toujours
+  chargées au premier survol seulement, CSS 32 Ko gzippé par Pages. Audit final : 5 pages × 1280/375
+  en iframes = 0 débordement, 0 ratio d'image faux, comptes lazy conformes ; console vide partout.
+  ⚠️ LEÇON DE RIG : cette session, le pane ET l'onglet Chrome piloté restent visibilityState:hidden
+  en continu (captures CDP sans affichage réel) → Chrome DIFFÈRE le chargement média d'un onglet
+  jamais visible (networkState LOADING mais 0 octet), alors que les IO tirent bien pendant les
+  frames de capture. Preuve de lecture obtenue en frontant le vrai Chrome 6 s par osascript
+  (activate + active tab index) avec sonde setInterval posée avant, puis focus restitué à Claude.
 
 - 2026-07-27 (routine, AXE A : AMÉLIORER) : deux volets.
   (1) RÉCUPÉRATION : le backlog de la veille du 21/07 (8 idées sourcées, workflow 6 angles) dormait
