@@ -68,6 +68,7 @@
   {
     "@context": "https://schema.org",
     "@type": "SportsOrganization",
+    "@id": "https://tpracing.github.io/#association",
     "name": "TPRacing - Thomas Papone Racing",
     "alternateName": "TPRacing",
     "legalName": "TPRACING (THOMAS PAPONE RACING)",
@@ -83,6 +84,21 @@
     "founder": { "@type": "Person", "name": "Thomas Papone", "jobTitle": "Pilote, co-fondateur" },
     "member": { "@type": "Person", "name": "Patrice Papone", "jobTitle": "Président" },
     "sameAs": [ "https://www.linkedin.com/company/tpracing/" ]
+  }
+  </script>
+
+  <!-- Le site lui-même, rattaché à l'association (aide les moteurs et les assistants à relier
+       les pages entre elles ; résumé lisible par les IA : /llms.txt) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://tpracing.github.io/#site",
+    "name": "TPRacing - Thomas Papone Racing",
+    "alternateName": "TPRacing",
+    "url": "https://tpracing.github.io/",
+    "inLanguage": "fr-FR",
+    "publisher": { "@id": "https://tpracing.github.io/#association" }
   }
   </script>
 

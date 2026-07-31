@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://tpracing.github.io/sitemap.xml
+
+# Résumé du site lisible par les assistants : https://tpracing.github.io/llms.txt

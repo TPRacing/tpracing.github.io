@@ -97,9 +97,13 @@ Actionnables sans contenu de Thomas :
       Korataki, coupé en reduced-motion) — source : cadillacf1team.com (composant ScrambleText, vérifié dans le HTML)
 - [ ] Overlay de barres skewées (même angle que le marquee, 1 barre or d'accent) pour l'ouverture lightbox/menu mobile —
       source : charlesleclerc.com (Awwwards SOTD 24/04/2025 : 320 barres .rectangle--skew en stagger, vérifié dans le HTML)
-- [ ] /llms.txt à la racine (H1 + résumé + liens décrits des 5 pages, spec llmstxt.org) : la couche « lisibilité IA » qui
+- [x] /llms.txt à la racine (H1 + résumé + liens décrits des 5 pages, spec llmstxt.org) : la couche « lisibilité IA » qui
       alimente les réponses ChatGPT/Perplexity/AI Overviews quand un sponsor cherche TPRacing — sources : llmstxt.org,
-      studiomeyer.io/en/blog/webdesign-trends-2026-reality-check
+      studiomeyer.io/en/blog/webdesign-trends-2026-reality-check (fait 31/07)
+- [x] Graphe de données structurées relié (idée ajoutée le 31/07, faite le jour même dans le même chantier) : entité
+      WebSite rattachée à l'association par @id partagés, fils d'ariane sur les 3 pages secondaires, JSON-LD enfin
+      présent sur la page légale, lastmod du sitemap rafraîchis (ils dataient du 21/07 alors que les pages avaient
+      changé le 27)
 
 À valider ou en attente de contenu :
 - [ ] Section « fronts » Karting / Simracing / Caterham : 3 cartes égales, chacune avec son état et sa prochaine échéance
@@ -127,6 +131,38 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-07-31 (routine, AXE A : AMÉLIORER, volet COMPLÉTUDE) : chantier « le site lisible par les machines »,
+  suite directe de la veille du 26/07. Aucun pixel ne bouge : tout se joue dans le head, à la racine et dans
+  le sitemap. (1) **/llms.txt** créé à la racine selon la spec llmstxt.org (H1, résumé en citation, contexte
+  factuel, puis liens décrits des 4 pages publiques, contacts et notes) : quand un partenaire potentiel demande
+  à ChatGPT, Perplexity ou aux AI Overviews qui est TPRacing, ils tombent sur un résumé écrit par nous plutôt
+  que sur une lecture approximative du HTML. Contenu strictement tiré des pages existantes et des mentions
+  légales (RNA, date de déclaration, bureau, disciplines, contacts), rien d'inventé, rappel explicite que le
+  seul numéro du pilote est le 47 pour couper court aux numéros d'archives. 3,1 Ko, servi en text/plain.
+  Signalé en commentaire dans robots.txt. (2) **Graphe de données structurées relié** : jusqu'ici chaque page
+  déclarait son entité dans son coin, sans lien entre elles. L'association reçoit un @id
+  (`/#association`), une entité **WebSite** (`/#site`, inLanguage fr-FR, publisher = l'association) est
+  ajoutée à l'accueil, et les pages secondaires s'y raccrochent : Person du pilote relié à l'association par
+  @id (+ url, nationalité), ContactPage en isPartOf du site, et **la page légale reçoit enfin son JSON-LD**
+  (WebPage + about/publisher + dateModified) alors qu'elle était la seule sans données structurées.
+  **Fils d'ariane** (BreadcrumbList) ajoutés sur les 3 pages secondaires : c'est ce que Google affiche à la
+  place de l'URL brute dans les résultats. (3) **Sitemap corrigé** : les lastmod dataient tous du 21/07 alors
+  que les 5 pages avaient changé le 27 (défaut réel, un lastmod qui ment fait ignorer le signal par Google) ;
+  passés au 31/07, date des modifications du jour. VÉRIFS : les 8 blocs JSON-LD des 5 pages parsés un par un
+  (0 erreur, types attendus), sitemap revalidé en XML, llms.txt et robots.txt servis en 200, audit iframes
+  5 pages × 1280/375 = 0 débordement, 0 ratio d'image faux, 0 erreur JS, titres intacts ; console vide ;
+  captures headless desktop (accueil) et mobile (pilote) conformes. ⚠️ Rig : le pane est resté
+  visibilityState hidden / innerWidth 0 toute la session (mesures top-level fausses, seules les iframes à
+  largeur explicite sont fiables), les reveals ne se déclenchent pas dans une iframe hors écran (opacité 0
+  attendue, pas un bug), et Chrome headless clampe --window-size=390 à ~500 px, ce qui coupe le texte dans
+  les captures mobiles : l'audit iframes fait foi.
+  RAPPEL GROUPÉ DES QUESTIONS OUVERTES (le précédent datait du 20/07, donc 1 par semaine maximum respecté) :
+  (a) contraste de l'or #D49726 sur fond clair, 2,38:1 pour les petits labels Bebas, reco = or foncé #8F661A
+  réservé à ces textes-là, rien appliqué sans accord ; (b) contenus qui débloqueraient 7 idées déjà conçues :
+  calendrier et résultats de la saison, paliers de partenariat chiffrés, citations de partenaires, un scan de
+  la signature de Thomas, choix des casques/karts pour un hall of fame, anecdotes pour un pilote.html en deux
+  actes ; (c) validation de principe pour la frise « ils ont commencé en kart » (faits publics, aucune photo).
 
 - 2026-07-27 (après-midi, routine, AXE B : CORRIGER, dimension auditée = PERF / POIDS RÉELS) :
   première passe perf approfondie depuis l'élargissement. MESURES : analyse statique des ressources

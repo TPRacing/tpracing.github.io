@@ -51,9 +51,17 @@
   {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": "https://tpracing.github.io/pilote.html#thomas-papone",
     "name": "Thomas Papone",
     "jobTitle": "Pilote",
-    "affiliation": { "@type": "SportsOrganization", "name": "TPRacing - Thomas Papone Racing" },
+    "url": "https://tpracing.github.io/pilote.html",
+    "nationality": { "@type": "Country", "name": "France" },
+    "affiliation": {
+      "@id": "https://tpracing.github.io/#association",
+      "@type": "SportsOrganization",
+      "name": "TPRacing - Thomas Papone Racing",
+      "url": "https://tpracing.github.io/"
+    },
     "sameAs": [
       "https://www.instagram.com/thomaspaponeracing",
       "https://www.tiktok.com/@thomaspaponeracing",
@@ -61,6 +69,18 @@
       "https://www.twitch.tv/thomaspaponeracing",
       "https://www.linkedin.com/in/thomas-papone-b98327292",
       "https://www.facebook.com/thomas.pne.9/"
+    ]
+  }
+  </script>
+
+  <!-- Fil d'ariane : situe la page dans le site pour les moteurs de recherche -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "L'association", "item": "https://tpracing.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Le pilote", "item": "https://tpracing.github.io/pilote.html" }
     ]
   }
   </script>

@@ -52,12 +52,27 @@
     "@type": "ContactPage",
     "name": "Contact - TPRacing",
     "url": "https://tpracing.github.io/contact.html",
+    "inLanguage": "fr-FR",
+    "isPartOf": { "@id": "https://tpracing.github.io/#site" },
     "about": {
+      "@id": "https://tpracing.github.io/#association",
       "@type": "SportsOrganization",
       "name": "TPRacing - Thomas Papone Racing",
       "email": "contact.tpracing@gmail.com",
       "url": "https://tpracing.github.io/"
     }
+  }
+  </script>
+
+  <!-- Fil d'ariane : situe la page dans le site pour les moteurs de recherche -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "L'association", "item": "https://tpracing.github.io/" },
+      { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://tpracing.github.io/contact.html" }
+    ]
   }
   </script>
 

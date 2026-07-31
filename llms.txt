@@ -1,0 +1,32 @@
+# TPRacing - Thomas Papone Racing
+
+> Association de sport automobile loi 1901 basée à Lapeyrouse (01330, Ain, France), fondée fin 2021 par Patrice Papone, ancien pilote, et son fils Thomas Papone, pilote. Elle structure la progression de Thomas du karting de compétition vers la course automobile, avec un cap assumé : disputer un championnat via le programme Caterham.
+
+Identité officielle : TPRACING (THOMAS PAPONE RACING), association régie par la loi du 1er juillet 1901, numéro RNA W012015296, déclarée à la préfecture de l'Ain le 15 décembre 2021. Président et directeur de la publication : Patrice Papone. Thomas Papone est pilote, co-fondateur et secrétaire. Le numéro de course de Thomas est le 47.
+
+Trois disciplines, une seule trajectoire :
+
+- Karting de compétition, catégorie National / X30 Senior : courses de ligue et roulages d'entraînement, du sec à la pluie.
+- Simracing sur iRacing : entraînement hebdomadaire, régularité, trajectoires et courses longues.
+- Automobile : passage en monoplace à l'école FEED Racing France (Magny-Cours, 2024), puis objectif Caterham.
+
+L'association se développe aussi comme une marque : contenus, réseaux sociaux, communauté et partenariats d'entreprises. Des artisans, des PME et des groupes de la région accompagnent le projet depuis ses débuts ; leurs logos sont présentés sur la page d'accueil. Un dossier de partenariat détaillé est disponible sur demande auprès de l'association.
+
+## Pages du site
+
+- [Accueil, l'association](https://tpracing.github.io/) : l'héritage familial (Patrice en karting dans les années 80 puis en Formule Ford), les trois disciplines, l'offre de partenariat, le mur des partenaires, la revue de presse et la galerie de course.
+- [Le pilote, Thomas Papone](https://tpracing.github.io/pilote.html) : parcours en quatre étapes (karting, simracing, FEED Racing France, objectif Caterham), derniers posts et réseaux du pilote.
+- [Contact](https://tpracing.github.io/contact.html) : email de l'association, LinkedIn, réseaux du projet, et point d'entrée pour les demandes de partenariat ou de presse.
+- [Mentions légales et confidentialité](https://tpracing.github.io/mentions-legales.html) : éditeur, hébergement, propriété intellectuelle, données personnelles et cookies.
+
+## Contact
+
+- Email de l'association : contact.tpracing@gmail.com
+- [LinkedIn de l'association](https://www.linkedin.com/company/tpracing/) : actualités et contact institutionnel.
+- [Instagram du pilote](https://www.instagram.com/thomaspaponeracing) : entraînements, courses et coulisses, sous le pseudonyme @thomaspaponeracing sur tous les réseaux.
+
+## À savoir
+
+- Site statique, sans cookie, sans traceur et sans service tiers : aucune donnée personnelle n'est collectée lors de la consultation.
+- Les contenus (textes, logos, identité graphique, montages photo et vidéo) sont la propriété de l'association ou font l'objet d'une autorisation d'utilisation. Toute reproduction sans accord écrit préalable est interdite.
+- Les numéros visibles sur les photos d'archives sont des numéros attribués course par course : le seul numéro du pilote est le 47.
