@@ -429,6 +429,11 @@ h3 { font-family: var(--f-label); font-size: 1.45rem; letter-spacing: .07em; tex
 .btn-or { background: var(--or); color: var(--marine-deep); }
 .btn-or:hover { background: var(--or-clair); }
 .btn-blanc { background: var(--blanc); color: var(--marine); }
+/* Variante marine : la seule lisible sur un fond clair (le blanc cassé y disparaît).
+   Elle vivait dans la feuille inline de l'accueil alors que contact.html s'en sert
+   aussi : ses deux boutons y tombaient sur le seul style de base, sans aplat. */
+.btn-marine { background: var(--marine); color: var(--blanc); }
+.btn-marine:hover { background: #2b3650; }
 
 /* ---------- Navigation : transparente sur le hero, solide au scroll ---------- */
 nav {
@@ -514,7 +519,22 @@ nav.solide ul a:hover, nav.solide ul a.active { color: var(--or); }
   nav ul { gap: 13px; }
   nav ul li.masque-mobile { display: none; }
   nav ul a { font-size: .92rem; letter-spacing: .07em; }
+  /* Cible tactile d'au moins 24 px de haut (le texte seul n'en fait que 20). */
+  nav ul a:not(.nav-cta) { padding-top: 5px; }
   nav .nav-cta { padding: 7px 12px; }
+}
+/* Petits téléphones (320 à 400 px) : sans ce palier, logo + liens + bouton
+   dépassent la largeur d'écran et « Devenir partenaire » est rogné, sans
+   défilement possible puisque le débordement horizontal est clippé. */
+@media (max-width: 384px) {
+  nav { padding: 10px 3.5%; }
+  nav .logo img { height: 30px; }
+  nav.solide .logo img { height: 28px; }
+  nav ul { gap: 9px; }
+  nav ul a { font-size: .82rem; letter-spacing: .04em; }
+  nav .nav-cta { padding: 6px 9px; }
+  /* Boutons à libellé long (adresse e-mail, handle) : ils dépassaient le cadre. */
+  .btn { font-size: 1rem; letter-spacing: .08em; padding: 12px 20px; max-width: 100%; overflow-wrap: anywhere; }
 }
 
 /* ---------- Sections ---------- */

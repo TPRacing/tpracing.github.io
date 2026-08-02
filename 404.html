@@ -55,12 +55,16 @@
       transform: translate(-50%, -46%);
       width: clamp(460px, 64vw, 900px);
     }
-    .err-contenu { position: relative; z-index: 2; max-width: 700px; }
+    /* min-width:0 : sans lui le bloc hérite d'un plancher min-content de 363 px
+       et déborde des deux côtés sous 360 px de large (texte rogné). */
+    .err-contenu { position: relative; z-index: 2; max-width: 700px; min-width: 0; }
     .err-404 {
       display: block;
       font-family: var(--f-titre);
       font-weight: 700;
-      font-size: clamp(6rem, 24vw, 15rem);
+      /* Le chiffre déborde volontairement de la colonne de texte, mais il doit
+         rester dans l'écran : à 6rem il sortait du viewport sous 390 px. */
+      font-size: clamp(4.8rem, 24vw, 15rem);
       line-height: .88;
       letter-spacing: .04em;
       color: transparent;

@@ -29,6 +29,8 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [x] Cartes OG des pages secondaires (og-contact.jpg dédiée) + audit final de clôture 5 pages, 6 correctifs — 20/07
 - [x] Perf : vidéo galerie différée à l'approche (8,9 Mo économisés au chargement de l'accueil),
       13 images sous la ligne de flottaison en lazy, fetchpriority sur le LCP de pilote.html — 27/07
+- [x] Audit accessibilité complet + correction des débordements réels sous 414 px (nav, galerie, contact, 404),
+      bouton marine enfin défini pour contact.html, cibles tactiles de nav à 24 px, lightbox annoncée — 02/08
 - [ ] Emblème 3D : version animée légère en hero (séquence AE ou sprite au scroll) si le poids reste raisonnable
 - [ ] Section actus/prochaines échéances (structure seulement, contenus à valider avec Thomas)
 - [x] Accueil : mur de partenaires « Ils nous font confiance » (18 logos)
@@ -131,6 +133,53 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-08-02 (routine, AXE B : CORRIGER, dimension auditée = ACCESSIBILITÉ) : T7 non monté, travail sur clone
+  GitHub dans le scratchpad. Faute d'axe-core hors ligne, harnais d'audit maison passé sur les 5 pages
+  (contraste calculé fond réel compris, alt, hiérarchie de titres, landmarks, noms accessibles, ids et aria-*,
+  tabindex, focusables dans un aria-hidden, cibles tactiles WCAG 2.5.8, débordements) à 320 / 360 / 375 / 390 /
+  414 / 560 / 768 / 1024 / 1280 / 1680 px.
+  **DÉFAUT PRINCIPAL, WCAG 1.4.10 (Reflow) : le site perdait du contenu sur petit écran, sans que rien ne le
+  signale.** Depuis le passage de body en `overflow-x: clip` (27/07), un débordement horizontal n'est plus
+  défilable mais CLIPPÉ : le contrôle habituel `scrollWidth > innerWidth` renvoie 0 alors que le contenu est
+  bel et bien rogné, et les audits précédents concluaient « 0 débordement » à tort. Nouveau contrôle retenu :
+  comparer le rectangle de CHAQUE élément au viewport. Quatre débordements réels, tous corrigés :
+  (1) **nav des 5 pages** : sous ~372 px, logo + liens + bouton dépassaient et « Devenir partenaire » était
+  coupé, y compris à 360 px (largeur Android très courante) ; palier `@media (max-width: 384px)` ajouté
+  (logo 30 px, gouttière 9 px, libellés .82rem, bouton resserré) ; vérifié : à 320 px la barre s'arrête à
+  309 px. (2) **galerie de l'accueil** : la piste de grille restait bloquée à 363 px à cause du plancher
+  `min-width: auto` des cases, alors que la colonne ne fait que 330 px à 375 px et 282 px à 320 px : photos,
+  brackets et légendes étaient rognés sur TOUT téléphone de 414 px ou moins (un quart de l'image perdu à
+  320 px) ; corrigé par `.galerie > * { min-width: 0 }`. (3) **contact.html** : le bouton e-mail sortait de
+  14 px à 320 px (palier boutons à libellé long ajouté). (4) **404** : le bloc de contenu héritait du même
+  plancher de 363 px et sortait des deux côtés (`min-width: 0`), et le « 404 » géant sortait de l'ÉCRAN sous
+  390 px (plancher du clamp 6rem → 4.8rem ; son débordement hors colonne de texte, lui, est voulu et conservé,
+  il reprend la respiration du desktop).
+  **AUTRE DÉFAUT RÉEL : `.btn-marine` n'était défini que dans la feuille inline de l'accueil**, alors que
+  contact.html s'en sert pour ses deux boutons principaux (adresse e-mail et handle Instagram) : ils
+  s'affichaient en texte nu, sans aplat ni biseau, depuis la création de la page le 19/07. Règle remontée dans
+  styles.css (et retirée de l'accueil, qui ne l'utilise pas). Balayage systématique lancé dans la foulée
+  (classes employées par page vs règles réellement atteignables) : aucun autre cas ; restent `.nouveau`,
+  `.lb-actif`, `.h2-part`, `.txt`, sans effet et sans conséquence, héritées de la page jeu.html retirée le 25/07.
+  **AUSSI CORRIGÉ** : cibles tactiles des liens de nav, 20 à 22 px de haut en mobile pour un minimum de 24
+  (WCAG 2.5.8), passées à 25 px par un retrait haut ; **lightbox** dotée d'une région vivante
+  (`aria-live="polite" aria-atomic`) sur la scène, car au clavier le focus reste sur les flèches et changer
+  d'image ne disait rien à un lecteur d'écran.
+  **SAINS, vérifiés (rien à faire)** : 0 erreur console sur les 5 pages, 0 ratio d'image faux, alt complets et
+  non génériques, hiérarchie de titres sans saut, landmarks présents, ids uniques, tous les `aria-labelledby`
+  et `aria-controls` résolus, aucun focusable piégé dans un `aria-hidden` (la copie du marquee partenaires est
+  correcte : conteneur masqué, `tabindex="-1"` et alt vides), tous les `target="_blank"` avec `rel="noopener"`,
+  jeu de la 404 déjà clavier et déjà annoncé (`role=button` + `aria-live`), fermeture de la lightbox qui rend
+  le focus à la vignette d'origine (revérifié). Après correctifs : 0 débordement sur 5 pages × 9 largeurs.
+  **OBSERVATION LAISSÉE EN L'ÉTAT** : les métas des cartes disciplines (« National / X30 Senior »…) n'apparaissent
+  qu'au survol ; le `:focus-within` prévu ne se déclenche jamais puisqu'aucun élément focusable ne vit dans la
+  carte. Le texte reste lu par les lecteurs d'écran et s'affiche en permanence sous 900 px, mais un visiteur
+  desktop au clavier seul ne le verra pas. Corriger supposerait de revenir sur le parti pris de design validé
+  le 18/07, donc rien n'est touché : à trancher avec Thomas.
+  ⚠️ Rig : pane `visibilityState: hidden` toute la session (seules les iframes à largeur explicite mesurent
+  juste) ; les captures headless doivent NEUTRALISER les reveals (une capture prise en plein balayage du kicker
+  fait croire à un texte tronqué, faux positif attrapé aujourd'hui) ; `launch.json` pointait encore vers le
+  scratchpad de la session du 31/07 (restauré vers le T7 en fin de run).
 
 - 2026-07-31 (routine, AXE A : AMÉLIORER, volet COMPLÉTUDE) : chantier « le site lisible par les machines »,
   suite directe de la veille du 26/07. Aucun pixel ne bouge : tout se joue dans le head, à la racine et dans

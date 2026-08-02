@@ -324,6 +324,10 @@
       gap: 26px 24px;
       margin-top: 46px;
     }
+    /* Les cases de grille ont un plancher min-width:auto : la vidéo et les photos
+       imposaient une piste de 363 px, plus large que l'écran sous 414 px, et les
+       images débordaient hors du cadre (débordement clippé, donc invisible). */
+    .galerie > * { min-width: 0; }
     .galerie figure { margin: 0; }
     .galerie figcaption {
       font-family: var(--f-label);
@@ -567,8 +571,6 @@
     }
     #contact .actions { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
     #contact .actions .btn { width: auto; }
-    .btn-marine { background: var(--marine); color: var(--blanc); }
-    .btn-marine:hover { background: #2b3650; }
     #contact .note {
       font-family: var(--f-label);
       letter-spacing: .13em;
@@ -1168,7 +1170,9 @@
         '<button class="lb-btn lb-fermer" type="button" aria-label="Fermer">×</button>' +
         '<button class="lb-btn lb-nav lb-prec" type="button" aria-label="Image précédente">‹</button>' +
         '<button class="lb-btn lb-nav lb-suiv" type="button" aria-label="Image suivante">›</button>' +
-        '<figure class="lb-scene">' +
+        // aria-live : au clavier, le focus reste sur les flèches ; sans région
+        // vivante, changer d'image ne dit rien à un lecteur d'écran.
+        '<figure class="lb-scene" aria-live="polite" aria-atomic="true">' +
           '<span class="frame"><img class="lb-img" src="" alt=""></span>' +
           '<figcaption class="lb-legende"></figcaption>' +
           '<div class="lb-compteur"></div>' +
