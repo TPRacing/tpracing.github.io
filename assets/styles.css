@@ -226,6 +226,20 @@ html { scrollbar-color: var(--or) var(--marine); }
 .section-marine .mot-geant {
   -webkit-text-stroke-color: rgba(246, 247, 252, .05);
 }
+/* Le 47 se remplit d'or au fil de la lecture : le principe de charte « contour vs plein »
+   mis en mouvement. Un seul mot rempli par page, l'aplat reste sous le seuil du décor.
+   Texte réel dans le DOM, zéro JS, zéro octet ; sans support = contour d'aujourd'hui. */
+.mot-geant.remplir {
+  background-image: linear-gradient(90deg, rgba(212, 151, 38, .17), rgba(212, 151, 38, .17));
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.section-marine .mot-geant.remplir {
+  background-image: linear-gradient(90deg, rgba(212, 151, 38, .13), rgba(212, 151, 38, .13));
+}
+
 /* Dérive lente au fil du scroll (timeline view(), zéro JS) ; sans support = mot statique.
    translate (propriété à part) pour ne pas toucher au positionnement absolu. */
 @supports (animation-timeline: view()) {
@@ -235,11 +249,20 @@ html { scrollbar-color: var(--or) var(--marine); }
       animation-timeline: view();
       animation-range: entry 0% exit 100%;
     }
+    .mot-geant.remplir {
+      animation: derive-mot linear both, remplir-mot linear both;
+      animation-timeline: view(), view();
+      animation-range: entry 0% exit 100%, entry 40% cover 75%;
+    }
   }
 }
 @keyframes derive-mot {
   from { translate: 3% 0; }
   to { translate: -3% 0; }
+}
+@keyframes remplir-mot {
+  from { background-size: 0% 100%; }
+  to { background-size: 100% 100%; }
 }
 
 /* emblème TP contour géant : LE motif signature de la charte */

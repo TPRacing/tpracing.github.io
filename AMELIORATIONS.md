@@ -79,8 +79,9 @@ Actionnables sans contenu de Thomas :
 - [x] Scroll-driven animations CSS : dérive lente des mots géants outline via animation-timeline: view() + migration de la
       ligne de course en scroll(root) pur CSS (le JS devient repli) — sources : MDN Scroll-driven_animations,
       scroll-driven-animations.style (showcase Chrome DevRel), cydstumpel.nl ; @supports + reduced-motion en place (fait 27/07)
-- [ ] Mot géant outline→rempli au fil du scroll (UN seul par page : le principe charte « plein vs contour » animé, texte réel
+- [x] Mot géant outline→rempli au fil du scroll (UN seul par page : le principe charte « plein vs contour » animé, texte réel
       dans le DOM) — source : studiomeyer.io/en/blog/kinetische-typografie (règles kinetic typo 2026)
+      FAIT 03/08 sur le 47 de l'accueil et celui de pilote.html (le mot « Presse » reste en contour : un seul par page)
 - [x] ~~@starting-style : fondu de FERMETURE de la lightbox galerie~~ — vérifié le 27/07 : la fermeture FOND DÉJÀ
       (transition opacity/visibility .3s dans les deux sens), l'hypothèse « fermeture sèche » de la veille était fausse ;
       @starting-style reste utile pour de futurs popovers — source : MDN @starting-style (Baseline 2024)
@@ -123,6 +124,46 @@ Actionnables sans contenu de Thomas :
 chrono de tour fictif dans l'intro (chiffre inventé), section inversée fond or de collabcapitolium.fr (bascule de DA à ne pas
 tenter sans accord), glassmorphism/Y2K/maximalisme (hors charte, cf. reality-check StudioMeyer).
 
+### Idées de la veille 03/08 (angles neufs : filière karting, ingénierie issue de la F1, sport primé, socle navigateur — chaque source ouverte et vérifiée)
+
+Actionnables sans contenu de Thomas :
+- [x] Le 47 se remplit d'or au fil de la lecture (fait le jour même, voir Journal du 03/08) — sources :
+      studiomeyer.io/en/blog/webdesign-trends-2026-reality-check (la typo cinétique « a surpromis » : à réserver au hero
+      ou à une transition de section, jamais généralisée) et elements.envato.com/learn/web-design-trends (le texte
+      surdimensionné devient élément de mise en page, pas simple contenu)
+- [ ] Popovers partenaires ancrés : l'item de la veille du 26/07 change de statut. **CSS anchor positioning est passé
+      Baseline en 2026 et caniuse le donne à 81,67 % (Chrome 125+, Safari 26, Firefox 147, Android 150)** — il reste un
+      enrichissement sous @supports, mais ce n'est plus une pièce exotique — source : caniuse.com/css-anchor-positioning
+- [ ] `:open` (Baseline mai 2026) : styler les états ouvert/fermé de `details` et `dialog` sans classe JS — utile le jour
+      où l'accordéon des mentions légales et la lightbox passeront en éléments natifs — source : web.dev/blog/baseline-digest-may-2026
+- [ ] Requêtes de style de conteneur (Baseline mai 2026) : piloter les variantes claires/marine des cartes par une
+      propriété personnalisée portée par la section plutôt que par des sélecteurs `.section-marine .x` en cascade —
+      dette technique, zéro effet visible, gros gain de maintenance — source : web.dev/blog/baseline-digest-may-2026
+- [ ] `shape()` (Baseline 2026) : successeur lisible de `clip-path: polygon()` pour les biseaux maison ; à instruire en
+      même temps que `corner-shape`, la même famille de problèmes (le clip actuel rogne outline et ombres) —
+      source : web.dev/baseline/2026
+- [ ] Chiffres à zéro de tête façon plaque de châssis (« 05 décennies ») sur la bande de chiffres animée : le zéro
+      transforme un compteur en donnée d'ingénieur, très proche de l'esprit Bebas de la charte —
+      source : williamsgptech.com (« 05 Decades of motorsport engineering pedigree »)
+
+À valider ou en attente de contenu :
+- [ ] « Pourquoi nous soutenir » en 4 arguments courts, juste avant le bandeau partenaire — source : williamsgptech.com
+      (bloc « Why work with us ») — ATTEND l'accord de Thomas sur les 4 arguments
+- [ ] Héritage chiffré en une ligne (deux générations, première licence 1987) plutôt qu'en paragraphe —
+      source : williamsgptech.com (l'héritage sert de socle de crédibilité, pas d'anecdote) — ATTEND validation du chiffre
+
+Écartés en connaissance de cause :
+- Grilles cassées / anti-grille (elements.envato.com) : la charte TPRacing est une charte de rigueur et d'alignements,
+  la casser serait adapter la marque à la tendance et non l'inverse.
+- Compteurs de résultats globaux (« races / wins / podiums / poles ») : hrtdriver.com, équipe de karting, les affiche
+  tous à 0 pour la saison en cours, et le bloc se retourne contre l'équipe. Tant que Thomas n'a pas fourni de chiffres,
+  ne rien créer de vide ; sodikart.com fait la démonstration inverse en prouvant par le fil d'actualités des résultats.
+- Typographie cinétique généralisée : écartée par le reality-check à six mois (accessibilité, indexation, décalages
+  de mise en page qui abîment les Core Web Vitals). D'où la règle d'un seul mot rempli par page.
+
+Sites morts ou trompeurs, à ne pas reprendre dans une prochaine veille : teamduqueine.com, akkodis-asp.com et
+tds-racing.com ne répondent plus ; signatech.fr n'est PAS l'écurie mais une entreprise de signalétique du Loiret.
+
 ## Règles (rappel pour la routine)
 
 Charte : marine #1E2635, or #D49726, blanc #F6F7FC, rouge #C13221, vert #3E836E (micro-accent).
@@ -133,6 +174,55 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-08-03 (routine, AXE C : S'ADAPTER, veille tendances) : T7 non monté, travail sur clone GitHub dans le
+  scratchpad. Veille menée sur des angles encore jamais couverts (filière karting, ingénierie issue de la F1,
+  catégorie sport des sites primés, socle navigateur), chaque source ouverte avant citation. 6 idées neuves
+  versées au backlog, 3 pistes écartées motivées, et une idée déjà au backlog IMPLÉMENTÉE le jour même.
+  **FAIT : le 47 se remplit d'or au fil de la lecture.** Le mot géant en contour derrière la galerie de
+  l'accueil et derrière le parcours de pilote.html se remplit progressivement d'un aplat or, de la gauche
+  vers la droite, à mesure que la section défile : c'est le principe « contour contre plein » de la charte
+  mis en mouvement, sur le seul élément qui mérite ce traitement, le numéro du pilote. Le mot « Presse » de
+  l'accueil reste en contour : un seul mot rempli par page. Réalisation : dégradé plat en `background-clip: text`
+  dont le `background-size` passe de 0 à 100 % sur une `animation-timeline: view()` — le texte reste du vrai
+  texte dans le DOM, aucun JS, aucun octet ajouté, le contour existant continue d'être peint par-dessus.
+  Aplat volontairement sous le seuil du décor, et calibré par fond après capture (or à 13 % sur les sections
+  marine, 17 % sur fond clair, où l'or contraste beaucoup moins). Sans `animation-timeline` ou en
+  `prefers-reduced-motion`, le mot reste exactement le contour d'aujourd'hui (vérifié : `animation: none`,
+  remplissage figé à 0).
+  **POURQUOI CETTE IDÉE, ET POURQUOI DOSÉE AINSI** : les deux sources de tendance de la journée convergent
+  sur la typographie cinétique comme LE geste 2026 (elements.envato.com : « le texte surdimensionné devient
+  élément de mise en page »), mais le bilan à six mois de StudioMeyer la classe parmi les tendances qui ont
+  surpromis, à réserver au hero ou à une transition, pour trois raisons concrètes : gêne des lecteurs d'écran,
+  lutte contre les robots d'indexation, décalages de mise en page qui abîment les Core Web Vitals. La version
+  retenue ici échappe aux trois : le texte n'est ni découpé ni dupliqué, rien ne bouge en mise en page, seule
+  une couleur de fond progresse.
+  **VEILLE, CE QUI A ÉTÉ REGARDÉ** : socle navigateur (web.dev/baseline/2026 et le digest de mai) — anchor
+  positioning est désormais Baseline et donné à 81,67 % par caniuse, ce qui fait passer les popovers partenaires
+  du statut de pièce exotique à celui d'enrichissement raisonnable sous @supports ; `:open`, les requêtes de
+  style de conteneur et `shape()` entrent aussi dans le socle et sont notés au backlog. Filière karting
+  (hrtdriver.com, sodikart.com) : le premier affiche un bloc « Results by the numbers » dont les quatre
+  compteurs sont à 0 pour la saison, contre-exemple utile ; le second ne publie aucun chiffre agrégé et prouve
+  par le fil des résultats. Ingénierie issue de la F1 (williamsgptech.com, primé) : l'héritage y sert de socle
+  de crédibilité en une ligne chiffrée (« 05 décennies ») et non d'anecdote, et un bloc « Why work with us »
+  en quatre arguments précède l'appel à l'action — deux transpositions notées, la seconde en attente de
+  l'accord de Thomas. Catégorie sport des sites primés relevée pour les prochaines veilles.
+  **ÉLÉMENT DE RÉPONSE À UNE QUESTION EN ATTENTE** : la nouvelle fonction CSS `contrast-color()` (Baseline
+  avril 2026) ne règle PAS la question du contraste de l'or sur fond clair : elle renvoie un noir ou un blanc
+  de contraste, pas un or plus foncé. La recommandation du 15/07 (or foncé #8F661A réservé aux petits labels
+  Bebas sur fond clair) reste la bonne réponse, toujours en attente de l'accord de Thomas.
+  **VÉRIFS** : audit iframes 5 pages × 1280 et 375 px = 0 débordement au rectangle, 0 ratio d'image faux,
+  0 erreur, largeur de document égale au viewport partout ; console vide ; captures headless du 47 à 0, 50 et
+  100 % de remplissage sur les deux pages (le remplissage part bien de la gauche, le « 4 » plein et le « 7 »
+  en contour à mi-course) ; comportement en `prefers-reduced-motion` vérifié au drapeau navigateur.
+  ⚠️ Rig : le pane est resté `visibilityState: hidden` / `innerWidth: 0` toute la session ET l'extension Chrome
+  connectée était injoignable, donc aucune des deux recettes habituelles de preuve d'une animation liée au
+  scroll n'était disponible. Confirmé au passage, et à retenir : **`requestAnimationFrame` ne s'exécute PAS
+  sous `--virtual-time-budget` en Chrome headless** (testé isolément : le `setTimeout` passe, le rAF non), ce
+  qui explique pourquoi les timelines n'y suivent jamais un scroll programmatique. Preuve obtenue en deux
+  temps à la place : l'objet ViewTimeline est bien attaché à l'animation et sa plage est lue par le moteur
+  (`animation-timeline: view(), view()`, plage `entry 40% cover 75%`, progression calculée), et le rendu est
+  contrôlé par captures en forçant le remplissage à des valeurs intermédiaires.
 
 - 2026-08-02 (routine, AXE B : CORRIGER, dimension auditée = ACCESSIBILITÉ) : T7 non monté, travail sur clone
   GitHub dans le scratchpad. Faute d'axe-core hors ligne, harnais d'audit maison passé sur les 5 pages
