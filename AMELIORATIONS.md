@@ -31,6 +31,8 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       13 images sous la ligne de flottaison en lazy, fetchpriority sur le LCP de pilote.html — 27/07
 - [x] Audit accessibilité complet + correction des débordements réels sous 414 px (nav, galerie, contact, 404),
       bouton marine enfin défini pour contact.html, cibles tactiles de nav à 24 px, lightbox annoncée — 02/08
+- [x] Audit qualité visuelle par bords zoomés de toutes les images publiées : 3 bandes noires incrustées corrigées
+      (Le Mans 1980 remasterisée en 16:9 depuis la diapo originale, photo partenaires et duel Valence recadrées) — 04/08
 - [ ] Emblème 3D : version animée légère en hero (séquence AE ou sprite au scroll) si le poids reste raisonnable
 - [ ] Section actus/prochaines échéances (structure seulement, contenus à valider avec Thomas)
 - [x] Accueil : mur de partenaires « Ils nous font confiance » (18 logos)
@@ -174,6 +176,41 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-08-04 (routine, AXE B : CORRIGER, dimension auditée = QUALITÉ VISUELLE / BORDS D'IMAGES) : T7 monté,
+  travail sur le dépôt du SSD. Première passe de la dimension « qualité visuelle par captures zoomées des
+  bords » : toutes les images publiées (photos de l'accueil et du pilote, cartes OG, 18 logos partenaires,
+  vignettes Insta en lecture seule) passées d'abord au scan de luminance des bords (détection de suites de
+  colonnes/lignes sombres), puis contrôle À L'ŒIL par planches-contact : vue entière + les 4 bords zoomés x3
+  + les 4 coins, pour chaque fichier suspect.
+  **TROIS DÉFAUTS RÉELS, TOUS CORRIGÉS LE JOUR MÊME (commit 39a129a)** :
+  (1) **heritage-1980 (« Le Mans 1980 / l'époque Papone »)** : le fichier publié contenait les BANDES NOIRES
+  du cache de la diapositive d'origine (165 px à gauche, 200 px à droite sur 1200), bien visibles sur la page
+  puisque l'affichage 16:9 en object-fit: cover conservait toute la largeur. Remasterisée DEPUIS LA DIAPO
+  ORIGINALE du T7 (1980_Le_Mans (6).jpg, 5728x3824) : fenêtre 16:9 calée sur le ratio d'affichage réel de la
+  figure (plus aucun pixel caché), les deux visages et la roue tenue entiers, plus aucune bande. Vérifié au
+  préalable que le fichier en ligne n'était PAS étalonné (LUT quasi-identité mesurée entre original et
+  publié) : la photo d'époque reste donc brute, comme ses deux voisines de section.
+  (2) **partenaires-stickers (« Vos couleurs en piste / Valence 2022 »)** : bandes résiduelles du cadre
+  incrusté Thierry Chomel sur LES DEUX bords (~25 px chacune, luminance ~28-31, sous le seuil de rognage 55
+  du pipeline de 2021-2022 mais au-dessus du noir) : recadrée depuis le livrable étalonné, 1400 -> 1345 px.
+  (3) **galerie-duel-324 (« Défense de la position / Valence 2022 »)** : même bande résiduelle à gauche
+  (~25 px), recadrée 1400 -> 1374 px. Variantes -m et AVIF régénérées pour les trois, width/height et
+  descripteurs srcset du markup mis à jour (la lightbox lit les mêmes chemins, rien à toucher).
+  **SUSPECTS RÉFUTÉS après examen (rien à corriger)** : collage-origines (la cellule marine du damier cisaillé
+  EST le design), logos hexagone-motors et lunatik (marques nativement sur aplat noir : c'est leur identité,
+  pas un défaut de détourage), heritage-1987 et heritage-1988 (bords sombres = contenu photo : barrières,
+  piste, carrosserie), galerie-soleil-2021 (ombre du kart au sol), pilote-simu et embleme-3d (fonds voulus),
+  cartes OG (cadres dessinés voulus). Vignettes Insta : rien d'anormal, et domaine de la routine dédiée.
+  **VÉRIFS** : les 12 fichiers de sortie re-scannés = 0 suite sombre résiduelle ; audit local index 1280 et
+  375 = 0 débordement au rectangle, 0 ratio d'image faux, console vide ; captures des trois zones corrigées
+  (héritage desktop + mobile, partenaires, galerie) ; prod contrôlée aux octets (content-length = tailles
+  locales exactes) et markup en ligne vérifié (height 675, descripteur 1374w).
+  ⚠️ Rig du jour : le workflow multi-agents d'inspection a calé (erreurs API en série, 6 agents sans
+  progression) : repli en planches-contact inspectées inline, même méthode, mêmes preuves. Le cache
+  d'images du pane survit au reload de l'iframe : forcer fetch(cache:'reload') sur CHAQUE fichier remplacé
+  avant de conclure. Et dans un contexte srcset, naturalWidth rend des px CSS corrigés de densité (1200w
+  affiché 500px -> naturalWidth 500), ne pas le lire comme la taille intrinsèque du fichier.
 
 - 2026-08-03 (routine, AXE C : S'ADAPTER, veille tendances) : T7 non monté, travail sur clone GitHub dans le
   scratchpad. Veille menée sur des angles encore jamais couverts (filière karting, ingénierie issue de la F1,
