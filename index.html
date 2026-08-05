@@ -48,6 +48,28 @@
     }
   </script>
 
+  <!-- Sens de navigation : remonter l'arborescence inverse le volet (types de View Transition) -->
+  <script>
+    (function () {
+      var ordre = { 'index.html': 0, 'pilote.html': 1, 'contact.html': 2, 'mentions-legales.html': 3 };
+      function rang(url) {
+        try { var f = new URL(url).pathname.split('/').pop() || 'index.html'; return (f in ordre) ? ordre[f] : 9; }
+        catch (e) { return 9; }
+      }
+      function typer(e, depuis, vers) {
+        if (!e.viewTransition || !depuis || !vers) return;
+        try { if (rang(vers) < rang(depuis)) e.viewTransition.types.add('retour'); } catch (err) {}
+      }
+      addEventListener('pageswap', function (e) {
+        typer(e, location.href, e.activation && e.activation.entry && e.activation.entry.url);
+      });
+      addEventListener('pagereveal', function (e) {
+        var a = self.navigation && navigation.activation;
+        typer(e, a && a.from && a.from.url, location.href);
+      });
+    })();
+  </script>
+
   <!-- Intro : décision AVANT le premier rendu (pas de flash), 1 fois par session, jamais en mouvement réduit -->
   <script>
     (function () {
@@ -1199,20 +1221,58 @@
         // Préchargement des voisines pour une navigation fluide
         [index + 1, index - 1].forEach(j => { const u = vues[(j + vues.length) % vues.length].src; new Image().src = u; });
       }
-      function ouvrir(i, source) {
-        declencheur = source || null;
-        afficher(i);
+      // Morph photo de grille <-> lightbox : View Transition same-document quand le
+      // navigateur sait faire (sinon, et en mouvement réduit, fondus CSS existants).
+      const vtDispo = () => document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function morph(maj) {
+        document.documentElement.classList.add('vt-lb');
+        lb.classList.add('vt-net'); // coupe les fondus CSS : l'état capturé doit être l'état final
+        const t = document.startViewTransition(maj);
+        t.finished.finally(() => {
+          document.documentElement.classList.remove('vt-lb');
+          lb.classList.remove('vt-net');
+        });
+        return t;
+      }
+      function montrer() {
         lb.classList.add('ouvert');
         document.body.classList.add('lb-actif');
         document.documentElement.style.overflow = 'hidden';
+      }
+      function ouvrir(i, source) {
+        declencheur = source || null;
+        afficher(i);
+        if (vtDispo()) {
+          const gImg = vues[index].el;
+          gImg.style.viewTransitionName = 'lb-photo'; // capture « avant » : la photo de la grille
+          morph(async () => {
+            gImg.style.viewTransitionName = ''; // un seul lb-photo dans la capture « après »
+            montrer();
+            // Laisser une chance à la pleine taille d'être décodée (plafonnée : jamais bloquant)
+            try { await Promise.race([img.decode(), new Promise(r => setTimeout(r, 350))]); } catch (e) {}
+          });
+        } else {
+          montrer();
+        }
         // Focus après application du style (l'élément est visibility:hidden avant .ouvert)
         requestAnimationFrame(() => requestAnimationFrame(() => btnFermer.focus()));
       }
-      function fermer() {
+      function cacher() {
         lb.classList.remove('ouvert');
         document.body.classList.remove('lb-actif');
         document.documentElement.style.overflow = '';
         if (declencheur) declencheur.focus();
+      }
+      function fermer() {
+        if (vtDispo()) {
+          const gImg = vues[index].el; // la photo COURANTE (on a pu naviguer aux flèches)
+          morph(() => {
+            cacher();
+            gImg.style.viewTransitionName = 'lb-photo'; // capture « après » : retour dans la grille
+          }).finished.finally(() => { gImg.style.viewTransitionName = ''; });
+        } else {
+          cacher();
+        }
       }
 
       // Rendre chaque photo cliquable + repère « agrandir »

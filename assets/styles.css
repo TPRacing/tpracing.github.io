@@ -87,8 +87,17 @@ section[id], div[id].bande-origines { scroll-margin-top: 76px; }
   to { clip-path: polygon(0 0, 114% 0, 100% 100%, -14% 100%); }
 }
 nav .logo { view-transition-name: tp-logo; }
+/* Type « retour » (posé par pageswap/pagereveal quand on remonte l'arborescence) : même volet, inversé.
+   Règle isolée : un navigateur sans :active-view-transition-type l'ignore sans toucher au reste. */
+:root:active-view-transition-type(retour)::view-transition-new(root) { animation-name: vt-entree-retour; }
+@keyframes vt-entree-retour {
+  from { clip-path: polygon(114% 0, 100% 0, 114% 100%, 128% 100%); }
+  to { clip-path: polygon(100% 0, -14% 0, 0 100%, 114% 100%); }
+}
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+  /* Séparée exprès : sa pseudo-classe invaliderait toute liste de sélecteurs qui la contient */
+  :root:active-view-transition-type(retour)::view-transition-new(root) { animation: none; }
 }
 
 /* ---------- Détails de marque (site vivant) ---------- */
@@ -646,6 +655,18 @@ footer .foot-bas { max-width: 1180px; margin: 0 auto; border-top: 1px solid rgba
   transition: opacity .3s ease, visibility .3s ease;
 }
 .lightbox.ouvert { opacity: 1; visibility: visible; pointer-events: auto; }
+
+/* Morph galerie -> lightbox (View Transition same-document, classe vt-lb posée par le JS).
+   La photo cliquée grandit jusqu'à sa place dans la lightbox, et revient s'y poser à la fermeture.
+   Sans startViewTransition ou en mouvement réduit : fondus existants inchangés. */
+.lightbox { view-transition-name: lb-boite; }
+.lb-img { view-transition-name: lb-photo; }
+.lightbox.vt-net, .lightbox.vt-net .lb-scene { transition: none; }
+html.vt-lb::view-transition-old(root) { animation: none; }
+html.vt-lb::view-transition-new(root) { animation: none; }
+html.vt-lb::view-transition-group(lb-photo) { animation-duration: .42s; animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+html.vt-lb::view-transition-old(lb-photo),
+html.vt-lb::view-transition-new(lb-photo) { width: 100%; height: 100%; object-fit: cover; }
 .lightbox .lb-fond { position: absolute; inset: 0; cursor: zoom-out; }
 .lb-scene {
   position: relative;

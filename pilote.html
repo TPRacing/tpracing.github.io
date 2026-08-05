@@ -47,6 +47,28 @@
     }
   </script>
 
+  <!-- Sens de navigation : remonter l'arborescence inverse le volet (types de View Transition) -->
+  <script>
+    (function () {
+      var ordre = { 'index.html': 0, 'pilote.html': 1, 'contact.html': 2, 'mentions-legales.html': 3 };
+      function rang(url) {
+        try { var f = new URL(url).pathname.split('/').pop() || 'index.html'; return (f in ordre) ? ordre[f] : 9; }
+        catch (e) { return 9; }
+      }
+      function typer(e, depuis, vers) {
+        if (!e.viewTransition || !depuis || !vers) return;
+        try { if (rang(vers) < rang(depuis)) e.viewTransition.types.add('retour'); } catch (err) {}
+      }
+      addEventListener('pageswap', function (e) {
+        typer(e, location.href, e.activation && e.activation.entry && e.activation.entry.url);
+      });
+      addEventListener('pagereveal', function (e) {
+        var a = self.navigation && navigation.activation;
+        typer(e, a && a.from && a.from.url, location.href);
+      });
+    })();
+  </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
