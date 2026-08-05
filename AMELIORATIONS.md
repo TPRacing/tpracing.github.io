@@ -70,7 +70,7 @@ Section RÉCUPÉRÉE le 27/07 : elle était restée non commitée sur le T7 depu
 - [ ] Contact en 3 portes PARTENARIAT / PRESSE / COMMUNAUTÉ (mailto pré-remplis) + email cliquer-copier flash « COPIÉ » — premaracing.com + Podium/studio San Rita (Awwwards SOTD 27/06/2026) [recoupe « contact 2 canaux » de la veille 26/07 : fusionner au moment de faire]
 - [ ] Galerie en planche-contact argentique 35 mm (bandes perforées SVG, numéros de vue « TP-47 / 03A », ±0,5° de rotation) — tendance « Imperfection is in » (lummi.ai/blog/2026-design-trend) ; prolonge le grain + récit héritage
 - [ ] T et P révélés en contour or dans un intertitre plein (« TRANSMETTRE LA PASSION ») ± manifeste 3 piliers — Team WRT « WE ARE A TEAM » (w-racingteam.com) + G2/100 Thieves ; vérifier la zone de protection T-P de la charte
-- [ ] Micro-tâches (trop petites pour une journée, à glisser dans un prochain chantier) : ~~text-wrap balance/pretty~~ [FAIT 26/07] ; ~~Speculation Rules~~ [FAIT 26/07] ; popover natif ancré sur les logos partenaires [repris au backlog 26/07] ; morph View Transition intra-page de la lightbox ; accordéon details/summary stylé pour mentions légales ; microcopie « voix radio d'écurie »
+- [ ] Micro-tâches (trop petites pour une journée, à glisser dans un prochain chantier) : ~~text-wrap balance/pretty~~ [FAIT 26/07] ; ~~Speculation Rules~~ [FAIT 26/07] ; popover natif ancré sur les logos partenaires [repris au backlog 26/07] ; ~~morph View Transition intra-page de la lightbox~~ [FAIT 05/08] ; accordéon details/summary stylé pour mentions légales ; microcopie « voix radio d'écurie »
 
 ### Idées de la veille 26/07 (workflow 5 éclaireurs : écuries hors F1 vues, pilotes pros, sites primés, tendances 2026, plateforme web — chaque source fetchée avant citation)
 
@@ -93,9 +93,10 @@ Actionnables sans contenu de Thomas :
       Firefox 147+) → @supports requis, fallback = lien direct actuel
 - [ ] corner-shape: bevel en @supports : la version NATIVE des coins biseautés maison (aujourd'hui en clip-path qui rogne
       outline et ombres) sur cartes/boutons/badges — source : smashingmagazine.com/2026/03 (corner-shape, Chrome 139+)
-- [ ] View Transitions directionnelles : types forward/back posés dans pageswap/pagereveal (glissement discret selon le sens
-      accueil↔pilote↔contact) + view-transition-class pour un futur morph galerie→lightbox — source :
-      developer.chrome.com/blog/view-transitions-in-2025 (Firefox 144 = same-document Baseline, SANS les types → enhancement)
+- [x] View Transitions directionnelles : type « retour » posé dans pageswap/pagereveal quand on remonte l'arborescence
+      (le volet diagonal s'inverse) + morph galerie→lightbox en same-document (la micro-tâche du 21/07, faite dans le
+      même chantier) — source : developer.chrome.com/blog/view-transitions-in-2025 (Firefox 144 = same-document Baseline,
+      SANS les types → enhancement) — FAIT 05/08
 - [ ] Séparateurs SVG dans le marquee : glyphe or trait fin (damier/chevron) entre les mots, façon signalétique de bord de
       piste — source : trionn.com (croix SVG inline entre les .marquee-text-item, vérifié dans le HTML)
 - [ ] Labels Bebas « décodés » façon écran de chronométrage au premier reveal (~400 ms, cycle A-Z/0-9, JAMAIS sur les titres
@@ -176,6 +177,40 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-08-05 (routine, AXE A : AMÉLIORER, chantier View Transitions, commit 902e67f) : T7 non monté, travail
+  sur clone GitHub dans le scratchpad. Les deux pièces VT restantes du backlog faites ensemble :
+  (1) **Morph galerie -> lightbox (same-document)** : au clic, la photo de la grille GRANDIT jusqu'à sa place
+  dans la lightbox, et revient s'y poser à la fermeture, y compris sur la photo COURANTE si on a navigué aux
+  flèches entre-temps. Technique : view-transition-name posé dynamiquement sur la photo cliquée (capture
+  « avant »), retiré dans le callback de startViewTransition pour que seule .lb-img porte le nom dans la
+  capture « après » (un nom dupliqué = transition avortée) ; classe html.vt-lb qui NEUTRALISE le volet
+  ::view-transition-old/new(root) du cross-document pendant le morph (sinon ouvrir la lightbox déclenchait
+  le volet de page !) ; classe .vt-net qui coupe les fondus CSS de la lightbox (l'état capturé doit être
+  l'état final, pas le début d'une transition) ; object-fit: cover sur les pseudos old/new (ratios cover
+  grille vs contain lightbox) ; attente plafonnée img.decode() 350 ms dans le callback (pleine taille pas
+  encore décodée = morph vers une image vide). Sans startViewTransition ou en mouvement réduit : fondus
+  d'avant, inchangés (vérifié : 0 appel VT sur ce chemin).
+  (2) **Volet directionnel cross-document** : snippet head sur les 5 pages ; pageswap/pagereveal comparent le
+  rang des pages (index 0 / pilote 1 / contact 2 / mentions 3, autre 9) et ajoutent le type « retour » quand
+  on remonte -> :root:active-view-transition-type(retour) joue vt-entree-retour, le miroir exact du volet.
+  Règles CSS ISOLÉES exprès : une pseudo-classe inconnue invalide toute la liste de sélecteurs qui la
+  contient (l'inclure dans la liste reduced-motion existante aurait REDONNÉ les animations aux utilisateurs
+  en mouvement réduit sur Firefox/vieux Safari).
+  **VÉRIFS** : code livré testé tel quel (snippet extrait du DOM, exécuté avec location/navigation factices) :
+  10 scénarios de direction corrects, y compris racine vs index.html, 404 et événement sans viewTransition ;
+  morph prouvé par instrumentation (1 appel VT par ouverture/fermeture, noms posés/retirés au bon moment sur
+  la bonne photo, zéro classe résiduelle) ; audit 5 pages x 1280/375 : 0 débordement réel au rect, 0 ratio
+  faux, 0 erreur console ; prod contrôlée après déploiement. Sitemap lastmod -> 05/08 (les 5 pages changent).
+  ⚠️ Rig : pane visibilityState:hidden toute la session -> les animations VT sont SAUTÉES (le nom ne vit
+  qu'une frame, une sonde à 40 ms le rate : utiliser un MutationObserver) et le cross-document ne crée PAS
+  de viewTransition dans un onglet caché (e.viewTransition null, garde-fou vérifié) ; l'attribut class d'un
+  élément SVG est un SVGAnimatedString, pas une chaîne -> les filtres d'exclusion d'audit par regex sur
+  className laissent passer les use .embleme-fond (faux positifs de débordement, décor voulu).
+  Choix assumé du jour : les popovers partenaires ancrés (2x au backlog) restent en attente : intercaler une
+  carte entre le clic et le site du partenaire ajoute de la friction sur des liens qui marchent, et l'info
+  (nom) est déjà dans alt/aria-label ; à retenter le jour où il y aura un vrai contenu de carte (statut,
+  citation) validé par Thomas.
 
 - 2026-08-04 (routine, AXE B : CORRIGER, dimension auditée = QUALITÉ VISUELLE / BORDS D'IMAGES) : T7 monté,
   travail sur le dépôt du SSD. Première passe de la dimension « qualité visuelle par captures zoomées des
