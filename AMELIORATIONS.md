@@ -167,6 +167,27 @@ Actionnables sans contenu de Thomas :
 Sites morts ou trompeurs, à ne pas reprendre dans une prochaine veille : teamduqueine.com, akkodis-asp.com et
 tds-racing.com ne répondent plus ; signatech.fr n'est PAS l'écurie mais une entreprise de signalétique du Loiret.
 
+### Constats reportés de l'audit SEO du 06/08 (à traiter un jour de dimension adaptée)
+
+Perf (pour le prochain jour d'audit performance) :
+- [ ] Vidéo de la galerie : 8,47 Mo en 1600x900 à 3,7 Mbit/s, sans variante allégée. Le chargement est déjà
+      différé depuis le 27/07, mais le poids reste énorme dès qu'un visiteur mobile la déclenche : ré-encoder
+      une version 1000 px pour les petits écrans (source `<video>` avec media) ou baisser le débit.
+- [ ] Les 4 logos de marque sont restés en PNG (97 Ko au total) alors que tout le reste du site est en AVIF/WebP.
+- [ ] Attribut `sizes` deux fois trop grand sur les deux photos d'héritage : le navigateur télécharge la grande
+      variante pour un affichage moitié moins large.
+- [ ] Logos partenaires servis environ deux fois trop grands (autour de 280 Ko pour une bande décorative).
+- [ ] `@font-face` Korataki 400 déclaré mais jamais utilisé (35 Ko de police morte dans le dépôt ; jamais
+      téléchargée par le navigateur, donc coût nul à l'affichage, mais autant nettoyer).
+- [ ] Fond décoratif `collage-origines.webp` (127 Ko) chargé dans la première salve de l'accueil.
+
+Pour la routine du feed Instagram (`maj-feed-insta-site`, section « Les derniers posts » interdite à cette routine) :
+- [ ] `pilote.html` alt du post du 15/07 : « Monoplace TPRacing en piste, monogramme TP » laisse entendre que
+      l'association possède la monoplace. C'est la voiture de l'école, décrite ailleurs sur le site comme
+      « Monoplace de l'école FEED Racing France en piste ». À aligner.
+- [ ] `pilote.html` alt du post du 13/07 : « dossard 32 » met en avant un numéro qui n'est pas le 47. La règle
+      du site est de ne citer aucun autre numéro. À retirer de l'alt.
+
 ## Règles (rappel pour la routine)
 
 Charte : marine #1E2635, or #D49726, blanc #F6F7FC, rouge #C13221, vert #3E836E (micro-accent).
@@ -177,6 +198,73 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-08-06 (routine, AXE B : CORRIGER, dimension SEO TECHNIQUE + résultats Google réels, commit ec9dc99) :
+  T7 non monté, travail sur clone GitHub dans le scratchpad. Dimension jamais auditée à fond jusqu'ici
+  (rotation : liens 25/07, perf 27/07, accessibilité 02/08, qualité visuelle 04/08).
+  **CE QUI EST SAIN, mesuré en production** : les 5 pages, le sitemap, robots.txt et llms.txt répondent 200 ;
+  Googlebot reçoit bien la page complète ; compression gzip active ; aucun `X-Robots-Tag` bloquant ;
+  1 seul h1 par page, aucun niveau de titre sauté, aucun title ni description en double ; canonical juste
+  partout ; `noindex, follow` sur la 404 seulement ; 8 blocs JSON-LD valides ; sitemap sans BOM, XML valide,
+  servi en `application/xml` y compris à Googlebot ; les 3 cartes de partage font bien 1200x630.
+  **RÉSULTATS GOOGLE RÉELS (Chrome connecté, google.fr)** : `site:tpracing.github.io` renvoie 2 pages
+  (accueil + pilote). Le site est **1er sur « TPRacing Thomas Papone »** et **1er sur « Thomas Papone pilote
+  karting »** (devant LinkedIn, l'interview MyCitee, Le Progrès et la fiche kartcom.com). Search Console
+  confirme : 2 pages dans l'index, 0 non indexée, aucun problème depuis 90 jours. **MAIS contact.html et
+  mentions-legales.html ne sont toujours pas découvertes** (créées les 17 et 19/07) et l'entrée sitemap reste
+  en « Impossible de récupérer le sitemap » (dernière lecture le 4 août, 0 page découverte) alors que le
+  fichier est irréprochable octet par octet. Diagnostic inchangé depuis le 17/07 : bug connu des propriétés
+  récentes en \*.github.io. Le titre affiché par Google pour pilote.html contient encore un tiret cadratin,
+  supprimé du site le 18/07 : la page n'a donc pas été réexplorée depuis. Rien à corriger côté site.
+  **CE QUI A ÉTÉ CORRIGÉ AUJOURD'HUI** :
+  1. **Liens internes alignés sur l'URL canonique** : tous les liens vers l'accueil pointaient `index.html`
+     alors que la canonique est `/` (24 liens sur les 5 pages). Passés en `./` et `/` sur la 404. Un moteur
+     voyait deux adresses pour une seule page.
+  2. **Graphe de données structurées relié** : le fondateur déclaré sur l'accueil est maintenant la MÊME
+     entité que la Person de la page pilote (`@id` partagé), Patrice a un identifiant stable, la page pilote
+     reçoit une entité `ProfilePage` (elle n'avait aucune entité de page, contrairement à contact et mentions),
+     `primaryImageOfPage` passe en `ImageObject` (schema.org n'attend pas une chaîne), le `jobTitle` est
+     harmonisé sur les deux pages (sinon deux valeurs contradictoires sur le même identifiant) et la
+     convention de fragment devient `#page` partout.
+  3. **Descriptions raccourcies** : accueil 176 et pilote 177 caractères, donc coupées par Google. Ramenées
+     sous 155, sens conservé.
+  4. **`twitter:image:alt`** ajouté sur les 4 pages indexables (l'alt existait en Open Graph seulement).
+  5. **404 partageable** : elle n'avait aucune balise de partage, un lien cassé envoyé à quelqu'un
+     n'affichait rien. Carte de marque ajoutée, la page reste `noindex`.
+  6. **CTA de fin de section partenaires** : « Contacter l'association » quittait le site vers LinkedIn alors
+     que contact.html existe depuis le 19/07. Il pointe désormais vers la page contact. Effet secondaire utile :
+     la page contact, pas encore indexée, reçoit enfin un lien depuis la section commerciale.
+  7. **Contradiction de chronologie** sur pilote.html : le bloc final disait « avant le passage en voiture »
+     alors que la même page et l'accueil disent que le passage en monoplace est FAIT (école FEED, 2024).
+     Reformulé en « avant l'entrée en championnat », avec les mots déjà employés plus haut. À revoir si tu
+     préfères une autre formule.
+  8. **Page confidentialité rendue exacte** : elle affirmait « aucun cookie ni aucun autre traceur sur votre
+     appareil » alors que le site écrit deux choses dans le navigateur (l'intro déjà vue, en mémoire de session,
+     et le meilleur temps du test de réflexes de la 404). Le « aucun cookie » est conservé et précisé
+     (« ni traceur publicitaire ou de mesure d'audience »), et un paragraphe factuel décrit les deux
+     informations locales. Rien n'est collecté ni transmis, la promesse du site tient toujours.
+  9. **robots.txt** : les deux documents de travail publiés avec le dépôt (AMELIORATIONS.md et le mode d'emploi)
+     sont exclus de l'exploration. Ils n'ont pas vocation à sortir dans les résultats.
+  10. **Mode d'emploi renommé et remis à jour** : le fichier s'appelait « LISEZ-MOI — Comment modifier le
+     site.md », avec un tiret cadratin DANS le nom (URL en %E2%80%94) et 9 dans le texte. Devenu `LISEZ-MOI.md`,
+     sans caractère interdit, et remis à jour (5 pages et non 2, dépôt sur le T7, Search Console déjà validée
+     avec les 2 fichiers à ne jamais supprimer, routines quotidiennes).
+  **MÉTHODE** : audit en 6 dimensions par agents (schema.org, métas, régression du diff, indexabilité, contenu,
+  technique) puis contre-vérification adversariale de chaque constat, 48 constats bruts, 4 confirmés,
+  44 réfutés ou écartés. Constats justement réfutés, à ne pas « corriger » un autre jour : le lien du partenaire
+  SMD vers hexagone-motors.com (SMD appartient au groupe Hexagone Motors), le h1 « Le volant se transmet » qui
+  ne contient pas de mot-clé (accroche validée par Thomas), le lastmod du sitemap qui diffère de la date de mise
+  à jour affichée sur la page légale (deux dates de nature différente), l'absence d'og:url sur la 404.
+  **VÉRIFS** : 5 pages x 1280/375/320 px, 0 débordement hors décor, 0 ratio d'image faux, 0 titre empilé,
+  0 erreur console, tous les liens et ressources internes existants, JSON-LD reparsé, sitemap revalidé,
+  captures de contrôle du bandeau partenaires et de la section confidentialité, puis contrôle en production.
+  **QUESTIONS EN ATTENTE (rappel groupé)** : (a) contraste de l'or sur fond clair, la reco du 15/07 reste
+  #8F661A pour les petits textes sur fond clair, rien n'est appliqué sans ton accord ; (b) Search Console :
+  garder les 2 propriétés (compte asso + compte perso) ou n'en garder qu'une et ajouter l'autre compte en
+  utilisateur ; (c) les métas des cartes disciplines n'apparaissent qu'au survol, donc invisibles au clavier
+  seul sur desktop ; (d) le backlog reste bloqué sur tes contenus : palmarès, calendrier et résultats, paliers
+  de partenariat, citations de partenaires, scan de ta signature, casques et machines, anecdotes pour la page
+  pilote.
 
 - 2026-08-05 (routine, AXE A : AMÉLIORER, chantier View Transitions, commit 902e67f) : T7 non monté, travail
   sur clone GitHub dans le scratchpad. Les deux pièces VT restantes du backlog faites ensemble :
