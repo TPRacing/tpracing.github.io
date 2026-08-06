@@ -245,8 +245,8 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
      informations locales. Rien n'est collecté ni transmis, la promesse du site tient toujours.
   9. **robots.txt** : les deux documents de travail publiés avec le dépôt (AMELIORATIONS.md et le mode d'emploi)
      sont exclus de l'exploration. Ils n'ont pas vocation à sortir dans les résultats.
-  10. **Mode d'emploi renommé et remis à jour** : le fichier s'appelait « LISEZ-MOI — Comment modifier le
-     site.md », avec un tiret cadratin DANS le nom (URL en %E2%80%94) et 9 dans le texte. Devenu `LISEZ-MOI.md`,
+  10. **Mode d'emploi renommé et remis à jour** : le fichier s'appelait « LISEZ-MOI [cadratin] Comment modifier
+     le site.md », avec un tiret cadratin DANS le nom (URL en %E2%80%94) et 9 dans le texte. Devenu `LISEZ-MOI.md`,
      sans caractère interdit, et remis à jour (5 pages et non 2, dépôt sur le T7, Search Console déjà validée
      avec les 2 fichiers à ne jamais supprimer, routines quotidiennes).
   **MÉTHODE** : audit en 6 dimensions par agents (schema.org, métas, régression du diff, indexabilité, contenu,
