@@ -265,6 +265,11 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   seul sur desktop ; (d) le backlog reste bloqué sur tes contenus : palmarès, calendrier et résultats, paliers
   de partenariat, citations de partenaires, scan de ta signature, casques et machines, anecdotes pour la page
   pilote.
+  **MISE EN LIGNE DIFFÉRÉE, ET CE N'EST PAS LE SITE** : GitHub Pages est en panne majeure depuis 15h22 UTC
+  ce 6 août (githubstatus.com, Actions et Pages en « major outage »). Les commits sont bien poussés sur main,
+  mais les builds échouent ou restent bloqués côté GitHub. Le site en ligne continue de servir la version
+  du 5 août, intacte : aucune page cassée. Le déploiement se fera tout seul au rétablissement du service ;
+  si demain la version en ligne n'a toujours pas les correctifs, relancer un build (un commit vide suffit).
 
 - 2026-08-05 (routine, AXE A : AMÉLIORER, chantier View Transitions, commit 902e67f) : T7 non monté, travail
   sur clone GitHub dans le scratchpad. Les deux pièces VT restantes du backlog faites ensemble :
