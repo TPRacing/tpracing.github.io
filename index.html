@@ -6,7 +6,7 @@
 
   <!-- ✏️ SEO : titre affiché dans Google + onglet du navigateur -->
   <title>TPRacing - Thomas Papone Racing | Association de sport automobile</title>
-  <meta name="description" content="TPRacing est une association de sport automobile fondée en 2021 par un père pilote et son fils : karting de compétition, simracing, et le championnat Caterham en ligne de mire.">
+  <meta name="description" content="TPRacing, association de sport automobile fondée en 2021 par un père pilote et son fils : karting de compétition, simracing, cap sur la Caterham.">
 
   <link rel="canonical" href="https://tpracing.github.io/">
   <meta property="og:site_name" content="TPRacing">
@@ -24,6 +24,7 @@
   <meta name="twitter:title" content="TPRacing - Thomas Papone Racing">
   <meta name="twitter:description" content="Le volant se transmet. Association de sport automobile : karting de compétition, simracing, cap sur la Caterham.">
   <meta name="twitter:image" content="https://tpracing.github.io/assets/img/og-accueil.jpg">
+  <meta name="twitter:image:alt" content="TPRacing - Le volant se transmet. Association de sport automobile.">
 
   <link rel="icon" href="assets/favicon.ico?v=2" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=2">
@@ -100,11 +101,12 @@
     "sport": "Sport automobile",
     "url": "https://tpracing.github.io/",
     "logo": "https://tpracing.github.io/assets/logo-couleur-degrade.png",
+    "image": "https://tpracing.github.io/assets/img/og-accueil.jpg",
     "email": "contact.tpracing@gmail.com",
     "contactPoint": { "@type": "ContactPoint", "email": "contact.tpracing@gmail.com", "url": "https://tpracing.github.io/contact.html", "contactType": "customer service" },
     "address": { "@type": "PostalAddress", "addressLocality": "Lapeyrouse", "postalCode": "01330", "addressCountry": "FR" },
-    "founder": { "@type": "Person", "name": "Thomas Papone", "jobTitle": "Pilote, co-fondateur" },
-    "member": { "@type": "Person", "name": "Patrice Papone", "jobTitle": "Président" },
+    "founder": { "@type": "Person", "@id": "https://tpracing.github.io/pilote.html#thomas-papone", "name": "Thomas Papone", "jobTitle": "Pilote, co-fondateur" },
+    "member": { "@type": "Person", "@id": "https://tpracing.github.io/#patrice-papone", "name": "Patrice Papone", "jobTitle": "Président" },
     "sameAs": [ "https://www.linkedin.com/company/tpracing/" ]
   }
   </script>
@@ -114,13 +116,27 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": "https://tpracing.github.io/#site",
-    "name": "TPRacing - Thomas Papone Racing",
-    "alternateName": "TPRacing",
-    "url": "https://tpracing.github.io/",
-    "inLanguage": "fr-FR",
-    "publisher": { "@id": "https://tpracing.github.io/#association" }
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://tpracing.github.io/#site",
+        "name": "TPRacing - Thomas Papone Racing",
+        "alternateName": "TPRacing",
+        "url": "https://tpracing.github.io/",
+        "inLanguage": "fr-FR",
+        "publisher": { "@id": "https://tpracing.github.io/#association" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://tpracing.github.io/#page",
+        "name": "TPRacing - Thomas Papone Racing | Association de sport automobile",
+        "url": "https://tpracing.github.io/",
+        "inLanguage": "fr-FR",
+        "isPartOf": { "@id": "https://tpracing.github.io/#site" },
+        "about": { "@id": "https://tpracing.github.io/#association" },
+        "primaryImageOfPage": { "@type": "ImageObject", "url": "https://tpracing.github.io/assets/img/og-accueil.jpg", "width": 1200, "height": 630 }
+      }
+    ]
   }
   </script>
 
@@ -636,7 +652,7 @@
   <!-- ===== NAVIGATION ===== -->
   <div class="ligne-course" aria-hidden="true"></div>
   <nav id="navbar" aria-label="Navigation principale">
-    <a class="logo" href="index.html" aria-label="TPRacing, retour à l'accueil">
+    <a class="logo" href="./" aria-label="TPRacing, retour à l'accueil">
       <img class="logo-sombre" src="assets/logo-secondaire-blanc.png" alt="" width="940" height="405">
       <img class="logo-clair" src="assets/logo-secondaire-couleur.png" alt="" width="940" height="405">
     </a>
@@ -854,7 +870,7 @@
 
     <div class="part-cta rvl">
       <strong>Envie d'écrire la suite avec nous ?</strong>
-      <a class="btn btn-or" href="https://www.linkedin.com/company/tpracing/" target="_blank" rel="noopener">Contacter l'association</a>
+      <a class="btn btn-or" href="contact.html">Contacter l'association</a>
     </div>
   </section>
 
@@ -982,7 +998,7 @@
       </div>
       <div class="foot-liens">
         <a href="pilote.html">Le pilote</a>
-        <a href="index.html#partenaires">Partenaires</a>
+        <a href="./#partenaires">Partenaires</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>

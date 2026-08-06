@@ -1,6 +1,10 @@
 User-agent: *
 Allow: /
 
+# Documents de travail publiés avec le dépôt : hors index (règle plus spécifique que Allow: /)
+Disallow: /AMELIORATIONS.md
+Disallow: /LISEZ-MOI.md
+
 Sitemap: https://tpracing.github.io/sitemap.xml
 
 # Résumé du site lisible par les assistants : https://tpracing.github.io/llms.txt

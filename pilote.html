@@ -6,7 +6,7 @@
 
   <!-- ✏️ SEO -->
   <title>Thomas Papone - Pilote | TPRacing</title>
-  <meta name="description" content="Thomas Papone, pilote et co-fondateur de l'association TPRacing : karting de compétition, simracing, école FEED Racing France, et un cap clair, la course automobile en Caterham.">
+  <meta name="description" content="Thomas Papone, pilote et co-fondateur de TPRacing : karting de compétition, simracing, école FEED Racing France, cap sur la course automobile.">
 
   <link rel="canonical" href="https://tpracing.github.io/pilote.html">
   <meta property="og:site_name" content="TPRacing">
@@ -24,6 +24,7 @@
   <meta name="twitter:title" content="Thomas Papone - Pilote TPRacing">
   <meta name="twitter:description" content="Karting, simracing, FEED Racing France : le parcours d'un pilote qui construit sa route vers la course automobile.">
   <meta name="twitter:image" content="https://tpracing.github.io/assets/img/og-pilote.jpg">
+  <meta name="twitter:image:alt" content="Thomas Papone, pilote TPRacing - karting, simracing.">
 
   <link rel="icon" href="assets/favicon.ico?v=2" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=2">
@@ -72,25 +73,42 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": "https://tpracing.github.io/pilote.html#thomas-papone",
-    "name": "Thomas Papone",
-    "jobTitle": "Pilote",
-    "url": "https://tpracing.github.io/pilote.html",
-    "nationality": { "@type": "Country", "name": "France" },
-    "affiliation": {
-      "@id": "https://tpracing.github.io/#association",
-      "@type": "SportsOrganization",
-      "name": "TPRacing - Thomas Papone Racing",
-      "url": "https://tpracing.github.io/"
-    },
-    "sameAs": [
-      "https://www.instagram.com/thomaspaponeracing",
-      "https://www.tiktok.com/@thomaspaponeracing",
-      "https://www.youtube.com/@thomaspaponeracing",
-      "https://www.twitch.tv/thomaspaponeracing",
-      "https://www.linkedin.com/in/thomas-papone-b98327292",
-      "https://www.facebook.com/thomas.pne.9/"
+    "@graph": [
+      {
+        "@type": "ProfilePage",
+        "@id": "https://tpracing.github.io/pilote.html#page",
+        "name": "Thomas Papone - Pilote | TPRacing",
+        "url": "https://tpracing.github.io/pilote.html",
+        "inLanguage": "fr-FR",
+        "isPartOf": { "@id": "https://tpracing.github.io/#site" },
+        "about": { "@id": "https://tpracing.github.io/pilote.html#thomas-papone" },
+        "mainEntity": { "@id": "https://tpracing.github.io/pilote.html#thomas-papone" },
+        "primaryImageOfPage": { "@type": "ImageObject", "url": "https://tpracing.github.io/assets/img/og-pilote.jpg", "width": 1200, "height": 630 }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://tpracing.github.io/pilote.html#thomas-papone",
+        "name": "Thomas Papone",
+        "jobTitle": "Pilote, co-fondateur",
+        "url": "https://tpracing.github.io/pilote.html",
+        "image": "https://tpracing.github.io/assets/img/og-pilote.jpg",
+        "mainEntityOfPage": { "@id": "https://tpracing.github.io/pilote.html#page" },
+        "nationality": { "@type": "Country", "name": "France" },
+        "affiliation": {
+          "@id": "https://tpracing.github.io/#association",
+          "@type": "SportsOrganization",
+          "name": "TPRacing - Thomas Papone Racing",
+          "url": "https://tpracing.github.io/"
+        },
+        "sameAs": [
+          "https://www.instagram.com/thomaspaponeracing",
+          "https://www.tiktok.com/@thomaspaponeracing",
+          "https://www.youtube.com/@thomaspaponeracing",
+          "https://www.twitch.tv/thomaspaponeracing",
+          "https://www.linkedin.com/in/thomas-papone-b98327292",
+          "https://www.facebook.com/thomas.pne.9/"
+        ]
+      }
     ]
   }
   </script>
@@ -399,16 +417,16 @@
   <!-- ===== NAVIGATION ===== -->
   <div class="ligne-course" aria-hidden="true"></div>
   <nav id="navbar" aria-label="Navigation principale">
-    <a class="logo" href="index.html" aria-label="TPRacing, retour à l'accueil">
+    <a class="logo" href="./" aria-label="TPRacing, retour à l'accueil">
       <img class="logo-sombre" src="assets/logo-secondaire-blanc.png" alt="" width="940" height="405">
       <img class="logo-clair" src="assets/logo-secondaire-couleur.png" alt="" width="940" height="405">
     </a>
     <ul>
-      <li class="masque-mobile"><a href="index.html#association">L'association</a></li>
-      <li class="masque-mobile"><a href="index.html#trajectoire">La trajectoire</a></li>
+      <li class="masque-mobile"><a href="./#association">L'association</a></li>
+      <li class="masque-mobile"><a href="./#trajectoire">La trajectoire</a></li>
       <li><a class="active" aria-current="page" href="pilote.html">Le pilote</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a class="nav-cta" href="index.html#partenaires">Devenir partenaire</a></li>
+      <li><a class="nav-cta" href="./#partenaires">Devenir partenaire</a></li>
     </ul>
   </nav>
 
@@ -425,7 +443,7 @@
         <!-- ✏️ MODIFIABLE : bio courte -->
         <p class="lead rvl" data-d="2">Formé en karting de compétition, entraîné chaque semaine sur simulateur, passé en monoplace à l'école FEED Racing France. Un cap assumé : rejoindre la course automobile via le programme Caterham, une étape à la fois.</p>
         <div class="btn-rangee rvl" data-d="3">
-          <a class="btn btn-or" href="index.html#partenaires">Soutenir le projet</a>
+          <a class="btn btn-or" href="./#partenaires">Soutenir le projet</a>
           <a class="btn btn-blanc" href="#parcours">Voir le parcours</a>
         </div>
       </div>
@@ -562,8 +580,8 @@
     <div class="cta-final rvl">
       <div class="damier"></div>
       <h2>La suite s'écrit maintenant</h2>
-      <p>Partenaires, passionnés, curieux : le projet avance et tout se partage. Rejoignez l'aventure au bon moment, avant le passage en voiture.</p>
-      <a class="btn btn-or" href="index.html#partenaires">Devenir partenaire</a>
+      <p>Partenaires, passionnés, curieux : le projet avance et tout se partage. Rejoignez l'aventure au bon moment, avant l'entrée en championnat.</p>
+      <a class="btn btn-or" href="./#partenaires">Devenir partenaire</a>
     </div>
   </section>
 
@@ -586,8 +604,8 @@
         <a href="https://www.facebook.com/thomas.pne.9/" target="_blank" rel="noopener" aria-label="Facebook du pilote"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3.4"/><path fill="currentColor" stroke="none" d="M13.35 20.6v-6.3h2.12l.32-2.46h-2.44V10.27c0-.71.2-1.2 1.22-1.2h1.3V6.87c-.22-.03-1-.09-1.9-.09-1.88 0-3.16 1.15-3.16 3.25v1.81H8.7v2.46h2.11v6.3z"/></svg></a>
       </div>
       <div class="foot-liens">
-        <a href="index.html#association">L'association</a>
-        <a href="index.html#partenaires">Partenaires</a>
+        <a href="./#association">L'association</a>
+        <a href="./#partenaires">Partenaires</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
