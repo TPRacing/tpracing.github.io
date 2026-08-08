@@ -169,17 +169,32 @@ tds-racing.com ne répondent plus ; signatech.fr n'est PAS l'écurie mais une en
 
 ### Constats reportés de l'audit SEO du 06/08 (à traiter un jour de dimension adaptée)
 
-Perf (pour le prochain jour d'audit performance) :
-- [ ] Vidéo de la galerie : 8,47 Mo en 1600x900 à 3,7 Mbit/s, sans variante allégée. Le chargement est déjà
+Perf (pour le prochain jour d'audit performance) : TOUS TRAITÉS LE 08/08, voir le Journal.
+- [x] Vidéo de la galerie : 8,47 Mo en 1600x900 à 3,7 Mbit/s, sans variante allégée. Le chargement est déjà
       différé depuis le 27/07, mais le poids reste énorme dès qu'un visiteur mobile la déclenche : ré-encoder
       une version 1000 px pour les petits écrans (source `<video>` avec media) ou baisser le débit.
-- [ ] Les 4 logos de marque sont restés en PNG (97 Ko au total) alors que tout le reste du site est en AVIF/WebP.
-- [ ] Attribut `sizes` deux fois trop grand sur les deux photos d'héritage : le navigateur télécharge la grande
-      variante pour un affichage moitié moins large.
-- [ ] Logos partenaires servis environ deux fois trop grands (autour de 280 Ko pour une bande décorative).
-- [ ] `@font-face` Korataki 400 déclaré mais jamais utilisé (35 Ko de police morte dans le dépôt ; jamais
-      téléchargée par le navigateur, donc coût nul à l'affichage, mais autant nettoyer).
-- [ ] Fond décoratif `collage-origines.webp` (127 Ko) chargé dans la première salve de l'accueil.
+      FAIT 08/08, et le vrai défaut était plus grave : le fichier était encodé en **H.264 High 4:4:4
+      Predictive** (`avc1.F40028`), un profil hors du socle web, sans décodeur matériel. Passé en 4:2:0 High
+      1280x720 (3,90 Mo) + source 854x480 pour les téléphones (1,49 Mo).
+- [x] Les 4 logos de marque sont restés en PNG (97 Ko au total) alors que tout le reste du site est en AVIF/WebP.
+      TRAITÉ AUTREMENT le 08/08 : le vrai gain n'était pas le format mais le CALIBRE (ils étaient servis 4,8×
+      trop grands). Redimensionnés, ils passent de 68,5 à 36,4 Ko sur les 5 pages, sans toucher au markup de la
+      nav (ni au morph View Transition, ni au nom accessible). Le PNG est conservé : `logo-couleur-degrade.png`
+      sert de `logo` au JSON-LD, et un `<picture>` dans la nav aurait fragilisé le swap clair/sombre.
+- [x] Attribut `sizes` deux fois trop grand sur les deux photos d'héritage : le navigateur télécharge la grande
+      variante pour un affichage moitié moins large. FAIT 08/08 (mesuré : 249 px affichés contre 500 déclarés).
+- [x] Logos partenaires servis environ deux fois trop grands (autour de 280 Ko pour une bande décorative).
+      FAIT 08/08 : 249,3 -> 103,4 Ko (-59 %), chacun ramené au DPR2 exact de sa tuile.
+- [x] `@font-face` Korataki 400 déclaré mais jamais utilisé (35 Ko de police morte dans le dépôt ; jamais
+      téléchargée par le navigateur, donc coût nul à l'affichage, mais autant nettoyer). FAIT 08/08.
+- [x] Fond décoratif `collage-origines.webp` (127 Ko) chargé dans la première salve de l'accueil.
+      TRAITÉ AUTREMENT le 08/08 : à 2400 px il n'était PAS surdimensionné (c'est le DPR2 d'une bande pleine
+      largeur). Plutôt que d'ajouter un différé JS, ramené à 1800 px / q72 = 74,6 Ko — invisible sous son
+      scrim marine de 55 à 62 %, vérifié par comparaison sous voile.
+
+Nouveau constat du 08/08, pour la routine du feed Instagram (section interdite à cette routine) :
+- [ ] Les 3 vignettes de posts sont servies en 720 px de large pour un affichage de 146 px sur mobile
+      (2,46× le DPR2). Les régénérer autour de 400 px ferait gagner environ 250 Ko sur `pilote.html`.
 
 Pour la routine du feed Instagram (`maj-feed-insta-site`, section « Les derniers posts » interdite à cette routine) :
 - [ ] `pilote.html` alt du post du 15/07 : « Monoplace TPRacing en piste, monogramme TP » laisse entendre que
@@ -198,6 +213,70 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-08-08 (routine, AXE B : CORRIGER, dimension PERFORMANCE / POIDS RÉELS, commit 05a72f1) :
+  T7 non monté, travail sur clone GitHub dans le scratchpad. Rotation des dimensions : liens 25/07,
+  perf 27/07, accessibilité 02/08, qualité visuelle 04/08, SEO technique 06/08, perf à nouveau ce jour
+  pour solder les 6 constats que l'audit SEO avait renvoyés à « un jour de dimension adaptée ».
+  **D'ABORD UN INCIDENT DE DÉPLOIEMENT À DÉBLOQUER** : le build de GitHub Pages était resté coincé en
+  `building` (durée 0) depuis le 06/08 18 h 50, séquelle de la panne GitHub de ce jour-là. Conséquence
+  concrète : **la production servait encore la version du 05/08 et aucun des 10 correctifs SEO du 06/08
+  n'était en ligne** (vérifié en comparant la prod au dépôt : liens `index.html` résiduels, ancienne
+  description de 176 caractères). GitHub était repassé « All Systems Operational », mais une demande de
+  build par l'API a été absorbée par le build fantôme ; c'est un **push** qui a relancé la machine.
+  Les deux builds sont repartis `built` et la prod a rattrapé son retard. Leçon : un `git push` réussi ne
+  prouve pas une mise en ligne, il faut lire `gh api .../pages/builds` ET comparer un marqueur de contenu.
+  **LE DÉFAUT LE PLUS GRAVE DU JOUR N'ÉTAIT PAS UN POIDS.** La vidéo de la galerie était encodée en
+  **H.264 High 4:4:4 Predictive** (`avc1.F40028`, `yuvj444p`) : un profil qui sort du socle web, qu'aucun
+  décodeur matériel de téléphone ne prend en charge (le support H.264 d'Apple s'arrête au profil High en
+  4:2:0). Elle est passée en 4:2:0 High, `avc1.640028`, `moov` avant `mdat` conservé.
+  **CE QUI A ÉTÉ CORRIGÉ, chiffres mesurés (accueil complet, visiteur qui déroule tout)** :
+  9 150 Ko -> 4 227 Ko en desktop (**-54 %**) et -> 1 758 Ko en mobile (**-81 %**).
+  (1) vidéo 8,47 -> 3,90 Mo en 1280x720 CRF 28, plus une source **854x480 / 1,49 Mo** pour les écrans
+  ≤ 620 px ; (2) logos de nav 940x405 -> 376x162, logo du pied 585x502 -> 140x120, sur les 5 pages ;
+  (3) emblème 3D du hero 1561x1106 -> 780x553 (36 -> 21,9 Ko) alors qu'il est préchargé en
+  `fetchpriority="high"` : c'est le chemin du LCP ; (4) 18 logos partenaires ramenés dans 308x186,
+  249,3 -> 103,4 Ko ; (5) collage décoratif 2400 -> 1800 px, 126,7 -> 74,6 Ko ; (6) `sizes` des photos
+  d'héritage 1987 et 1988 corrigé ; (7) Korataki 400 retirée du dépôt.
+  **MÉTHODE, ce qui a évité deux erreurs** : le calibre a été mesuré page par page dans des iframes à
+  largeur explicite (8 largeurs), jamais déduit du CSS — c'est comme ça qu'on a vu que les logos de marque
+  étaient **4,8× trop grands sur les 5 pages** alors que le constat de départ ne parlait que de format, et
+  que `heritage-1980` (521 px affichés, pleine largeur de son conteneur) n'avait au contraire **rien** à
+  corriger, contrairement à 1987 et 1988 (249 px, demi-colonne) qui partageaient le même `sizes`.
+  Les courbes de largeur ont été relevées sur 13 paliers pour écrire des `sizes` justes à chaque palier
+  (et non un seul chiffre moyen faux partout) : les deux photos passent enfin sur la variante 760w.
+  **DEUX FAUSSES PISTES ÉCARTÉES, à ne pas « corriger » un autre jour** : le collage n'était pas
+  surdimensionné (2400 px = le DPR2 d'une bande pleine largeur) — on a baissé sa qualité sous son scrim
+  plutôt que d'ajouter un différé JS ; et convertir les 4 logos PNG en AVIF/WebP aurait été le mauvais
+  levier (le gain était le calibre) tout en fragilisant le swap clair/sombre de la nav, son nom accessible
+  et le morph View Transition. `logo-couleur-degrade.png` a même été **laissé intact** : la version réduite
+  pesait PLUS que l'originale (réduire un dégradé crée plus de couleurs que la baisse de pixels n'en
+  économise) et ce fichier sert de `logo` au JSON-LD.
+  **VÉRIFICATIONS** : rendu identique au pixel après redimensionnement (nav 97,5x42 / 78,9x34 / 69,6x30,
+  pied 60,7x52, emblème 381x270 — mêmes valeurs qu'avant), 0 débordement sur 5 pages x 8 largeurs
+  (320 -> 1680), 0 ratio déformé, console vide, 5 pages en 200, captures visuelles du hero, de la bande
+  partenaires, de la galerie et du pied. Écart visuel mesuré sur chaque image retouchée : 0,09 à 0,79
+  sur 255 en moyenne, soit invisible.
+  ⚠️ **Pièges de rig confirmés ou nouveaux.** (a) Le pane est resté `visibilityState: hidden` avec
+  `innerWidth: 0` toute la session : seules les iframes à largeur explicite mesurent juste, et les captures
+  fiables passent par Chrome headless sur une page-cadre. (b) **Le cache d'images du pane a fait croire
+  que rien n'avait changé** : `naturalWidth` renvoyait encore 940x405 après remplacement des fichiers →
+  toujours faire `fetch(url, {cache:'reload'})` sur chaque fichier remplacé AVANT de mesurer. (c) Les
+  images `loading="lazy"` ne se chargent JAMAIS dans une iframe hors écran (l'IntersectionObserver remonte
+  au viewport de premier niveau) : il faut les repasser en eager pour les mesurer, et `img.decode()` ne
+  résout jamais sur une image non chargée — sonder `complete` avec une borne, pas `await decode()`.
+  (d) En zsh, `scale=$W:$H:flags=lanczos` est mangé par l'expansion (`720ags`) : accolader `${H}`.
+  (e) Le premier relevé du poids d'un encodage ffmpeg lu pendant l'écriture est faux (0,25 Mo au lieu de
+  2,25) : attendre la fin du process avant de comparer des tailles.
+  ⚠️ **`media` sur un `<source>` de `<video>` : vérifié, pas supposé.** Un premier relevé le donnait
+  ignoré (fichier mobile choisi à 700 px de large) ; un test isolé sur 10 largeurs a montré que la sélection
+  est en réalité exacte à la frontière 620/621 et que le premier relevé était un artefact du harnais. Le
+  markup a malgré tout été écrit **desktop en premier** avec `min-width`, et la source mobile en repli sans
+  `media` : un navigateur qui ignorerait l'attribut retombe ainsi sur la version NETTE (qualité préservée,
+  économie perdue) plutôt que d'imposer le fichier léger à un grand écran.
+  **RESTE À FAIRE, hors de cette routine** : les 3 vignettes du feed Instagram sont servies 2,46× trop
+  grandes (720 px pour 146 px affichés, ~250 Ko à gagner) — reporté au backlog pour `maj-feed-insta-site`,
+  la section « Les derniers posts » étant interdite ici.
 
 - 2026-08-06 (routine, AXE B : CORRIGER, dimension SEO TECHNIQUE + résultats Google réels, commit ec9dc99) :
   T7 non monté, travail sur clone GitHub dans le scratchpad. Dimension jamais auditée à fond jusqu'ici
