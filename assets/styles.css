@@ -1,15 +1,11 @@
 /* ============================================================
    TPRacing v3 / feuille de style commune
-   Charte : marine #1E2635 · or #D49726 · blanc cassé #F6F7FC
-   Typos : Korataki (titres) · Bebas Neue Pro (labels) · Inter (texte)
+   Charte : marine #1E2635 / or #D49726 / blanc cassé #F6F7FC
+   Typos : Korataki (titres) / Bebas Neue Pro (labels) / Inter (texte)
    ============================================================ */
 
-@font-face {
-  font-family: 'Korataki';
-  src: url('fonts/korataki.woff2') format('woff2');
-  font-weight: 400;
-  font-display: swap;
-}
+/* Korataki n'est utilisée qu'en graisse 700 (titres, mots géants, chiffres) :
+   la fonte 400 a été retirée le 08/08, elle n'était appelée par aucune règle. */
 @font-face {
   font-family: 'Korataki';
   src: url('fonts/korataki-bold.woff2') format('woff2');
