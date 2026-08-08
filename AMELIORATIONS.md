@@ -239,21 +239,21 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   249,3 -> 103,4 Ko ; (5) collage décoratif 2400 -> 1800 px, 126,7 -> 74,6 Ko ; (6) `sizes` des photos
   d'héritage 1987 et 1988 corrigé ; (7) Korataki 400 retirée du dépôt.
   **MÉTHODE, ce qui a évité deux erreurs** : le calibre a été mesuré page par page dans des iframes à
-  largeur explicite (8 largeurs), jamais déduit du CSS — c'est comme ça qu'on a vu que les logos de marque
+  largeur explicite (8 largeurs), jamais déduit du CSS : c'est comme ça qu'on a vu que les logos de marque
   étaient **4,8× trop grands sur les 5 pages** alors que le constat de départ ne parlait que de format, et
   que `heritage-1980` (521 px affichés, pleine largeur de son conteneur) n'avait au contraire **rien** à
   corriger, contrairement à 1987 et 1988 (249 px, demi-colonne) qui partageaient le même `sizes`.
   Les courbes de largeur ont été relevées sur 13 paliers pour écrire des `sizes` justes à chaque palier
   (et non un seul chiffre moyen faux partout) : les deux photos passent enfin sur la variante 760w.
   **DEUX FAUSSES PISTES ÉCARTÉES, à ne pas « corriger » un autre jour** : le collage n'était pas
-  surdimensionné (2400 px = le DPR2 d'une bande pleine largeur) — on a baissé sa qualité sous son scrim
+  surdimensionné (2400 px = le DPR2 d'une bande pleine largeur) : on a baissé sa qualité sous son scrim
   plutôt que d'ajouter un différé JS ; et convertir les 4 logos PNG en AVIF/WebP aurait été le mauvais
   levier (le gain était le calibre) tout en fragilisant le swap clair/sombre de la nav, son nom accessible
   et le morph View Transition. `logo-couleur-degrade.png` a même été **laissé intact** : la version réduite
   pesait PLUS que l'originale (réduire un dégradé crée plus de couleurs que la baisse de pixels n'en
   économise) et ce fichier sert de `logo` au JSON-LD.
   **VÉRIFICATIONS** : rendu identique au pixel après redimensionnement (nav 97,5x42 / 78,9x34 / 69,6x30,
-  pied 60,7x52, emblème 381x270 — mêmes valeurs qu'avant), 0 débordement sur 5 pages x 8 largeurs
+  pied 60,7x52, emblème 381x270, mêmes valeurs qu'avant), 0 débordement sur 5 pages x 8 largeurs
   (320 -> 1680), 0 ratio déformé, console vide, 5 pages en 200, captures visuelles du hero, de la bande
   partenaires, de la galerie et du pied. Écart visuel mesuré sur chaque image retouchée : 0,09 à 0,79
   sur 255 en moyenne, soit invisible.
@@ -264,7 +264,7 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   toujours faire `fetch(url, {cache:'reload'})` sur chaque fichier remplacé AVANT de mesurer. (c) Les
   images `loading="lazy"` ne se chargent JAMAIS dans une iframe hors écran (l'IntersectionObserver remonte
   au viewport de premier niveau) : il faut les repasser en eager pour les mesurer, et `img.decode()` ne
-  résout jamais sur une image non chargée — sonder `complete` avec une borne, pas `await decode()`.
+  résout jamais sur une image non chargée : sonder `complete` avec une borne, pas `await decode()`.
   (d) En zsh, `scale=$W:$H:flags=lanczos` est mangé par l'expansion (`720ags`) : accolader `${H}`.
   (e) Le premier relevé du poids d'un encodage ffmpeg lu pendant l'écriture est faux (0,25 Mo au lieu de
   2,25) : attendre la fin du process avant de comparer des tailles.
@@ -275,7 +275,7 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   `media` : un navigateur qui ignorerait l'attribut retombe ainsi sur la version NETTE (qualité préservée,
   économie perdue) plutôt que d'imposer le fichier léger à un grand écran.
   **RESTE À FAIRE, hors de cette routine** : les 3 vignettes du feed Instagram sont servies 2,46× trop
-  grandes (720 px pour 146 px affichés, ~250 Ko à gagner) — reporté au backlog pour `maj-feed-insta-site`,
+  grandes (720 px pour 146 px affichés, ~250 Ko à gagner), reporté au backlog pour `maj-feed-insta-site`,
   la section « Les derniers posts » étant interdite ici.
 
 - 2026-08-06 (routine, AXE B : CORRIGER, dimension SEO TECHNIQUE + résultats Google réels, commit ec9dc99) :
