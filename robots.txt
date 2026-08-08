@@ -4,6 +4,7 @@ Allow: /
 # Documents de travail publiés avec le dépôt : hors index (règle plus spécifique que Allow: /)
 Disallow: /AMELIORATIONS.md
 Disallow: /LISEZ-MOI.md
+Disallow: /DA-TPRACING.md
 
 Sitemap: https://tpracing.github.io/sitemap.xml
 
