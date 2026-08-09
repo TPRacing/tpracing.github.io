@@ -237,6 +237,48 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-08-09 bis (demande directe de Thomas, dans la foulée) : **11 surtitres sur 17 supprimés.**
+  Sa remarque : « enlève ceux qui sont inutiles, par exemple "Ils nous soutiennent" alors que le
+  titre juste après c'est "Ils nous font confiance", la plupart font trop robotiques ». Son exemple
+  en cachait dix autres. Méthode : les 17 surtitres passés à trois lectures indépendantes
+  (redondance pure, voix de marque, fonction réelle) puis à trois contradicteurs chargés de
+  défendre le maintien (rendu graphique, usage, sur-zèle), enfin arbitrage. Les affirmations qui
+  portaient une décision ont été revérifiées à la main dans le code avant d'agir.
+  **RÈGLE RETENUE, vérifiable :** un surtitre ne reste que s'il porte une information que le titre
+  ne PEUT pas porter, s'il est le seul mot d'arrivée d'une ancre réellement cliquée, ou s'il est le
+  seul en-tête d'un bloc sans titre. Partout ailleurs la section s'ouvre sur son titre.
+  **SUPPRIMÉS (11)** : accueil « Qui sommes nous », « Nous soutenir », « Ils nous soutiennent »,
+  « Dans les médias », « En piste », « Le pilote », « Contact » ; pilote « Suivre le parcours » ;
+  contact « Contact » ; mentions « Informations légales » ; 404 « Erreur 404 ».
+  **GARDÉS (6)** : « Association de sport automobile » (seule ligne qui dit ce qu'est TPRacing, le
+  h1 étant une métaphore) ; « La trajectoire » et « Le parcours » (cibles d'ancres réellement
+  cliquées, 5 liens et 1 lien, et le mot ne survit pas dans le titre) ; « Pilote / Co-fondateur »
+  (seule mention VISIBLE de « co-fondateur » sur la page) ; « En attendant » (transition parlée qui
+  justifie un jeu sur une page d'erreur, aucun gabarit ne livre ça) ; « Sur Instagram » (intouchable,
+  domaine de la routine maj-feed-insta-site).
+  **VÉRIFICATIONS D'ANCRES faites avant de trancher** : #presse, #galerie, #contact et #instagram
+  ont ZÉRO lien entrant dans tout le site, leur surtitre ne confirmait donc aucune arrivée ;
+  #trajectoire en a 5 et #parcours 1, d'où les deux maintiens.
+  **DÉFAUT RÉEL DÉBUSQUÉ AU PASSAGE** : `.contact-tete` et `.legal-tete` ne sont pas des
+  `.section-marine`, leur emblème filigrane héritait donc de `rgba(30,38,53,.08)`, soit du marine à
+  8 % POSÉ SUR DU MARINE : il était invisible depuis toujours. Sans surtitre ces deux en-têtes
+  seraient devenus des dégradés plats, l'interdit numéro un de la DA. Ils reçoivent la teinte claire
+  des fonds sombres (`rgba(246,247,252,.05)`) et l'emblème apparaît enfin, vérifié en capture.
+  **MÉNAGE** : règles devenues mortes retirées (`.trust-tete .kicker`, `.hero-404 .kicker`), et
+  `data-d="1"` retiré des h2 de presse et galerie qui traînaient 120 ms de retard derrière un
+  surtitre disparu.
+  **UN ARBITRAGE PRIS CONTRE LA SYNTHÈSE** : elle proposait de renommer « Suivre le parcours » en
+  « Les réseaux » au motif que le bloc n'a aucun titre. Vérification faite, le paragraphe juste
+  dessous finit déjà par « sur tous les réseaux » et les six liens s'appellent Instagram, TikTok,
+  YouTube, Twitch, LinkedIn, Facebook : le label aurait été la troisième fois que la même idée
+  s'écrivait dans la même rangée, et une deuxième pastille à moins d'un écran de « Sur Instagram ».
+  Supprimé, donc, ce qui est plus fidèle à la demande.
+  **VÉRIFIÉ** : 5 pages x 5 largeurs (320 à 1680), 0 débordement, 0 erreur JS, aucun titre resté
+  invisible faute de reveal ; captures des 8 sections touchées REGARDÉES en desktop et en mobile.
+  **À DIRE À THOMAS** : « En piste » disparaît du site comme phrase autonome alors que c'est du
+  vocabulaire maison, à confirmer à l'œil ; et contact.html comme mentions-legales.html n'ont plus
+  de pastille damier du tout, ce qui ne tient que grâce au correctif d'emblème ci-dessus.
+
 - 2026-08-09 (routine, AXE A : AMÉLIORER, demande directe de Thomas) : **les labels Bebas passent
   de la coupe Middle à la coupe BOLD sur tout le site.** L'entrée « PRIORITÉ ABSOLUE » du 08/08
   n'était présente que dans la copie du T7 et n'avait jamais été poussée (le run du 08/08 travaillait

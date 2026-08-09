@@ -71,6 +71,15 @@ langage étranger, elle ne passe pas.
   identiques, rangées d'icônes rondes, tout à la même échelle. Hors charte et hors sujet
   (reality-check StudioMeyer consigné le 03/08).
 - Le tout-doré (rejet du favicon doré, 17/07) : l'or est un accent, le marine domine.
+- **Le surtitre qui redit le titre** : rejeté par Thomas le 09/08, « la plupart des surtitres font
+  trop robotiques car pas très utiles », exemple donné « Ils nous soutiennent » au-dessus de
+  « Ils nous font confiance ». Une étiquette de rubrique (« Qui sommes nous », « Contact »,
+  « Dans les médias », « Informations légales ») est collable sur n'importe quel site : c'est la
+  signature du gabarit. **Règle : un surtitre ne se pose que s'il porte une information que le
+  titre ne PEUT pas porter, s'il est le seul mot d'arrivée d'une ancre réellement cliquée dans le
+  site, ou s'il est le seul en-tête d'un bloc sans titre.** Dans tous les autres cas la section
+  s'ouvre sur son titre, et c'est la matière graphique qui l'installe (mot géant, logo, emblème
+  filigrane, cadres à brackets), pas un label.
 - **La typo trop FINE** : les labels en Bebas Middle ont été rejetés par Thomas le 08/08,
   « ça fait présentation Claude IA ». Un trait maigre en capitales espacées, c'est le
   registre du slide d'entreprise, pas celui de la course. Le sport auto écrit épais.
@@ -124,3 +133,17 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   sur les très petits écrans, jamais un rétrécissement du corps qui casserait l'échelle des labels.
   Dernier endroit du site encore en Middle, assumé et consigné au backlog : les 3 cartes Open Graph,
   où la police est cuite dans le pixel.
+
+- 2026-08-09 bis : **la pastille damier devient rare, donc elle redevient un signe.** Source : retour
+  de Thomas le jour même sur les surtitres « robotiques ». 11 des 17 surtitres du site ont sauté, et
+  avec eux leur pastille. Ce qui s'apprend ici dépasse le texte : la pastille damier ne vaut que si
+  elle marque quelque chose. Posée en tête de chaque section, elle devenait un ornement de gabarit,
+  exactement l'effet que la DA cherche à fuir. Il en reste 6 sur les 5 pages, chacune sur un bloc qui
+  la mérite. Contrepartie vérifiée avant d'agir : une section qui perd sa pastille doit avoir une
+  autre matière pour s'ouvrir. C'est le cas partout (logo couleur dégradé pour l'association, mot
+  géant « Presse », 47 géant et cadres à brackets pour la galerie, emblème filigrane pour
+  partenaires et contact), SAUF sur contact.html et mentions-legales.html : leurs en-têtes portaient
+  un emblème filigrane resté invisible depuis toujours, en marine à 8 % sur un fond marine, faute
+  d'être des `.section-marine`. Corrigé en même temps. **Règle qui en découle : avant de retirer un
+  élément de vocabulaire d'un bloc, vérifier CE QUI RESTE pour le tenir, et le vérifier en capture,
+  pas dans le code** ; un décor déclaré n'est pas un décor visible.
