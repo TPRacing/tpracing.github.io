@@ -18,7 +18,8 @@ ou le retour de Thomas qui la justifie). Il n'est pas une deuxième charte : la 
 - Typos : Korataki 700 pour les titres (police TRÈS large : environ 1,21 em par capitale,
   une demi-colonne tient environ 13 caractères par ligne, tout titre vise 2 lignes maximum,
   sinon on REFORMULE, accord de principe de Thomas du 18/07) ; Bebas Neue Pro pour les
-  labels et kickers ; Inter pour le texte courant.
+  labels et kickers, **en coupe BOLD et seulement elle** depuis le 09/08 (voir le journal de DA) ;
+  Inter pour le texte courant.
 - Logo : COULEUR sur fond clair, BLANC sur fond sombre, jamais l'inverse. Le logo couleur
   dégradé est la version préférée de Thomas pour le numérique.
 - Nom officiel au tiret court : « TPRacing - Thomas Papone Racing ». Aucun cadratin,
@@ -49,6 +50,11 @@ langage étranger, elle ne passe pas.
   est la matière.
 - Chevrons de vitesse « » » pleins en dégradé d'opacité pour les listes et labels
   (jamais de tirets décoratifs).
+- Label TPRacing = **Bebas BOLD + interlettrage large**, jamais l'inverse. Les deux vont
+  ensemble : le tracing large seul donne le label fin et distingué des présentations
+  génériques, la graisse seule perd la respiration de la charte. Ratio de référence,
+  repris du dossier sponsoring : quand on passe en Bold, on resserre l'interlettrage
+  d'environ 12 % (2,8 au lieu de 3,2) pour que la ligne reste tenue.
 - Un élément volontairement TROP GRAND par écran : c'est ce qui fait poster plutôt que
   template (consigne du 10/07).
 - Emblème TP : en 3D or au hero, en contour géant filigrane dans les fonds de section.
@@ -65,6 +71,11 @@ langage étranger, elle ne passe pas.
   identiques, rangées d'icônes rondes, tout à la même échelle. Hors charte et hors sujet
   (reality-check StudioMeyer consigné le 03/08).
 - Le tout-doré (rejet du favicon doré, 17/07) : l'or est un accent, le marine domine.
+- **La typo trop FINE** : les labels en Bebas Middle ont été rejetés par Thomas le 08/08,
+  « ça fait présentation Claude IA ». Un trait maigre en capitales espacées, c'est le
+  registre du slide d'entreprise, pas celui de la course. Le sport auto écrit épais.
+  Remède appliqué le 09/08 : coupe Bold seule (aucune Middle chargée, donc aucun recoin
+  du site ne peut retomber dans le fin), interlettrage large conservé.
 - Le trop-plein : la page jeu.html a été RETIRÉE le 25/07 (« ça en fait trop, laisse
   juste sur la page 404 »). Pas de nouvelle page ni rubrique sans accord, enrichir
   l'existant, sobriété d'abord.
@@ -95,3 +106,21 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   jeu.html, amplitudes) et le vocabulaire déjà en production sur les 5 pages. Prochaine
   étape de veille : passer les captures des sites de référence à la grille d'observation
   de la routine et sourcer ici, capture à l'appui, ce qu'on garde et ce qu'on refuse.
+
+- 2026-08-09 : **la graisse des labels devient une règle de DA, pas un réglage.** Source : retour
+  direct de Thomas du 08/08 sur les kickers en Bebas Middle, « trop fins, ça fait présentation
+  Claude IA », et bascule déjà opérée sur le dossier sponsoring (Bold 9 pt / espacement 2,8 au lieu
+  de Middle 8,5 / 3,2), qui sert de référence visuelle inter-supports. Vérifié par comparaison
+  rendue avant/après sur « ASSOCIATION DE SPORT AUTOMOBILE » et « LE PILOTE / N.47 » : à
+  interlettrage égal la Middle se dilue sur le marine alors que la Bold tient la ligne, et le
+  contraste avec le Korataki des titres redevient une hiérarchie (deux niveaux lisibles) au lieu
+  d'un écart de finesse. Ce qui est entériné : **une seule graisse de Bebas est déclarée sur le
+  site**, la Bold. C'est volontairement plus rigide qu'un réglage par règle : tant qu'aucune Middle
+  n'est chargée, aucun label futur, aucune section reprise d'un ancien gabarit ne peut redevenir
+  fine par oubli. La contrainte porte la DA à la place de la vigilance.
+  Corollaire mesuré, à retenir pour les prochains chantiers typographiques : **changer de graisse
+  change la largeur du texte**, donc les lignes courtes se vérifient à 320 px (ici le plus long
+  kicker débordait de 5 px et repassait sur 2 lignes) ; la réponse est un palier d'interlettrage
+  sur les très petits écrans, jamais un rétrécissement du corps qui casserait l'échelle des labels.
+  Dernier endroit du site encore en Middle, assumé et consigné au backlog : les 3 cartes Open Graph,
+  où la police est cuite dans le pixel.

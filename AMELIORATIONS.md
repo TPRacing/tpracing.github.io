@@ -5,6 +5,29 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 
 ## Backlog (par priorité)
 
+- [x] PRIORITÉ ABSOLUE (demande directe de Thomas, 08/08) : les kickers et petits labels Bebas
+      sont TROP FINS, « ça fait présentation Claude IA ». Le site ne charge Bebas Neue Pro
+      qu'en coupe Middle (assets/fonts/bebas-neue-pro-middle.woff2, weight 400) : ajouter une
+      coupe BOLD en woff2 (source de conversion : bebas_bold.ttf dans « TPRacing - SPONSORS/
+      Offre 2027-2028 (sources)/ » sur le T7, nom interne « Bebas Neue Pro » = la Bold ;
+      fonttools pour la conversion woff2), déclarer le @font-face weight 700 et passer en
+      font-weight 700 tous les usages de --f-label (.kicker ligne ~163, lignes ~313/372/437,
+      h3 ligne ~430). Garder l'interlettrage large (identité) mais avec de la matière : le
+      dossier sponsoring vient de faire la même bascule (Bold 9 pt / espacement 2,8 au lieu de
+      Middle 8,5 / 3,2) et sert de référence visuelle. Vérifier le breakpoint mobile
+      (.kicker .95rem/.22em) et traquer les rasters où la Middle serait cuite en dur (images OG).
+      FAIT le 09/08 (voir Journal). Les rasters ont été traqués : reste l'item ci-dessous.
+- [ ] Cartes Open Graph : la Middle y est CUITE EN DUR (kicker et ligne d'url des 3 cartes
+      og-accueil.jpg, og-pilote.jpg, og-contact.jpg), elles sont donc les derniers endroits
+      du site où le label reste fin. Repérées le 09/08, sciemment PAS retouchées ce jour-là :
+      les scripts de génération n'existent plus, un repeint local du texte se ferait sur de
+      la photo (risque d'artefact sur la vitrine sociale du site) et une reconstruction
+      complète ferait dériver l'étalonnage des 3 cartes, qui doivent rester une famille.
+      Chantier propre à prévoir : refaire les 3 d'un coup depuis les photos sources
+      (accueil = CLV_0089 kart 324 Valence 2022 ; pilote = découpe simu ; contact = photo
+      partenaires-stickers), recette PIL en mémoire projet (split-tone marine/or, midpoint
+      ~158, voile marine 10 %, vignette, scrim bas, logo BLANC, supersampling x2), en
+      remplaçant la Middle par bebas_bold.ttf, puis comparer les 3 côte à côte avant push.
 - [x] Favicon propre multi-tailles depuis l'emblème (32px, 180px apple-touch) + meta theme-color marine
 - [x] Image Open Graph dédiée 1200×630 (logo + photo duotone) pour les partages LinkedIn/WhatsApp
 - [x] Micro-interaction nav : soulignement or animé qui glisse sous les liens
@@ -213,6 +236,50 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-08-09 (routine, AXE A : AMÉLIORER, demande directe de Thomas) : **les labels Bebas passent
+  de la coupe Middle à la coupe BOLD sur tout le site.** L'entrée « PRIORITÉ ABSOLUE » du 08/08
+  n'était présente que dans la copie du T7 et n'avait jamais été poussée (le run du 08/08 travaillait
+  depuis un clone du scratchpad, T7 non monté) : elle a été récupérée dans le diff local avant le
+  `git pull`, d'où le traitement aujourd'hui. Rappel de méthode : **toujours regarder le diff local
+  du T7 avant de le synchroniser**, une demande de Thomas peut y dormir.
+  **CE QUI A CHANGÉ.** `bebas_bold.ttf` (« TPRacing - SPONSORS/Offre 2027-2028 (sources)/ », nom
+  interne « Bebas Neue Pro ») converti en woff2 sous-ensemble latin par fonttools :
+  **13,4 Ko contre 32,4 Ko pour la Middle**, couverture vérifiée caractère par caractère contre le
+  contenu réel des 5 pages (les 3 seuls signes absents, des pictogrammes, manquaient déjà à la
+  Middle : zéro régression). La Middle a été **retirée du dépôt** : le site ne déclare plus qu'UNE
+  graisse de Bebas, si bien qu'un label laissé sans `font-weight` tombe forcément sur la Bold et
+  qu'aucun recoin ne peut rester fin. Bilan de poids : **-19 Ko** malgré l'ajout.
+  Les 5 `<link rel=preload>` pointaient sur l'ancien fichier et ont été repointés (sans ça, un
+  préchargement en 404 et la police servie en retard). `font-weight: 700` posé explicitement sur les
+  règles de label, et les deux `font-weight: 400` qui bridaient `<strong>`/`<b>` (`.part-cta strong`,
+  `.depart .devise b`) supprimés : ils n'existaient que faute de coupe grasse.
+  **INTERLETTRAGE.** Consigne de Thomas : garder le tracking large (c'est l'identité) mais avec de la
+  matière. Il est resserré d'environ 12 %, le même ratio que le dossier sponsoring qui vient de faire
+  la bascule (Bold 2,8 au lieu de Middle 3,2) : kicker .34 -> .30em, marquee .22 -> .20em, bande
+  origines et légende de lightbox .16 -> .145em, presse .15 -> .135em, disciplines et badges de
+  parcours .16 -> .145em, boutons .12 -> .11em, labels du jeu 404 .14 -> .13em.
+  **UN DÉFAUT ATTRAPÉ EN VÉRIFICATION** : la Bold est plus large, et à 320 px le plus long kicker
+  (« Association de sport automobile ») réclamait 259 px pour 254 px utiles, donc passait sur 2 lignes.
+  Mesuré au lieu d'être supposé, corrigé par un palier `@media (max-width: 360px)` qui ramène le
+  kicker à .16em : dès 375 px la ligne tient avec le tracking large. Contrôlé à 320 / 360 / 361 / 375 / 390.
+  **VÉRIFICATIONS** : 5 pages x 6 largeurs (320 à 1680) = 0 débordement (contrôle par rect de chaque
+  élément, `overflow-x: clip` masquant `scrollWidth`), 0 erreur JS ; graisse calculée relevée sur
+  160 labels = 700 partout, une seule police Bebas chargée (`Bebas Neue Pro:700`) ; l'ancien fichier
+  répond bien 404 et le nouveau 200 ; captures desktop 1280 et mobile 390/320 des 5 pages REGARDÉES.
+  **LES CARTES OG NE SONT PAS TOUCHÉES, ET C'EST DÉLIBÉRÉ** : la Middle y est cuite en dur (kicker et
+  ligne d'url des 3 cartes). Les scripts de génération n'existent plus ; repeindre le texte sur de la
+  photo risquait un artefact visible sur la vitrine sociale, et tout reconstruire aurait fait dériver
+  l'étalonnage des 3 cartes qui doivent rester une famille. Item dédié ajouté au backlog avec les
+  sources et la recette, à faire d'un bloc.
+  ⚠️ Rig : le pane est resté `visibilityState: hidden` avec `innerWidth: 0` toute la session (seules
+  les iframes à largeur explicite mesurent juste). **Piège neuf : une page-cadre de capture servie sur
+  un AUTRE port que le site est cross-origin, donc `contentDocument` est inaccessible et toute
+  l'injection (neutralisation des reveals, sortie d'intro) échoue EN SILENCE** ; la capture paraît
+  simplement vide et on croit à un bug de rendu. Il faut servir le cadre depuis le site lui-même.
+  Deuxième piège : donner à l'iframe une hauteur énorme pour « tout voir » étire les sections en
+  `100vh` (hero de 9000 px) ; garder la hauteur réelle et scroller l'iframe. Et pour contourner le
+  clamp de `--window-size` en dessous de ~500 px, capturer une iframe de 390 px DANS une fenêtre large.
 
 - 2026-08-08 (routine, AXE B : CORRIGER, dimension PERFORMANCE / POIDS RÉELS, commit 05a72f1) :
   T7 non monté, travail sur clone GitHub dans le scratchpad. Rotation des dimensions : liens 25/07,

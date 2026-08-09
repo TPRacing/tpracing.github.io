@@ -12,10 +12,14 @@
   font-weight: 700;
   font-display: swap;
 }
+/* Bebas Neue Pro : coupe BOLD depuis le 09/08 (demande de Thomas, les labels en
+   Middle étaient trop fins et manquaient de matière). Le site ne charge QUE cette
+   graisse : un label laissé sans font-weight tombe donc sur la Bold, jamais sur une
+   Middle absente. La coupe Middle et son fichier ont été retirés le même jour. */
 @font-face {
   font-family: 'Bebas Neue Pro';
-  src: url('fonts/bebas-neue-pro-middle.woff2') format('woff2');
-  font-weight: 400;
+  src: url('fonts/bebas-neue-pro-bold.woff2') format('woff2');
+  font-weight: 700;
   font-display: swap;
 }
 /* Inter auto-hébergée (police variable, 400 à 700) : aucun appel à Google Fonts */
@@ -158,8 +162,12 @@ html { scrollbar-color: var(--or) var(--marine); }
 /* pastille damier (reprise du damier du logo) */
 .kicker {
   font-family: var(--f-label);
+  font-weight: 700;
   font-size: 1.15rem;
-  letter-spacing: .34em;
+  /* interlettrage large gardé (c'est l'identité), resserré de 12 % depuis la
+     bascule en Bold : la graisse remplit déjà l'espace. Même ratio que le
+     dossier sponsoring (Bold 2,8 au lieu de Middle 3,2). */
+  letter-spacing: .30em;
   text-transform: uppercase;
   color: var(--or);
   display: flex;
@@ -307,8 +315,9 @@ html { scrollbar-color: var(--or) var(--marine); }
 }
 .bande-origines p.origines {
   font-family: var(--f-label);
+  font-weight: 700;
   font-size: clamp(1.25rem, 2.6vw, 1.9rem);
-  letter-spacing: .16em;
+  letter-spacing: .145em;
   text-transform: uppercase;
   line-height: 1.9;
   text-shadow: 0 2px 18px rgba(7, 11, 29, .8);
@@ -366,8 +375,9 @@ html { scrollbar-color: var(--or) var(--marine); }
 .marquee:hover .piste { animation-play-state: paused; }
 .marquee span {
   font-family: var(--f-label);
+  font-weight: 700;
   font-size: 1.28rem;
-  letter-spacing: .22em;
+  letter-spacing: .20em;
   text-transform: uppercase;
   color: var(--blanc);
   white-space: nowrap;
@@ -395,7 +405,7 @@ h2 { font-size: clamp(1.4rem, 2.7vw, 2.15rem); margin-bottom: 22px; }
 @media (max-width: 560px) {
   h1 { font-size: 1.6rem; }
   h2 { font-size: min(5.8vw, 1.4rem); }
-  .kicker { font-size: .95rem; letter-spacing: .22em; }
+  .kicker { font-size: .95rem; letter-spacing: .20em; }
 }
 /* groupes de mots insécables (anti mot-orphelin dans les titres) */
 .hl { white-space: nowrap; }
@@ -423,7 +433,7 @@ p { text-wrap: pretty; }
 }
 .foot-reso svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
-h3 { font-family: var(--f-label); font-size: 1.45rem; letter-spacing: .07em; text-transform: uppercase; }
+h3 { font-family: var(--f-label); font-weight: 700; font-size: 1.45rem; letter-spacing: .07em; text-transform: uppercase; }
 
 .lead { color: var(--gris); max-width: 720px; font-size: 1.02rem; }
 .lead strong { color: var(--encre); }
@@ -431,8 +441,9 @@ h3 { font-family: var(--f-label); font-size: 1.45rem; letter-spacing: .07em; tex
 /* ---------- Boutons ---------- */
 .btn {
   font-family: var(--f-label);
+  font-weight: 700;
   font-size: 1.12rem;
-  letter-spacing: .12em;
+  letter-spacing: .11em;
   text-transform: uppercase;
   text-decoration: none;
   display: inline-block;
@@ -490,6 +501,7 @@ nav ul {
 }
 nav ul a {
   font-family: var(--f-label);
+  font-weight: 700;
   font-size: 1.08rem;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -565,6 +577,14 @@ nav.solide ul a:hover, nav.solide ul a.active { color: var(--or); }
   .btn { font-size: 1rem; letter-spacing: .08em; padding: 12px 20px; max-width: 100%; overflow-wrap: anywhere; }
 }
 
+/* Très petits écrans : la Bold est plus large que l'ancienne Middle et le plus long
+   kicker (« Association de sport automobile ») réclamait 259 px pour 254 px utiles,
+   donc passait sur 2 lignes. L'interlettrage se resserre ici seulement : dès 375 px
+   la ligne tient avec le tracking large d'origine. */
+@media (max-width: 360px) {
+  .kicker { letter-spacing: .16em; }
+}
+
 /* ---------- Sections ---------- */
 section { padding: 92px 6%; position: relative; }
 .contenu { max-width: 1180px; margin: 0 auto; position: relative; z-index: 1; }
@@ -604,7 +624,7 @@ footer .foot-grille {
   padding-bottom: 26px;
 }
 footer img { height: 52px; width: auto; }
-footer a { color: var(--blanc); text-decoration: none; font-family: var(--f-label); letter-spacing: .1em; font-size: 1.02rem; text-transform: uppercase; }
+footer a { color: var(--blanc); text-decoration: none; font-family: var(--f-label); font-weight: 700; letter-spacing: .1em; font-size: 1.02rem; text-transform: uppercase; }
 footer a:hover { color: var(--or); }
 footer .foot-liens { display: flex; gap: 22px; flex-wrap: wrap; }
 footer .foot-bas { max-width: 1180px; margin: 0 auto; border-top: 1px solid rgba(246, 247, 252, .14); padding-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; }
@@ -693,7 +713,8 @@ html.vt-lb::view-transition-new(lb-photo) { width: 100%; height: 100%; object-fi
   align-items: center;
   gap: 12px;
   font-family: var(--f-label);
-  letter-spacing: .16em;
+  font-weight: 700;
+  letter-spacing: .145em;
   text-transform: uppercase;
   font-size: 1.02rem;
   color: var(--blanc);
@@ -760,6 +781,7 @@ html.vt-lb::view-transition-new(lb-photo) { width: 100%; height: 100%; object-fi
   z-index: 90;
   transform: translate(-50%, -180%);
   font-family: var(--f-label);
+  font-weight: 700;
   font-size: 1.05rem;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -881,7 +903,8 @@ nav .nav-cta:focus-visible {
 .depart .chrono.faux { color: var(--rouge); }
 .depart .comparatif {
   font-family: var(--f-label);
-  letter-spacing: .14em;
+  font-weight: 700;
+  letter-spacing: .13em;
   text-transform: uppercase;
   font-size: 1rem;
   color: var(--gris);
@@ -889,7 +912,8 @@ nav .nav-cta:focus-visible {
 }
 .depart .consigne {
   font-family: var(--f-label);
-  letter-spacing: .14em;
+  font-weight: 700;
+  letter-spacing: .13em;
   text-transform: uppercase;
   font-size: 1.02rem;
   color: var(--gris);
@@ -898,12 +922,14 @@ nav .nav-cta:focus-visible {
 .depart .devise {
   margin-top: 34px;
   font-family: var(--f-label);
-  letter-spacing: .15em;
+  font-weight: 700;
+  letter-spacing: .135em;
   text-transform: uppercase;
   font-size: .95rem;
   color: var(--gris);
 }
-.depart .devise b { color: var(--or); font-weight: 400; }
+/* le b ne force plus 400 : ce garde-fou n'existait que faute de coupe Bold */
+.depart .devise b { color: var(--or); }
 
 /* ---------- Impression / Enregistrer en PDF ----------
    Sortie papier de marque : fond blanc, encre sobre, en-tête logo couleur,
