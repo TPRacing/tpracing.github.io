@@ -190,6 +190,68 @@ Actionnables sans contenu de Thomas :
 Sites morts ou trompeurs, à ne pas reprendre dans une prochaine veille : teamduqueine.com, akkodis-asp.com et
 tds-racing.com ne répondent plus ; signatech.fr n'est PAS l'écurie mais une entreprise de signalétique du Loiret.
 
+### Idées de la veille 10/08 (angles neufs : héritage, endurance, rallye, karting industriel, marque hors sport auto, studio primé : sites REGARDÉS, pas lus)
+
+Méthode du jour : 6 sites ouverts et capturés dans le Chrome connecté (haut de page + section de contenu),
+chaque capture relue avant d'écrire, le code seulement ensuite. Les captures parlent d'espace et de matière,
+pas de composants : c'est ce qui a fait trouver le défaut corrigé le jour même.
+
+Actionnables sans contenu de Thomas :
+- [x] **Le pas vertical est une règle, pas un réglage** : la bande de logos partenaires et le bandeau CTA
+      « Envie d'écrire la suite avec nous ? » se touchaient à 0 px sur l'accueil, si bien que les tuiles
+      blanches paraissaient coupées par l'aplat marine. Vu en regardant goodwood.com/motorsport (une bande
+      vide d'environ 150 px avant chaque titre de section, la respiration fait partie de la composition) et
+      baltic-watches.com (un vide franc entre le carrousel de collections et la photo suivante). Mesuré
+      ensuite dans le site : `.trust` porte `margin: 66px auto 0`, `.part-cta` portait `margin: 0 auto`.
+      Corrigé le jour même (66 px, le pas de la section elle-même). Pourquoi c'est TPRacing : la DA se dit
+      « tendue, pas flottante », et une composition tendue suppose des intervalles tenus, pas des blocs collés.
+- [ ] **Rail de position sous une rangée qui déborde** : baltic-watches.com pose sous son carrousel un filet
+      d'un pixel sur toute la largeur du contenu, avec un segment plus épais et plus sombre qui indique la
+      position et l'étendue visible ; la 3e carte est volontairement coupée par le bord de l'écran pour dire
+      « il y en a d'autres ». Mécanisme : un rail statique + un segment en `transform: translateX()` piloté
+      par le défilement du conteneur. Pourquoi c'est TPRacing : la ligne de course de progression sous la nav
+      est déjà exactement ce langage, un rail de bande partenaires en serait la déclinaison locale et rendrait
+      lisible le fait que la bande contient 18 logos et pas 6. À doser : la bande défile toute seule, un
+      indicateur de position sur un ruban infini peut être plus bavard qu'utile.
+- [ ] **En-tête de section « titre à gauche, signature à droite, filet sous la ligne »** : birelart.com pose
+      « MISSION AND VALUES » en très grandes capitales à gauche, la marque en petit et une phrase courte à
+      droite, et un filet fin sur toute la largeur juste dessous. Pourquoi c'est TPRacing : le site a déjà la
+      signature filet + emblème or en pied de page (reprise des pages de la charte) ; la remonter au niveau
+      d'une section serait du vocabulaire maison, pas un emprunt. À n'essayer que sur UNE section, la veille
+      du 09/08 ayant montré qu'un ornement posé partout redevient un gabarit.
+
+Observé, gardé comme règle plutôt que comme chantier (voir DA-TPRACING.md) :
+- Le surtitre qui survit à l'élagage du 09/08 a une forme précise, et deux sites la donnent : goodwood.com
+  écrit « OUR » puis « FLAGSHIP EVENTS », « EXPLORE » puis « ALL THINGS MOTORSPORT », « THE » puis
+  « DRIVING EXPERIENCES ». La petite ligne n'est jamais une rubrique, c'est le DÉBUT DE LA PHRASE que le
+  titre finit ; baltic-watches.com écrit « AQUASCAPHE MK2 COLLECTION » au-dessus de « NOW WITH A DATE », où
+  la petite ligne porte le RÉFÉRENT sans lequel le titre ne veut rien dire. Détail de mise en page relevé :
+  le filet qui accompagne le mot change de place avec l'alignement (des deux côtés quand c'est centré, à
+  droite seulement quand c'est aligné à gauche).
+- Contraste dominant/accent tenu par la photo : jotasport.com pousse la photo de garage jusqu'au quasi-noir
+  et ne laisse qu'un seul objet saturé à l'écran (l'écusson jaune Hertz), les deux logos partenaires étant
+  séparés par un simple filet vertical. C'est le ratio marine/or de TPRacing obtenu par l'image et non par
+  des aplats.
+
+Écartés en connaissance de cause :
+- Duotone généralisé sur les photos de reportage : mesure faite ce jour sur les 12 photos publiées, la
+  saturation moyenne des photos de galerie va de 0,07 à 0,23 et celle de `feed-racing.webp` monte à 0,37
+  avec 65 % de pixels dans le vert de l'herbe. La tentation était de « rattraper » cette photo. Refusé :
+  le site publie ses photos de reportage quasi naturelles (galerie comprise) et réserve le duotone aux
+  montages de marque (teaser pilote, cartes OG, collage origines). Corriger une seule photo aurait cassé
+  la règle réelle au nom d'une règle mal écrite dans DA-TPRACING.md, qui est corrigé à la place.
+- petrolicious.com : bel étalonnage ambré et sceau circulaire posé sur la photo de hero, mais le sceau
+  rond n'est pas du vocabulaire TPRacing (l'emblème TP et le damier tiennent déjà ce rôle) et la grille
+  de films assume des mondes colorimétriques tous différents, ce que la charte interdit.
+- m-sport.co.uk sert de CONTRE-EXEMPLE utile et rien d'autre : mosaïque de tuiles rectangulaires plates,
+  plaques marine avec un mot centré, grille sociale qui laisse des trous, zéro texture. Une écurie WRT
+  officielle Ford fait exactement ce que la DA appelle « template ». À citer quand une idée de plaque
+  plate reviendra. Sa grille sociale à trous confirme aussi le correctif du 25/07 (la tuile « Tout voir »
+  étirée en bandeau quand elle ouvre une rangée).
+
+Sites non capturables, à ne pas retenter à l'aveugle : noth.in (Awwwards SOTD, rendu WebGL : la page
+reste noire dans un onglet non visible, le préchargeur ne finit jamais faute de `requestAnimationFrame`).
+
 ### Constats reportés de l'audit SEO du 06/08 (à traiter un jour de dimension adaptée)
 
 Perf (pour le prochain jour d'audit performance) : TOUS TRAITÉS LE 08/08, voir le Journal.
@@ -236,6 +298,43 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-08-10 (routine, AXE C : veille par captures, dernière veille le 03/08 donc la semaine en
+  réclamait une ; 09/08 était un jour A) : **6 sites regardés sur des angles neufs, et un défaut de
+  finition trouvé grâce à eux, corrigé le jour même.** Sites : goodwood.com/motorsport (héritage),
+  jotasport.com (endurance), m-sport.co.uk (rallye), baltic-watches.com (marque forte hors sport auto,
+  petit catalogue), birelart.com (karting industriel), petrolicious.com (édition patrimoine) ; plus
+  noth.in (Awwwards SOTD) non capturable. Chaque site ouvert dans le Chrome connecté, haut de page +
+  section de contenu, captures relues avant d'écrire quoi que ce soit ; le code n'a été lu qu'ensuite.
+  **CE QUE LES CAPTURES ONT CHANGÉ :** en revenant sur l'accueil après une heure passée à regarder
+  comment Goodwood et Baltic gèrent le vide, la jonction bande de partenaires → bandeau CTA saute aux
+  yeux. Mesure : `.trust-band` finit à la ligne exacte où commence `.part-cta`, **gap = 0 px**, alors
+  que `.trust` s'ouvre lui-même sur 66 px et que `.part-grille` respire de 40 px. Résultat visible :
+  les tuiles blanches des logos paraissent COUPÉES par l'aplat marine, on ne voit jamais leur bord bas.
+  Corrigé : `.part-cta` passe de `margin: 0 auto` à `margin: 66px auto 0`, soit le pas de la section
+  elle-même, pas une valeur inventée. **Vérifs :** harnais de jonctions (tous les blocs frères des
+  5 pages, écart < 12 px signalé) → seul l'accueil avait un cas, les paires « chiffre géant + label »
+  à 8 px sont voulues ; après correction, 5 pages × 6 largeurs (320 / 375 / 414 / 768 / 1280 / 1680)
+  = 0 débordement, gap mesuré à 66 px aux six largeurs ; 0 erreur JS, 0 image cassée (le seul `img`
+  vide est `.lb-img`, la lightbox tant qu'aucune photo n'est ouverte) ; captures desktop et mobile 375
+  REGARDÉES, les tuiles montrent enfin leur bord bas. En ligne.
+  **FAUSSE PISTE ÉCARTÉE, à ne pas rouvrir :** la photo `feed-racing.webp` de la carte « Automobile »
+  est la plus saturée du site (0,37 de saturation moyenne, 65 % de ses pixels dans le vert de l'herbe,
+  contre 0,07 à 0,23 pour les photos de galerie). Tentation de l'étalonner en duotone au nom de la
+  ligne de DA « photos étalonnées split-tone ». Vérification faite avant d'agir : les photos de galerie
+  ne sont PAS étalonnées non plus (galerie-trois-karts sort ses jaunes et ses oranges naturels), donc la
+  règle réelle du site est à deux régimes, reportage quasi naturel, montages de marque en duotone. La
+  ligne de DA était mal écrite : c'est ELLE qui est corrigée, pas la photo.
+  **DA-TPRACING.md enrichi de trois entrées** : le vide comme matière (avec le chiffre du pas vertical),
+  les deux régimes photo, et la forme exacte du surtitre qui aurait le droit de revenir un jour.
+  **Rig :** dans un onglet non visible, aucun `reveal` ne se déclenche et les sites externes paraissent
+  vides. Recette qui débloque tout, y compris sur un site tiers : injecter
+  `*{opacity:1;visibility:visible;transform:none;transition:none;animation:none}` avant la capture
+  (elle fait aussi réapparaître les bandeaux de consentement, qu'il faut alors masquer avant de
+  screenshoter). Chrome headless reste inutilisable sur les sites lourds (deux captures parties en
+  timeout de plusieurs minutes) ; `resize_window` du Chrome connecté redimensionne la fenêtre sans
+  changer `innerWidth` du contenu (1200 px quoi qu'il arrive) → les mesures mobiles passent par le
+  Browser pane en preset mobile ou par des iframes à largeur explicite.
 
 - 2026-08-09 bis (demande directe de Thomas, dans la foulée) : **11 surtitres sur 17 supprimés.**
   Sa remarque : « enlève ceux qui sont inutiles, par exemple "Ils nous soutiennent" alors que le

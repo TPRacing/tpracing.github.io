@@ -338,7 +338,9 @@
     @media (max-width: 900px) { .part-grille { grid-template-columns: 1fr; } }
     .part-cta {
       max-width: 1180px;
-      margin: 0 auto;
+      /* 66px = le pas vertical de .trust : sans lui la bande de logos blancs vient
+         buter sur l'aplat marine et les tuiles paraissent coupées. */
+      margin: 66px auto 0;
       background:
         radial-gradient(rgba(246,247,252,.04) 1px, transparent 1.5px),
         var(--marine);

@@ -44,10 +44,13 @@ langage étranger, elle ne passe pas.
   « plein contre contour » animé, avec parcimonie).
 - Chiffres outline or (bande de chiffres, 404 géant).
 - Grain argentique global (SVG feTurbulence) + pointillés carbone sur les sections marine.
-- Photos : VRAIES photos de Thomas et de la famille, étalonnées split-tone marine/or
-  (+ grain + vignette), en NOUVEAUX fichiers, originaux jamais modifiés. Les photos
-  héritage (Le Mans 1980, Patrice 1987/1988) sont publiées BRUTES : la matière d'époque
-  est la matière.
+- Photos : VRAIES photos de Thomas et de la famille, en NOUVEAUX fichiers, originaux jamais
+  modifiés. **Deux régimes, à ne pas confondre** (précisé le 10/08 après mesure) : les photos
+  de REPORTAGE publiées dans les grilles de contenu (galerie, cartes disciplines, partenaires
+  en piste) restent quasi naturelles, la couleur du kart et de la piste est de la matière ;
+  le duotone split-tone marine/or (+ grain + vignette) est réservé aux MONTAGES DE MARQUE
+  (teaser pilote, cartes Open Graph, collage de la bande origines). Les photos héritage
+  (Le Mans 1980, Patrice 1987/1988) sont publiées BRUTES : la matière d'époque est la matière.
 - Chevrons de vitesse « » » pleins en dégradé d'opacité pour les listes et labels
   (jamais de tirets décoratifs).
 - Label TPRacing = **Bebas BOLD + interlettrage large**, jamais l'inverse. Les deux vont
@@ -57,6 +60,10 @@ langage étranger, elle ne passe pas.
   d'environ 12 % (2,8 au lieu de 3,2) pour que la ligne reste tenue.
 - Un élément volontairement TROP GRAND par écran : c'est ce qui fait poster plutôt que
   template (consigne du 10/07).
+- **Le vide est de la matière, et il se mesure.** Deux blocs de nature différente ne se
+  touchent jamais : entre eux, le pas vertical de la section qui les porte (66 px sur
+  l'accueil, le même que la marge d'ouverture de `.trust`). Un intervalle inventé au jugé
+  se voit autant qu'un intervalle nul (entrée du 10/08).
 - Emblème TP : en 3D or au hero, en contour géant filigrane dans les fonds de section.
 - Mouvement : sobre et lié à la course (intro tracé de circuit, ligne de course de
   progression, marquee asservi au scroll, reveals) ; tout est coupé en
@@ -147,3 +154,44 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   d'être des `.section-marine`. Corrigé en même temps. **Règle qui en découle : avant de retirer un
   élément de vocabulaire d'un bloc, vérifier CE QUI RESTE pour le tenir, et le vérifier en capture,
   pas dans le code** ; un décor déclaré n'est pas un décor visible.
+
+- 2026-08-10 : **le vide se mesure, et un intervalle nul est un défaut de fabrication.** Source :
+  captures de goodwood.com/motorsport et de baltic-watches.com. Goodwood laisse une bande vide
+  d'environ 150 px avant chaque titre de section et ne remplit jamais toute la largeur ; Baltic
+  ouvre un vide franc entre son carrousel de collections et la photo d'ambiance suivante. Ce ne
+  sont pas des sites « aérés » par paresse : le vide y sert à séparer deux natures de contenu, et
+  il est toujours de la même taille. En rentrant sur l'accueil TPRacing avec cet œil, la jonction
+  bande de logos partenaires → bandeau CTA se lisait mal ; mesure faite : **0 px**, alors que la
+  section elle-même s'ouvre sur 66 px. Effet visible en capture : les tuiles blanches paraissent
+  coupées par l'aplat marine, leur bord bas n'existe jamais. Corrigé à 66 px, c'est-à-dire au pas
+  DÉJÀ EN VIGUEUR dans la section, pas à une valeur choisie à l'œil. **Règle : quand deux blocs de
+  nature différente se suivent, l'intervalle est le pas vertical de la section, et on le vérifie
+  par une mesure, pas par une impression.** Corollaire d'outillage : un harnais qui liste tous les
+  écarts inférieurs à 12 px entre blocs frères trouve ces défauts en quelques secondes sur les
+  5 pages, là où l'œil ne les voit que par comparaison avec un autre site.
+
+- 2026-08-10 bis : **deux régimes photo, et la fiche « Photos » du chapitre 2 est corrigée en
+  conséquence.** Elle disait que les photos du site sont étalonnées split-tone. Mesure faite sur
+  les 12 photos publiées (saturation moyenne et histogramme de teinte) : les photos de galerie
+  vont de 0,07 à 0,23 de saturation et sortent leurs jaunes, leurs oranges et leurs verts naturels ;
+  seuls le teaser pilote, les cartes Open Graph et le collage des origines sont réellement duotone.
+  Le reportage est donc publié quasi naturel, et c'est cohérent : la couleur d'un kart et d'une
+  piste EST de la matière, la retirer ferait exactement le rendu lisse que la DA combat. Ce qui a
+  déclenché la vérification : `feed-racing.webp` (carte « Automobile ») est la photo la plus
+  saturée du site, 65 % de ses pixels dans le vert de l'herbe, et la règle mal écrite invitait à
+  l'étalonner. **Leçon de méthode, plus importante que le cas : avant de « rattraper » un élément
+  au nom d'une règle de ce document, vérifier que la règle décrit bien ce que le site fait
+  réellement.** Une règle fausse fabrique des corrections qui abîment.
+
+- 2026-08-10 ter : **la forme exacte du surtitre qui aurait le droit de revenir.** L'élagage du
+  09/08 a supprimé les surtitres-rubriques. Deux sites montrent la forme qui, elle, tient debout.
+  goodwood.com/motorsport : « OUR » puis « FLAGSHIP EVENTS », « EXPLORE » puis « ALL THINGS
+  MOTORSPORT », « THE » puis « DRIVING EXPERIENCES ». La petite ligne n'est pas une étiquette de
+  rubrique, c'est le début de la phrase que le grand titre termine, et elle n'a aucun sens détachée.
+  baltic-watches.com : « AQUASCAPHE MK2 COLLECTION » au-dessus de « NOW WITH A DATE ». La petite
+  ligne porte le référent, sans lequel le titre ne veut rien dire. **Règle qui s'ajoute à celle du
+  09/08 : si un surtitre revient un jour sur ce site, il devra être soit un fragment de phrase que
+  le titre finit, soit le nom de l'objet montré. Jamais le nom de la rubrique.** Détail de mise en
+  page relevé en capture, transposable au filet or maison : le filet qui accompagne le mot change
+  de place selon l'alignement, des deux côtés quand le bloc est centré, à droite seulement quand il
+  est aligné à gauche.
