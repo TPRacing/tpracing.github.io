@@ -252,6 +252,44 @@ Observé, gardé comme règle plutôt que comme chantier (voir DA-TPRACING.md) :
 Sites non capturables, à ne pas retenter à l'aveugle : noth.in (Awwwards SOTD, rendu WebGL : la page
 reste noire dans un onglet non visible, le préchargeur ne finit jamais faute de `requestAnimationFrame`).
 
+### Constats de l'audit de COHÉRENCE DE LA DA du 11/08 (5 pages regardées, desktop 1280 + mobile 390)
+
+Corrigés le jour même :
+- [x] La seule liste de contenu du site (mentions légales, 3 lignes) sortait en **puce ronde du
+      navigateur**, seul élément graphique hors charte encore visible. Remplacée par le carré
+      biseauté or, en règle globale `main ul` pour que la puce du user-agent ne puisse pas revenir
+      par une page future, avec `role="list"` (le `list-style: none` fait perdre le rôle liste sous
+      Safari/VoiceOver).
+- [x] Légende de la 3e photo d'héritage : « Formule Ford 1988 / **la piste en héritage** » répétait
+      mot pour mot le h2 de sa propre section, à moins d'un écran de distance, alors que les dix
+      autres légendes du site suivent « sujet / lieu année ». Passée à « le passage en voiture »,
+      information réelle déjà portée par le paragraphe voisin.
+
+Réfutés, à ne pas « corriger » un autre jour (motifs) :
+- La bande claire en bas du teaser pilote n'est PAS un artefact d'étalonnage : c'est un marquage
+  au sol peint, vérifié par zoom sur le fichier source. Même piège que la photo `feed-racing` du 10/08.
+- Bascule marine → clair en bord DROIT sur contact.html et mentions-legales.html : cohérent.
+  `diag-haut` marque l'ENTRÉE dans une section marine ; ces deux pages ouvrent sur leur en-tête,
+  sans section précédente à couper.
+- Badges numérotés or pleins sur l'accueil contre marine sur pilote.html : deux objets différents.
+  Les trois disciplines sont égales et n'ont aucune hiérarchie à marquer ; les quatre étapes du
+  parcours en ont une, et l'or y désigne l'objectif Caterham.
+- « la suite s'écrit » présent dans l'étape 03 et dans le titre du CTA final de pilote.html :
+  écho de marque volontaire, séparé par une section entière, contrairement à la légende ci-dessus.
+- contact.html est la page la plus pauvre en vocabulaire (aucun mot géant, aucune photo, aucun
+  damier) : c'est de la sobriété assumée. Y ajouter du décor irait contre le « ça en fait trop »
+  du 25/07, et la leçon du 09/08 dit qu'un ornement posé partout redevient un gabarit.
+- Classes mortes `h2-part` et `txt` dans index.html (héritées de jeu.html) : laissées. Elles ne
+  produisent rien et ne gênent rien ; les retirer risquerait un sélecteur d'enfant pour un gain nul.
+
+Observations sans correction, à instruire un jour avec Thomas :
+- [ ] La case la plus grande de la galerie marine est le POSTER de la vidéo, soit un aplat blanc
+      au logo couleur (frame finale du sting). La règle charte est respectée (logo couleur sur fond
+      clair) et le poster est transitoire, mais c'est le plus grand élément d'une section de photos
+      de course. À trancher avec Thomas plutôt que d'imposer un choix.
+- [ ] Légende « Trois de front / corps à corps » : seule légende de galerie sans lieu ni année,
+      et ses deux membres se redisent. On ne connaît pas le lieu de la photo, donc rien inventé.
+
 ### Constats reportés de l'audit SEO du 06/08 (à traiter un jour de dimension adaptée)
 
 Perf (pour le prochain jour d'audit performance) : TOUS TRAITÉS LE 08/08, voir le Journal.
@@ -298,6 +336,51 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-08-11 (routine, AXE B : audit, dimension **cohérence de la DA page par page**, la seule
+  dimension de la rotation jamais traitée en tant que telle ; 10/08 était un jour C et 09/08 un
+  jour A) : **le seul endroit du site que le navigateur dessinait encore.** Méthode : les 5 pages
+  capturées et REGARDÉES en desktop 1280 (9 vues sur l'accueil, 6 sur pilote, le reste selon la
+  hauteur) et en mobile 390, puis inventaire mesuré du vocabulaire maison page par page (pastilles,
+  mots géants, emblèmes filigranes, damiers, biseaux, filets or, diagonales, ratio des surfaces
+  marine/or/clair), puis comparaison des styles calculés des composants partagés d'une page à
+  l'autre. **DEUX DÉFAUTS RÉELS, corrigés le jour même.** (1) La seule liste de contenu du site,
+  les trois lignes de l'éditeur dans les mentions légales, sortait en **puce ronde grise du
+  user-agent** : le dernier élément graphique hors charte du site, très visible en mobile sous des
+  titres Korataki à filet or. Remplacée par le carré biseauté or, posé en règle globale `main ul`
+  dans styles.css et non sur la seule page légale, pour que la puce du navigateur ne puisse pas
+  revenir par un bloc futur (même logique que la coupe Bebas unique du 09/08) ; `role="list"`
+  ajouté car `list-style: none` fait perdre le rôle liste sous Safari/VoiceOver. Le premier jet ne
+  coupait qu'un coin : les sept `clip-path` du site en coupent DEUX (haut-droit et bas-gauche),
+  géométrie reprise à l'identique. (2) La légende de la 3e photo d'héritage disait « Formule Ford
+  1988 / la piste en héritage », soit **le h2 de sa propre section répété mot pour mot** dans le
+  même écran, alors que les dix autres légendes du site suivent « sujet / lieu année » ; c'est le
+  défaut que Thomas a pointé le 09/08 sur les surtitres, transposé à une légende. Passée à « le
+  passage en voiture », information déjà portée par le paragraphe voisin. **Une règle FAUSSE de
+  DA-TPRACING.md débusquée, la deuxième en deux jours** (après celle des photos le 10/08) : le
+  chapitre 2 revendiquait des « chevrons de vitesse » comme vocabulaire en production, or il y en a
+  zéro dans le CSS, les 5 pages et le JS. La fiche décrivait une intention, pas le site : corrigée.
+  **Six pistes réfutées avec motif** (détail au-dessus, section « Constats de l'audit du 11/08 »),
+  dont la bande claire du teaser pilote qui n'est pas un artefact mais un marquage au sol réel,
+  vérifié par zoom sur le fichier source. **Vérifs :** 5 pages × 6 largeurs (320 / 375 / 414 / 768 /
+  1280 / 1680) = 30 mesures, **0 débordement** (rect de chaque élément contre le viewport, décor
+  exclu par `closest()`, le `scrollWidth` étant masqué par `overflow-x: clip` depuis le 27/07),
+  **0 ratio d'image faux**, **0 erreur console et 0 image cassée sur les 5 pages**, signe de liste
+  mesuré à 9×9 px en #D49726 avec clip actif et présent sur la seule page qui a une liste. Captures
+  desktop et mobile relues après correction. En ligne.
+  RAPPEL GROUPÉ DES QUESTIONS OUVERTES (le précédent datait du 27/07, donc 1 par semaine maximum
+  respecté) : (a) **contraste de l'or #D49726 sur fond clair**, 2,38:1 pour les petits labels Bebas,
+  posée le 15/07 et toujours sans réponse ; la reco reste l'or foncé #8F661A pour ces textes-là
+  seulement, rien ne sera appliqué sans accord (le `contrast-color()` de 2026 ne répond pas à la
+  question, il ne rend que du noir ou du blanc) ; (b) contenus qui débloqueraient 7 idées déjà
+  conçues : calendrier et résultats de la saison, paliers de partenariat chiffrés, citations de
+  partenaires, un scan de la signature de Thomas, choix des casques et karts pour un hall of fame,
+  anecdotes pour un pilote.html en deux actes ; (c) validation de principe pour la frise « ils ont
+  commencé en kart » (faits publics, aucune photo) ; (d) suites de l'élagage du 09/08 : « En piste »
+  a disparu du site comme phrase autonome, et contact.html comme mentions-legales.html n'ont plus
+  aucune pastille damier ; (e) la grande case blanche du poster vidéo dans la galerie marine
+  (constat du jour) ; (f) garder les DEUX propriétés Search Console (compte asso et compte perso)
+  ou n'en garder qu'une et ajouter l'autre compte en utilisateur.
 
 - 2026-08-10 (routine, AXE C : veille par captures, dernière veille le 03/08 donc la semaine en
   réclamait une ; 09/08 était un jour A) : **6 sites regardés sur des angles neufs, et un défaut de

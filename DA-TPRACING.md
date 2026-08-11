@@ -51,8 +51,12 @@ langage étranger, elle ne passe pas.
   le duotone split-tone marine/or (+ grain + vignette) est réservé aux MONTAGES DE MARQUE
   (teaser pilote, cartes Open Graph, collage de la bande origines). Les photos héritage
   (Le Mans 1980, Patrice 1987/1988) sont publiées BRUTES : la matière d'époque est la matière.
-- Chevrons de vitesse « » » pleins en dégradé d'opacité pour les listes et labels
-  (jamais de tirets décoratifs).
+- Signe de liste = **carré biseauté or de 9 px**, jamais la puce ronde du navigateur
+  (posé le 11/08 ; l'entrée précédente annonçait ici des « chevrons de vitesse » qui
+  n'ont jamais existé sur le site, voir le journal du 11/08). La géométrie est celle de
+  TOUS les biseaux maison : les DEUX coins coupés, haut-droit et bas-gauche.
+- Ponctuation graphique : pastille damier et slash. Jamais de tiret décoratif, jamais de
+  point médian.
 - Label TPRacing = **Bebas BOLD + interlettrage large**, jamais l'inverse. Les deux vont
   ensemble : le tracing large seul donne le label fin et distingué des présentations
   génériques, la graisse seule perd la respiration de la charte. Ratio de référence,
@@ -182,6 +186,30 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   l'étalonner. **Leçon de méthode, plus importante que le cas : avant de « rattraper » un élément
   au nom d'une règle de ce document, vérifier que la règle décrit bien ce que le site fait
   réellement.** Une règle fausse fabrique des corrections qui abîment.
+
+- 2026-08-11 : **le seul endroit du site que le NAVIGATEUR dessinait encore.** Audit de cohérence
+  de la DA page par page (5 pages regardées en captures desktop 1280 et mobile 390, puis inventaire
+  mesuré du vocabulaire par page). Résultat : une seule liste de contenu existe sur tout le site,
+  les trois lignes de l'éditeur dans les mentions légales, et elle sortait en **puce ronde grise du
+  user-agent**. C'est le contraire exact du vocabulaire maison, et c'est le genre de détail qui ne
+  se voit qu'en regardant : dans une page dont les titres sont en Korataki avec filet or, la puce
+  ronde signe le gabarit par défaut. Remplacée par le carré biseauté or. **Deux décisions de méthode
+  valent plus que le correctif lui-même.** (1) La règle est posée sur `main ul` dans styles.css et
+  non sur la page légale seule, alors qu'aucune autre page n'a de liste aujourd'hui : la contrainte
+  vaut pour les blocs futurs, exactement comme la coupe Bebas unique du 09/08. Une DA tenue par une
+  règle globale ne dépend plus de la vigilance de celui qui ajoutera la prochaine liste. (2) Le
+  premier jet coupait UN seul coin ; les sept `clip-path` du site coupent tous les DEUX coins,
+  haut-droit et bas-gauche. Corrigé après relecture des valeurs réelles. **Reprendre le vocabulaire,
+  c'est en reprendre la géométrie exacte, pas son esprit** : une variante inventée d'un signe maison
+  fabrique un deuxième langage, ce qui est précisément ce que ce document doit empêcher.
+  Corollaire d'accessibilité à retenir : `list-style: none` fait perdre le rôle `list` sous
+  Safari/VoiceOver, donc tout retrait de puce s'accompagne d'un `role="list"` explicite.
+  **Deuxième règle FAUSSE trouvée dans ce document en deux jours** (après les photos le 10/08) : le
+  chapitre 2 revendiquait des « chevrons de vitesse » comme vocabulaire en production. Vérification :
+  zéro occurrence dans le CSS, dans les cinq pages et dans le JS. La fiche décrivait une intention,
+  pas le site. Corrigée. À la lumière du 10/08, où une règle mal écrite invitait à abîmer une photo,
+  la leçon se durcit : **une entrée de ce document ne s'écrit pas depuis le souvenir d'une idée, elle
+  s'écrit depuis une mesure ou une capture, et les entrées anciennes se revérifient.**
 
 - 2026-08-10 ter : **la forme exacte du surtitre qui aurait le droit de revenir.** L'élagage du
   09/08 a supprimé les surtitres-rubriques. Deux sites montrent la forme qui, elle, tient debout.

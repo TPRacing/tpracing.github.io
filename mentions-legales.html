@@ -134,7 +134,9 @@
     }
     .legal-corps p { color: var(--encre); line-height: 1.75; margin: 0 0 10px; }
     .legal-corps p + p { margin-top: 6px; }
-    .legal-corps ul { margin: 4px 0 10px 20px; color: var(--encre); line-height: 1.75; }
+    /* l'indentation est portée par le padding du li (carré biseauté or, styles.css) */
+    .legal-corps ul { margin: 6px 0 12px; color: var(--encre); line-height: 1.75; }
+    .legal-corps li + li { margin-top: 5px; }
     .legal-corps a { color: var(--marine); text-decoration: underline; text-decoration-color: rgba(212, 151, 38, .6); text-underline-offset: 3px; }
     .legal-corps a:hover { color: var(--or); }
     .legal-corps .detail { color: var(--gris); font-size: .95rem; }
@@ -183,7 +185,7 @@
       <section>
         <h2>Éditeur du site</h2>
         <p><strong>TPRACING (Thomas Papone Racing)</strong>, association régie par la loi du 1<sup>er</sup> juillet 1901, déclarée à la préfecture de l'Ain le 15 décembre 2021 (annonce publiée au Journal officiel des associations le 21 décembre 2021).</p>
-        <ul>
+        <ul role="list">
           <li>Numéro RNA : W012015296</li>
           <li>Siège social : 01330 Lapeyrouse (Ain), France</li>
           <li>Directeur de la publication : Patrice Papone, président de l'association</li>

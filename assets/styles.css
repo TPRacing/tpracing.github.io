@@ -415,6 +415,26 @@ h2 { font-size: clamp(1.4rem, 2.7vw, 2.15rem); margin-bottom: 22px; }
 h1, h2, h3 { text-wrap: balance; }
 p { text-wrap: pretty; }
 
+/* Listes de contenu : le signe est un CARRÉ BISEAUTÉ OR, jamais la puce ronde du
+   navigateur. Posé en règle globale sur `main ul` (et non sur la seule page légale,
+   seule à en porter une aujourd'hui) pour que la puce du user-agent ne puisse pas
+   revenir par une page ou un bloc futur, comme la coupe Bebas unique du 09/08 :
+   c'est la contrainte qui porte la DA, pas la vigilance. */
+main ul { list-style: none; padding-left: 0; }
+main ul > li { position: relative; padding-left: 22px; }
+main ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .56em;
+  width: 9px;
+  height: 9px;
+  background: var(--or);
+  /* même géométrie que les boutons, badges et cartes : les DEUX coins coupés,
+     haut-droit et bas-gauche. Un seul coin coupé serait une variante étrangère. */
+  clip-path: polygon(0 0, calc(100% - 3px) 0, 100% 3px, 100% 100%, 3px 100%, 0 calc(100% - 3px));
+}
+
 /* ---------- Icônes réseaux du footer (style carte de visite) ---------- */
 .foot-reso { display: flex; gap: 10px; flex-wrap: wrap; }
 .foot-reso a {
