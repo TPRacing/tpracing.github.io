@@ -36,7 +36,11 @@ langage étranger, elle ne passe pas.
   bande origines (grille cisaillée k=-0.32), liseré damier.
 - Carrés biseautés : boutons et tuiles à coin coupé (clip-path ; attention, le clip rogne
   outline et ombres, anneaux de focus en inset).
-- Brackets d'angle or : les coins de cadres photo de la galerie.
+- Brackets d'angle or : les coins de cadres photo de la galerie. **Une case de grille qui
+  n'est pas une photo prend les MÊMES brackets** (12/08 : la tuile « Plus d'images » de la
+  galerie était la seule case sans, elle lisait comme une plaque rapportée au milieu de
+  huit photos cadrées). Reprendre le vocabulaire, c'est reprendre la règle CSS existante
+  (`class="frame"`), pas en redessiner une variante.
 - Coupes diagonales : pente UNIFIÉE 2.3vw (le 1,3 degré du marquee) pour toutes les
   bascules de section.
 - Mots géants Korataki en outline derrière les sections (Héritage, En piste, 47, Presse),
@@ -223,3 +227,22 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   page relevé en capture, transposable au filet or maison : le filet qui accompagne le mot change
   de place selon l'alignement, des deux côtés quand le bloc est centré, à droite seulement quand il
   est aligné à gauche.
+
+- 2026-08-12 : **une taille de texte se règle sur la boîte qui le porte, jamais sur la fenêtre.**
+  Mesuré sur la tuile « Plus d'images » de la galerie de l'accueil : le handle
+  `@thomaspaponeracing` était dimensionné en `clamp(.68rem, 2vw, 1rem)` alors que la largeur de
+  sa case, elle, dépend du NOMBRE DE COLONNES de la galerie, qui change par paliers (3 colonnes,
+  puis 2 sous 900 px, puis 1 sous 620). Les deux courbes n'ont aucune raison de se suivre : à
+  950 px de fenêtre la case ne fait plus que 263 px alors que le texte reste à sa taille maximale
+  et sort de 153 px, en traversant sa propre bordure. Le texte débordait sur 9 des 14 largeurs
+  testées, et là où il ne débordait pas (620 px, case de 546 px) il était au contraire minuscule
+  dans une grande case. **Règle : dès qu'un texte doit tenir dans une case dont la largeur est
+  décidée par une grille, il se dimensionne en unités de conteneur (`cqi`) et pas en `vw`.**
+  Formule utilisée, à réemployer : mesurer le rapport largeur-du-texte / taille-de-police (ici
+  22,70 pour du Korataki bold en capitales), puis poser `font-size: min(<taille max>, k·cqi)`
+  avec k = 100 / rapport, moins 4 % de marge. Filet de sécurité systématique en plus de la
+  formule : `max-width: 100%` + `text-overflow: ellipsis`, pour qu'un cas non prévu se coupe
+  DANS la case au lieu de la traverser.
+  Corollaire de méthode : un contrôle de débordement qui compare les rectangles d'éléments ne
+  voit RIEN ici, parce que la boîte du span fait sagement la largeur de sa case et que seul le
+  texte peint dehors. Il faut mesurer le texte lui-même (`Range.getBoundingClientRect`).

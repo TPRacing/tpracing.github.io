@@ -56,6 +56,10 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       bouton marine enfin défini pour contact.html, cibles tactiles de nav à 24 px, lightbox annoncée — 02/08
 - [x] Audit qualité visuelle par bords zoomés de toutes les images publiées : 3 bandes noires incrustées corrigées
       (Le Mans 1980 remasterisée en 16:9 depuis la diapo originale, photo partenaires et duel Valence recadrées) — 04/08
+- [x] Galerie de l'accueil : la tuile « Plus d'images » débordait de sa case (handle dimensionné en vw
+      alors que la case dépend du nombre de colonnes) et la légende de la vidéo perdait son lieu et son
+      année dans les points de suspension sous 414 px ; la tuile prend au passage les brackets or des
+      autres cases (12/08)
 - [ ] Emblème 3D : version animée légère en hero (séquence AE ou sprite au scroll) si le poids reste raisonnable
 - [ ] Section actus/prochaines échéances (structure seulement, contenus à valider avec Thomas)
 - [x] Accueil : mur de partenaires « Ils nous font confiance » (18 logos)
@@ -336,6 +340,54 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-08-12 (routine, AXE A : amélioration, finition design ; 11/08 était un jour B et 10/08
+  un jour C) : **du texte qui ne tenait pas dans sa case, sur la dernière case de la galerie.**
+  La journée est partie d'un simple regard sur les captures de l'accueil : dans la galerie
+  marine, le handle `@thomaspaponeracing` de la tuile « Plus d'images » traversait la bordure
+  droite de sa propre tuile. Mesure ensuite, sur 14 largeurs de 320 à 1680 px, avec la largeur
+  du TEXTE et pas celle de sa boîte (`Range.getBoundingClientRect`) : **le handle sortait de sa
+  case sur 9 largeurs sur 14, jusqu'à 153 px à 950 px de fenêtre**, c'est-à-dire un texte de
+  363 px peint dans une case de 211 px. Cause : `font-size: clamp(.68rem, 2vw, 1rem)`, une
+  taille indexée sur la FENÊTRE, alors que la largeur de la case est décidée par le nombre de
+  colonnes de la galerie, qui change par paliers (3, puis 2 sous 900 px, puis 1 sous 620 px).
+  Les deux ne peuvent pas coïncider : juste après un palier la case rétrécit d'un coup, la
+  taille du texte non. Symétriquement, à 620 px de fenêtre, la case fait 546 px et le texte y
+  était minuscule. **Corrigé par construction** : `container-type: inline-size` sur la tuile et
+  `font-size: min(1rem, 4.25cqi)`, coefficient calculé sur le rapport mesuré largeur-de-texte /
+  taille-de-police du Korataki bold en capitales (22,70), moins 4 % de marge. Le texte se cale
+  désormais entre 9 et 14 px à l'intérieur de sa case sur les 14 largeurs, et le maximum reste
+  1 rem pour ne pas grossir dans les grandes cases. Filet de sécurité ajouté (`max-width:100%`
+  + `text-overflow: ellipsis`) pour qu'un cas non prévu se coupe DANS la case au lieu de la
+  traverser, plus l'ancienne déclaration `clamp()` conservée juste avant comme repli pour un
+  navigateur sans unités de conteneur. **Deuxième défaut de la même famille, trouvé dans la
+  foulée** : la légende de la vidéo, « Roulage monoplace / SERA Racing Academy, Le Luc 2024 »,
+  est en `nowrap` + `text-overflow: ellipsis` et se faisait donc AMPUTER de son lieu et de son
+  année sur tout téléphone de 390 px et moins (365 px de texte pour 343 px utiles). En colonne
+  unique elle passe maintenant sur deux lignes plutôt que d'être coupée ; les autres largeurs
+  ne bougent pas. **Finition de DA** : la tuile « Plus d'images » était la seule case de la
+  grille sans brackets d'angle or, donc une plaque rapportée au milieu de huit photos cadrées.
+  Elle reprend la classe `frame` existante, donc exactement les mêmes brackets et le même
+  écartement au survol que les photos, sans une ligne de CSS nouvelle. **Détecteur ajouté au
+  harnais de vérification, et PROUVÉ** : un contrôle de débordement qui compare les rectangles
+  d'éléments ne voyait rien ici, la boîte du span faisant sagement la largeur de sa case
+  pendant que seul le texte peignait dehors ; le nouveau contrôle compare le rectangle du
+  TEXTE à celui de son élément. Passé sur la version d'avant le correctif, il retrouve le
+  défaut (+155 px à 950, +58 px à 1280) ; passé sur les 5 pages en 320 / 390 / 768 / 1280 /
+  1680, il ne signale plus rien. Vérifs : 5 pages × 6 largeurs, 0 débordement, 0 ratio d'image
+  faux, 0 erreur console, captures desktop 1280 et mobile 390 REGARDÉES avant et après, puis
+  prod.
+  **QUESTION POUR THOMAS (rien n'a été publié) :** le fichier `assets/img/collage-origines.webp`
+  du SSD a été remplacé le 11/08 à 23 h 52 par une version très différente, non commitée, à
+  côté d'une sauvegarde `collage-origines-ambre-avant-11-08.webp` de la version en ligne.
+  La nouvelle est carrée (1600 × 1587 au lieu de 1800 × 590), pèse 244 Ko au lieu de 76,
+  et surtout elle garde les couleurs d'origine de plusieurs photos (kart bleu, logo rouge,
+  herbe verte) là où la version en ligne est un duotone or/marine strict. Comme la routine
+  ne publie pas un changement de DA dont elle ignore l'intention, **elle n'a rien touché :
+  le fichier reste tel quel sur le SSD et la prod garde la version duotone**. Deux questions :
+  est-ce une piste à garder, et si oui faut-il tenir la règle du duotone pour les montages de
+  marque (chapitre 2 de DA-TPRACING.md) et le poids d'un décor passé sous un voile marine de
+  55 à 62 % ?
 
 - 2026-08-11 (routine, AXE B : audit, dimension **cohérence de la DA page par page**, la seule
   dimension de la rotation jamais traitée en tant que telle ; 10/08 était un jour C et 09/08 un
