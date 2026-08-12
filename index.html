@@ -399,6 +399,10 @@
       border: 1px solid rgba(246, 247, 252, .16);
       background: rgba(39, 49, 68, .4);
       transition: border-color .25s, transform .2s;
+      /* Le handle se dimensionne sur la LARGEUR DE LA TUILE, pas sur celle de la fenêtre :
+         le nombre de colonnes de la galerie change par paliers, si bien qu'une taille en vw
+         faisait sortir le texte de sa case entre deux paliers (jusqu'à 153 px à 950 px). */
+      container-type: inline-size;
     }
     .galerie-plus:hover { border-color: var(--or); transform: translateY(-4px); }
     .galerie-plus .plus-kicker {
@@ -412,14 +416,26 @@
       font-family: var(--f-titre);
       font-weight: 700;
       font-size: clamp(.68rem, 2vw, 1rem);
+      font-size: min(1rem, 4.25cqi);
       color: var(--blanc);
       text-transform: uppercase;
       letter-spacing: 0;
       white-space: nowrap;
+      /* filet de sécurité : si la mesure devait quand même être prise en défaut,
+         le handle se coupe DANS sa case au lieu de la traverser */
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .galerie-plus .plus-fleche { color: var(--or); font-size: 1.6rem; line-height: 1; }
     @media (max-width: 900px) { .galerie { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 620px) { .galerie { grid-template-columns: 1fr; } }
+    @media (max-width: 620px) {
+      .galerie { grid-template-columns: 1fr; }
+      /* En colonne unique la légende la plus longue (« Roulage monoplace / SERA Racing
+         Academy, Le Luc 2024 ») perdait son lieu et son année dans les points de suspension
+         sous 414 px : elle passe sur deux lignes plutôt que d'être amputée. */
+      .galerie figcaption { white-space: normal; text-overflow: clip; }
+    }
 
     /* ---------- Teaser pilote ---------- */
     .pilote-grille {
@@ -941,7 +957,7 @@
           <span class="frame"><picture><source type="image/avif" srcset="assets/img/galerie-file-324-m.avif 760w, assets/img/galerie-file-324.avif 1400w" sizes="(max-width: 620px) 92vw, (max-width: 900px) 46vw, 373px"><img alt="Filé du kart TPRacing en pleine vitesse" loading="lazy" src="assets/img/galerie-file-324.webp" srcset="assets/img/galerie-file-324-m.webp 760w, assets/img/galerie-file-324.webp 1400w" sizes="(max-width: 620px) 92vw, (max-width: 900px) 46vw, 373px" width="1400" height="913"></picture></span>
           <figcaption>Pleine charge / Valence 2022</figcaption>
         </figure>
-        <a class="galerie-plus rvl" href="https://www.instagram.com/thomaspaponeracing" target="_blank" rel="noopener">
+        <a class="galerie-plus frame rvl" href="https://www.instagram.com/thomaspaponeracing" target="_blank" rel="noopener">
           <span class="plus-kicker">Plus d'images</span>
           <span class="plus-handle">@thomaspaponeracing</span>
           <span class="plus-fleche">&#8599;</span>
