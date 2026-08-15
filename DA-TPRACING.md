@@ -246,3 +246,20 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   Corollaire de méthode : un contrôle de débordement qui compare les rectangles d'éléments ne
   voit RIEN ici, parce que la boîte du span fait sagement la largeur de sa case et que seul le
   texte peint dehors. Il faut mesurer le texte lui-même (`Range.getBoundingClientRect`).
+
+- 2026-08-15 : **la règle de la graisse unique atteint les pixels : plus un seul texte du site en
+  Bebas Middle, rasters compris.** Les trois cartes Open Graph, derniers endroits où la coupe fine
+  rejetée le 08/08 vivait encore (cuite en dur dans les JPG), refaites d'un bloc depuis les photos
+  sources avec bebas_bold.ttf, l'interlettrage Middle d'origine résolu numériquement sur la carte
+  en ligne puis resserré de 12 % : la règle du 09/08 s'applique donc aussi hors CSS, avec le même
+  ratio. Deux enseignements de méthode, mesurés sur ce chantier. (1) **Un raster de marque se
+  reconstruit d'un bloc et se recale par mesures, jamais à l'œil** : géométrie relevée au pixel sur
+  les cartes en ligne, corps du titre retrouvé par calcul (648 px recalculés contre 650 mesurés),
+  sujets recalés par template matching (résidus finaux 0 à 8 px). Les jugements à l'œil des
+  premières passes se trompaient de 30 à 130 px, et dans les deux sens. (2) **Ce que la photo
+  faisait dans l'original, la copie doit le refaire par un moyen explicite** : la lisibilité de la
+  fin du kicker de la carte accueil tenait à un creux sombre de la photo, pas à un choix
+  typographique ; le recadrage recalé n'avait plus ce creux, une ombre marine elliptique feutrée
+  rend le même service, contrôlée au chiffre (fond sous les lettres ramené de 185 à environ 110,
+  blanc du carénage voisin intact à 246). Un rôle graphique n'appartient pas à l'accident qui le
+  rendait : il se transporte.

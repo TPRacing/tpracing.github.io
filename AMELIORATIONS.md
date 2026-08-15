@@ -17,7 +17,7 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       Middle 8,5 / 3,2) et sert de référence visuelle. Vérifier le breakpoint mobile
       (.kicker .95rem/.22em) et traquer les rasters où la Middle serait cuite en dur (images OG).
       FAIT le 09/08 (voir Journal). Les rasters ont été traqués : reste l'item ci-dessous.
-- [ ] Cartes Open Graph : la Middle y est CUITE EN DUR (kicker et ligne d'url des 3 cartes
+- [x] Cartes Open Graph : la Middle y est CUITE EN DUR (kicker et ligne d'url des 3 cartes
       og-accueil.jpg, og-pilote.jpg, og-contact.jpg), elles sont donc les derniers endroits
       du site où le label reste fin. Repérées le 09/08, sciemment PAS retouchées ce jour-là :
       les scripts de génération n'existent plus, un repeint local du texte se ferait sur de
@@ -28,6 +28,7 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       partenaires-stickers), recette PIL en mémoire projet (split-tone marine/or, midpoint
       ~158, voile marine 10 %, vignette, scrim bas, logo BLANC, supersampling x2), en
       remplaçant la Middle par bebas_bold.ttf, puis comparer les 3 côte à côte avant push.
+      FAIT le 15/08 d'un bloc, famille unifiée au passage (voir Journal).
 - [x] Favicon propre multi-tailles depuis l'emblème (32px, 180px apple-touch) + meta theme-color marine
 - [x] Image Open Graph dédiée 1200×630 (logo + photo duotone) pour les partages LinkedIn/WhatsApp
 - [x] Micro-interaction nav : soulignement or animé qui glisse sous les liens
@@ -340,6 +341,41 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-08-15 (routine, AXE A : amélioration, chantier du backlog hérité de la demande de Thomas
+  du 08/08 ; 12/08 était un jour A, 11/08 un jour B, 10/08 un jour C, pas de run les 13 et 14,
+  l'app était fermée) : **les trois cartes Open Graph refaites d'un bloc : plus un seul texte du
+  site en Bebas Middle.** C'étaient les derniers pixels où la coupe fine rejetée par Thomas
+  (« ça fait présentation Claude IA ») survivait, cuite en dur dans les JPG depuis le 12/07
+  (accueil, pilote) et le 20/07 (contact). Les scripts d'origine n'existant plus, tout a été
+  reconstruit depuis les photos sources (CLV_0089 pour l'accueil, la découpe simu du hero pour
+  le pilote, CLV_2190 pour contact), en recalant le résultat SUR MESURE sur les cartes en ligne :
+  géométrie relevée au pixel (liseré or de 3 px au bord, logo blanc de 135 px à (67,52), pastille
+  damier 4x2 de cellules de 9 px or/blanc, kicker cap 25 à y368, titre Korataki cap 63 lignes à
+  y397/y489, filet et url or à y574), corps du titre retrouvé par calcul (« THOMAS » recalculé à
+  648 px contre 650 mesurés sur la carte d'origine, même corps de 78), et position des sujets
+  recalée par template matching entre ancienne et nouvelle carte (résidus finaux de 0 à 8 px sur
+  les trois). L'interlettrage des labels suit la règle DA du 09/08 : celui de la Middle d'origine
+  résolu numériquement sur la carte en ligne, puis resserré de 12 % pour la Bold. **La famille est
+  au passage UNIFIÉE** : la carte contact du 20/07 avait son propre corps de titre et son propre
+  kicker plus petits, elle reprend la géométrie des deux autres (règle mesurée sur l'original :
+  ligne la plus large calée à 1097 px, plafond cap 63, ce qui rend au contact un cap 58 très
+  proche de ses 59 d'origine). **Un défaut évité de justesse et corrigé proprement** : sur la
+  carte accueil d'origine, la lisibilité de la fin du kicker tenait à un creux sombre de la
+  photo ; le recadrage recalé n'a plus ce creux au même endroit et le pod APPROTECH clair
+  remontait derrière « MOBILE » (blanc sur gris 185). Ombre marine elliptique très feutrée posée
+  derrière la ligne : le fond sous les lettres passe à 106-122, et le blanc pur du carénage juste
+  dessous reste à 246, mesuré avant après. Poids finaux 108/69/103 Ko contre 107/67/103 : la
+  vitrine sociale ne s'alourdit pas. Vérifs : comparatifs ancien/nouveau empilés REGARDÉS pour
+  les trois cartes, zooms relus sur pastille, kicker, filet et url, famille des trois côte à côte
+  regardée, JPEG revalidés en 1200x630, les métas des 5 pages n'ont pas bougé (mêmes URLs, mêmes
+  dimensions déclarées), build Pages « built » et les trois fichiers en 200 avec le bon
+  content-length EN PROD. Le chantier avait été bloqué le 09/08 par la perte des scripts
+  d'origine : celui d'aujourd'hui est archivé sur le T7 (TPRacing/og_build.py, à côté de
+  sting.jsx), la prochaine régénération ne repartira pas de zéro. Hors scope, déjà signalé :
+  le collage-origines.webp modifié du 11/08
+  dort toujours dans l'arbre de travail du T7, non commité, en attente de la réponse de Thomas
+  (question au Journal du 12/08).
 
 - 2026-08-12 (routine, AXE A : amélioration, finition design ; 11/08 était un jour B et 10/08
   un jour C) : **du texte qui ne tenait pas dans sa case, sur la dernière case de la galerie.**
