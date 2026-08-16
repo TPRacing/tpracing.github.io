@@ -76,6 +76,10 @@ langage étranger, elle ne passe pas.
 - Mouvement : sobre et lié à la course (intro tracé de circuit, ligne de course de
   progression, marquee asservi au scroll, reveals) ; tout est coupé en
   prefers-reduced-motion ; jamais d'effet « waouh » sans rapport avec la piste.
+  **Le survol RÉCOMPENSE, il n'INFORME pas** (règle du 16/08) : il peut agrandir une
+  photo ou filer un liseré, jamais porter seul un fait. Une donnée factuelle est
+  écrite en permanence, sur toutes les largeurs — et si un état transitoire devient
+  permanent, son contraste se REMESURE, il n'a pas été calibré pour être lu.
 
 ## 3. Interdits (chaque ligne vient d'un rejet réel de Thomas)
 
@@ -246,6 +250,28 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   Corollaire de méthode : un contrôle de débordement qui compare les rectangles d'éléments ne
   voit RIEN ici, parce que la boîte du span fait sagement la largeur de sa case et que seul le
   texte peint dehors. Il faut mesurer le texte lui-même (`Range.getBoundingClientRect`).
+
+- 2026-08-16 : **ce qui n'existe qu'au survol n'existe pas, et ce qu'on rend permanent se remesure.**
+  Source : caterhamcars.com/fr/sport-automobile, bloc « NOS CHAMPIONNATS EN UN COUP D'OEIL », capturé en
+  desktop 1280 et en mobile 390. Trois cartes de championnat y écrivent EN PERMANENCE tout ce qui les
+  distingue — niveau, courses, tours, nombre de pilotes, support — en paires étiquette/valeur séparées de
+  filets fins, le niveau étant porté par un `<progress value max>` natif. Rien n'attend un geste de souris.
+  Appliqué au site : les trois cartes disciplines de l'accueil escamotaient leur unique ligne factuelle en
+  `translateY(101%)` et ne la rendaient qu'au `:hover` ; le `:focus-within` prévu en secours ne pouvait
+  jamais se déclencher, faute d'élément focusable dans la carte. Au repos, à 1280, les trois cartes étaient
+  interchangeables. **Règle : une information factuelle ne se cache pas derrière un survol. Le survol
+  récompense, il n'informe pas** — il peut agrandir une photo, filer un liseré, jamais porter seul un fait.
+  Corollaire mesuré, plus utile encore : **un élément conçu pour être révélé une seconde n'a jamais été
+  calibré pour être LU.** Le voile sous cette ligne donnait 3,86:1 en médiane et 2,81:1 sur le décile clair
+  de la carte karting une fois la ligne permanente, sous le seuil AA. Repris à .95/.90 jusqu'à 54 % de la
+  hauteur, il remonte à 8,80 / 6,40. **Rendre un état transitoire permanent, c'est en devenir responsable
+  au contraste : on remesure, on ne suppose pas.**
+  Écart assumé le même jour, et il compte autant : Caterham pose sur l'arête HAUTE de chaque carte une barre
+  d'accent en dégradé (transparente à gauche, pleine à droite). Le liseré or sur l'arête est du vocabulaire
+  maison, la tentation était directe. Refusé : trois cartes voisines portant le même ornement au même
+  endroit, c'est la signature d'un gabarit, exactement ce que la pastille damier a appris le 09/08. Ces
+  cartes manquaient d'information, pas d'un troisième signe doré. **Quand une veille propose un signe et
+  que le site manque d'un fait, c'est le fait qu'on pose.**
 
 - 2026-08-15 : **la règle de la graisse unique atteint les pixels : plus un seul texte du site en
   Bebas Middle, rasters compris.** Les trois cartes Open Graph, derniers endroits où la coupe fine

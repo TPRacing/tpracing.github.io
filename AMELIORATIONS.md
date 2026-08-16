@@ -257,6 +257,68 @@ Observé, gardé comme règle plutôt que comme chantier (voir DA-TPRACING.md) :
 Sites non capturables, à ne pas retenter à l'aveugle : noth.in (Awwwards SOTD, rendu WebGL : la page
 reste noire dans un onglet non visible, le préchargeur ne finit jamais faute de `requestAnimationFrame`).
 
+### Idées de la veille 16/08 (angle : la série que Thomas vise, et comment un site dit ce qu'il est SANS survol)
+
+Sites REGARDÉS : caterhamcars.com (accueil + /fr/sport-automobile, desktop 1280 et mobile 390),
+lemansclassic.com (desktop), mygale.fr qui redirige sur ligier-automotive (desktop), rapha.cc (desktop),
+sodikart.com et gp-elite.com en contre-exemples. Angle choisi parce que le programme Caterham est
+l'objectif affiché sur les trois pages du site : autant regarder d'abord la maison qui organise
+le championnat.
+
+Actionnables sans contenu de Thomas :
+- [x] **Les trois cartes disciplines de l'accueil ne disaient plus rien au repos.** Vu sur
+      caterhamcars.com/fr/sport-automobile, bloc « NOS CHAMPIONNATS EN UN COUP D'OEIL » : trois cartes
+      où TOUT ce qui distingue un championnat d'un autre (niveau, courses, tours, nombre de pilotes)
+      est écrit en permanence, en paires étiquette/valeur séparées de filets fins, le niveau étant porté
+      par un `<progress value max>` natif ; rien n'attend le survol. En rentrant sur l'accueil TPRacing
+      avec cet œil : la seule ligne factuelle des cartes (« National / X30 Senior », « iRacing /
+      entraînement hebdo », « FEED Racing France / Magny-Cours 2024 ») était posée en
+      `transform: translateY(101%)` et ne remontait qu'au `:hover` — et comme aucune carte ne contient
+      d'élément focusable, le `:focus-within` de secours ne pouvait jamais se déclencher. Au repos, au
+      clavier, ou sur un desktop sans souris, les trois cartes étaient interchangeables : photo, badge,
+      titre, paragraphe. Le mobile, lui, affichait la ligne en permanence depuis le 18/07 : c'était donc
+      le DESKTOP qui faisait exception. Rendue permanente le 16/08, avec le voile recalibré (voir Journal).
+      Pourquoi c'est TPRacing : la ligne est déjà du vocabulaire maison (Bebas or, slash graphique) et
+      elle porte les seuls faits vérifiables de la section.
+- [ ] **Bandeau « prochaine échéance » collé sous la nav** : lemansclassic.com écrit « PROCHAINE ÉDITION
+      1-4 JUILLET 2027 ! SAVE THE DATE » dans une bande fine accrochée sous la barre de navigation, pas
+      dans une section. Pourquoi c'est TPRacing : c'est la version SOBRE du bloc « Prochaine course » du
+      backlog, qui attend depuis le 18/07 des dates que Thomas n'a pas données — une bande de trois mots
+      coûte une ligne de HTML et ne crée pas de rubrique. ATTEND une date réelle (interdit des blocs vides).
+- [ ] **Un seul chiffre géant, souligné d'un filet d'accent court** : le hero de lemansclassic.com après
+      l'événement n'est pas un carrousel, c'est un merci et « 159 853 SPECTATEURS » en très grand, avec un
+      filet magenta sous le nombre seul, décalé à gauche. Pourquoi c'est TPRacing : « un élément
+      volontairement trop grand par écran » est déjà la règle maison, et le filet or existe en pied de page.
+      ATTEND un chiffre réel de Thomas — sans quoi c'est le compteur vide interdit depuis le 03/08.
+- [ ] **Hero par la matière plutôt que par la silhouette** : l'accueil de caterhamcars.com n'ouvre pas sur
+      une voiture entière mais sur un macro du tableau de bord (tissage carbone, interrupteurs à arceau,
+      compte-tours), la voiture n'étant jamais montrée en entier au-dessus de la ligne de flottaison.
+      Pourquoi c'est TPRacing : la DA dit « ajouter de la matière », et le site possède des macros
+      possibles (volant, stickers partenaires, casque, damier réel). À instruire pour un visuel secondaire,
+      PAS pour remplacer le hero validé par Thomas.
+
+Écartés en connaissance de cause :
+- Le liseré d'accent au repos sur l'arête des trois cartes disciplines (chez Caterham : une barre lime en
+  dégradé, transparente à gauche, pleine à droite, sur le bord HAUT de la photo de chaque carte). Le liseré
+  or sur l'arête est pourtant du vocabulaire maison. Refusé quand même : posé à l'identique sur trois cartes
+  voisines, un ornement redevient la signature d'un gabarit (leçon du 09/08 sur la pastille damier). Le
+  besoin réel de ces cartes était l'information, pas un troisième signe doré.
+- Le `<progress>` de niveau : mécanisme excellent (natif, annoncé par les lecteurs d'écran, zéro JS) mais
+  TPRacing n'a aucune donnée réelle à y mettre, et une jauge inventée serait exactement le compteur vide
+  refusé le 03/08. À garder en réserve le jour où Thomas fournira une échelle vraie.
+- rapha.cc n'a rien donné ce jour-là : le site était en mode soldes, hero occupé par « JUSQU'À -50 % »
+  posé sans voile sur une photo claire, texte à peine lisible. Seul détail noté : la photo du hero est un
+  bloc à marges, pas un plein cadre, et un filet fin d'un pixel sépare le hero de la section suivante.
+
+Contre-exemples et sites à ne pas retenter à l'aveugle :
+- sodikart.com ouvre sur un écran noir de chargement PUIS une modale « Réseaux sociaux de Sodikart »
+  posée sur du vide : en capture, le site n'existe pas. La modale d'accueil est l'anti-hero.
+- 24h-lemans.com, mygale.fr, gp-elite.com : trop lourds pour Chrome headless (aucune capture rendue en
+  plusieurs minutes), passer par le Chrome piloté. ompracing.com et kartcom.com répondent 403 aux robots.
+- Note d'outillage : le neutraliseur `*{visibility:visible}` utilisé pour capturer un onglet non visible
+  OUVRE aussi tous les méga-menus (gp-elite.com est devenu illisible). Le filtrer sur les conteneurs de
+  contenu, ou masquer `[class*=dropdown],[class*=submenu]` juste après.
+
 ### Constats de l'audit de COHÉRENCE DE LA DA du 11/08 (5 pages regardées, desktop 1280 + mobile 390)
 
 Corrigés le jour même :
@@ -341,6 +403,48 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-08-16 (routine, AXE C : veille par captures ; 15/08 et 12/08 étaient des jours A, 11/08 un jour B,
+  la dernière veille datait du 10/08, la semaine en réclamait une) : **« en un coup d'œil » — une donnée
+  qui n'existe qu'au survol n'existe pas.** Angle du jour : la maison qui organise le championnat que
+  Thomas vise. Six sites approchés, cinq réellement regardés en captures (caterhamcars.com en desktop 1280
+  ET mobile 390, lemansclassic.com, mygale.fr qui redirige sur Ligier, rapha.cc, sodikart.com en
+  contre-exemple), captures relues une par une avant d'écrire quoi que ce soit, code lu seulement ensuite.
+  **Ce que la veille a trouvé dans le site.** Le bloc « NOS CHAMPIONNATS EN UN COUP D'OEIL » de
+  caterhamcars.com/fr/sport-automobile affiche en permanence tout ce qui distingue ses trois championnats
+  (niveau, courses, tours, pilotes, support) en paires étiquette/valeur séparées de filets fins, le niveau
+  porté par un `<progress value="10" max="50">` natif. En revenant sur l'accueil TPRacing avec cet œil, la
+  section « Trois disciplines, un seul cap » ne disait plus rien au repos : sa seule ligne factuelle
+  (« National / X30 Senior », « iRacing / entraînement hebdo », « FEED Racing France / Magny-Cours 2024 »)
+  était escamotée en `transform: translateY(101%)` et ne remontait qu'au survol de la souris. Le
+  `:focus-within` prévu comme secours clavier ne pouvait JAMAIS se déclencher : les cartes ne contiennent
+  aucun élément focusable. Capture d'avant à l'appui : au repos, à 1280, les trois cartes sont
+  interchangeables (photo, badge chiffré, titre, paragraphe) et aucune ne dit dans quoi Thomas court. Le
+  mobile, lui, montrait la ligne en permanence depuis le 18/07 — c'était donc le desktop l'exception.
+  **Correctif.** La ligne devient permanente sur toutes les largeurs (règle de survol, règle mobile et
+  règle reduced-motion supprimées : il n'y a plus rien à révéler, donc plus rien à couper).
+  **Défaut de second ordre débusqué par la mesure, et c'est le vrai enseignement du jour** : le voile sous
+  la ligne avait été calibré pour un texte fugitif, pas pour un texte qu'on lit. Contraste mesuré de l'or
+  #E8B451 sur les photos, une fois la ligne permanente : **3,86:1 en médiane et 2,81:1 sur le décile clair
+  de la carte karting**, sous les 4,5:1 exigés pour ce corps (Bebas ~15 px). Voile repris en
+  `linear-gradient(0deg, rgba(7,11,29,.95) 0%, rgba(7,11,29,.9) 54%, transparent 100%)` avec 34 px de
+  retrait haut au lieu de 30 : remesuré à **8,80 / 6,40 (karting), 9,92 / 5,65 (simracing), 9,43 / 6,65
+  (automobile)** en médiane et décile clair. La photo reste visible au-dessus, le voile n'est pas une barre.
+  **Écarté sciemment** : reprendre le liseré d'accent que Caterham pose sur l'arête haute de chaque carte
+  (barre lime en dégradé). C'est pourtant du vocabulaire maison (liseré or sur l'arête), mais posé à
+  l'identique sur trois cartes voisines il redevient signature de gabarit, exactement la leçon du 09/08 sur
+  la pastille damier ; ces cartes avaient besoin d'information, pas d'un troisième signe doré. Écarté aussi
+  le `<progress>` de niveau : aucune échelle réelle à y mettre, une jauge inventée serait le compteur vide
+  interdit le 03/08. Trois idées restent au backlog en attente de contenu de Thomas (bande « prochaine
+  échéance » sous la nav, chiffre unique surdimensionné souligné d'un filet or, hero par la matière).
+  **Vérifications** : 5 pages × 6 largeurs (320, 375, 390, 768, 1280, 1680) = 30 mesures, 0 débordement de
+  boîte, 0 texte peint hors de sa case, 0 ratio d'image faux, 0 erreur console ; le seul signalement est le
+  47 géant du hero de pilote.html, décor `aria-hidden` volontairement plus large que la colonne (déjà acté
+  le 02/08 — le filtre de décor du harnais doit inclure `.hero-num`). Captures avant/après regardées en
+  desktop 1280 et mobile 375. Prod vérifiée après build.
+  ⚠️ Outillage du jour : `timeout` n'existe pas sur ce Mac (les boucles de capture échouaient en silence) ;
+  Chrome headless écrit bien le PNG mais NE REND PAS LA MAIN, il faut lancer, laisser le tool expirer, puis
+  `pkill` ; au-delà de deux instances headless en parallèle plus aucune capture n'aboutit.
 
 - 2026-08-15 (routine, AXE A : amélioration, chantier du backlog hérité de la demande de Thomas
   du 08/08 ; 12/08 était un jour A, 11/08 un jour B, 10/08 un jour C, pas de run les 13 et 14,
