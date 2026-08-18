@@ -313,12 +313,28 @@
     .part-carte {
       background: #fff;
       border: 1px solid rgba(30,38,53,.1);
-      border-top: 3px solid var(--or);
+      border-top: 0;
       padding: 26px 24px;
       transition: transform .25s ease, box-shadow .25s ease;
     }
     .part-carte:hover { transform: translateY(-5px); box-shadow: 0 16px 34px rgba(30,38,53,.1); }
     .part-carte, .presse-carte { position: relative; overflow: hidden; }
+    /* Liseré damier en tête de carte : remplace la barre or pleine, qui était le seul
+       endroit du site où l'or servait d'aplat sur du blanc. Damier marine + or de la
+       ligne de course (.ligne-course::after), la seule recette maison faite pour un
+       fond clair ; le damier or/transparent du hero, lui, suppose un fond sombre.
+       Géométrie damier maison : la tuile conique vaut le double de la cellule, donc
+       6 px de haut = deux rangées de 3 px. */
+    .part-carte::before, .presse-carte::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: repeating-conic-gradient(var(--marine-deep) 0% 25%, var(--or) 0% 50%);
+      background-size: 6px 6px;
+      pointer-events: none;
+      z-index: 1;
+    }
     .part-carte::after, .presse-carte::after {
       content: "";
       position: absolute;
@@ -509,7 +525,7 @@
     .presse-carte {
       background: #fff;
       border: 1px solid rgba(30, 38, 53, .1);
-      border-top: 3px solid var(--or);
+      border-top: 0;
       padding: 26px 24px 24px;
       display: flex;
       flex-direction: column;

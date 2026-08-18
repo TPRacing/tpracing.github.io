@@ -1058,6 +1058,12 @@ nav .nav-cta:focus-visible {
   .trust-lot.copie { display: none !important; }
   .trust-tile img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
+  /* Le liseré damier des cartes est un fond : le papier ne l'imprime pas (encre
+     économisée). Sans lui la carte s'ouvrirait par le haut, alors la tête de carte
+     reprend un filet or plein, qui, lui, s'imprime comme une bordure. */
+  .part-carte::before, .presse-carte::before { display: none !important; }
+  .part-carte, .presse-carte { border-top: 2px solid var(--or) !important; }
+
   /* Photos et cartes : ne pas couper au milieu d'une page */
   section, article, figure, .frame,
   .part-carte, .presse-carte, .disc-carte, .contact-carte, .etape {
