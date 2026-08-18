@@ -51,6 +51,9 @@
 
   <!-- Sens de navigation : remonter l'arborescence inverse le volet (types de View Transition) -->
   <script>
+    // Atteste que les scripts tournent : les regles html:not(.js) de styles.css
+    // affichent tout d'emblee quand cette classe n'arrive jamais.
+    document.documentElement.classList.add('js');
     (function () {
       var ordre = { 'index.html': 0, 'pilote.html': 1, 'contact.html': 2, 'mentions-legales.html': 3 };
       function rang(url) {
@@ -563,6 +566,8 @@
        voile (même fond que le hero) s'efface : atterrissage invisible. */
     html.intro-active { overflow: hidden; }
     html.intro-off #intro { display: none; }
+    /* Sans JS, rien ne lève jamais le voile : il masquerait toute la page. */
+    html:not(.js) #intro { display: none; }
     #intro {
       position: fixed; inset: 0; z-index: 999;
       display: grid; place-items: center;
@@ -1235,7 +1240,9 @@
       const btnFermer = lb.querySelector('.lb-fermer');
       const btnPrec = lb.querySelector('.lb-prec');
       const btnSuiv = lb.querySelector('.lb-suiv');
-      const focusables = [btnPrec, btnSuiv, btnFermer];
+      // Ordre du DOM, pas ordre de déclaration : le piège à focus ne retient
+      // que le premier et le dernier, il faut donc les vrais bouts de la chaîne.
+      const focusables = [btnFermer, btnPrec, btnSuiv];
       let index = 0, declencheur = null;
       const pad = n => String(n).padStart(2, '0');
 

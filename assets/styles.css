@@ -156,6 +156,16 @@ html { scrollbar-color: var(--or) var(--marine); }
 .rvl[data-d="1"] { transition-delay: .12s; }
 .rvl[data-d="2"] { transition-delay: .24s; }
 .rvl[data-d="3"] { transition-delay: .36s; }
+/* Filet de sécurité : c'est le JS qui pose la classe « vu ». Sans lui (scripts bloqués,
+   extension de confidentialité, erreur avant l'observateur), le contenu resterait
+   invisible pour toujours. La classe « js » est posée sur <html> par le premier script
+   de chaque page : tant qu'elle manque, tout s'affiche d'emblée. */
+html:not(.js) .rvl,
+html:not(.js) .rvl.vu { opacity: 1; transform: none; transition: none; }
+html:not(.js) .rvl .frame img,
+html:not(.js) .rvl.frame img { transform: none; }
+html:not(.js) .rvl .kicker,
+html:not(.js) .kicker.rvl { clip-path: none; }
 
 /* ---------- Éléments graphiques ---------- */
 

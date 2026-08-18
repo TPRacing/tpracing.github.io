@@ -7,35 +7,11 @@
   const consigne = document.getElementById('consigne');
   const chrono = document.getElementById('chrono');
   const comparatif = document.getElementById('comparatif');
-  // Éléments optionnels, présents uniquement sur la page Réflexes
-  const recordBloc = document.getElementById('record-bloc');
-  const recordVal = document.getElementById('record');
-  const CLE_RECORD = 'tp47-reflexes-best';
+  // Le meilleur temps était affiché par la page Réflexes, retirée le 25/07 :
+  // il n'était plus qu'écrit dans le navigateur du visiteur sans jamais lui être montré.
 
   let etat = 'repos'; // repos | allumage | armé | fini
   let timers = [], t0 = 0;
-
-  const lireRecord = () => {
-    try {
-      const v = parseInt(localStorage.getItem(CLE_RECORD), 10);
-      return Number.isFinite(v) && v > 0 ? v : null;
-    } catch (e) { return null; }
-  };
-  const afficherRecord = () => {
-    if (!recordBloc || !recordVal) return;
-    const r = lireRecord();
-    if (r) { recordVal.textContent = r + ' ms'; recordBloc.hidden = false; }
-  };
-  const sauverRecord = (t) => {
-    try {
-      const r = lireRecord();
-      if (!r || t < r) {
-        localStorage.setItem(CLE_RECORD, String(t));
-        if (recordBloc) recordBloc.classList.add('nouveau');
-      }
-    } catch (e) { /* stockage indisponible : le jeu marche quand même */ }
-    afficherRecord();
-  };
 
   const reset = () => {
     timers.forEach(clearTimeout); timers = [];
@@ -52,7 +28,6 @@
     reset();
     etat = 'allumage';
     chrono.hidden = true; comparatif.hidden = true;
-    if (recordBloc) recordBloc.classList.remove('nouveau');
     consigne.textContent = 'Attends l’extinction…';
     feux.forEach((f, i) => timers.push(setTimeout(() => f.classList.add('on'), 550 * (i + 1))));
     const attente = 550 * 5 + 900 + Math.random() * 1800;
@@ -76,7 +51,6 @@
       else if (t < 450) cmp = 'Solide. La grille n’attend personne';
       else cmp = 'Encore un tour de chauffe ?';
       montrer(t + ' ms', cmp);
-      sauverRecord(t);
     }
   };
   portique.addEventListener('click', clic);
@@ -91,7 +65,5 @@
       consigne.textContent = 'Clique sur le portique pour lancer le départ';
     }
   });
-
-  afficherRecord();
 
 })();

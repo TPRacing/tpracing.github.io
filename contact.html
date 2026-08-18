@@ -49,6 +49,9 @@
 
   <!-- Sens de navigation : remonter l'arborescence inverse le volet (types de View Transition) -->
   <script>
+    // Atteste que les scripts tournent : les regles html:not(.js) de styles.css
+    // affichent tout d'emblee quand cette classe n'arrive jamais.
+    document.documentElement.classList.add('js');
     (function () {
       var ordre = { 'index.html': 0, 'pilote.html': 1, 'contact.html': 2, 'mentions-legales.html': 3 };
       function rang(url) {

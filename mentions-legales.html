@@ -49,6 +49,9 @@
 
   <!-- Sens de navigation : remonter l'arborescence inverse le volet (types de View Transition) -->
   <script>
+    // Atteste que les scripts tournent : les regles html:not(.js) de styles.css
+    // affichent tout d'emblee quand cette classe n'arrive jamais.
+    document.documentElement.classList.add('js');
     (function () {
       var ordre = { 'index.html': 0, 'pilote.html': 1, 'contact.html': 2, 'mentions-legales.html': 3 };
       function rang(url) {
@@ -220,7 +223,7 @@
       <section>
         <h2>Cookies</h2>
         <p>Ce site ne dépose <strong>aucun cookie</strong>, ni aucun traceur publicitaire ou de mesure d'audience. C'est pourquoi aucun bandeau de consentement ne vous est présenté.</p>
-        <p>Deux informations purement techniques peuvent être enregistrées par votre navigateur, sur votre appareil uniquement : le fait que l'animation d'accueil a déjà été jouée pendant votre visite, et votre meilleur temps au test de réflexes de la page introuvable. Elles ne sont transmises ni à l'association ni à un tiers, ne permettent aucun suivi, et disparaissent quand vous effacez les données du site.</p>
+        <p>Une seule information purement technique peut être enregistrée par votre navigateur, sur votre appareil uniquement : le fait que l'animation d'accueil a déjà été jouée pendant votre visite. Elle n'est transmise ni à l'association ni à un tiers, ne permet aucun suivi, et disparaît à la fermeture de votre onglet.</p>
       </section>
 
       <section>
