@@ -61,6 +61,10 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       alors que la case dépend du nombre de colonnes) et la légende de la vidéo perdait son lieu et son
       année dans les points de suspension sous 414 px ; la tuile prend au passage les brackets or des
       autres cases (12/08)
+- [x] Les six cartes blanches de l'accueil (3 arguments partenaires + 3 articles de presse) portaient la même
+      barre or pleine de 3 px en tête, sur fond blanc : la signature de carte la plus générique qui existe, et
+      le seul endroit du site où l'or servait d'aplat sur du clair. Remplacée par le liseré damier marine + or
+      de la ligne de course (18/08, voir Journal)
 - [ ] Emblème 3D : version animée légère en hero (séquence AE ou sprite au scroll) si le poids reste raisonnable
 - [ ] Section actus/prochaines échéances (structure seulement, contenus à valider avec Thomas)
 - [x] Accueil : mur de partenaires « Ils nous font confiance » (18 logos)
@@ -119,8 +123,13 @@ Actionnables sans contenu de Thomas :
       marine/filet or par logo (nom, statut, lien), marquee en pause via :has(:popover-open), accessible clavier/mobile là où
       le survol seul ne l'est pas — sources : nexgismo.com (anchor positioning 2026), caniuse (Chrome 125+/Safari 26+/
       Firefox 147+) → @supports requis, fallback = lien direct actuel
-- [ ] corner-shape: bevel en @supports : la version NATIVE des coins biseautés maison (aujourd'hui en clip-path qui rogne
-      outline et ombres) sur cartes/boutons/badges — source : smashingmagazine.com/2026/03 (corner-shape, Chrome 139+)
+- [x] ~~corner-shape: bevel en @supports : la version NATIVE des coins biseautés maison (aujourd'hui en clip-path qui rogne
+      outline et ombres) sur cartes/boutons/badges — source : smashingmagazine.com/2026/03 (corner-shape, Chrome 139+)~~
+      ÉCARTÉ le 18/08 sur données, pas sur impression : browser-compat-data de MDN (fichier css/properties/corner-shape.json
+      lu ce jour) donne Chrome et Edge 139+, **Firefox `false`, Safari `false`, donc iOS `false`**. Un signe de DA que
+      l'iPhone ne verrait pas n'est pas un signe de DA. Le biseau maison reste en clip-path, avec sa contrainte connue
+      (il rogne outline et ombre portée ; drop-shadow en filtre est le contournement si le besoin revient). À rouvrir
+      seulement si WebKit implémente.
 - [x] View Transitions directionnelles : type « retour » posé dans pageswap/pagereveal quand on remonte l'arborescence
       (le volet diagonal s'inverse) + morph galerie→lightbox en same-document (la micro-tâche du 21/07, faite dans le
       même chantier) — source : developer.chrome.com/blog/view-transitions-in-2025 (Firefox 144 = same-document Baseline,
@@ -403,6 +412,67 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-08-18 (routine, AXE A : amélioration, finition design ; 17/08 était un jour B et 16/08 un jour C) :
+  **la barre or pleine des cartes blanches, seule signature de gabarit qui restait sur l'accueil.**
+  Journée en deux temps, parce que le run du 17/08 s'était arrêté sans commit.
+  **(1) Le correctif du 17/08 est vérifié et publié.** Le SSD portait 8 fichiers modifiés non commités,
+  datés du 17/08 à 12 h 03, et la prod servait encore la version du 16. Vérification avant de publier
+  quoi que ce soit, et le défaut était sérieux : les 5 pages sont capturées SANS JavaScript (copies
+  privées de leurs balises `<script>`, servies en local), et l'accueil d'avant le correctif ne montre
+  **rien d'autre que le voile d'intro** : l'emblème et le tracé de circuit, pour toujours. Cause :
+  `#intro` est levé par le JS, et `.rvl` part de `opacity: 0` sur **44 éléments de l'accueil, 21 de
+  pilote.html, 5 de contact.html**. Sans script, le site n'existait pas. Le correctif du 17/08 est bon :
+  une classe `js` posée sur `<html>` par le premier script de chaque page, et des règles `html:not(.js)`
+  qui rendent tout d'emblée quand elle n'arrive jamais. Vérifié aussi : le piège à focus de la lightbox
+  suit maintenant l'ordre du DOM (fermer, précédent, suivant), le jeu de la 404 tourne toujours après
+  retrait du code de record devenu mort le 25/07 (rien ne l'affichait plus depuis le retrait de jeu.html),
+  et les mentions légales ne parlent plus que de la seule information réellement stockée. Publié le 18/08.
+  **(2) Amélioration du jour.** Constat en regardant l'accueil : deux rangées de trois cartes blanches
+  (les 3 arguments partenaires, les 3 articles de presse) sont **exactement la même recette mesurée** :
+  fond blanc, filet 1 px à 10 %, **barre or pleine de 3 px en tête**, même padding, même survol. Six
+  plaques identiques, et la barre d'accent en tête d'une carte blanche est la signature de carte la plus
+  générique qui existe. Mesure faite au passage : c'était aussi le seul endroit du site où l'or sert
+  d'**aplat sur du clair** (partout ailleurs il est trait, contour, texte ou damier), et à l'intérieur
+  même de la carte de presse, les deux boutons « Partie 1 / Partie 2 » sont biseautés alors que la carte
+  qui les porte est un rectangle nu. Remplacée par le **liseré damier** : 6 px de haut, cellules de 3 px,
+  marine + or. Deux décisions valent plus que le correctif. **(a) La recette n'est pas choisie, elle est
+  reprise.** Le damier maison existe en deux versions : or sur transparent (pastilles, marquee, liseré du
+  hero) et **marine + or opaque** (`.ligne-course::after`, la tête de la ligne de course). Les quatre
+  variantes ont été construites et REGARDÉES avant de trancher : sur blanc, l'or-sur-transparent donne un
+  ruban jaune pâle qui lit « taxi », et en 3 px de haut il ne lit plus qu'en pointillés, c'est-à-dire une
+  bordure dashed, un gabarit remplacé par un autre. Seule la version marine + or tient sur un fond clair,
+  et c'est justement celle que le site réserve déjà à son unique élément posé sur du clair. **La géométrie
+  suit la règle maison** : la tuile conique vaut le double de la cellule, donc 6 px de haut = deux rangées
+  de 3 px. **(b) La règle est posée sur le sélecteur déjà partagé** par les deux familles
+  (`.part-carte, .presse-carte`), pas recopiée deux fois : une carte future ne peut pas retomber dans la
+  barre pleine par oubli. Même logique que `main ul` le 11/08 et que la coupe Bebas unique le 09/08.
+  **Un effet de bord attrapé avant publication** : le liseré est un fond, et le papier n'imprime pas les
+  fonds. Sans filet, la carte se serait ouverte par le haut sur la feuille de style d'impression de marque
+  (19/07). Une règle `@media print` masque le liseré et redonne un filet or plein de 2 px, qui, lui,
+  s'imprime comme une bordure ; vérifié en rendant le PDF de l'accueil (14 pages) et en REGARDANT les
+  pages 7 à 9. Vérifications : 5 pages × 7 largeurs (320 à 1680) via un harnais d'iframes, **0 texte hors
+  de sa boîte, 0 ratio d'image faux, 0 débordement non décoratif** (les seuls signalements sont les SVG de
+  filigrane, les mots géants et la bande de logos, tous volontairement plus larges que l'écran dans un
+  parent qui les coupe), console sans erreur, captures desktop 1280 et mobile 390 regardées avant/après,
+  puis prod contrôlée par le build `built` du commit, par les marqueurs de contenu dans les octets servis
+  ET par relevé des styles calculés sur la page en ligne (6 cartes, 6 px, marine + or).
+  **Une fausse piste écartée sur données** : l'item `corner-shape: bevel` du backlog (la version native du
+  biseau maison, qui ne rognerait ni outline ni ombre) est refusé et coché. Le browser-compat-data de MDN,
+  lu ce jour, donne Chrome et Edge 139+ mais **Firefox `false` et Safari `false`, donc iOS `false`**. Un
+  signe de direction artistique que l'iPhone ne verrait pas n'est pas un signe de direction artistique.
+  **Une alerte détectée et refutée** : le détecteur de texte hors boîte signale le « 404 » géant sur les
+  7 largeurs (jusqu'à +206 px). Mesure faite : le chiffre déborde de sa COLONNE, comme son propre
+  commentaire de code l'annonce, mais reste dans l'écran (1389 px sur 1680 ; 12 px de marge à 320 px).
+  Rien à corriger : le détecteur du 12/08 ne sait pas distinguer un débordement voulu d'un accident,
+  c'est à la mesure de trancher.
+  **INCIDENT MATÉRIEL, à savoir avant le prochain run** : le SSD T7 s'est démonté en cours de journée
+  (`/Volumes/ TPT7` a disparu, seul `Macintosh HD` restait monté). Le travail a continué depuis un clone
+  du dépôt dans le scratchpad, comme la routine le prévoit, et **tout est poussé**. Conséquence pour
+  Thomas : la copie du site sur le SSD est maintenant EN RETARD de deux commits, et elle porte toujours
+  ses modifications locales non commitées (le collage `collage-origines.webp` du 11/08, toujours en
+  attente de sa décision). **Au prochain branchement du T7, faire `git pull` dans « Site TPRacing » avant
+  toute modification**, sinon les deux versions divergent.
 
 - 2026-08-16 (routine, AXE C : veille par captures ; 15/08 et 12/08 étaient des jours A, 11/08 un jour B,
   la dernière veille datait du 10/08, la semaine en réclamait une) : **« en un coup d'œil » — une donnée

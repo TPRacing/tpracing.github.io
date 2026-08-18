@@ -33,7 +33,15 @@ Chaque élément nouveau doit pouvoir se DIRE avec ces mots-là. Si l'idée a be
 langage étranger, elle ne passe pas.
 
 - Damier : pastille damier des kickers, marquee incliné, collage damier duotone de la
-  bande origines (grille cisaillée k=-0.32), liseré damier.
+  bande origines (grille cisaillée k=-0.32), liseré damier. **Deux recettes, et c'est le
+  FOND qui décide laquelle** (mesuré le 18/08) : `or sur transparent` pour tout ce qui se
+  pose sur du sombre ou sur une photo (pastilles, marquee, liseré du hero) ; `marine + or
+  opaque` pour ce qui se pose sur du clair (tête de la ligne de course, liseré des cartes
+  blanches). Transposer la première sur du blanc donne un ruban jaune pâle qui lit « taxi ».
+  **Géométrie invariable** : la tuile du `repeating-conic-gradient` vaut le DOUBLE de la
+  cellule, donc un liseré de 6 px = `background-size: 6px 6px` = deux rangées de 3 px. Et
+  sous 4 px de haut le damier cesse d'être un damier : il ne reste qu'une rangée, qui lit
+  comme une bordure `dashed`, soit un gabarit échangé contre un autre.
 - Carrés biseautés : boutons et tuiles à coin coupé (clip-path ; attention, le clip rogne
   outline et ombres, anneaux de focus en inset).
 - Brackets d'angle or : les coins de cadres photo de la galerie. **Une case de grille qui
@@ -88,7 +96,17 @@ langage étranger, elle ne passe pas.
   la même raison). Remède : matière (grain, duotone, photo), asymétrie, oversize.
 - Rendu « template IA » : dégradés violet/bleu génériques, glassmorphism, cartes toutes
   identiques, rangées d'icônes rondes, tout à la même échelle. Hors charte et hors sujet
-  (reality-check StudioMeyer consigné le 03/08).
+  (reality-check StudioMeyer consigné le 03/08). **La barre d'accent pleine en tête d'une
+  carte blanche en fait partie** (18/08) : c'est la carte par défaut de toutes les
+  bibliothèques de composants, et sur ce site c'était le seul endroit où l'or servait
+  d'APLAT sur du clair. L'or est un trait, un contour, un texte ou un damier ; quand il
+  devient une surface, il n'accentue plus, il remplit.
+
+- Un signe de DA que Safari et iOS ne rendent pas n'est PAS un signe de DA (18/08, à propos
+  de `corner-shape: bevel` : Chrome et Edge seuls, Firefox et Safari à zéro). Un enrichissement
+  peut être réservé à un moteur ; une pièce de vocabulaire, non, sinon la marque a deux
+  visages selon le téléphone. Se tranche sur les données de compatibilité, jamais sur un billet
+  de blog.
 - Le tout-doré (rejet du favicon doré, 17/07) : l'or est un accent, le marine domine.
 - **Le surtitre qui redit le titre** : rejeté par Thomas le 09/08, « la plupart des surtitres font
   trop robotiques car pas très utiles », exemple donné « Ils nous soutiennent » au-dessus de
@@ -289,3 +307,24 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   rend le même service, contrôlée au chiffre (fond sous les lettres ramené de 185 à environ 110,
   blanc du carénage voisin intact à 246). Un rôle graphique n'appartient pas à l'accident qui le
   rendait : il se transporte.
+
+- 2026-08-18 : **remplacer un ornement générique n'est pas en ajouter un, mais la recette se reprend
+  au fond près.** Les six cartes blanches de l'accueil (3 arguments partenaires, 3 articles de presse)
+  partageaient une recette mesurée à l'identique, barre or pleine de 3 px comprise. La tentation du
+  16/08 était encore fraîche et elle a servi de garde-fou : ce jour-là le liseré or sur l'arête des
+  cartes disciplines avait été REFUSÉ, parce qu'ajouter un troisième signe doré à des cartes qui
+  manquaient d'information, c'est signer un gabarit. Ici le mouvement est différent et il faut savoir
+  le dire : on n'AJOUTE rien, on remplace un ornement générique par de la matière maison, à nombre
+  d'ornements constant. Le test de la question 4 (matière ou effet ?) tranche : une texture remplace
+  un aplat. Ce qui s'apprend ensuite est plus utile que le correctif. **Une recette maison ne se
+  transpose pas, elle se choisit en fonction du fond.** Les quatre variantes ont été construites et
+  regardées côte à côte avant décision : le damier or-sur-transparent du hero, transposé tel quel sur
+  du blanc, donne un ruban jaune pâle qui lit « taxi », et réduit à 3 px de haut il ne lit plus qu'en
+  pointillés, c'est-à-dire une bordure `dashed`, un gabarit échangé contre un autre. La bonne recette
+  existait déjà, marine + or, et c'est précisément celle que le site réserve à son seul élément posé
+  sur du clair (la tête de la ligne de course). **Corollaire d'outillage, à retenir : un décor peint
+  en FOND disparaît sur le papier.** Le liseré est un `background`, l'impression ne l'imprime pas, et
+  la carte se serait ouverte par le haut sur la feuille de style d'impression de marque. Un filet or
+  plein de 2 px prend le relais en `@media print` ; vérifié en regardant le PDF rendu, pas en le
+  supposant. **Règle qui en découle : toute pièce de vocabulaire posée en `background` se double d'un
+  équivalent en bordure pour le papier.**
