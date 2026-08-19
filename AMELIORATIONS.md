@@ -328,6 +328,67 @@ Contre-exemples et sites à ne pas retenter à l'aveugle :
   OUVRE aussi tous les méga-menus (gp-elite.com est devenu illisible). Le filtrer sur les conteneurs de
   contenu, ou masquer `[class*=dropdown],[class*=submenu]` juste après.
 
+### Idées de la veille 19/08 (angle neuf : la MATIÈRE PHOTOGRAPHIQUE, comment un site fait exister ses images)
+
+Sites REGARDÉS (captures pilotées par le protocole DevTools, desktop 1280 et mobile 390, chaque capture
+relue avant d'écrire) : **spa-francorchamps.be** (haut de page, section événements, bannière calendrier,
+section entreprises + le hero mobile), **circuit-dijon-prenois.com** (hero, grille de tuiles, carrousel
+d'événements, bascule de section, mobile), **darrenheath.com** (hero). Le code n'a été lu qu'ensuite,
+pour comprendre le mécanisme de ce qui avait été vu.
+
+Retenues :
+- [x] **Plein ou contour se règle sur le FOND, pas sur le goût.** VU chez Spa : le même slogan est en
+      contour blanc sur la vidéo nocturne du desktop et en plein blanc sur la photo diurne du mobile.
+      VU en négatif chez Darren Heath : sa ligne de titre en graisse fine disparaît là où la photo
+      s'éclaircit. Pourquoi c'est TPRacing : le site pose déjà « plein contre contour » comme principe
+      de charte, il lui manquait le réglage. FAIT le 19/08 (voir Journal et DA).
+- [x] **L'accent est réservé au plus PETIT élément.** VU chez Spa : le surtitre « À LA UNE » est
+      minuscule et ROUGE, le titre au-dessus est géant et BLANC. L'accent ne devient jamais une surface,
+      il reste un mot de 10 px. Pourquoi c'est TPRacing : c'est la formulation positive de la règle
+      « l'or est un trait, jamais un aplat » posée le 18/08. Sert de garde-fou, rien à implémenter.
+- [ ] **La coupe diagonale peut PORTER un signe au lieu d'être une pente nue.** VU chez Spa, bannière
+      « TÉLÉCHARGER LE CALENDRIER » : la photo est séparée du texte par une diagonale, et cette
+      diagonale est faite de **trois filets inclinés aux couleurs du drapeau belge**, pas d'un bord net.
+      Mécanisme : un dégradé linéaire à bandes dures posé sur l'arête du masque. Pourquoi c'est
+      TPRacing : la coupe diagonale (2.3vw) et le damier sont déjà deux mots du vocabulaire maison ;
+      les marier met de la MATIÈRE sur une arête qui est aujourd'hui muette. À maquetter hors ligne
+      avant de proposer, la bascule de section touche les 5 pages.
+- [ ] **Écrire sur une photo, c'est l'assombrir — mais localement vaut mieux que globalement.**
+      VU à Dijon : les tuiles de navigation sont des photos **entièrement teintées en marine** avec le
+      titre posé dessus, alors que les cartes d'événements, dont le titre est SOUS l'image, gardent
+      leurs couleurs pleines. VU chez Spa : même besoin, réponse plus fine, un **dégradé sombre au seul
+      pied de l'image**, qui laisse intacts les 70 % du haut. Ce que ça corrige dans notre DA :
+      la règle du 10/08 opposait « montage de marque » et « reportage » ; la vraie ligne de partage
+      est mécanique, **on teinte quand on écrit dessus**. À reprendre le jour où une image du site
+      devra porter du texte.
+
+Écartées, avec le motif :
+- Le **badge de catégorie jaune citron** de Spa (« RACE » sur chaque carte) : lisible et utile, mais il
+  introduit une SECONDE couleur d'accent à côté du rouge de leur marque. Transposé chez nous, ce serait
+  un deuxième or : la charte n'a qu'un accent, l'idée tombe au test n°3.
+- Le **titre en italique penché** de Spa et de Dijon : c'est leur manière de dire la vitesse. Korataki
+  n'a pas d'italique dessinée et un faux penchage abîmerait la lettre. Langage étranger, test n°2.
+- Le **chiffre d'anniversaire en tête** (« 50 ANS » à Dijon) : TPRacing a 2021 comme date de naissance,
+  un « 5 ANS » ne dit rien. La bande de chiffres joue déjà ce rôle avec des faits.
+
+Défauts observés chez eux, qui valent avertissement pour nous :
+- Dijon écrit « DISPONIBILITÉS DU KARTING » dans une tuile où le titre **touche les deux bords**, sans
+  marge, et c'est pire sur mobile. Confirmation extérieure de la règle du 12/08 : une taille de texte se
+  règle sur sa case, pas sur la fenêtre.
+- Dijon aligne mal ses cartes d'événements : un titre sur deux lignes pousse son lien 24 px plus bas que
+  les autres. Une grille de cartes s'égalise sur la ligne de base des liens, pas sur le haut des photos.
+- Le widget flottant « Réserver une table » de Dijon **recouvre le texte** sur mobile.
+
+Sites écartés du panel, à ne pas retenter à l'aveugle : **bellracing.com** répond 403 aux robots,
+**sparco.it** ne répond pas (délai dépassé), **stilo.it** et **paulsmith.com** posent une modale de
+consentement plein écran qui rend la capture inexploitable (Paul Smith **floute** en plus toute la page
+derrière la modale). Note d'outillage majeure du jour : le pane d'aperçu reste `visibilityState:hidden`,
+donc les reveals au scroll n'y partent jamais et la page ressort BLANCHE ; et l'astuce de la fenêtre très
+haute (`--window-size=1280,2800`) ne sert à rien sur un hero en `100vh`, qui s'étire simplement sur toute
+la hauteur. La voie fiable, quand l'extension Chrome n'est pas connectée, est de piloter Chrome headless
+par le **protocole DevTools** (navigation, retrait des bandeaux, scroll réel, capture, et
+`Network.setCacheDisabled` sans quoi on mesure l'ancienne feuille de style).
+
 ### Constats de l'audit de COHÉRENCE DE LA DA du 11/08 (5 pages regardées, desktop 1280 + mobile 390)
 
 Corrigés le jour même :
@@ -412,6 +473,55 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-08-19 (routine, AXE C : veille par captures ; 18/08 était un jour A, 17/08 un jour B, la dernière
+  veille datait du 16/08) : **l'or ne tient pas comme encre sur le blanc cassé.** Angle neuf du jour :
+  la MATIÈRE PHOTOGRAPHIQUE, comment un site fait exister ses images. Trois sites réellement regardés
+  (Spa-Francorchamps, Circuit Dijon-Prenois, Darren Heath), en desktop 1280 et mobile 390.
+  **(1) Ce que la veille a donné.** Spa sert le même slogan en CONTOUR blanc sur sa vidéo nocturne de
+  desktop et en PLEIN blanc sur sa photo diurne de mobile : le contour n'est pas leur style, c'est leur
+  réglage. Darren Heath en fait la démonstration par l'échec, sa ligne de titre fine se dissout là où la
+  photo s'éclaircit. Dijon oppose « 50 ANS » plein et « DE PASSION » en contour dans un même titre, mais
+  sur du NOIR. Conclusion transposable : **plein ou contour est un réglage de CONTRASTE dicté par le
+  fond.** Quatre idées consignées au backlog, trois écartées avec leur motif (le badge de catégorie
+  jaune de Spa introduirait un second accent, l'italique penché est un langage étranger à Korataki,
+  le chiffre d'anniversaire ne dit rien pour une structure née en 2021).
+  **(2) Le défaut que ça a fait trouver, et sa correction.** Mesure sur nos pages : **l'or #D49726 sur
+  le blanc cassé #F6F7FC vaut 2,38:1**, et 2,50:1 sur le blanc pur des cartes, donc sous les deux
+  seuils utiles (3:1 grands textes, 4,5:1 petits). Neuf éléments porteurs d'information étaient dans ce
+  cas et sont corrigés : les **surtitres des sections claires** (« Le parcours » et « Sur Instagram » sur
+  pilote.html, « En attendant » sur la 404), les **libellés de presse** (source et date des 3 articles),
+  les **flèches de lien externe** des cartes de presse, le **survol** de ces cartes (le mot passait en or
+  sur blanc au moment précis où on interagit ; la récompense est désormais portée par l'anneau or seul),
+  l'**état actif de la nav sur fond clair** (le filet or qui glisse sous le lien portait déjà le signal,
+  la couleur du mot était redondante) et les **trois chiffres de la bande** (2021 / 3 / 1). Règle posée
+  une fois pour toutes, sur le sélecteur partagé : sur fond clair l'encre est marine, l'or reste le
+  SIGNE (pastille damier, liseré, filet, anneau, arête) ; sur fond sombre l'or redevient l'encre.
+  C'est la doctrine du damier du 18/08 étendue à tout l'or.
+  **(3) Les chiffres géants, décidés en regardant.** Quatre variantes construites et comparées côte à
+  côte avant de trancher : contour or actuel (pâle, creux), contour marine seul (lit comme un dessin
+  technique et efface l'accent), plein marine nu (banal), **plein marine + liseré or de 2 px sur
+  l'arête** (retenu). Le chiffre devient enfin l'élément fort de sa bande, l'or garde son rôle de trait.
+  **(4) Une fausse piste écartée sur données** : assombrir l'or pour lui faire passer le seuil. Un or
+  ramené à 4,5:1 tombe à **#93691A**, un bronze olive qui n'est plus la couleur de la charte. On ne
+  corrige pas un contraste en déplaçant une couleur de marque.
+  **(5) SIX FAUX POSITIFS attrapés, et la leçon de méthode qui va avec.** Le premier audit déterminait
+  le fond en remontant le DOM jusqu'à un `background-color` opaque. Sur ce site presque tous les fonds
+  sont des photos, des dégradés ou des voiles : `backgroundColor` vaut `rgba(0,0,0,0)` partout et la
+  remontée finit sur le blanc du `body`. Il annonçait donc en échec le **47 géant** du hero pilote, la
+  tuile **« Plus d'images »**, les libellés **Instagram**, et les deux mots or des accroches
+  (« transmet », « Papone ») — tous en réalité posés sur du sombre, entre **5,51 et 7,37:1**, donc
+  parfaitement contrastés. Deux avaient déjà été « corrigés » avant que la mesure au pixel ne le
+  démente : ils ont été remis en l'état. **Le fond d'un élément se mesure au PIXEL sur la capture
+  rendue**, en excluant les pixels proches de l'encre, jamais par la structure. Le 47 géant et le 404
+  géant restent donc en contour or creux, mesurés et intacts.
+  **Vérifications** : 5 pages × 7 largeurs (320 à 1680), **0 erreur console, 0 ratio d'image faux, 0
+  débordement horizontal** (les seuls signalements sont le marquee incliné et le mot géant « 47 »,
+  volontairement plus larges que l'écran dans un parent qui les coupe, déjà consignés le 18/08) ;
+  contraste re-mesuré au pixel après correction sur les 5 pages, plus aucun élément sous son seuil ;
+  captures desktop 1280 et mobile 390 regardées avant/après sur la bande de chiffres et les cartes.
+  **Rappel resté sans réponse** : le collage `collage-origines.webp` du 11/08 est toujours modifié et
+  non commité sur le SSD, en attente de la décision de Thomas.
 
 - 2026-08-18 (routine, AXE A : amélioration, finition design ; 17/08 était un jour B et 16/08 un jour C) :
   **la barre or pleine des cartes blanches, seule signature de gabarit qui restait sur l'accueil.**

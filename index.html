@@ -540,7 +540,8 @@
       letter-spacing: .135em;
       text-transform: uppercase;
       font-size: .95rem;
-      color: var(--or);
+      /* encre marine sur la carte claire (19/08) ; l'or reste le liseré damier en tête */
+      color: var(--marine);
     }
     .presse-carte .media b { color: var(--gris); }
     .presse-carte .titre { color: var(--marine); font-weight: 600; font-size: 1.04rem; line-height: 1.5; }
@@ -553,8 +554,9 @@
       color: var(--marine);
       transition: color .2s;
     }
-    .presse-carte .lire i, .presse-carte .lire-duo i { font-style: normal; color: var(--or); }
-    a.presse-carte:hover .lire, a.presse-carte:focus-visible .lire { color: var(--or); }
+    /* Carte CLAIRE : l'encre reste marine, l'or n'y est que le liseré damier en tête
+       et l'anneau au survol. Une flèche or sur blanc tombait à 2,50:1 (19/08). */
+    .presse-carte .lire i, .presse-carte .lire-duo i { font-style: normal; color: var(--marine); }
     .presse-carte .lire-duo { margin-top: auto; display: flex; gap: 12px; flex-wrap: wrap; }
     .presse-carte .lire-duo a {
       font-family: var(--f-label);
@@ -569,8 +571,8 @@
       transition: box-shadow .2s, color .2s, transform .15s;
     }
     .presse-carte .lire-duo a:hover, .presse-carte .lire-duo a:focus-visible {
+      /* la récompense du survol est l'anneau or, pas la couleur du mot */
       box-shadow: inset 0 0 0 1.5px var(--or);
-      color: var(--or);
       transform: translateY(-2px);
     }
     @media (max-width: 900px) { .presse-grid { grid-template-columns: 1fr; } }

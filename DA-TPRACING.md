@@ -147,6 +147,51 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-08-19 : **l'or ne tient pas comme ENCRE sur le blanc cassé, et c'est le fond qui décide.**
+  Veille par captures (Spa-Francorchamps, Circuit Dijon-Prenois, Darren Heath, desktop 1280 et
+  mobile 390) puis mesure sur le site. Trois sites, une même leçon, et un défaut mesuré chez nous.
+  **(a) Ce qui a été VU.** Spa sert le MÊME slogan de deux façons selon l'écran : sur le desktop,
+  « LE TRACÉ DE VOS ENVIES » est en **contour blanc** sur une vidéo de light-painting nocturne ;
+  sur mobile, le même titre est **plein blanc** sur une photo du Raidillon en plein jour. Le
+  contour n'est donc pas leur style, c'est leur réglage : sur un fond pâle, ils remplissent.
+  Chez Darren Heath, la démonstration par l'échec : la première ligne du titre, en graisse fine
+  blanche, **disparaît** là où la photo devient claire, alors que la seconde ligne, en gras, tient.
+  À Dijon, « **50 ANS** » est plein et « *DE PASSION* » est en contour — dans le même titre, mais
+  sur du NOIR, où le contour a de quoi mordre.
+  **(b) Ce que ça donne comme règle maison.** Plein ou contour n'est pas un choix d'esthétique,
+  c'est un réglage de CONTRASTE dicté par le fond. Et son corollaire, mesuré sur nos pages :
+  **l'or #D49726 sur le blanc cassé #F6F7FC vaut 2,38:1** (2,50:1 sur le blanc pur des cartes),
+  sous les deux seuils utiles (3:1 pour les grands textes, 4,5:1 pour les petits). Donc :
+  **sur fond clair, l'encre est MARINE ; l'or y reste un SIGNE** — pastille damier, liseré damier,
+  filet, anneau de survol, arête. Sur fond sombre l'or redevient l'encre (5,7 à 7,4:1 mesurés).
+  C'est exactement la doctrine du damier du 18/08 (« c'est le FOND qui décide la recette »),
+  étendue de la seule trame à TOUT l'or. Appliqué le jour même aux surtitres des sections claires,
+  aux libellés de presse, aux flèches de lien externe, aux survols des cartes de presse et à l'état
+  actif de la nav sur fond clair (où le filet or qui glisse portait déjà le signal : la couleur du
+  mot était redondante, elle est rendue au marine).
+  **(c) Le chiffre géant reçoit sa recette de fond clair.** Les trois chiffres de la bande
+  (2021 / 3 / 1) étaient en contour or creux sur le blanc cassé : l'élément censé être le plus fort
+  de la bande en était le plus pâle. Quatre variantes construites et REGARDÉES avant de trancher
+  (contour or actuel, contour marine seul, plein marine + liseré or, plein marine nu) : le contour
+  marine seul lit comme un dessin technique et efface l'accent, le plein nu est banal. Retenu :
+  **plein marine + liseré or de 2 px sur l'arête**, qui rend le chiffre lisible par sa masse
+  (14,18:1) tout en gardant l'or dans son rôle de trait. Le vocabulaire « chiffres outline or »
+  n'est pas abandonné : il garde sa forme creuse là où elle marche, c'est-à-dire sur du sombre
+  (le 47 géant du hero pilote à 7,37:1, le 404 à 6,52:1, tous deux mesurés et laissés intacts).
+  **(d) Interdit qui en découle, à ne plus tester** : l'or ne devient PAS un texte foncé pour
+  passer le seuil. Un or assombri jusqu'à 4,5:1 tombe à #93691A, un bronze olive qui n'est plus la
+  couleur de la charte. On ne corrige pas un contraste en déplaçant une couleur de marque : on
+  change l'encre et on laisse la couleur de marque au signe.
+  **(e) Leçon de MÉTHODE, la plus coûteuse de la journée** : le fond réel d'un élément se mesure
+  **au PIXEL sur la capture**, jamais en remontant le DOM à la recherche d'un `background-color`
+  opaque. Sur ce site presque tous les fonds sont des photos, des dégradés ou des voiles, donc
+  `backgroundColor` vaut `rgba(0,0,0,0)` partout et la remontée finit sur le blanc du `body`.
+  Le premier audit, fait ainsi, a produit **six faux positifs** — le 47 géant, la tuile
+  « Plus d'images », les libellés Instagram, les deux mots or des hero — tous en réalité posés sur
+  du sombre et parfaitement contrastés. Deux d'entre eux avaient déjà été « corrigés » avant que
+  la mesure au pixel ne le démente, et il a fallu les remettre. Règle : pour juger une couleur,
+  échantillonner la couleur dominante de la zone rendue, en excluant les pixels proches de l'encre.
+
 - 2026-08-08 : création du document. Contenu fondé sur la charte PDF, les retours de
   Thomas consignés du 09/07 au 25/07 (rejets v1/v2 du site, favicon, carton de fin,
   jeu.html, amplitudes) et le vocabulaire déjà en production sur les 5 pages. Prochaine

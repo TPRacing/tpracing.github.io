@@ -179,12 +179,21 @@ html:not(.js) .kicker.rvl { clip-path: none; }
      dossier sponsoring (Bold 2,8 au lieu de Middle 3,2). */
   letter-spacing: .30em;
   text-transform: uppercase;
-  color: var(--or);
+  /* Sur fond CLAIR l'or ne tient pas comme ENCRE (2,38:1 sur le blanc cassé,
+     mesuré le 19/08) : le mot passe en marine et l'or reste le SIGNE, porté par
+     la pastille damier ci-dessous. Sur fond sombre l'or redevient l'encre (5,96:1).
+     Même doctrine que le damier du 18/08 : c'est le FOND qui décide la recette. */
+  color: var(--marine);
   display: flex;
   align-items: center;
   gap: 13px;
   margin-bottom: 16px;
 }
+/* Contenants SOMBRES du site : l'or y redevient l'encre (5,7 à 7,4:1 mesurés au pixel).
+   Partout ailleurs le surtitre est sur le blanc cassé et reste marine. */
+.hero .kicker,
+.hero-pilote .kicker,
+.section-marine .kicker { color: var(--or); }
 .kicker::before {
   content: "";
   width: 15px; height: 15px;
@@ -225,7 +234,11 @@ html:not(.js) .kicker.rvl { clip-path: none; }
   font-weight: 700;
   font-size: clamp(3rem, 6vw, 4.6rem);
   line-height: 1;
-  color: transparent;
+  /* Le chiffre porte l'information (le label seul ne dit pas « 2021 ») et il se
+     tient sur le blanc cassé : l'encre est donc marine, et l'or reste le liseré
+     sur l'arête. Le contour or seul donnait 2,38:1, sous le seuil de 3:1 des
+     grands textes (mesuré le 19/08, quatre variantes construites et regardées). */
+  color: var(--marine);
   -webkit-text-stroke: 2px var(--or);
   text-stroke: 2px var(--or);
 }
@@ -581,7 +594,9 @@ nav.solide .logo img { height: 36px; }
 nav.solide .logo .logo-sombre { display: none; }
 nav.solide .logo .logo-clair { display: block; }
 nav.solide ul a { color: var(--marine); }
-nav.solide ul a:hover, nav.solide ul a.active { color: var(--or); }
+/* Nav sur fond clair : le mot reste marine (l'or y tombe à 2,38:1) ; l'état actif
+   et le survol restent signalés par le filet or qui glisse sous le lien. */
+nav.solide ul a:hover, nav.solide ul a.active { color: var(--marine); }
 
 @media (max-width: 820px) {
   nav { padding: 10px 4%; }
