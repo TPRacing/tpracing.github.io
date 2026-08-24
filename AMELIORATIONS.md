@@ -474,6 +474,23 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-08-24 (routine feed Insta, `maj-feed-insta-site`) : **la routine ne lit plus le profil depuis un
+  mois, Google Chrome est simplement ÉTEINT à l'heure de déclenchement.** Les outils du Chrome connecté
+  répondent « not connected » (deux tentatives), et un `pgrep` confirme qu'aucun processus Google Chrome
+  ne tourne sur la machine : ce n'est ni l'extension ni la session Instagram, c'est le navigateur qui
+  n'est pas lancé. Même message aux déclenchements des 23/07, 27/07, 03/08 et 17/08, soit **cinq runs
+  consécutifs sans lecture possible**. La grille de `pilote.html` est donc figée sur les 3 posts posés
+  le 25/07 (DbDIlw9DNT-, Da0czcVDLSv, DavPpbfjFkZ), et personne n'en avait été averti puisque la routine
+  est conçue pour s'arrêter en silence. Aucun fichier du feed n'a été modifié ni poussé aujourd'hui,
+  seule cette ligne l'est. Le repli « clone GitHub » ne sert à rien ici : le blocage est la LECTURE
+  d'Instagram, pas l'accès au dépôt (le T7 était monté et à jour).
+  ❓ EN ATTENTE DE THOMAS : la routine a besoin que **Chrome soit ouvert, avec le volet Claude connecté**,
+  au moment où elle se déclenche (lundi 10 h). Trois options au choix : (1) ouvrir Chrome le lundi matin
+  avant 10 h ; (2) m'autoriser à lancer Chrome moi-même en début de routine, ce que je ne fais pas
+  aujourd'hui faute d'accord (ouvrir une application sur son Mac en son absence n'est pas anodin, et cela
+  ne reconnecte le volet Claude que si la session y est déjà signée) ; (3) déplacer l'horaire sur un
+  créneau où il est sûr d'être devant sa machine. Sans l'une des trois, le feed restera figé.
+
 - 2026-08-19 (routine, AXE C : veille par captures ; 18/08 était un jour A, 17/08 un jour B, la dernière
   veille datait du 16/08) : **l'or ne tient pas comme encre sur le blanc cassé.** Angle neuf du jour :
   la MATIÈRE PHOTOGRAPHIQUE, comment un site fait exister ses images. Trois sites réellement regardés
