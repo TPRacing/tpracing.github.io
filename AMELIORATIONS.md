@@ -463,6 +463,32 @@ Pour la routine du feed Instagram (`maj-feed-insta-site`, section « Les dernier
 - [ ] `pilote.html` alt du post du 13/07 : « dossard 32 » met en avant un numéro qui n'est pas le 47. La règle
       du site est de ne citer aucun autre numéro. À retirer de l'alt.
 
+### Constats de l'audit LIENS du 24/08 (49 URL externes, 68 liens internes, 203 refs d'assets)
+
+- [x] **La tuile SMD pointait vers le site du partenaire voisin.** Corrigé le 24/08 : `hexagonemotors.fr`
+  remplacé par `servicematerieldistribution.com` sur les 2 occurrences de la bande (lot visible et copie
+  de boucle). Preuves : hexagonemotors.fr est un concessionnaire auto qui ne mentionne SMD nulle part,
+  le registre donne SARL SERVICE MATERIEL DISTRIBUTION, SIREN 498 226 968, 965 route du Pont 69330 Jons,
+  NAF 3312Z, et le logo de leur site est identique au fichier `smd.webp` de la bande. Leur site date de
+  février 2025, soit APRÈS la construction de la bande, ce qui explique le lien de dépannage d'origine.
+  Canonique = domaine nu sans www.
+- [ ] **QUESTION THOMAS, lien Facebook en cul-de-sac pour tous les visiteurs.**
+  `facebook.com/thomas.pne.9` renvoie « Ce contenu n'est pas disponible pour le moment » à toute personne
+  non connectée. Ce n'est pas un blocage anti-robot : un profil public témoin s'affiche complètement dans
+  la même session de capture, et la version mbasic renvoie une erreur elle aussi. Le lien vit à 7 endroits :
+  le pied des 5 pages, la puce réseaux du hero de pilote.html, et le `sameAs` du JSON-LD de pilote.html.
+  Deux issues possibles, aucune n'est prise sans toi. (a) Rendre le profil visible publiquement côté
+  Facebook, rien ne change sur le site. (b) Retirer Facebook des réseaux affichés, ce qui touche ta règle
+  des 6 icônes au pied de toutes les pages. Rien n'a été modifié en attendant.
+- [ ] Partenaires sans lien, réexaminés et confirmés sans site : GPI Grayel Protection Incendie (le domaine
+  `gpi-incendie.fr` existe mais ne sert qu'un gabarit Webador non publié), AMS Rénov Bâtiment, Les Frang'Ain,
+  DMPI, Midas Lyon Tête d'Or. Les 5 tuiles restent des blocs sans lien, ce qui est le motif déjà en place.
+  À reprendre au prochain audit de liens, un site peut ouvrir comme celui de SMD l'a fait.
+- [ ] Report SEO, pas traité ce jour : sur pilote.html, contact.html et mentions-legales.html, le JSON-LD
+  référence `.../#site` alors que ce nœud n'est défini que sur l'accueil. C'est une pratique courante et
+  tolérée, mais un nœud WebSite répété sur chaque page serait plus robuste. À trancher un jour de
+  dimension SEO.
+
 ## Règles (rappel pour la routine)
 
 Charte : marine #1E2635, or #D49726, blanc #F6F7FC, rouge #C13221, vert #3E836E (micro-accent).
@@ -473,6 +499,65 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-08-24 (routine, AXE B : audit, dimension **liens internes et externes**, la dernière remontait au
+  25/07 et les partenaires changent de site, 19/08 était un jour C, 18/08 un jour A, 17/08 un jour B,
+  pas de run du 20 au 23) : **une tuile de la bande partenaires envoyait chez le voisin.**
+  Le T7 s'est démonté en cours de run, comme le 18/08, la journée s'est faite depuis un clone du dépôt
+  dans le scratchpad.
+  **(1) Le périmètre, mesuré.** 49 URL externes uniques, 68 liens internes, 203 références d'assets sur
+  les 5 pages plus sitemap.xml, robots.txt, llms.txt, styles.css et le manifeste. Côté interne, **rien à
+  signaler** : 0 fichier absent, 0 ancre morte, 0 asset manquant, et **les 78 liens externes portent tous
+  `rel="noopener"`, sans exception**.
+  **(2) Le défaut réel, et pourquoi il était invisible.** La tuile **SMD** de la bande partenaires pointait
+  vers `hexagonemotors.fr`, c'est-à-dire le site du partenaire affiché juste au-dessus. Le lien répondait
+  200, donc aucun contrôle de code de statut ne pouvait le voir. Il a fallu **lire le contenu des sites**
+  pour le trouver : hexagonemotors.fr est un concessionnaire automobile qui ne mentionne SMD nulle part.
+  Identification : registre des entreprises, **SARL SERVICE MATERIEL DISTRIBUTION, SIREN 498 226 968,
+  965 route du Pont 69330 Jons, NAF 3312Z**, réparation de matériel de voirie et de nettoyage, ce qui
+  colle à l'écosystème des autres partenaires (pompes, bobinage, canalisations). Leur site
+  `servicematerieldistribution.com` porte le **même SIRET** et un **logo identique au fichier `smd.webp`**
+  de la bande. Il a été **créé en février 2025, après la construction de la bande**, ce qui explique le
+  lien de dépannage d'origine. Corrigé sur les 2 occurrences (lot visible et copie de boucle), avec le
+  canonique déclaré par leur site, le domaine nu sans www. **Leçon : un audit de liens qui ne regarde que
+  les codes de statut ne trouve pas un lien qui mène au mauvais endroit. Il faut comparer ce que la tuile
+  ANNONCE et ce que la page d'arrivée DIT.**
+  **(3) Le deuxième défaut, laissé à Thomas.** `facebook.com/thomas.pne.9` renvoie « Ce contenu n'est pas
+  disponible pour le moment » à tout visiteur non connecté. Vérifié contre un **témoin** : un profil public
+  connu s'affiche entièrement dans la même session de capture, donc ce n'est pas un blocage anti-robot, et
+  la version mbasic échoue elle aussi. Le lien est à 7 endroits, dont le `sameAs` du JSON-LD de pilote.html.
+  Rien n'a été touché : soit le profil redevient public côté Facebook, soit le réseau sort du site, et
+  cette seconde option touche la règle des 6 icônes au pied de toutes les pages. Question posée au backlog.
+  **(4) Ce qui a été vérifié EN REGARDANT, pas en supposant.** Les 12 sites de partenaires répondent 200
+  **avec leur propre titre et leur propre contenu**, aucun domaine parqué, aucune redirection hors domaine.
+  Les réseaux ont été ouverts en Chrome headless piloté en DevTools : Instagram (profil vivant, 74 abonnés,
+  bio « Driver #47 »), TikTok (vivant, 15 abonnés), Twitch, YouTube (« Thomas Papone »), et la page
+  LinkedIn de l'association qui affiche bien « TPRacing - Thomas Papone Racing ». Les 5 permaliens
+  Instagram sont vivants : les 2 reels de l'accueil appartiennent à **myciteemedia** et correspondent mot
+  pour mot à la carte « interview en deux parties », les 3 de pilote.html à thomaspaponeracing. Les 2
+  articles du Progrès sont en ligne, **titres et dates identiques à ce que les cartes citent**, au
+  toponyme « Lapeyrouse » près.
+  **(5) Fausses pistes écartées, pour ne pas les re-chasser.** Le LinkedIn personnel renvoie sur l'authwall,
+  c'est le comportement normal pour un visiteur déconnecté et l'URL reste juste, elle est reconduite dans
+  le paramètre de redirection. Les 15 « ancres absentes » du premier harnais sont des `@id` de JSON-LD, pas
+  des ancres de navigation. Le lien vers la politique GitHub redirige vers `/en/`, la forme sans locale est
+  la bonne. Les 5 tuiles sans lien ont été réexaminées une par une : GPI a bien un domaine, `gpi-incendie.fr`,
+  mais il ne sert qu'un gabarit Webador non publié, et rien n'a été trouvé pour AMS Rénov, Les Frang'Ain,
+  DMPI et Midas Lyon Tête d'Or, donc les 5 restent des blocs sans lien.
+  **Vérifications** : 5 pages x 6 largeurs (320 à 1680) = 30 mesures, **0 débordement réel**
+  (`scrollWidth` égal à `innerWidth` à 1280), 0 ratio d'image faux, la seule image « cassée » est `.lb-img`,
+  la lightbox au repos, déjà connue, **0 erreur console sur les 5 pages**, et chaque logo de la bande a été
+  relu dans le DOM rendu pour confirmer qu'il mène à sa propre société. Prod prouvée par **shasum identique
+  entre le dépôt et `index.html` servi**, build Pages en `built`.
+  **Rig, leçons neuves.** (a) Sur Chrome 151, **`/json/new` du protocole DevTools exige une requête PUT**,
+  un GET renvoie 405 et casse tout le harnais de capture. (b) Instagram sert **exactement le même shell de
+  611 ko à curl** quelle que soit l'URL, y compris sur `/embed/captioned/`, donc **aucun test d'existence
+  ne peut passer par curl** sur ce domaine, il faut rendre la page. (c) Mon détecteur de débordement
+  signale `.trust-piste`, `.trust-lot` et `.trust-tile` sur l'accueil : la bande partenaires est
+  volontairement plus large que l'écran dans `.trust-band`, qui est en `overflow: hidden` (mesuré) →
+  **à ajouter au filtre de décor des harnais**, à côté de `.marquee`, `.mot-geant` et `.hero-num`.
+  **Rappel resté sans réponse** : `collage-origines.webp` est toujours modifié et non commité sur le SSD,
+  invérifiable aujourd'hui puisque le T7 s'est démonté.
 
 - 2026-08-24 (routine feed Insta, `maj-feed-insta-site`) : **la routine ne lit plus le profil depuis un
   mois, Google Chrome est simplement ÉTEINT à l'heure de déclenchement.** Les outils du Chrome connecté
