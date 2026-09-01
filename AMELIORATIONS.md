@@ -500,6 +500,33 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-09-01 (routine feed Insta, `maj-feed-insta-site`) : **sixième run sans lecture possible, et le
+  diagnostic posé le 24/08 est à corriger.** Ce matin `pgrep -x "Google Chrome"` répond OUI, ce qui
+  laissait croire que le navigateur était enfin ouvert et que le blocage venait de l'extension. Vérif
+  faite : le seul processus Chrome de la machine est une instance **headless** lancée le 30/08 à 23h41
+  par une session Claude précédente (`--headless=new --remote-debugging-port=9222` sur un profil jeté
+  dans le scratchpad), c'est-à-dire un reliquat de mon propre harnais de captures. Aucune instance
+  interactive ne tourne. L'extension, elle, est bien présente en **1.0.85** dans le **Profil 2** du
+  Chrome de Thomas : le problème n'a jamais été là. (Piège de lecture : les extensions se lisent dans
+  `Secure Preferences`, PAS dans `Preferences` — chercher dans le mauvais fichier fait croire qu'aucun
+  profil ne l'a installée.)
+  **Leçon de méthode, à retenir contre la note du 24/08 : `pgrep` ne suffit pas à dire si le Chrome de
+  Thomas est ouvert**, il faut exclure les processus portant `--headless` (`ps -Ao command | grep
+  "MacOS/Google Chrome" | grep -v Helper | grep -v -- "--headless"`), sinon un reliquat de session
+  automatisée fait conclure l'inverse de la réalité.
+  Le T7 était monté et le dépôt à jour avec l'origine, donc rien ne bloquait côté écriture : le blocage
+  reste la LECTURE d'Instagram. La grille de `pilote.html` est toujours figée sur les 3 posts du 25/07
+  (DbDIlw9DNT-, Da0czcVDLSv, DavPpbfjFkZ). Aucun fichier du feed n'a été modifié, seule cette ligne
+  l'est. Les modifications non validées trouvées dans le dépôt (collage-origines.webp et les logos
+  WebP de la routine design) n'ont pas été touchées.
+  ❓ EN ATTENTE DE THOMAS, inchangé depuis le 24/08 : la routine a besoin que **Chrome soit ouvert avec
+  le volet Claude connecté** au moment du déclenchement (lundi 10 h). Trois options : (1) ouvrir Chrome
+  le lundi avant 10 h ; (2) m'autoriser à le lancer moi-même en début de routine, ce que je ne fais
+  toujours pas faute d'accord ; (3) déplacer l'horaire. Deux points neufs à trancher au passage :
+  le processus headless du 30/08 tourne encore depuis deux jours et n'a plus aucune utilité, je ne le
+  tue pas sans accord (`kill 20108`) ; et si l'option (2) est retenue, il faudra viser le **Profil 2**,
+  c'est lui qui porte l'extension.
+
 - 2026-08-24 (routine, AXE B : audit, dimension **liens internes et externes**, la dernière remontait au
   25/07 et les partenaires changent de site, 19/08 était un jour C, 18/08 un jour A, 17/08 un jour B,
   pas de run du 20 au 23) : **une tuile de la bande partenaires envoyait chez le voisin.**
