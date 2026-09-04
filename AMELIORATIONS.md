@@ -569,15 +569,15 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 - 2026-09-04 (routine, AXE C : veille par captures, angle neuf **la CLÔTURE d'une page** ; dernier jour
   de veille le 19/08, dernier run de la routine le 24/08 en axe B, aucun run du 25/08 au 03/09) :
-  **la veille a trouvé un défaut chez nous, dans le seul bloc que six audits n'avaient jamais regardé.**
+  **la veille a trouvé un défaut chez nous, dans le bloc qu'aucun audit n'avait encore regardé.**
   Le T7 n'était pas monté, la journée s'est faite depuis un clone `--depth 1` du dépôt dans le scratchpad.
   **(1) Ce qui a été regardé.** Cinq sites capturés au protocole DevTools en haut de page, section de
   contenu et bas de page, en desktop 1280 ET en mobile 390, plus la liste Awwwards du moment :
   prodrive.com, tonykart.com, kartrepublic.com, ming.watch, wrc.com. Chaque capture a été relue avant
   d'écrire quoi que ce soit, le code n'a été ouvert qu'ensuite pour comprendre les mécanismes.
   L'angle a été choisi parce que le bas de page n'avait jamais été benchmarké : les veilles précédentes
-  ont regardé les heros (16/08), les cartes (16/08), la matière photographique (19/08), les liens (24/08),
-  jamais la dernière chose qu'un visiteur voit.
+  ont regardé les heros et les cartes (16/08) puis la matière photographique (19/08), et le dernier audit
+  en date portait sur les liens (24/08). Jamais sur la dernière chose qu'un visiteur voit.
   **(2) Le défaut, et comment la veille l'a fait apparaître.** Chez Prodrive la page ne se termine pas
   sur la grille de liens : une **bande de signature** vient après, sur son propre fond (presque noir
   contre le blanc de la grille), avec la ligne de marque en capitales et un tracé technique géant en
