@@ -80,7 +80,11 @@ langage étranger, elle ne passe pas.
   touchent jamais : entre eux, le pas vertical de la section qui les porte (66 px sur
   l'accueil, le même que la marge d'ouverture de `.trust`). Un intervalle inventé au jugé
   se voit autant qu'un intervalle nul (entrée du 10/08).
-- Emblème TP : en 3D or au hero, en contour géant filigrane dans les fonds de section.
+- Emblème TP : en 3D or au hero, en contour géant filigrane dans les fonds de section, en petit
+  format or au bout du filet de la signature de bas de page. **Une seule occurrence du monogramme
+  par coup d'œil** (règle du 04/09) : quand la marque se répète dans le même écran, elle ne signe
+  plus, elle se redouble. La signature de charte se pose donc là où le logo n'est pas, et
+  l'intervalle qui les sépare est le pas vertical du bloc, jamais un reste de mise en page.
 - Mouvement : sobre et lié à la course (intro tracé de circuit, ligne de course de
   progression, marquee asservi au scroll, reveals) ; tout est coupé en
   prefers-reduced-motion ; jamais d'effet « waouh » sans rapport avec la piste.
@@ -146,6 +150,51 @@ Les quatre doivent passer. Sinon : écarté, et on note pourquoi au backlog (les
 motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
+
+- 2026-09-04 : **la règle du vide vaut aussi dans le pied de page, et un monogramme ne signe que s'il est
+  seul.** Veille par captures sur la CLÔTURE des pages (prodrive.com, tonykart.com, kartrepublic.com,
+  ming.watch, wrc.com, desktop 1280 et mobile 390).
+  **(a) Ce qui a été VU.** Chez Prodrive, la page ne se termine pas sur la grille de liens : après elle
+  vient une **bande de signature** sur son propre fond (presque noir contre le blanc de la grille), qui
+  ne porte que la ligne de marque en capitales et un tracé technique géant en contour débordant par la
+  gauche. Le mécanisme n'est pas une marge, c'est un **changement de sol** : les deux blocs ne peuvent
+  pas se toucher, y compris en mobile où la bande survit entière. Chez Tony Kart et MING, à l'inverse,
+  la page s'arrête sur une grille de liens plate posée sur un aplat, et rien ne distingue la fin de ces
+  deux sites de n'importe quel autre.
+  **(b) Le défaut que ça a révélé chez nous.** Notre `.signature-charte` (filet + emblème or, reprise des
+  bas de page de la charte) et la rangée logo / réseaux / liens du pied étaient à **0 px d'encre**, sur
+  les 5 pages et à toutes les largeurs, alors que le pied laisse déjà 26 px entre cette rangée et la
+  ligne légale. En mobile 390 la conséquence était visible : le TP or de la signature tombait
+  immédiatement au-dessus du TP RACING blanc du pied, soit **le même monogramme deux fois dans 80 px**.
+  C'est mot pour mot la règle du 10/08 (« deux blocs de nature différente ne se touchent jamais,
+  l'intervalle est le pas vertical de la section ») restée non appliquée à l'intérieur du pied. Corrigé
+  le jour même avec le pas déjà en place dans ce bloc, 26 px, pas une valeur choisie à l'œil.
+  **(c) La règle qui en sort, et qui est neuve.** Un élément de vocabulaire n'a pas seulement besoin
+  d'être RARE (règle de la pastille, 09/08) : quand c'est la **marque elle-même**, il a besoin d'être
+  SEUL DANS SON ÉCRAN. Deux occurrences du monogramme dans le même coup d'œil ne font pas une signature
+  deux fois plus forte, elles font une répétition de logo. Corollaire de placement : la signature de
+  charte se pose là où le logo du pied n'est pas, et l'écart qui les sépare est un intervalle mesuré,
+  jamais un reste de mise en page.
+  **(d) Fausse piste écartée, avec sa mesure.** Le premier réflexe était de masquer l'emblème de
+  signature sous un point de rupture mobile. La mesure l'interdit : l'écart entre les deux marques vaut
+  0,77 à 0,83 fois la largeur de l'écran de 390 à 900 px, donc **il est constant en proportion** et il
+  n'existe aucune largeur à partir de laquelle le défaut apparaîtrait. Ce n'était pas la largeur, c'était
+  le contact. Un point de rupture aurait été une valeur inventée pour un problème mal nommé.
+  **(e) Interdit confirmé par un contre-exemple.** Kart Republic termine sur « Seguici sui social! » et
+  six icônes rondes AUX COULEURS DES PLATEFORMES (Facebook bleu, Instagram dégradé, YouTube rouge) posées
+  au centre d'un fond noir : cinq palettes étrangères importées d'un coup dans le dernier écran de la
+  marque. L'interdit « rangée d'icônes rondes bien alignées » du chapitre 3 tient, et nos six carrés
+  biseautés monochromes sont la réponse, et on ne les colorise jamais.
+  **(f) Leçon de MÉTHODE, coûteuse et à retenir pour tous les harnais de capture.** Le neutraliseur de
+  reveals `*{opacity:1;visibility:visible;transform:none}` qu'on injecte avant chaque capture **détruit
+  la géométrie des SVG** : le path de l'emblème TP porte un `transform="matrix(1,0,0,-1,105,39.9)"` en
+  attribut de présentation, qu'un `transform:none` en CSS écrase. Résultat, l'emblème du pied sortait
+  ABSENT des captures (zéro pixel or mesuré dans la zone) alors que le DOM le donnait bien à 34x24 px en
+  #D49726 : un faux défaut « emblème invisible depuis toujours » qu'on a failli aller corriger, comme
+  celui du 09/08 qui, lui, était réel. Neutraliseur corrigé en `:not(svg):not(svg *){...}`, et l'emblème
+  a été confirmé au pixel (332 pixels or à l'emplacement mesuré). Règle : **un neutraliseur de capture
+  ne touche jamais aux SVG**, et un élément « invisible » se prouve au pixel après avoir vérifié que
+  l'outil de capture ne l'a pas effacé lui-même.
 
 - 2026-08-19 : **l'or ne tient pas comme ENCRE sur le blanc cassé, et c'est le fond qui décide.**
   Veille par captures (Spa-Francorchamps, Circuit Dijon-Prenois, Darren Heath, desktop 1280 et

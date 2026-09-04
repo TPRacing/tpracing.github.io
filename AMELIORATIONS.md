@@ -389,6 +389,73 @@ la hauteur. La voie fiable, quand l'extension Chrome n'est pas connectée, est d
 par le **protocole DevTools** (navigation, retrait des bandeaux, scroll réel, capture, et
 `Network.setCacheDisabled` sans quoi on mesure l'ancienne feuille de style).
 
+### Idées de la veille 04/09 (angle neuf : la CLÔTURE, comment un site termine sa page et signe sa dernière image)
+
+Sites REGARDÉS (Chrome headless piloté au protocole DevTools, haut de page + section de contenu + bas de
+page, desktop 1280 ET mobile 390, chaque capture relue avant d'écrire ; le code n'a été lu qu'ensuite) :
+**prodrive.com**, **tonykart.com**, **kartrepublic.com**, **ming.watch**, **wrc.com**, plus la liste
+Awwwards « Sites of the Day » pour voir ce qui se prime en ce moment. Angle choisi parce que le bas de
+page n'avait jamais été benchmarké : les six audits précédents avaient regardé les heros, les cartes,
+les photos et les liens, jamais la dernière chose qu'un visiteur voit.
+
+Retenues :
+- [x] **Deux blocs de nature différente ne se touchent pas, y compris dans le pied de page.** VU chez
+      Prodrive : la page ne finit pas sur la grille de liens, elle finit sur une **bande de signature**
+      (« PERFORMANCE UNLIMITED. » en capitales + un tracé technique géant en contour qui déborde par la
+      gauche), et cette bande est séparée de la grille par un **changement de fond** (blanc → presque
+      noir), pas par une marge : elles ne PEUVENT pas se toucher. Vérifié aussi en mobile, où la bande
+      survit entière. En revenant sur TPRacing : notre `.signature-charte` (filet + emblème or) et la
+      rangée logo / réseaux / liens du pied étaient collées à **0 px d'encre**, sur les 5 pages et sur
+      toutes les largeurs. FAIT le 04/09 : intervalle porté au pas vertical du pied (voir Journal).
+- [x] **Un monogramme n'est une signature que s'il est seul dans son écran.** VU en négatif sur notre
+      propre pied en mobile 390 : le TP or de la signature tombait juste au-dessus du logo TP RACING
+      blanc, soit le même monogramme deux fois dans 80 px. Mesure faite avant de conclure : l'écart
+      relatif entre les deux marques est constant (0,77 à 0,83 fois la largeur de l'écran de 390 à
+      900 px), donc **il n'existe pas de largeur seuil** à partir de laquelle le problème apparaît :
+      c'était bien le contact à 0 px qui les faisait lire comme une paire, pas la largeur. Écarter par
+      conséquent l'idée de masquer l'emblème sous un point de rupture : ce serait une valeur inventée.
+- [ ] **Le chiffre géant en filigrane DERRIÈRE le nom de l'événement.** VU chez WRC, bandeau calendrier :
+      chaque manche porte son quantième (« 22 », « 15 ») en très grand, en gris fantôme, derrière le nom
+      du rallye, la date et le drapeau. Mécanisme : un simple élément de fond en position absolue, pas
+      un pseudo-élément décoratif, le chiffre est du texte, il reste sélectionnable. Pourquoi c'est
+      TPRacing : « chiffres outline » et « mots géants derrière la section » sont déjà deux mots du
+      vocabulaire maison, et c'est la seule idée vue aujourd'hui qui saurait dater un bloc sans compteur
+      vide. ⏳ Bloquée : demande un calendrier réel, à voir avec Thomas.
+- [ ] **La ligne de marque comme dernier mot de la page.** VU chez Prodrive (« PERFORMANCE UNLIMITED. »
+      posé APRÈS la grille de liens, sur son propre fond). Chez nous la dernière chose lue est la ligne
+      de copyright. L'accroche « Le volant se transmet » existe déjà, elle n'est que sur le hero de
+      l'accueil. ⏳ Non implémenté sciemment : réemployer une accroche éditoriale au pied des 5 pages
+      est une décision de marque, pas un réglage, à valider par Thomas avant de la poser.
+- [ ] **La signature manuscrite du fondateur comme ligne de marque.** VU chez Kart Republic : leur seule
+      accroche est « we are republic, we are one. » écrite À LA MAIN et signée « Dino Chiesa », posée nue
+      sur un bandeau clair, sans cadre ni carte. Confirme l'item « scan de la signature à vectoriser »
+      déjà au backlog depuis le 18/07. ⏳ Bloquée : demande un scan de Thomas (ou de Patrice).
+
+Écartées, avec le motif (pour ne pas les re-proposer) :
+- **Le bloc « In The Press » en logos nus** (VU chez MING : cinq logos de publications en gris uniforme,
+  posés sans carte ni cadre sur un aplat pâle). Séduisant, mais notre section « Ils parlent de nous »
+  cite deux articles et deux reels, pas des rédactions-partenaires : des logos de presse nus ici
+  laisseraient croire à une revue de presse fournie. Et les 3 cartes ont déjà reçu leur liseré damier
+  le 18/08. Rien à changer.
+- **Les icônes de réseaux en couleurs de plateforme** (VU chez Kart Republic : Facebook bleu, Instagram
+  dégradé, YouTube rouge, en ronds alignés au centre d'un fond noir, plus un crédit d'agence en pied).
+  Contre-exemple utile : c'est exactement l'interdit « rangée d'icônes rondes bien alignées » de la DA,
+  et ça fait entrer cinq palettes étrangères dans un écran. Nos six carrés biseautés monochromes sont
+  la bonne réponse, l'entrée de DA est confirmée telle quelle.
+- **Le hero qui est la dernière actualité** (VU chez Tony Kart : le haut de page est le titre du dernier
+  communiqué de course, pas une accroche de marque). Écarté : ça suppose un flux d'actualités nourri,
+  et TPRacing a fait le choix inverse d'une accroche identitaire (« Le volant se transmet ») validée
+  le 09/07. À reverser plutôt à la question de la fraîcheur, si Thomas ouvre un jour une rubrique actus.
+- **Le glyphe de lien tiré du logo** (VU chez Tony Kart : le « // » de leur logo devient le chevron
+  « » » de tous leurs liens « lire la suite »). Le mécanisme est juste, mais TPRacing l'applique DÉJÀ
+  avec le slash de ponctuation graphique : rien à importer, la case est cochée depuis l'origine.
+
+Sites à connaître pour les prochaines veilles : **wrc.com** garde son bandeau de consentement même après
+neutralisation (sélecteurs OneTrust non standard, les captures sont voilées d'un panneau blanc central) ;
+**kartrepublic.com** rend son hero en vidéo, qui ressort en aplat noir dans une capture headless ;
+**tonykart.com** superpose sa barre verte de marque AU TRAVERS du titre en mobile (le titre devient
+illisible sur trois mots), contre-exemple de mobile non soigné, à citer.
+
 ### Constats de l'audit de COHÉRENCE DE LA DA du 11/08 (5 pages regardées, desktop 1280 + mobile 390)
 
 Corrigés le jour même :
@@ -499,6 +566,64 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-09-04 (routine, AXE C : veille par captures, angle neuf **la CLÔTURE d'une page** ; dernier jour
+  de veille le 19/08, dernier run de la routine le 24/08 en axe B, aucun run du 25/08 au 03/09) :
+  **la veille a trouvé un défaut chez nous, dans le seul bloc que six audits n'avaient jamais regardé.**
+  Le T7 n'était pas monté, la journée s'est faite depuis un clone `--depth 1` du dépôt dans le scratchpad.
+  **(1) Ce qui a été regardé.** Cinq sites capturés au protocole DevTools en haut de page, section de
+  contenu et bas de page, en desktop 1280 ET en mobile 390, plus la liste Awwwards du moment :
+  prodrive.com, tonykart.com, kartrepublic.com, ming.watch, wrc.com. Chaque capture a été relue avant
+  d'écrire quoi que ce soit, le code n'a été ouvert qu'ensuite pour comprendre les mécanismes.
+  L'angle a été choisi parce que le bas de page n'avait jamais été benchmarké : les veilles précédentes
+  ont regardé les heros (16/08), les cartes (16/08), la matière photographique (19/08), les liens (24/08),
+  jamais la dernière chose qu'un visiteur voit.
+  **(2) Le défaut, et comment la veille l'a fait apparaître.** Chez Prodrive la page ne se termine pas
+  sur la grille de liens : une **bande de signature** vient après, sur son propre fond (presque noir
+  contre le blanc de la grille), avec la ligne de marque en capitales et un tracé technique géant en
+  contour qui déborde par la gauche. Les deux blocs ne peuvent pas se toucher, c'est le SOL qui change.
+  En revenant sur TPRacing : notre `.signature-charte` (filet + emblème or, reprise des bas de page de
+  la charte) et la rangée logo / réseaux / liens étaient collées à **0 px d'encre**, sur les 5 pages et
+  à toutes les largeurs mesurées (320 à 1680), alors que ce même pied laisse déjà 26 px entre cette
+  rangée et la ligne légale. En mobile 390 ça se voyait : le TP or de la signature tombait juste
+  au-dessus du TP RACING blanc, **le même monogramme deux fois dans 80 px**. C'est la règle du 10/08
+  (« deux blocs de nature différente ne se touchent jamais ») restée non appliquée à l'intérieur du pied.
+  **(3) Le correctif.** `padding-bottom: 26px` sur `.signature-charte`, soit le pas vertical déjà en
+  place dans ce bloc (`.foot-grille` a le même), pas une valeur choisie à l'œil. Une déclaration, dans
+  styles.css, donc les 5 pages d'un coup. Écart d'encre entre l'emblème et le logo mesuré à **26 px**
+  contre 0 avant, sur les 5 pages en 390 et en 1280 ; capture avant/après regardée : la signature lit
+  enfin comme un filet qui CLÔT la page au-dessus du pied, et non comme un ornement posé sur la tête
+  du logo.
+  **(4) La fausse piste, écartée par la mesure.** Le premier réflexe était de masquer l'emblème de
+  signature sous un point de rupture mobile, puisque le défaut se voyait surtout à 390. Mesuré avant
+  d'agir : l'écart entre les deux marques vaut 0,77 à 0,83 fois la largeur de l'écran de 390 à 900 px,
+  donc il est **constant en proportion** et aucune largeur seuil n'existe. Ce n'était pas la largeur,
+  c'était le contact. Un point de rupture aurait été une valeur inventée pour un problème mal nommé.
+  **(5) Ce que la veille a versé au backlog** (4 idées retenues, 4 écartées avec leur motif, section
+  « Idées de la veille 04/09 ») : le chiffre géant en filigrane derrière le nom d'un événement (WRC),
+  la ligne de marque comme dernier mot de la page (Prodrive), la signature manuscrite du fondateur en
+  guise d'accroche (Kart Republic, qui confirme l'item « scan de la signature » du 18/07). Les trois
+  attendent du contenu ou une décision de Thomas et **rien n'a été publié à ce titre**. Écartés : les
+  logos de presse nus de MING (nos 3 cartes citent des articles, pas des rédactions-partenaires), le
+  hero-actualité de Tony Kart (suppose un flux nourri, et l'accroche identitaire a été validée le 09/07),
+  le glyphe de lien tiré du logo (déjà fait, notre slash), et les icônes de réseaux aux couleurs des
+  plateformes vues chez Kart Republic, contre-exemple qui confirme nos six carrés biseautés monochromes.
+  **(6) Vérifications.** 5 pages x 6 largeurs (320, 375, 390, 620, 1280, 1680) = **30 mesures, 0
+  débordement, 0 texte peint hors de sa boîte, 0 ratio d'image faux, 0 image cassée, 0 erreur console**.
+  Écarts du pied relus page par page. Puis prod : build Pages `built` et marqueur de contenu comparé
+  entre le dépôt et le fichier servi.
+  **(7) Rig, la leçon du jour, coûteuse.** Le neutraliseur de reveals `*{opacity:1;visibility:visible;
+  transform:none}` injecté avant chaque capture **détruit la géométrie des SVG** : le path de l'emblème
+  TP porte un `transform="matrix(1,0,0,-1,105,39.9)"` en attribut de présentation, qu'un `transform:none`
+  en CSS écrase. L'emblème du pied sortait donc ABSENT des captures (zéro pixel or mesuré dans la zone)
+  alors que le DOM le donnait à 34x24 px en #D49726 : un faux défaut « emblème invisible depuis
+  toujours » qu'on a failli aller corriger. Neutraliseur corrigé en `:not(svg):not(svg *){...}` et
+  emblème confirmé au pixel (332 pixels or à l'emplacement mesuré). **Un neutraliseur de capture ne
+  touche jamais aux SVG.** Autres notes d'outillage : wrc.com garde son bandeau OneTrust malgré la
+  neutralisation (captures voilées d'un panneau blanc central), kartrepublic.com rend son hero en vidéo
+  qui ressort en aplat noir en headless, et deux Chrome headless résiduels de sessions Claude
+  précédentes occupaient déjà le port 9222, donc le harnais du jour a donc été lancé sur le **port 9333**
+  plutôt que de tuer des processus sans accord (question déjà posée au Journal du 01/09).
 
 - 2026-09-01 (routine feed Insta, `maj-feed-insta-site`) : **sixième run sans lecture possible, et le
   diagnostic posé le 24/08 est à corriger.** Ce matin `pgrep -x "Google Chrome"` répond OUI, ce qui

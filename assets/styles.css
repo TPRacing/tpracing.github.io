@@ -373,6 +373,9 @@ html:not(.js) .kicker.rvl { clip-path: none; }
   align-items: center;
   gap: 18px;
   padding-top: 8px;
+  /* Le pas vertical du pied (celui de .foot-grille) : la signature de charte et la
+     rangée logo/reseaux/liens sont deux blocs de nature differente, ils ne se touchent pas. */
+  padding-bottom: 26px;
 }
 .signature-charte .filet { flex: 1; height: 1px; background: rgba(246, 247, 252, .22); }
 .signature-charte svg { width: 34px; height: auto; color: var(--or); fill: currentColor; stroke: none; flex-shrink: 0; }
