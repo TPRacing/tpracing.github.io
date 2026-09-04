@@ -421,6 +421,14 @@ Retenues :
       TPRacing : « chiffres outline » et « mots géants derrière la section » sont déjà deux mots du
       vocabulaire maison, et c'est la seule idée vue aujourd'hui qui saurait dater un bloc sans compteur
       vide. ⏳ Bloquée : demande un calendrier réel, à voir avec Thomas.
+- [ ] **La prochaine échéance s'écrit en PHRASE, pas en compteur.** VU chez WRC en mobile 390, juste
+      sous le hero : « 5 days until the next event » en gros, et dessous, en plus petit et en gris,
+      « Round 12 of the 2026 FIA World Rally Championship Season ». Aucun chiffrier heures / minutes /
+      secondes, aucune case vide : une phrase qui se lit, et le contexte de la manche en dessous.
+      Pourquoi c'est TPRacing : la « bande prochaine échéance sous la nav » est au backlog depuis le
+      16/08 et bute sur le risque du compteur creux (contre-exemple hrtdriver.com du 03/08) ; cette
+      forme-là le désamorce, puisqu'une phrase sans date à annoncer ne s'affiche simplement pas.
+      ⏳ Bloquée : demande une date de course réelle de Thomas.
 - [ ] **La ligne de marque comme dernier mot de la page.** VU chez Prodrive (« PERFORMANCE UNLIMITED. »
       posé APRÈS la grille de liens, sur son propre fond). Chez nous la dernière chose lue est la ligne
       de copyright. L'accroche « Le volant se transmet » existe déjà, elle n'est que sur le hero de
