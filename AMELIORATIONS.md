@@ -346,7 +346,10 @@ Retenues :
       minuscule et ROUGE, le titre au-dessus est géant et BLANC. L'accent ne devient jamais une surface,
       il reste un mot de 10 px. Pourquoi c'est TPRacing : c'est la formulation positive de la règle
       « l'or est un trait, jamais un aplat » posée le 18/08. Sert de garde-fou, rien à implémenter.
-- [ ] **La coupe diagonale peut PORTER un signe au lieu d'être une pente nue.** VU chez Spa, bannière
+- [x] **La coupe diagonale peut PORTER un signe au lieu d'être une pente nue.** FAIT le 06/09 (chantier
+      ouvert le 01/09 et resté non commité, repris, vérifié au pixel sur 7 largeurs, en ligne, voir Journal) :
+      `.diag-haut::before`, damier or sur transparent de 10 px tourné sur la pente, sur les 3 bascules
+      diagonales du site (accueil trajectoire et galerie, pilote appel final). VU chez Spa, bannière
       « TÉLÉCHARGER LE CALENDRIER » : la photo est séparée du texte par une diagonale, et cette
       diagonale est faite de **trois filets inclinés aux couleurs du drapeau belge**, pas d'un bord net.
       Mécanisme : un dégradé linéaire à bandes dures posé sur l'arête du masque. Pourquoi c'est
@@ -574,6 +577,47 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-09-06 (routine, AXE A : design, 04/09 était un jour C, 24/08 un jour B, aucun run abouti entre les
+  deux) : **l'arête diagonale porte enfin le damier.** Le chantier avait été ouvert le 01/09 sur le T7
+  (règle `.diag-haut::before` écrite dans styles.css, jamais vérifiée, jamais commitée, aucune ligne de
+  Journal : ce run s'est arrêté avant la fin), retrouvé ce matin sous forme de modification locale qui
+  bloquait le `git merge` avec l'origine. Mise de côté (stash), dépôt remis à jour sur 638e4ab, puis
+  reprise et jugée SUR CAPTURES avant toute décision.
+  **(1) L'idée, et pourquoi elle passe le test DA.** Item de la veille du 19/08 (vu chez Spa : la
+  diagonale qui sépare la photo du texte est faite de trois filets inclinés, pas d'un bord net). Chez
+  nous, le site ferme déjà ses deux heros par une bande damier pleine largeur, mais les trois bascules
+  diagonales (accueil : trajectoire et galerie, pilote : appel final) restaient des pentes nues. Les
+  quatre questions : (1) le drapeau à damier, c'est la course ; (2) deux mots du vocabulaire maison
+  mariés, le damier et la coupe à 2.3vw, aucun langage importé ; (3) 10 px d'or sur le marine de la
+  section, l'accent reste un filet ; (4) de la matière sur une arête qui était muette, pas un effet.
+  **(2) Le mécanisme.** `.diag-haut::before` : bande de 20 px centrée sur la ligne de coupe (y = 1.15vw
+  au milieu de la section), tournée de -1,3175 deg (atan(2.3/100)), damier `repeating-conic-gradient`
+  or sur transparent, tuile 10 px donc cellule 5 px, opacité .85, z-index 2. La bande dépasse de 10 px
+  AU-DESSUS de la coupe, soit exactement une période du damier, et le `clip-path` du parent recoupe ce
+  dépassement : l'arête visible EST la coupe, et un écart de sous-pixel entre les deux pentes est
+  absorbé au lieu de faire un filet clair. Sur le papier, `*::before { background-image: none }` de la
+  feuille d'impression la retire avec le reste du décor. Aucun HTML touché, aucun octet d'image ajouté.
+  **(3) Vérifié en regardant, puis au pixel.** Chrome headless piloté en DevTools (port 9333) sur le
+  serveur local : les 3 arêtes en 1280 et 390, zooms gauche, centre et droite de chacune, puis 7 largeurs
+  (320, 390, 560, 768, 1024, 1280, 1680) sur les deux bascules clair vers marine (galerie, appel pilote)
+  avec lecture colonne par colonne de la capture : la bande est flush sur la coupe à 1 px près, épaisseur
+  mesurée 10 à 11 px (anticrénelage), et la moitié des colonnes touchent une cellule or en tête de bande,
+  ce qui est la définition même d'un damier. `scrollWidth` égal à la largeur d'écran sur les 7 largeurs,
+  0 erreur console, les seuls rects hors écran sont les mots géants de décor, hors écran par conception.
+  L'arête de la trajectoire pose sur la bande origines (photo) : jugée à l'œil sur les zooms, la mesure
+  par « premier pixel non clair » n'y a pas de sens.
+  **(4) Prod.** Push 04bbd29, build `built` sur ce commit, shasum de styles.css identique dépôt/prod
+  dix secondes après le push, styles calculés relus EN LIGNE (hauteur 20 px, rotation, tuile 10 px).
+  Détail consigné sans le traiter : les deux bandes de hero n'ont pas la même épaisseur (accueil 12 px,
+  pilote 10 px). L'arête prend 10 px, celle du pilote, et reste un filet subordonné aux bandes pleines.
+  Pas d'unification aujourd'hui, l'écart n'est pas visible d'une page à l'autre et le chantier du jour
+  est l'arête. Fausse piste corrigée : le commentaire CSS du 01/09 annonçait « même géométrie que le
+  hero », il dit maintenant « même recette » et note l'écart 12/10.
+  Rig : `Page.captureScreenshot` avec `clip` a renvoyé une zone blanche hors sujet (le repère du clip
+  n'est pas celui du viewport après scroll), capturer le viewport entier et recadrer en PIL. Chrome
+  headless tué en fin de run, serveur local aussi. Le collage-origines.webp et les .webp de logos non
+  suivis du T7 n'ont pas été touchés, toujours en attente de Thomas.
 
 - 2026-09-04 (routine, AXE C : veille par captures, angle neuf **la CLÔTURE d'une page** ; dernier jour
   de veille le 19/08, dernier run de la routine le 24/08 en axe B, aucun run du 25/08 au 03/09) :

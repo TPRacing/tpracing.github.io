@@ -50,7 +50,9 @@ langage étranger, elle ne passe pas.
   huit photos cadrées). Reprendre le vocabulaire, c'est reprendre la règle CSS existante
   (`class="frame"`), pas en redessiner une variante.
 - Coupes diagonales : pente UNIFIÉE 2.3vw (le 1,3 degré du marquee) pour toutes les
-  bascules de section.
+  bascules de section. **Et l'arête PORTE le damier** (06/09) : un filet or sur transparent
+  de 10 px tourné sur la pente, même recette que les bandes de fin de hero. Une bascule de
+  section n'est jamais une pente nue : là où le sol change, le drapeau passe.
 - Mots géants Korataki en outline derrière les sections (Héritage, En piste, 47, Presse),
   et UN SEUL mot rempli d'or au scroll par page (règle du 03/08 : le principe charte
   « plein contre contour » animé, avec parcimonie).
@@ -150,6 +152,24 @@ Les quatre doivent passer. Sinon : écarté, et on note pourquoi au backlog (les
 motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
+
+- 2026-09-06 : **là où le sol change, le drapeau passe.** Chantier de design (axe A) : les trois bascules
+  diagonales du site (accueil trajectoire et galerie, pilote appel final) reçoivent un damier or sur leur
+  arête. Source : la veille du 19/08 chez Spa (spa-francorchamps.be, bannière calendrier), où la diagonale
+  qui sépare la photo du texte n'est pas un bord net mais trois filets inclinés aux couleurs du drapeau
+  belge. Transposé, pas copié : chez nous le signe qui passe sur l'arête est le damier, celui que les deux
+  heros posent déjà en bande pleine largeur.
+  **Ce que ça pose comme règle.** Une frontière entre deux sols n'est jamais nue sur ce site. Le hero se
+  ferme par une bande damier, les cartes blanches s'ouvrent par un liseré damier marine et or, et
+  maintenant la pente entre une section claire et une section marine porte le même signe. Trois fois le
+  même mot, trois épaisseurs subordonnées (12 px, 6 px, 10 px), une seule recette par fond : or sur
+  transparent quand la bande pose sur du sombre (hero, arête), marine et or opaque sur du clair (cartes).
+  **Le détail qui fait que ça tient.** La bande tourne du même angle que la coupe (atan(2.3/100)) et
+  dépasse au-dessus d'exactement une période du damier, recoupée par le clip du parent : les cellules
+  gardent leur phase, l'arête visible est la coupe elle-même, et aucun filet clair ne peut apparaître
+  entre les deux pentes, même quand la largeur de la section n'est pas 100vw à un pixel près. Vérifié
+  au pixel sur 7 largeurs, pas supposé. Ce qui ne bouge pas compte autant : la bande est statique,
+  rien ne défile sur l'arête, le mouvement du site reste réservé au marquee et à la ligne de course.
 
 - 2026-09-04 : **la règle du vide vaut aussi dans le pied de page, et un monogramme ne signe que s'il est
   seul.** Veille par captures sur la CLÔTURE des pages (prodrive.com, tonykart.com, kartrepublic.com,
