@@ -651,6 +651,33 @@ section { padding: 92px 6%; position: relative; }
 /* pente unique du site : celle du marquee (1,3 deg = 2.3vw sur 100vw) */
 .diag-haut { clip-path: polygon(0 2.3vw, 100% 0, 100% 100%, 0 100%); margin-top: -2.3vw; padding-top: calc(92px + 2.3vw); }
 
+/* L'arete diagonale PORTE le damier (01/09). Le site ferme deja ses deux heros par
+   une bande damier pleine largeur (.hero .liseret, .liseret-damier) : la bascule
+   diagonale etait la seule frontiere de section restee nue, une pente sans matiere.
+   Meme objet, donc meme recette : or sur transparent (le fond est le marine de la
+   section), opacite .85, tuile = deux cellules. Epaisseur 10 px / cellule 5 px, celle
+   de la bande du hero pilote (celle de l'accueil est a 12 px) : l'arete reste un
+   filet, subordonne aux deux bandes pleines des heros.
+   Geometrie : la ligne de coupe passe par le milieu de la section a y = 1.15vw et
+   descend de 1,3175 deg (atan(2.3/100)). La bande est donc centree sur ce point,
+   tournee du meme angle, et DEPASSE de 10 px vers le haut - soit exactement une
+   periode du damier, ce qui garde la phase des cellules intacte. Le clip-path du
+   parent recoupe ce depassement : l'arete visible EST la coupe, au pixel, et un
+   ecart d'arrondi de sous-pixel entre les deux pentes reste absorbe. */
+.diag-haut::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  top: calc(1.15vw - 10px);
+  height: 20px;
+  background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%);
+  background-size: 10px 10px;
+  opacity: .85;
+  transform: rotate(-1.3175deg);
+  pointer-events: none;
+  z-index: 2;
+}
+
 /* ---------- Footer ---------- */
 footer {
   background:
