@@ -567,6 +567,38 @@ Pour la routine du feed Instagram (`maj-feed-insta-site`, section « Les dernier
   tolérée, mais un nœud WebSite répété sur chaque page serait plus robuste. À trancher un jour de
   dimension SEO.
 
+### Constats de l'audit ACCESSIBILITÉ du 06/09 (5 pages x 2 largeurs, plus mesures au pixel)
+
+- [x] **La bande partenaires n'avait aucune commande d'arrêt sur écran tactile.** Ses deux seules
+  pauses étaient `:hover` et `:focus-within`, or un téléphone rapporte `pointer: coarse` et
+  `hover: none` (mesuré dans un Chrome émulé en tactile) : la première règle ne peut jamais
+  s'appliquer, et la seconde suppose de poser le focus sur une tuile, c'est-à-dire d'ouvrir le site
+  du partenaire. Vitesse mesurée : 71,2 px/s en 390 et 131,6 px/s en 1280, pour des liens de 150 px
+  de large. WCAG 2.2.2 niveau A. Corrigé le 06/09 par un bouton de défilement biseauté sous la
+  bande, plus un mur statique en `html:not(.js)` pour qu'il n'y ait jamais de mouvement sans
+  commande.
+- [ ] **`target="_blank"` sans indication dans le nom accessible, sur 60 liens des 5 pages** (les 6
+  icônes de réseaux au pied de chaque page, les 13 tuiles partenaires, les liens de presse, les
+  boutons de contact, les liens externes des mentions légales). Tous portent déjà `rel="noopener"`
+  et un nom accessible explicite, et l'ouverture dans un nouvel onglet est un choix assumé pour ne
+  pas perdre le visiteur. Le point est advisory (technique G201), pas un échec AA : un lecteur
+  d'écran n'annonce pas le changement de fenêtre de façon fiable. Deux façons de le traiter le jour
+  où on le traite : suffixer les `aria-label` (« Instagram, nouvel onglet »), ce qui alourdit 60
+  intitulés, ou poser un glyphe maison de lien sortant, qui existe déjà en clair sur la tuile
+  « Tout voir @thomaspaponeracing ↗ » de pilote.html. À trancher avec Thomas, rien changé.
+- [x] **`src=""` sur l'image de la lightbox : l'accueil téléchargeait sa propre page en double.**
+  Trouvé par le harnais de vérification, qui signalait `index.html` comme image cassée sur l'accueil
+  à toutes les largeurs. Une source vide n'est pas une source absente : elle se résout sur l'URL du
+  document, donc `<img class="lb-img" src="">` déclenchait une vraie requête de `index.html` à chaque
+  visite. Corrigé le 06/09 en retirant l'attribut (le script pose la vraie source à l'ouverture) :
+  `performance.getEntriesByType('resource')` ne montre plus aucune entrée `index.html`, et la
+  lightbox a été rouverte pour contrôle (bonne image, focus sur le bouton Fermer, Échap qui rend le
+  focus à la vignette).
+- [ ] Le bouton de pause de la bande arrive dans l'ordre de tabulation APRÈS les 13 tuiles qu'il
+  commande. Sans conséquence aujourd'hui, la bande se figeant déjà au `:focus-within` dès la
+  première tuile, mais si le `:focus-within` disparaissait un jour il faudrait remonter le bouton
+  avant la bande.
+
 ## Règles (rappel pour la routine)
 
 Charte : marine #1E2635, or #D49726, blanc #F6F7FC, rouge #C13221, vert #3E836E (micro-accent).
@@ -577,6 +609,82 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-09-06 (routine, 2e passage du jour, AXE B : audit, dimension ACCESSIBILITÉ ; le passage du
+  matin était un jour A, le 04/09 un jour C, et le dernier jour B remontait au 24/08) :
+  **la bande partenaires ne pouvait pas être arrêtée sur un téléphone.**
+  T7 non monté, journée faite depuis un clone `--depth 3` dans le scratchpad.
+  **(1) Le défaut, et comment il a été trouvé.** L'audit de structure (5 pages x 2 largeurs, titres,
+  repères, noms accessibles, aria, ids, cibles tactiles, médias, formulaires) ressort propre : aucun
+  `alt` manquant, aucun élément interactif sans nom, aucun saut de niveau de titre, aucun `tabindex`
+  positif, aucun id dupliqué, aucun `aria-labelledby` non résolu, `main` unique sur les 5 pages. La
+  seule anomalie est venue de l'inventaire de ce qui BOUGE en boucle : la bande des 13 logos
+  partenaires tourne en `animation: defile-partenaires 58s linear infinite`, et ses deux seules
+  commandes d'arrêt sont `.trust-band:hover` et `.trust-band:focus-within`. Mesuré dans un Chrome
+  émulé en tactile à 390 px : `pointer: coarse` et `hover: none` sont vrais, donc la règle `:hover`
+  ne peut jamais s'appliquer, et le `:focus-within` demande de poser le focus sur une tuile, ce qui
+  sur un téléphone veut dire ouvrir le site du partenaire. Sur mobile, la bande défile donc à
+  **71,2 px/s sans aucun moyen de l'arrêter** (131,6 px/s en 1280), et chaque logo est un lien de
+  150 px de large qui traverse l'écran en moins de cinq secondes : une cible mouvante.
+  C'est le critère WCAG 2.2.2 (niveau A) et c'est surtout la règle maison du 16/08 prise dans l'autre
+  sens : le survol ne porte pas seul un fait, et il ne porte pas seul une COMMANDE non plus.
+  **(2) Le correctif.** Un bouton de défilement posé sous la bande, aligné à son bord droit, à 16 px
+  d'elle (le `gap` de la bande elle-même, pas un intervalle inventé). Carré biseauté maison de 38 px,
+  fond marine, glyphe or de 13 px, les deux coins coupés haut-droit et bas-gauche de tous les biseaux
+  du site, anneau de focus `inset` puisque le `clip-path` rogne outline et ombre. Il bascule une
+  classe `.fige` sur la bande, et son nom accessible dit l'action à venir (« Mettre en pause le
+  défilement des partenaires » / « Reprendre le défilement des partenaires »). Trois garde-fous :
+  en mouvement réduit la bande est déjà un mur statique, donc la commande n'existe pas ; le bouton
+  est posé PAR LE SCRIPT, et une règle `html:not(.js)` met la bande en mur statique quand le script
+  ne tourne pas, pour qu'il n'y ait jamais de mouvement sans commande ; et `@media print` la retire.
+  **(3) Le reste de l'audit, sain et vérifié.** Visibilité du focus mesurée AU PIXEL et non dans le
+  code : on tabule pour de vrai, on capture la zone de l'élément avec et sans focus, on compte les
+  pixels qui changent. Les 5 pages passent, du lien d'évitement aux cartes de presse, avec un
+  minimum de 348 pixels changés sur le plus petit élément (le nouveau bouton) et 12 987 sur une carte
+  de presse. Lightbox revérifiée : `role=dialog`, `aria-modal`, piège à focus dans l'ordre du DOM,
+  Échap, focus rendu à la vignette. Cibles tactiles : les seuls éléments sous 24 px sont des liens
+  DANS une phrase, cas explicitement exempté par WCAG 2.5.8.
+  Contraste MESURÉ AU PIXEL sur les captures rendues (jamais par remontée du DOM, leçon du 19/08) :
+  396 mesures sur 5 pages x 2 largeurs, **aucun échec réel**. Les deux seules alertes sur le fond
+  dominant sont le même artefact de méthode, et il vaut la peine d'être écrit : le nœud de texte
+  « se » de l'accroche du hero a pour boîte le `span.hl` qui contient AUSSI le mot doré
+  « transmet », donc la couleur dominante trouvée dans ce rectangle est l'or du mot voisin, pas un
+  fond. Vérifié en REGARDANT le hero : blanc cassé et or, tous deux posés sur la photo sombre.
+  **Règle de rig qui en sort : la boîte d'un nœud de texte n'est pas son fond dès qu'un frère porte
+  une autre couleur.**
+  **(3 bis) Un second défaut, trouvé par le harnais de vérification et corrigé le même jour.** Il
+  signalait `index.html` comme image cassée sur l'accueil à toutes les largeurs : l'image de la
+  lightbox était créée avec `src=""`, et une source VIDE n'est pas une source absente, elle se résout
+  sur l'URL du document. L'accueil demandait donc sa propre page une seconde fois à chaque visite.
+  Attribut retiré, la source étant de toute façon posée par le script à l'ouverture ; plus aucune
+  entrée `index.html` dans `performance.getEntriesByType('resource')`, et lightbox rouverte pour
+  contrôle (bonne image, focus au bouton Fermer, Échap qui rend le focus à la vignette).
+  **(4) Fausses pistes écartées, et trois pièges de harnais neufs.** (a) Les cibles sous 24 px sont
+  toutes des liens dans une phrase, exemptés par WCAG 2.5.8, rien à corriger. (b) L'idée de figer la
+  bande sous un point de rupture mobile a été écartée : le défaut n'est pas la largeur, c'est
+  l'absence de commande, et un mur statique sur téléphone aurait supprimé le mouvement voulu par
+  Thomas au lieu de le rendre commandable. (c) Les 60 `target="_blank"` sans mention de nouvel
+  onglet sont notés au backlog, pas corrigés : le point est advisory et alourdirait 60 intitulés.
+  **Pièges de harnais, coûteux, à retenir.** (i) En Chrome headless piloté en CDP,
+  `document.hasFocus()` vaut **false** et NI `:focus` NI `:focus-visible` ne matchent : tout audit de
+  focus sort « aucun anneau » partout. Remède : `Emulation.setFocusEmulationEnabled` avec
+  `enabled: true`, une ligne, et les anneaux réapparaissent. (ii) Le neutraliseur de reveals
+  `*{opacity:1;visibility:visible}` **rouvre le voile d'intro `#intro` et la lightbox**, qui sont
+  masqués exactement par ces deux propriétés : toutes les captures de l'accueil sortaient sous un
+  voile sombre plein écran, et l'audit de contraste comme celui du focus donnaient des chiffres
+  faux sans rien signaler. Le neutraliseur s'écrit désormais
+  `:not(svg):not(svg *):not(.lightbox):not(.lightbox *):not(#intro):not(#intro *)`. C'est la même
+  famille que la leçon du 04/09 sur les SVG et que celle du 16/08 sur les méga-menus : **le
+  neutraliseur ne neutralise pas, il RÉVÈLE, et ce qu'il révèle se pose par-dessus la mesure.**
+  (iii) `scroll-behavior: smooth` du site s'applique aussi à `scrollIntoView` et `scrollTo` du
+  harnais : le rect est lu à un endroit et la capture prise à un autre. Poser
+  `documentElement.style.scrollBehavior = 'auto'` avant toute mesure, et attendre que `scrollY` soit
+  stable sur deux lectures.
+  **Vérifs.** 5 pages x 6 largeurs (320 à 1680) = 30 mesures : 0 débordement, 0 texte hors boîte,
+  0 ratio d'image faux, 0 image cassée, 0 erreur console. Bouton regardé en 1280 et en 390, dans ses
+  deux états, avec zoom x4 sur le biseau. Mouvement réduit : mur statique de 18 logos, aucune
+  commande affichée. Script coupé (`Emulation.setScriptExecutionDisabled`) : pas de classe `js`,
+  `animation: none`, un seul lot de logos, aucune commande, donc aucun mouvement sans commande.
 
 - 2026-09-06 (routine, AXE A : design, 04/09 était un jour C, 24/08 un jour B, aucun run abouti entre les
   deux) : **l'arête diagonale porte enfin le damier.** Le chantier avait été ouvert le 01/09 sur le T7

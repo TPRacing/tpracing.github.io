@@ -482,6 +482,22 @@
     @keyframes defile-partenaires { to { transform: translateX(calc(-50% - 8px)); } }
     .trust-band:hover .trust-piste,
     .trust-band:focus-within .trust-piste { animation-play-state: paused; }
+    .trust-band.fige .trust-piste { animation-play-state: paused; }
+    /* Commande de défilement. Le survol et le focus arrêtent déjà la bande, mais
+       AUCUN des deux n'existe sur un écran tactile (pointer: coarse, hover: none) :
+       sur téléphone les 13 logos défilaient à 71 px/s sans aucun moyen de les
+       arrêter, et chaque lien était une cible mouvante. Carré biseauté maison. */
+    .trust-cmd { display: flex; justify-content: flex-end; margin-top: 16px; }
+    .trust-pause {
+      width: 38px; height: 38px; padding: 0; border: 0; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--marine);
+      clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
+      transition: background .25s ease;
+    }
+    .trust-pause:hover { background: var(--marine-deep); }
+    .trust-pause:focus-visible { outline: none; box-shadow: inset 0 0 0 3px var(--or); }
+    .trust-pause svg { width: 13px; height: 13px; display: block; fill: var(--or); }
     .trust-tile {
       position: relative;
       flex: 0 0 auto;
@@ -518,7 +534,14 @@
       .trust-lot { flex-wrap: wrap; justify-content: center; }
       .trust-lot.copie { display: none; }
       .trust-band { -webkit-mask-image: none; mask-image: none; }
+      .trust-cmd { display: none; }
     }
+    /* Sans JavaScript, le bouton n'est jamais posé : la bande ne doit alors pas
+       partir toute seule. Même mur statique qu'en mouvement réduit. */
+    html:not(.js) .trust-piste { animation: none; width: auto; flex-wrap: wrap; justify-content: center; }
+    html:not(.js) .trust-lot { flex-wrap: wrap; justify-content: center; }
+    html:not(.js) .trust-lot.copie { display: none; }
+    html:not(.js) .trust-band { -webkit-mask-image: none; mask-image: none; }
 
     /* ---------- Ils parlent de nous (presse) ---------- */
     .presse-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 40px; }
@@ -856,8 +879,10 @@
         <h2>Ils nous font confiance</h2>
         <p class="lead">Des artisans, des PME et des groupes nous accompagnent depuis les débuts du projet. Et vous, pourquoi pas&nbsp;?</p>
       </div>
-      <!-- Bande défilante : pause au survol et au focus clavier. Ordre = actifs 2026 (tri
-           par soutien cumulé) puis anciens soutiens. Le 2e lot est une copie pour la boucle. -->
+      <!-- Bande défilante : pause au survol, au focus clavier et par le bouton posé
+           sous la bande (le seul moyen d'arrêt qui existe sur un écran tactile).
+           Ordre = actifs 2026 (tri par soutien cumulé) puis anciens soutiens.
+           Le 2e lot est une copie pour la boucle. -->
       <div class="trust-band" role="region" aria-label="Les partenaires de TPRacing">
         <div class="trust-piste">
           <div class="trust-lot">
@@ -1221,6 +1246,34 @@
       zone.addEventListener('mouseleave', () => { t3.style.transform = ''; });
     }
 
+    // ===== Bande partenaires : commande de défilement =====
+    // Le survol et le focus mettent la bande en pause, mais un écran tactile n'a ni
+    // l'un ni l'autre : le bouton est le seul arrêt possible sur téléphone. Il est
+    // posé par le script, donc jamais affiché si le JS ne tourne pas (dans ce cas la
+    // feuille de style laisse la bande en mur statique).
+    (function () {
+      const bande = document.querySelector('.trust-band');
+      if (!bande || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const PAUSE = '<svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.6" height="12"></rect><rect x="8.4" y="1" width="3.6" height="12"></rect></svg>';
+      const LIRE = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1 L12 7 L3 13 Z"></path></svg>';
+      const zone = document.createElement('div');
+      zone.className = 'trust-cmd';
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'trust-pause';
+      const poser = () => {
+        const fige = bande.classList.contains('fige');
+        btn.innerHTML = fige ? LIRE : PAUSE;
+        btn.setAttribute('aria-label', fige
+          ? 'Reprendre le défilement des partenaires'
+          : 'Mettre en pause le défilement des partenaires');
+      };
+      poser();
+      btn.addEventListener('click', () => { bande.classList.toggle('fige'); poser(); });
+      zone.appendChild(btn);
+      bande.after(zone);
+    })();
+
     // ===== Galerie : agrandissement au clic (lightbox) =====
     (function () {
       const figures = [...document.querySelectorAll('.galerie figure:not(.galerie-video)')];
@@ -1246,7 +1299,9 @@
         // aria-live : au clavier, le focus reste sur les flèches ; sans région
         // vivante, changer d'image ne dit rien à un lecteur d'écran.
         '<figure class="lb-scene" aria-live="polite" aria-atomic="true">' +
-          '<span class="frame"><img class="lb-img" src="" alt=""></span>' +
+          // pas de src="" : une source vide se résout sur l'URL de la PAGE et
+          // déclenche un vrai téléchargement de index.html au chargement.
+          '<span class="frame"><img class="lb-img" alt=""></span>' +
           '<figcaption class="lb-legende"></figcaption>' +
           '<div class="lb-compteur"></div>' +
         '</figure>';

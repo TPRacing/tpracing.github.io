@@ -1102,6 +1102,8 @@ nav .nav-cta:focus-visible {
   .trust-lot { flex-wrap: wrap !important; justify-content: center !important; }
   .trust-lot.copie { display: none !important; }
   .trust-tile img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* La commande de défilement ne commande rien sur du papier. */
+  .trust-cmd { display: none !important; }
 
   /* Le liseré damier des cartes est un fond : le papier ne l'imprime pas (encre
      économisée). Sans lui la carte s'ouvrirait par le haut, alors la tête de carte

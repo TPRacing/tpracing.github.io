@@ -94,6 +94,12 @@ langage étranger, elle ne passe pas.
   photo ou filer un liseré, jamais porter seul un fait. Une donnée factuelle est
   écrite en permanence, sur toutes les largeurs — et si un état transitoire devient
   permanent, son contraste se REMESURE, il n'a pas été calibré pour être lu.
+  **Et il ne COMMANDE pas non plus** (règle durcie le 06/09) : un écran tactile rapporte
+  `pointer: coarse` et `hover: none`, donc toute règle `:hover` y est morte, et le
+  `:focus-within` d'appoint suppose d'y poser le focus, ce qui sur un lien veut dire
+  partir. Ce qui BOUGE tout seul porte donc une commande VISIBLE, dessinée dans le
+  vocabulaire maison. La bande partenaires a vécu sept semaines sans arrêt possible
+  sur téléphone parce que ses deux pauses étaient des états de pointeur.
 
 ## 3. Interdits (chaque ligne vient d'un rejet réel de Thomas)
 
@@ -152,6 +158,24 @@ Les quatre doivent passer. Sinon : écarté, et on note pourquoi au backlog (les
 motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
+
+- 2026-09-06 (2e passage, axe B) : **ce qui bouge tout seul se commande, et la commande se dessine
+  en maison.** L'audit d'accessibilité a montré que la bande partenaires ne pouvait être arrêtée ni
+  au doigt ni autrement sur un téléphone (71,2 px/s mesurés, `hover: none`). La question de design
+  n'était pas s'il fallait un bouton, mais lequel : une commande de lecture est du mobilier
+  d'interface, exactement le genre de pièce qui fait retomber une page dans le générique.
+  **Ce qui a été décidé.** Le bouton reprend le carré biseauté du site tel quel, la géométrie des
+  autres biseaux (les deux coins coupés, haut-droit et bas-gauche, 9 px sur 38), le marine en fond
+  et l'or en glyphe, donc le ratio dominant/accent de la charte, et l'anneau de focus `inset` que
+  tout élément détouré au `clip-path` impose ici. Le glyphe, lui, reste le pictogramme standard de
+  pause et de lecture : une commande doit être comprise avant d'être belle, et chercher un signe
+  malin (un damier, un drapeau) aurait rendu illisible la seule pièce de la page dont la fonction
+  doit être évidente. **Règle qui en découle, et qui vaut au-delà de ce bouton : le vocabulaire
+  maison habille les commandes, il ne remplace pas leur pictogramme.**
+  **Placement, mesuré et non jugé à l'œil.** Le bouton est aligné sur le bord droit de la bande,
+  à 16 px sous elle, c'est-à-dire le `gap` de la bande elle-même. C'est l'application de la règle
+  du 10/08 (le vide se mesure, on reprend un pas déjà présent dans le bloc) à un cas nouveau : la
+  commande appartient à la bande, elle prend donc le rythme de la bande, pas le pas de section.
 
 - 2026-09-06 : **là où le sol change, le drapeau passe.** Chantier de design (axe A) : les trois bascules
   diagonales du site (accueil trajectoire et galerie, pilote appel final) reçoivent un damier or sur leur
