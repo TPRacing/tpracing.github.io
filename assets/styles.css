@@ -605,11 +605,19 @@ nav.solide ul a:hover, nav.solide ul a.active { color: var(--marine); }
   nav { padding: 10px 4%; }
   nav .logo img { height: 34px; }
   nav ul { gap: 13px; }
-  nav ul li.masque-mobile { display: none; }
   nav ul a { font-size: .92rem; letter-spacing: .07em; }
   /* Cible tactile d'au moins 24 px de haut (le texte seul n'en fait que 20). */
   nav ul a:not(.nav-cta) { padding-top: 5px; }
   nav .nav-cta { padding: 7px 12px; }
+}
+/* Repli des deux ancres d'accueil : il se déclenche à la largeur MESURÉE où la
+   barre cesse de tenir, pas 220 px trop tôt. À l'échelle typo ci-dessus, les cinq
+   liens occupent 447 px fixes ; avec le logo et le padding de 4 %, le gap flex
+   déclaré (20 px) tient encore à 600 px (26 px mesurés) et casse à 580 (report de
+   13 px). Avant le 08/09 la coupe était à 820 px : à 819 px la barre gardait
+   227 px de vide entre le logo et les liens tout en en supprimant deux. */
+@media (max-width: 600px) {
+  nav ul li.masque-mobile { display: none; }
 }
 /* Petits téléphones (320 à 400 px) : sans ce palier, logo + liens + bouton
    dépassent la largeur d'écran et « Devenir partenaire » est rogné, sans
