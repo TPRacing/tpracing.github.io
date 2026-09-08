@@ -82,6 +82,14 @@ langage étranger, elle ne passe pas.
   touchent jamais : entre eux, le pas vertical de la section qui les porte (66 px sur
   l'accueil, le même que la marge d'ouverture de `.trust`). Un intervalle inventé au jugé
   se voit autant qu'un intervalle nul (entrée du 10/08).
+- **Un point de rupture est une mesure, et rien ne se cache sans destination de repli**
+  (règle du 08/09). La largeur à laquelle un élément disparaît se calcule sur la place qu'il occupe
+  et sur l'espacement que le bloc déclare lui-même, jamais sur un palier rond repris du voisin :
+  la nav supprimait deux liens à 820 px alors qu'ils tenaient jusqu'à 600, laissant 227 px de vide
+  dans la barre. Et comme le site n'a AUCUN panneau de menu, ce qu'on retire du haut doit se
+  retrouver au pied : avant tout `display: none` responsive sur un lien, vérifier au `grep` que sa
+  cible garde au moins un lien entrant à cette largeur-là. Vu chez Caterham, Birel ART et CRG, qui
+  escamotent mais ne suppriment jamais.
 - Emblème TP : en 3D or au hero, en contour géant filigrane dans les fonds de section, en petit
   format or au bout du filet de la signature de bas de page. **Une seule occurrence du monogramme
   par coup d'œil** (règle du 04/09) : quand la marque se répète dans le même écran, elle ne signe
@@ -158,6 +166,37 @@ Les quatre doivent passer. Sinon : écarté, et on note pourquoi au backlog (les
 motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
+
+- 2026-09-08 (axe C, veille sur L'EN-TÊTE : caterhamcars.com, kartcrg.com, birelart.com,
+  oscarpiastri.com, sauber-group.com, studiofreight.com, captures du jour dans le scratchpad) :
+  **un point de rupture n'est pas un choix de style, c'est la largeur où la barre cesse de tenir ;
+  et ce qu'une barre ne peut pas tenir doit exister ailleurs dans la page.**
+  **Ce qui a été VU.** Les six sites cachent des liens quand la place manque, aucun ne les supprime.
+  Caterham escamote ses huit liens sous 1 200 px, mais dans un panneau noir plein écran où ils sont
+  posés en colonne EN BAS, le haut du panneau restant vide. Birel ART et CRG font de même. Piastri
+  n'a que deux choses à porter (un menu, un bouton) et n'a donc rien à cacher. Audi Revolut F1 cache
+  tout, même en desktop, le luxe d'une marque que personne ne cherche.
+  **Ce que ça a révélé chez nous.** Notre barre supprimait deux ancres sous 820 px sans destination de
+  repli, et la section « La trajectoire » n'était plus liée nulle part sur tout écran de moins de
+  821 px. La coupe elle-même était une valeur ronde : mesuré, les cinq liens tiennent jusqu'à 600 px,
+  et à 819 px la barre gardait 227 px de vide en supprimant deux liens.
+  **Règle posée.** Sur un site SANS panneau de menu, le point de rupture d'une barre se calcule : c'est
+  la largeur en dessous de laquelle le `gap` déclaré de la barre n'est plus respecté, mesurée, jamais
+  arrondie au palier voisin. Et rien ne se cache sans être repris ailleurs, au pied de page si le site
+  n'a pas de panneau. **Corollaire pour les prochains chantiers : avant de poser un `display: none`
+  responsive sur un lien, vérifier au `grep` que la cible reste atteignable depuis au moins un autre
+  endroit du site à cette largeur-là.**
+  **Ce qui reste ouvert, noté ici pour ne pas le perdre.** (a) CRG fait de son marqueur d'onglet actif
+  (bloc rouge plein) et de ses étiquettes de rubrique le MÊME objet ; chez nous le filet or de la nav
+  ne se retrouve nulle part ailleurs, alors que la pastille damier des kickers est déjà notre étiquette
+  de rubrique. (b) Notre nav solide superpose `backdrop-filter: blur(9px)` à un plateau blanc cassé
+  opaque à 95 % : à cette opacité le flou n'a presque rien à flouter, donc c'est un effet, pas de la
+  matière, au sens de la question 4 du test. À trancher au pixel, pas à l'intuition.
+  **Contre-exemple confirmé.** Le burger carré rouge plein de Birel ART : la couleur de marque en aplat
+  sur un bouton de mobilier. C'est l'interdit du 18/08 vu chez quelqu'un d'autre : l'or reste un trait,
+  un contour, un texte ou un damier, et sa seule surface pleine autorisée est le bouton d'action
+  « Devenir partenaire ».
+
 
 - 2026-09-06 (2e passage, axe B) : **ce qui bouge tout seul se commande, et la commande se dessine
   en maison.** L'audit d'accessibilité a montré que la bande partenaires ne pouvait être arrêtée ni

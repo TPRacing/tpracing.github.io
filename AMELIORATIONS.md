@@ -467,6 +467,75 @@ neutralisation (sélecteurs OneTrust non standard, les captures sont voilées d'
 **tonykart.com** superpose sa barre verte de marque AU TRAVERS du titre en mobile (le titre devient
 illisible sur trois mots), contre-exemple de mobile non soigné, à citer.
 
+### Idées de la veille 08/09 (angle neuf : L'EN-TÊTE, le seul bloc que le visiteur revoit sur les 5 pages)
+
+Sites REGARDÉS (Chrome headless piloté au protocole DevTools, haut de page + section de contenu +
+descente profonde, desktop 1280 ET mobile 390, menu mobile ouvert par script quand il existe ; chaque
+capture relue avant d'écrire une ligne, le code n'a été lu qu'ensuite) : **caterhamcars.com**,
+**kartcrg.com**, **birelart.com**, **oscarpiastri.com**, **sauber-group.com** (site Audi Revolut F1),
+**studiofreight.com**, plus la liste Awwwards « Sites of the Day » du jour. Angle choisi parce que les
+veilles précédentes ont regardé les heros et les cartes (16/08), la matière photographique (19/08) et
+la clôture de page (04/09) : jamais la barre du haut, alors que c'est le seul bloc que le visiteur
+revoit sur les cinq pages.
+
+Ce qui a été VU, avant toute lecture de code :
+- **Caterham** (la marque même que vise TPRacing) : barre noire pleine dès le pixel 0, jamais
+  transparente sur le hero, jamais modifiée au scroll, la même à 2 814 px de descente qu'en haut.
+  Huit liens en bas-de-casse, plus UN seul élément à droite, le sélecteur de pays « France ». Et,
+  mesuré : sous 1 200 px les huit liens disparaissent d'un coup au profit d'un burger, qui ouvre un
+  panneau noir plein écran où les liens sont posés en colonne EN BAS du panneau, le haut restant vide.
+- **CRG** : en-tête à deux étages (rangée logo, puis rangée de liens). L'onglet actif n'est pas
+  souligné, il est un BLOC ROUGE PLEIN derrière le mot, de la hauteur entière de la rangée. Et ce même
+  bloc rouge sert d'étiquette de section dans le contenu (« RACING LINE », « RACING TEAM ») : le
+  marqueur de nav et le label de rubrique sont le MÊME objet. En mobile, le burger passe à GAUCHE et
+  le logo au centre.
+- **Birel ART** : nav catalogue complète (huit liens + trouver un revendeur + recherche + langue +
+  bouton e-commerce). En mobile, tout s'efface derrière un burger qui est un CARRÉ ROUGE PLEIN, la
+  couleur de marque servant de sol au bouton.
+- **Oscar Piastri** (pilote pro) : la barre porte TROIS choses. Le logo, un seul menu déroulant
+  « Latest news », un bouton blanc « Official store ». Rien d'autre, ni en desktop ni en mobile.
+- **Audi Revolut F1** : logo à gauche, deux glyphes à droite (compte, burger) et RIEN d'autre à
+  1 280 px : toute la navigation est derrière le burger même en desktop. Et la barre DISPARAÎT
+  complètement dès qu'on descend.
+
+Retenues :
+- [x] **Ce qu'une barre ne peut pas tenir doit exister ailleurs dans la page.** C'est la leçon commune
+      aux six sites : tous cachent des liens, aucun ne les supprime : Caterham, Birel ART et CRG les
+      versent dans un panneau, Piastri n'en a que deux à porter. Chez TPRacing, qui n'a pas de panneau,
+      les deux ancres d'accueil étaient purement retirées sous 820 px et « La trajectoire » n'était plus
+      liée NULLE PART. Corrigé le jour même, voir le Journal du 08/09.
+- [ ] **Le marqueur d'onglet actif et l'étiquette de rubrique sont le même objet** (VU chez CRG, bloc
+      rouge plein). Pourquoi c'est TPRacing : notre filet or qui glisse sous le lien actif ne se
+      retrouve nulle part ailleurs dans le site, alors que la pastille damier des kickers, elle, est
+      déjà notre étiquette de rubrique. Piste : que l'état actif de la nav porte la pastille damier
+      plutôt qu'un filet neutre. ⏳ Non implémenté aujourd'hui : c'est une modification du seul
+      micro-geste validé de la nav (soulignement or, backlog du 10/07), à regarder à froid un jour de
+      design, avec un avant/après.
+- [ ] **La barre qui ne change jamais d'état** (VU chez Caterham : même fond noir plein en haut de page
+      et à 2 814 px). Chez nous la nav est transparente sur le hero puis devient un plateau blanc cassé
+      à 95 % avec `backdrop-filter: blur(9px)`. À 95 % d'opacité le flou n'a presque rien à flouter :
+      c'est un effet qui coûte une couche de composition et ne se voit pas, donc « un effet, pas de la
+      matière » au sens du test des 4 questions. ⏳ À trancher par une mesure au pixel (comparer la
+      barre avec et sans le flou sur une photo contrastée) avant de toucher à quoi que ce soit.
+
+Écartées, avec le motif :
+- **Toute la navigation derrière un burger en DESKTOP** (VU chez Audi Revolut F1). Pour une écurie de F1
+  dont tout le monde connaît déjà le nom, cacher le menu est un luxe. TPRacing cherche des partenaires :
+  « Devenir partenaire » doit rester lisible en permanence, et c'est déjà notre seul bouton plein.
+- **La barre qui disparaît au scroll** (même site). Notre nav sert aussi de repère de marque sur des
+  pages longues, et le logo qui bascule blanc→couleur au scroll est un geste maison validé le 09/07.
+- **Le burger à gauche et le logo centré en mobile** (VU chez CRG). C'est un déplacement du logo, donc
+  de la marque, pour un gain nul chez nous : notre barre mobile n'a pas de burger à loger.
+- **La couleur de marque en aplat plein sur le bouton de menu** (VU chez Birel ART, carré rouge plein).
+  Interdit maison du 18/08 : chez nous l'or est un trait, un contour, un texte ou un damier, jamais une
+  surface, sauf le seul bouton d'action, « Devenir partenaire ».
+
+Sites à connaître pour les prochaines veilles : **jota.gp N'EXISTE PAS** (DNS mort, le bon domaine est
+jota.sport, qui ne répond pas non plus depuis ce poste) ; **aesop.com/fr** sert un interstitiel plein
+écran au lieu de sa page en headless ; **studiofreight.com** et **jota.sport** ignorent `window.scrollTo`
+(défilement piloté en JS, `scrollY` reste à 0 et les trois captures sortent identiques) ; **sauber-group.com**
+garde son panneau Usercentrics malgré la neutralisation et assombrit toute la page.
+
 ### Constats de l'audit de COHÉRENCE DE LA DA du 11/08 (5 pages regardées, desktop 1280 + mobile 390)
 
 Corrigés le jour même :
@@ -609,6 +678,68 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-09-08 (routine, AXE C : veille par captures, angle neuf **L'EN-TÊTE** ; dernier jour de veille le
+  04/09, 06/09 en axe A puis B, aucun run le 05 ni le 07) : **la veille a trouvé une section du site que
+  rien ne liait plus, sur tout téléphone et toute tablette.** T7 monté, `git pull` passé avant toute
+  modification (la modif locale du collage origines est laissée non commitée, elle attend toujours Thomas).
+  **(1) Ce qui a été regardé.** Six sites capturés au protocole DevTools, haut de page + section de contenu
+  + descente profonde, en desktop 1280 ET en mobile 390, menu mobile ouvert par script quand il existe :
+  caterhamcars.com, kartcrg.com, birelart.com, oscarpiastri.com, sauber-group.com (Audi Revolut F1),
+  studiofreight.com, plus la liste Awwwards du jour. Chaque capture relue avant d'écrire, le code seulement
+  ensuite. Angle choisi parce que les veilles ont regardé les heros et les cartes (16/08), la matière
+  photographique (19/08) et la clôture de page (04/09), jamais la barre du haut, qui est pourtant le seul
+  bloc que le visiteur revoit sur les cinq pages.
+  **(2) Le défaut, et comment la veille l'a fait apparaître.** Les six sites cachent des liens, aucun ne les
+  supprime : Caterham verse ses huit liens dans un panneau noir plein écran sous 1 200 px, Birel ART et CRG
+  font pareil, Piastri n'a que deux choses à porter. En revenant sur TPRacing, la règle `nav ul
+  li.masque-mobile { display: none }` vivait dans le palier `max-width: 820px` et faisait **disparaître
+  purement et simplement « L'association » et « La trajectoire »**, sans panneau pour les recevoir puisque
+  le site n'en a pas. Deux conséquences mesurées. D'abord la coupe tombait 220 px trop tôt : à l'échelle
+  typographique de ce palier, les cinq liens occupent **447 px fixes**, et avec le logo et le padding de 4 %
+  le `gap` flex déclaré (20 px) tient encore à **600 px** (26 px mesurés) pour ne casser qu'à 580 (report de
+  13 px). Autrement dit à 819 px la barre gardait **227 px de vide** entre le logo et les liens tout en en
+  supprimant deux. Ensuite, et c'est le vrai défaut : `#trajectoire` n'était cité QUE par ce lien de nav,
+  vérifié sur les cinq pages (`grep` : cinq occurrences, toutes dans la nav, zéro dans les pieds), donc sur
+  tout écran de moins de 821 px, **la section « La trajectoire » n'avait plus un seul lien entrant nulle part
+  sur le site.**
+  **(3) Le correctif, deux gestes.** (a) Le repli passe dans son propre palier `@media (max-width: 600px)`,
+  la largeur MESURÉE où la barre cesse de tenir, pas une valeur ronde : les cinq destinations reviennent sur
+  toute la bande 601-820, qui couvre l'iPad portrait (768), les tablettes et les téléphones en paysage.
+  (b) Sous 600 px, où les deux ancres ne tiennent réellement plus, « La trajectoire » entre dans la rangée
+  `.foot-liens` des quatre pages qui portent déjà « L'association » (pilote, contact, mentions légales, 404),
+  juste après elle, dans l'ordre de la nav. Le pied d'accueil n'est pas touché : la section y est sur la page
+  qu'on lit déjà. Une déclaration CSS et quatre lignes de HTML, aucun composant nouveau.
+  **(4) Les fausses pistes, écartées avant de coder.** Ajouter un burger et un panneau plein écran comme
+  Caterham : c'est le geste que six sites sur six emploient, mais il crée un composant entier pour porter
+  DEUX liens, et la leçon du 25/07 (« ça en fait trop ») vaut ici. Reculer la coupe à 640 px « pour avoir de
+  l'air » : ç'aurait été une valeur à l'œil, alors que le site déclare lui-même son minimum, le `gap: 20px`
+  de la barre. Et masquer autrement en mobile : le problème n'était pas l'affichage, c'était l'absence de
+  destination de repli.
+  **(5) Ce que la veille a versé au backlog** (section « Idées de la veille 08/09 ») : 1 idée retenue et
+  faite, 2 retenues et bloquées (le marqueur d'onglet actif et l'étiquette de rubrique comme un seul objet,
+  vu chez CRG en bloc rouge plein ; la barre qui ne change jamais d'état, vue chez Caterham, qui pose la
+  question de notre `backdrop-filter: blur(9px)` sous un plateau opaque à 95 %, soit un flou qui n'a presque
+  rien à flouter), 4 écartées motivées (toute la nav derrière un burger en desktop, la barre qui disparaît au
+  scroll, le burger à gauche avec logo centré, la couleur de marque en aplat plein sur le bouton de menu).
+  **(6) Vérifications.** 5 pages x 12 largeurs (320, 375, 390, 414, 600, 601, 620, 768, 820, 1024, 1280,
+  1680) = **60 mesures** : bascule nette 3 liens à 600 / 5 liens à 601 sur les cinq pages, 0 image cassée,
+  0 ratio d'image faux, `scrollWidth == innerWidth` partout, 0 erreur console sur les 5 pages en 390 et 1280.
+  Seul dépassement relevé : le mot géant en contour, qui est un débordement VOULU (24 relevés, tous
+  `.mot-geant`, aucun scroll horizontal créé). Le harnais du jour est plus permissif que celui des jours
+  précédents, il le signale au lieu de le taire. Captures avant/après de la barre à 768 et 820 regardées, et
+  pieds relus à 320, 390 et 1280 (la rangée se replie proprement sur deux lignes, elle ne déborde pas).
+  Puis prod : build Pages `built` sur c798ed5, **shasum identique dépôt/prod sur styles.css et les 4 pages
+  modifiées**, et la bascule retestée EN LIGNE à 768, 820, 600 et 390.
+  **(7) Rig, les leçons du jour.** `PUT /json/new` : Chrome 152 refuse désormais le `POST` sur cet endpoint
+  (405 Method Not Allowed), tout le harnais de capture sortait en échec sans autre message. Le test de
+  débordement ne peut PAS se contenter de « a un ancêtre qui rogne » : `html` et `body` portent
+  `overflow-x: hidden/clip` sur ce site, donc la remontée naïve exclut la page entière et le harnais rapporte
+  triomphalement zéro défaut. Il faut s'arrêter avant `body` et exiger que l'ancêtre rogneur tienne
+  lui-même dans le viewport. Une image `naturalWidth === 0` n'est pas cassée si elle est en `loading="lazy"`
+  sous la ligne de flottaison : filtrer sur l'intersection avec le viewport, sinon chaque page ressort avec
+  trois « images cassées » imaginaires. Enfin `studiofreight.com` et `jota.sport` ignorent `window.scrollTo`
+  (défilement piloté en JS) : les trois captures sortent identiques, et `jota.gp` n'existe pas du tout.
 
 - 2026-09-06 (routine, 2e passage du jour, AXE B : audit, dimension ACCESSIBILITÉ ; le passage du
   matin était un jour A, le 04/09 un jour C, et le dernier jour B remontait au 24/08) :
