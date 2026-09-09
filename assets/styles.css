@@ -559,8 +559,8 @@ nav ul a {
 nav ul a:hover { color: var(--or); }
 nav ul a.active { color: var(--or); }
 
-/* Soulignement or qui glisse : entre par la gauche au survol, ressort par la droite ;
-   reste plein sur le lien actif. Exclut le bouton CTA (aplat plein). */
+/* Soulignement or qui glisse : entre par la gauche au survol, ressort par la droite.
+   C'est le geste du SURVOL, et lui seul (09/09). Exclut le bouton CTA (aplat plein). */
 nav ul a:not(.nav-cta) { position: relative; padding-bottom: 5px; }
 nav ul a:not(.nav-cta)::after {
   content: "";
@@ -573,11 +573,48 @@ nav ul a:not(.nav-cta)::after {
   transition: transform .32s cubic-bezier(.4, .15, .2, 1);
 }
 nav ul a:not(.nav-cta):hover::after,
-nav ul a:not(.nav-cta):focus-visible::after,
-nav ul a.active:not(.nav-cta)::after {
+nav ul a:not(.nav-cta):focus-visible::after {
   transform: scaleX(1);
   transform-origin: left center;
 }
+
+/* Page en cours : un liseré DAMIER, pas le filet du survol (09/09).
+   Avant ce jour, l'état actif et le survol produisaient le MÊME trait or plein :
+   sur pilote.html, survoler « Contact » marquait ce lien exactement comme le lien
+   de la page où l'on se trouve, et la barre annonçait deux pages courantes. Deux
+   sens différents réclament deux objets différents. Le marqueur de page prend donc
+   l'objet que le site emploie déjà partout pour dire « voici la rubrique » : le
+   liseré damier des cartes blanches (18/08) et des fins de hero, seul marqueur de
+   la maison. Le filet or nu, lui, ne se retrouvait nulle part ailleurs.
+   Recette dictée par le FOND (règle du 18/08) : or sur transparent tant que la
+   barre est posée sur le hero sombre, marine + or opaque dès qu'elle devient un
+   plateau clair. Géométrie invariable : tuile = double de la cellule, donc 6 px de
+   haut = 6 px de tuile = deux rangées de 3 px, le minimum sous lequel le damier
+   n'est plus qu'une bordure pointillée.
+   Calage vertical mesuré, pas choisi : le filet de 2 px laissait 7 px d'air sous
+   les capitales. Une marque trois fois plus épaisse en réclame au moins autant, or
+   posée au ras du padding elle n'en gardait que 4 et se collait au mot. Les trois
+   calages (-1, -3, -4 px) ont été rendus et regardés côte à côte : -3 px rend 6 px
+   d'air, la bande reste attachée au mot sans le toucher, et garde 11 px jusqu'au
+   bord bas de la barre. L'élément est en ligne, donc rien de tout cela ne pousse la
+   boîte de ligne ni ne décale un seul lien. */
+nav ul a.active:not(.nav-cta)::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -3px;
+  height: 6px;
+  background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%);
+  background-size: 6px 6px;
+  pointer-events: none;
+}
+nav.solide ul a.active:not(.nav-cta)::before {
+  background: repeating-conic-gradient(var(--marine-deep) 0% 25%, var(--or) 0% 50%);
+  background-size: 6px 6px;
+}
+/* Le lien de la page en cours ne rejoue pas le survol : sa marque est déjà posée,
+   et le filet viendrait se superposer au damier. */
+nav ul a.active:not(.nav-cta):hover::after,
+nav ul a.active:not(.nav-cta):focus-visible::after { transform: scaleX(0); }
 
 nav .nav-cta {
   background: var(--or);
@@ -587,9 +624,20 @@ nav .nav-cta {
 }
 nav .nav-cta:hover { background: var(--or-clair); color: var(--marine-deep); }
 
+/* Plateau OPAQUE, sans backdrop-filter (mesuré au pixel le 09/09). La barre était
+   à 95 % d'opacité plus un blur(9px). Mesure faite sur trois fonds, capture contre
+   capture, bande de nav 1280x60 : au-dessus d'une PHOTO le flou ne change rien de
+   visible (écart maximal 10/255) ; il ne mord que sur une chose, la trame fine qui
+   traverse les 5 % de transparence - le damier du marquee et les mots géants en
+   contour, qui remontaient en fantôme gris à travers la barre. Autrement dit le
+   flou n'était pas là pour montrer ce qu'il y a dessous, il était là pour effacer
+   un artefact que la transparence elle-même fabriquait. En rendant le plateau
+   opaque, les deux disparaissent : la barre est plus PROPRE qu'avant (le fantôme
+   du mot géant a disparu, vérifié en capture) et le site rend une couche de
+   composition sur chaque image de chaque défilement. C'est aussi la doctrine
+   maison : de la matière, pas un effet. */
 nav.solide {
-  background: rgba(246, 247, 252, .95);
-  backdrop-filter: blur(9px);
+  background: var(--blanc);
   border-bottom: 1px solid rgba(30, 38, 53, .12);
   padding: 10px 5%;
 }
