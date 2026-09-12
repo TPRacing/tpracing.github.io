@@ -396,9 +396,11 @@ html:not(.js) .kicker.rvl { clip-path: none; }
   align-items: center;
   gap: 44px;
   width: max-content;
-  animation: defile 30s linear infinite;
+  /* Aucune animation CSS : la piste n'est mue QUE par le scroll du lecteur (JS).
+     Elle portait un défilement propre de 30 s en boucle, doublé d'une dérive JS
+     de 39 px/s, qu'aucun écran tactile ne pouvait arrêter (le survol était son
+     seul frein). Plus de moteur autonome : plus rien à commander. */
 }
-.marquee:hover .piste { animation-play-state: paused; }
 .marquee span {
   font-family: var(--f-label);
   font-weight: 700;
@@ -415,7 +417,6 @@ html:not(.js) .kicker.rvl { clip-path: none; }
   background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%);
   background-size: 6.5px 6.5px;
 }
-@keyframes defile { to { transform: translateX(-50%); } }
 
 /* ---------- Typo ---------- */
 h1, h2 {
@@ -971,7 +972,6 @@ nav .nav-cta:focus-visible {
   html { scroll-behavior: auto; }
   .saut-contenu { transition: none; }
   .rvl { opacity: 1; transform: none; transition: none; }
-  .marquee .piste { animation: none; }
   .lightbox, .lb-scene, .gal-loupe { transition: opacity .18s ease, visibility .18s ease; }
   .lb-scene { transform: none; }
   nav ul a:not(.nav-cta)::after { transition: none; }

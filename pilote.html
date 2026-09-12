@@ -619,29 +619,35 @@
   </footer>
 
   <script>
-    // Marquee asservi à la vitesse de scroll (inertie + cisaillement, façon vitesse réelle)
+    // Bandeau asservi à la vitesse de scroll : il avance quand le lecteur avance et
+    // s'arrête quand le lecteur s'arrête. Il portait en plus un défilement propre de
+    // 0,65 px/frame, soit 39 px/s qui démarraient tout seuls et que RIEN ne pouvait
+    // arrêter sur un écran tactile (son seul frein était le survol, et pointer: coarse
+    // n'en a pas). La dérive est retirée : plus de mouvement automatique à commander,
+    // et la bande dit enfin ce que son nom promet, la vitesse réelle du lecteur.
     (function () {
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; // on garde l'animation CSS
-      const piste = document.querySelector('.marquee .piste');
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; // la CSS fige la piste
+      const bande = document.querySelector('.marquee');
+      const piste = bande && bande.querySelector('.piste');
       if (!piste) return;
       piste.style.animation = 'none';
-      let x = 0, vel = 0, lastY = scrollY, skew = 0, visible = true, moitie = 0, pause = false;
+      let x = 0, vel = 0, lastY = scrollY, skew = 0, visible = true, moitie = 0;
       const mesurer = () => { moitie = piste.scrollWidth / 2; };
       mesurer();
       addEventListener('resize', mesurer, { passive: true });
-      new IntersectionObserver(es => es.forEach(e => { visible = e.isIntersecting; })).observe(piste.parentElement);
-      piste.parentElement.addEventListener('mouseenter', () => { pause = true; });
-      piste.parentElement.addEventListener('mouseleave', () => { pause = false; });
+      new IntersectionObserver(es => es.forEach(e => { visible = e.isIntersecting; })).observe(bande);
       const tick = () => {
         requestAnimationFrame(tick);
         if (!visible || !moitie) { lastY = scrollY; return; }
         const dy = scrollY - lastY; lastY = scrollY;
         vel += (dy - vel) * 0.12;
-        if (!pause) x -= 0.65 + vel * 0.07;
-        else x -= vel * 0.07;
-        x = ((x % moitie) + moitie) % moitie - moitie;
+        if (Math.abs(vel) < 0.02) vel = 0;   // sous le pixel : le lecteur est à l'arrêt, la bande aussi
         const cible = Math.max(-3.5, Math.min(3.5, vel * 0.09));
         skew += (cible - skew) * 0.1;
+        if (Math.abs(skew) < 0.01) skew = 0;
+        if (!vel && !skew) return;           // rien ne bouge : aucun style à réécrire
+        x -= vel * 0.5;                      // la bande parcourt la moitié du chemin du lecteur
+        x = ((x % moitie) + moitie) % moitie - moitie;
         piste.style.transform = 'translateX(' + x.toFixed(1) + 'px) skewX(' + skew.toFixed(2) + 'deg)';
       };
       tick();
