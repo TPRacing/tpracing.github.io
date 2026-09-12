@@ -668,6 +668,44 @@ Pour la routine du feed Instagram (`maj-feed-insta-site`, section « Les dernier
   première tuile, mais si le `:focus-within` disparaissait un jour il faudrait remonter le bouton
   avant la bande.
 
+### Constats de l'audit CONSOLE ET JS du 12/09 (5 pages, parcours nominal + interactions + sans JS + instrumentation)
+
+Le défaut principal (bandeau qui démarre seul, sans arrêt possible sur écran tactile) a été corrigé le
+jour même. Ce qui suit a été trouvé et NON corrigé, faute d'être un défaut actif aujourd'hui.
+
+- [ ] **Ordre de fragilité dans le bloc de script d'index.html.** Onze fonctionnalités y vivent dans UN
+  seul `<script>` : bandeau, ligne de course, intro, compteurs, parallax, barre de nav, vidéo, emblème
+  incliné, commande de la bande partenaires, lightbox. Une exception qui s'échappe de l'une **tue
+  silencieusement toutes celles qui suivent** — le bloc entier cesse de s'exécuter. Or deux
+  déréférencements ne sont pas gardés : `const navbar = document.getElementById('navbar')` suivi de
+  `majNav()`, et `const zone = t3.closest('.hero')` suivi de `zone.addEventListener`. Les deux sont
+  placés EN AMONT de la commande d'accessibilité de la bande partenaires (le seul arrêt possible sur
+  téléphone, posé le 06/09) et de TOUTE la lightbox. Rien ne casse aujourd'hui, les éléments existent sur
+  les 5 pages ; le problème est l'ordre, qui met le plus fragile devant le plus important. Remède
+  possible : deux gardes, ou couper le bloc en plusieurs `<script>` pour que la casse reste locale.
+- [ ] **Lightbox : deux tableaux indexés ensemble mais construits différemment.** `vues` est bâti par
+  `.map(...).filter(Boolean)`, qui SAUTE toute figure sans `<img>` dans son `.frame` ; il est ensuite
+  indexé par le rang de `figures`, qui, lui, ne saute rien. Aujourd'hui 6 figures pour 6 vues, tout est
+  aligné. Le jour où une figure de galerie n'a pas d'image, toutes les suivantes ouvrent la MAUVAISE
+  photo et portent la mauvaise légende dans leur `aria-label` (et la dernière lève une exception sur
+  `vues[i].legende`). Remède : construire les deux listes dans la même passe.
+- [ ] **Le même code recopié sur 5 fichiers.** La ligne de course et la bascule de la barre de nav sont
+  identiques sur les 5 pages, les reveals sur 3, le bandeau sur 2. Aucune divergence trouvée aujourd'hui
+  (comparaison au caractère près), mais chaque correctif futur est à appliquer cinq fois, et le seul
+  fichier JS externe du site (`assets/js/reflexes.js`, sur la 404) prouve que le socle existe déjà.
+  À arbitrer : un `assets/js/socle.js` économiserait ~4 Ko de HTML mais ajoute une requête.
+- [ ] **Compteurs : repli sur `document.body`.** `new IntersectionObserver(...).observe(blocs[0] || document.body)`
+  — si `.chiffres .num-outline` venait à disparaître, l'observateur se poserait sur `<body>` et
+  `compte()` ferait un `parseInt` de tout le texte de la page. Sans effet visible (le garde `if (!fin)`
+  rattrape), mais le repli ne veut rien dire : il vaudrait mieux ne rien observer.
+- [ ] **Speculation Rules : ce qui tourne AVANT la visite.** Les 5 pages déclarent
+  `prerender` en `eagerness: moderate` sur `/*` : la page préchargée exécute tout son JavaScript avant
+  que le visiteur n'y arrive. L'intro s'en protège explicitement (`document.prerendering`), mais les
+  compteurs de la bande chiffres, eux, sont déclenchés par un IntersectionObserver et peuvent avoir
+  terminé leur montée hors écran — le visiteur arriverait alors sur des nombres déjà posés, sans
+  l'animation de tableau de bord. À mesurer un jour de dimension adaptée (le prérendu ne se pilote pas
+  facilement en CDP : il faut une vraie navigation depuis une page qui déclare la règle).
+
 ## Règles (rappel pour la routine)
 
 Charte : marine #1E2635, or #D49726, blanc #F6F7FC, rouge #C13221, vert #3E836E (micro-accent).
@@ -678,6 +716,106 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-09-12 (routine, AXE B : audit, dimension **CONSOLE ET JS**, la seule de la rotation jamais
+  auditée en propre ; 08/09 était un jour C, 09/09 un jour A, aucun run les 10 et 11) : **le bandeau
+  défilant démarrait tout seul et rien ne pouvait l'arrêter sur un téléphone, exactement le défaut
+  corrigé le 06/09 sur la bande partenaires, laissé sur les deux pages principales.**
+  T7 non monté, journée faite depuis un clone du dépôt dans le scratchpad, poussée de là.
+  **(1) Ce que le parcours nominal donne : rien.** 5 pages x 2 largeurs (1280 et 390 tactile), chargement,
+  scroll complet par paliers, puis un aller-retour de redimensionnement pour éprouver les gestionnaires
+  `resize` : **0 exception, 0 message de console, 0 requête en échec, 0 réponse ≥ 400**. C'était attendu,
+  les vérifications quotidiennes contrôlent déjà « 0 erreur console » ; c'est justement pourquoi cette
+  dimension ne se juge pas là.
+  **(2) Les surfaces interactives, jamais exercées par une vérification jusqu'ici, tiennent.** Lightbox :
+  ouverture au clic, verrou de défilement posé (`overflow: hidden`) et rendu, focus porté sur le bouton
+  Fermer, trois flèches droite (compteur 01/06 → 04/06, image pleine taille décodée à 1400 px), cycle de
+  Tab correct sur les trois boutons dans l'ordre du DOM, Échap qui rend le focus à la vignette d'origine
+  et restitue la position de lecture au pixel (scrollY 4852), puis réouverture immédiate et fermeture par
+  le fond. Bande partenaires : le bouton du 06/09 bascule bien `running → paused → running`, **en 1280 ET
+  en 390 tactile**. Carrousels Insta : les 4 diapositives sont construites au premier survol et RÉUTILISÉES
+  au second (4, pas 8), nettoyées à la sortie. Aucune erreur sur aucune de ces séquences.
+  **(3) Une fausse piste, mesurée puis écartée.** Le parallax de `.bande-origines` programme un
+  `requestAnimationFrame` à CHAQUE événement de scroll, sans verrou, et chacun fait un
+  `getBoundingClientRect` suivi d'une écriture de style : sur le papier, empilement et travail de mise en
+  page en rafale. Instrumenté (`requestAnimationFrame` et `getBoundingClientRect` enveloppés, compteurs)
+  sur un scroll réaliste de 120 pas : 52 événements, 246 rAF, **5 rAF en attente au maximum** et
+  5 mesures de rect. Chrome ne livre qu'un événement de scroll par frame, l'empilement est borné. Aucun
+  correctif : la suspicion venait de la lecture du code, la mesure l'a démentie.
+  **(4) Le défaut, et l'angle qui l'a fait apparaître.** Il est sorti du test SANS JavaScript, le seul
+  qui demande ce qui tourne tout seul : script désactivé, `.marquee .piste` gardait
+  `animation: defile 30s linear infinite`, alors que la bande partenaires, elle, avait été mise en mur
+  statique le 06/09 « pour qu'il n'y ait jamais de mouvement sans commande ». En remontant le fil, le
+  défaut était plus large que le cas sans JS. Avec JavaScript, le bandeau porte une dérive constante de
+  **0,65 px par frame, soit 39 px/s mesurés sur pilote.html**, qui démarre seule et ne s'arrête jamais.
+  Son unique frein est `.marquee:hover` doublé d'un `mouseenter` : mesuré dans un Chrome émulé tactile à
+  390 px, `hover: false` et `pointer: coarse` sont vrais, donc **ce frein n'existe pas sur un téléphone**.
+  Mouvement automatique, sans commande, sur les deux pages les plus lues du site : critère WCAG 2.2.2,
+  niveau A, et la règle maison du 06/09 prise une seconde fois en défaut au même endroit.
+  **(5) Une première réponse, écartée à la capture.** Reprise de la recette validée le 06/09 : carré
+  biseauté 34 px, marine, glyphe or 13 px, liseré or, posé au bout de la bande et couché dans sa pente.
+  Implémenté, capturé, regardé en zoom x3 : dans une bande de 50 px de haut il touche les deux filets or,
+  la piste lui passe contre (« FEED RACING FRANCE » et une pastille damier collées à son arête, la
+  pastille dépassant sur sa droite) et il lit comme un widget rapporté sur une bande de signature. C'est
+  l'interdit « plaque collée » vu dans notre propre travail. Retiré entièrement.
+  **(6) Le geste retenu : enlever le moteur au lieu d'ajouter un bouton.** Le commentaire du code
+  promettait déjà « asservi à la vitesse de scroll, façon vitesse réelle » — la dérive constante était
+  précisément ce qui démentait cette promesse. Elle est supprimée : le bandeau ne bouge plus que de ce
+  que le lecteur bouge (`x -= vel * 0.5`, la bande parcourt la moitié du chemin du lecteur). Plus de
+  mouvement automatique, donc **plus rien à commander** : aucun mobilier ajouté, aucun pixel de la bande
+  changé, et la promesse du code devient vraie. Vérifié sur capture en 1280 et en 390 : la bande est
+  identique à celle d'hier.
+  **(7) Le nettoyage que ce geste a rendu possible.** `@keyframes defile`, la déclaration
+  `animation: defile 30s linear infinite`, la règle `.marquee:hover .piste { animation-play-state: paused }`
+  et la ligne `.marquee .piste { animation: none }` du bloc mouvement réduit n'existaient plus que pour
+  s'annuler les unes les autres. Plutôt que d'ajouter une quatrième annulation (`html:not(.js)`, qui avait
+  été écrite puis jugée de trop), la source est supprimée : le bandeau n'a plus aucune animation CSS, dans
+  aucun chemin, par construction. Ajouté aussi un plancher sur la vélocité et le cisaillement (< 0,02 et
+  < 0,01 → 0) : au repos, la boucle n'écrit plus rien du tout, **0 écriture de style mesurée sur 3 s**,
+  contre une par frame auparavant.
+  **(8) Vérifications.** Les trois chemins, sur les deux pages : nominal, mouvement réduit émulé, et
+  script désactivé → `animationName: none` partout, et **0 px/s au repos** dans les trois. Sous scroll, la
+  bande répond (101 à 136 px pour 400 px de scroll, en headless bridé). Au repos, après stabilisation :
+  0 px de déplacement et **0 écriture de style en 3 s**, sur les 4 combinaisons page x largeur. Puis
+  5 pages x 12 largeurs (320, 375, 390, 414, 600, 601, 768, 820, 1024, 1280, 1440, 1680) = **60 mesures** :
+  0 erreur JS, 0 ratio d'image faux, 0 image cassée, `scrollWidth == innerWidth` partout, et
+  `animationName: none` sur les 60. Les 18 à 36 débordements relevés par largeur ont tous été remontés
+  jusqu'à leur chaîne d'ancêtres : `.marquee` et ses `<span>`/`<i>` (la bande pleine cadre, rognée par son
+  propre `overflow: hidden`), les `<svg><use>` du grain, et `.mot-geant` — tous voulus, aucun ne crée de
+  défilement horizontal. La seule « image sans source » signalée est le `<img class="lb-img">` de la
+  lightbox, volontairement sans attribut `src` depuis le 06/09. Enfin le jeu de tests d'interactions
+  repassé après modification : lightbox, bouton partenaires et carrousels inchangés.
+  **(9) Poids.** +126 octets de CSS, +548 octets par page touchée, uniquement des commentaires expliquant
+  le pourquoi. La CSS perd deux règles et un `@keyframes`.
+  **(10) Ce qui est versé au backlog** (section « Constats de l'audit CONSOLE ET JS du 12/09 ») : cinq
+  constats non corrigés aujourd'hui, dont le principal est un ordre de fragilité — sur index.html, onze
+  fonctionnalités vivent dans UN seul bloc `<script>`, et les deux déréférencements non gardés du fichier
+  (`navbar` et `t3.closest('.hero')`) sont placés en amont de la commande d'accessibilité de la bande
+  partenaires et de TOUTE la lightbox.
+  **(11) Écart d'intendance relevé.** Le run du 09/09 a poussé le commit 8b39479 (marqueur de page en
+  damier dans la nav, plateau de barre opaque) **sans écrire sa ligne de Journal** : le travail est en
+  ligne, sa trace manquait. Elle est rétablie ci-dessous à partir du message de commit, signalée comme
+  reconstruite.
+  **(12) Rig, leçons du jour.** (a) Le protocole DevTools finit par ne plus répondre du tout quand les
+  cibles s'accumulent : après 60 chargements de page, `/json/list` lui-même expire et tout run suivant
+  meurt sur `no close frame received` — tuer et relancer Chrome entre deux campagnes, ne pas se fier au
+  seul `close_target`. (b) Un test de vitesse de bande mesuré en headless est FAUX tant qu'on n'a pas
+  laissé la vélocité retomber : le rAF y tourne à ~20 fps au lieu de 60, la décroissance exponentielle
+  prend donc trois fois plus longtemps et une fenêtre de 2,5 s attrape une traînée qu'on lit comme une
+  dérive résiduelle. La preuve propre n'est pas une vitesse, c'est un **compteur d'écritures de style**
+  posé en `MutationObserver` sur l'attribut `style` : 0 écriture, aucune interprétation possible.
+
+- 2026-09-09 (routine, AXE A : design ; **ligne rétablie le 12/09**, reconstruite depuis le message du
+  commit 8b39479 — le run du jour avait poussé son travail sans écrire au Journal). Le marqueur de page
+  et le survol produisaient le même trait or plein : sur pilote.html, survoler « Contact » marquait ce
+  lien exactement comme la page courante. L'état actif prend le liseré damier des cartes (recette dictée
+  par le fond : or sur transparent, puis marine + or sur le plateau clair), calé à 6 px d'air sous les
+  capitales, et le filet or redevient le geste du survol seul. Le plateau de la barre passe opaque et
+  perd son `backdrop-filter` : mesuré au pixel, le flou ne changeait rien au-dessus d'une photo (10/255)
+  et ne servait qu'à effacer la trame qui traversait les 5 % de transparence ; sans lui la barre est plus
+  propre et le fantôme du mot géant a disparu. (Cela tranche le point (b) laissé ouvert par la veille du
+  08/09 sur le `blur(9px)`.) Vérifications du jour non consignées : à considérer comme faites en ligne,
+  le travail y est.
 
 - 2026-09-08 (routine, AXE C : veille par captures, angle neuf **L'EN-TÊTE** ; dernier jour de veille le
   04/09, 06/09 en axe A puis B, aucun run le 05 ni le 07) : **la veille a trouvé une section du site que

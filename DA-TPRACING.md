@@ -108,6 +108,15 @@ langage étranger, elle ne passe pas.
   partir. Ce qui BOUGE tout seul porte donc une commande VISIBLE, dessinée dans le
   vocabulaire maison. La bande partenaires a vécu sept semaines sans arrêt possible
   sur téléphone parce que ses deux pauses étaient des états de pointeur.
+  **Mais avant de dessiner cette commande, demander si le mouvement automatique est
+  seulement VOULU** (règle ajoutée le 12/09) : le bandeau se disait « asservi à la
+  vitesse de scroll » et portait pourtant une dérive constante de 0,65 px/frame, qui
+  était tout ce qu'il y avait à arrêter. Retirée, il ne bouge plus que de ce que le
+  lecteur bouge — donc plus rien à commander, aucun mobilier ajouté, et la promesse
+  du code devient vraie. **Un mouvement lié au geste du lecteur vaut toujours mieux
+  qu'un mouvement autonome muni d'un bouton** : il ajoute du sens là où l'autre ajoute
+  une pièce. Ordre de préférence, désormais : (1) lier le mouvement au lecteur,
+  (2) le supprimer, (3) lui donner une commande visible.
 
 ## 3. Interdits (chaque ligne vient d'un rejet réel de Thomas)
 
@@ -166,6 +175,32 @@ Les quatre doivent passer. Sinon : écarté, et on note pourquoi au backlog (les
 motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
+
+- 2026-09-12 (axe B, audit CONSOLE ET JS ; captures du bouton essayé puis écarté dans le
+  scratchpad du jour) : **on n'ajoute pas une commande à un mouvement dont personne ne veut.**
+  **Le défaut.** Le bandeau défilant démarrait seul à 39 px/s (dérive de 0,65 px/frame) et son
+  unique frein était `.marquee:hover`, mort sur un écran tactile (`hover: false`,
+  `pointer: coarse` mesurés à 390 px). Même défaut qu'au 06/09 sur la bande partenaires, sur les
+  deux pages principales.
+  **Ce qui a été essayé, et REGARDÉ.** La recette validée du 06/09, à l'identique : carré biseauté
+  34 px, marine, glyphe or, liseré or, posé au bout de la bande et couché dans sa pente. En zoom x3,
+  le verdict est net : dans une bande de 50 px de haut, le carré touche les deux filets or, la piste
+  lui passe contre (« FEED RACING FRANCE » et une pastille damier collées à son arête, la pastille
+  dépassant à droite), et l'ensemble lit comme un widget rapporté. **Une recette validée ailleurs
+  n'est pas validée partout : elle l'est pour une DENSITÉ donnée.** Le bouton partenaires respire
+  parce qu'il est posé dans les 16 px de gouttière d'une section ; la même pièce dans une bande
+  pleine cadre de 50 px n'a aucun air autour d'elle, et l'air est la moitié du dessin.
+  **Le geste retenu.** Supprimer la dérive plutôt qu'ajouter le bouton. Le bandeau ne bouge plus que
+  de ce que le lecteur bouge, aucun pixel de la bande ne change, et trois règles CSS qui ne
+  servaient qu'à s'annuler entre elles disparaissent (`@keyframes defile`, la règle `:hover`,
+  l'annulation en mouvement réduit).
+  **Règle posée**, versée aussi en section 2 : face à un mouvement automatique, l'ordre de préférence
+  est (1) le lier au geste du lecteur, (2) le supprimer, (3) lui donner une commande visible. La
+  commande est le dernier recours, pas le premier réflexe, parce qu'elle ajoute une pièce là où les
+  deux autres ajoutent du sens.
+  **Corollaire de méthode.** Avant de poser une pièce de mobilier empruntée à un autre endroit du
+  site, mesurer la hauteur disponible ET l'air autour, puis juger sur une capture zoomée — pas sur
+  le fait que la recette a déjà marché.
 
 - 2026-09-08 (axe C, veille sur L'EN-TÊTE : caterhamcars.com, kartcrg.com, birelart.com,
   oscarpiastri.com, sauber-group.com, studiofreight.com, captures du jour dans le scratchpad) :
