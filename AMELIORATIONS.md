@@ -227,12 +227,16 @@ Actionnables sans contenu de Thomas :
       est déjà exactement ce langage, un rail de bande partenaires en serait la déclinaison locale et rendrait
       lisible le fait que la bande contient 18 logos et pas 6. À doser : la bande défile toute seule, un
       indicateur de position sur un ruban infini peut être plus bavard qu'utile.
-- [ ] **En-tête de section « titre à gauche, signature à droite, filet sous la ligne »** : birelart.com pose
+- [x] **En-tête de section « titre à gauche, signature à droite, filet sous la ligne »** : birelart.com pose
       « MISSION AND VALUES » en très grandes capitales à gauche, la marque en petit et une phrase courte à
       droite, et un filet fin sur toute la largeur juste dessous. Pourquoi c'est TPRacing : le site a déjà la
       signature filet + emblème or en pied de page (reprise des pages de la charte) ; la remonter au niveau
       d'une section serait du vocabulaire maison, pas un emprunt. À n'essayer que sur UNE section, la veille
       du 09/08 ayant montré qu'un ornement posé partout redevient un gabarit.
+      FAIT le 13/09 sur « Ils nous font confiance », la section choisie par la mesure et non par le goût :
+      c'était le SEUL titre de section centré du site (7 h2 sur 8 posés à x=76 sur l'accueil). Pas de texte
+      à droite du titre, faute d'un fait publiable à y mettre : le filet tient seul la fin de ligne, et il
+      passe de lui-même sous le titre quand la place manque (voir Journal).
 
 Observé, gardé comme règle plutôt que comme chantier (voir DA-TPRACING.md) :
 - Le surtitre qui survit à l'élagage du 09/08 a une forme précise, et deux sites la donnent : goodwood.com
@@ -716,6 +720,61 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-09-13 (routine, AXE A : design ; 12/09 était un jour B, 09/09 un jour A, 08/09 un jour C, donc
+  les deux quotas hebdomadaires d'audit et de veille étaient déjà tenus) : **la section la plus
+  stratégique du site était la seule dont le titre n'était pas aligné comme les autres.**
+  T7 monté, `git pull` passé avant toute modification.
+  **(1) Le défaut, trouvé par la mesure et pas par l'impression.** En balayant l'alignement de tous les
+  h2 des pages (script sur `main h2`, `textAlign` calculé plus rect), l'accueil sort net : sept titres
+  de section sur huit posés à x=76, un seul centré, « Ils nous font confiance ». Les deux autres blocs
+  centrés du site ne sont pas des sections mais des bandeaux d'appel (« Envie d'écrire la suite avec
+  nous ? », « La suite s'écrit maintenant »), donc un objet différent qui a le droit d'être centré.
+  L'écart se voyait aussi en mobile 390, où tout le reste de la page est fer à gauche. Autrement dit
+  la seule section qui parle aux partenaires était celle qui ne parlait pas la langue du site.
+  **(2) Le geste, et les variantes REGARDÉES avant de trancher.** Trois maquettes montées par injection
+  CSS dans la page servie en local, capturées en x2 et relues (`shots/mq-*.png` du scratchpad) : titre
+  à gauche avec filet pleine largeur dessous ; filet marine pâle en fin de ligne de titre ; filet or en
+  fin de ligne. Le filet marine à 22 % disparaît sur le blanc cassé : il ne tient pas le vide, il le
+  laisse. Le filet or de 2 px, lui, termine la ligne et reste un TRAIT, jamais une surface (règle du
+  18/08). Retenu, avec sa mécanique : `.trust-ligne` en flex, le h2 en `flex: 0 1 auto` et le filet en
+  `flex: 1 1 196px`, 196 px étant la largeur MESURÉE d'une tuile de la bande qu'il annonce. En dessous
+  de cette place le filet passe tout seul sous le titre, sur toute la largeur, ce qui donne la première
+  maquette : deux compositions justes, une seule règle, et **aucun point de rupture inventé** (bascule
+  mesurée entre 1150 et 1100 px, et le titre ne passe à deux lignes qu'à 640).
+  Réglage attrapé à la mesure : dans un conteneur flex la marge basse du h2 ne fusionne plus avec la
+  marge haute du lead, l'en-tête s'allongeait de 22 px sans que rien ne le demande. Marge portée par le
+  conteneur, écarts revenus à 22 px partout.
+  **(3) Ce que la modification a révélé en cascade.** En mouvement réduit et sans JavaScript, la bande
+  devient un mur statique de 18 logos, et ce mur était `justify-content: center` : il démarrait 35 px à
+  DROITE du titre et laissait un trou de part et d'autre de sa dernière rangée de trois. Tant que le
+  titre était centré, ça se tenait ; avec un titre à gauche, c'était un désalignement franc. Mur passé
+  en `flex-start` dans les trois contextes concernés (mouvement réduit, sans JS, impression) : tuiles à
+  x=76 comme le titre, dernière rangée alignée à gauche. C'est aussi la grille à trous relevée le 10/08
+  chez m-sport.co.uk comme contre-exemple, corrigée chez nous.
+  **(4) Écartés en connaissance de cause.** Un compte de partenaires en fin de ligne de titre (façon
+  « 18 PARTENAIRES ») : la bande mêle les actifs 2026 et d'anciens soutiens, le chiffre serait vrai pour
+  les logos et faux pour la phrase (voir la question posée plus bas). Le rail de position de la veille
+  du 10/08 (baltic-watches.com) : un indicateur de position sur un ruban qui boucle indique une position
+  qui n'existe pas. Le liseré damier en guise de filet : il est déjà la signature des six cartes posées
+  juste au-dessus, à moins d'un écran, et se serait redoublé.
+  **(5) Vérifications.** 5 pages x 8 à 13 largeurs de 320 à 1680 : `scrollWidth == innerWidth` partout,
+  0 image cassée, 0 ratio d'image faux, 0 erreur console, 0 exception. Les seuls « débordements »
+  rapportés par le harnais sont les faux positifs déjà connus (le bandeau incliné, les mots géants
+  outline, les emblèmes de fond : décors volontairement plus larges que la page, rognés par `html` et
+  `body`). En plus du nominal, les quatre états de la section ont été mesurés ET regardés : mouvement
+  réduit, sans JavaScript, impression (le filet y est masqué comme celui de `.signature-charte`, mur
+  aligné), et le rendu au pixel de la jonction titre-filet en zoom x2. Prod : build `built` et marqueur
+  de contenu comparé entre le dépôt et la page en ligne.
+  **(6) QUESTION POUR THOMAS, rien n'a été publié dessus.** La bande porte 18 logos, dans l'ordre
+  « actifs 2026 puis anciens soutiens », mais rien à l'écran ne dit où passe la frontière. Deux options,
+  aucune prise sans toi : (a) on l'écrit (« Partenaires 2026 » puis « Ils nous ont soutenus »), ce qui
+  suppose que tu valides la liste exacte de chaque groupe ; (b) on n'écrit rien et la bande reste un mur
+  de soutiens sans date, ce qui est la situation actuelle et reste parfaitement défendable.
+  Rappel groupé des deux autres questions toujours ouvertes : le profil Facebook `thomas.pne.9` reste
+  en cul-de-sac pour tout visiteur non connecté (7 liens sur le site, question du 06/09), et le feed
+  Instagram de pilote.html est figé depuis le 25/07 faute de Chrome ouvert au passage de la routine
+  (question du 01/09, six échecs).
 
 - 2026-09-12 (routine, AXE B : audit, dimension **CONSOLE ET JS**, la seule de la rotation jamais
   auditée en propre ; 08/09 était un jour C, 09/09 un jour A, aucun run les 10 et 11) : **le bandeau

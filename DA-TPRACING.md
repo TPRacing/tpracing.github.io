@@ -53,6 +53,14 @@ langage étranger, elle ne passe pas.
   bascules de section. **Et l'arête PORTE le damier** (06/09) : un filet or sur transparent
   de 10 px tourné sur la pente, même recette que les bandes de fin de hero. Une bascule de
   section n'est jamais une pente nue : là où le sol change, le drapeau passe.
+- Filet de fin de ligne : le `.filet` en `flex: 1` de `.signature-charte` (pied de page)
+  se remonte au niveau d'un EN-TÊTE DE SECTION, en or de 2 px qui s'éteint vers la droite.
+  Il tient le vide laissé à droite d'un titre fer à gauche, et il ne s'affiche en fin de
+  ligne que s'il atteint une longueur prise dans la section elle-même (13/09 : la largeur
+  d'une tuile de la bande partenaires, 196 px) ; en dessous il passe sous le titre, sur
+  toute la largeur. C'est la règle du 10/08 appliquée : le filet accompagne le mot des deux
+  côtés quand le bloc est centré, à droite seulement quand il est fer à gauche.
+  **Une seule section le porte** : posé partout il redeviendrait un gabarit (leçon du 09/08).
 - Mots géants Korataki en outline derrière les sections (Héritage, En piste, 47, Presse),
   et UN SEUL mot rempli d'or au scroll par page (règle du 03/08 : le principe charte
   « plein contre contour » animé, avec parcimonie).
@@ -175,6 +183,27 @@ Les quatre doivent passer. Sinon : écarté, et on note pourquoi au backlog (les
 motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
+
+- 2026-09-13 (axe A, design ; maquettes comparées dans le scratchpad du jour, `shots/mq-*.png`) :
+  **la cohérence se mesure, elle ne se sent pas.** Le défaut corrigé aujourd'hui ne se voyait pas
+  en regardant une capture isolée : « Ils nous font confiance » était centré, ce qui est une
+  composition parfaitement acceptable en soi. Il n'apparaît qu'en mesurant les HUIT titres de
+  section de l'accueil d'un coup : sept posés à x=76, un seul centré, et c'est celui de la section
+  qui parle aux partenaires. **Règle : avant de juger un bloc, mesurer la famille à laquelle il
+  appartient.** Un bloc n'est pas faux tout seul, il est faux par rapport aux siens.
+  Deuxième enseignement du jour, et il vaut pour tous les prochains chantiers : **un alignement
+  change l'état de ce qui l'entoure.** Aligner le titre à gauche a rendu visible que le mur
+  statique de logos (mouvement réduit, sans JS, impression) était centré et démarrait 35 px à côté
+  de lui, avec un trou de part et d'autre de sa dernière rangée : le centrage du titre couvrait
+  celui du mur. Quand on déplace une pièce, relire ses voisines DANS TOUS LEURS ÉTATS, pas
+  seulement dans l'état nominal.
+  Troisième point, sur la matière : le filet marine à 22 % essayé d'abord ne tient pas le vide sur
+  le blanc cassé, il le laisse. Sur ce fond, seul l'or a assez de densité pour terminer une ligne,
+  et il y reste un TRAIT de 2 px, jamais une surface : la règle du 18/08 n'interdit pas l'or, elle
+  interdit l'aplat. Source de la forme : birelart.com, bloc « MISSION AND VALUES », relevé en veille
+  le 10/08 (titre géant à gauche, petit texte à droite, filet fin dessous) ; la partie « texte à
+  droite » a été écartée faute d'un fait publiable à y mettre, un compte de partenaires mêlant
+  actifs et anciens soutiens aurait été vrai pour les logos et faux pour la phrase.
 
 - 2026-09-12 (axe B, audit CONSOLE ET JS ; captures du bouton essayé puis écarté dans le
   scratchpad du jour) : **on n'ajoute pas une commande à un mouvement dont personne ne veut.**
