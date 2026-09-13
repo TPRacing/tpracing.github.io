@@ -1154,12 +1154,14 @@ nav .nav-cta:focus-visible {
 
   /* Partenaires : bande figée, un seul jeu de logos, réparti sur la page */
   .trust-band { -webkit-mask-image: none !important; mask-image: none !important; }
-  .trust-piste { animation: none !important; width: auto !important; flex-wrap: wrap !important; justify-content: center !important; }
-  .trust-lot { flex-wrap: wrap !important; justify-content: center !important; }
+  .trust-piste { animation: none !important; width: auto !important; flex-wrap: wrap !important; justify-content: flex-start !important; }
+  .trust-lot { flex-wrap: wrap !important; justify-content: flex-start !important; }
   .trust-lot.copie { display: none !important; }
   .trust-tile img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   /* La commande de défilement ne commande rien sur du papier. */
   .trust-cmd { display: none !important; }
+  /* Le filet de fin de ligne est un décor, comme celui de .signature-charte. */
+  .trust-ligne .filet { display: none !important; }
 
   /* Le liseré damier des cartes est un fond : le papier ne l'imprime pas (encre
      économisée). Sans lui la carte s'ouvrirait par le haut, alors la tête de carte

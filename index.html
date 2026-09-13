@@ -470,8 +470,25 @@
          Ordre du défilé = importance : partenaires actifs 2026 d'abord (tri par soutien
          cumulé), puis les anciens soutiens. Source : Suivi_Partenaires_TPRacing. */
     .trust { max-width: 1180px; margin: 66px auto 0; position: relative; z-index: 1; }
-    .trust-tete { text-align: center; margin-bottom: 36px; }
-    .trust-tete p.lead { margin: 12px auto 0; }
+    /* En-tête aligné à gauche comme les 7 autres titres de section du site (mesuré :
+       tous posés à x=76, celui-ci était le seul centré, et c'est la section la plus
+       stratégique). Le vide laissé à droite du titre est tenu par un filet, la pièce
+       exacte de .signature-charte du pied (un .filet en flex:1 qui prend la place
+       restante) remontée au niveau d'une section. Il ne s'affiche en fin de ligne que
+       s'il peut atteindre la largeur d'une tuile de la bande qu'il annonce (196 px) ;
+       sinon il passe de lui-même sous le titre, sur toute la largeur. Aucun point de
+       rupture inventé : la seule valeur est une mesure prise dans la section. */
+    .trust-tete { text-align: left; margin-bottom: 36px; }
+    .trust-ligne { display: flex; flex-wrap: wrap; align-items: baseline; gap: 18px 22px; }
+    /* La marge basse du h2 est portée par le conteneur : dans un flex elle ne
+       fusionne plus avec celle du lead et allongerait l'en-tête de 22 px. */
+    .trust-ligne h2 { flex: 0 1 auto; margin-bottom: 0; }
+    .trust-ligne .filet {
+      flex: 1 1 196px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--or) 0%, rgba(212, 151, 38, .12) 100%);
+    }
+    .trust-tete p.lead { margin: 22px 0 0; max-width: 720px; }
     .trust-band {
       overflow: hidden;
       -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
@@ -530,16 +547,18 @@
     a.trust-tile:hover::after, a.trust-tile:focus-visible::after { width: 100%; }
     @media (max-width: 620px) { .trust-tile { width: 150px; padding: 14px 16px; } .trust-piste, .trust-lot { gap: 12px; } @keyframes defile-partenaires { to { transform: translateX(calc(-50% - 6px)); } } }
     @media (prefers-reduced-motion: reduce) {
-      .trust-piste { animation: none; width: auto; flex-wrap: wrap; justify-content: center; }
-      .trust-lot { flex-wrap: wrap; justify-content: center; }
+      /* Mur statique aligné sur la colonne du titre : centré, il démarrait 35 px à
+         droite de lui et laissait un trou de part et d'autre de sa dernière rangée. */
+      .trust-piste { animation: none; width: auto; flex-wrap: wrap; justify-content: flex-start; }
+      .trust-lot { flex-wrap: wrap; justify-content: flex-start; }
       .trust-lot.copie { display: none; }
       .trust-band { -webkit-mask-image: none; mask-image: none; }
       .trust-cmd { display: none; }
     }
     /* Sans JavaScript, le bouton n'est jamais posé : la bande ne doit alors pas
        partir toute seule. Même mur statique qu'en mouvement réduit. */
-    html:not(.js) .trust-piste { animation: none; width: auto; flex-wrap: wrap; justify-content: center; }
-    html:not(.js) .trust-lot { flex-wrap: wrap; justify-content: center; }
+    html:not(.js) .trust-piste { animation: none; width: auto; flex-wrap: wrap; justify-content: flex-start; }
+    html:not(.js) .trust-lot { flex-wrap: wrap; justify-content: flex-start; }
     html:not(.js) .trust-lot.copie { display: none; }
     html:not(.js) .trust-band { -webkit-mask-image: none; mask-image: none; }
 
@@ -876,7 +895,10 @@
     </div>
     <div class="trust rvl">
       <div class="trust-tete">
-        <h2>Ils nous font confiance</h2>
+        <div class="trust-ligne">
+          <h2>Ils nous font confiance</h2>
+          <span class="filet" aria-hidden="true"></span>
+        </div>
         <p class="lead">Des artisans, des PME et des groupes nous accompagnent depuis les débuts du projet. Et vous, pourquoi pas&nbsp;?</p>
       </div>
       <!-- Bande défilante : pause au survol, au focus clavier et par le bouton posé
