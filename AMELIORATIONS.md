@@ -710,6 +710,56 @@ jour même. Ce qui suit a été trouvé et NON corrigé, faute d'être un défau
   l'animation de tableau de bord. À mesurer un jour de dimension adaptée (le prérendu ne se pilote pas
   facilement en CDP : il faut une vraie navigation depuis une page qui déclare la règle).
 
+### Constats de l'audit PERF du 16/09 (5 pages, poids réel modélisé selon la sélection du navigateur)
+
+Dimension pas auditée en profondeur depuis le 08/08 (5 semaines). Le rig habituel (mesure au
+`getBoundingClientRect` + Resource Timing dans le pane) s'est révélé cassé sur DEUX points nouveaux
+ce jour-là, contournés avant de conclure quoi que ce soit :
+- `window.innerWidth` reste à **0** dans le pane top-level même après un `preview_start` réussi et un
+  chargement complet → un audit de ratio d'image y renvoie des faux positifs énormes (un logo nav
+  mesuré à ratio 5,4 alors qu'il est conforme, `max-width:100%` s'effondrant sur un conteneur sans
+  largeur). Contournement repris du 05/08 : page-cadre `_cadre.html` avec une **iframe à largeur
+  explicite** (1280 puis 390), non commitée, servie depuis le même serveur que le site pour rester
+  same-origin.
+- **Nouveau piège, jamais noté avant** : même dans cette iframe correctement dimensionnée et
+  same-origin, `PerformanceResourceTiming.transferSize` reste bloqué à 300 (une valeur fixe, pas une
+  vraie mesure) et `encodedBodySize` retombe à 0 pour une bonne partie des entrées, alors qu'un
+  `fetch()` direct sur le même fichier dans la même page renvoie le bon `content-length` (vérifié sur
+  `heritage-1980.avif`, 40 771 octets réels contre 0 rapporté par l'API de timing). La Resource Timing
+  API est donc **inutilisable pour peser une page dans ce rig**, y compris en same-origin ; il faut
+  peser autrement.
+- Méthode de repli qui a marché : **réimplémenter en Python la sélection réelle du navigateur** —
+  préférence AVIF, résolution de l'attribut `sizes` (règles `(max-width:Npx) Xvw` évaluées contre le
+  viewport visé), choix du candidat `srcset` juste au-dessus de la cible DPR2, et évaluation des
+  `<source media>` de la balise vidéo — puis lire la taille réelle sur disque de SEULEMENT les fichiers
+  qu'un navigateur téléchargerait à cette largeur. Recoupé avec les en-têtes de PROD (curl
+  `Accept-Encoding: gzip`) pour convertir HTML/CSS en poids de transfert réel (police/image déjà
+  compressées, gzip ne s'y applique pas).
+
+Résultat, RIEN À CORRIGER (site sain) :
+- **Chemin critique (avant tout scroll) à 1280 px** : `index.html` 22,3 Ko de transfert réel (gzip,
+  mesuré en prod contre 83 Ko de source) + CSS 14,1 Ko gzip (partagé, mis en cache dès la 2e page) +
+  3 polices woff2 déjà compressées (35+13+47 Ko) + emblème 3D préchargé (fetchpriority=high) + logos
+  nav/pied. `pilote.html` a bien son image de hero en `fetchpriority="high"` sur l'`<img>` (contrôlé
+  ligne 454, posé le 27/07, toujours en place).
+- **Poids si le visiteur scrolle tout l'accueil (hors vidéo)** : environ 940 Ko à 1280 px et 830 Ko à
+  390 px, réparti sur ~15 photos réelles + le collage origines — cohérent avec les corrections du 08/08
+  et rien de neuf n'a fait grossir ce total depuis (dossier `assets/video/` toujours à 5,4 Mo pour les
+  2 variantes, aucun fichier orphelin trouvé par comparaison HTML/CSS ↔ disque).
+- **Vidéo galerie inchangée** : `sera-roulage.mp4` (3,99 Mo, 720p) et sa variante `-480` (1,49 Mo) —
+  toujours en `preload="none"`, ne se chargent qu'à l'approche ou au clic, comme réglé le 27/07 et
+  08/08.
+- **Ratios d'image (hors `object-fit:cover`) mesurés correctement cette fois (iframe 1280 et 390)** :
+  tous ≤ 2,4× la cible DPR2 (le pire cas, `logo-secondaire-blanc.png` en mobile, est à 2,38 pour un
+  fichier de 12 Ko — écart négligeable, non retouché).
+- **Compression HTTP en prod vérifiée** : `content-encoding: gzip` confirmé sur `index.html` et
+  `styles.css` (curl avec `Accept-Encoding`), donc le chemin critique texte est déjà compressé côté
+  GitHub Pages ; rien à activer, GitHub Pages ne permet de toute façon aucun en-tête personnalisé.
+- **`styles.css` non minifié (1207 lignes commentées)** : écarté volontairement — le gain réel
+  au-dessus du gzip est faible (les commentaires compressent déjà très bien) et minifier casserait le
+  mode de travail de cette routine, qui édite ce fichier à la main chaque jour avec des commentaires
+  qui documentent le pourquoi de chaque règle.
+
 ## Règles (rappel pour la routine)
 
 Charte : marine #1E2635, or #D49726, blanc #F6F7FC, rouge #C13221, vert #3E836E (micro-accent).
@@ -721,6 +771,24 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-09-16 (routine, AXE B : audit, dimension **PERF**, pas auditée en profondeur depuis le 08/08 —
+  5 semaines ; 13/09 était un jour A, 12/09 un jour B, 08/09 un jour C, donc les deux quotas
+  hebdomadaires étaient déjà tenus la semaine passée, mais aucun run n'a eu lieu les 14 et 15/09,
+  et le poids réel des pages restait le point le plus ancien de la rotation) : **rien à corriger,
+  le site reste sain**, mais le rig de mesure a montré une nouvelle faille avant d'y arriver. T7 non
+  monté → clone `--depth 20` dans le scratchpad. Détail complet des constats et de la méthode dans
+  la section « Constats de l'audit PERF du 16/09 » ci-dessus (chemin critique 1280 px ≈ 22,3 Ko HTML
+  gzip + 14,1 Ko CSS gzip + 3 polices déjà compressées, poids scrollé de l'accueil ≈ 940 Ko hors
+  vidéo, vidéo galerie toujours différée à 5,4 Mo pour les 2 variantes, tous les ratios d'image hors
+  `object-fit:cover` ≤ 2,4× la cible DPR2, gzip actif en prod, aucun fichier orphelin). **Piège de
+  rig neuf, à retenir pour toutes les prochaines mesures de poids dans ce pane : la Resource Timing
+  API (`transferSize`/`encodedBodySize`) renvoie des valeurs fausses (300 fixe, ou 0) même dans une
+  iframe same-origin correctement dimensionnée — un `fetch()` direct sur le même fichier donne le
+  bon `content-length`, donc peser une page exige de reconstruire la sélection du navigateur
+  (AVIF/srcset/sizes/DPR2/`<source media>`) en dehors du navigateur plutôt que de lire ses
+  compteurs.** Vérifs : 5 pages à 1280 et 390, curl d'en-têtes sur `index.html` et `styles.css` en
+  prod. Rien poussé (aucune ligne de code changée), seul ce Journal + la section de constats sont
+  commités, conformément à la règle « pas de changement gratuit ».
 - 2026-09-13 (routine, AXE A : design ; 12/09 était un jour B, 09/09 un jour A, 08/09 un jour C, donc
   les deux quotas hebdomadaires d'audit et de veille étaient déjà tenus) : **la section la plus
   stratégique du site était la seule dont le titre n'était pas aligné comme les autres.**
