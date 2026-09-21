@@ -771,6 +771,19 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-09-21 (routine feed Insta, `maj-feed-insta-site`) : **encore aucune lecture possible, blocage
+  inchangé depuis le 24/08.** Les outils du Chrome connecté répondent « not connected » (deux tentatives),
+  et `ps -Ao command` confirme qu'**aucun processus Google Chrome ne tourne sur la machine**, headless ou
+  non (contrairement au 01/09, pas de reliquat headless cette fois). T7 monté, dépôt à jour après
+  `git pull` (rien à faire côté écriture, le blocage est uniquement la lecture d'Instagram). La grille de
+  `pilote.html` reste figée sur les 3 posts posés le 25/07 (DbDIlw9DNT-, Da0czcVDLSv, DavPpbfjFkZ). Aucun
+  fichier du feed touché, seule cette ligne est commitée ; les modifications non validées déjà présentes
+  dans le dépôt (`collage-origines.webp` et les logos WebP de la routine design) n'ont pas été touchées
+  non plus.
+  ❓ EN ATTENTE DE THOMAS, inchangé depuis le 24/08 (deux options posées, aucune tranchée) : la routine a
+  besoin que **Chrome soit ouvert avec le volet Claude connecté (Profil 2)** au moment du déclenchement.
+  Soit ouvrir Chrome avant l'heure de la routine, soit m'autoriser à le lancer moi-même en début de run.
+
 - 2026-09-16 (routine, AXE B : audit, dimension **PERF**, pas auditée en profondeur depuis le 08/08 —
   5 semaines ; 13/09 était un jour A, 12/09 un jour B, 08/09 un jour C, donc les deux quotas
   hebdomadaires étaient déjà tenus la semaine passée, mais aucun run n'a eu lieu les 14 et 15/09,
