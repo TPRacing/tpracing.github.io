@@ -598,7 +598,15 @@
     }
     /* Carte CLAIRE : l'encre reste marine, l'or n'y est que le liseré damier en tête
        et l'anneau au survol. Une flèche or sur blanc tombait à 2,50:1 (19/08). */
-    .presse-carte .lire i, .presse-carte .lire-duo i { font-style: normal; color: var(--marine); }
+    .presse-carte .lire i, .presse-carte .lire-duo i {
+      font-style: normal; color: var(--marine); display: inline-block;
+      transition: transform .2s ease;
+    }
+    /* La flèche glisse dans le sens qu'elle indique au survol (veille 21/09, vu chez
+       astonmartinf1.com : l'accent ne s'allume pas, il avance). Geste du lecteur
+       uniquement, comme le lift des cartes juste au-dessus : pas de garde reduced-motion. */
+    a.presse-carte:hover .lire i, a.presse-carte:focus-visible .lire i,
+    .lire-duo a:hover i, .lire-duo a:focus-visible i { transform: translate(3px, -3px); }
     .presse-carte .lire-duo { margin-top: auto; display: flex; gap: 12px; flex-wrap: wrap; }
     .presse-carte .lire-duo a {
       font-family: var(--f-label);

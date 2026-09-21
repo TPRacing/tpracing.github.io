@@ -184,6 +184,46 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-09-21 (axe C, veille sur LE GESTE : ce qui se passe entre le survol et le clic sur un
+  bouton ou un lien, angle jamais regardé — les veilles précédentes avaient benchmarké des
+  blocs entiers, jamais l'instant du contact) : 5 sites REGARDÉS en CDP (mclaren.com/racing,
+  redbullracing.com, astonmartinf1.com, kosmickart.com ; patek.com et aimeleondore.com
+  capturés mais bloqués par une passerelle région/cookies avant le contenu réel, comptés
+  quand même pour ce qu'ils ont montré). Chaque bouton REGARDÉ en 3 états réels (survol et
+  pression envoyés à Chrome par le protocole DevTools, pas simulés en CSS) avant lecture du
+  code. **Trois mécanismes, trois familles, et aucune ne se ressemble** : (1) Red Bull Racing,
+  pilule pleine « Read Story » : l'aplat FONCE de 9 % au survol (225,50,95 → 205,50,91, mesuré
+  au pixel dans la pilule) et la pression n'ajoute rien de plus — repos et engagé, deux états
+  seulement, un seul geste (foncer), rien d'autre ne bouge. (2) McLaren Racing, bouton biseauté
+  « suivant » du carrousel : l'aplat orange plein devient un CONTOUR au survol (le fond passe au
+  noir transparent, un filet or reste, un petit trait diagonal s'allume au coin) — l'ancien
+  bouton n'aurait de sens que fixe, jamais posé deux fois d'affilée sur l'écran, ce que notre
+  test des 4 questions demande depuis le 09/08. (3) Aston Martin F1, lien texte « Read the
+  preview » (pas de bouton du tout, juste le mot et sa flèche accent) : au repos la flèche est
+  VERTE (couleur de marque), au survol elle devient BLANCHE comme le texte et GLISSE de
+  quelques pixels dans le sens qu'elle indique déjà — l'accent ne s'allume pas, il avance.
+  **Ce que ces trois ont en commun, et qui manquait à la fiche de vocabulaire : un geste de
+  survol n'est pas un habillage, c'est une PHRASE COURTE avec un seul verbe** (foncer, s'ouvrir,
+  avancer), jamais un paquet d'effets empilés. Vu aussi hors du sujet du jour, gardé pour une
+  autre fois : le hero d'astonmartinf1.com traite chaque photo de course comme un TABLEAU PEINT
+  dans un cadre en bois, plusieurs cadres à des échelles et des angles différents formant un mur
+  de galerie (desktop ET mobile, la composition se réordonne mais garde le principe) — aucune
+  photo n'est montrée nue, chacune est un objet posé ; et kosmickart.com confirme un contre-
+  exemple utile, bouton « Leggi » en parallélogramme incliné italique magenta = le gabarit
+  « racing générique » que nos propres carrés biseautés à coins droits évitent depuis le début.
+  **Mécanisme (3) implémenté le jour même** (actionnable sans contenu de Thomas, hors de la
+  section Instagram interdite à cette routine) : la flèche ↗ de `.presse-carte .lire` et
+  `.lire-duo` (section « Ils parlent de nous », accueil) glisse de 3 px en diagonale au survol
+  de sa carte ou d'elle-même, `transition: transform .2s`, geste du lecteur donc pas de garde
+  reduced-motion (même logique que le lift déjà en place sur ces cartes). **Mécanisme (2)
+  délibérément PAS repris sur `.nav-cta` (« Devenir partenaire »)**, testé au brouillon puis
+  écarté : c'est le seul bouton du site où un aplat or plein est AUTORISÉ précisément parce
+  qu'il reste le même partout et toujours (règle du 18/08, chapitre 3) ; le rendre creux au
+  survol retire la seule chose qui le distingue des autres liens — recette juste ailleurs,
+  fausse ici, notée pour ne pas la retenter. Vérifs : 5 pages x 2 largeurs (1280/375), 0
+  débordement, 0 erreur console, capture avant/après du survol regardée (le lift de carte et
+  le glissé de flèche coexistent sans se gêner) ; prod à confirmer après le push du jour.
+
 - 2026-09-13 (axe A, design ; maquettes comparées dans le scratchpad du jour, `shots/mq-*.png`) :
   **la cohérence se mesure, elle ne se sent pas.** Le défaut corrigé aujourd'hui ne se voyait pas
   en regardant une capture isolée : « Ils nous font confiance » était centré, ce qui est une

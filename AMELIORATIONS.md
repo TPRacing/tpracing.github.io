@@ -76,6 +76,50 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       quotidienne à 10 h, via le Chrome connecté ; validée par Thomas le 17/07)
 
 
+### Idées de la veille 21/09 (angle neuf : LE GESTE, ce qui se passe entre le survol et le clic)
+
+Sites REGARDÉS (Chrome headless piloté au protocole DevTools, survol et pression envoyés en
+vrais événements souris, capturés en 3 états — repos / survol / pressé — avant toute lecture
+de code) : **mclaren.com/racing**, **redbullracing.com**, **astonmartinf1.com**,
+**kosmickart.com**, plus **patek.com** et **aimeleondore.com** (bloqués par une passerelle
+région/cookies avant le contenu réel, comptés pour ce qu'ils ont montré quand même). Angle
+choisi parce que 8 jours de veille avaient benchmarké des blocs entiers (en-têtes, clôtures,
+matière photo, cartes) mais jamais l'instant précis où un visiteur interagit avec un bouton.
+
+Ce qui a été VU, mesuré au pixel plutôt que jugé à l'œil :
+- **Red Bull Racing** : la pilule pleine « Read Story » fonce de 9 % au survol (225,50,95 →
+  205,50,91) et la pression n'ajoute rien de plus — deux états, un seul verbe (foncer).
+- **McLaren Racing** : le bouton biseauté « suivant » du carrousel, plein orange au repos,
+  devient un CONTOUR au survol (fond transparent, filet or, petit trait diagonal au coin).
+  L'aplat n'existe que pour UN écran à la fois, jamais répété.
+- **Aston Martin F1** : lien texte, pas de bouton. La flèche accent est verte (couleur de
+  marque) au repos, blanche comme le texte au survol, et elle GLISSE de quelques pixels dans
+  le sens qu'elle indique déjà. L'accent ne s'allume pas, il avance.
+- Hors sujet du jour, noté pour une veille future : le hero d'astonmartinf1.com traite chaque
+  photo de course comme un TABLEAU PEINT dans un cadre en bois, plusieurs cadres à des échelles
+  et des angles différents formant un mur de galerie, desktop et mobile.
+- kosmickart.com en contre-exemple : bouton « Leggi » parallélogramme incliné italique
+  magenta, exactement le gabarit « racing générique » que nos carrés biseautés à coins droits
+  évitent.
+
+Retenu et FAIT le jour même (voir Journal du 21/09) :
+- [x] La flèche ↗ des cartes de presse (`.presse-carte .lire`, `.lire-duo`, section « Ils
+      parlent de nous » de l'accueil) glisse de 3 px en diagonale au survol, dans le sens
+      qu'elle indique déjà — mécanisme d'Aston Martin, actionnable sans contenu de Thomas,
+      hors de la section Instagram interdite à cette routine.
+
+Écarté avec motif, à ne pas retenter :
+- Le mécanisme McLaren (surface pleine → contour au survol) appliqué à `nav .nav-cta`
+  (« Devenir partenaire ») : c'est le seul bouton du site où un aplat or plein est AUTORISÉ en
+  permanence (règle du 18/08) ; le vider au survol retire la seule chose qui le distingue des
+  autres liens. La recette est juste ailleurs (un carrousel, un écran à la fois), fausse ici.
+
+Reporté au backlog, non implémenté aujourd'hui (nécessite un jour de design à froid pour
+choisir où) :
+- [ ] Étendre le glissé de flèche du 21/09 aux autres flèches externes du site si l'inventaire
+      en révèle d'autres hors de la zone interdite (à vérifier : liens LinkedIn/email de
+      contact.html, CTA partenaires).
+
 ### Idées du benchmark 18/07 (fan-out 4 agents : équipes F1, sites de pilotes, Awwwards, conversion sponsors)
 - [x] Transitions de page en volet diagonal (View Transitions cross-document, logo morphé entre pages)
 - [x] 404 « lights out » : test de réaction façon départ F1 (5 feux, jump start, verdicts)
@@ -770,6 +814,31 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-09-21 (routine, AXE C : veille par captures, angle neuf **LE GESTE** — ce qui se passe
+  entre le survol et le clic ; dernier jour de veille le 08/09, 13 jours d'écart, quota
+  hebdomadaire de veille en retard ; dernier axe B le 16/09, donc pas de répétition d'axe) :
+  T7 monté, `git pull` avant modif. Détail complet (sites, méthode, mesures) dans la section
+  « Idées de la veille 21/09 » du backlog ci-dessus. Résumé : 3 mécanismes de survol/clic
+  REGARDÉS en 3 états réels (Chrome headless piloté en CDP, souris envoyée en vrais événements,
+  pas de simulation CSS) sur mclaren.com/racing (surface → contour), redbullracing.com (aplat
+  qui fonce de 9 %), astonmartinf1.com (flèche qui neutralise sa couleur et glisse dans son
+  sens) ; kosmickart.com en contre-exemple (bouton parallélogramme italique = gabarit racing
+  générique) ; patek.com et aimeleondore.com bloqués par une passerelle région/cookies avant le
+  contenu réel. **IMPLÉMENTÉ le jour même** : la flèche ↗ de `.presse-carte .lire` et
+  `.lire-duo` (section « Ils parlent de nous », accueil, hors de la zone Instagram interdite à
+  cette routine) glisse de 3 px en diagonale au survol de sa carte ou d'elle-même — reprise du
+  mécanisme Aston Martin, `transition: transform .2s ease`, geste du lecteur donc pas de garde
+  reduced-motion (même logique que le lift de carte déjà en place). **Écarté avec motif** : le
+  mécanisme McLaren (surface pleine → contour au survol) sur `nav .nav-cta` — c'est le seul
+  bouton du site où un aplat or plein est un choix permanent assumé (règle du 18/08), le vider
+  au survol lui retirerait ce qui le distingue des autres liens. Vérifs : 5 pages x 2 largeurs
+  (1280/375) via CDP, 0 débordement, 0 erreur console (Runtime.exceptionThrown + Log niveau
+  error surveillés) sur les 5 pages ; hover/pressé capturés et comparés au pixel (delta RGB
+  mesuré chez Red Bull, bbox de diff chez McLaren et Aston Martin) avant d'écrire une ligne de
+  DA. DA-TPRACING.md enrichi d'une entrée datée. Seul index.html a changé ; les fichiers non
+  validés déjà présents dans l'arbre (`collage-origines.webp`, logos WebP) n'ont pas été
+  touchés, laissés en attente de Thomas comme les jours précédents.
 
 - 2026-09-21 (routine feed Insta, `maj-feed-insta-site`) : **encore aucune lecture possible, blocage
   inchangé depuis le 24/08.** Les outils du Chrome connecté répondent « not connected » (deux tentatives),
