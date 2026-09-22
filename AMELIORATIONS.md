@@ -584,6 +584,24 @@ jota.sport, qui ne répond pas non plus depuis ce poste) ; **aesop.com/fr** sert
 (défilement piloté en JS, `scrollY` reste à 0 et les trois captures sortent identiques) ; **sauber-group.com**
 garde son panneau Usercentrics malgré la neutralisation et assombrit toute la page.
 
+### Chantier du 22/09 bis (hors routine, demande de Thomas) : la matière photographique
+
+- [x] **Étalonnage maison des dix photos de reportage** (galerie, cartes disciplines, bande
+      partenaires) depuis les originaux pleine résolution retrouvés sur le T7. Recette complète
+      au journal de DA du 22/09. Le site en ressort 30 Ko plus léger.
+- [ ] **QUESTION THOMAS : trois photos n'ont pas d'original retrouvé sur le T7**
+      (`galerie-leader` « en tête de peloton, Lyon 2020 », `karting-pluie` de la carte Karting,
+      `pilote-simu` de la carte Simracing). Elles ont été étalonnées depuis le fichier publié,
+      donc avec une génération de compression de plus que les sept autres. Si les originaux
+      existent quelque part (iCloud, disque, téléphone), les remettre sur le T7 et je les
+      reprends proprement.
+- [ ] Écarté avec motif : pousser l'étalonnage plus loin (force 1,0 et au-delà). Testé et
+      regardé en planche : au-delà de 0,8 la photo de pluie perd son gris de pluie, et le
+      rendu commence à se voir. Une photo de reportage reste une photo de reportage.
+- [ ] Non traité, hors périmètre de ce chantier : les trois photos d'héritage (publiées brutes
+      par décision du 10/08), le teaser pilote et le collage des origines (montages de marque
+      déjà duotonés), les logos partenaires.
+
 ### Chantier du 22/09 (axe A) : la famille des cartes claires
 
 - [x] **contact.html portait encore la barre or pleine en tête de ses 3 cartes**, l'interdit du
@@ -833,6 +851,35 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-09-22 bis (HORS ROUTINE, demande directe de Thomas en session : « améliore le site
+  sachant que je t'ai lié à Figma, tu peux allier la suite Adobe, Figma pour faire un site
+  encore plus design ». Chantier choisi avec lui parmi quatre propositions : LA MATIÈRE
+  PHOTOGRAPHIQUE. Commit 4121fc9) : les dix photos de reportage du site étaient publiées
+  telles que sorties du boîtier, de dix journées de course différentes, donc dix rendus qui
+  ne faisaient pas famille. Mesure AVANT tout geste (luminance, 5e centile, saturation,
+  couleur des ombres, part de vert vif) : deux intruses, `galerie-pluie` (délavée, aucun
+  noir, saturation 9,1 % contre 23 pour ses voisines) et `feed-racing` (aucune haute lumière,
+  saturation 50,9 %). Geste : un étalonnage maison commun, détaillé au journal de DA, qui
+  ramène les dix à une même cible sans changer leur RÉGIME (pas de duotone, le kart garde ses
+  couleurs ; héritage, teaser et collage non touchés, règle du 10/08 intacte). Travail fait
+  sur les ORIGINAUX pleine résolution, pas sur les webp publiés : les sources ont été
+  retrouvées sur le T7 par signature d'image (1035 photos indexées, 7 trouvées avec une
+  erreur quasi nulle) et les cadrages d'origine reconstruits par corrélation (erreur ≤ 0,007),
+  ce qui évite une génération de compression. Résultat mesuré : le site est **30 Ko plus
+  léger** qu'avant (950 Ko d'AVIF contre 980) avec des images plus détaillées. Vérifs : rendu
+  REGARDÉ à chaque étape (planche avant/après des 7 photos de galerie, zooms à 100 % sur le
+  casque et sur le carénage pour les halos, planche des 3 cartes disciplines), 4 mesures de
+  page (accueil et pilote en 390 et 1280) = 0 image cassée, 0 ratio faux, 0 erreur console,
+  `scrollWidth == innerWidth`. **Trois défauts attrapés en cours de route et corrigés** :
+  la vibrance faisait virer au magenta le bruit des zones sombres (combinaison du pilote) ;
+  le normalisateur de niveaux détruisait la photo studio du simulateur en étirant son fond
+  bleu nuit vers le gris ; le calmage du vert devait se régler par image et non globalement.
+  **Sur la demande d'outils : les tools Adobe refusent toute url externe** (« URL domain not
+  whitelisted » sur tpracing.github.io) et ne peuvent pas lire un chemin local, donc le
+  pipeline a été écrit en PIL/numpy. Figma répond (compte de Thomas, plan starter, siège
+  View) mais n'avait rien à apporter à ce chantier-là. Question ouverte pour Thomas au
+  paragraphe des questions ci-dessous.
 
 - 2026-09-22 (routine, AXE A : améliorer, **la famille des cartes claires**, une page entière
   reprise ; axe C hier, axe B le 16/09, donc pas de répétition) : T7 monté, `git pull` avant

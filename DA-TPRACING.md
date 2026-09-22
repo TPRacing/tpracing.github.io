@@ -84,7 +84,16 @@ langage étranger, elle ne passe pas.
 - Chiffres outline or (bande de chiffres, 404 géant).
 - Grain argentique global (SVG feTurbulence) + pointillés carbone sur les sections marine.
 - Photos : VRAIES photos de Thomas et de la famille, en NOUVEAUX fichiers, originaux jamais
-  modifiés. **Deux régimes, à ne pas confondre** (précisé le 10/08 après mesure) : les photos
+  modifiés. **Et depuis le 22/09, un ÉTALONNAGE MAISON commun aux photos de reportage**
+  (recette complète au journal de DA du 22/09) : point noir et point blanc ramenés à une
+  cible commune avec un gain bridé à 1,35, courbe en S douce, ombres tirées de 8,5 % vers le
+  marine de la charte, verts d'herbe désaturés de 34 %, vibrance réservée aux tons moyens et
+  hauts. Le régime ne change pas (ce n'est pas un duotone, le kart garde ses couleurs) :
+  l'étalonnage fait FAMILLE là où dix photos de dix journées différentes ne se ressemblaient
+  pas. La photo la plus éloignée de la famille se repère à la MESURE, pas à l'œil : sur le
+  site, `galerie-pluie` sortait à 9,1 % de saturation contre 23 pour ses voisines et n'avait
+  aucun noir (5e centile à 40/255), elle lisait délavée sans que personne ne l'ait remarqué
+  en deux mois. **Deux régimes, à ne pas confondre** (précisé le 10/08 après mesure) : les photos
   de REPORTAGE publiées dans les grilles de contenu (galerie, cartes disciplines, partenaires
   en piste) restent quasi naturelles, la couleur du kart et de la piste est de la matière ;
   le duotone split-tone marine/or (+ grain + vignette) est réservé aux MONTAGES DE MARQUE
@@ -200,6 +209,43 @@ Les quatre doivent passer. Sinon : écarté, et on note pourquoi au backlog (les
 motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
+
+- 2026-09-22 bis (demande directe de Thomas : « allier Figma, Adobe pour un site encore plus
+  design » ; chantier choisi ensemble = LA MATIÈRE PHOTOGRAPHIQUE) : **ce qui manquait au site
+  n'était pas un effet de plus, c'était un étalonnage.** Dix photos de reportage publiées
+  telles que sorties du boîtier de dix journées différentes, donc dix rendus : mesure faite
+  avant tout geste (luminance moyenne, 5e centile, saturation, couleur des ombres, part de
+  vert vif), et deux intruses en sont sorties, `galerie-pluie` (lum 146, saturation 9,1 %,
+  aucun noir : ombres à 53/48/47) et `feed-racing` (95e centile à 140, donc aucune haute
+  lumière, saturation 50,9 %). **Recette du look TPRacing, à reprendre telle quelle** :
+  (1) niveaux ramenés à une cible commune, noir 0,012 et blanc 0,965, **gain BRIDÉ à 1,35** ;
+  (2) courbe en S de 0,16 appliquée en LUMIÈRE LINÉAIRE, pas sur les octets sRGB, sinon les
+  couleurs virent ; (3) split-tone léger, ombres tirées de 8,5 % vers le marine #1E2635, hautes
+  lumières laissées neutres ; (4) verts d'herbe (teinte 52 à 108, saturation > 55) désaturés de
+  34 %, masque flouté de 2 px pour ne pas découper ; (5) vibrance de 30 % pondérée par
+  (1 − saturation) ; (6) masque de netteté après redimensionnement, rayon 1,1 et 88 %.
+  **Trois pièges payés en essais, à ne pas repayer.** (a) La vibrance appliquée sans porte de
+  luminance fait virer au MAGENTA le bruit chroma des zones sombres : la combinaison noire du
+  pilote devenait rouge criard. Remède : porte `clip((lum − 0,09) / 0,22)`, la vibrance ne
+  touche plus les basses lumières. (b) Un normalisateur de niveaux non bridé DÉTRUIT une image
+  volontairement sombre : sur la photo studio du simulateur, il étirait le fond bleu nuit vers
+  le gris clair et retirait à l'image ce qui la tenait. Une image low-key n'a pas de hautes
+  lumières à aller chercher ; d'où le gain plafonné, et 1,06 seulement pour cette photo-là.
+  (c) Le calmage du vert se règle PAR IMAGE, pas globalement : à 1,0 la monoplace de Magny-Cours
+  restait noyée dans l'herbe, à 2,0 le fond devenait kaki et sentait le filtre, 1,5 est le point
+  où la voiture se détache sans que le pré cesse d'être un pré. **Et la contrainte qui tient
+  tout : le régime de la photo ne change pas.** La règle du 10/08 (reportage quasi naturel,
+  duotone réservé aux montages de marque, héritage publié brut) n'a pas bougé d'un pixel :
+  les trois photos d'héritage, le teaser pilote et le collage des origines n'ont pas été
+  touchés. Un étalonnage rapproche des photos les unes des autres, il ne les repeint pas.
+  **Note d'outillage sur la demande initiale : les tools Adobe n'acceptent AUCUNE url externe**
+  (« URL domain not whitelisted » sur tpracing.github.io), seulement leurs propres assets, et
+  l'upload programmatique ne marche pas depuis un chemin local. Le travail s'est donc fait sur
+  un pipeline maison en PIL/numpy, appliqué aux ORIGINAUX pleine résolution retrouvés sur le
+  T7 par signature d'image (1035 photos indexées) puis recadrés automatiquement par corrélation
+  (erreur ≤ 0,007 sur 7 des 10). Gain caché de cette voie : repartir des originaux au lieu des
+  webp publiés évite une génération de compression, et le site en ressort **30 Ko plus léger**
+  qu'avant malgré des images plus détaillées.
 
 - 2026-09-22 (axe A, la famille des CARTES CLAIRES : contact.html reprise de sa tête à sa ligne
   d'action) : journée ouverte en REGARDANT les 5 pages en CDP sans objectif préalable, et les
