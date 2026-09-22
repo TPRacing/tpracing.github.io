@@ -124,7 +124,14 @@ langage étranger, elle ne passe pas.
   retrouver au pied : avant tout `display: none` responsive sur un lien, vérifier au `grep` que sa
   cible garde au moins un lien entrant à cette largeur-là. Vu chez Caterham, Birel ART et CRG, qui
   escamotent mais ne suppriment jamais.
-- Emblème TP : en 3D or au hero, en contour géant filigrane dans les fonds de section, en petit
+- **Le diptyque des générations** (22/09, hero de l'accueil, validé par Thomas sur maquette
+  Figma) : Patrice en 1987 et Thomas en 2020, DE FACE, dans le même cadrage, détourés et posés
+  sur le marine, à la même hauteur, les deux karts se touchant au centre. C'est la seule
+  symétrie autorisée du site, parce qu'elle a un sens : deux générations, un même geste. Les
+  légendes se font face dans le vide entre les deux casques. Sur téléphone il devient une
+  frise verticale, 1987 en haut, 2020 en bas, séparés par un liseré damier. **Aucune autre
+  marque ne peut poser cette image**, c'est ce qui la rend TPRacing et pas « racing ».
+- Emblème TP : dans l'intro (il atterrit désormais sur le logo de la nav), en contour géant filigrane dans les fonds de section, en petit
   format or au bout du filet de la signature de bas de page. **Une seule occurrence du monogramme
   par coup d'œil** (règle du 04/09) : quand la marque se répète dans le même écran, elle ne signe
   plus, elle se redouble. La signature de charte se pose donc là où le logo n'est pas, et
@@ -209,6 +216,34 @@ Les quatre doivent passer. Sinon : écarté, et on note pourquoi au backlog (les
 motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
+
+- 2026-09-22 ter (demande directe de Thomas : « le site paraît encore très IA, tu ne te sers pas
+  de Figma ni des montages Adobe ». Chantier : LE HERO DE L'ACCUEIL, maquette d'abord) :
+  **diagnostic honnête, le défaut n'était pas dans les détails mais dans le squelette.** Le hero
+  était la mise en page par défaut d'un site généré (titre à gauche, logo 3D sur un fond vide à
+  droite) et l'accueil empile quatre rangées de trois cartes identiques, l'interdit n°1 de ce
+  document. Des semaines de liserés et de pastilles ne pouvaient pas rattraper ça. **Méthode
+  changée : montage réel, maquettes Figma, choix de Thomas, puis intégration.** Les archives ont
+  donné le concept sans rien inventer : Patrice en 1987 au Championnat de France, kart n°19, DE
+  FACE, et Thomas en 2020 à Château-Gaillard, kart n°20, DE FACE, même cadrage à 33 ans d'écart.
+  C'est littéralement « le volant se transmet ». Deux directions maquettées dans Figma : A, les
+  deux karts détourés en diptyque sur le marine ; B, les deux photos entières coupées par l'arête
+  diagonale damier. Thomas a retenu A. **Règles qui en sortent.** (1) Quand l'image dit ce que
+  disait le paragraphe, on retire le paragraphe : la phrase « Patrice a couru dans les années 80,
+  Thomas reprend la piste » est devenue deux photos et deux légendes. (2) Un seul aplat or plein
+  par écran : l'appel du hero passe en CONTOUR or (recette des boutons « Partie 1 / Partie 2 »),
+  l'aplat reste au bouton de la nav. (3) L'élément trop grand est le titre, 6,78vw, calculé sur
+  l'encre de « SE TRANSMET » (13,29 fois la taille de police interlettrage compris). (4) Les
+  légendes se placent là où il y a du vide, mesuré sur les détourages : entre les deux casques,
+  face à face, jusqu'à 790 px, puis au-dessus des karts. (5) Un détourage recadré dans une gerbe
+  d'eau ne se coupe pas net, il s'éteint (masque en dégradé sur 9 %). **Pièges payés.** Les
+  polices de la charte n'existent pas dans Figma : titres passés en tracés vectoriels depuis les
+  vrais TTF. Photoshop, lancé par script, s'est bloqué sur « Disque de travail plein » ; le
+  détourage s'est fait avec le moteur natif d'Apple, sur les originaux pleine définition. Une
+  apparition `.rvl` translate son élément, et une transformation fait de l'élément transformé la
+  référence de ses enfants en position absolue : avec des figures vides, les karts auraient
+  sauté de toute leur hauteur pendant 0,8 s. Invisible sur une capture prise après l'animation,
+  attrapé à la relecture du CSS puis prouvé par la mesure.
 
 - 2026-09-22 bis (demande directe de Thomas : « allier Figma, Adobe pour un site encore plus
   design » ; chantier choisi ensemble = LA MATIÈRE PHOTOGRAPHIQUE) : **ce qui manquait au site

@@ -852,6 +852,25 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-09-22 ter (HORS ROUTINE, demande directe de Thomas : « le site paraît encore très IA »,
+  commit 647216d) : **nouveau hero de l'accueil, « La transmission »**, maquetté dans Figma
+  (fichier « TPRacing - Refonte design du site », https://www.figma.com/design/84rsHQUMl4rHmUk8cIDsPh ,
+  page Hero accueil, 2 directions + mobile + le hero d'avant pour comparer), direction A validée
+  par Thomas avant toute ligne de code. Patrice 1987 (Championnat de France, kart n°19) et Thomas
+  2020 (Château-Gaillard, kart n°20), de face, détourés sur les originaux pleine définition,
+  posés en diptyque sur le marine ; titre à 6,78vw ; appel en contour or en fin de première
+  ligne dès 1240 px ; frise verticale sur téléphone. Le paragraphe et l'emblème 3D quittent le
+  hero ; l'emblème reste dans l'intro, qui atterrit maintenant sur le logo de la nav. Poids :
+  165 Ko d'AVIF pour les deux karts en desktop (contre 21 Ko pour l'emblème), justifié, c'est
+  l'image de marque. Vérifs : 13 largeurs de 320 à 1680 = 0 débordement, 0 image cassée, 0 ratio
+  faux, 0 texte rogné, 0 chevauchement entre titre, actions et légendes (mesuré sur l'ENCRE des
+  lignes, pas sur leur boîte), 0 erreur console ; 4 autres pages en 390 et 1280 ; sans JS,
+  mouvement réduit et impression regardés en capture ; intro filmée image par image à 1680.
+  Défauts corrigés en cours de route : lien collé à « TRANSMET » à 1280, légende 2020 sur le
+  casque, légendes qui se chevauchaient entre 601 et 789 px, coupure nette de la gerbe d'eau sur
+  mobile, et le saut des karts pendant leur apparition (voir la DA). **Prochaine étape proposée à
+  Thomas : les quatre rangées de trois cartes identiques de l'accueil**, même méthode.
+
 - 2026-09-22 bis (HORS ROUTINE, demande directe de Thomas en session : « améliore le site
   sachant que je t'ai lié à Figma, tu peux allier la suite Adobe, Figma pour faire un site
   encore plus design ». Chantier choisi avec lui parmi quatre propositions : LA MATIÈRE
