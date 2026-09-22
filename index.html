@@ -145,46 +145,135 @@
 
   <style>
     /* ---------- Hero accueil : page de charte vivante ---------- */
+    /* ---------- Hero « La transmission » (22/09, direction A validée par Thomas) ----------
+       Le hero était la mise en page par défaut d'un site généré : titre à gauche, logo 3D
+       sur fond vide à droite. Il montre maintenant ce que disait le paragraphe : Patrice en
+       1987 et Thomas en 2020, de face, dans le même cadrage, à 33 ans d'écart. Détourages
+       réels (moteur « détacher le sujet » d'Apple, sur les originaux pleine définition),
+       archive laissée brute, photo récente étalonnée au look maison. Maquette source :
+       Figma « TPRacing - Refonte design du site », page Hero accueil. */
     .hero {
+      --hk: min(56svh, 36vw);        /* hauteur commune des deux karts */
+      --marge: max(20px, 4.86vw);    /* 70 px à 1440, la marge de la maquette */
       position: relative;
-      min-height: 92vh;
-      display: flex;
-      align-items: center;
+      min-height: clamp(620px, min(100svh, 62vw), 1100px);
       overflow: hidden;
       color: var(--blanc);
       background:
-        radial-gradient(ellipse 62% 52% at 74% 44%, rgba(212, 151, 38, .16), transparent 62%),
         radial-gradient(rgba(246, 247, 252, .035) 1px, transparent 1.5px),
         linear-gradient(180deg, #070B1D 0%, #0d1526 68%, var(--marine) 100%);
-      background-size: auto, 26px 26px, auto;
+      background-size: 26px 26px, auto;
     }
-    .hero .grille {
-      position: relative;
-      z-index: 1;
-      max-width: 1180px;
-      margin: 0 auto;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1.22fr .78fr;
-      align-items: center;
-      gap: clamp(20px, 4vw, 60px);
-      padding: 150px 6% 110px;
-    }
+    .hero-tete { position: relative; z-index: 3; padding: max(104px, 7.8vw) var(--marge) 0; }
     .hero h1 {
       color: var(--blanc);
-      /* 2 lignes maîtrisées : la ligne la plus large (« SE TRANSMET ») fait ~13,3× la taille de police */
-      font-size: min(3.25vw, 2.5rem);
-      line-height: 1.06;
+      /* « SE TRANSMET » mesure 13,29 fois la taille de police (interlettrage compris) :
+         6,78vw la fait tenir entre les deux marges. L'élément volontairement trop grand. */
+      font-size: min(6.78vw, 7.2rem);
+      line-height: 1.07;
     }
+    .hero h1 .l1, .hero h1 .l2 { display: block; }
     .hero h1 .or { color: var(--or); }
-    .hero .lead { color: #c7cddb; margin: 24px 0 38px; max-width: 560px; }
-    .hero .btn-rangee { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero .visuel { display: flex; justify-content: center; perspective: 900px; }
-    @media (max-width: 860px) {
-      .hero .grille { grid-template-columns: 1fr; padding-top: 120px; }
-      .hero .visuel { order: -1; }
-      .embleme-3d { width: min(64vw, 340px); }
-      .hero h1 { font-size: min(6.2vw, 2.5rem); }
+    .hero-actions { display: flex; align-items: center; gap: 14px 28px; flex-wrap: wrap; margin-top: 30px; }
+    /* Contour or, recette des boutons « Partie 1 / Partie 2 » : l'aplat or plein reste
+       réservé au bouton de la nav, seul aplat or autorisé (règle du 18/08). */
+    .btn-contour-or { color: var(--or); background: transparent; box-shadow: inset 0 0 0 1.5px var(--or); }
+    .btn-contour-or:hover, .btn-contour-or:focus-visible { background: rgba(212, 151, 38, .12); color: var(--or-clair); }
+    .lien-fleche {
+      font-family: var(--f-label); font-weight: 700; font-size: 1rem;
+      letter-spacing: .14em; text-transform: uppercase; text-decoration: none;
+      color: var(--blanc); display: inline-flex; align-items: center; gap: 10px;
+    }
+    .lien-fleche i { font-style: normal; color: var(--or); transition: transform .2s ease; }
+    .lien-fleche:hover i, .lien-fleche:focus-visible i { transform: translate(3px, -3px); }
+    /* À partir de 1240 px, l'action prend le vide en fin de première ligne. Mesure, pas
+       palier rond : « LE VOLANT » finit à 76,1 % de la largeur, le bloc mesure 214 px,
+       il reste 22 px d'air à 1240. Le bloc finit avant le haut de « TRANSMET ». */
+    @media (min-width: 1240px) {
+      .hero-actions {
+        position: absolute; right: var(--marge); top: calc(max(104px, 7.8vw) + 4px);
+        width: 214px; margin: 0; display: block;
+      }
+      /* le lien se range sous la fin de « TRANSMET », dans le vide avant les karts :
+         empilé sous le bouton, il n'avait que 3 px d'air avec la seconde ligne à 1280 */
+      .hero-actions .lien-fleche {
+        position: absolute; right: 0; white-space: nowrap;
+        top: calc(min(6.78vw, 7.2rem) * 2.14 + 12px);
+      }
+    }
+    .diptyque { position: absolute; left: 0; right: 0; bottom: 12px; height: var(--hk); margin: 0; z-index: 2; }
+    /* chaque figure couvre tout le diptyque : l'apparition (.rvl) les translate, et une
+       transformation fait de l'élément transformé la référence de ses enfants en position
+       absolue. Figure vide, les karts sautaient de toute leur hauteur pendant 0,8 s. */
+    .epoque { margin: 0; position: absolute; inset: 0; }
+    .epoque img { position: absolute; bottom: 0; height: 100%; width: auto; max-width: none; }
+    /* les deux karts se touchent au centre : le passage de témoin */
+    .e1987 img { right: 50%; }
+    .e2020 img {
+      left: calc(50% - var(--hk) * .04); z-index: 1;
+      /* le détourage est recadré dans la gerbe d'eau : on l'éteint au lieu de la couper net */
+      -webkit-mask-image: linear-gradient(to left, transparent, #000 9%);
+      mask-image: linear-gradient(to left, transparent, #000 9%);
+    }
+    /* Les deux légendes se font face dans le vide entre les deux casques : le casque de
+       Patrice finit à 50 % - 0,675 hk, celui de Thomas commence à 50 % + 0,752 hk (mesurés
+       sur les détourages). Posées au-dessus des karts, elles touchaient le casque. */
+    .epoque figcaption {
+      position: absolute; top: 10px; z-index: 2; padding-left: 26px;
+      font-family: var(--f-label); font-weight: 700; text-transform: uppercase;
+      letter-spacing: .13em; line-height: 1.25;
+    }
+    /* pastille damier : même géométrie que celle des kickers */
+    .epoque figcaption::before {
+      content: ""; position: absolute; left: 0; top: .32em; width: 15px; height: 15px;
+      background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%);
+      background-size: 7.5px 7.5px;
+    }
+    .e1987 figcaption { left: calc(50% - var(--hk) * .675 + 18px); }
+    .e2020 figcaption { right: calc(50% - var(--hk) * .752 + 18px); text-align: right; padding: 0 26px 0 0; }
+    .e2020 figcaption::before { left: auto; right: 0; }
+    .epoque .an { display: block; color: var(--or); font-size: 1.5rem; }
+    .epoque .nom { display: block; color: var(--blanc); font-size: 1.06rem; }
+    .epoque .lieu { display: block; color: #aeb6c8; font-size: .94rem; }
+    .passage { display: none; }
+    /* Tablette et petit portable : le titre passe sur la largeur et l'action dessous, il
+       n'y a plus la hauteur pour poser le diptyque en fond de hero, il se range dessous. */
+    @media (min-width: 601px) and (max-width: 1239px) {
+      .hero { min-height: 0; padding-bottom: 12px; }
+      .diptyque { position: relative; bottom: auto; margin-top: 44px; }
+    }
+    /* Sous 790 px, le vide entre les deux casques (1,43 hk moins l'air) ne loge plus deux
+       légendes de 175 px : elles remontent au-dessus des karts, chacune de son côté. */
+    @media (min-width: 601px) and (max-width: 789px) {
+      .diptyque { margin-top: 118px; }
+      .epoque figcaption { top: -86px; }
+      .e1987 figcaption { left: var(--marge); }
+      .e2020 figcaption { right: var(--marge); }
+    }
+    /* Téléphone : le diptyque devient une frise, 1987 en haut, 2020 en bas, séparés
+       par un liseré damier. Deux karts côte à côte y tiendraient à 130 px de haut. */
+    @media (max-width: 600px) {
+      .hero { min-height: 0; padding-bottom: 12px; }
+      .hero-tete { padding-top: 104px; }
+      .hero h1 { font-size: calc((100vw - 40px) / 10.6); }
+      .hero h1 .or { display: block; }
+      .diptyque { position: relative; bottom: auto; height: auto; margin-top: 34px; }
+      .epoque { position: relative; inset: auto; }
+      .e1987 { height: 212px; }
+      .e2020 { height: 226px; margin-top: 22px; }
+      .e1987 img { right: -14px; }
+      .e2020 img { left: -40px; }
+      .epoque figcaption { top: 6px; }
+      .e1987 figcaption { left: 20px; }
+      .e2020 figcaption { right: 20px; }
+      .epoque .an { font-size: 1.25rem; }
+      .epoque .nom { font-size: .92rem; }
+      .epoque .lieu { font-size: .8rem; }
+      .passage {
+        display: block; height: 6px; margin-top: 18px;
+        background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%);
+        background-size: 6px 6px;
+      }
     }
     .hero .liseret {
       position: absolute; left: 0; right: 0; bottom: 0; height: 12px; z-index: 2;
@@ -744,20 +833,30 @@
 
   <!-- ===== HERO ===== -->
   <header class="hero">
-    <div class="grille">
-      <div class="txt">
-        <p class="kicker rvl">Association de sport automobile</p>
-        <!-- ✏️ MODIFIABLE : accroche principale -->
-        <h1 class="rvl" data-d="1"><span class="hl">Le volant</span><br><span class="hl">se <span class="or">transmet</span></span></h1>
-        <p class="lead rvl" data-d="2">Patrice a couru dans les années 80. Thomas reprend la piste. TPRacing construit la suite, avec un cap assumé : la course automobile en Caterham.</p>
-        <div class="btn-rangee rvl" data-d="3">
-          <a class="btn btn-or" href="#partenaires">Devenir partenaire</a>
-          <a class="btn btn-blanc" href="pilote.html">Découvrir le pilote</a>
-        </div>
+    <div class="hero-tete">
+      <!-- ✏️ MODIFIABLE : accroche principale -->
+      <h1 class="rvl" data-d="1"><span class="l1">Le volant</span> <span class="l2">se <span class="or">transmet</span></span></h1>
+      <div class="hero-actions rvl" data-d="2">
+        <a class="btn btn-contour-or" href="#partenaires">Devenir partenaire</a>
+        <a class="lien-fleche" href="pilote.html">Découvrir le pilote <i aria-hidden="true">↗</i></a>
       </div>
-      <div class="visuel rvl" data-d="2">
-        <img class="embleme-3d tilt3d" src="assets/img/embleme-3d.webp" alt="Emblème TP de TPRacing en relief, bleu marine avec l'élan doré en accent" width="780" height="553">
-      </div>
+    </div>
+    <div class="diptyque">
+      <figure class="epoque e1987 rvl" data-d="2">
+        <picture>
+          <source type="image/avif" srcset="assets/img/hero-1987-m.avif 786w, assets/img/hero-1987.avif 1543w" sizes="(max-width: 600px) 300px, min(78.6svh, 50.5vw)">
+          <img src="assets/img/hero-1987.webp" srcset="assets/img/hero-1987-m.webp 786w, assets/img/hero-1987.webp 1543w" sizes="(max-width: 600px) 300px, min(78.6svh, 50.5vw)" width="1543" height="1100" fetchpriority="high" alt="Patrice Papone de face au volant de son kart numéro 19, Championnat de France 1987">
+        </picture>
+        <figcaption><span class="an">1987</span><span class="nom">Patrice Papone</span><span class="lieu">Championnat de France</span></figcaption>
+      </figure>
+      <div class="passage" aria-hidden="true"></div>
+      <figure class="epoque e2020 rvl" data-d="3">
+        <picture>
+          <source type="image/avif" srcset="assets/img/hero-2020-m.avif 929w, assets/img/hero-2020.avif 1825w" sizes="(max-width: 600px) 380px, min(92.9svh, 59.7vw)">
+          <img src="assets/img/hero-2020.webp" srcset="assets/img/hero-2020-m.webp 929w, assets/img/hero-2020.webp 1825w" sizes="(max-width: 600px) 380px, min(92.9svh, 59.7vw)" width="1825" height="1100" fetchpriority="high" alt="Thomas Papone de face sous la pluie à Château-Gaillard en 2020, kart numéro 20">
+        </picture>
+        <figcaption><span class="an">2020</span><span class="nom">Thomas Papone</span><span class="lieu">Château-Gaillard</span></figcaption>
+      </figure>
     </div>
     <div class="liseret"></div>
   </header>
@@ -1152,7 +1251,7 @@
         setTimeout(() => {
           intro.querySelector('.intro-circuit').classList.add('efface');
           const logo = intro.querySelector('.intro-logo');
-          const cible = document.querySelector('.hero .embleme-3d');
+          const cible = document.querySelector('.hero .embleme-3d') || document.querySelector('nav .logo .logo-sombre');
           // révéler l'emblème du hero SANS transition avant la mesure : position finale exacte,
           // et il est déjà visible sous le voile pour un atterrissage invisible
           const vis = document.querySelector('.hero .visuel');
@@ -1253,19 +1352,6 @@
           entries.forEach(e => { e.isIntersecting ? vid.play().catch(() => {}) : vid.pause(); });
         }, { threshold: 0.25 }).observe(vid);
       }
-    }
-
-    // Emblème 3D : inclinaison qui suit la souris
-    const t3 = document.querySelector('.tilt3d');
-    if (t3 && matchMedia('(pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const zone = t3.closest('.hero');
-      zone.addEventListener('mousemove', e => {
-        const r = t3.getBoundingClientRect();
-        const dx = (e.clientX - (r.left + r.width / 2)) / r.width;
-        const dy = (e.clientY - (r.top + r.height / 2)) / r.height;
-        t3.style.transform = `perspective(900px) rotateY(${(dx * 10).toFixed(2)}deg) rotateX(${(-dy * 8).toFixed(2)}deg)`;
-      });
-      zone.addEventListener('mouseleave', () => { t3.style.transform = ''; });
     }
 
     // ===== Bande partenaires : commande de défilement =====

@@ -1125,7 +1125,7 @@ nav .nav-cta:focus-visible {
   #intro, .ligne-course, .marquee, .mot-geant, .saut-contenu,
   .lightbox, .lb-scene, .gal-loupe, .car-glyph, .liseret,
   .signature-charte, .bande-origines, .embleme-fond,
-  .hero .visuel, .hero-num, .btn-rangee,
+  .hero .visuel, .hero-num, .btn-rangee, .hero .diptyque, .hero-actions,
   .portique, .depart .verdict,
   .foot-reso, video, .foot-grille img[src*="logo-blanc"] {
     display: none !important;
