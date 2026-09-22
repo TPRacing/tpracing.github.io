@@ -584,6 +584,25 @@ jota.sport, qui ne répond pas non plus depuis ce poste) ; **aesop.com/fr** sert
 (défilement piloté en JS, `scrollY` reste à 0 et les trois captures sortent identiques) ; **sauber-group.com**
 garde son panneau Usercentrics malgré la neutralisation et assombrit toute la page.
 
+### Chantier du 22/09 (axe A) : la famille des cartes claires
+
+- [x] **contact.html portait encore la barre or pleine en tête de ses 3 cartes**, l'interdit du
+      18/08, parce que le chantier de ce jour-là n'avait repassé que les 6 cartes de l'accueil.
+      Liseré damier marine + or posé, et la recette déplacée dans `assets/styles.css` pour les
+      trois familles de cartes (une signature partagée ne vit pas dans le `<style>` d'une page).
+- [x] **La ligne d'action des 3 cartes de contact ne s'alignait pas** (34 px d'écart à 1280 px,
+      variable selon la largeur) : rangées partagées en `subgrid` au-dessus de 901 px, sous
+      `@supports`. Applique la règle du 19/08 tirée de circuit-dijon-prenois.com.
+- [x] **Les libellés techniques des boutons de contact étaient TRONQUÉS de 901 à ~1210 px**
+      (jusqu'à 46 px perdus sur l'adresse email, 25 px sur le pseudo) : le bouton rogne pour son
+      biseau et une chaîne sans espace ne se coupe pas. `<wbr>` aux points de coupure sensés plus
+      `overflow-wrap: anywhere`. Défaut préexistant, invisible à tous les audits précédents.
+- [ ] Écarté avec motif : donner aux cartes de contact le balayage or au survol des cartes de
+      l'accueil. C'est un effet, pas de la matière, et la sobriété de contact.html est assumée
+      depuis le 11/08. Ne pas re-proposer.
+- [ ] Mesuré et laissé : padding de carte 30/26 sur contact contre 26/24 sur l'accueil. 4 px,
+      et les deux familles ne se voient jamais dans le même écran.
+
 ### Constats de l'audit de COHÉRENCE DE LA DA du 11/08 (5 pages regardées, desktop 1280 + mobile 390)
 
 Corrigés le jour même :
@@ -814,6 +833,60 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-09-22 (routine, AXE A : améliorer, **la famille des cartes claires**, une page entière
+  reprise ; axe C hier, axe B le 16/09, donc pas de répétition) : T7 monté, `git pull` avant
+  modif, commit 85aef61. Journée ouverte en REGARDANT le site plutôt qu'en lisant le backlog :
+  5 pages capturées en CDP, desktop 1280, puis relues une à une. **Défaut trouvé à l'œil puis
+  confirmé au pixel : les 3 cartes de contact.html portaient encore la BARRE OR PLEINE en tête,
+  l'interdit posé le 18/08.** Le chantier du 18/08 n'avait traité que les 6 cartes de l'accueil
+  (3 arguments partenaires, 3 articles de presse) ; contact.html n'avait jamais été repassé, si
+  bien que le site avait deux signatures de carte blanche selon la page, dont la plus générique
+  qui existe. Zoom x3 comparatif à l'appui : liseré damier marine + or à gauche, filet or plein
+  à droite. Correctif : la recette du liseré (`repeating-conic-gradient`, 6 px = deux rangées de
+  3 px) **quitte le bloc `<style>` d'index.html pour `assets/styles.css`**, où elle porte
+  désormais les trois sélecteurs `.part-carte`, `.presse-carte`, `.contact-carte` — une
+  signature partagée par deux pages ne peut pas vivre dans le style d'une seule d'entre elles
+  (constat du 12/09 sur le code recopié). La règle `@media print` a suivi : le damier est un
+  fond, il ne s'imprime pas, et le filet or plein de 2 px qui prend le relais couvre maintenant
+  la carte de contact aussi. Mesure de famille sur les 9 cartes après coup : même largeur, même
+  bordure, même liseré 6 px, même Bebas de titre ; seul écart restant, un padding de 30/26 contre
+  26/24, mesuré et LAISSÉ (4 px, et les deux familles ne se voient jamais dans le même écran).
+  **2e geste, trouvé en mesurant la même famille : la ligne d'action ne s'alignait pas.** Chaque
+  carte étant une colonne flex isolée, la place du bouton suivait la longueur du paragraphe : à
+  1280 px le bouton « Par email » tombait 34 px plus bas que les deux autres, et l'écart changeait
+  à chaque largeur. C'est le contre-exemple de circuit-dijon-prenois.com noté le 19/08 (« une
+  grille de cartes s'égalise sur la ligne des actions, pas sur le haut du texte »), appliqué chez
+  nous. Geste : les 3 cartes partagent les mêmes rangées (titre, texte, action, note) en
+  `grid-template-rows: subgrid`, au-dessus de 901 px seulement et sous `@supports`. Support
+  tranché sur données et non sur souvenir, caniuse ouvert ce jour : Chrome 117, Edge 117,
+  Safari 16, iOS Safari 16, Firefox 71, 93,5 % — les quatre moteurs, donc un signe que l'iPhone
+  rend aussi. Résultat mesuré : boutons alignés au pixel à 950, 1024, 1280 et 1440 ; en une seule
+  colonne (mobile) chaque carte redevient indépendante et rien ne bouge. La carte sans note laisse
+  sa 4e rangée vide, choix assumé : un vide en pied de carte se lit, un bouton désaligné se voit.
+  **3e geste, et la vraie trouvaille du jour : un défaut PRÉEXISTANT que seule la capture a
+  montré.** À 1024 px, le bouton de la carte email affichait « CONTACT.TPRACING@GMAIL.C » : le
+  bouton rogne (`overflow: hidden` pour son biseau) et l'adresse, un mot sans espace, ne peut pas
+  se couper. Mesuré ensuite sur 11 largeurs : **tronqué de 901 à environ 1210 px de viewport,
+  jusqu'à 46 px perdus**, soit l'adresse de contact de l'association fausse à lire sur tout un
+  palier d'écrans ; `@thomaspaponeracing` y perdait 25 px. Correctif : `<wbr>` avant l'arobase et
+  avant « racing » pour placer la coupure là où elle a un sens, plus `overflow-wrap: anywhere` en
+  filet. Vérifié : `scrollWidth <= clientWidth` sur les 3 boutons à 11 largeurs, et coupures
+  REGARDÉES en capture (« CONTACT.TPRACING / @GMAIL.COM », « @THOMASPAPONE / RACING »).
+  **Leçon de méthode, la plus chère du jour : ce défaut avait survécu à tous les audits parce que
+  le harnais de débordement excuse tout élément dont un ancêtre rogne et tient dans le viewport,
+  et un bouton rognant SON PROPRE texte est exactement ce cas.** Un test de débordement mesure
+  des boîtes, il ne lit pas ; seul l'œil sur la capture attrape un texte coupé à l'intérieur de sa
+  boîte. D'où la sonde ajoutée au harnais : comparer `scrollWidth` à `clientWidth` sur tout
+  élément qui rogne. Écarté avec motif, pour ne pas le re-proposer : donner aux cartes de contact
+  le balayage or au survol des 6 cartes de l'accueil (ce serait un effet, pas de la matière, et
+  contact.html est la page dont la sobriété est assumée depuis le 11/08). Audit des aplats or sur
+  fond clair passé sur les 5 pages dans la foulée : hors boutons, badges et filets de survol, il
+  ne reste AUCUN or en surface sur du clair. Vérifs : 12 largeurs (320-1680) sur contact +
+  2 largeurs sur les 4 autres pages = 0 débordement, 0 image cassée, 0 ratio faux, 0 erreur
+  console, `scrollWidth == innerWidth` partout ; liseré à 6 px mesuré sur les 9 cartes ;
+  mouvement réduit et impression contrôlés (border-top de 2 px bien repris sur contact.html) ;
+  rendu sans JS sans erreur.
 
 - 2026-09-21 (routine, AXE C : veille par captures, angle neuf **LE GESTE** — ce qui se passe
   entre le survol et le clic ; dernier jour de veille le 08/09, 13 jours d'écart, quota

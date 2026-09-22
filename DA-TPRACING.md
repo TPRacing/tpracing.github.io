@@ -53,6 +53,23 @@ langage étranger, elle ne passe pas.
   bascules de section. **Et l'arête PORTE le damier** (06/09) : un filet or sur transparent
   de 10 px tourné sur la pente, même recette que les bandes de fin de hero. Une bascule de
   section n'est jamais une pente nue : là où le sol change, le drapeau passe.
+- **Liseré damier en tête de carte claire : il vaut pour TOUTES les cartes de contenu du
+  site, pas pour la page où on l'a posé** (22/09). Posé le 18/08 sur les 6 cartes de
+  l'accueil, il avait laissé les 3 cartes de contact.html avec leur barre or pleine pendant
+  cinq semaines : le site a donc porté deux signatures de carte blanche selon la page, dont
+  la plus générique qui existe. Une pièce de vocabulaire se pose par FAMILLE d'objets, jamais
+  par page, et sa règle CSS vit dans la feuille commune dès qu'au moins deux pages la portent
+  (le `<style>` d'une page est le bon endroit pour ce qui n'existe que là, et seulement pour
+  ça). Corollaire de contrôle : après avoir corrigé un objet, chercher ses FRÈRES ailleurs
+  dans le site avant de refermer le chantier.
+- **La ligne d'action d'une rangée de cartes s'aligne, et elle s'aligne par une mécanique,
+  pas par la longueur des textes** (22/09, la règle du 19/08 enfin appliquée). Trois cartes
+  côte à côte dont les boutons sont à trois hauteurs différentes se lisent comme trois blocs
+  bricolés ; égaliser en raccourcissant les paragraphes ne tient à aucune autre largeur. Le
+  geste juste est `grid-template-rows: subgrid` : les cartes partagent les rangées du parent,
+  la rangée du texte prend la hauteur du plus long, les actions se posent sur une ligne à
+  toutes les largeurs. Une carte à qui il manque le dernier élément laisse sa rangée vide, et
+  c'est le bon échange : un vide en pied de carte se lit, un bouton désaligné se voit.
 - Filet de fin de ligne : le `.filet` en `flex: 1` de `.signature-charte` (pied de page)
   se remonte au niveau d'un EN-TÊTE DE SECTION, en or de 2 px qui s'éteint vers la droite.
   Il tient le vide laissé à droite d'un titre fer à gauche, et il ne s'affiche en fin de
@@ -183,6 +200,40 @@ Les quatre doivent passer. Sinon : écarté, et on note pourquoi au backlog (les
 motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
+
+- 2026-09-22 (axe A, la famille des CARTES CLAIRES : contact.html reprise de sa tête à sa ligne
+  d'action) : journée ouverte en REGARDANT les 5 pages en CDP sans objectif préalable, et les
+  trois gestes sont venus de là, aucun du backlog. **(1) Une pièce de vocabulaire se pose par
+  FAMILLE, pas par page.** Le liseré damier posé le 18/08 sur les 6 cartes de l'accueil avait
+  laissé les 3 cartes de contact.html avec leur barre or pleine, l'interdit même que ce chantier
+  visait : cinq semaines durant, le site a porté deux signatures de carte blanche selon la page,
+  dont la plus générique qui existe. Zoom x3 comparatif à l'appui avant de conclure. La recette a
+  quitté le `<style>` d'index.html pour la feuille commune, avec les trois sélecteurs et la règle
+  `@media print` qui va avec (le damier est un fond, le papier ne l'imprime pas, un filet or plein
+  de 2 px prend le relais). **(2) La ligne d'action s'aligne par une mécanique, jamais par la
+  longueur des textes.** Les boutons des trois cartes étaient à trois hauteurs (34 px d'écart à
+  1280 px, variable selon la largeur) parce que chaque carte était une colonne flex isolée :
+  `grid-template-rows: subgrid` leur fait partager les rangées du parent, la rangée de texte prend
+  la hauteur du plus long, et les actions se posent sur une ligne à toutes les largeurs. La carte
+  sans note laisse sa 4e rangée vide, échange assumé : un vide en pied de carte se lit, un bouton
+  désaligné se voit. Support tranché sur caniuse et non de mémoire (Chrome 117, Edge 117,
+  Safari 16, iOS Safari 16, Firefox 71, 93,5 %) : l'interdit du 18/08 sur `corner-shape` vaut dans
+  les deux sens, ce que les quatre moteurs rendent est utilisable comme pièce de vocabulaire.
+  **(3) La trouvaille du jour, qu'aucun audit n'avait pu voir : à 1024 px, le bouton de la carte
+  email affichait « CONTACT.TPRACING@GMAIL.C ».** L'adresse de contact de l'association, tronquée
+  de 901 à environ 1210 px de viewport, jusqu'à 46 px perdus. Invisible à tous les harnais parce
+  qu'un test de débordement compare des BOÎTES : le bouton tient dans sa carte, la carte tient
+  dans le viewport ; ce qui déborde est le TEXTE à l'intérieur du bouton, que le `overflow: hidden`
+  du biseau coupe en silence. **Règle qui en découle : tout élément qui rogne (clip-path, overflow
+  caché) se sonde sur `scrollWidth` contre `clientWidth`, en plus du test de boîtes ; et un libellé
+  sans espace, adresse, pseudo ou référence, n'est pas du texte mais un mot unique que le navigateur
+  ne coupera jamais seul.** Le remède maison n'est pas d'autoriser la coupure n'importe où mais de
+  la PLACER : un `<wbr>` avant l'arobase, un autre avant « racing », et `overflow-wrap: anywhere`
+  seulement en filet. Une adresse coupée à un endroit choisi reste lisible ; coupée par le hasard
+  du rendu, elle devient une autre adresse. **Leçon transverse : le backlog dit ce qu'on a déjà
+  compris, seule la capture dit ce qu'on n'a pas encore vu.** Écarté avec motif : le balayage or au
+  survol des cartes de l'accueil transposé aux cartes de contact (un effet, pas de la matière, et
+  la sobriété de contact.html est assumée depuis le 11/08).
 
 - 2026-09-21 (axe C, veille sur LE GESTE : ce qui se passe entre le survol et le clic sur un
   bouton ou un lien, angle jamais regardé — les veilles précédentes avaient benchmarké des
