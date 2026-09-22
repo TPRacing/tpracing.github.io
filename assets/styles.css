@@ -320,6 +320,35 @@ html:not(.js) .kicker.rvl { clip-path: none; }
 .section-marine .embleme-fond { color: rgba(246, 247, 252, .06); }
 .embleme-fond--or { color: rgba(212, 151, 38, .13); }
 
+/* Liseré damier en tête des cartes claires (posé le 18/08 sur l'accueil, étendu à
+   contact.html le 22/09). Il remplace la barre or pleine, qui était le seul endroit
+   du site où l'or servait d'APLAT sur du blanc : l'or est un trait, un contour, un
+   texte ou un damier, jamais une surface. C'est aussi la signature de carte de toutes
+   les bibliothèques de composants, donc exactement le signe « template » à bannir.
+   Recette dictée par le FOND (règle du 18/08) : marine + or opaque sur du clair, le
+   damier de la ligne de course ; le damier or sur transparent du hero, lui, suppose
+   un fond sombre et vire au jaune pâle sur du blanc.
+   Géométrie damier maison invariable : la tuile conique vaut le double de la cellule,
+   donc 6 px de haut = 6 px de tuile = deux rangées de 3 px, minimum sous lequel le
+   damier n'est plus qu'une bordure pointillée.
+   La règle vit ICI et non dans le bloc <style> d'une page : trois cartes de deux
+   pages différentes portent la même signature, et une signature recopiée finit par
+   diverger (constat de l'audit JS du 12/09 sur le code dupliqué). Les cartes qui la
+   portent ouvrent donc leur bordure en haut (border-top: 0) et sont en position
+   relative avec overflow: hidden. */
+.part-carte::before,
+.presse-carte::before,
+.contact-carte::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: repeating-conic-gradient(var(--marine-deep) 0% 25%, var(--or) 0% 50%);
+  background-size: 6px 6px;
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* ---------- Bande origine des couleurs (collage damier charte p.25) ---------- */
 .bande-origines {
   position: relative;
@@ -1166,8 +1195,8 @@ nav .nav-cta:focus-visible {
   /* Le liseré damier des cartes est un fond : le papier ne l'imprime pas (encre
      économisée). Sans lui la carte s'ouvrirait par le haut, alors la tête de carte
      reprend un filet or plein, qui, lui, s'imprime comme une bordure. */
-  .part-carte::before, .presse-carte::before { display: none !important; }
-  .part-carte, .presse-carte { border-top: 2px solid var(--or) !important; }
+  .part-carte::before, .presse-carte::before, .contact-carte::before { display: none !important; }
+  .part-carte, .presse-carte, .contact-carte { border-top: 2px solid var(--or) !important; }
 
   /* Photos et cartes : ne pas couper au milieu d'une page */
   section, article, figure, .frame,

@@ -136,7 +136,9 @@
     .contact-carte {
       background: #fff;
       border: 1px solid rgba(30, 38, 53, .1);
-      border-top: 3px solid var(--or);
+      /* Tête de carte : liseré damier marine + or (assets/styles.css), pas de barre
+         or pleine. La bordure s'ouvre en haut pour lui laisser la place. */
+      border-top: 0;
       padding: 30px 26px 26px;
       display: flex;
       flex-direction: column;
@@ -155,6 +157,14 @@
     }
     .contact-carte p { color: var(--gris); font-size: .95rem; flex: 1; }
     .contact-carte .btn { margin-top: 6px; }
+    /* Les libellés de ces trois boutons sont des chaînes TECHNIQUES sans espace
+       (une adresse email, un pseudo) : sans autorisation de coupure, le navigateur
+       les traite comme un mot unique, et le bouton, qui rogne (overflow: hidden pour
+       son biseau), les tronquait. Mesuré le 22/09 entre 901 et 1210 px de viewport :
+       « contact.tpracing@gmail.com » perdait jusqu'à 46 px de sa fin, soit une
+       adresse fausse à lire. Le <wbr> du HTML place la coupure avant l'arobase,
+       le anywhere ne sert que de filet pour les libellés futurs. */
+    .contact-carte .btn { overflow-wrap: anywhere; }
     .contact-carte .note {
       font-family: var(--f-label);
       letter-spacing: .12em;
@@ -197,6 +207,35 @@
     .contact-info a { color: var(--marine); text-decoration: underline; text-decoration-color: rgba(212, 151, 38, .6); text-underline-offset: 3px; }
     .contact-info a:hover { color: var(--or); }
     @media (max-width: 900px) { .contact-grille { grid-template-columns: 1fr; } }
+
+    /* Ligne d'action alignée d'une carte à l'autre (22/09). Tant que chaque carte
+       était une colonne flex isolée, la place du bouton suivait la longueur du
+       paragraphe : à 1280 px le bouton de la carte « Par email » tombait 34 px plus
+       bas que les deux autres, et l'écart changeait à chaque largeur. Or la règle
+       maison, tirée du contre-exemple de circuit-dijon-prenois.com le 19/08, dit
+       qu'une grille de cartes s'égalise sur la ligne des actions, pas sur le haut
+       du texte. Les trois cartes partagent donc les MÊMES rangées (titre, texte,
+       action, note) via subgrid : la rangée du texte prend la hauteur du plus long
+       des trois, et les boutons se posent sur une seule ligne.
+       Support vérifié sur caniuse le 22/09 : Chrome 117, Edge 117, Safari 16,
+       iOS Safari 16, Firefox 71, soit les quatre moteurs, donc un signe de DA que
+       l'iPhone rend aussi. Le @supports garde l'ancienne colonne flex en repli, et
+       la règle ne s'applique qu'au-dessus de 900 px : en une seule colonne, chaque
+       carte redevient indépendante et le gap de 22 px sépare les cartes entre elles.
+       La carte sans note laisse sa 4e rangée vide : un vide en pied de carte se
+       lit, un bouton désaligné se voit. */
+    @media (min-width: 901px) {
+      @supports (grid-template-rows: subgrid) {
+        .contact-grille { row-gap: 12px; }
+        .contact-carte {
+          display: grid;
+          grid-template-rows: subgrid;
+          grid-row: span 4;
+          gap: 0;
+        }
+        .contact-carte p { flex: none; }
+      }
+    }
   </style>
 </head>
 <body>
@@ -241,7 +280,7 @@
       <div class="contact-carte rvl">
         <h2>Par email</h2>
         <p>Le canal des dossiers et des demandes détaillées : partenariat, presse, organisation. Écrivez-nous, on vous répond.</p>
-        <a class="btn btn-marine" href="mailto:contact.tpracing@gmail.com">contact.tpracing@gmail.com</a>
+        <a class="btn btn-marine" href="mailto:contact.tpracing@gmail.com">contact.tpracing<wbr>@gmail.com</a>
       </div>
       <div class="contact-carte rvl" data-d="1">
         <h2>Sur LinkedIn</h2>
@@ -252,7 +291,7 @@
       <div class="contact-carte rvl" data-d="2">
         <h2>Sur les réseaux</h2>
         <p>Le projet se suit au quotidien sur les comptes du pilote : coulisses, roulages et courses en images.</p>
-        <a class="btn btn-marine" href="https://www.instagram.com/thomaspaponeracing" target="_blank" rel="noopener">@thomaspaponeracing</a>
+        <a class="btn btn-marine" href="https://www.instagram.com/thomaspaponeracing" target="_blank" rel="noopener">@thomaspapone<wbr>racing</a>
         <span class="note">Instagram / TikTok / YouTube / Twitch</span>
       </div>
     </div>
