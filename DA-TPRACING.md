@@ -220,6 +220,22 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-09-23 bis (REFONTE v3, validée par Thomas sur prototype) : **la DA change de centre de gravité, du
+  karting vers la VOITURE.** Règles qui en sortent, à tenir sur toute nouvelle page. (1) **Le damier devient
+  RARE** : il reste dans le logo, la pastille des surtitres et le rappel du drapeau, jamais comme bordure,
+  liseré ou arête. Une frontière se dit par la diagonale et un FILET OR de 3 px. (2) **Le montage remplace
+  la photo seule** (référence McLaren Racing validée par Thomas) : emblème TP en aplat or trame fine, sujet
+  détouré devant, voiture qui déborde du cadre. (3) **La plaque blanche** est la barre de menu du site :
+  logo couleur sur le clair, coin bas-gauche biseauté, aplat or collé au bord droit. (4) **La palette
+  s'élargit par page, pas par élément** : le VERT tient l'histoire de l'association (racines Papone), le
+  ROUGE tient la page pilote en touches (point « saison », étape SERA, rail des étapes), marine et or
+  restent la base partout. (5) **Des objets vrais plutôt que des icônes** : les tracés réels des circuits
+  (OpenStreetMap) plutôt que des pictos, la vraie plaque 47 retouchée plutôt qu'un 47 géant. (6) **Pas de
+  luxe froid** : Singer et Spyker refusés (« trop haut de gamme »), Palomino et Pas Normal Studios aussi
+  (« too much ») ; stylisé, lisible, pas de surtitres partout. Références : planches Artifact
+  « Inspirations TPRacing » et « Maquettes accueil TPRacing », prototype « Prototype TPRacing v3 », sources
+  sur le T7 dans Communication/Refonte design site/.
+
 - 2026-09-22 ter (demande directe de Thomas : « le site paraît encore très IA, tu ne te sers pas
   de Figma ni des montages Adobe ». Chantier : LE HERO DE L'ACCUEIL, maquette d'abord) :
   **diagnostic honnête, le défaut n'était pas dans les détails mais dans le squelette.** Le hero

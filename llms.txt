@@ -8,14 +8,14 @@ Trois disciplines, une seule trajectoire :
 
 - Karting de compétition, catégorie National / X30 Senior : courses de ligue et roulages d'entraînement, du sec à la pluie.
 - Simracing sur iRacing : entraînement hebdomadaire, régularité, trajectoires et courses longues.
-- Automobile : passage en monoplace à l'école FEED Racing France (Magny-Cours, 2024), puis objectif Caterham.
+- Automobile : monoplace avec SERA Racing Academy (Formule Renault 2.0, circuit du Var) et l'école FEED Racing France (Magny-Cours, 2024), puis test Caterham Academy au Pôle Mécanique d'Alès le 16 juillet 2026.
 
 L'association se développe aussi comme une marque : contenus, réseaux sociaux, communauté et partenariats d'entreprises. Des artisans, des PME et des groupes de la région accompagnent le projet depuis ses débuts ; leurs logos sont présentés sur la page d'accueil. Un dossier de partenariat détaillé est disponible sur demande auprès de l'association.
 
 ## Pages du site
 
-- [Accueil, l'association](https://tpracing.github.io/) : l'héritage familial (Patrice en karting dans les années 80 puis en Formule Ford), les trois disciplines, l'offre de partenariat, le mur des partenaires, la revue de presse et la galerie de course.
-- [Le pilote, Thomas Papone](https://tpracing.github.io/pilote.html) : parcours en quatre étapes (karting, simracing, FEED Racing France, objectif Caterham), derniers posts et réseaux du pilote.
+- [Accueil, l'association](https://tpracing.github.io/) : le projet Caterham Academy (la voiture, le format, les cinq circuits de la saison), l'histoire de l'association (« Le volant se transmet », Patrice en 1987, Thomas en 2020), la revue de presse, les partenaires classés par soutien et le contact.
+- [Le pilote, Thomas Papone](https://tpracing.github.io/pilote.html) : le parcours du plus récent au plus ancien (test Caterham Academy 2026, préparation sur simulateur, FEED Racing et SERA Racing Academy en 2024, karting de compétition dès 2020, débuts en 2015), les réseaux et les derniers posts du pilote.
 - [Contact](https://tpracing.github.io/contact.html) : email de l'association, LinkedIn, réseaux du projet, et point d'entrée pour les demandes de partenariat ou de presse.
 - [Mentions légales et confidentialité](https://tpracing.github.io/mentions-legales.html) : éditeur, hébergement, propriété intellectuelle, données personnelles et cookies.
 

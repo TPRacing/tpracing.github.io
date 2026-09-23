@@ -75,7 +75,7 @@ picture { display: contents; } /* les <picture> (AVIF/WebP) restent transparents
 a { color: inherit; }
 
 /* Ancres : ne pas atterrir sous la nav fixe */
-section[id], div[id].bande-origines { scroll-margin-top: 76px; }
+section[id], div[id].bande-origines { scroll-margin-top: 104px; }
 
 /* ---------- Transitions de page : volet dans l'axe des diagonales ---------- */
 @view-transition { navigation: auto; }
@@ -120,14 +120,7 @@ html { scrollbar-color: var(--or) var(--marine); }
   transform: scaleX(0);
   pointer-events: none;
 }
-.ligne-course::after {
-  content: "";
-  position: absolute;
-  right: -1px; top: 0;
-  width: 14px; height: 3px;
-  background: repeating-conic-gradient(var(--marine-deep) 0% 25%, var(--or-clair) 0% 50%);
-  background-size: 7px 3px;
-}
+/* (23/09) la pointe damier de la ligne est retirée : le damier se fait rare sur le site */
 /* Ligne pilotée par le scroll en CSS pur (compositor) ; le JS des pages n'est plus qu'un repli */
 @supports (animation-timeline: scroll()) {
   .ligne-course {
@@ -342,9 +335,9 @@ html:not(.js) .kicker.rvl { clip-path: none; }
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 6px;
-  background: repeating-conic-gradient(var(--marine-deep) 0% 25%, var(--or) 0% 50%);
-  background-size: 6px 6px;
+  height: 3px;
+  /* (23/09) filet marine ouvert par un trait or : le damier se fait rare */
+  background: linear-gradient(90deg, var(--or) 0 56px, var(--marine) 56px);
   pointer-events: none;
   z-index: 1;
 }
@@ -550,171 +543,101 @@ h3 { font-family: var(--f-label); font-weight: 700; font-size: 1.45rem; letter-s
 .btn-marine { background: var(--marine); color: var(--blanc); }
 .btn-marine:hover { background: #2b3650; }
 
-/* ---------- Navigation : transparente sur le hero, solide au scroll ---------- */
+/* ---------- Navigation : plaque blanche flottante (refonte v3 validée par Thomas le 23/09) ----------
+   Une seule apparence, du haut au bas de la page : plaque blanc cassé détachée des bords,
+   coin bas-gauche biseauté, logo COULEUR dégradé posé sur le clair (règle de charte, version
+   préférée de Thomas pour le numérique), bouton « Devenir partenaire » en aplat or collé au
+   bord droit. La bascule transparente puis solide a disparu : la classe .solide que posent
+   encore les scripts des pages ne change plus rien. La page en cours porte le filet or du
+   survol, figé : le damier se fait rare (retour de Thomas, 23/09 : « trop de damier partout »). */
 nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
   z-index: 100;
+  top: 14px; left: 24px; right: 24px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  padding: 14px 5%;
-  background: transparent;
-  border-bottom: 1px solid rgba(246, 247, 252, .16);
-  transition: background .35s ease, border-color .35s ease, padding .35s ease;
+  gap: 24px;
+  padding: 0 0 0 22px;
+  background: var(--blanc);
+  color: var(--marine);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 14px 100%, 0 calc(100% - 14px));
 }
-nav .logo img { height: 42px; width: auto; transition: height .35s ease; }
+nav .logo { display: flex; align-items: center; }
+nav .logo img { height: 50px; width: auto; }
 /* les logos portent width/height (anti-CLS) : sans ceci, max-width:100% + parent
    dimensionné par le contenu = pourcentage cyclique, largeur effondrée à 0 */
 nav .logo img, footer img { max-width: none; }
-nav .logo .logo-clair { display: none; }
 nav ul {
   display: flex;
   align-items: center;
-  gap: 26px;
+  align-self: stretch;
+  gap: 28px;
   list-style: none;
 }
+nav ul li { display: flex; align-items: center; }
+nav ul li:last-child { align-self: stretch; }
 nav ul a {
   font-family: var(--f-label);
   font-weight: 700;
-  font-size: 1.08rem;
-  letter-spacing: .1em;
+  font-size: 1.06rem;
+  letter-spacing: .09em;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--blanc);
+  color: var(--marine);
   white-space: nowrap;
-  transition: color .25s;
 }
-nav ul a:hover { color: var(--or); }
-nav ul a.active { color: var(--or); }
-
-/* Soulignement or qui glisse : entre par la gauche au survol, ressort par la droite.
-   C'est le geste du SURVOL, et lui seul (09/09). Exclut le bouton CTA (aplat plein). */
-nav ul a:not(.nav-cta) { position: relative; padding-bottom: 5px; }
+nav ul a:not(.nav-cta) { position: relative; padding: 6px 0; }
 nav ul a:not(.nav-cta)::after {
   content: "";
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  height: 2px;
+  height: 3px;
   background: var(--or);
   transform: scaleX(0);
   transform-origin: right center;
   transition: transform .32s cubic-bezier(.4, .15, .2, 1);
 }
 nav ul a:not(.nav-cta):hover::after,
-nav ul a:not(.nav-cta):focus-visible::after {
+nav ul a:not(.nav-cta):focus-visible::after,
+nav ul a.active:not(.nav-cta)::after {
   transform: scaleX(1);
   transform-origin: left center;
 }
-
-/* Page en cours : un liseré DAMIER, pas le filet du survol (09/09).
-   Avant ce jour, l'état actif et le survol produisaient le MÊME trait or plein :
-   sur pilote.html, survoler « Contact » marquait ce lien exactement comme le lien
-   de la page où l'on se trouve, et la barre annonçait deux pages courantes. Deux
-   sens différents réclament deux objets différents. Le marqueur de page prend donc
-   l'objet que le site emploie déjà partout pour dire « voici la rubrique » : le
-   liseré damier des cartes blanches (18/08) et des fins de hero, seul marqueur de
-   la maison. Le filet or nu, lui, ne se retrouvait nulle part ailleurs.
-   Recette dictée par le FOND (règle du 18/08) : or sur transparent tant que la
-   barre est posée sur le hero sombre, marine + or opaque dès qu'elle devient un
-   plateau clair. Géométrie invariable : tuile = double de la cellule, donc 6 px de
-   haut = 6 px de tuile = deux rangées de 3 px, le minimum sous lequel le damier
-   n'est plus qu'une bordure pointillée.
-   Calage vertical mesuré, pas choisi : le filet de 2 px laissait 7 px d'air sous
-   les capitales. Une marque trois fois plus épaisse en réclame au moins autant, or
-   posée au ras du padding elle n'en gardait que 4 et se collait au mot. Les trois
-   calages (-1, -3, -4 px) ont été rendus et regardés côte à côte : -3 px rend 6 px
-   d'air, la bande reste attachée au mot sans le toucher, et garde 11 px jusqu'au
-   bord bas de la barre. L'élément est en ligne, donc rien de tout cela ne pousse la
-   boîte de ligne ni ne décale un seul lien. */
-nav ul a.active:not(.nav-cta)::before {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: -3px;
-  height: 6px;
-  background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%);
-  background-size: 6px 6px;
-  pointer-events: none;
-}
-nav.solide ul a.active:not(.nav-cta)::before {
-  background: repeating-conic-gradient(var(--marine-deep) 0% 25%, var(--or) 0% 50%);
-  background-size: 6px 6px;
-}
-/* Le lien de la page en cours ne rejoue pas le survol : sa marque est déjà posée,
-   et le filet viendrait se superposer au damier. */
-nav ul a.active:not(.nav-cta):hover::after,
-nav ul a.active:not(.nav-cta):focus-visible::after { transform: scaleX(0); }
-
 nav .nav-cta {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 26px;
   background: var(--or);
   color: var(--marine-deep);
-  padding: 8px 18px;
-  clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
+  transition: background .2s;
 }
-nav .nav-cta:hover { background: var(--or-clair); color: var(--marine-deep); }
-
-/* Plateau OPAQUE, sans backdrop-filter (mesuré au pixel le 09/09). La barre était
-   à 95 % d'opacité plus un blur(9px). Mesure faite sur trois fonds, capture contre
-   capture, bande de nav 1280x60 : au-dessus d'une PHOTO le flou ne change rien de
-   visible (écart maximal 10/255) ; il ne mord que sur une chose, la trame fine qui
-   traverse les 5 % de transparence - le damier du marquee et les mots géants en
-   contour, qui remontaient en fantôme gris à travers la barre. Autrement dit le
-   flou n'était pas là pour montrer ce qu'il y a dessous, il était là pour effacer
-   un artefact que la transparence elle-même fabriquait. En rendant le plateau
-   opaque, les deux disparaissent : la barre est plus PROPRE qu'avant (le fantôme
-   du mot géant a disparu, vérifié en capture) et le site rend une couche de
-   composition sur chaque image de chaque défilement. C'est aussi la doctrine
-   maison : de la matière, pas un effet. */
-nav.solide {
-  background: var(--blanc);
-  border-bottom: 1px solid rgba(30, 38, 53, .12);
-  padding: 10px 5%;
-}
-nav.solide .logo img { height: 36px; }
-nav.solide .logo .logo-sombre { display: none; }
-nav.solide .logo .logo-clair { display: block; }
-nav.solide ul a { color: var(--marine); }
-/* Nav sur fond clair : le mot reste marine (l'or y tombe à 2,38:1) ; l'état actif
-   et le survol restent signalés par le filet or qui glisse sous le lien. */
-nav.solide ul a:hover, nav.solide ul a.active { color: var(--marine); }
+nav .nav-cta:hover { background: var(--or-clair); }
 
 @media (max-width: 820px) {
-  nav { padding: 10px 4%; }
-  nav .logo img { height: 34px; }
-  nav ul { gap: 13px; }
-  nav ul a { font-size: .92rem; letter-spacing: .07em; }
-  /* Cible tactile d'au moins 24 px de haut (le texte seul n'en fait que 20). */
-  nav ul a:not(.nav-cta) { padding-top: 5px; }
-  nav .nav-cta { padding: 7px 12px; }
+  nav { top: 10px; left: 10px; right: 10px; height: 60px; padding-left: 14px; gap: 14px; clip-path: polygon(0 0, 100% 0, 100% 100%, 11px 100%, 0 calc(100% - 11px)); }
+  nav .logo img { height: 42px; }
+  nav ul { gap: 14px; }
+  nav ul a { font-size: .95rem; letter-spacing: .07em; }
+  nav .nav-cta { padding: 0 14px; }
 }
-/* Repli des deux ancres d'accueil : il se déclenche à la largeur MESURÉE où la
-   barre cesse de tenir, pas 220 px trop tôt. À l'échelle typo ci-dessus, les cinq
-   liens occupent 447 px fixes ; avec le logo et le padding de 4 %, le gap flex
-   déclaré (20 px) tient encore à 600 px (26 px mesurés) et casse à 580 (report de
-   13 px). Avant le 08/09 la coupe était à 820 px : à 819 px la barre gardait
-   227 px de vide entre le logo et les liens tout en en supprimant deux. */
+/* Repli des deux ancres d'accueil (largeur mesurée le 08/09, inchangée). */
 @media (max-width: 600px) {
   nav ul li.masque-mobile { display: none; }
 }
-/* Petits téléphones (320 à 400 px) : sans ce palier, logo + liens + bouton
-   dépassent la largeur d'écran et « Devenir partenaire » est rogné, sans
-   défilement possible puisque le débordement horizontal est clippé. */
+/* Petits téléphones (320 à 400 px) : logo + liens + bouton doivent tenir sans rognage. */
 @media (max-width: 384px) {
-  nav { padding: 10px 3.5%; }
-  nav .logo img { height: 30px; }
-  nav.solide .logo img { height: 28px; }
-  nav ul { gap: 9px; }
-  nav ul a { font-size: .82rem; letter-spacing: .04em; }
-  nav .nav-cta { padding: 6px 9px; }
+  nav { padding-left: 11px; gap: 10px; }
+  nav .logo img { height: 36px; }
+  nav ul { gap: 10px; }
+  nav ul a { font-size: .84rem; letter-spacing: .04em; }
+  nav .nav-cta { padding: 0 10px; }
   /* Boutons à libellé long (adresse e-mail, handle) : ils dépassaient le cadre. */
   .btn { font-size: 1rem; letter-spacing: .08em; padding: 12px 20px; max-width: 100%; overflow-wrap: anywhere; }
 }
-
-/* Très petits écrans : la Bold est plus large que l'ancienne Middle et le plus long
-   kicker (« Association de sport automobile ») réclamait 259 px pour 254 px utiles,
-   donc passait sur 2 lignes. L'interlettrage se resserre ici seulement : dès 375 px
-   la ligne tient avec le tracking large d'origine. */
+/* Très petits écrans : la Bold est plus large que l'ancienne Middle. */
 @media (max-width: 360px) {
   .kicker { letter-spacing: .16em; }
 }
@@ -751,14 +674,13 @@ section { padding: 92px 6%; position: relative; }
    parent recoupe ce depassement : l'arete visible EST la coupe, au pixel, et un
    ecart d'arrondi de sous-pixel entre les deux pentes reste absorbe. */
 .diag-haut::before {
+  /* (23/09) l'arête porte un filet or de 3 px, le damier se fait rare */
   content: "";
   position: absolute;
   left: 0; right: 0;
-  top: calc(1.15vw - 10px);
-  height: 20px;
-  background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%);
-  background-size: 10px 10px;
-  opacity: .85;
+  top: calc(1.15vw - 1.5px);
+  height: 3px;
+  background: var(--or);
   transform: rotate(-1.3175deg);
   pointer-events: none;
   z-index: 2;
@@ -981,7 +903,8 @@ footer :focus-visible,
   outline-color: var(--or);
   box-shadow: 0 0 0 3px rgba(7, 11, 29, .9);
 }
-/* La nav bascule sur fond clair au scroll : l'anneau repasse en marine. */
+/* La nav est une plaque claire (23/09) : l'anneau y est toujours marine. */
+nav :focus-visible,
 nav.solide :focus-visible {
   outline-color: var(--marine);
   box-shadow: 0 0 0 3px rgba(212, 151, 38, .9);
@@ -1139,6 +1062,7 @@ nav .nav-cta:focus-visible {
     padding: 6px 0 12px !important;
     height: auto !important;
     box-shadow: none !important;
+    clip-path: none !important;
   }
   nav#navbar ul { display: none !important; }
   nav#navbar .logo { position: static !important; }

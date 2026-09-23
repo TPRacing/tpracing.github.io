@@ -6,12 +6,12 @@
 
   <!-- ✏️ SEO : titre affiché dans Google + onglet du navigateur -->
   <title>TPRacing - Thomas Papone Racing | Association de sport automobile</title>
-  <meta name="description" content="TPRacing, association de sport automobile fondée en 2021 par un père pilote et son fils : karting de compétition, simracing, cap sur la Caterham.">
+  <meta name="description" content="TPRacing, association de sport automobile fondée en 2021 par un père pilote et son fils. Après le karting et la monoplace, cap sur la Caterham Academy.">
 
   <link rel="canonical" href="https://tpracing.github.io/">
   <meta property="og:site_name" content="TPRacing">
   <meta property="og:title" content="TPRacing - Thomas Papone Racing">
-  <meta property="og:description" content="Le volant se transmet. Association de sport automobile : karting de compétition, simracing, cap sur la Caterham.">
+  <meta property="og:description" content="Cap sur la Caterham. Association de sport automobile : Thomas Papone prépare son entrée en Caterham Academy.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tpracing.github.io/">
   <meta property="og:locale" content="fr_FR">
@@ -19,12 +19,12 @@
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="TPRacing - Le volant se transmet. Association de sport automobile.">
+  <meta property="og:image:alt" content="TPRacing - Cap sur la Caterham. Thomas Papone et la Caterham du test Academy.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="TPRacing - Thomas Papone Racing">
-  <meta name="twitter:description" content="Le volant se transmet. Association de sport automobile : karting de compétition, simracing, cap sur la Caterham.">
+  <meta name="twitter:description" content="Cap sur la Caterham. Association de sport automobile : Thomas Papone prépare son entrée en Caterham Academy.">
   <meta name="twitter:image" content="https://tpracing.github.io/assets/img/og-accueil.jpg">
-  <meta name="twitter:image:alt" content="TPRacing - Le volant se transmet. Association de sport automobile.">
+  <meta name="twitter:image:alt" content="TPRacing - Cap sur la Caterham. Thomas Papone et la Caterham du test Academy.">
 
   <link rel="icon" href="assets/favicon.ico?v=2" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=2">
@@ -150,563 +150,203 @@
   </script>
 
   <style>
-    /* ---------- Hero accueil : page de charte vivante ---------- */
-    /* ---------- Hero « La transmission » (22/09, direction A validée par Thomas) ----------
-       Le hero était la mise en page par défaut d'un site généré : titre à gauche, logo 3D
-       sur fond vide à droite. Il montre maintenant ce que disait le paragraphe : Patrice en
-       1987 et Thomas en 2020, de face, dans le même cadrage, à 33 ans d'écart. Détourages
-       réels (moteur « détacher le sujet » d'Apple, sur les originaux pleine définition),
-       archive laissée brute, photo récente étalonnée au look maison. Maquette source :
-       Figma « TPRacing - Refonte design du site », page Hero accueil. */
+
+    /* ================= ACCUEIL, REFONTE v3 (23/09/2026) =================
+       Validée par Thomas sur prototype : la VOITURE au premier plan (Caterham n°47),
+       le karting devient l'histoire, le damier se fait rare, le montage remplace la
+       photo seule (référence McLaren Racing), la rigueur de charte de Caterham Cars.
+       Prototype et sources : T7, Communication/Refonte design site/v3 - prototype (23-09). */
+    :root { --vert: #3E836E; --nuit: #121824; --gris-c: #AEB6C6; --gris-f: #5B6478; --pente: 2.3vw; }
+    body { background: var(--nuit); }
+    .lien-or { font-family: var(--f-label); font-weight: 700; font-size: 1.15rem; letter-spacing: .09em; text-transform: uppercase; text-decoration: none; border-bottom: 2px solid var(--or); padding-bottom: 5px; }
+
+    /* ---------- Hero : le montage (emblème or, Thomas, la Caterham n°47) ---------- */
     .hero {
-      --hk: min(56svh, 36vw);        /* hauteur commune des deux karts */
-      --marge: max(20px, 4.86vw);    /* 70 px à 1440, la marge de la maquette */
       position: relative;
-      min-height: clamp(620px, min(100svh, 62vw), 1100px);
-      overflow: hidden;
+      min-height: max(760px, 100svh);
+      padding: 150px 48px 0 max(20px, 4.4vw);
+      display: grid;
+      grid-template-columns: minmax(0, 640px) minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+      background: radial-gradient(110% 90% at 72% 42%, #27324B 0%, #1A2233 45%, #111723 100%);
       color: var(--blanc);
-      background:
-        radial-gradient(rgba(246, 247, 252, .035) 1px, transparent 1.5px),
-        linear-gradient(180deg, #070B1D 0%, #0d1526 68%, var(--marine) 100%);
-      background-size: 26px 26px, auto;
+      z-index: 3; /* la voiture déborde sur la bascule : le hero passe devant */
     }
-    .hero-tete { position: relative; z-index: 3; padding: max(104px, 7.8vw) var(--marge) 0; }
-    .hero h1 {
-      color: var(--blanc);
-      /* « SE TRANSMET » mesure 13,29 fois la taille de police (interlettrage compris) :
-         6,78vw la fait tenir entre les deux marges. L'élément volontairement trop grand. */
-      font-size: min(6.78vw, 7.2rem);
-      line-height: 1.07;
-    }
-    .hero h1 .l1, .hero h1 .l2 { display: block; }
+    .hero h1 { margin: 0; color: var(--blanc); font-size: clamp(1.9rem, 3.6vw, 3.4rem); line-height: 1.03; letter-spacing: 0; }
+    .hero h1 span { display: block; white-space: nowrap; }
     .hero h1 .or { color: var(--or); }
-    .hero-actions { display: flex; align-items: center; gap: 14px 28px; flex-wrap: wrap; margin-top: 30px; }
-    /* Contour or, recette des boutons « Partie 1 / Partie 2 » : l'aplat or plein reste
-       réservé au bouton de la nav, seul aplat or autorisé (règle du 18/08). */
-    .btn-contour-or { color: var(--or); background: transparent; box-shadow: inset 0 0 0 1.5px var(--or); }
-    .btn-contour-or:hover, .btn-contour-or:focus-visible { background: rgba(212, 151, 38, .12); color: var(--or-clair); }
-    .lien-fleche {
-      font-family: var(--f-label); font-weight: 700; font-size: 1rem;
-      letter-spacing: .14em; text-transform: uppercase; text-decoration: none;
-      color: var(--blanc); display: inline-flex; align-items: center; gap: 10px;
+    .hero .texte p { margin-top: 24px; color: var(--gris-c); max-width: 440px; }
+    .hero .actions { margin-top: 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 26px; }
+    .montage { position: relative; width: 100%; max-width: 840px; aspect-ratio: 820 / 740; justify-self: end; margin-bottom: -120px; z-index: 5; --px: 0; --py: 0; }
+    /* les <picture> sont en display: contents (styles.css) : on positionne les images elles-mêmes */
+    .montage .plaque, .montage .ombre, .montage img { position: absolute; }
+    .montage img { max-width: none; }
+    .plaque {
+      left: 7.3%; top: 4.3%; width: 91.5%; aspect-ratio: 1400 / 968; overflow: hidden;
+      -webkit-mask: url(assets/img/embleme-masque.png) center / 100% 100% no-repeat;
+      mask: url(assets/img/embleme-masque.png) center / 100% 100% no-repeat;
+      background: linear-gradient(160deg, #E2A63C 0%, var(--or) 45%, #B67C16 100%);
+      transform: translate(calc(var(--px) * -10px), calc(var(--py) * -8px));
     }
-    .lien-fleche i { font-style: normal; color: var(--or); transition: transform .2s ease; }
-    .lien-fleche:hover i, .lien-fleche:focus-visible i { transform: translate(3px, -3px); }
-    /* À partir de 1240 px, l'action prend le vide en fin de première ligne. Mesure, pas
-       palier rond : « LE VOLANT » finit à 76,1 % de la largeur, le bloc mesure 214 px,
-       il reste 22 px d'air à 1240. Le bloc finit avant le haut de « TRANSMET ». */
-    @media (min-width: 1240px) {
-      .hero-actions {
-        position: absolute; right: var(--marge); top: calc(max(104px, 7.8vw) + 4px);
-        width: 214px; margin: 0; display: block;
-      }
-      /* le lien se range sous la fin de « TRANSMET », dans le vide avant les karts :
-         empilé sous le bouton, il n'avait que 3 px d'air avec la seconde ligne à 1280 */
-      .hero-actions .lien-fleche {
-        position: absolute; right: 0; white-space: nowrap;
-        top: calc(min(6.78vw, 7.2rem) * 2.14 + 12px);
-      }
-    }
-    .diptyque { position: absolute; left: 0; right: 0; bottom: 12px; height: var(--hk); margin: 0; z-index: 2; }
-    /* chaque figure couvre tout le diptyque : l'apparition (.rvl) les translate, et une
-       transformation fait de l'élément transformé la référence de ses enfants en position
-       absolue. Figure vide, les karts sautaient de toute leur hauteur pendant 0,8 s. */
-    .epoque { margin: 0; position: absolute; inset: 0; }
-    .epoque img { position: absolute; bottom: 0; height: 100%; width: auto; max-width: none; }
-    /* les deux karts se touchent au centre : le passage de témoin */
-    .e1987 img { right: 50%; }
-    .e2020 img {
-      left: calc(50% - var(--hk) * .04); z-index: 1;
-      /* le détourage est recadré dans la gerbe d'eau : on l'éteint au lieu de la couper net */
-      -webkit-mask-image: linear-gradient(to left, transparent, #000 9%);
-      mask-image: linear-gradient(to left, transparent, #000 9%);
-    }
-    /* Les deux légendes se font face dans le vide entre les deux casques : le casque de
-       Patrice finit à 50 % - 0,675 hk, celui de Thomas commence à 50 % + 0,752 hk (mesurés
-       sur les détourages). Posées au-dessus des karts, elles touchaient le casque. */
-    .epoque figcaption {
-      position: absolute; top: 10px; z-index: 2; padding-left: 26px;
-      font-family: var(--f-label); font-weight: 700; text-transform: uppercase;
-      letter-spacing: .13em; line-height: 1.25;
-    }
-    /* pastille damier : même géométrie que celle des kickers */
-    .epoque figcaption::before {
-      content: ""; position: absolute; left: 0; top: .32em; width: 15px; height: 15px;
-      background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%);
-      background-size: 7.5px 7.5px;
-    }
-    .e1987 figcaption { left: calc(50% - var(--hk) * .675 + 18px); }
-    .e2020 figcaption { right: calc(50% - var(--hk) * .752 + 18px); text-align: right; padding: 0 26px 0 0; }
-    .e2020 figcaption::before { left: auto; right: 0; }
-    .epoque .an { display: block; color: var(--or); font-size: 1.5rem; }
-    .epoque .nom { display: block; color: var(--blanc); font-size: 1.06rem; }
-    .epoque .lieu { display: block; color: #aeb6c8; font-size: .94rem; }
-    .passage { display: none; }
-    /* Tablette et petit portable : le titre passe sur la largeur et l'action dessous, il
-       n'y a plus la hauteur pour poser le diptyque en fond de hero, il se range dessous. */
-    @media (min-width: 601px) and (max-width: 1239px) {
-      .hero { min-height: 0; padding-bottom: 12px; }
-      .diptyque { position: relative; bottom: auto; margin-top: 44px; }
-    }
-    /* Sous 790 px, le vide entre les deux casques (1,43 hk moins l'air) ne loge plus deux
-       légendes de 175 px : elles remontent au-dessus des karts, chacune de son côté. */
-    @media (min-width: 601px) and (max-width: 789px) {
-      .diptyque { margin-top: 118px; }
-      .epoque figcaption { top: -86px; }
-      .e1987 figcaption { left: var(--marge); }
-      .e2020 figcaption { right: var(--marge); }
-    }
-    /* Téléphone : le diptyque devient une frise, 1987 en haut, 2020 en bas, séparés
-       par un liseré damier. Deux karts côte à côte y tiendraient à 130 px de haut. */
-    @media (max-width: 600px) {
-      .hero { min-height: 0; padding-bottom: 12px; }
-      .hero-tete { padding-top: 104px; }
-      .hero h1 { font-size: calc((100vw - 40px) / 10.6); }
-      .hero h1 .or { display: block; }
-      .diptyque { position: relative; bottom: auto; height: auto; margin-top: 34px; }
-      .epoque { position: relative; inset: auto; }
-      .e1987 { height: 212px; }
-      .e2020 { height: 226px; margin-top: 22px; }
-      .e1987 img { right: -14px; }
-      .e2020 img { left: -40px; }
-      .epoque figcaption { top: 6px; }
-      .e1987 figcaption { left: 20px; }
-      .e2020 figcaption { right: 20px; }
-      .epoque .an { font-size: 1.25rem; }
-      .epoque .nom { font-size: .92rem; }
-      .epoque .lieu { font-size: .8rem; }
-      .passage {
-        display: block; height: 6px; margin-top: 18px;
-        background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%);
-        background-size: 6px 6px;
-      }
-    }
-    .hero .liseret {
-      position: absolute; left: 0; right: 0; bottom: 0; height: 12px; z-index: 2;
-      background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%);
-      background-size: 12px 12px;
-      opacity: .85;
-    }
+    .plaque::before { content: ""; position: absolute; inset: 0; opacity: .2; mix-blend-mode: multiply; background-image: radial-gradient(rgba(30, 38, 53, .9) 1px, transparent 1.4px); background-size: 6px 6px; }
+    .plaque::after { content: ""; position: absolute; inset: -20% -60%; background: linear-gradient(105deg, transparent 40%, rgba(255, 244, 214, .55) 50%, transparent 60%); transform: translateX(-70%); }
+    .montage .thomas { left: 47%; top: 1.6%; height: 92%; width: auto; filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .45)); transform: translate(calc(var(--px) * 6px), calc(var(--py) * 4px)); }
+    .montage .ombre { left: 3%; top: 88%; width: 98%; height: 12%; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, .62), transparent); }
+    .montage .voiture { left: 1.5%; top: 35%; width: 98.8%; height: auto; filter: url(#vitesse) drop-shadow(0 24px 30px rgba(0, 0, 0, .5)); transform: translate(calc(var(--px) * 16px), calc(var(--py) * 6px)); }
+    /* entrée orchestrée, une seule fois, au lever de l'intro */
+    .js .hero .texte > * { opacity: 0; transform: translateY(18px); }
+    .js .plaque { clip-path: inset(0 100% 0 0); }
+    .js .montage .thomas, .js .montage .voiture { opacity: 0; }
+    .pret .hero .texte > * { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1); }
+    .pret .hero .texte > :nth-child(2) { transition-delay: .12s; }
+    .pret .hero .texte > :nth-child(3) { transition-delay: .24s; }
+    .pret .plaque { clip-path: inset(0 0 0 0); transition: clip-path .9s cubic-bezier(.7, 0, .2, 1) .15s; }
+    .pret .plaque::after { transform: translateX(70%); transition: transform 1.3s ease 1.05s; }
+    .pret .montage .thomas { opacity: 1; transition: opacity .6s ease .75s; }
+    .pret .montage .voiture { opacity: 1; }
 
-    /* ---------- Bande chiffres ---------- */
-    .chiffres {
-      display: flex;
-      justify-content: center;
-      gap: clamp(34px, 9vw, 130px);
-      flex-wrap: wrap;
-      padding: 64px 6% 50px;
-      background: var(--blanc);
-      position: relative;
-    }
-    .chiffres .bloc { text-align: center; }
-    .chiffres .label {
-      font-family: var(--f-label);
-      font-weight: 700;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--gris);
-      font-size: .95rem;
-      margin-top: 8px;
-    }
+    /* bascule : la diagonale de la charte et un filet or, sans damier */
+    .bascule { position: relative; z-index: 2; height: calc(var(--pente) * 2); margin-top: calc(var(--pente) * -2); background: var(--blanc); clip-path: polygon(0 100%, 100% 0, 100% 100%); }
+    .bascule::before { content: ""; position: absolute; inset: 0; background: var(--or); clip-path: polygon(0 100%, 100% 0, 100% 3px, 0 calc(100% + 3px)); }
 
-    /* ---------- L'association ---------- */
-    #association { padding-top: 70px; }
-    .asso-grille {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: clamp(30px, 5vw, 70px);
-      align-items: center;
-      max-width: 1180px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
+    /* ---------- Histoire : le volant se transmet (le vert des racines Papone) ---------- */
+    .histoire { position: relative; height: 230vh; padding: 0; background: var(--blanc); color: var(--marine); view-timeline-name: --histoire; }
+    .histoire .scene { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+    .histoire .fond-vert { position: absolute; inset: auto 0 0 0; height: 44%; background: var(--vert); clip-path: polygon(0 var(--pente), 100% 0, 100% 100%, 0 100%); }
+    .histoire h2 { position: absolute; z-index: 3; left: 0; right: 0; top: 15vh; margin: 0; text-align: center; font-size: clamp(1.6rem, 4.6vw, 4.5rem); line-height: 1; }
+    .histoire h2 span { display: block; }
+    .histoire h2 .v { color: var(--vert); }
+    .histoire .recit { position: absolute; z-index: 5; top: calc(15vh + 2.3em + 9vw); left: 50%; transform: translateX(-50%); width: min(580px, 86vw); text-align: center; color: var(--gris-f); font-size: 1.05rem; line-height: 1.55; }
+    .histoire .couleurs { display: block; margin-top: 12px; font-family: var(--f-label); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: .95rem; color: var(--marine); }
+    .histoire .couleurs b { color: var(--vert); }
+    .kart { position: absolute; z-index: 2; bottom: 9%; height: min(46vh, 430px); width: auto; max-width: none; }
+    .kart.k87 { left: 50%; transform: translateX(-104%); }
+    .kart.k20 { left: 50%; transform: translateX(4%); }
+    .annee { position: absolute; z-index: 4; bottom: 5%; font-family: var(--f-label); font-weight: 700; font-size: 1.25rem; letter-spacing: .12em; color: var(--blanc); text-transform: uppercase; line-height: 1; }
+    .annee b { display: block; font-family: var(--f-titre); font-size: 2.75rem; margin-bottom: 6px; }
+    .annee.a87 { left: 5vw; }
+    .annee.a20 { right: 5vw; text-align: right; }
+    @supports (animation-timeline: view()) {
+      .kart.k87 { animation: k87 linear both; animation-timeline: --histoire; animation-range: contain 0% contain 55%; }
+      .kart.k20 { animation: k20 linear both; animation-timeline: --histoire; animation-range: contain 0% contain 55%; }
+      .annee, .histoire .recit { animation: apparait linear both; animation-timeline: --histoire; animation-range: contain 30% contain 60%; }
+      .histoire h2 { animation: titre linear both; animation-timeline: --histoire; animation-range: contain 0% contain 40%; }
     }
-    .asso-txt .logo-asso { width: min(200px, 44%); margin-bottom: 26px; }
-    .asso-txt p + p { margin-top: 14px; }
-    /* héritage : 1980 en bandeau, puis les deux photos de Patrice côte à côte / ratios unifiés */
-    .heritage { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-content: center; }
-    .heritage figure:first-child { grid-column: 1 / -1; }
-    .heritage figure:first-child .frame img { aspect-ratio: 16 / 9; }
-    .heritage .frame img { aspect-ratio: 4 / 3; object-fit: cover; }
-    @media (max-width: 560px) { .heritage { grid-template-columns: 1fr; } .heritage .frame img { aspect-ratio: 3 / 2; } }
-    .heritage figcaption {
-      font-family: var(--f-label);
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      font-size: .95rem;
-      color: var(--gris);
-      margin-top: 12px;
-    }
-    @media (max-width: 860px) { .asso-grille { grid-template-columns: 1fr; } }
+    @keyframes k87 { from { transform: translateX(-190%); } to { transform: translateX(-104%); } }
+    @keyframes k20 { from { transform: translateX(90%); } to { transform: translateX(4%); } }
+    @keyframes apparait { from { opacity: 0; translate: 0 14px; } to { opacity: 1; translate: 0 0; } }
+    @keyframes titre { from { letter-spacing: .2em; opacity: .35; } to { letter-spacing: 0; opacity: 1; } }
 
-    /* ---------- Disciplines ---------- */
-    .disciplines { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; max-width: 1180px; margin: 44px auto 0; position: relative; z-index: 1; }
-    .disc {
-      position: relative;
-      background: rgba(39, 49, 68, .4);
-      border: 1px solid rgba(246,247,252,.12);
-      overflow: hidden;
+    /* ---------- Caterham Academy ---------- */
+    .academy { background: var(--marine); color: var(--blanc); padding: 130px max(20px, 4.4vw) 140px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 72px; align-items: center; clip-path: polygon(0 var(--pente), 100% 0, 100% 100%, 0 100%); margin-top: calc(var(--pente) * -1); }
+    .academy .photo { position: relative; }
+    .academy .photo img { width: 100%; aspect-ratio: 4 / 3.3; object-fit: cover; clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px)); }
+    .academy .photo::before, .academy .photo::after { content: ""; position: absolute; width: 44px; height: 44px; border: 4px solid var(--or); }
+    .academy .photo::before { left: -14px; top: -14px; border-right: 0; border-bottom: 0; }
+    .academy .photo::after { right: -14px; bottom: -14px; border-left: 0; border-top: 0; }
+    .academy h2 { margin: 0; color: var(--blanc); font-size: clamp(1.6rem, 3vw, 2.9rem); line-height: 1.04; }
+    .academy h2 span { display: block; white-space: nowrap; }
+    .academy h2 .or { color: var(--or); }
+    .academy p { color: var(--gris-c); max-width: 520px; margin-top: 18px; }
+    .circuits { margin: 30px 0 8px; }
+    .circuits svg { width: 100%; height: auto; overflow: visible; }
+    .circuits path { fill: none; stroke: var(--or); stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+    .circuits text { fill: var(--gris-c); font: 700 12px var(--f-label); letter-spacing: .1em; text-transform: uppercase; }
+    @supports (animation-timeline: view()) {
+      .circuits path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace linear both; animation-timeline: view(); animation-range: entry 20% cover 55%; }
     }
-    .disc .photo { height: 340px; overflow: hidden; }
-    .disc .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
-    .disc:hover .photo img { transform: scale(1.05); }
-    .disc::after {
-      content: "";
-      position: absolute;
-      left: 0; bottom: 0;
-      height: 3px; width: 0;
-      background: var(--or);
-      transition: width .45s ease;
-    }
-    .disc:hover::after { width: 100%; }
-    .disc .corps { padding: 22px 22px 26px; }
-    .disc h3 { color: var(--blanc); margin-bottom: 8px; }
-    .disc p { color: #aeb6c8; font-size: .95rem; }
-    .disc .puce {
-      position: absolute; top: 14px; left: 14px;
-      z-index: 2;
-      background: var(--or); color: var(--marine-deep);
-      font-family: var(--f-titre); font-weight: 700; font-size: 1.05rem;
-      width: 46px; height: 46px;
-      display: flex; align-items: center; justify-content: center;
-      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-    }
-    .disc .photo { position: relative; }
-    .disc-meta {
-      position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
-      font-family: var(--f-label);
-      letter-spacing: .145em;
-      text-transform: uppercase;
-      font-size: .95rem;
-      color: var(--or-clair);
-      background: linear-gradient(0deg, rgba(7, 11, 29, .95) 0%, rgba(7, 11, 29, .9) 54%, rgba(7, 11, 29, 0) 100%);
-      padding: 34px 16px 10px;
-    }
-    @media (max-width: 900px) { .disciplines { grid-template-columns: 1fr; } .disc .photo { height: 300px; } }
+    @keyframes trace { to { stroke-dashoffset: 0; } }
+    .chiffres { display: grid; grid-template-columns: repeat(3, 1fr); margin: 28px 0 36px; border-top: 1px solid rgba(246, 247, 252, .25); }
+    .chiffres div { padding-top: 16px; }
+    .chiffres b { display: block; font-family: var(--f-label); font-weight: 700; font-size: 3.4rem; line-height: 1; }
+    .chiffres span { font-size: .88rem; color: var(--gris-c); line-height: 1.4; display: block; padding-right: 10px; }
 
-    /* ---------- Partenaires ---------- */
-    .part-duo {
-      max-width: 1180px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: clamp(28px, 4.5vw, 64px);
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-    @media (max-width: 860px) { .part-duo { grid-template-columns: 1fr; } }
-    .part-duo figcaption {
-      font-family: var(--f-label);
-      letter-spacing: .13em;
-      text-transform: uppercase;
-      font-size: .92rem;
-      color: var(--gris);
-      margin-top: 12px;
-    }
-    .part-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1180px; margin: 40px auto; position: relative; z-index: 1; }
-    .part-carte {
-      background: #fff;
-      border: 1px solid rgba(30,38,53,.1);
-      border-top: 0;
-      padding: 26px 24px;
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
-    .part-carte:hover { transform: translateY(-5px); box-shadow: 0 16px 34px rgba(30,38,53,.1); }
-    .part-carte, .presse-carte { position: relative; overflow: hidden; }
-    /* Le liseré damier en tête de ces cartes vit dans assets/styles.css : la même
-       signature est portée par les cartes de contact.html (unifiée le 22/09). */
-    .part-carte::after, .presse-carte::after {
-      content: "";
-      position: absolute;
-      top: -30%; bottom: -30%;
-      left: -45%;
-      width: 26%;
-      background: linear-gradient(105deg, transparent, rgba(212, 151, 38, .13), transparent);
-      transform: skewX(-18deg);
-      transition: left .55s ease;
-      pointer-events: none;
-    }
-    .part-carte:hover::after, .presse-carte:hover::after, a.presse-carte:focus-visible::after { left: 130%; }
-    @media (prefers-reduced-motion: reduce) { .part-carte::after, .presse-carte::after { display: none; } }
-    .part-carte h3 { color: var(--marine); margin-bottom: 8px; }
-    .part-carte p { color: var(--gris); font-size: .95rem; }
-    @media (max-width: 900px) { .part-grille { grid-template-columns: 1fr; } }
-    .part-cta {
-      max-width: 1180px;
-      /* 66px = le pas vertical de .trust : sans lui la bande de logos blancs vient
-         buter sur l'aplat marine et les tuiles paraissent coupées. */
-      margin: 66px auto 0;
-      background:
-        radial-gradient(rgba(246,247,252,.04) 1px, transparent 1.5px),
-        var(--marine);
-      background-size: 22px 22px, 100% 100%;
-      color: var(--blanc);
-      padding: 34px 34px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 22px;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
-    }
-    .part-cta strong { font-family: var(--f-label); font-weight: 700; font-size: 1.55rem; letter-spacing: .06em; text-transform: uppercase; }
+    /* ---------- Presse : une revue en lignes typographiques ---------- */
+    .presse { background: var(--nuit); color: var(--blanc); padding: 120px max(20px, 4.4vw) 130px; clip-path: polygon(0 0, 100% var(--pente), 100% 100%, 0 100%); margin-top: calc(var(--pente) * -1); }
+    .presse h2 { color: var(--blanc); margin: 0 0 40px; font-size: clamp(1.6rem, 3.4vw, 3rem); }
+    .presse h2 .or { color: var(--or); }
+    .revue { border-top: 1px solid rgba(246, 247, 252, .18); }
+    .revue .ligne { display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; gap: 28px; align-items: center; padding: 26px 0; border-bottom: 1px solid rgba(246, 247, 252, .18); position: relative; transition: padding .25s; }
+    .revue .ligne::before { content: ""; position: absolute; left: 0; top: -1px; height: 2px; width: 0; background: var(--or); transition: width .4s cubic-bezier(.2, .7, .2, 1); }
+    .revue .ligne:hover::before, .revue .ligne:focus-within::before { width: 100%; }
+    .revue .ligne:hover { padding-left: 14px; }
+    .revue .media { font-family: var(--f-label); font-weight: 700; font-size: 1.12rem; line-height: 1.2; letter-spacing: .1em; text-transform: uppercase; color: var(--or); }
+    .revue .media small { display: block; color: var(--gris-c); font-size: .95rem; margin-top: 4px; }
+    .revue .titre { font-weight: 600; font-size: clamp(1.15rem, 1.9vw, 1.7rem); line-height: 1.3; color: var(--blanc); text-decoration: none; }
+    .revue .aller { display: flex; gap: 18px; font-family: var(--f-label); font-weight: 700; font-size: 1.05rem; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+    .revue .aller a { color: var(--blanc); text-decoration: none; border-bottom: 2px solid var(--or); padding-bottom: 4px; }
+    .revue a.couvre::after { content: ""; position: absolute; inset: 0; }
 
-    /* ---------- Galerie ---------- */
-    .galerie {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 26px 24px;
-      margin-top: 46px;
+    /* ---------- Partenaires : logos d'origine, jamais recolorés ---------- */
+    .partenaires { background: var(--blanc); color: var(--marine); padding: 130px max(20px, 4.4vw) 140px; text-align: center; clip-path: polygon(0 0, 100% var(--pente), 100% 100%, 0 100%); margin-top: calc(var(--pente) * -1); }
+    .partenaires h2 { margin: 0 0 12px; font-size: clamp(1.6rem, 3.4vw, 3rem); }
+    .partenaires h2 .or { color: var(--or); }
+    .partenaires .lead { margin: 0 auto 14px; color: var(--gris-f); max-width: 560px; }
+    .fidelite { margin: 0 auto 48px; font-family: var(--f-label); font-weight: 700; font-size: 1.12rem; letter-spacing: .1em; text-transform: uppercase; }
+    .fidelite b { color: #9A6A10; }
+    .arguments { max-width: 1100px; margin: 0 auto 56px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; text-align: left; border-top: 2px solid var(--marine); }
+    .arguments div { padding: 20px 26px 0 0; }
+    .arguments b { display: block; font-family: var(--f-label); font-weight: 700; font-size: 1.3rem; letter-spacing: .06em; text-transform: uppercase; }
+    .arguments span { display: block; margin-top: 6px; font-size: .95rem; line-height: 1.55; color: var(--gris-f); }
+    .mur { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(240px, 340px) repeat(3, minmax(0, 1fr)); grid-auto-rows: 118px; border-top: 1px solid #DCE0E8; border-left: 1px solid #DCE0E8; max-width: 1320px; margin: 0 auto; }
+    .mur > div { display: grid; place-items: center; border-right: 1px solid #DCE0E8; border-bottom: 1px solid #DCE0E8; padding: 16px; background: #fff; }
+    .mur img { max-width: 112px; max-height: 60px; width: auto; height: auto; }
+    .mur a { display: grid; place-items: center; width: 100%; height: 100%; transition: transform .2s; }
+    .mur a:hover { transform: scale(1.06); }
+    .mur .centre { grid-column: 4; grid-row: 1 / span 3; gap: 24px; align-content: center; background: var(--blanc); }
+    .mur .centre img { max-width: 220px; max-height: none; }
+    @supports (animation-timeline: view()) {
+      .mur > div:not(.centre) { animation: pose linear both; animation-timeline: view(); animation-range: entry 10% cover 35%; }
     }
-    /* Les cases de grille ont un plancher min-width:auto : la vidéo et les photos
-       imposaient une piste de 363 px, plus large que l'écran sous 414 px, et les
-       images débordaient hors du cadre (débordement clippé, donc invisible). */
-    .galerie > * { min-width: 0; }
-    .galerie figure { margin: 0; }
-    .galerie figcaption {
-      font-family: var(--f-label);
-      font-weight: 700;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-      font-size: .92rem;
-      color: #aeb6c8;
-      margin-top: 12px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .galerie .frame { overflow: visible; }
-    .galerie .frame img { aspect-ratio: 3 / 2; transition: transform .45s ease, filter .45s ease; }
-    .galerie .frame:hover img { transform: scale(1.03); filter: saturate(1.15); }
-    .galerie-video { grid-column: span 2; margin: 0; }
-    .galerie-video video { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
-    @media (max-width: 620px) { .galerie-video { grid-column: span 1; } }
-    .galerie-plus {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 8px;
-      aspect-ratio: 3 / 2;
-      padding: 26px;
-      text-decoration: none;
-      border: 1px solid rgba(246, 247, 252, .16);
-      background: rgba(39, 49, 68, .4);
-      transition: border-color .25s, transform .2s;
-      /* Le handle se dimensionne sur la LARGEUR DE LA TUILE, pas sur celle de la fenêtre :
-         le nombre de colonnes de la galerie change par paliers, si bien qu'une taille en vw
-         faisait sortir le texte de sa case entre deux paliers (jusqu'à 153 px à 950 px). */
-      container-type: inline-size;
-    }
-    .galerie-plus:hover { border-color: var(--or); transform: translateY(-4px); }
-    .galerie-plus .plus-kicker {
-      font-family: var(--f-label);
-      letter-spacing: .20em;
-      text-transform: uppercase;
-      font-size: .95rem;
-      color: var(--or);
-    }
-    .galerie-plus .plus-handle {
-      font-family: var(--f-titre);
-      font-weight: 700;
-      font-size: clamp(.68rem, 2vw, 1rem);
-      font-size: min(1rem, 4.25cqi);
-      color: var(--blanc);
-      text-transform: uppercase;
-      letter-spacing: 0;
-      white-space: nowrap;
-      /* filet de sécurité : si la mesure devait quand même être prise en défaut,
-         le handle se coupe DANS sa case au lieu de la traverser */
-      max-width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .galerie-plus .plus-fleche { color: var(--or); font-size: 1.6rem; line-height: 1; }
-    @media (max-width: 900px) { .galerie { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 620px) {
-      .galerie { grid-template-columns: 1fr; }
-      /* En colonne unique la légende la plus longue (« Roulage monoplace / SERA Racing
-         Academy, Le Luc 2024 ») perdait son lieu et son année dans les points de suspension
-         sous 414 px : elle passe sur deux lignes plutôt que d'être amputée. */
-      .galerie figcaption { white-space: normal; text-overflow: clip; }
-    }
+    @keyframes pose { from { opacity: 0; transform: translateY(22px) scale(.94); } to { opacity: 1; transform: none; } }
 
-    /* ---------- Teaser pilote ---------- */
-    .pilote-grille {
-      display: grid;
-      grid-template-columns: .85fr 1.15fr;
-      gap: clamp(30px, 5vw, 80px);
-      align-items: center;
-      max-width: 1180px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-    .pilote-grille .frame { max-width: 400px; }
-    @media (max-width: 860px) { .pilote-grille { grid-template-columns: 1fr; } .pilote-grille .frame { margin: 0 auto; } }
+    /* ---------- Contact ---------- */
+    #contact { background: var(--nuit); color: var(--blanc); padding: 110px max(20px, 4.4vw); display: flex; flex-wrap: wrap; gap: 30px; align-items: center; justify-content: space-between; }
+    #contact h2 { margin: 0; color: var(--blanc); font-size: clamp(1.5rem, 3vw, 2.75rem); max-width: 760px; line-height: 1.05; }
+    #contact h2 .or { color: var(--or); }
+    #contact .coord { display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; }
+    #contact .mail { font-weight: 600; font-size: 1.1rem; color: var(--blanc); border-bottom: 1px solid rgba(246, 247, 252, .35); padding-bottom: 4px; }
 
-    /* ---------- Ils nous font confiance (bande de partenaires défilante) ----------
-         Ordre du défilé = importance : partenaires actifs 2026 d'abord (tri par soutien
-         cumulé), puis les anciens soutiens. Source : Suivi_Partenaires_TPRacing. */
-    .trust { max-width: 1180px; margin: 66px auto 0; position: relative; z-index: 1; }
-    /* En-tête aligné à gauche comme les 7 autres titres de section du site (mesuré :
-       tous posés à x=76, celui-ci était le seul centré, et c'est la section la plus
-       stratégique). Le vide laissé à droite du titre est tenu par un filet, la pièce
-       exacte de .signature-charte du pied (un .filet en flex:1 qui prend la place
-       restante) remontée au niveau d'une section. Il ne s'affiche en fin de ligne que
-       s'il peut atteindre la largeur d'une tuile de la bande qu'il annonce (196 px) ;
-       sinon il passe de lui-même sous le titre, sur toute la largeur. Aucun point de
-       rupture inventé : la seule valeur est une mesure prise dans la section. */
-    .trust-tete { text-align: left; margin-bottom: 36px; }
-    .trust-ligne { display: flex; flex-wrap: wrap; align-items: baseline; gap: 18px 22px; }
-    /* La marge basse du h2 est portée par le conteneur : dans un flex elle ne
-       fusionne plus avec celle du lead et allongerait l'en-tête de 22 px. */
-    .trust-ligne h2 { flex: 0 1 auto; margin-bottom: 0; }
-    .trust-ligne .filet {
-      flex: 1 1 196px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--or) 0%, rgba(212, 151, 38, .12) 100%);
+    /* grain argentique posé sur les scènes sombres */
+    .grain { isolation: isolate; }
+    .grain::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 40; opacity: .13; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding: 100px 20px 0; gap: 10px; min-height: auto; }
+      .hero .texte p { font-size: .95rem; }
+      .montage { justify-self: center; margin-bottom: -60px; }
+      .kart { height: 25vh; bottom: 22%; }
+      .histoire .fond-vert { height: 36%; }
+      .histoire .recit { top: calc(15vh + 3.4em); font-size: .95rem; }
+      .annee b { font-size: 1.75rem; }
+      .academy, .partenaires, .presse, #contact { padding: 90px 20px 100px; }
+      .academy { grid-template-columns: 1fr; gap: 40px; }
+      .chiffres b { font-size: 2.5rem; }
+      .chiffres span { font-size: .75rem; }
+      .revue .ligne { grid-template-columns: 1fr; gap: 10px; }
+      .arguments { grid-template-columns: 1fr; }
+      .arguments div { padding: 16px 0 0; }
+      .mur { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: auto; }
+      .mur > div { min-height: 92px; }
+      .mur .centre { grid-column: 1 / -1; grid-row: auto; padding: 26px; }
+      .mur img { max-width: 84px; max-height: 44px; }
+      #contact .mail { font-size: 1rem; }
     }
-    .trust-tete p.lead { margin: 22px 0 0; max-width: 720px; }
-    .trust-band {
-      overflow: hidden;
-      -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
-      mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
-    }
-    .trust-piste { display: flex; gap: 16px; width: max-content; animation: defile-partenaires 58s linear infinite; }
-    .trust-lot { display: flex; gap: 16px; }
-    @keyframes defile-partenaires { to { transform: translateX(calc(-50% - 8px)); } }
-    .trust-band:hover .trust-piste,
-    .trust-band:focus-within .trust-piste { animation-play-state: paused; }
-    .trust-band.fige .trust-piste { animation-play-state: paused; }
-    /* Commande de défilement. Le survol et le focus arrêtent déjà la bande, mais
-       AUCUN des deux n'existe sur un écran tactile (pointer: coarse, hover: none) :
-       sur téléphone les 13 logos défilaient à 71 px/s sans aucun moyen de les
-       arrêter, et chaque lien était une cible mouvante. Carré biseauté maison. */
-    .trust-cmd { display: flex; justify-content: flex-end; margin-top: 16px; }
-    .trust-pause {
-      width: 38px; height: 38px; padding: 0; border: 0; cursor: pointer;
-      display: inline-flex; align-items: center; justify-content: center;
-      background: var(--marine);
-      clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
-      transition: background .25s ease;
-    }
-    .trust-pause:hover { background: var(--marine-deep); }
-    .trust-pause:focus-visible { outline: none; box-shadow: inset 0 0 0 3px var(--or); }
-    .trust-pause svg { width: 13px; height: 13px; display: block; fill: var(--or); }
-    .trust-tile {
-      position: relative;
-      flex: 0 0 auto;
-      width: 196px;
-      background: #fff;
-      border: 1px solid rgba(30, 38, 53, .09);
-      aspect-ratio: 3 / 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 18px 20px;
-      overflow: hidden;
-      text-decoration: none;
-      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-    }
-    .trust-tile img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
-    .trust-tile::after {
-      content: "";
-      position: absolute;
-      left: 0; bottom: 0;
-      height: 3px; width: 0;
-      background: var(--or);
-      transition: width .4s ease;
-    }
-    a.trust-tile:hover, a.trust-tile:focus-visible {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 30px rgba(30, 38, 53, .12);
-      border-color: rgba(212, 151, 38, .55);
-    }
-    a.trust-tile:hover::after, a.trust-tile:focus-visible::after { width: 100%; }
-    @media (max-width: 620px) { .trust-tile { width: 150px; padding: 14px 16px; } .trust-piste, .trust-lot { gap: 12px; } @keyframes defile-partenaires { to { transform: translateX(calc(-50% - 6px)); } } }
     @media (prefers-reduced-motion: reduce) {
-      /* Mur statique aligné sur la colonne du titre : centré, il démarrait 35 px à
-         droite de lui et laissait un trou de part et d'autre de sa dernière rangée. */
-      .trust-piste { animation: none; width: auto; flex-wrap: wrap; justify-content: flex-start; }
-      .trust-lot { flex-wrap: wrap; justify-content: flex-start; }
-      .trust-lot.copie { display: none; }
-      .trust-band { -webkit-mask-image: none; mask-image: none; }
-      .trust-cmd { display: none; }
+      .js .hero .texte > *, .js .montage .thomas, .js .montage .voiture { opacity: 1; transform: none; }
+      .js .plaque { clip-path: none; }
+      .plaque::after { display: none; }
+      .kart, .annee, .histoire .recit, .histoire h2, .circuits path, .mur > div { animation: none !important; }
     }
-    /* Sans JavaScript, le bouton n'est jamais posé : la bande ne doit alors pas
-       partir toute seule. Même mur statique qu'en mouvement réduit. */
-    html:not(.js) .trust-piste { animation: none; width: auto; flex-wrap: wrap; justify-content: flex-start; }
-    html:not(.js) .trust-lot { flex-wrap: wrap; justify-content: flex-start; }
-    html:not(.js) .trust-lot.copie { display: none; }
-    html:not(.js) .trust-band { -webkit-mask-image: none; mask-image: none; }
-
-    /* ---------- Ils parlent de nous (presse) ---------- */
-    .presse-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 40px; }
-    .presse-carte {
-      background: #fff;
-      border: 1px solid rgba(30, 38, 53, .1);
-      border-top: 0;
-      padding: 26px 24px 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
-      text-decoration: none;
-      transition: transform .25s ease, box-shadow .25s ease;
+    @media print {
+      .montage, .bascule, .histoire .fond-vert, .kart, .annee, .circuits { display: none !important; }
+      .histoire { height: auto !important; }
+      .histoire .scene { position: static !important; height: auto !important; }
+      .histoire h2, .histoire .recit { position: static !important; transform: none !important; }
+      .academy, .presse, .partenaires, #contact { clip-path: none !important; margin-top: 0 !important; }
     }
-    a.presse-carte:hover, a.presse-carte:focus-visible { transform: translateY(-5px); box-shadow: 0 16px 34px rgba(30, 38, 53, .1); }
-    .presse-carte .media {
-      font-family: var(--f-label);
-      font-weight: 700;
-      letter-spacing: .135em;
-      text-transform: uppercase;
-      font-size: .95rem;
-      /* encre marine sur la carte claire (19/08) ; l'or reste le liseré damier en tête */
-      color: var(--marine);
-    }
-    .presse-carte .media b { color: var(--gris); }
-    .presse-carte .titre { color: var(--marine); font-weight: 600; font-size: 1.04rem; line-height: 1.5; }
-    .presse-carte .lire {
-      margin-top: auto;
-      font-family: var(--f-label);
-      letter-spacing: .13em;
-      text-transform: uppercase;
-      font-size: .98rem;
-      color: var(--marine);
-      transition: color .2s;
-    }
-    /* Carte CLAIRE : l'encre reste marine, l'or n'y est que le liseré damier en tête
-       et l'anneau au survol. Une flèche or sur blanc tombait à 2,50:1 (19/08). */
-    .presse-carte .lire i, .presse-carte .lire-duo i {
-      font-style: normal; color: var(--marine); display: inline-block;
-      transition: transform .2s ease;
-    }
-    /* La flèche glisse dans le sens qu'elle indique au survol (veille 21/09, vu chez
-       astonmartinf1.com : l'accent ne s'allume pas, il avance). Geste du lecteur
-       uniquement, comme le lift des cartes juste au-dessus : pas de garde reduced-motion. */
-    a.presse-carte:hover .lire i, a.presse-carte:focus-visible .lire i,
-    .lire-duo a:hover i, .lire-duo a:focus-visible i { transform: translate(3px, -3px); }
-    .presse-carte .lire-duo { margin-top: auto; display: flex; gap: 12px; flex-wrap: wrap; }
-    .presse-carte .lire-duo a {
-      font-family: var(--f-label);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      font-size: .95rem;
-      text-decoration: none;
-      color: var(--marine);
-      padding: 7px 14px;
-      box-shadow: inset 0 0 0 1.5px rgba(30, 38, 53, .35);
-      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-      transition: box-shadow .2s, color .2s, transform .15s;
-    }
-    .presse-carte .lire-duo a:hover, .presse-carte .lire-duo a:focus-visible {
-      /* la récompense du survol est l'anneau or, pas la couleur du mot */
-      box-shadow: inset 0 0 0 1.5px var(--or);
-      transform: translateY(-2px);
-    }
-    @media (max-width: 900px) { .presse-grid { grid-template-columns: 1fr; } }
 
     /* ---------- Intro « tracé de circuit » au lancement ----------
        Une piste se dessine en zigzag façon intro F1, parcourue par une
@@ -765,32 +405,10 @@
       to { opacity: 1; transform: scale(1); filter: blur(0); }
     }
     #intro.fin { opacity: 0; transition: opacity .4s ease; pointer-events: none; }
-
-    /* ---------- Contact ---------- */
-    #contact .duo {
-      max-width: 1180px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: clamp(28px, 5vw, 70px);
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-    #contact .actions { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
-    #contact .actions .btn { width: auto; }
-    #contact .note {
-      font-family: var(--f-label);
-      letter-spacing: .13em;
-      text-transform: uppercase;
-      font-size: .95rem;
-      color: var(--gris);
-      margin-top: 6px;
-    }
-    @media (max-width: 860px) { #contact .duo { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
+
 
   <!-- ===== INTRO AU LANCEMENT (1 fois par session) ===== -->
   <div id="intro" aria-hidden="true">
@@ -817,18 +435,22 @@
   <!-- Symbole emblème TP (réutilisé en motif de fond) -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="tp-embleme"><path transform="matrix(1,0,0,-1,105.048,39.8827)" d="M0 0H-14.843-18.39-21.927-25.487-30.224-70.716L-74.338-12.077H-49.812L-63.958-59.256H-50.253L-37.921-18.123C-36.845-14.535-33.542-12.077-29.796-12.077H-29.102-25.551-22.003-18.452-4.093C-.63-12.134-.985-19.39-5.576-19.337L-5.579-19.345H-6.003-27.964C-30.013-19.345-31.82-20.689-32.408-22.652L-43.383-59.252C-43.018-59.26-42.659-59.265-42.305-59.267-39.871-59.278-37.698-59.14-35.994-58.998-28.609-58.383-27.605-53.078-27.578-53.025L-20.986-31.423C-20.986-31.423-13.091-31.433-10.015-31.425-9.883-31.425-9.757-31.425-9.644-31.424-9.449-31.424-9.282-31.423-9.151-31.422L-9.148-31.414C-5.016-31.476-3.249-31.223-2.109-31.072 2.242-30.498 10.766-25.789 11.352-10.582 11.389-9.611 11.546 .017 0 0"/></g></defs></svg>
 
+  <!-- Flou de vitesse de la voiture du hero (piloté par le script de bas de page) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="vitesse" x="-20%" y="-10%" width="140%" height="120%"><feGaussianBlur id="flou" in="SourceGraphic" stdDeviation="0 0"/></filter>
+  </svg>
+
   <a class="saut-contenu" href="#contenu">Aller au contenu</a>
 
   <!-- ===== NAVIGATION ===== -->
   <div class="ligne-course" aria-hidden="true"></div>
   <nav id="navbar" aria-label="Navigation principale">
     <a class="logo" href="./" aria-label="TPRacing, retour à l'accueil">
-      <img class="logo-sombre" src="assets/logo-secondaire-blanc.png" alt="" width="376" height="162">
-      <img class="logo-clair" src="assets/logo-secondaire-couleur.png" alt="" width="376" height="162">
+      <img class="logo-clair" src="assets/logo-couleur-degrade.png" alt="" width="585" height="503">
     </a>
     <ul>
-      <li class="masque-mobile"><a href="#association">L'association</a></li>
-      <li class="masque-mobile"><a href="#trajectoire">La trajectoire</a></li>
+      <li class="masque-mobile"><a href="#histoire">L'association</a></li>
+      <li class="masque-mobile"><a href="#academy">Le projet Caterham</a></li>
       <li><a href="pilote.html">Le pilote</a></li>
       <li><a href="contact.html">Contact</a></li>
       <li><a class="nav-cta" href="#partenaires">Devenir partenaire</a></li>
@@ -837,325 +459,128 @@
 
   <main id="contenu">
 
-  <!-- ===== HERO ===== -->
-  <header class="hero">
-    <div class="hero-tete">
-      <!-- ✏️ MODIFIABLE : accroche principale -->
-      <h1 class="rvl" data-d="1"><span class="l1">Le volant</span> <span class="l2">se <span class="or">transmet</span></span></h1>
-      <div class="hero-actions rvl" data-d="2">
-        <a class="btn btn-contour-or" href="#partenaires">Devenir partenaire</a>
-        <a class="lien-fleche" href="pilote.html">Découvrir le pilote <i aria-hidden="true">↗</i></a>
-      </div>
+  <!-- ===== HERO : CAP SUR LA CATERHAM =====
+       Montage : emblème TP en aplat or, Thomas casqué (test du 16/07/2026 à Alès) et la
+       Caterham du test, détourée, plaque retouchée en 47 (le seul numéro du site). -->
+  <header class="hero grain">
+    <div class="texte">
+      <h1><span>Cap sur la</span><span class="or">Caterham</span></h1>
+      <p>Association de sport automobile. Après le karting et la monoplace, Thomas Papone prépare son entrée en Caterham Academy.</p>
+      <div class="actions"><a class="btn btn-or" href="#partenaires">Devenir partenaire</a><a class="lien-or" href="pilote.html">Voir le parcours</a></div>
     </div>
-    <div class="diptyque">
-      <figure class="epoque e1987 rvl" data-d="2">
-        <picture>
-          <source type="image/avif" srcset="assets/img/hero-1987-m.avif 786w, assets/img/hero-1987.avif 1543w" sizes="(max-width: 600px) 300px, min(78.6svh, 50.5vw)">
-          <img src="assets/img/hero-1987.webp" srcset="assets/img/hero-1987-m.webp 786w, assets/img/hero-1987.webp 1543w" sizes="(max-width: 600px) 300px, min(78.6svh, 50.5vw)" width="1543" height="1100" fetchpriority="high" alt="Patrice Papone de face au volant de son kart, Championnat de France 1987">
-        </picture>
-        <figcaption><span class="an">1987</span><span class="nom">Patrice Papone</span><span class="lieu">Championnat de France</span></figcaption>
-      </figure>
-      <div class="passage" aria-hidden="true"></div>
-      <figure class="epoque e2020 rvl" data-d="3">
-        <picture>
-          <source type="image/avif" srcset="assets/img/hero-2020-m.avif 929w, assets/img/hero-2020.avif 1825w" sizes="(max-width: 600px) 380px, min(92.9svh, 59.7vw)">
-          <img src="assets/img/hero-2020.webp" srcset="assets/img/hero-2020-m.webp 929w, assets/img/hero-2020.webp 1825w" sizes="(max-width: 600px) 380px, min(92.9svh, 59.7vw)" width="1825" height="1100" fetchpriority="high" alt="Thomas Papone de face au volant de son kart sous la pluie, Château-Gaillard 2020">
-        </picture>
-        <figcaption><span class="an">2020</span><span class="nom">Thomas Papone</span><span class="lieu">Château-Gaillard</span></figcaption>
-      </figure>
+    <div class="montage" id="montage" aria-hidden="true">
+      <div class="plaque"></div>
+      <picture>
+        <source type="image/avif" srcset="assets/img/hero-thomas-m.avif 250w, assets/img/hero-thomas.avif 564w" sizes="(max-width: 900px) 40vw, 22vw">
+        <img class="thomas" src="assets/img/hero-thomas.webp" srcset="assets/img/hero-thomas-m.webp 250w, assets/img/hero-thomas.webp 564w" sizes="(max-width: 900px) 40vw, 22vw" width="564" height="1400" alt="">
+      </picture>
+      <div class="ombre"></div>
+      <picture>
+        <source type="image/avif" srcset="assets/img/hero-car47-m.avif 760w, assets/img/hero-car47.avif 1640w" sizes="(max-width: 900px) 92vw, 46vw">
+        <img class="voiture" id="voiture" src="assets/img/hero-car47.webp" srcset="assets/img/hero-car47-m.webp 760w, assets/img/hero-car47.webp 1640w" sizes="(max-width: 900px) 92vw, 46vw" width="1640" height="1017" alt="" fetchpriority="high">
+      </picture>
     </div>
-    <div class="liseret"></div>
   </header>
 
-  <!-- ===== MARQUEE ===== -->
-  <div class="marquee" aria-hidden="true">
-    <div class="piste">
-      <span>Road to Caterham</span><i></i>
-      <span>Karting de compétition</span><i></i>
-      <span>Père et fils</span><i></i>
-      <span>Depuis 2021</span><i></i>
-      <span>FEED Racing France</span><i></i>
-      <span>Chaque dixième compte</span><i></i>
-      <span>Road to Caterham</span><i></i>
-      <span>Karting de compétition</span><i></i>
-      <span>Père et fils</span><i></i>
-      <span>Depuis 2021</span><i></i>
-      <span>FEED Racing France</span><i></i>
-      <span>Chaque dixième compte</span><i></i>
-    </div>
-  </div>
+  <div class="bascule" aria-hidden="true"></div>
 
-  <!-- ===== CHIFFRES ===== -->
-  <div class="chiffres">
-    <div class="bloc rvl"><div class="num-outline">2021</div><div class="label">Naissance de l'association</div></div>
-    <div class="bloc rvl" data-d="1"><div class="num-outline">3</div><div class="label">Disciplines en parallèle</div></div>
-    <div class="bloc rvl" data-d="2"><div class="num-outline">1</div><div class="label">Objectif, la Caterham</div></div>
-  </div>
-
-  <!-- ===== L'ASSOCIATION ===== -->
-  <section id="association">
-    <svg class="embleme-fond" viewBox="29 38 90 63" style="top: 40px; right: -9%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
-    <div class="asso-grille">
-      <div class="asso-txt rvl">
-        <img class="logo-asso" src="assets/logo-couleur-degrade.png" alt="Logo TPRacing" width="585" height="503" loading="lazy">
-        <h2><span class="hl">La piste</span> <span class="hl">en héritage</span></h2>
-        <!-- ✏️ MODIFIABLE : texte de présentation -->
-        <p class="lead">Chez les Papone, la piste se transmet. Des paddocks de karting des années 80 à la Formule Ford, Patrice a couru avant de passer le volant. En 2021, père et fils fondent <strong>TPRacing, Thomas Papone Racing</strong>, pour structurer la progression de Thomas vers la course automobile.</p>
-        <p class="lead">TPRacing n'est pas qu'une structure sportive : c'est un projet qui se développe <strong>comme une marque</strong>, avec sa communication, ses contenus, ses partenaires et sa communauté. Suivre l'association, c'est voir un projet de course se construire pour de vrai, étape par étape.</p>
-      </div>
-      <div class="heritage">
-        <figure class="rvl">
-          <span class="frame"><picture><source type="image/avif" srcset="assets/img/heritage-1980-m.avif 760w, assets/img/heritage-1980.avif 1200w" sizes="(max-width: 860px) 90vw, (max-width: 1100px) 42vw, 555px"><img alt="Paddock karting au Mans en 1980, époque Papone" src="assets/img/heritage-1980.webp" srcset="assets/img/heritage-1980-m.webp 760w, assets/img/heritage-1980.webp 1200w" sizes="(max-width: 860px) 90vw, (max-width: 1100px) 42vw, 555px" width="1200" height="675" loading="lazy"></picture></span>
-          <figcaption>Le Mans 1980 / l'époque Papone</figcaption>
-        </figure>
-        <figure class="rvl" data-d="1">
-          <span class="frame"><picture><source type="image/avif" srcset="assets/img/heritage-1987-m.avif 760w, assets/img/heritage-1987.avif 1200w" sizes="(max-width: 560px) 90vw, (max-width: 860px) 44vw, (max-width: 1100px) 20vw, 265px"><img alt="Patrice Papone en course de karting dans les années 80" src="assets/img/heritage-1987.webp" srcset="assets/img/heritage-1987-m.webp 760w, assets/img/heritage-1987.webp 1200w" sizes="(max-width: 560px) 90vw, (max-width: 860px) 44vw, (max-width: 1100px) 20vw, 265px" width="1200" height="778" loading="lazy"></picture></span>
-          <figcaption>Karting années 80 / Patrice Papone</figcaption>
-        </figure>
-        <figure class="rvl" data-d="2">
-          <span class="frame"><picture><source type="image/avif" srcset="assets/img/heritage-1988-m.avif 760w, assets/img/heritage-1988.avif 1200w" sizes="(max-width: 560px) 90vw, (max-width: 860px) 44vw, (max-width: 1100px) 20vw, 265px"><img alt="Patrice Papone en Formule Ford en 1988" src="assets/img/heritage-1988.webp" srcset="assets/img/heritage-1988-m.webp 760w, assets/img/heritage-1988.webp 1200w" sizes="(max-width: 560px) 90vw, (max-width: 860px) 44vw, (max-width: 1100px) 20vw, 265px" width="1200" height="675" loading="lazy"></picture></span>
-          <figcaption>Formule Ford 1988 / le passage en voiture</figcaption>
-        </figure>
-      </div>
+  <!-- ===== L'ASSOCIATION : LE VOLANT SE TRANSMET ===== -->
+  <section class="histoire" id="histoire" aria-labelledby="t-histoire">
+    <div class="scene">
+      <div class="fond-vert"></div>
+      <h2 id="t-histoire"><span>Le volant</span><span class="v">se transmet</span></h2>
+      <p class="recit">Chez les Papone, la piste se transmet. Patrice a couru en karting puis en Formule Ford. En 2021, père et fils fondent TPRacing pour porter Thomas jusqu'à la course automobile.
+        <span class="couleurs">L'or de Senna / le marine de la rigueur / le rouge de la persévérance / le <b>vert</b> des racines Papone</span></p>
+      <picture>
+        <source type="image/avif" srcset="assets/img/hero-1987-m.avif 786w, assets/img/hero-1987.avif 1543w" sizes="(max-width: 900px) 36vh, 60vh">
+        <img class="kart k87" src="assets/img/hero-1987.webp" srcset="assets/img/hero-1987-m.webp 786w, assets/img/hero-1987.webp 1543w" sizes="(max-width: 900px) 36vh, 60vh" width="1543" height="1100" loading="lazy" alt="Patrice Papone de face au volant de son kart, Championnat de France 1987">
+      </picture>
+      <picture>
+        <source type="image/avif" srcset="assets/img/hero-2020-m.avif 929w, assets/img/hero-2020.avif 1825w" sizes="(max-width: 900px) 42vh, 72vh">
+        <img class="kart k20" src="assets/img/hero-2020.webp" srcset="assets/img/hero-2020-m.webp 929w, assets/img/hero-2020.webp 1825w" sizes="(max-width: 900px) 42vh, 72vh" width="1825" height="1100" loading="lazy" alt="Thomas Papone de face au volant de son kart sous la pluie, Château-Gaillard 2020">
+      </picture>
+      <div class="annee a87"><b>1987</b>Patrice</div>
+      <div class="annee a20"><b>2020</b>Thomas</div>
     </div>
   </section>
 
-  <!-- ===== ORIGINE DES COULEURS (collage damier de la charte) ===== -->
-  <div class="bande-origines">
-    <div class="contenu rvl">
-      <!-- ✏️ MODIFIABLE : le sens des couleurs de la charte -->
-      <p class="origines">L'<span class="c-or">or</span> de Senna. Le <span style="color:#9fb2d4">marine</span> de la rigueur.<br>
-      Le <span class="c-rouge">rouge</span> de la persévérance. Le <span class="c-vert">vert</span> des racines Papone.</p>
+  <!-- ===== LE PROJET : LA CATERHAM ACADEMY ===== -->
+  <section class="academy grain" id="academy" aria-labelledby="t-academy">
+    <div class="photo">
+      <picture>
+        <source type="image/avif" srcset="assets/img/academy-volant-m.avif 760w, assets/img/academy-volant.avif 1300w" sizes="(max-width: 900px) 92vw, 48vw">
+        <img src="assets/img/academy-volant.webp" srcset="assets/img/academy-volant-m.webp 760w, assets/img/academy-volant.webp 1300w" sizes="(max-width: 900px) 92vw, 48vw" width="1300" height="1111" loading="lazy" alt="Thomas Papone au volant de la Caterham lors du test au Pôle Mécanique d'Alès">
+      </picture>
     </div>
-  </div>
-
-  <!-- ===== LA TRAJECTOIRE ===== -->
-  <section id="trajectoire" class="section-marine diag-haut">
-    <svg class="embleme-fond" viewBox="29 38 90 63" style="bottom: -40px; left: -10%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
-    <div class="contenu">
-      <p class="kicker rvl">La trajectoire</p>
-      <h2 class="rvl" data-d="1">Trois disciplines, un seul cap</h2>
-      <p class="lead rvl" data-d="2">Chaque discipline prépare la suivante : le combat en piste s'apprend en karting, la rigueur se travaille sur simulateur, et la course automobile guide tout le projet.</p>
-      <div class="disciplines">
-        <article class="disc rvl">
-          <div class="puce">01</div>
-          <div class="photo"><picture><source type="image/avif" srcset="assets/img/karting-pluie.avif"><img alt="Thomas Papone en course de karting sous la pluie" src="assets/img/karting-pluie.webp" width="745" height="931" loading="lazy"></picture><span class="disc-meta">National / X30 Senior</span></div>
-          <div class="corps">
-            <h3>Karting</h3>
-            <p>La compétition réelle, du sec à la pluie : départs, dépassements, gestion de course. L'école du corps à corps en piste.</p>
-          </div>
-        </article>
-        <article class="disc rvl" data-d="1">
-          <div class="puce">02</div>
-          <div class="photo"><picture><source type="image/avif" srcset="assets/img/pilote-simu-m.avif 760w, assets/img/pilote-simu.avif 1400w" sizes="(max-width: 900px) 92vw, 373px"><img alt="Thomas Papone sur le simulateur TPRacing" src="assets/img/pilote-simu.webp" srcset="assets/img/pilote-simu-m.webp 760w, assets/img/pilote-simu.webp 1400w" sizes="(max-width: 900px) 92vw, 373px" width="1400" height="1867" loading="lazy"></picture><span class="disc-meta">iRacing / entraînement hebdo</span></div>
-          <div class="corps">
-            <h3>Simracing</h3>
-            <p>L'entraînement permanent sur iRacing : régularité, trajectoires, setups. Le laboratoire du pilotage, disponible chaque semaine.</p>
-          </div>
-        </article>
-        <article class="disc rvl" data-d="2">
-          <div class="puce">03</div>
-          <div class="photo"><picture><source type="image/avif" srcset="assets/img/feed-racing-m.avif 760w, assets/img/feed-racing.avif 1400w" sizes="(max-width: 900px) 92vw, 373px"><img alt="Monoplace de l'école FEED Racing France en piste" src="assets/img/feed-racing.webp" srcset="assets/img/feed-racing-m.webp 760w, assets/img/feed-racing.webp 1400w" sizes="(max-width: 900px) 92vw, 373px" width="1400" height="935" loading="lazy"></picture><span class="disc-meta">FEED Racing France / Magny-Cours 2024</span></div>
-          <div class="corps">
-            <h3>Automobile</h3>
-            <p>Le passage en voiture, engagé à l'école FEED Racing France, avec un objectif clair : courir en championnat via le programme Caterham.</p>
-          </div>
-        </article>
+    <div>
+      <h2 id="t-academy"><span>La Caterham</span><span class="or">Academy</span></h2>
+      <p>Une coupe réservée aux pilotes qui débutent en automobile, tous sur la même voiture. C'est la prochaine marche de Thomas, et ce que financent nos partenaires.</p>
+      <div class="circuits">
+        <svg viewBox="-4 -4 560 126" role="img" aria-label="Les tracés des cinq circuits de la saison 2026 : Pau-Arnos, Alès, Nogaro, Magny-Cours et Lédenon"><path pathLength="1" d="M56.4 32.2 L55.1 30.8 L54.1 29.3 L52.8 26.7 L47.5 14.3 L46.9 11.1 L46.6 8.3 L47.3 4.0 L48.4 2.0 L49.4 1.0 L50.7 0.3 L52.1 -0.0 L53.1 0.1 L54.8 0.6 L55.7 1.1 L56.6 1.9 L58.4 4.6 L59.4 7.1 L60.0 9.8 L60.8 13.2 L62.3 17.5 L80.9 54.5 L81.8 56.7 L82.1 58.4 L81.8 60.8 L80.8 63.6 L80.8 65.5 L82.1 71.0 L85.5 81.1 L87.0 85.6 L87.2 87.0 L87.2 89.6 L86.6 91.5 L86.2 92.3 L84.3 94.2 L82.8 95.2 L81.2 95.8 L78.6 96.0 L77.3 95.6 L76.4 95.0 L75.7 94.0 L75.2 92.9 L74.8 89.6 L75.3 84.7 L76.6 77.3 L76.5 74.1 L75.8 72.6 L74.8 71.1 L54.9 51.1 L52.3 49.1 L51.2 48.3 L50.0 47.8 L46.9 47.1 L44.7 47.2 L42.6 47.7 L40.1 48.9 L37.3 50.9 L35.8 52.5 L28.2 62.0 L25.7 63.1 L22.9 63.2 L19.9 62.6 L13.3 59.8 L12.0 59.1 L9.6 57.1 L9.1 56.1 L8.8 55.0 L8.8 52.2 L9.8 50.0 L11.7 47.9 L13.7 46.6 L31.9 38.8 L36.0 37.9 L40.6 37.3 L42.8 37.2 L45.4 37.4 L48.2 38.2 L52.0 40.1 L55.8 43.3 L68.5 57.6 L71.0 59.5 L71.8 59.8 L73.4 59.7 L74.4 58.9 L75.1 56.8 L75.2 55.1 L74.6 52.1 L73.0 48.2 L64.6 32.0 L63.6 30.8 L63.2 30.6 L62.6 30.6 L61.7 31.2 L60.4 33.2 L59.4 33.7 L58.0 33.5 L56.4 32.2"/><path pathLength="1" d="M149.7 51.9 L150.0 50.5 L150.1 50.1 L150.2 49.9 L150.4 49.6 L150.5 49.3 L150.7 49.0 L151.0 48.8 L151.3 48.5 L151.7 48.3 L152.1 48.1 L152.4 47.9 L152.8 47.8 L153.4 47.7 L154.1 47.7 L154.7 47.8 L155.2 48.0 L155.8 48.3 L156.3 48.5 L156.7 48.9 L157.0 49.2 L157.3 49.6 L157.5 49.8 L157.6 50.1 L157.7 50.3 L157.7 50.5 L157.8 50.7 L157.9 51.2"/><path pathLength="1" d="M152.7 89.4 L151.3 71.9 L149.7 51.9 L149.5 47.5 L149.9 46.4 L150.0 45.9 L150.4 45.3 L150.9 44.4 L151.5 43.4 L152.3 42.5 L152.8 42.0 L153.5 41.4 L154.2 40.9 L155.1 40.3 L155.7 40.0 L156.5 39.7 L157.4 39.3 L158.0 39.2 L158.5 39.0 L159.1 38.9 L159.7 38.8 L161.5 38.7 L163.6 39.0 L166.1 39.2 L167.1 39.3 L167.8 39.3 L168.3 39.2 L168.7 39.0 L169.1 38.8 L169.5 38.5 L169.8 38.2 L170.1 37.8 L170.3 37.3 L170.5 36.8 L170.6 36.2 L170.6 35.7 L170.5 35.2 L170.3 34.7 L170.1 34.2 L169.5 33.4 L168.9 32.7 L160.4 24.6 L159.5 23.8 L158.5 22.7 L158.0 22.1 L157.7 21.5 L157.6 21.1 L157.4 20.7 L157.2 20.0 L154.8 10.4 L153.9 7.1 L153.8 6.6 L153.8 5.9 L154.1 4.8 L154.5 3.5 L154.8 2.9 L155.3 2.3 L155.8 1.7 L156.4 1.2 L157.1 0.8 L157.8 0.4 L158.6 0.1 L159.3 0.0 L159.9 0.0 L160.5 0.1 L161.1 0.2 L162.1 0.4 L163.0 0.8 L163.8 1.3 L164.4 1.8 L165.0 2.5 L165.4 3.2 L165.7 4.2 L165.9 5.0 L166.2 7.2 L166.3 7.7 L166.4 8.9 L166.8 10.1 L167.3 11.8 L177.6 37.7 L177.7 38.7 L177.7 39.4 L177.6 40.1 L177.5 40.6 L177.3 41.4 L177.1 42.1 L176.8 42.6 L176.5 43.0 L176.1 43.4 L175.6 43.8 L175.1 44.1 L174.1 44.6 L173.3 44.9 L166.1 46.4 L162.3 47.0 L161.5 47.2 L160.6 47.5 L160.1 47.7 L159.8 47.9 L159.5 48.1 L159.3 48.2 L159.0 48.5 L158.8 48.8 L158.5 49.1 L158.4 49.4 L158.3 49.6 L158.1 49.9 L158.0 50.4 L157.9 50.7 L157.9 51.2 L157.9 51.7 L157.9 52.2 L158.0 52.8 L158.1 53.1 L158.3 53.4 L158.6 53.9 L158.9 54.3 L159.4 54.7 L159.8 55.0 L160.2 55.2 L160.7 55.5 L161.3 55.7 L161.8 55.8 L162.4 55.9 L162.9 55.8 L163.4 55.7 L163.9 55.6 L169.5 53.1 L170.1 52.9 L170.7 52.8 L171.3 52.7 L171.9 52.7 L172.2 52.8 L172.7 52.9 L173.4 53.2 L174.0 53.5 L174.5 53.8 L174.8 54.1 L175.2 54.5 L175.5 54.9 L175.7 55.2 L175.8 55.5 L176.0 55.8 L176.1 56.2 L176.1 56.5 L176.2 56.8 L176.2 57.3 L176.2 58.3 L173.3 74.0 L173.2 74.4 L173.0 74.8 L172.9 75.1 L172.6 75.5 L171.8 76.3 L171.3 76.7 L171.0 76.9 L170.7 77.0 L170.3 77.1 L169.9 77.1 L169.6 77.1 L169.1 77.0 L168.8 76.9 L168.5 76.7 L168.3 76.5 L168.2 76.3 L168.0 76.0 L167.9 75.6 L167.8 75.3 L167.8 75.0 L167.8 73.6 L167.8 72.4 L167.6 71.1 L167.3 70.0 L166.7 68.6 L166.0 67.5 L165.4 66.7 L164.6 65.9 L163.7 65.3 L163.0 65.0 L162.3 64.9 L161.4 64.8 L160.6 64.9 L159.9 65.1 L159.4 65.4 L158.9 65.7 L158.6 66.1 L158.1 67.0 L157.9 67.7 L157.8 68.5 L157.7 69.3 L158.4 77.3 L158.5 78.0 L158.7 78.6 L159.2 79.1 L159.8 79.7 L161.1 80.5 L162.4 81.4 L163.5 82.3 L163.8 82.6 L164.0 82.8 L164.3 83.1 L164.4 83.4 L164.5 83.6 L164.6 83.9 L164.7 84.5 L164.7 84.8 L164.6 85.6 L163.7 90.8 L163.5 91.2 L163.4 91.7 L163.1 92.3 L162.7 92.9 L162.3 93.4 L161.8 93.9 L161.2 94.2 L160.8 94.4 L160.3 94.6 L159.5 94.8 L158.8 94.9 L157.9 94.8 L157.1 94.7 L156.4 94.5 L155.8 94.3 L155.0 93.9 L154.5 93.5 L153.9 92.9 L153.5 92.4 L153.2 91.8 L153.0 91.2 L152.8 90.6 L152.8 90.2 L152.7 89.8 L152.7 89.4"/><path pathLength="1" d="M161.8 93.9 L161.0 94.6 L160.6 94.9 L160.1 95.3 L159.6 95.6 L159.1 95.8 L158.6 95.9 L157.8 96.0 L156.7 96.0 L155.8 96.0 L154.0 95.9 L153.1 95.8 L152.7 95.7 L152.1 95.6 L151.4 95.3 L150.6 95.0 L150.1 94.7 L149.7 94.3 L149.2 93.9 L149.0 93.4 L148.7 92.9 L148.6 92.4 L148.3 90.9 L148.2 90.4 L147.9 87.3 L147.9 87.1 L148.0 86.9 L148.4 86.6 L149.0 86.3 L149.1 86.1 L149.1 86.0 L149.1 85.3 L149.0 80.8 L148.9 74.3 L148.8 67.5 L148.6 60.5 L148.5 52.7 L148.4 50.1 L148.5 49.9 L148.6 49.7 L148.7 49.5 L149.2 48.3 L149.4 48.0 L149.5 47.5"/><path pathLength="1" d="M172.6 75.5 L171.9 76.4 L170.1 78.3 L166.0 82.7 L165.6 83.2 L165.4 83.5 L165.2 83.8 L165.1 84.0 L165.0 84.4 L164.9 84.7 L164.6 85.6"/><path pathLength="1" d="M166.1 39.2 L165.0 39.4 L164.5 39.5 L164.0 39.8 L163.5 40.1 L163.1 40.6 L162.8 41.0 L162.5 41.6 L162.3 42.2 L162.2 42.8 L162.2 43.3 L162.4 43.9 L162.7 44.6 L163.1 45.1 L163.5 45.5 L164.0 45.9 L164.6 46.2 L165.2 46.3 L166.1 46.4"/><path pathLength="1" d="M148.4 50.1 L148.3 49.0 L148.2 48.6 L148.1 48.1 L147.9 47.5 L147.9 47.3 L147.0 44.6 L146.6 43.0 L146.4 42.3 L146.3 41.9 L146.3 41.5 L146.3 41.1 L146.5 40.7 L146.7 40.1 L146.9 39.6 L147.3 39.2 L147.7 38.9 L148.0 38.6 L148.9 37.9"/><path pathLength="1" d="M149.5 47.5 L149.4 46.6 L149.4 46.3 L149.2 45.8 L149.1 45.2 L148.9 44.8 L148.8 44.6 L148.7 44.3 L148.0 43.1 L148.0 42.9 L147.6 42.0 L147.3 41.3 L147.3 41.0 L147.3 40.7 L147.3 40.2 L147.5 39.7 L147.6 39.4 L147.8 39.0 L148.2 38.6 L148.9 37.9 L149.2 37.7 L149.6 37.5 L149.9 37.4 L150.2 37.3 L150.6 37.3 L151.3 37.3 L153.7 37.6 L161.5 38.7"/><path pathLength="1" d="M154.8 10.4 L154.9 8.9 L155.0 8.5 L155.2 7.9 L155.5 7.5 L155.9 7.0 L156.5 6.6 L157.1 6.3 L161.0 5.1 L161.8 5.0 L162.8 5.0 L163.5 5.2 L164.1 5.5 L164.7 5.8 L165.4 6.4 L166.3 7.7"/><path pathLength="1" d="M316.0 74.7 L316.6 75.3 L316.9 76.0 L317.0 77.0 L316.8 77.8 L316.3 78.6 L315.4 79.3 L314.4 79.6 L313.2 79.5 L308.2 78.4 L306.4 77.8 L305.1 77.1 L304.3 76.3 L303.4 75.1 L302.0 71.5 L300.4 67.1 L298.9 63.8 L298.2 62.8 L297.4 62.3 L296.6 62.1 L295.6 62.2 L294.7 62.5 L293.9 62.9 L289.8 70.2 L289.3 71.9 L289.3 73.5 L289.9 75.6 L291.0 77.1 L292.4 78.1 L307.8 84.2 L310.2 84.7 L320.5 86.6 L321.3 87.0 L322.0 87.6 L322.5 88.3 L322.8 89.0 L322.9 90.0 L322.6 91.0 L321.7 92.6 L320.4 94.6 L319.5 95.4 L318.3 95.9 L317.1 96.0 L315.6 95.7 L313.9 95.1 L299.7 88.2 L288.9 82.8 L287.2 81.9 L285.9 80.8 L284.9 79.7 L284.2 78.3 L283.9 76.9 L283.8 75.5 L284.1 74.2 L284.6 72.7 L287.3 67.6 L287.6 66.0 L287.6 64.8 L287.6 63.5 L287.3 62.1 L287.0 61.2 L285.5 58.6 L276.6 44.8 L274.1 40.7 L272.6 38.4 L270.6 35.6 L268.9 33.4 L265.0 29.3 L260.1 24.0 L257.0 21.3 L255.8 20.6 L254.5 20.2 L253.2 20.1 L251.6 20.3 L249.5 20.8 L242.6 23.9 L240.6 24.6 L239.0 24.7 L236.6 23.9 L235.8 23.2 L235.0 22.4 L232.4 18.1 L229.5 13.3 L229.2 12.2 L229.1 10.9 L229.6 9.5 L230.3 8.1 L231.2 6.8 L232.1 5.8 L233.8 4.4 L235.9 3.2 L239.1 1.5 L241.3 0.5 L242.9 0.1 L244.3 0.0 L245.5 0.2 L246.8 0.8 L247.6 1.4 L248.3 2.1 L248.8 3.2 L249.1 4.2 L249.0 5.2 L248.6 6.1 L248.1 6.8 L247.3 7.3 L246.4 7.7 L239.1 7.9 L237.8 8.4 L237.0 9.1 L236.6 10.0 L236.3 11.1 L236.5 12.2 L237.0 13.2 L238.1 14.1 L239.3 14.3 L240.5 14.3 L247.0 14.2 L250.2 14.3 L252.7 14.7 L255.3 15.5 L257.0 16.5 L258.5 17.5 L271.6 30.4 L282.0 40.9 L299.1 57.9 L306.3 65.0 L316.0 74.7"/><path pathLength="1" d="M403.6 95.5 L403.5 95.6 L403.4 95.6 L403.2 95.7 L403.0 95.8 L402.8 95.8 L402.5 95.9 L402.3 96.0 L402.0 96.0 L401.8 96.0 L401.5 96.0 L401.2 96.0 L400.8 95.9 L400.5 95.9 L400.2 95.8 L399.9 95.7 L399.3 95.5 L398.7 95.3 L398.2 95.0 L397.7 94.7 L396.8 94.1 L395.9 93.5 L394.8 92.6 L393.9 91.8 L393.1 90.9 L391.6 89.1 L390.0 87.2 L383.2 79.4 L381.9 77.8 L380.9 76.8 L379.9 75.9 L379.0 75.1 L378.1 74.3 L376.9 73.4 L375.6 72.6 L374.3 71.9 L373.2 71.4 L372.4 71.0 L371.6 70.7 L370.7 70.4 L369.4 70.0 L358.1 66.4 L357.9 66.3 L357.7 66.2 L357.5 66.0 L357.4 65.9 L357.3 65.7 L357.3 65.5 L357.3 65.3 L357.3 65.0 L357.4 64.8 L357.5 64.5 L357.7 64.0 L358.0 63.4 L358.3 62.8 L358.6 62.3 L358.9 61.8 L359.2 61.4 L360.1 60.3 L360.8 59.6 L361.5 58.7 L362.1 58.2 L362.4 57.9 L362.6 57.8 L362.7 57.7 L362.8 57.7 L363.0 57.6 L363.1 57.6 L363.2 57.6 L363.4 57.6 L363.5 57.7 L363.6 57.7 L363.7 57.8 L363.8 57.9 L364.0 58.0 L364.2 58.2 L364.4 58.4 L364.5 58.6 L364.6 58.7 L364.8 58.7 L364.9 58.8 L365.0 58.8 L365.2 58.8 L365.3 58.8 L365.5 58.7 L365.6 58.7 L365.7 58.6 L366.0 58.4 L397.2 33.6 L397.5 33.2 L398.0 32.6 L398.3 32.1 L398.6 31.6 L398.8 31.2 L398.9 30.9 L399.1 30.5 L399.2 30.1 L399.3 29.7 L399.4 29.2 L399.4 29.1 L399.4 28.5 L399.5 27.8 L399.5 27.3 L399.6 18.9 L399.5 18.1 L399.5 17.6 L399.4 17.1 L399.3 16.8 L399.1 16.3 L398.8 15.9 L398.3 14.9 L398.0 14.4 L397.8 14.0 L397.7 13.5 L397.6 13.1 L397.4 12.5 L397.3 12.0 L397.3 11.4 L397.2 10.7 L397.2 9.9 L397.1 9.3 L397.2 8.5 L397.3 7.4 L397.4 6.9 L397.6 6.4 L397.9 5.8 L398.2 5.1 L398.6 4.4 L399.1 3.7 L399.6 3.2 L400.0 2.8 L400.3 2.5 L400.7 2.2 L401.1 1.9 L401.5 1.6 L402.0 1.4 L402.2 1.2 L402.6 1.0 L403.2 0.8 L403.8 0.5 L404.5 0.3 L405.2 0.1 L405.7 0.1 L406.3 0.0 L407.0 0.0 L407.5 0.0 L408.1 0.1 L408.6 0.1 L409.0 0.2 L409.5 0.3 L409.8 0.4 L410.4 0.6 L410.8 0.7 L411.3 1.0 L411.8 1.2 L412.3 1.6 L413.0 2.1 L413.4 2.5 L413.9 3.0 L414.2 3.5 L414.7 4.1 L415.1 4.8 L415.5 5.6 L416.0 6.4 L416.6 7.6 L417.4 9.3 L418.1 11.1 L419.0 12.9 L419.4 14.1 L419.8 15.2 L420.1 16.3 L420.5 17.4 L420.7 18.4 L421.0 19.9 L421.2 21.0 L421.3 21.9 L421.4 23.4 L421.5 25.1 L422.6 43.1 L422.7 44.9 L422.7 47.1 L422.7 48.7 L422.6 50.1 L422.5 51.0 L422.3 52.9 L422.0 54.3 L421.7 55.9 L421.2 57.9 L413.2 87.3 L412.9 87.8 L412.8 88.0 L412.6 88.1 L412.4 88.3 L412.2 88.3 L412.0 88.4 L411.8 88.3 L411.6 88.2 L411.3 88.1 L411.0 87.9 L410.9 87.7 L410.7 87.3 L410.6 86.9 L410.5 85.6 L410.0 82.3 L409.5 79.3 L409.4 78.7 L409.4 78.4 L409.4 78.2 L409.4 77.9 L409.5 77.0 L410.9 67.4 L411.3 65.4 L411.4 64.4 L411.5 63.6 L411.4 62.8 L411.2 51.7 L410.9 40.0 L410.9 39.3 L410.9 38.9 L411.0 38.5 L411.2 38.2 L411.4 37.9 L411.6 37.6 L411.9 37.3 L412.3 37.0 L412.7 36.7 L413.0 36.4 L413.3 36.1 L413.6 35.8 L413.8 35.5 L414.0 35.1 L414.3 34.7 L414.5 34.2 L414.8 33.7 L415.0 33.1 L415.1 32.5 L415.2 31.9 L415.3 31.3 L415.3 30.3 L415.3 28.6 L415.2 27.4 L415.1 26.1 L414.8 24.1 L414.5 22.2 L414.2 21.0 L413.7 19.0 L413.4 18.2 L413.1 17.4 L412.8 16.6 L412.5 15.9 L412.1 15.3 L411.6 14.6 L411.0 14.0 L410.5 13.6 L410.0 13.3 L409.7 13.2 L409.2 13.0 L408.9 12.9 L408.5 12.9 L408.2 12.9 L407.8 12.9 L407.5 12.9 L407.1 13.0 L406.8 13.1 L406.5 13.3 L406.1 13.5 L405.8 13.8 L405.6 14.0 L405.4 14.3 L405.1 14.7 L405.0 15.0 L404.9 15.3 L404.8 15.6 L404.8 16.0 L404.8 16.3 L404.8 16.7 L404.9 17.1 L405.1 17.4 L405.3 17.8 L406.2 19.2 L406.6 19.9 L406.9 20.4 L407.2 20.9 L407.4 21.5 L407.7 22.4 L407.9 22.8 L408.0 23.5 L408.1 24.1 L408.2 24.8 L408.3 25.6 L408.2 26.5 L408.1 27.3 L408.0 28.0 L407.8 28.9 L405.8 35.2 L405.5 36.5 L405.2 37.6 L405.0 38.7 L404.9 39.6 L404.9 40.5 L404.9 41.8 L405.0 48.1 L405.1 53.7 L405.3 68.1 L405.3 68.7 L405.2 69.3 L405.2 69.7 L405.1 70.0 L405.0 70.3 L404.9 70.6 L404.7 70.9 L404.5 71.2 L404.3 71.4 L404.1 71.7 L401.8 73.9 L401.4 74.3 L401.1 74.8 L401.0 75.0 L400.9 75.3 L400.8 75.5 L400.7 75.9 L400.6 76.3 L400.5 76.7 L400.5 77.1 L400.5 77.6 L400.5 78.2 L400.4 78.9 L400.5 79.7 L400.5 80.6 L400.6 81.6 L400.7 82.8 L400.9 84.1 L401.3 85.7 L401.6 87.1 L402.1 88.8 L403.8 94.2 L403.9 94.4 L403.9 94.6 L403.9 94.8 L403.9 94.9 L403.9 95.0 L403.9 95.1 L403.9 95.2 L403.8 95.3 L403.7 95.4 L403.6 95.5"/><path pathLength="1" d="M483.5 14.0 L482.0 18.0 L481.7 19.0 L481.5 19.8 L474.4 54.4 L472.5 64.0 L469.9 76.4 L469.7 77.7 L469.6 78.5 L469.5 79.5 L469.5 80.4 L469.7 81.5 L470.0 82.3 L470.2 83.0 L471.0 84.9 L476.3 92.5 L477.6 93.8 L479.2 94.9 L480.6 95.5 L482.3 95.9 L483.8 96.0 L485.3 95.9 L486.5 95.7 L489.9 94.5 L490.9 94.1 L494.7 92.0 L495.5 91.4 L496.4 90.5 L497.2 89.7 L497.9 88.8 L498.3 87.9 L498.6 87.2 L498.7 86.6 L498.8 85.8 L498.8 85.1 L498.7 84.1 L498.5 83.1 L498.0 82.1 L497.4 81.2 L496.0 79.9 L495.4 79.4 L493.5 77.9 L491.6 76.5 L491.0 75.8 L490.5 75.0 L489.7 73.6 L489.4 72.9 L483.1 53.3 L483.0 52.4 L483.0 51.2 L483.2 50.4 L483.4 49.6 L483.8 49.0 L484.4 48.3 L485.4 47.8 L486.1 47.6 L487.0 47.6 L488.4 47.8 L489.2 48.2 L490.0 48.7 L490.8 49.5 L491.3 50.2 L506.6 81.5 L507.1 82.1 L507.8 82.6 L508.5 82.9 L509.3 83.1 L510.0 83.1 L511.1 83.0 L512.1 82.6 L512.6 82.1 L513.0 81.6 L513.4 80.7 L513.6 79.9 L513.6 79.1 L513.7 64.3 L513.6 63.2 L513.5 62.1 L513.2 61.2 L512.9 60.2 L512.4 59.2 L511.8 58.2 L511.0 57.3 L493.1 38.7 L492.7 38.2 L492.3 37.6 L491.9 37.0 L491.7 36.4 L491.6 35.7 L491.6 35.1 L491.7 34.4 L491.8 33.5 L492.0 32.8 L496.7 18.2 L496.9 17.6 L497.3 17.1 L497.6 16.7 L498.0 16.3 L498.4 16.1 L498.9 15.9 L499.5 15.8 L500.2 15.8 L500.8 15.9 L501.4 16.0 L501.9 16.2 L502.5 16.5 L503.0 16.8 L503.4 17.1 L503.8 17.5 L504.2 17.9 L504.5 18.2 L504.8 18.6 L505.2 19.3 L505.4 19.9 L505.9 21.1 L506.9 24.0 L507.1 24.6 L512.9 45.9 L513.1 46.7 L513.4 47.2 L513.8 47.9 L514.1 48.4 L514.7 49.1 L515.3 49.7 L515.9 50.2 L516.7 50.7 L517.8 51.2 L518.3 51.3 L519.0 51.5 L524.4 52.0 L528.1 52.2 L529.4 52.1 L530.0 52.0 L530.6 51.8 L531.3 51.6 L531.8 51.3 L532.2 51.0 L532.6 50.7 L533.2 50.1 L533.5 49.6 L533.8 49.0 L534.0 48.4 L534.2 47.9 L534.3 47.4 L534.3 46.8 L534.3 46.4 L534.2 45.9 L534.0 45.5 L533.8 45.2 L533.6 44.8 L533.2 44.5 L532.8 44.2 L532.4 43.9 L531.9 43.7 L531.3 43.6 L524.5 42.0 L523.9 41.8 L523.4 41.5 L522.9 41.2 L522.5 40.8 L522.1 40.4 L521.7 39.8 L521.5 39.3 L521.2 38.7 L515.2 21.6 L514.7 20.3 L514.4 19.8 L514.0 19.3 L513.2 18.3 L512.7 17.9 L512.1 17.4 L502.4 9.6 L501.7 8.9 L501.2 8.4 L500.2 7.3 L499.8 6.8 L499.5 6.1 L499.1 5.0 L498.1 1.6 L497.9 1.2 L497.6 0.8 L496.9 0.3 L496.2 0.1 L495.7 0.0 L494.9 0.0 L494.2 0.2 L493.5 0.6 L493.0 1.0 L492.5 1.4 L490.1 4.7 L484.7 11.5 L484.3 12.3 L483.8 13.2 L483.5 14.0"/><path pathLength="1" d="M490.1 4.7 L485.0 9.3 L484.6 9.8 L479.2 16.0 L478.9 16.5 L478.7 17.1 L478.5 17.6 L478.5 18.0 L478.6 18.4 L479.0 19.9 L479.1 20.5 L479.0 20.8 L477.5 28.1 L475.9 36.3 L472.2 54.6 L469.9 65.9 L469.4 69.3 L468.1 77.4 L468.0 78.0 L468.0 78.7 L468.0 79.4 L468.1 79.9 L468.4 80.7 L469.0 82.1 L469.5 83.0 L469.8 83.5 L471.0 84.9"/><path pathLength="1" d="M521.2 67.6 L521.7 66.8 L522.5 65.1 L522.8 64.7 L523.7 64.2 L528.3 62.3 L530.6 61.3 L535.0 58.7 L538.6 56.7 L539.1 56.3 L539.4 56.0 L539.7 55.5 L540.0 54.5"/><text x="48" y="118" text-anchor="middle">Pau-Arnos</text><text x="162" y="118" text-anchor="middle">Alès</text><text x="276" y="118" text-anchor="middle">Nogaro</text><text x="390" y="118" text-anchor="middle">Magny-Cours</text><text x="504" y="118" text-anchor="middle">Lédenon</text></svg>
       </div>
+      <div class="chiffres">
+        <div><b>170</b><span>chevaux, 2.0 atmosphérique</span></div>
+        <div><b>5</b><span>rapports, grille en H</span></div>
+        <div><b>12</b><span>courses sur ces 5 circuits en 2026</span></div>
+      </div>
+      <a class="btn btn-or" href="#partenaires">Soutenir la saison</a>
     </div>
   </section>
 
-  <!-- ===== PARTENAIRES ===== -->
-  <section id="partenaires">
-    <svg class="embleme-fond embleme-fond--or" viewBox="29 38 90 63" style="top: 30px; right: -10%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
-    <div class="part-duo">
-      <div class="rvl">
-        <h2 class="h2-part"><span class="hl">Roulez</span> <span class="hl">avec nous</span></h2>
-        <p class="lead">Le sponsoring sportif ne se limite plus à un logo sur une carrosserie : la valeur est dans le contenu. En soutenant TPRacing, votre marque s'intègre à une histoire suivie au quotidien et bénéficie d'un suivi transparent de son partenariat.</p>
-      </div>
-      <figure class="rvl" data-d="1">
-        <span class="frame"><picture><source type="image/avif" srcset="assets/img/partenaires-stickers-m.avif 760w, assets/img/partenaires-stickers.avif 1345w" sizes="(max-width: 860px) 92vw, 560px"><img alt="Kart TPRacing en course, stickers des partenaires visibles" src="assets/img/partenaires-stickers.webp" srcset="assets/img/partenaires-stickers-m.webp 760w, assets/img/partenaires-stickers.webp 1345w" sizes="(max-width: 860px) 92vw, 560px" width="1345" height="870" loading="lazy"></picture></span>
-        <figcaption>Vos couleurs en piste / Valence 2022</figcaption>
-      </figure>
-    </div>
-    <div class="part-grille">
-      <div class="part-carte rvl">
-        <h3>Visibilité contenu</h3>
-        <p>Présence dans les contenus publiés autour du projet : publications, vidéos, coulisses. Votre marque vit dans l'histoire, pas seulement sur un sticker.</p>
-      </div>
-      <div class="part-carte rvl" data-d="1">
-        <h3>Image &amp; valeurs</h3>
-        <p>Un projet familial, authentique et rigoureux : la progression d'un jeune pilote qui se construit sans raccourcis.</p>
-      </div>
-      <div class="part-carte rvl" data-d="2">
-        <h3>Suivi transparent</h3>
-        <p>Des comptes rendus réguliers publiés par l'association : vous savez ce que votre soutien finance et ce qu'il vous rapporte en visibilité.</p>
-      </div>
-    </div>
-    <div class="trust rvl">
-      <div class="trust-tete">
-        <div class="trust-ligne">
-          <h2>Ils nous font confiance</h2>
-          <span class="filet" aria-hidden="true"></span>
-        </div>
-        <p class="lead">Des artisans, des PME et des groupes nous accompagnent depuis les débuts du projet. Et vous, pourquoi pas&nbsp;?</p>
-      </div>
-      <!-- Bande défilante : pause au survol, au focus clavier et par le bouton posé
-           sous la bande (le seul moyen d'arrêt qui existe sur un écran tactile).
-           Ordre = actifs 2026 (tri par soutien cumulé) puis anciens soutiens.
-           Le 2e lot est une copie pour la boucle. -->
-      <div class="trust-band" role="region" aria-label="Les partenaires de TPRacing">
-        <div class="trust-piste">
-          <div class="trust-lot">
-            <a class="trust-tile" href="https://www.combe-industrie.fr" target="_blank" rel="noopener" aria-label="Combe, site web"><img src="assets/img/partners/combe.webp" alt="Combe" width="308" height="96" loading="lazy"></a>
-            <a class="trust-tile" href="https://www.bobinage-duclos.fr" target="_blank" rel="noopener" aria-label="Bobinage Duclos, site web"><img src="assets/img/partners/bobinage-duclos.webp" alt="Bobinage Duclos" width="308" height="146" loading="lazy"></a>
-            <a class="trust-tile" href="https://www.mbe-bobinage.fr" target="_blank" rel="noopener" aria-label="MBE Maintenance Bobinage Électrique, site web"><img src="assets/img/partners/mbe.webp" alt="MBE / Maintenance Bobinage Électrique" width="308" height="103" loading="lazy"></a>
-            <a class="trust-tile" href="https://www.savoietransmissions.com" target="_blank" rel="noopener" aria-label="Savoie Transmissions, site web"><img src="assets/img/partners/savoie-transmissions.webp" alt="Savoie Transmissions" width="308" height="102" loading="lazy"></a>
-            <a class="trust-tile" href="https://www.alpes-is.com" target="_blank" rel="noopener" aria-label="Alpes Industries Services, site web"><img src="assets/img/partners/alpes-industries.webp" alt="Alpes Industries Services" width="279" height="186" loading="lazy"></a>
-            <a class="trust-tile" href="https://www.f3c-moteurs.fr" target="_blank" rel="noopener" aria-label="F3C Motors et Drives, site web"><img src="assets/img/partners/f3c-motors.webp" alt="F3C Motors &amp; Drives" width="308" height="105" loading="lazy"></a>
-            <a class="trust-tile" href="https://www.banquepopulaire.fr/bpbfc/" target="_blank" rel="noopener" aria-label="Banque Populaire Bourgogne Franche-Comté, site web"><img src="assets/img/partners/banque-populaire.webp" alt="Banque Populaire Bourgogne Franche-Comté" width="308" height="105" loading="lazy"></a>
-            <div class="trust-tile"><img src="assets/img/partners/gpi-grayel.webp" alt="GPI / Grayel Protection Incendie" width="308" height="135" loading="lazy"></div>
-            <a class="trust-tile" href="https://www.approtech.fr" target="_blank" rel="noopener" aria-label="Approtech, site web"><img src="assets/img/partners/approtech.webp" alt="Approtech" width="217" height="186" loading="lazy"></a>
-            <div class="trust-tile"><img src="assets/img/partners/ams-renov.webp" alt="AMS Rénov Bâtiment" width="289" height="186" loading="lazy"></div>
-            <a class="trust-tile" href="https://www.hexagonemotors.fr" target="_blank" rel="noopener" aria-label="Hexagone Motors, site web"><img src="assets/img/partners/hexagone-motors.webp" alt="Hexagone Motors" width="306" height="186" loading="lazy"></a>
-            <a class="trust-tile" href="https://servicematerieldistribution.com" target="_blank" rel="noopener" aria-label="SMD Service Matériel Distribution, site web"><img src="assets/img/partners/smd.webp" alt="SMD / Service Matériel Distribution" width="308" height="90" loading="lazy"></a>
-            <div class="trust-tile"><img src="assets/img/partners/les-frangain.webp" alt="Les Frang'Ain / Boulangerie de la Tuilerie" width="178" height="186" loading="lazy"></div>
-            <a class="trust-tile" href="https://www.lunatik-restaurant.fr" target="_blank" rel="noopener" aria-label="Lunatik, site web"><img src="assets/img/partners/lunatik.webp" alt="Lunatik" width="186" height="186" loading="lazy"></a>
-            <a class="trust-tile" href="https://www.pompes-services.com" target="_blank" rel="noopener" aria-label="Pompes Services, site web"><img src="assets/img/partners/pompes-services.webp" alt="Pompes Services" width="308" height="161" loading="lazy"></a>
-            <div class="trust-tile"><img src="assets/img/partners/dmpi.webp" alt="DMPI" width="225" height="186" loading="lazy"></div>
-            <div class="trust-tile"><img src="assets/img/partners/midas.webp" alt="Midas Lyon Tête d'Or" width="308" height="146" loading="lazy"></div>
-            <a class="trust-tile" href="https://www.serveau-sarl.com" target="_blank" rel="noopener" aria-label="Serv'EAU, site web"><img src="assets/img/partners/serveau.webp" alt="Serv'EAU" width="200" height="110" loading="lazy"></a>
-          </div>
-          <div class="trust-lot copie" aria-hidden="true">
-            <a class="trust-tile" tabindex="-1" href="https://www.combe-industrie.fr" target="_blank" rel="noopener"><img src="assets/img/partners/combe.webp" alt="" width="308" height="96" loading="lazy"></a>
-            <a class="trust-tile" tabindex="-1" href="https://www.bobinage-duclos.fr" target="_blank" rel="noopener"><img src="assets/img/partners/bobinage-duclos.webp" alt="" width="308" height="146" loading="lazy"></a>
-            <a class="trust-tile" tabindex="-1" href="https://www.mbe-bobinage.fr" target="_blank" rel="noopener"><img src="assets/img/partners/mbe.webp" alt="" width="308" height="103" loading="lazy"></a>
-            <a class="trust-tile" tabindex="-1" href="https://www.savoietransmissions.com" target="_blank" rel="noopener"><img src="assets/img/partners/savoie-transmissions.webp" alt="" width="308" height="102" loading="lazy"></a>
-            <a class="trust-tile" tabindex="-1" href="https://www.alpes-is.com" target="_blank" rel="noopener"><img src="assets/img/partners/alpes-industries.webp" alt="" width="279" height="186" loading="lazy"></a>
-            <a class="trust-tile" tabindex="-1" href="https://www.f3c-moteurs.fr" target="_blank" rel="noopener"><img src="assets/img/partners/f3c-motors.webp" alt="" width="308" height="105" loading="lazy"></a>
-            <a class="trust-tile" tabindex="-1" href="https://www.banquepopulaire.fr/bpbfc/" target="_blank" rel="noopener"><img src="assets/img/partners/banque-populaire.webp" alt="" width="308" height="105" loading="lazy"></a>
-            <div class="trust-tile"><img src="assets/img/partners/gpi-grayel.webp" alt="" width="308" height="135" loading="lazy"></div>
-            <a class="trust-tile" tabindex="-1" href="https://www.approtech.fr" target="_blank" rel="noopener"><img src="assets/img/partners/approtech.webp" alt="" width="217" height="186" loading="lazy"></a>
-            <div class="trust-tile"><img src="assets/img/partners/ams-renov.webp" alt="" width="289" height="186" loading="lazy"></div>
-            <a class="trust-tile" tabindex="-1" href="https://www.hexagonemotors.fr" target="_blank" rel="noopener"><img src="assets/img/partners/hexagone-motors.webp" alt="" width="306" height="186" loading="lazy"></a>
-            <a class="trust-tile" tabindex="-1" href="https://servicematerieldistribution.com" target="_blank" rel="noopener"><img src="assets/img/partners/smd.webp" alt="" width="308" height="90" loading="lazy"></a>
-            <div class="trust-tile"><img src="assets/img/partners/les-frangain.webp" alt="" width="178" height="186" loading="lazy"></div>
-            <a class="trust-tile" tabindex="-1" href="https://www.lunatik-restaurant.fr" target="_blank" rel="noopener"><img src="assets/img/partners/lunatik.webp" alt="" width="186" height="186" loading="lazy"></a>
-            <a class="trust-tile" tabindex="-1" href="https://www.pompes-services.com" target="_blank" rel="noopener"><img src="assets/img/partners/pompes-services.webp" alt="" width="308" height="161" loading="lazy"></a>
-            <div class="trust-tile"><img src="assets/img/partners/dmpi.webp" alt="" width="225" height="186" loading="lazy"></div>
-            <div class="trust-tile"><img src="assets/img/partners/midas.webp" alt="" width="308" height="146" loading="lazy"></div>
-            <a class="trust-tile" tabindex="-1" href="https://www.serveau-sarl.com" target="_blank" rel="noopener"><img src="assets/img/partners/serveau.webp" alt="" width="200" height="110" loading="lazy"></a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="part-cta rvl">
-      <strong>Envie d'écrire la suite avec nous ?</strong>
-      <a class="btn btn-or" href="contact.html">Contacter l'association</a>
+  <!-- ===== PRESSE ===== -->
+  <section class="presse grain" id="presse" aria-labelledby="t-presse">
+    <h2 id="t-presse">Ils parlent <span class="or">de nous</span></h2>
+    <div class="revue">
+      <div class="ligne"><span class="media">Le Progrès<small>23 avril 2024</small></span><a class="titre couvre" href="https://www.leprogres.fr/societe/2024/04/23/thomas-jeune-espoir-du-sport-automobile" target="_blank" rel="noopener">« Thomas, jeune espoir du sport automobile »</a><span class="aller" aria-hidden="true"><span>Lire &#8599;</span></span></div>
+      <div class="ligne"><span class="media">Le Progrès<small>28 août 2024</small></span><a class="titre couvre" href="https://www.leprogres.fr/sport/2024/08/28/karting-un-bel-avenir-se-dessine-pour-le-jeune-thomas-papone" target="_blank" rel="noopener">« Karting&nbsp;: un bel avenir se dessine pour le jeune Thomas Papone »</a><span class="aller" aria-hidden="true"><span>Lire &#8599;</span></span></div>
+      <div class="ligne"><span class="media">MyCitee<small>Interview vidéo</small></span><span class="titre">« Thomas Papone, pilote de karting »&nbsp;: l'interview en deux parties</span><span class="aller"><a href="https://www.instagram.com/reel/DPjkn4akYCr/" target="_blank" rel="noopener" aria-label="Interview MyCitee, partie 1, sur Instagram">Partie 1 &#8599;</a><a href="https://www.instagram.com/reel/DPmC1-mAu9t/" target="_blank" rel="noopener" aria-label="Interview MyCitee, partie 2, sur Instagram">Partie 2 &#8599;</a></span></div>
     </div>
   </section>
 
-  <!-- ===== ILS PARLENT DE NOUS ===== -->
-  <section id="presse">
-    <span class="mot-geant" style="top: 26px; left: -2%;">Presse</span>
-    <div class="contenu">
-      <h2 class="rvl">Ils parlent de nous</h2>
-      <div class="presse-grid">
-        <a class="presse-carte rvl" href="https://www.leprogres.fr/societe/2024/04/23/thomas-jeune-espoir-du-sport-automobile" target="_blank" rel="noopener">
-          <span class="media">Le Progrès <b>/ 23 avril 2024</b></span>
-          <span class="titre">« Thomas, jeune espoir du sport automobile »</span>
-          <span class="lire">Lire l'article <i>&#8599;</i></span>
-        </a>
-        <a class="presse-carte rvl" data-d="1" href="https://www.leprogres.fr/sport/2024/08/28/karting-un-bel-avenir-se-dessine-pour-le-jeune-thomas-papone" target="_blank" rel="noopener">
-          <span class="media">Le Progrès <b>/ 28 août 2024</b></span>
-          <span class="titre">« Karting&nbsp;: un bel avenir se dessine pour le jeune Thomas Papone »</span>
-          <span class="lire">Lire l'article <i>&#8599;</i></span>
-        </a>
-        <div class="presse-carte rvl" data-d="2">
-          <span class="media">MyCitee <b>/ Interview vidéo</b></span>
-          <span class="titre">« Thomas Papone, pilote de karting »&nbsp;: l'interview en deux parties</span>
-          <span class="lire-duo">
-            <a href="https://www.instagram.com/reel/DPjkn4akYCr/" target="_blank" rel="noopener" aria-label="Interview MyCitee, partie 1, sur Instagram">Partie 1 <i>&#8599;</i></a>
-            <a href="https://www.instagram.com/reel/DPmC1-mAu9t/" target="_blank" rel="noopener" aria-label="Interview MyCitee, partie 2, sur Instagram">Partie 2 <i>&#8599;</i></a>
-          </span>
-        </div>
-      </div>
+  <!-- ===== PARTENAIRES =====
+       Ordre de lecture (demande de Thomas, 23/09) : soutien cumulé décroissant, puis
+       versement le plus récent. Source : Liste_Suivi_Partenaires.docx (2022 à 2025).
+       SMD et Hexagone Motors sont une seule entreprise : deux logos côte à côte.
+       Logos dans leurs couleurs d'origine, jamais recolorés. -->
+  <section class="partenaires" id="partenaires" aria-labelledby="t-part">
+    <h2 id="t-part">Ils roulent <span class="or">avec nous</span></h2>
+    <p class="lead">Des artisans, des PME et des groupes de la région accompagnent le projet depuis ses débuts. Et vous, pourquoi pas&nbsp;?</p>
+    <p class="fidelite"><b>18</b> entreprises depuis 2022 / <b>4</b> présentes à chaque saison</p>
+    <div class="arguments">
+      <div><b>Visibilité contenu</b><span>Votre marque vit dans l'histoire publiée autour du projet : posts, vidéos, coulisses. Pas seulement sur un sticker.</span></div>
+      <div><b>Image et valeurs</b><span>Un projet familial, authentique et rigoureux : la progression d'un jeune pilote qui se construit sans raccourcis.</span></div>
+      <div><b>Suivi transparent</b><span>Des comptes rendus réguliers : vous savez ce que votre soutien finance et ce qu'il vous rapporte en visibilité.</span></div>
     </div>
-  </section>
-
-  <!-- ===== GALERIE EN PISTE ===== -->
-  <section id="galerie" class="section-marine diag-haut">
-    <span class="mot-geant remplir" style="top: 40px; left: -2%;">47</span>
-    <div class="contenu">
-      <h2 class="rvl">La course, en images</h2>
-      <div class="galerie">
-        <!-- ✏️ Vidéo : montage de la journée de roulage monoplace avec SERA -->
-        <figure class="galerie-video rvl">
-          <!-- Deux encodages 4:2:0 (socle web) : le petit sert aux téléphones, où la
-               tuile ne dépasse pas 92vw. Desktop en PREMIER pour qu'un navigateur qui
-               ignorerait l'attribut media garde la version nette plutôt que la légère. -->
-          <span class="frame"><video poster="assets/img/video-poster.webp" muted loop playsinline preload="none" aria-label="Montage vidéo : journée de roulage en monoplace avec SERA Racing Academy"><source src="assets/video/sera-roulage.mp4" type="video/mp4" media="(min-width: 621px)"><source src="assets/video/sera-roulage-480.mp4" type="video/mp4"></video></span>
-          <figcaption>Roulage monoplace / SERA Racing Academy, Le Luc 2024</figcaption>
-        </figure>
-        <figure class="rvl">
-          <span class="frame"><picture><source type="image/avif" srcset="assets/img/galerie-pluie-m.avif 760w, assets/img/galerie-pluie.avif 1400w" sizes="(max-width: 620px) 92vw, (max-width: 900px) 46vw, 373px"><img alt="Kart de Thomas Papone sous la pluie, gerbes d'eau" loading="lazy" src="assets/img/galerie-pluie.webp" srcset="assets/img/galerie-pluie-m.webp 760w, assets/img/galerie-pluie.webp 1400w" sizes="(max-width: 620px) 92vw, (max-width: 900px) 46vw, 373px" width="1400" height="933"></picture></span>
-          <figcaption>Sous la pluie / Château Gaillard</figcaption>
-        </figure>
-        <figure class="rvl" data-d="1">
-          <span class="frame"><picture><source type="image/avif" srcset="assets/img/galerie-duel-324-m.avif 760w, assets/img/galerie-duel-324.avif 1374w" sizes="(max-width: 620px) 92vw, (max-width: 900px) 46vw, 373px"><img alt="Le kart TPRacing défend sa position en virage" loading="lazy" src="assets/img/galerie-duel-324.webp" srcset="assets/img/galerie-duel-324-m.webp 760w, assets/img/galerie-duel-324.webp 1374w" sizes="(max-width: 620px) 92vw, (max-width: 900px) 46vw, 373px" width="1374" height="892"></picture></span>
-          <figcaption>Défense de la position / Valence 2022</figcaption>
-        </figure>
-        <figure class="rvl" data-d="2">
-          <span class="frame"><picture><source type="image/avif" srcset="assets/img/galerie-soleil-2021-m.avif 760w, assets/img/galerie-soleil-2021.avif 1400w" sizes="(max-width: 620px) 92vw, (max-width: 900px) 46vw, 373px"><img alt="Duel au soleil au Trophée de Ligue Valence 2021" loading="lazy" src="assets/img/galerie-soleil-2021.webp" srcset="assets/img/galerie-soleil-2021-m.webp 760w, assets/img/galerie-soleil-2021.webp 1400w" sizes="(max-width: 620px) 92vw, (max-width: 900px) 46vw, 373px" width="1400" height="688"></picture></span>
-          <figcaption>Trophée de Ligue / Valence 2021</figcaption>
-        </figure>
-        <figure class="rvl">
-          <span class="frame"><picture><source type="image/avif" srcset="assets/img/galerie-trois-karts-m.avif 760w, assets/img/galerie-trois-karts.avif 1400w" sizes="(max-width: 620px) 92vw, (max-width: 900px) 46vw, 373px"><img alt="Trois karts imbriqués dans le même virage" loading="lazy" src="assets/img/galerie-trois-karts.webp" srcset="assets/img/galerie-trois-karts-m.webp 760w, assets/img/galerie-trois-karts.webp 1400w" sizes="(max-width: 620px) 92vw, (max-width: 900px) 46vw, 373px" width="1400" height="933"></picture></span>
-          <figcaption>Trois de front / corps à corps</figcaption>
-        </figure>
-        <figure class="rvl" data-d="1">
-          <span class="frame"><picture><source type="image/avif" srcset="assets/img/galerie-leader-m.avif 760w, assets/img/galerie-leader.avif 1400w" sizes="(max-width: 620px) 92vw, (max-width: 900px) 46vw, 373px"><img alt="Thomas Papone en tête d'un peloton de karts" loading="lazy" src="assets/img/galerie-leader.webp" srcset="assets/img/galerie-leader-m.webp 760w, assets/img/galerie-leader.webp 1400w" sizes="(max-width: 620px) 92vw, (max-width: 900px) 46vw, 373px" width="1400" height="791"></picture></span>
-          <figcaption>En tête de peloton / Lyon 2020</figcaption>
-        </figure>
-        <figure class="rvl" data-d="2">
-          <span class="frame"><picture><source type="image/avif" srcset="assets/img/galerie-file-324-m.avif 760w, assets/img/galerie-file-324.avif 1400w" sizes="(max-width: 620px) 92vw, (max-width: 900px) 46vw, 373px"><img alt="Filé du kart TPRacing en pleine vitesse" loading="lazy" src="assets/img/galerie-file-324.webp" srcset="assets/img/galerie-file-324-m.webp 760w, assets/img/galerie-file-324.webp 1400w" sizes="(max-width: 620px) 92vw, (max-width: 900px) 46vw, 373px" width="1400" height="913"></picture></span>
-          <figcaption>Pleine charge / Valence 2022</figcaption>
-        </figure>
-        <a class="galerie-plus frame rvl" href="https://www.instagram.com/thomaspaponeracing" target="_blank" rel="noopener">
-          <span class="plus-kicker">Plus d'images</span>
-          <span class="plus-handle">@thomaspaponeracing</span>
-          <span class="plus-fleche">&#8599;</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== TEASER PILOTE ===== -->
-  <section>
-    <svg class="embleme-fond" viewBox="29 38 90 63" style="bottom: -30px; right: -9%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
-    <div class="pilote-grille">
-      <span class="frame rvl"><picture><source type="image/avif" srcset="assets/img/teaser-pilote-m.avif 760w, assets/img/teaser-pilote.avif 1080w" sizes="(max-width: 860px) 88vw, 400px"><img src="assets/img/teaser-pilote.webp" srcset="assets/img/teaser-pilote-m.webp 760w, assets/img/teaser-pilote.webp 1080w" sizes="(max-width: 860px) 88vw, 400px" alt="Thomas Papone au départ sur la grille, kart numéro 47, montage duotone TPRacing" width="1080" height="1350" loading="lazy"></picture></span>
-      <div class="rvl" data-d="1">
-        <h2>Thomas Papone</h2>
-        <p class="lead">Pilote et co-fondateur de l'association. Formé en karting de compétition, affûté sur simulateur, passé par l'école FEED Racing France. Il partage son parcours et les coulisses du projet sur ses réseaux.</p>
-        <p style="margin-top: 26px;"><a class="btn btn-or" href="pilote.html">Découvrir le pilote</a></p>
-      </div>
+    <div class="mur">
+          <div style="grid-row:1;grid-column:1"><a href="https://www.combe-industrie.fr" target="_blank" rel="noopener" aria-label="Combe, site web"><img src="assets/img/partners/combe.webp" alt="Combe" width="308" height="96" loading="lazy"></a></div>
+          <div style="grid-row:1;grid-column:2"><img src="assets/img/partners/gpi-grayel.webp" alt="GPI / Grayel Protection Incendie" width="308" height="135" loading="lazy"></div>
+          <div style="grid-row:1;grid-column:3"><a href="https://www.bobinage-duclos.fr" target="_blank" rel="noopener" aria-label="Bobinage Duclos, site web"><img src="assets/img/partners/bobinage-duclos.webp" alt="Bobinage Duclos" width="308" height="146" loading="lazy"></a></div>
+          <div class="centre"><img src="assets/logo-couleur-degrade.png" alt="TPRacing" width="585" height="503" loading="lazy"><a class="btn btn-or" href="contact.html">Devenir partenaire</a></div>
+          <div style="grid-row:1;grid-column:5"><a href="https://www.mbe-bobinage.fr" target="_blank" rel="noopener" aria-label="MBE / Maintenance Bobinage Électrique, site web"><img src="assets/img/partners/mbe.webp" alt="MBE / Maintenance Bobinage Électrique" width="308" height="103" loading="lazy"></a></div>
+          <div style="grid-row:1;grid-column:6"><a href="https://www.approtech.fr" target="_blank" rel="noopener" aria-label="Approtech, site web"><img src="assets/img/partners/approtech.webp" alt="Approtech" width="217" height="186" loading="lazy"></a></div>
+          <div style="grid-row:1;grid-column:7"><a href="https://www.savoietransmissions.com" target="_blank" rel="noopener" aria-label="Savoie Transmissions, site web"><img src="assets/img/partners/savoie-transmissions.webp" alt="Savoie Transmissions" width="308" height="102" loading="lazy"></a></div>
+          <div style="grid-row:2;grid-column:1"><a href="https://www.alpes-is.com" target="_blank" rel="noopener" aria-label="Alpes Industries Services, site web"><img src="assets/img/partners/alpes-industries.webp" alt="Alpes Industries Services" width="279" height="186" loading="lazy"></a></div>
+          <div style="grid-row:2;grid-column:2"><a href="https://servicematerieldistribution.com" target="_blank" rel="noopener" aria-label="SMD / Service Matériel Distribution, site web"><img src="assets/img/partners/smd.webp" alt="SMD / Service Matériel Distribution" width="308" height="90" loading="lazy"></a></div>
+          <div style="grid-row:2;grid-column:3"><a href="https://www.hexagonemotors.fr" target="_blank" rel="noopener" aria-label="Hexagone Motors, site web"><img src="assets/img/partners/hexagone-motors.webp" alt="Hexagone Motors" width="306" height="186" loading="lazy"></a></div>
+          <div style="grid-row:2;grid-column:5"><img src="assets/img/partners/les-frangain.webp" alt="Les Frang&#39;Ain / Boulangerie de la Tuilerie" width="178" height="186" loading="lazy"></div>
+          <div style="grid-row:2;grid-column:6"><img src="assets/img/partners/ams-renov.webp" alt="AMS Rénov Bâtiment" width="289" height="186" loading="lazy"></div>
+          <div style="grid-row:2;grid-column:7"><a href="https://www.f3c-moteurs.fr" target="_blank" rel="noopener" aria-label="F3C Motors et Drives, site web"><img src="assets/img/partners/f3c-motors.webp" alt="F3C Motors et Drives" width="308" height="105" loading="lazy"></a></div>
+          <div style="grid-row:3;grid-column:1"><a href="https://www.banquepopulaire.fr/bpbfc/" target="_blank" rel="noopener" aria-label="Banque Populaire Bourgogne Franche-Comté, site web"><img src="assets/img/partners/banque-populaire.webp" alt="Banque Populaire Bourgogne Franche-Comté" width="308" height="105" loading="lazy"></a></div>
+          <div style="grid-row:3;grid-column:2"><a href="https://www.lunatik-restaurant.fr" target="_blank" rel="noopener" aria-label="Lunatik, site web"><img src="assets/img/partners/lunatik.webp" alt="Lunatik" width="186" height="186" loading="lazy"></a></div>
+          <div style="grid-row:3;grid-column:3"><a href="https://www.pompes-services.com" target="_blank" rel="noopener" aria-label="Pompes Services, site web"><img src="assets/img/partners/pompes-services.webp" alt="Pompes Services" width="308" height="161" loading="lazy"></a></div>
+          <div style="grid-row:3;grid-column:5"><a href="https://www.serveau-sarl.com" target="_blank" rel="noopener" aria-label="Serv&#39;EAU, site web"><img src="assets/img/partners/serveau.webp" alt="Serv&#39;EAU" width="200" height="110" loading="lazy"></a></div>
+          <div style="grid-row:3;grid-column:6"><img src="assets/img/partners/dmpi.webp" alt="DMPI" width="225" height="186" loading="lazy"></div>
+          <div style="grid-row:3;grid-column:7"><img src="assets/img/partners/midas.webp" alt="Midas Lyon Tête d&#39;Or" width="308" height="146" loading="lazy"></div>
     </div>
   </section>
 
   <!-- ===== CONTACT ===== -->
-  <section id="contact">
-    <svg class="embleme-fond embleme-fond--or" viewBox="29 38 90 63" style="bottom: -36px; left: -10%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
-    <div class="duo">
-      <div class="rvl">
-        <h2>Parlons de votre projet</h2>
-        <p class="lead">Partenariat, presse ou simple question : l'association répond sur LinkedIn et par email. Un dossier de partenariat détaillé est disponible sur demande.</p>
-      </div>
-      <div class="actions rvl" data-d="1">
-        <a class="btn btn-or" href="contact.html">Nous contacter</a>
-        <p class="note">Email / LinkedIn / réseaux</p>
-      </div>
+  <section id="contact" class="grain" aria-labelledby="t-contact">
+    <h2 id="t-contact">Envie d'écrire la suite <span class="or">avec nous&nbsp;?</span></h2>
+    <div class="coord">
+      <span class="mail">contact.tpracing@gmail.com</span>
+      <a class="btn btn-or" href="contact.html">Contacter l'association</a>
+      <a class="lien-or" href="https://www.linkedin.com/company/tpracing/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </section>
 
@@ -1178,8 +603,9 @@
         <a href="https://www.facebook.com/thomas.pne.9/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3.4"/><path fill="currentColor" stroke="none" d="M13.35 20.6v-6.3h2.12l.32-2.46h-2.44V10.27c0-.71.2-1.2 1.22-1.2h1.3V6.87c-.22-.03-1-.09-1.9-.09-1.88 0-3.16 1.15-3.16 3.25v1.81H8.7v2.46h2.11v6.3z"/></svg></a>
       </div>
       <div class="foot-liens">
+        <a href="#academy">Le projet Caterham</a>
         <a href="pilote.html">Le pilote</a>
-        <a href="./#partenaires">Partenaires</a>
+        <a href="#partenaires">Partenaires</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
@@ -1190,43 +616,11 @@
   </footer>
 
   <script>
-    // Bandeau asservi à la vitesse de scroll : il avance quand le lecteur avance et
-    // s'arrête quand le lecteur s'arrête. Il portait en plus un défilement propre de
-    // 0,65 px/frame, soit 39 px/s qui démarraient tout seuls et que RIEN ne pouvait
-    // arrêter sur un écran tactile (son seul frein était le survol, et pointer: coarse
-    // n'en a pas). La dérive est retirée : plus de mouvement automatique à commander,
-    // et la bande dit enfin ce que son nom promet, la vitesse réelle du lecteur.
-    (function () {
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; // la CSS fige la piste
-      const bande = document.querySelector('.marquee');
-      const piste = bande && bande.querySelector('.piste');
-      if (!piste) return;
-      piste.style.animation = 'none';
-      let x = 0, vel = 0, lastY = scrollY, skew = 0, visible = true, moitie = 0;
-      const mesurer = () => { moitie = piste.scrollWidth / 2; };
-      mesurer();
-      addEventListener('resize', mesurer, { passive: true });
-      new IntersectionObserver(es => es.forEach(e => { visible = e.isIntersecting; })).observe(bande);
-      const tick = () => {
-        requestAnimationFrame(tick);
-        if (!visible || !moitie) { lastY = scrollY; return; }
-        const dy = scrollY - lastY; lastY = scrollY;
-        vel += (dy - vel) * 0.12;
-        if (Math.abs(vel) < 0.02) vel = 0;   // sous le pixel : le lecteur est à l'arrêt, la bande aussi
-        const cible = Math.max(-3.5, Math.min(3.5, vel * 0.09));
-        skew += (cible - skew) * 0.1;
-        if (Math.abs(skew) < 0.01) skew = 0;
-        if (!vel && !skew) return;           // rien ne bouge : aucun style à réécrire
-        x -= vel * 0.5;                      // la bande parcourt la moitié du chemin du lecteur
-        x = ((x % moitie) + moitie) % moitie - moitie;
-        piste.style.transform = 'translateX(' + x.toFixed(1) + 'px) skewX(' + skew.toFixed(2) + 'deg)';
-      };
-      tick();
-    })();
-    // Ligne de course : progression de lecture (scroll)
+    const calme = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Ligne de course : progression de lecture (repli JS quand animation-timeline manque)
     (function () {
       const lc = document.querySelector('.ligne-course');
-      // La CSS pilote la ligne quand animation-timeline est supporté : le JS n'est que le repli
       if (!lc || (window.CSS && CSS.supports('animation-timeline: scroll()'))) return;
       const maj = () => {
         const max = document.documentElement.scrollHeight - innerHeight;
@@ -1236,11 +630,28 @@
       addEventListener('resize', maj, { passive: true });
       maj();
     })();
+
     const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('vu'); io.unobserve(e.target); }
-      });
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vu'); io.unobserve(e.target); } });
     }, { threshold: 0.15 });
+
+    // Entrée du hero : l'emblème se révèle, Thomas apparaît, la Caterham arrive avec un flou de vitesse
+    const flou = document.getElementById('flou'), voiture = document.getElementById('voiture');
+    let sd = 0;
+    const regle = v => { sd = v; flou.setAttribute('stdDeviation', v.toFixed(1) + ' 0'); };
+    let entreeFaite = false;
+    function entreeHero() {
+      if (entreeFaite) return; entreeFaite = true;
+      document.documentElement.classList.add('pret');
+      if (calme) return;
+      const t0 = performance.now() + 450, dur = 950;
+      const pas = t => {
+        const p = Math.min(1, Math.max(0, (t - t0) / dur)), e = 1 - Math.pow(1 - p, 3);
+        voiture.style.translate = ((1 - e) * -160).toFixed(1) + 'px 0'; regle((1 - e) * 38);
+        if (p < 1) requestAnimationFrame(pas); else { voiture.style.translate = ''; regle(0); }
+      };
+      requestAnimationFrame(pas);
+    }
 
     // Intro : chorégraphie de sortie, puis lancement des reveals (le hero s'anime au lever du voile)
     (function () {
@@ -1251,19 +662,20 @@
         if (revealsLances) return;
         revealsLances = true;
         document.querySelectorAll('.rvl').forEach(el => io.observe(el));
+        entreeHero();
       };
       if (intro && active) {
         // 1) fin du tracé : la piste s'efface, l'emblème glisse se poser sur le logo de la nav
         setTimeout(() => {
           intro.querySelector('.intro-circuit').classList.add('efface');
           const logo = intro.querySelector('.intro-logo');
-          const cible = document.querySelector('nav .logo .logo-sombre');
+          const cible = document.querySelector('nav .logo img');
           if (logo && cible) {
             const a = logo.getBoundingClientRect();
             const b = cible.getBoundingClientRect();
-            const s = b.height / a.height;
+            const s = (b.height * .66) / a.height;
             const dx = (b.left + b.width / 2) - (a.left + a.width / 2);
-            const dy = (b.top + b.height / 2) - (a.top + a.height / 2);
+            const dy = (b.top + b.height * .36) - (a.top + a.height / 2);
             // figer l'état final AVANT de couper l'animation (sinon retour à opacity 0)
             logo.style.opacity = '1';
             logo.style.filter = 'none';
@@ -1288,242 +700,38 @@
       }
     })();
 
-    // Compteurs de la bande chiffres : montée rapide façon tableau de bord
-    (function () {
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const blocs = [...document.querySelectorAll('.chiffres .num-outline')];
-      const compte = el => {
-        const fin = parseInt(el.textContent, 10);
-        if (!fin) return;
-        const t0 = performance.now(), duree = 900;
-        const pas = t => {
-          const p = Math.min(1, (t - t0) / duree);
-          const e = 1 - Math.pow(1 - p, 3);
-          el.textContent = String(Math.round(fin * e)).padStart(el.dataset.long, '0');
-          if (p < 1) requestAnimationFrame(pas);
-        };
-        el.dataset.long = String(fin).length;
-        requestAnimationFrame(pas);
-      };
-      new IntersectionObserver((es, io) => es.forEach(e => {
-        if (e.isIntersecting) { compte(e.target); io.unobserve(e.target); }
-      }), { threshold: .6 }).observe(blocs[0] || document.body);
-      if (blocs[0]) blocs.slice(1).forEach(b => new IntersectionObserver((es, io) => es.forEach(e => {
-        if (e.isIntersecting) { compte(e.target); io.unobserve(e.target); }
-      }), { threshold: .6 }).observe(b));
-    })();
-
-    // Parallax léger de la bande origines (coupé en mouvement réduit)
-    (function () {
-      const bo = document.querySelector('.bande-origines');
-      if (!bo || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      let visible = false;
-      new IntersectionObserver(es => es.forEach(e => { visible = e.isIntersecting; })).observe(bo);
+    // Défilement rapide = flou de vitesse sur la voiture
+    if (!calme) {
+      let yPrec = scrollY, tPrec = performance.now(), cible = 0, actif = true;
+      new IntersectionObserver(es => es.forEach(e => { actif = e.isIntersecting; })).observe(voiture);
       addEventListener('scroll', () => {
-        if (!visible) return;
-        requestAnimationFrame(() => {
-          const r = bo.getBoundingClientRect();
-          const p = (r.top + r.height / 2 - innerHeight / 2) * -0.08;
-          bo.style.backgroundPosition = 'center calc(50% + ' + p.toFixed(1) + 'px)';
-        });
+        const t = performance.now(), v = Math.abs(scrollY - yPrec) / Math.max(8, t - tPrec);
+        yPrec = scrollY; tPrec = t; if (actif) cible = Math.min(22, v * 9);
       }, { passive: true });
-    })();
-
-    const navbar = document.getElementById('navbar');
-    const majNav = () => navbar.classList.toggle('solide', scrollY > 60);
-    addEventListener('scroll', majNav, { passive: true });
-    majNav();
-
-    // Vidéo : zéro octet avant l'approche (preload none), buffer à 600 px,
-    // lecture seulement quand visible, contrôles si mouvement réduit
-    const vid = document.querySelector('.galerie-video video');
-    if (vid) {
-      if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        vid.controls = true;
-      } else {
-        const chauffe = new IntersectionObserver(entries => {
-          if (entries.some(e => e.isIntersecting)) { vid.preload = 'auto'; chauffe.disconnect(); }
-        }, { rootMargin: '600px 0px' });
-        chauffe.observe(vid);
-        new IntersectionObserver(entries => {
-          entries.forEach(e => { e.isIntersecting ? vid.play().catch(() => {}) : vid.pause(); });
-        }, { threshold: 0.25 }).observe(vid);
-      }
+      (function boucle() {
+        if (entreeFaite && (cible > sd + .3 || sd > .3)) { regle(sd + (cible - sd) * .25); cible *= .86; }
+        requestAnimationFrame(boucle);
+      })();
     }
 
-    // ===== Bande partenaires : commande de défilement =====
-    // Le survol et le focus mettent la bande en pause, mais un écran tactile n'a ni
-    // l'un ni l'autre : le bouton est le seul arrêt possible sur téléphone. Il est
-    // posé par le script, donc jamais affiché si le JS ne tourne pas (dans ce cas la
-    // feuille de style laisse la bande en mur statique).
+    // Parallaxe douce du montage sous la souris
     (function () {
-      const bande = document.querySelector('.trust-band');
-      if (!bande || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const PAUSE = '<svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.6" height="12"></rect><rect x="8.4" y="1" width="3.6" height="12"></rect></svg>';
-      const LIRE = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1 L12 7 L3 13 Z"></path></svg>';
-      const zone = document.createElement('div');
-      zone.className = 'trust-cmd';
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'trust-pause';
-      const poser = () => {
-        const fige = bande.classList.contains('fige');
-        btn.innerHTML = fige ? LIRE : PAUSE;
-        btn.setAttribute('aria-label', fige
-          ? 'Reprendre le défilement des partenaires'
-          : 'Mettre en pause le défilement des partenaires');
-      };
-      poser();
-      btn.addEventListener('click', () => { bande.classList.toggle('fige'); poser(); });
-      zone.appendChild(btn);
-      bande.after(zone);
+      const m = document.getElementById('montage');
+      if (calme || !matchMedia('(hover: hover)').matches) return;
+      document.querySelector('.hero').addEventListener('pointermove', e => {
+        const r = m.getBoundingClientRect();
+        m.style.setProperty('--px', ((e.clientX - r.left) / r.width - .5).toFixed(3));
+        m.style.setProperty('--py', ((e.clientY - r.top) / r.height - .5).toFixed(3));
+      });
     })();
 
-    // ===== Galerie : agrandissement au clic (lightbox) =====
+    // Mur des partenaires : sur téléphone, la grille se replie en 3 colonnes
     (function () {
-      const figures = [...document.querySelectorAll('.galerie figure:not(.galerie-video)')];
-      const vues = figures.map(fig => {
-        const img = fig.querySelector('.frame img');
-        const cap = fig.querySelector('figcaption');
-        return img ? { el: img, src: img.src, alt: img.alt || '', legende: cap ? cap.textContent.trim() : '' } : null;
-      }).filter(Boolean);
-      if (!vues.length) return;
-
-      // Structure de la lightbox
-      const lb = document.createElement('div');
-      lb.className = 'lightbox';
-      lb.id = 'lightbox';
-      lb.setAttribute('role', 'dialog');
-      lb.setAttribute('aria-modal', 'true');
-      lb.setAttribute('aria-label', 'Galerie en grand');
-      lb.innerHTML =
-        '<div class="lb-fond" data-lb-fermer></div>' +
-        '<button class="lb-btn lb-fermer" type="button" aria-label="Fermer">×</button>' +
-        '<button class="lb-btn lb-nav lb-prec" type="button" aria-label="Image précédente">‹</button>' +
-        '<button class="lb-btn lb-nav lb-suiv" type="button" aria-label="Image suivante">›</button>' +
-        // aria-live : au clavier, le focus reste sur les flèches ; sans région
-        // vivante, changer d'image ne dit rien à un lecteur d'écran.
-        '<figure class="lb-scene" aria-live="polite" aria-atomic="true">' +
-          // pas de src="" : une source vide se résout sur l'URL de la PAGE et
-          // déclenche un vrai téléchargement de index.html au chargement.
-          '<span class="frame"><img class="lb-img" alt=""></span>' +
-          '<figcaption class="lb-legende"></figcaption>' +
-          '<div class="lb-compteur"></div>' +
-        '</figure>';
-      document.body.appendChild(lb);
-
-      const img = lb.querySelector('.lb-img');
-      const legende = lb.querySelector('.lb-legende');
-      const compteur = lb.querySelector('.lb-compteur');
-      const btnFermer = lb.querySelector('.lb-fermer');
-      const btnPrec = lb.querySelector('.lb-prec');
-      const btnSuiv = lb.querySelector('.lb-suiv');
-      // Ordre du DOM, pas ordre de déclaration : le piège à focus ne retient
-      // que le premier et le dernier, il faut donc les vrais bouts de la chaîne.
-      const focusables = [btnFermer, btnPrec, btnSuiv];
-      let index = 0, declencheur = null;
-      const pad = n => String(n).padStart(2, '0');
-
-      function afficher(i) {
-        index = (i + vues.length) % vues.length;
-        const v = vues[index];
-        img.src = v.src; // toujours la pleine taille (le srcset de la grille sert des variantes réduites)
-        img.alt = v.alt;
-        legende.textContent = v.legende;
-        compteur.innerHTML = '<b>' + pad(index + 1) + '</b> / ' + pad(vues.length);
-        // Préchargement des voisines pour une navigation fluide
-        [index + 1, index - 1].forEach(j => { const u = vues[(j + vues.length) % vues.length].src; new Image().src = u; });
-      }
-      // Morph photo de grille <-> lightbox : View Transition same-document quand le
-      // navigateur sait faire (sinon, et en mouvement réduit, fondus CSS existants).
-      const vtDispo = () => document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches;
-      function morph(maj) {
-        document.documentElement.classList.add('vt-lb');
-        lb.classList.add('vt-net'); // coupe les fondus CSS : l'état capturé doit être l'état final
-        const t = document.startViewTransition(maj);
-        t.finished.finally(() => {
-          document.documentElement.classList.remove('vt-lb');
-          lb.classList.remove('vt-net');
-        });
-        return t;
-      }
-      function montrer() {
-        lb.classList.add('ouvert');
-        document.body.classList.add('lb-actif');
-        document.documentElement.style.overflow = 'hidden';
-      }
-      function ouvrir(i, source) {
-        declencheur = source || null;
-        afficher(i);
-        if (vtDispo()) {
-          const gImg = vues[index].el;
-          gImg.style.viewTransitionName = 'lb-photo'; // capture « avant » : la photo de la grille
-          morph(async () => {
-            gImg.style.viewTransitionName = ''; // un seul lb-photo dans la capture « après »
-            montrer();
-            // Laisser une chance à la pleine taille d'être décodée (plafonnée : jamais bloquant)
-            try { await Promise.race([img.decode(), new Promise(r => setTimeout(r, 350))]); } catch (e) {}
-          });
-        } else {
-          montrer();
-        }
-        // Focus après application du style (l'élément est visibility:hidden avant .ouvert)
-        requestAnimationFrame(() => requestAnimationFrame(() => btnFermer.focus()));
-      }
-      function cacher() {
-        lb.classList.remove('ouvert');
-        document.body.classList.remove('lb-actif');
-        document.documentElement.style.overflow = '';
-        if (declencheur) declencheur.focus();
-      }
-      function fermer() {
-        if (vtDispo()) {
-          const gImg = vues[index].el; // la photo COURANTE (on a pu naviguer aux flèches)
-          morph(() => {
-            cacher();
-            gImg.style.viewTransitionName = 'lb-photo'; // capture « après » : retour dans la grille
-          }).finished.finally(() => { gImg.style.viewTransitionName = ''; });
-        } else {
-          cacher();
-        }
-      }
-
-      // Rendre chaque photo cliquable + repère « agrandir »
-      figures.forEach((fig, i) => {
-        const frame = fig.querySelector('.frame');
-        if (!frame) return;
-        frame.classList.add('gal-clic');
-        frame.setAttribute('role', 'button');
-        frame.setAttribute('tabindex', '0');
-        frame.setAttribute('aria-label', 'Agrandir : ' + vues[i].legende);
-        const loupe = document.createElement('span');
-        loupe.className = 'gal-loupe';
-        loupe.setAttribute('aria-hidden', 'true');
-        loupe.textContent = '⤢';
-        frame.appendChild(loupe);
-        frame.addEventListener('click', () => ouvrir(i, frame));
-        frame.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ouvrir(i, frame); }
-        });
-      });
-
-      btnFermer.addEventListener('click', fermer);
-      btnPrec.addEventListener('click', () => afficher(index - 1));
-      btnSuiv.addEventListener('click', () => afficher(index + 1));
-      lb.querySelector('.lb-fond').addEventListener('click', fermer);
-
-      document.addEventListener('keydown', e => {
-        if (!lb.classList.contains('ouvert')) return;
-        if (e.key === 'Escape') { fermer(); }
-        else if (e.key === 'ArrowRight') { afficher(index + 1); }
-        else if (e.key === 'ArrowLeft') { afficher(index - 1); }
-        else if (e.key === 'Tab') {
-          // Piège à focus : garder le focus dans la lightbox
-          const premier = focusables[0], dernier = focusables[focusables.length - 1];
-          if (e.shiftKey && document.activeElement === premier) { e.preventDefault(); dernier.focus(); }
-          else if (!e.shiftKey && document.activeElement === dernier) { e.preventDefault(); premier.focus(); }
-        }
-      });
+      const mq = matchMedia('(max-width: 900px)');
+      const cases = [...document.querySelectorAll('.mur > div:not(.centre)')];
+      const pos = cases.map(d => [d.style.gridRow, d.style.gridColumn]);
+      const replier = () => cases.forEach((d, i) => { d.style.gridRow = mq.matches ? 'auto' : pos[i][0]; d.style.gridColumn = mq.matches ? 'auto' : pos[i][1]; });
+      replier(); mq.addEventListener('change', replier);
     })();
   </script>
 </body>

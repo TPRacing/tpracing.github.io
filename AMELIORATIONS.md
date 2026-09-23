@@ -852,6 +852,46 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-09-23 bis (HORS ROUTINE, demande directe de Thomas, REFONTE v3 validée sur prototype : « vas-y je
+  valide, on va améliorer au fur et à mesure »). Point de départ : « la présentation, j'aime pas trop, les
+  éléments graphiques font encore trop IA, et les photos de l'accueil ne montrent que du karting alors que
+  je vais faire un championnat en Caterham ». **Méthode nouvelle, à garder** : (1) planche d'inspirations
+  capturées (22 sites visités, 11 présentés, Thomas vote : OUI McLaren Racing, Caterham Cars, Nick Ho,
+  Charles Leclerc, Type 7 ; NON Singer, Spyker, Palomino, Pas Normal Studios, jugés trop haut de gamme
+  ou trop chargés), (2) maquettes, (3) prototype cliquable publié en Artifact, (4) retours, (5) intégration.
+  **CE QUI CHANGE, 5 pages** :
+  - **Barre de menu** (styles.css, les 5 pages) : plaque blanc cassé flottante, logo COULEUR dégradé,
+    coin biseauté, bouton or collé au bord. Liens : L'association (#histoire), Le projet Caterham
+    (#academy), Le pilote, Contact, Devenir partenaire. Rubriques validées par Thomas.
+  - **Damier retiré presque partout** (« trop de damier ») : arête diagonale, liseré des cartes, pointe
+    de la ligne de course, page en cours de la nav, liseret de la 404 passent en filet or.
+  - **Accueil** : hero « Cap sur la Caterham » = MONTAGE (emblème TP en aplat or, Thomas casqué et la
+    Caterham du test d'Alès détourés, plaque retouchée en 47 sur le capot ET sur le flanc), flou de
+    vitesse SVG à l'arrivée et au défilement rapide, parallaxe douce ; « Le volant se transmet » en
+    scène collante blanc et VERT (les karts de 1987 et 2020 se rejoignent) avec la phrase des couleurs ;
+    la Caterham Academy avec les VRAIS tracés des 5 circuits 2026 (OpenStreetMap, dessinés au
+    défilement) et 3 chiffres ; revue de presse en lignes (Le Progrès x2, MyCitee) ; partenaires autour
+    du logo, logos d'origine, **ordre = soutien cumulé puis versement le plus récent** (docx de Patrice,
+    2022 à 2025) + les 3 arguments partenaires + « 18 entreprises depuis 2022 / 4 présentes à chaque
+    saison » ; contact avec l'email et le LinkedIn de l'association. Retirés : galerie, bande chiffres,
+    disciplines en 3 cartes, bandeau défilant, teaser pilote.
+  - **Pilote** : hero plein cadre (le regard, SERA 27/03/2024) aux bandes cinéma, point rouge « Saison
+    2027 : Caterham Academy », 47 ; réseaux ; **le parcours en frise inversée**, cartes collantes qui se
+    recouvrent, rail des étapes : 2026 Caterham (16/07, Alès), 2026 Simu (« préparer la Caterham », choix
+    de Thomas), 2024 FEED (30/07, Magny-Cours), 2024 SERA (vidéo de roulage, aplat ROUGE), 2020 karting,
+    2015 Actua ; « Tout a commencé en 1987 ». **Section « Les derniers posts » reprise à l'identique**
+    (markup, CSS et scripts), la routine du feed continue de la réécrire.
+  - Cartes de partage og-accueil et og-pilote refaites (voiture n°47 / le regard), métas mises à jour,
+    llms.txt et sitemap à jour.
+  **Vérifs** : 5 pages x 1280 et 375, 0 erreur console, 0 requête en échec, 0 image cassée, 0
+  débordement (hors emblèmes décoratifs rognés exprès), sans JS et en mouvement réduit regardés en
+  capture, vidéo SERA qui démarre à l'écran. Photos vérifiées par EXIF (Le Castellet 2024 écarté : Thomas
+  y était spectateur). **Questions pour Thomas** : (a) les versements 2026 des partenaires (le fichier
+  Suivi_Partenaires_TPRacing.xlsx a disparu du Bureau) ; (b) une photo de 2015 où on le reconnaît ;
+  (c) l'année des premiers roulages à Pont d'Ain. **Reste à faire** : détourage final de la Caterham
+  sous Photoshop (quelques miettes derrière l'arceau au zoom), retrait des images devenues inutiles
+  (galerie, teaser, etc., gardées pour l'instant).
+
 - 2026-09-23 (routine, AXE B : audit, dimension **SEO TECHNIQUE + résultats Google réels**, pas
   auditée en profondeur depuis le 06/08 ; 21/09 était un jour C, 22/09 un jour A, dernier jour B le
   16/09). T7 non monté, travail sur clone GitHub dans le scratchpad. Commit a5325ac.
