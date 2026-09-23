@@ -35,7 +35,6 @@
   <link rel="preload" href="assets/fonts/korataki-bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/bebas-neue-pro-bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/img/embleme-3d.webp" as="image" fetchpriority="high">
   <link rel="stylesheet" href="assets/styles.css">
 
   <!-- Navigation instantanée : pré-rendu des pages internes au survol d'un lien
@@ -85,6 +84,13 @@
         } else {
           sessionStorage.setItem('tp_intro', '1');
           document.documentElement.classList.add('intro-active');
+          // L'emblème n'est préchargé que quand l'intro joue : depuis le hero « La transmission »
+          // (22/09), il n'apparaît plus ailleurs, et un préchargement prioritaire systématique
+          // passait devant les deux karts du hero, la vraie image principale de la page.
+          const pre = document.createElement('link');
+          pre.rel = 'preload'; pre.as = 'image'; pre.href = 'assets/img/embleme-3d.webp';
+          pre.fetchPriority = 'high';
+          document.head.appendChild(pre);
         }
       } catch (e) { document.documentElement.classList.add('intro-off'); }
     })();
@@ -805,7 +811,7 @@
         <animateMotion dur="1.5s" begin="0.15s" fill="freeze" rotate="auto" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines="0.45 0.05 0.2 1" path="M -120,330 C 60,240 190,200 320,300 C 450,400 480,500 620,470 C 720,449 760,360 860,340 C 980,316 1060,430 1180,470 C 1280,505 1380,420 1560,380"/>
       </g>
     </svg>
-    <img class="intro-logo" src="assets/img/embleme-3d.webp" alt="" width="780" height="553">
+    <img class="intro-logo" src="assets/img/embleme-3d.webp" alt="" width="780" height="553" loading="lazy">
   </div>
 
   <!-- Symbole emblème TP (réutilisé en motif de fond) -->
@@ -845,7 +851,7 @@
       <figure class="epoque e1987 rvl" data-d="2">
         <picture>
           <source type="image/avif" srcset="assets/img/hero-1987-m.avif 786w, assets/img/hero-1987.avif 1543w" sizes="(max-width: 600px) 300px, min(78.6svh, 50.5vw)">
-          <img src="assets/img/hero-1987.webp" srcset="assets/img/hero-1987-m.webp 786w, assets/img/hero-1987.webp 1543w" sizes="(max-width: 600px) 300px, min(78.6svh, 50.5vw)" width="1543" height="1100" fetchpriority="high" alt="Patrice Papone de face au volant de son kart numéro 19, Championnat de France 1987">
+          <img src="assets/img/hero-1987.webp" srcset="assets/img/hero-1987-m.webp 786w, assets/img/hero-1987.webp 1543w" sizes="(max-width: 600px) 300px, min(78.6svh, 50.5vw)" width="1543" height="1100" fetchpriority="high" alt="Patrice Papone de face au volant de son kart, Championnat de France 1987">
         </picture>
         <figcaption><span class="an">1987</span><span class="nom">Patrice Papone</span><span class="lieu">Championnat de France</span></figcaption>
       </figure>
@@ -853,7 +859,7 @@
       <figure class="epoque e2020 rvl" data-d="3">
         <picture>
           <source type="image/avif" srcset="assets/img/hero-2020-m.avif 929w, assets/img/hero-2020.avif 1825w" sizes="(max-width: 600px) 380px, min(92.9svh, 59.7vw)">
-          <img src="assets/img/hero-2020.webp" srcset="assets/img/hero-2020-m.webp 929w, assets/img/hero-2020.webp 1825w" sizes="(max-width: 600px) 380px, min(92.9svh, 59.7vw)" width="1825" height="1100" fetchpriority="high" alt="Thomas Papone de face sous la pluie à Château-Gaillard en 2020, kart numéro 20">
+          <img src="assets/img/hero-2020.webp" srcset="assets/img/hero-2020-m.webp 929w, assets/img/hero-2020.webp 1825w" sizes="(max-width: 600px) 380px, min(92.9svh, 59.7vw)" width="1825" height="1100" fetchpriority="high" alt="Thomas Papone de face au volant de son kart sous la pluie, Château-Gaillard 2020">
         </picture>
         <figcaption><span class="an">2020</span><span class="nom">Thomas Papone</span><span class="lieu">Château-Gaillard</span></figcaption>
       </figure>
@@ -1247,20 +1253,11 @@
         document.querySelectorAll('.rvl').forEach(el => io.observe(el));
       };
       if (intro && active) {
-        // 1) fin du tracé : la piste s'efface, l'emblème glisse se poser à sa place dans le hero
+        // 1) fin du tracé : la piste s'efface, l'emblème glisse se poser sur le logo de la nav
         setTimeout(() => {
           intro.querySelector('.intro-circuit').classList.add('efface');
           const logo = intro.querySelector('.intro-logo');
-          const cible = document.querySelector('.hero .embleme-3d') || document.querySelector('nav .logo .logo-sombre');
-          // révéler l'emblème du hero SANS transition avant la mesure : position finale exacte,
-          // et il est déjà visible sous le voile pour un atterrissage invisible
-          const vis = document.querySelector('.hero .visuel');
-          if (vis && !vis.classList.contains('vu')) {
-            vis.style.transition = 'none';
-            vis.classList.add('vu');
-            void vis.offsetHeight;
-            vis.style.transition = '';
-          }
+          const cible = document.querySelector('nav .logo .logo-sombre');
           if (logo && cible) {
             const a = logo.getBoundingClientRect();
             const b = cible.getBoundingClientRect();
