@@ -14,7 +14,7 @@ L'association se développe aussi comme une marque : contenus, réseaux sociaux,
 
 ## Pages du site
 
-- [Accueil, l'association](https://tpracing.github.io/) : le projet Caterham Academy (la voiture, le format, les cinq circuits de la saison), l'histoire de l'association (« Le volant se transmet », Patrice en 1987, Thomas en 2020), la revue de presse, les partenaires classés par soutien et le contact.
+- [Accueil, l'association](https://tpracing.github.io/) : le projet Caterham Academy (la voiture, le format, les cinq circuits de la saison), l'histoire de l'association (« Le volant se transmet », Patrice en 1987, Thomas aujourd'hui dans son Gold Kart 47), la revue de presse, les partenaires classés par soutien et le contact.
 - [Le pilote, Thomas Papone](https://tpracing.github.io/pilote.html) : le parcours du plus récent au plus ancien (test Caterham Academy 2026, préparation sur simulateur, FEED Racing en 2024, karting de compétition dès 2020, débuts en 2015), les réseaux et les derniers posts du pilote.
 - [Contact](https://tpracing.github.io/contact.html) : email de l'association, LinkedIn, réseaux du projet, et point d'entrée pour les demandes de partenariat ou de presse.
 - [Mentions légales et confidentialité](https://tpracing.github.io/mentions-legales.html) : éditeur, hébergement, propriété intellectuelle, données personnelles et cookies.

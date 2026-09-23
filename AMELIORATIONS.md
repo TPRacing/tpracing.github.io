@@ -857,7 +857,7 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   retirée de la frise, rail, métas et llms.txt ; le hero de la page pilote passe sur le regard dans le
   casque FEED (Magny-Cours, 30/07/2024), la carte de partage og-pilote aussi. (2) **Accueil, « Le volant se
   transmet »** : le kart de 2020 (Tony Kart blanc et vert) est remplacé par le **Gold Kart bleu et jaune,
-  plaque 47, stickers des partenaires**, shooting du 09/03/2024 (IMG_3469, détouré), étiquette 2024. Même
+  plaque 47, stickers des partenaires**, shooting du 09/03/2024 (IMG_3469, détouré), étiquette 2026 à la demande de Thomas (« j'ai toujours ce même kart, ça fait plus actuel »). Même
   Gold Kart en petite photo de l'étape karting de la frise, qui prend l'aplat ROUGE (tenu avant par SERA).
   (3) Versements 2026 des partenaires : Thomas ne les a pas tous, l'ordre reste calculé sur 2022 à 2025.
   (4) Photo de 2015 : pas nécessaire, l'étape reste telle quelle. Vérifs : accueil et pilote en 1280 et
