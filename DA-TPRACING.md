@@ -25,7 +25,10 @@ ou le retour de Thomas qui la justifie). Il n'est pas une deuxième charte : la 
 - Nom officiel au tiret court : « TPRacing - Thomas Papone Racing ». Aucun cadratin,
   aucun point médian décoratif : la ponctuation graphique maison = pastille damier + slashes.
 - Numéro : le 47, seul numéro mis en avant. Les numéros des photos d'archives (324, 19, 20)
-  sont des dossards de course, jamais des éléments de marque.
+  sont des dossards de course, jamais des éléments de marque. Durci le 23/09 : ils ne passent
+  pas non plus dans le TEXTE qui décrit l'image (alt, légende, title). La photo les montre, le
+  texte ne les nomme pas. L'alt du hero du 22/09 disait « kart numéro 19 » et « numéro 20 » :
+  un moteur et un lecteur d'écran lisent l'alt comme une affirmation, pas comme un décor.
 
 ## 2. Vocabulaire maison (validé, en production sur le site)
 

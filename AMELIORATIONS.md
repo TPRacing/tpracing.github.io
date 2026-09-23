@@ -852,6 +852,49 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-09-23 (routine, AXE B : audit, dimension **SEO TECHNIQUE + résultats Google réels**, pas
+  auditée en profondeur depuis le 06/08 ; 21/09 était un jour C, 22/09 un jour A, dernier jour B le
+  16/09). T7 non monté, travail sur clone GitHub dans le scratchpad. Commit a5325ac.
+  **RÉSULTATS GOOGLE RÉELS (Chrome connecté, google.fr)** : le site est **1er sur « TPRacing »** (devant
+  deux homonymes moto, une SARL de Replonges et un club du Tarn) et **1er et 2e sur « Thomas Papone
+  pilote karting »** (accueil puis pilote.html, devant kartcom, Instagram, Le Progrès, LinkedIn).
+  `site:tpracing.github.io` ne sort plus que l'accueil, mais pilote.html sort bien en recherche
+  nominative : l'opérateur `site:` est approximatif, ne pas conclure à une désindexation sur lui seul.
+  Google affiche encore pour pilote.html le titre avec tiret cadratin retiré le 18/07 : la page n'a
+  pas été réexplorée depuis deux mois. **Search Console** : 2 pages dans l'index, 0 non indexée, aucun
+  problème sur 90 jours ; 3 mois de performances = **29 clics, 92 impressions, CTR 31,5 %, position
+  moyenne 4,1**, requêtes « tpracing » (18 clics / 29 impressions) et « papone ». Le sitemap reste en
+  « Impossible de récupérer », **dernière lecture toujours le 4 août** (sept semaines sans relecture),
+  alors que le fichier servi est irréprochable (200, `application/xml`, sans BOM, identique pour l'UA
+  Googlebot, revérifié ce jour). contact.html et mentions-legales.html ne sont toujours pas découvertes.
+  **CORRIGÉ AUJOURD'HUI** :
+  1. **Préchargement hérité de l'ancien hero** : l'accueil préchargeait `embleme-3d.webp` en
+     `fetchpriority="high"` à CHAQUE visite, alors que depuis le hero « La transmission » l'emblème ne
+     vit plus que dans l'intro (une fois par session). Sur toutes les visites suivantes, il passait
+     devant les deux karts, la vraie image principale, et se téléchargeait pour rien (21 Ko). Le
+     préchargement est maintenant injecté par le script de décision de l'intro, seulement quand elle
+     joue, et l'image de l'intro passe en `loading="lazy"` (un `display:none` ne se charge alors pas).
+     Mesuré par le protocole DevTools : 1er passage = emblème chargé, intro regardée en capture à 1,2 s
+     (tracé + emblème) ; 2e passage 1280 et 390 = aucune requête d'emblème, les deux karts en priorité
+     High, 0 erreur console, `scrollWidth == innerWidth`.
+  2. **Code mort de l'intro** retiré : la recherche de `.hero .embleme-3d` et le bloc qui révélait
+     `.hero .visuel` visaient des éléments supprimés le 22/09 ; la cible est directement le logo de la nav.
+  3. **Alts du hero** : « kart numéro 19 » et « kart numéro 20 » citaient deux numéros qui ne sont pas le
+     47, contre la règle du site. Retirés (« au volant de son kart, Championnat de France 1987 » ;
+     « au volant de son kart sous la pluie, Château-Gaillard 2020 »). Règle durcie dans la DA.
+  4. **lastmod du sitemap** : pilote.html, contact.html et mentions-legales.html affichaient toujours le
+     08/08 alors qu'elles ont changé depuis (12/09, 22/09 et 08/09, dates des derniers commits). Un
+     lastmod juste est le seul signal de réexploration que le site peut envoyer sans Search Console.
+  **LAISSÉ, avec motif** : resoumettre le sitemap et demander l'indexation de contact.html et
+  mentions-legales.html dans Search Console. C'est une action sur le compte, hors mandat de la
+  routine automatique ; **question pour Thomas** : je peux le faire à ta prochaine session (ou toi :
+  Search Console > Sitemaps > supprimer puis renvoyer `sitemap.xml`, et Inspection de l'URL >
+  Demander l'indexation pour les deux pages). `pilote.html` porte encore « dossard 32 » dans un alt du
+  feed Insta : section de la routine du feed, déjà consigné au backlog le 08/08, non touché.
+  **Vérifié sain** : 5 pages en 200, 1 h1 par page, aucun niveau sauté, 7 blocs JSON-LD reparsés sans
+  erreur, canonicals justes, titles 27 à 65 caractères, descriptions 102 à 145, `noindex` sur la 404
+  seulement, aucune image sans alt (les 2 `<img>` nus de pilote.html sont dans un commentaire).
+
 - 2026-09-22 ter (HORS ROUTINE, demande directe de Thomas : « le site paraît encore très IA »,
   commit 647216d) : **nouveau hero de l'accueil, « La transmission »**, maquetté dans Figma
   (fichier « TPRacing - Refonte design du site », https://www.figma.com/design/84rsHQUMl4rHmUk8cIDsPh ,
