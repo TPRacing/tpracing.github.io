@@ -704,14 +704,20 @@
     if (!calme) {
       let yPrec = scrollY, tPrec = performance.now(), cible = 0, actif = true;
       new IntersectionObserver(es => es.forEach(e => { actif = e.isIntersecting; })).observe(voiture);
+      // La boucle ne tourne que pendant le flou, puis s'arrête : aucune image calculée à l'arrêt
+      // (une boucle permanente consommait de la batterie et bloquait les captures headless).
+      let tourne = false;
+      const boucle = () => {
+        if (cible > sd + .3 || sd > .3) { regle(sd + (cible - sd) * .25); cible *= .86; requestAnimationFrame(boucle); }
+        else { if (sd) regle(0); tourne = false; }
+      };
       addEventListener('scroll', () => {
         const t = performance.now(), v = Math.abs(scrollY - yPrec) / Math.max(8, t - tPrec);
-        yPrec = scrollY; tPrec = t; if (actif) cible = Math.min(22, v * 9);
+        yPrec = scrollY; tPrec = t;
+        if (!actif || !entreeFaite) return;
+        cible = Math.min(22, v * 9);
+        if (!tourne && cible > .3) { tourne = true; requestAnimationFrame(boucle); }
       }, { passive: true });
-      (function boucle() {
-        if (entreeFaite && (cible > sd + .3 || sd > .3)) { regle(sd + (cible - sd) * .25); cible *= .86; }
-        requestAnimationFrame(boucle);
-      })();
     }
 
     // Parallaxe douce du montage sous la souris
