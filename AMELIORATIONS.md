@@ -852,6 +852,17 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-09-23 ter (HORS ROUTINE, retours de Thomas sur la v3 en ligne) : (1) **SERA n'est plus cité
+  nulle part** (« c'étaient des entraînements pour la FEED Racing, on ne les met pas en avant ») : étape
+  retirée de la frise, rail, métas et llms.txt ; le hero de la page pilote passe sur le regard dans le
+  casque FEED (Magny-Cours, 30/07/2024), la carte de partage og-pilote aussi. (2) **Accueil, « Le volant se
+  transmet »** : le kart de 2020 (Tony Kart blanc et vert) est remplacé par le **Gold Kart bleu et jaune,
+  plaque 47, stickers des partenaires**, shooting du 09/03/2024 (IMG_3469, détouré), étiquette 2024. Même
+  Gold Kart en petite photo de l'étape karting de la frise, qui prend l'aplat ROUGE (tenu avant par SERA).
+  (3) Versements 2026 des partenaires : Thomas ne les a pas tous, l'ordre reste calculé sur 2022 à 2025.
+  (4) Photo de 2015 : pas nécessaire, l'étape reste telle quelle. Vérifs : accueil et pilote en 1280 et
+  375, 0 erreur, 0 image cassée, 0 débordement.
+
 - 2026-09-23 bis (HORS ROUTINE, demande directe de Thomas, REFONTE v3 validée sur prototype : « vas-y je
   valide, on va améliorer au fur et à mesure »). Point de départ : « la présentation, j'aime pas trop, les
   éléments graphiques font encore trop IA, et les photos de l'accueil ne montrent que du karting alors que
