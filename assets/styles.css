@@ -710,6 +710,8 @@ footer img { height: 52px; width: auto; }
 footer a { color: var(--blanc); text-decoration: none; font-family: var(--f-label); font-weight: 700; letter-spacing: .1em; font-size: 1.02rem; text-transform: uppercase; }
 footer a:hover { color: var(--or); }
 footer .foot-liens { display: flex; gap: 22px; flex-wrap: wrap; }
+/* cible tactile : 19 px de haut seulement avant (WCAG 2.5.8 demande 24) */
+footer .foot-bas a { display: inline-block; padding-block: 3px; }
 footer .foot-bas { max-width: 1180px; margin: 0 auto; border-top: 1px solid rgba(246, 247, 252, .14); padding-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; }
 
 /* ---------- Galerie : agrandissement au clic (lightbox) ---------- */

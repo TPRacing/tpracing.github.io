@@ -236,6 +236,7 @@
     @keyframes k87 { from { transform: translateX(-190%); } to { transform: translateX(-104%); } }
     @keyframes k20 { from { transform: translateX(90%); } to { transform: translateX(4%); } }
     @keyframes apparait { from { opacity: 0; translate: 0 14px; } to { opacity: 1; translate: 0 0; } }
+    @keyframes titre-m { from { letter-spacing: .06em; opacity: .35; } to { letter-spacing: 0; opacity: 1; } }
     @keyframes titre { from { letter-spacing: .2em; opacity: .35; } to { letter-spacing: 0; opacity: 1; } }
 
     /* ---------- Caterham Academy ---------- */
@@ -313,16 +314,29 @@
     .grain::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 40; opacity: .13; mix-blend-mode: overlay;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 
+    /* 901 à 1279 : la colonne de texte à 640 px ne laissait que 270 px au montage (voiture minuscule à 1024) */
+    @media (min-width: 901px) and (max-width: 1279px) {
+      .hero { grid-template-columns: minmax(0, max(420px, 41vw)) minmax(0, 1fr); padding-right: 28px; }
+    }
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; padding: 100px 20px 0; gap: 10px; min-height: auto; }
+      /* minmax(0, 1fr) : une piste 1fr prend la largeur min-content des titres en nowrap
+         et poussait tout le bloc hors de l'écran sous 360 px (titres et texte rognés) */
+      .hero { grid-template-columns: minmax(0, 1fr); padding: 100px 20px 0; gap: 10px; min-height: auto; }
+      .hero h1 { font-size: min(1.9rem, 7.6vw); }
       .hero .texte p { font-size: .95rem; }
       .montage { justify-self: center; margin-bottom: -60px; }
       .kart { height: 25vh; bottom: 22%; }
       .histoire .fond-vert { height: 36%; }
-      .histoire .recit { top: calc(15vh + 3.4em); font-size: .95rem; }
+      /* le récit se cale sous les 2 lignes du titre, quelle que soit la largeur (il le chevauchait sous 900 px) */
+      .histoire { --t: min(1.6rem, 7.2vw); }
+      .histoire h2 { font-size: var(--t); }
+      .histoire h2 span { white-space: nowrap; }
+      .histoire h2 { animation-name: titre-m; } /* écartement réduit : à .2em le titre sortait de l'écran */
+      .histoire .recit { top: calc(15vh + 2 * var(--t) + 26px); font-size: .95rem; }
       .annee b { font-size: 1.75rem; }
       .academy, .partenaires, .presse, #contact { padding: 90px 20px 100px; }
-      .academy { grid-template-columns: 1fr; gap: 40px; }
+      .academy { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+      .academy h2 { font-size: min(1.6rem, 6.5vw); }
       .chiffres b { font-size: 2.5rem; }
       .chiffres span { font-size: .75rem; }
       .revue .ligne { grid-template-columns: 1fr; gap: 10px; }
