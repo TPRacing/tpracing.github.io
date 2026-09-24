@@ -791,6 +791,39 @@ jour même. Ce qui suit a été trouvé et NON corrigé, faute d'être un défau
   l'animation de tableau de bord. À mesurer un jour de dimension adaptée (le prérendu ne se pilote pas
   facilement en CDP : il faut une vraie navigation depuis une page qui déclare la règle).
 
+### Constats de l'audit RENDU À TOUTES LES LARGEURS du 24/09 (5 pages x 11 largeurs, 320 à 1680, après la refonte v3)
+
+Premier audit de rendu du nouveau squelette (la v3 n'avait été vérifiée qu'en 1280 et 375). Méthode :
+protocole DevTools, défilement pas à pas, mesures à chaque vue (débordement réel en tenant compte des
+ancêtres qui rognent, texte plus large que sa boîte, étendue du TEXTE des titres par `Range`, polices
+sous 12 px, cibles tactiles sous 24 px, résolution réelle des images) puis captures regardées en 320,
+390, 768, 1024, 1280 et 1680.
+- [x] **Accueil à 320 : hero et Caterham Academy rognés à droite** (« Cap sur la », « Caterham », le
+      texte, « Voir le parcours », « La Caterham », les chiffres). Cause : une piste de grille `1fr`
+      vaut `minmax(auto, 1fr)`, elle prend la largeur min-content des titres en `nowrap` et pousse tout
+      le bloc hors de l'écran. Corrigé : `minmax(0, 1fr)` + titres plafonnés en vw (7,6vw et 6,5vw).
+- [x] **« Le volant se transmet » chevauchait le récit sous 900 px** (320 à 900) : le récit était placé
+      à `15vh + 3.4em` sans lien avec la hauteur réelle du titre. Corrigé : le titre prend une variable
+      `--t`, le récit se cale à `15vh + 2 x --t + 26px`, titre en `nowrap`, écartement de l'animation
+      réduit à .06em sur mobile (à .2em il sortait de l'écran).
+- [x] **Accueil de 901 à 1279 : montage minuscule** (270 px de large à 1024, un grand vide à droite) :
+      la colonne de texte gardait ses 640 px. Corrigé : colonne à `max(420px, 41vw)` sur cette plage,
+      1280 et plus inchangés (regardé).
+- [x] **Page pilote à 320 et 360 : « Thomas » et « Le parcours » sortaient de l'écran.** Corrigé en vw.
+- [x] **Année de la carte 2026 qui débordait de sa plaque or à 1024 et 1280.** Corrigé : la plaque est
+      un conteneur (`container-type: inline-size`), l'année plafonnée à `19.5cqi` (repli sans cqi gardé).
+- [x] **Photos de la frise et du hero pilote floues sur téléphone** (32 % à 82 % de la résolution utile) :
+      les cartes pleine hauteur recadrent une photo paysage en tranche portrait, et `sizes="96vw"` faisait
+      choisir la version 800 px. Corrigé : versions `-p` recadrées en portrait (même centre que le
+      `cover`, même étalonnage, depuis les originaux) servies sous 700 px : 0,94 à 1,17 de la
+      résolution utile, 19 à 78 Ko en AVIF.
+- [x] **Lien « Mentions légales » du pied de page : cible de 19 px de haut** (5 pages). Passé à 25 px.
+- [ ] À 1280, la carte karting prend `frise-kart-m` (800 px) pour un besoin de 931 px (0,86) : passer
+      son `sizes` à 73vw coûterait 78 Ko de plus pour 14 %, laissé en l'état.
+- RAS : 0 erreur console, 0 requête en échec, 0 débordement horizontal sur les 55 combinaisons ; les
+  emblèmes de fond de contact, mentions et 404 sortent du cadre exprès (rognés), le 404 géant déborde
+  de sa colonne exprès (commentaire en place) ; les liens de revue de presse font 24 px (lien couvrant).
+
 ### Constats de l'audit PERF du 16/09 (5 pages, poids réel modélisé selon la sélection du navigateur)
 
 Dimension pas auditée en profondeur depuis le 08/08 (5 semaines). Le rig habituel (mesure au
@@ -851,6 +884,22 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-09-24 (routine, AXE B : audit, dimension **RENDU À TOUTES LES LARGEURS, 320 à 1680**, jamais
+  passée sur le squelette v3 mis en ligne la veille ; 23/09 était un jour B SEO, 22/09 A, 21/09 C).
+  5 pages x 11 largeurs (320, 360, 390, 414, 600, 768, 900, 1024, 1280, 1440, 1680) mesurées vue par
+  vue et regardées en capture. **7 défauts trouvés et corrigés le jour même** (détail dans « Constats
+  de l'audit RENDU » du backlog) : hero et Caterham Academy rognés à 320 (piège `1fr` = `minmax(auto,
+  1fr)` avec des titres en `nowrap`), titre « Le volant se transmet » qui chevauchait le récit de 320 à
+  900, montage du hero minuscule entre 901 et 1279, titres de la page pilote hors écran à 320, année
+  2026 hors de sa plaque à 1024 et 1280, photos de la frise floues sur téléphone (nouvelles versions
+  portrait `-p`, +6 fichiers AVIF/WebP, 252 Ko d'AVIF au total mais seulement sur téléphone et en
+  remplacement des `-m`), cible tactile des mentions légales. Commit 492d0ae, build `built`, marqueurs
+  vérifiés en prod (41vw dans l'accueil, `frise-2015-p` dans la page pilote, CSS du pied à jour).
+  Vérif finale : 55 combinaisons page x largeur, 0 erreur, 0 échec réseau, 0 débordement, 0 titre
+  rogné ; 1280 regardé inchangé. **Piège noté** : un profil Chrome réutilisé sert l'ancien HTML et CSS
+  en cache (le serveur local envoie Last-Modified), le 1er contrôle après correctif disait « rien n'a
+  changé » : `Network.setCacheDisabled` obligatoire dans le script de mesure.
 
 - 2026-09-23 ter (HORS ROUTINE, retours de Thomas sur la v3 en ligne) : (1) **SERA n'est plus cité
   nulle part** (« c'étaient des entraînements pour la FEED Racing, on ne les met pas en avant ») : étape

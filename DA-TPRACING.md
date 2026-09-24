@@ -220,6 +220,17 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-09-24 (audit de rendu 320 à 1680) : **un mot trop grand l'est par rapport à SON cadre, jamais par
+  accident par rapport à l'écran.** Le vocabulaire maison vit de titres Korataki en `nowrap` volontairement
+  énormes ; ce jour-là quatre d'entre eux sortaient de l'écran à 320 et une année débordait de sa plaque
+  or à 1024. Règles durcies : (1) tout titre en `nowrap` a un plafond en vw (ou en `cqi` s'il vit dans
+  une plaque) calculé sur la plus petite largeur, 320 ; (2) une grille qui contient un tel titre se
+  déclare `minmax(0, 1fr)`, jamais `1fr` ; (3) un texte posé sous un titre en position absolue se cale
+  sur la taille du titre (variable partagée), pas sur des `em` du texte ; (4) le débordement voulu
+  (404 géant, emblèmes de fond) reste rogné par son cadre et commenté dans le CSS. Et côté matière : une
+  photo recadrée en tranche portrait par un `cover` a sa propre version portrait, sinon le grain devient
+  du flou. Captures : scratchpad du 24/09, `aud/shots` (avant et après).
+
 - 2026-09-23 bis (REFONTE v3, validée par Thomas sur prototype) : **la DA change de centre de gravité, du
   karting vers la VOITURE.** Règles qui en sortent, à tenir sur toute nouvelle page. (1) **Le damier devient
   RARE** : il reste dans le logo, la pastille des surtitres et le rappel du drapeau, jamais comme bordure,
