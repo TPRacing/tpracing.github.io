@@ -901,8 +901,9 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   `Communication/Refonte design site/Images retirées du site (26-09)/` (galerie-leader et karting-pluie
   n'ont pas d'original connu, l'archive est leur seule copie hors du dépôt). Les 5 pages contrôlées sans
   ces fichiers (0 image cassée). Le commit a été bloqué par le garde-fou du mode automatique : dépôt remis à
-  l'identique, rien n'est parti. **Question pour Thomas** : on retire ces 51 fichiers du site ? Les vidéos
-  SERA sont encore accessibles publiquement par leur adresse directe alors que SERA n'est plus mis en avant.
+  l'identique, rien n'est parti. **Réponse de Thomas : « oui fais ».** Liste recalculée à l'instant (identique), archive revérifiée au md5
+  (51/51), 5 pages recontrôlées en 1280 et 375 (0 image cassée), commit 657eebe, build `built` : les pages
+  répondent 200, les fichiers retirés 404 (vidéos SERA comprises).
   Les deux logos secondaires PNG sont gardés dans tous les cas (possible usage hors du site).
 
 - 2026-09-26 (routine, AXE A : finition, l'item « Reste à faire » laissé le 23/09 bis : **le détourage
