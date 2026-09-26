@@ -885,6 +885,26 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-09-26 bis (HORS ROUTINE, feu vert de Thomas « tu peux faire ce que t'as à faire »). (1) **La Caterham
+  du hero passe au détourage Photoshop** (commit 43293d7, build `built`, 4 fichiers identiques en prod) :
+  Photoshop répondait de nouveau, « Sélectionner le sujet » lancé par script sur IMG_2130, en arrière-plan,
+  sans prendre la main sur l'écran. Comparé côte à côte au masque GrabCut du matin, il gagne partout :
+  arceau complet et continu, rétroviseur gauche entier (le masque du matin l'écornait en haut à gauche),
+  rétro droit avec sa vraie tige, bâche nette, zéro grillage, dessous de caisse vide. Couleurs prises du
+  master (la retouche 47 est intacte), bords décontaminés, 142 Ko WebP / 96 Ko AVIF en 1640, 46 / 31 Ko en
+  760. Master archivé à côté des deux autres : `detourage-caterham47-v3-photoshop-26-09.png`. Vérifié en
+  Playwright (1280 en DPR 2, 375 en DPR 3) : 0 erreur, 0 requête en échec. (2) **Ménage des fichiers
+  inutilisés PRÉPARÉ, NON PUBLIÉ** : 51 fichiers qu'aucune page, feuille de style ou script ne référence
+  plus (galerie-*, teaser-pilote*, hero-2020*, heritage-1980*, feed-racing*, karting-pluie*,
+  partenaires-stickers*, pilote-regard-m*, video-poster.webp, et les deux vidéos SERA
+  `assets/video/sera-roulage*.mp4`, 8,9 Mo au total). Copies vérifiées au md5 dans
+  `Communication/Refonte design site/Images retirées du site (26-09)/` (galerie-leader et karting-pluie
+  n'ont pas d'original connu, l'archive est leur seule copie hors du dépôt). Les 5 pages contrôlées sans
+  ces fichiers (0 image cassée). Le commit a été bloqué par le garde-fou du mode automatique : dépôt remis à
+  l'identique, rien n'est parti. **Question pour Thomas** : on retire ces 51 fichiers du site ? Les vidéos
+  SERA sont encore accessibles publiquement par leur adresse directe alors que SERA n'est plus mis en avant.
+  Les deux logos secondaires PNG sont gardés dans tous les cas (possible usage hors du site).
+
 - 2026-09-26 (routine, AXE A : finition, l'item « Reste à faire » laissé le 23/09 bis : **le détourage
   final de la Caterham du hero** ; 21/09 C, 22/09 A, 23 et 24/09 B, pas de passage le 25/09). T7 monté,
   commit f2740ac, build `built`, les 4 fichiers identiques en prod (md5). **Constats au zoom sur l'ancien fichier** : tube supérieur gauche de l'arceau en

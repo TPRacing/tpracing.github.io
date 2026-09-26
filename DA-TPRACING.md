@@ -220,6 +220,13 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-09-26 bis : **pour un détourage, Photoshop d'abord, le script en repli.** Le même jour, le masque
+  scripté (GrabCut amorcé) et « Sélectionner le sujet » de Photoshop ont été comparés sur la même photo :
+  Photoshop rend l'arceau entier et les rétroviseurs intacts là où le script laissait des tubes coupés et
+  un rétro écorné. Le script reste utile pour recaler une photo et décontaminer les bords, pas pour tracer
+  la silhouette. À l'œil : un objet de marque doit rester ENTIER dans un montage, un tube coupé se voit plus
+  qu'un grain.
+
 - 2026-09-26 (axe A, détourage de la Caterham du hero) : **un détourage se juge sur le fond où il vit,
   pas sur du blanc.** L'ancien fichier paraissait propre en aperçu ; posé sur le marine du hero, il
   portait un liseré clair continu (couleur du béton restée dans les pixels semi-transparents) et, sur
