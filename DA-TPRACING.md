@@ -220,6 +220,17 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-09-26 (axe A, détourage de la Caterham du hero) : **un détourage se juge sur le fond où il vit,
+  pas sur du blanc.** L'ancien fichier paraissait propre en aperçu ; posé sur le marine du hero, il
+  portait un liseré clair continu (couleur du béton restée dans les pixels semi-transparents) et, sur
+  l'aplat or de l'emblème, des miettes de grillage entre les tubes. Règles durcies : (1) tout détourage
+  se contrôle composité sur **les deux fonds maison, marine ET or**, plus un magenta de contrôle qui
+  révèle les restes ; (2) les bords semi-transparents sont **décontaminés** (couleur du pixel opaque
+  voisin) avant export, sinon le fond d'origine de la photo se promène sur le site ; (3) une pièce de
+  la vraie voiture perdue au détourage (ici le rétroviseur droit) se rend, même redessinée, car le
+  montage McLaren que Thomas a choisi ne marche que si l'objet est entier. Captures : hero local 1280
+  et DPR 2 du 26/09 (scratchpad de la routine).
+
 - 2026-09-24 (audit de rendu 320 à 1680) : **un mot trop grand l'est par rapport à SON cadre, jamais par
   accident par rapport à l'écran.** Le vocabulaire maison vit de titres Korataki en `nowrap` volontairement
   énormes ; ce jour-là quatre d'entre eux sortaient de l'écran à 320 et une année débordait de sa plaque

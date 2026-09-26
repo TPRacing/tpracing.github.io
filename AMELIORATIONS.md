@@ -885,6 +885,27 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-09-26 (routine, AXE A : finition, l'item « Reste à faire » laissé le 23/09 bis : **le détourage
+  final de la Caterham du hero** ; 21/09 C, 22/09 A, 23 et 24/09 B, pas de passage le 25/09). T7 monté,
+  commit f2740ac, build `built`, les 4 fichiers identiques en prod (md5). **Constats au zoom sur l'ancien fichier** : tube supérieur gauche de l'arceau en
+  morceaux, bâche roulée déchiquetée, rétroviseur droit absent, un pan de grillage du box et l'extincteur
+  rouge du mur gardés entre les tubes, et surtout un **liseré clair tout autour de la voiture** (bords
+  semi-transparents d'Apple Vision qui gardaient la couleur du béton), visible sur le fond marine de l'aile
+  arrière et du pneu avant. **Méthode** : la source n'était pas IMG_2131 comme supposé mais **IMG_2130**
+  (recalage SIFT : décalage 133, 1127, échelle 1, écart moyen 1/255), la retouche 47 est donc conservée
+  telle quelle ; zone de l'arceau reprise par **GrabCut OpenCV** amorcé sur les structures sombres épaisses
+  (ouverture 17 px, le grillage disparaît) et la bâche brune, zones de fond forcées pour le poteau et le
+  grillage, casque repris de l'ancien masque, rétro droit redessiné (tête arrondie, tige, câble,
+  suréchantillonné x4) ; puis bords resserrés et **décontaminés** (chaque pixel de bord prend la couleur du
+  pixel opaque le plus proche). Réduction en alpha prémultiplié. Poids : 146 Ko WebP / 96 Ko AVIF en 1640,
+  47 / 32 Ko en 760, soit 12 à 16 % de MOINS qu'avant. Master neuf archivé à côté de l'ancien (non écrasé) :
+  `Communication/Refonte design site/v3 - prototype (23-09)/detourage-caterham47-v2-26-09.png`.
+  **Vérifs** : les 4 fichiers regardés sur marine ET sur l'or de l'emblème, hero local capturé en 1280 et
+  en DPR 2 (arceau net sur la plaque or, rétro droit devant la combinaison de Thomas, naturel). **Fausse
+  piste** : Photoshop « Sélectionner le sujet » par script n'a pas répondu (AppleEvent en attente, Thomas
+  était sur un jeu plein écran, on n'a pas touché à l'interface) : si une fenêtre Photoshop reste ouverte
+  sur `src_crop.png` au retour, elle vient de là et peut être fermée sans enregistrer.
+
 - 2026-09-24 (routine, AXE B : audit, dimension **RENDU À TOUTES LES LARGEURS, 320 à 1680**, jamais
   passée sur le squelette v3 mis en ligne la veille ; 23/09 était un jour B SEO, 22/09 A, 21/09 C).
   5 pages x 11 largeurs (320, 360, 390, 414, 600, 768, 900, 1024, 1280, 1440, 1680) mesurées vue par
@@ -948,8 +969,8 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   capture, vidéo SERA qui démarre à l'écran. Photos vérifiées par EXIF (Le Castellet 2024 écarté : Thomas
   y était spectateur). **Questions pour Thomas** : (a) les versements 2026 des partenaires (le fichier
   Suivi_Partenaires_TPRacing.xlsx a disparu du Bureau) ; (b) une photo de 2015 où on le reconnaît ;
-  (c) l'année des premiers roulages à Pont d'Ain. **Reste à faire** : détourage final de la Caterham
-  sous Photoshop (quelques miettes derrière l'arceau au zoom), retrait des images devenues inutiles
+  (c) l'année des premiers roulages à Pont d'Ain. **Reste à faire** : ~~détourage final de la Caterham
+  sous Photoshop (quelques miettes derrière l'arceau au zoom)~~ FAIT le 26/09 (voir Journal), retrait des images devenues inutiles
   (galerie, teaser, etc., gardées pour l'instant).
 
 - 2026-09-23 (routine, AXE B : audit, dimension **SEO TECHNIQUE + résultats Google réels**, pas
