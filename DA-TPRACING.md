@@ -220,6 +220,17 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-09-27 (veille, angle LA MACHINE) : **un texte ne se pose jamais sur une couture.** Le hero de pilote.html a
+  une bande cinéma en haut et en bas (11vh) ; la ligne « Saison 2027 / Pilote 47 » avait une marge en px, donc sa
+  place par rapport à la bande changeait avec la hauteur d'écran, et le 47 se retrouvait à cheval sur la lisière
+  photo/aplat. Règle : quand un élément de cadre est en unité d'écran (vh, vw, svh), ce qui se pose à côté se
+  calcule À PARTIR DE LUI (variable partagée), pas à côté de lui. Contrôle : mesurer à plusieurs HAUTEURS et pas
+  seulement à plusieurs largeurs, les audits de rendu passés ne faisaient varier que la largeur. Et deux
+  confirmations tirées des captures du jour : le biseau sur deux coins (haut-droit, bas-gauche) est aussi celui des
+  cartes de voitures de Ginetta, c'est un code du sport auto ; le fond d'un objet de marque est son propre graphisme
+  agrandi (Ressence et son cadran, nous et l'emblème TP), jamais une texture importée. Captures : scratchpad de la
+  routine du 27/09, `veille/` (sites) et `shot_*` / `after_*` (hero pilote avant et après).
+
 - 2026-09-26 bis : **pour un détourage, Photoshop d'abord, le script en repli.** Le même jour, le masque
   scripté (GrabCut amorcé) et « Sélectionner le sujet » de Photoshop ont été comparés sur la même photo :
   Photoshop rend l'arceau entier et les rétroviseurs intacts là où le script laissait des tubes coupés et

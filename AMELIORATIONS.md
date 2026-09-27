@@ -76,6 +76,52 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       quotidienne à 10 h, via le Chrome connecté ; validée par Thomas le 17/07)
 
 
+### Idées de la veille 27/09 (angle neuf : LA MACHINE, comment un constructeur ou un pilote présente son objet)
+
+Sites REGARDÉS en Chrome headless piloté en CDP, 1280 (4 vues au défilement) et 390 (2 vues), captures dans le
+scratchpad du jour (`veille/`) : ginetta.com, ligierautomotive.com, ressencewatches.com (hors sport, marque forte
+avec peu de contenu), landonorris.com, singervehicledesign.com. Puis nos pages capturées de la même façon, pour
+confronter.
+
+- [x] **RETENU ET FAIT le jour même : le texte du hero pilote ne se pose plus sur la couture de la bande basse.**
+      Vu en confrontant nos captures à celles du jour (Singer tranche son propre titre sur téléphone, même famille
+      de défaut). La bande « cinéma » basse vaut 11vh, la marge du texte valait 70 px (60 sur téléphone) : les deux
+      ne se suivaient pas, donc la ligne « Saison 2027 : Caterham Academy / Pilote 47 » tombait sur la couture
+      photo/bande à presque toutes les hauteurs d'écran. Mesuré (haut et bas du 47 contre le haut de la bande) :
+      1280x800 à cheval (4 px), 1440x900 coupé en son milieu, 390x844 tranché (14 px au-dessus, 19 en dessous),
+      1024x768 et 1280x720 collé à la couture, 1920x1080 à 2 px sous la couture. Correctif : une variable
+      `--bande: 11vh` partagée par les bandes et par la marge basse du hero (`calc(var(--bande) + 30px)`, 30 px =
+      le pas de la ligne elle-même), en desktop comme sur téléphone, avec retour à 60 px à l'impression (bandes
+      masquées). Remesuré à 8 tailles de 320x568 à 1920x1080 : 30 px pile entre la ligne et la couture partout.
+      Pourquoi c'est TPRacing : le 47 est le seul numéro de marque du site, il ne peut pas être coupé par un bord.
+- [ ] **Signature manuscrite du pilote en or, grand format, sur pilote.html** (vu sur landonorris.com : une section
+      entière n'est qu'une signature tracée en accent sur le fond sombre, « Message from Lando », sans autre texte).
+      Mécanisme lu après coup : un tracé vectoriel dessiné au défilement. Test : (1) personnel et pilote, oui ;
+      (2) un TRAIT or sur marine, dans le vocabulaire ; (3) accent seul sur marine dominant ; (4) matière, c'est une
+      vraie écriture. ⏳ Bloquée : demande un scan de la signature de Thomas (feuille blanche, stylo noir épais),
+      vectorisation possible ensuite sans rien publier. Place pressentie : juste avant le CTA final de pilote.html.
+      Question posée au Journal du 27/09.
+- [ ] **Un plan de DÉTAIL de la Caterham, pleine largeur, dans « Le projet Caterham »** (vu sur Singer : après un
+      titre et un texte posés côte à côte sur une seule rangée, une photo de l'habitacle seul, sièges, volant, levier,
+      qui dit « tout compte » mieux que le texte). Chez nous la voiture n'existe qu'en détourage entier ; le plan
+      serré (levier de la boîte en H, volant, arceau) dirait la machine que Thomas prépare. Test : (1) oui, c'est LA
+      voiture de la saison ; (2) photo réelle, étalonnage maison ; (3) photo, pas de couleur ajoutée ; (4) matière.
+      Non bloquée par Thomas : les photos du test day d'Alès (16/07) sont sur le T7, qui s'est démonté pendant la
+      routine du 27/09. À faire un jour A, T7 monté, en respectant le poids (image calibrée sur sa taille mesurée).
+- Confirmations (rien à faire, mais chacune durcit une règle de la DA) : **Ginetta coupe ses cartes de voitures sur
+  les DEUX coins de nos biseaux** (haut-droit et bas-gauche), le biseau est donc un vrai code du sport auto et pas
+  une invention maison ; **Ressence** agrandit le motif de son propre cadran en fond clair derrière la montre, comme
+  notre emblème TP en trame derrière la Caterham (le fond est le graphisme de l'OBJET, jamais une texture prise
+  ailleurs) ; **Lando Norris** date chaque photo d'une ligne « LIEU, ANNÉE » en petit, ce que fait déjà `.lieu` dans
+  la frise de pilote.html ; **Ligier** aligne six tuiles identiques qui portent toutes le même surtitre
+  « ACTUALITÉS », contre-exemple exact de la règle du 09/08 ; **Singer** titre en capitales ultra condensées et
+  maigres, le registre fin que Thomas a rejeté le 08/08.
+- Écartés avec motif : l'**encoche en chevron du filet de nav sous le logo** (Ginetta) : notre barre est une plaque
+  blanche et non un filet, et le chevron n'appartient pas au vocabulaire maison (entrée du 11/08) ; la **trame de
+  lignes horizontales sur la vidéo** (Ligier) : c'est le langage de l'écran TV, pas notre grain argentique ; l'**index
+  « 01 / G56 » d'un carrousel à filet actif** (Ginetta) : le site n'a pas de carrousel, et le rail de pilote.html
+  fait déjà la même chose (filet rouge actif + année).
+
 ### Idées de la veille 21/09 (angle neuf : LE GESTE, ce qui se passe entre le survol et le clic)
 
 Sites REGARDÉS (Chrome headless piloté au protocole DevTools, survol et pression envoyés en
@@ -247,6 +293,8 @@ Actionnables sans contenu de Thomas :
 
 Sites morts ou trompeurs, à ne pas reprendre dans une prochaine veille : teamduqueine.com, akkodis-asp.com et
 tds-racing.com ne répondent plus ; signatech.fr n'est PAS l'écurie mais une entreprise de signalétique du Loiret.
+Ajoutés le 27/09 : rimac-automobili.com (rendu client, page vide, bloque le harnais), pragacars.com (connexion
+réinitialisée), radical-sportscars.com et radicalsportscars.com (DNS introuvable), brabham.com (certificat invalide).
 
 ### Idées de la veille 10/08 (angles neufs : héritage, endurance, rallye, karting industriel, marque hors sport auto, studio primé : sites REGARDÉS, pas lus)
 
@@ -884,6 +932,20 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-09-27 (routine, AXE C : veille par captures, angle neuf **LA MACHINE**, comment un constructeur ou un
+  pilote présente son objet ; dernière veille le 21/09, puis A 22/09, B 23 et 24/09, A 26/09). T7 monté au départ
+  puis **démonté en cours de routine** : la journée s'est finie depuis un clone du dépôt dans le scratchpad, la
+  copie du T7 sera donc en retard d'un commit (faire `git pull` dans « Site TPRacing » au prochain branchement).
+  Cinq sites regardés en 1280 et 390 (Ginetta, Ligier, Ressence, Lando Norris, Singer), cinq morts ajoutés à la
+  liste. Détail dans « Idées de la veille 27/09 » du backlog. **Fait le jour même** : le hero de pilote.html, où la
+  ligne « Saison 2027 / Pilote 47 » tombait sur la couture de la bande cinéma basse (bande en vh, marge en px) ; le
+  47 était tranché sur téléphone et coupé en son milieu à 1440x900. Texte désormais calé sur la bande par une
+  variable commune, 30 px au-dessus de la couture à toutes les tailles (8 mesurées de 320x568 à 1920x1080) ;
+  0 débordement, 0 image cassée à 320, 375 et 1280. Seul pilote.html a changé (CSS de son `<style>`, aucune
+  ligne de la section Instagram). **Question pour Thomas** : pour l'idée « signature en or » (vue chez Lando
+  Norris), pourrais-tu envoyer un scan ou une photo nette de ta signature (stylo noir épais, feuille blanche) ?
+  Rien ne sera publié sans ton accord.
 
 - 2026-09-26 bis (HORS ROUTINE, feu vert de Thomas « tu peux faire ce que t'as à faire »). (1) **La Caterham
   du hero passe au détourage Photoshop** (commit 43293d7, build `built`, 4 fichiers identiques en prod) :

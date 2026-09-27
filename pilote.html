@@ -138,14 +138,17 @@
     body { background: var(--nuit-p); }
 
     /* ---------- Hero ---------- */
-    .hero-pilote { position: relative; min-height: max(720px, 100svh); display: grid; align-items: end; padding: 0 max(20px, 4.4vw) 70px; background: var(--nuit-p); color: var(--blanc); overflow: hidden; }
+    /* La bande basse est en vh et la marge du texte était en px : selon la hauteur d'écran, la ligne « Saison 2027 / Pilote 47 »
+       tombait sur la couture photo/bande (le 47 tranché en deux sur téléphone et à 1440x900). Le texte se cale désormais SUR la bande,
+       avec le pas de sa propre ligne (30 px) au-dessus de la couture, à toutes les hauteurs. */
+    .hero-pilote { --bande: 11vh; position: relative; min-height: max(720px, 100svh); display: grid; align-items: end; padding: 0 max(20px, 4.4vw) calc(var(--bande) + 30px); background: var(--nuit-p); color: var(--blanc); overflow: hidden; }
     .hero-pilote .film { position: absolute; inset: 0; }
     .hero-pilote .film img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; }
     .hero-pilote .film::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(11, 15, 22, .95) 0%, rgba(11, 15, 22, .35) 45%, rgba(11, 15, 22, .2) 70%, rgba(11, 15, 22, .7) 100%); }
-    .hero-pilote .bande { position: absolute; left: 0; right: 0; height: 11vh; background: var(--nuit-p); z-index: 2; }
+    .hero-pilote .bande { position: absolute; left: 0; right: 0; height: var(--bande); background: var(--nuit-p); z-index: 2; }
     .hero-pilote .bande.h { top: 0; } .hero-pilote .bande.b { bottom: 0; }
     .js .hero-pilote .bande { height: 50vh; }
-    .pret .hero-pilote .bande { height: 11vh; transition: height 1.2s cubic-bezier(.7, 0, .2, 1) .2s; }
+    .pret .hero-pilote .bande { height: var(--bande); transition: height 1.2s cubic-bezier(.7, 0, .2, 1) .2s; }
     .hero-pilote .contenu-h { position: relative; z-index: 3; }
     .hero-pilote h1 { margin: 0; color: var(--blanc); font-size: clamp(2.5rem, 7vw, 6.75rem); line-height: .92; }
     .hero-pilote .sous { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 12px 30px; align-items: center; }
@@ -215,7 +218,7 @@
     .cta-final p { color: #aeb6c8; margin: 14px 0 30px; }
 
     @media (max-width: 900px) {
-      .hero-pilote { padding: 0 20px 60px; }
+      .hero-pilote { padding: 0 20px calc(var(--bande) + 30px); }
       .parcours-tete { padding: 100px 20px 40px; }
       /* sous 360 px, « Thomas » et « Le parcours » sortaient de l'écran */
       .hero-pilote h1 { font-size: min(2.5rem, 11.4vw); }
@@ -238,12 +241,13 @@
       .p-reseaux { padding: 30px 20px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .js .hero-pilote .bande { height: 11vh; }
+      .js .hero-pilote .bande { height: var(--bande); }
       .direct::before { animation: none; }
       .chapitre .carte { animation: none !important; }
     }
     @media print {
       .hero-pilote .bande, .rail { display: none !important; }
+      .hero-pilote { padding-bottom: 60px; }
       .chapitre { height: auto !important; }
       .chapitre .carte { position: static !important; height: auto !important; min-height: 0 !important; break-inside: avoid; }
       .carte.plein .grande, .carte.plein .aplat, .carte.plein .petite { position: static !important; width: auto !important; }
