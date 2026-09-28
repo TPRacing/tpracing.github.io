@@ -101,7 +101,7 @@ confronter.
       vraie écriture. ⏳ Bloquée : demande un scan de la signature de Thomas (feuille blanche, stylo noir épais),
       vectorisation possible ensuite sans rien publier. Place pressentie : juste avant le CTA final de pilote.html.
       Question posée au Journal du 27/09.
-- [ ] **Un plan de DÉTAIL de la Caterham, pleine largeur, dans « Le projet Caterham »** (vu sur Singer : après un
+- [x] **Un plan de DÉTAIL de la Caterham, pleine largeur, dans « Le projet Caterham »** (FAIT le 28/09, voir Journal) (vu sur Singer : après un
       titre et un texte posés côte à côte sur une seule rangée, une photo de l'habitacle seul, sièges, volant, levier,
       qui dit « tout compte » mieux que le texte). Chez nous la voiture n'existe qu'en détourage entier ; le plan
       serré (levier de la boîte en H, volant, arceau) dirait la machine que Thomas prépare. Test : (1) oui, c'est LA
@@ -932,6 +932,31 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-09-28 (routine, AXE A : complétude + finition, l'item « plan de détail de la Caterham » de la veille du 27/09,
+  non bloqué par Thomas et laissé pour un jour où le T7 serait monté ; 26/09 A, 27/09 C). T7 monté, dépôt à jour
+  (`git pull` : rien à rapatrier). Commit 60eb757, build `built`, index.html et les images identiques dépôt/prod (shasum), rendu en ligne capturé. **Choix de la photo** : les 71 fichiers du test day d'Alès passés
+  en planche contact. Le bon plan n'était pas dans les HEIC de Thomas mais dans les photos du Samsung de Patrice :
+  `Samsung Patrice/20260716_114549.jpg`, le tableau de bord vu du baquet (compteurs Caterham, coupe-circuit rouge,
+  chrono AiM Solo 2, et le pommeau gravé « 1 3 5 / CATERHAM / 2 4 R »). C'est littéralement la « grille en H » du
+  chiffre juste au-dessus. **Fait** : une figure `.poste` sur toute la largeur de la section, sous les deux colonnes,
+  biseautée sur les deux coins comme la photo voisine. Un viseur en brackets or (le vocabulaire des cadres photo du
+  site) se cale sur le pommeau avec l'étiquette « Grille en H », et la légende « Le poste de pilotage / Pôle Mécanique
+  d'Alès / 16 juillet » occupe le vide sombre du côté passager, en bas à droite. Deux recadrages : 2:1 au-dessus de
+  700 px (1200w et 2340w), portrait 4:5 en dessous (1080w, cible téléphone DPR 3). Le viseur est placé en % de
+  l'image, avec ses coordonnées propres à chaque recadrage, mesurées sur le fichier final à 1:1. Étalonnage maison du
+  22/09 (point noir et point blanc mesurés sur la zone recadrée, gain 1,13 donc sous la borne de 1,35, S douce, ombres
+  vers le marine, vibrance réservée aux tons moyens) puis point noir resserré de 3 % : la photo de téléphone sortait
+  avec des noirs levés (5e centile à 0,051 contre 0,020 pour `academy-volant`), elle en est maintenant à 0,022. Poids :
+  107 Ko d'AVIF en 2340, 24 Ko en 1200, 57 Ko en portrait, en `loading="lazy"`. **Vérifs** : 13 largeurs de 320 à 1680,
+  source servie la bonne à chaque fois (portrait jusqu'à 700, 2:1 dès 701), ratio affiché égal au ratio du fichier,
+  aucun enfant de la figure hors de son cadre, 0 erreur console. **Défaut attrapé en vérif** : de 701 à ~900 px,
+  l'étiquette « Grille en H » passait sous le titre de la légende. Entre 701 et 1023 elle se pose désormais AU-DESSUS
+  du viseur. Le seul élément qui dépasse la largeur d'écran est le kart animé de la section histoire (préexistant,
+  rogné exprès par `overflow-x: clip`). **Écartés** : une trame ou un duotone sur la photo (la règle du 10/08 réserve
+  le duotone aux montages de marque, ceci est une photo de reportage) ; animer le viseur au défilement (ce qui ne bouge
+  pas compte aussi, et la section a déjà ses tracés de circuits animés). **Point à regarder par Thomas** : l'écran du
+  chrono reflète une silhouette (sans doute Patrice qui prend la photo) ; si ça le gêne, je l'éteins sur le fichier.
 
 - 2026-09-27 (routine, AXE C : veille par captures, angle neuf **LA MACHINE**, comment un constructeur ou un
   pilote présente son objet ; dernière veille le 21/09, puis A 22/09, B 23 et 24/09, A 26/09). T7 monté au départ

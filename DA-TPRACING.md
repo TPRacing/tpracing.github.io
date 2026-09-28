@@ -220,6 +220,17 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-09-28 (axe A, le poste de pilotage) : **les brackets d'angle or ne servent plus seulement à cadrer une photo,
+  ils peuvent VISER un détail dans la photo.** Posés autour du pommeau de la boîte, ils relient l'image au chiffre
+  « 5 rapports, grille en H » écrit juste au-dessus : le texte annonce, la photo prouve, le viseur fait le lien. Règle
+  d'usage : un seul viseur par image, sur l'objet dont le texte parle, avec une étiquette Bebas de deux ou trois mots
+  maximum. Plus que ça et on bascule dans l'infographie annotée, un autre langage. Mécanique à retenir : coordonnées en
+  % de l'IMAGE (variables `--vx/--vy/--vw/--vh`), un jeu par recadrage, image en `aspect-ratio` égal à celui du fichier
+  pour que le % ne dérive pas. Et une confirmation de la veille du 27/09 (Singer) : le plan SERRÉ d'un habitacle dit
+  « la machine » mieux qu'un détourage entier. La bonne photo était chez Patrice, pas chez Thomas : pour une machine,
+  chercher aussi dans les photos prises par l'entourage. Captures : scratchpad de la routine du 28/09 (`avant_1280`,
+  `apres_1280`, `m390`, `t768`).
+
 - 2026-09-27 (veille, angle LA MACHINE) : **un texte ne se pose jamais sur une couture.** Le hero de pilote.html a
   une bande cinéma en haut et en bas (11vh) ; la ligne « Saison 2027 / Pilote 47 » avait une marge en px, donc sa
   place par rapport à la bande changeait avec la hauteur d'écran, et le 47 se retrouvait à cheval sur la lisière
