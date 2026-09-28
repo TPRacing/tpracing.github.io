@@ -220,6 +220,11 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-09-28 bis : **ANNULÉ, la figure a été retirée le jour même par Thomas.** Une image dit un fait : un plan
+  d'habitacle dit « c'est ma voiture », or la Caterham est encore un objectif à financer. Avant de publier une photo,
+  se demander ce qu'elle AFFIRME, pas seulement si elle est belle. L'entrée ci-dessous reste comme mécanique (viseur
+  or) réutilisable plus tard, pas comme contenu validé.
+
 - 2026-09-28 (axe A, le poste de pilotage) : **les brackets d'angle or ne servent plus seulement à cadrer une photo,
   ils peuvent VISER un détail dans la photo.** Posés autour du pommeau de la boîte, ils relient l'image au chiffre
   « 5 rapports, grille en H » écrit juste au-dessus : le texte annonce, la photo prouve, le viseur fait le lien. Règle

@@ -101,7 +101,7 @@ confronter.
       vraie écriture. ⏳ Bloquée : demande un scan de la signature de Thomas (feuille blanche, stylo noir épais),
       vectorisation possible ensuite sans rien publier. Place pressentie : juste avant le CTA final de pilote.html.
       Question posée au Journal du 27/09.
-- [x] **Un plan de DÉTAIL de la Caterham, pleine largeur, dans « Le projet Caterham »** (FAIT le 28/09, voir Journal) (vu sur Singer : après un
+- [ ] **Un plan de DÉTAIL de la Caterham, pleine largeur, dans « Le projet Caterham »** (mis en ligne puis RETIRÉ le 28/09 à la demande de Thomas : il n'a pas encore la voiture, ne pas le reproposer avant, voir Journal) (vu sur Singer : après un
       titre et un texte posés côte à côte sur une seule rangée, une photo de l'habitacle seul, sièges, volant, levier,
       qui dit « tout compte » mieux que le texte). Chez nous la voiture n'existe qu'en détourage entier ; le plan
       serré (levier de la boîte en H, volant, arceau) dirait la machine que Thomas prépare. Test : (1) oui, c'est LA
@@ -932,6 +932,14 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-09-28 bis (retour de Thomas sur la routine du matin) : **le poste de pilotage est RETIRÉ du site.** Son mot :
+  « la créativité pour la photo est bonne mais pas pertinent de mettre ça, je n'ai pas encore la voiture ». Un plan de
+  l'habitacle laisse croire qu'il a déjà la Caterham et qu'il la prépare, alors que la saison est encore à financer.
+  `git revert` du commit 60eb757 : la section « Le projet Caterham » revient exactement à son état du 27/09, les 6
+  images sortent du dépôt (copies dans `Communication/Refonte design site/Images retirées du site (28-09) poste de
+  pilotage/`). **Règle pour la suite** : la Caterham se montre comme l'OBJECTIF (test day daté, projet, saison à venir),
+  jamais comme un acquis. Les idées de veille « montrer la machine » attendent qu'il ait réellement la voiture.
 
 - 2026-09-28 (routine, AXE A : complétude + finition, l'item « plan de détail de la Caterham » de la veille du 27/09,
   non bloqué par Thomas et laissé pour un jour où le T7 serait monté ; 26/09 A, 27/09 C). T7 monté, dépôt à jour
