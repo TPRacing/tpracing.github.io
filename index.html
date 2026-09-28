@@ -262,6 +262,28 @@
     .chiffres div { padding-top: 16px; }
     .chiffres b { display: block; font-family: var(--f-label); font-weight: 700; font-size: 3.4rem; line-height: 1; }
     .chiffres span { font-size: .88rem; color: var(--gris-c); line-height: 1.4; display: block; padding-right: 10px; }
+    /* Le poste de pilotage : un plan serré de la voiture, sur toute la largeur. La voiture
+       n'existait qu'en détourage entier ; ici c'est la machine qu'on prépare (grille en H,
+       coupe-circuit, chrono embarqué). Le viseur or se cale sur le levier, en % de l'image,
+       donc chaque recadrage (large / portrait sous 700 px) porte ses propres coordonnées. */
+    .poste { grid-column: 1 / -1; position: relative; margin: 0; --vx: 29.1%; --vy: 82.5%; --vw: 11.5%; --vh: 23%; }
+    .poste img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 26px 100%, 0 calc(100% - 26px)); }
+    .poste .viseur { position: absolute; left: calc(var(--vx) - var(--vw) / 2); top: calc(var(--vy) - var(--vh) / 2); width: var(--vw); height: var(--vh); pointer-events: none; }
+    .poste .viseur::before, .poste .viseur::after { content: ""; position: absolute; width: 30%; height: 30%; border: 3px solid var(--or); }
+    .poste .viseur::before { left: 0; top: 0; border-right: 0; border-bottom: 0; }
+    .poste .viseur::after { right: 0; bottom: 0; border-left: 0; border-top: 0; }
+    .poste .viseur span { position: absolute; left: calc(100% + 12px); top: 50%; transform: translateY(-50%); white-space: nowrap; font: 700 .95rem/1 var(--f-label); letter-spacing: .12em; text-transform: uppercase; color: var(--or); }
+    .poste figcaption { position: absolute; right: 44px; bottom: 34px; text-align: right; }
+    .poste figcaption b { display: block; font-family: var(--f-titre); font-size: clamp(1.1rem, 2vw, 1.8rem); line-height: 1.05; color: var(--blanc); text-transform: uppercase; }
+    .poste figcaption span { display: block; margin-top: 8px; font: 700 .95rem/1 var(--f-label); letter-spacing: .12em; text-transform: uppercase; color: var(--gris-c); }
+    /* 701 à 1023 : la légende du bas occupe la moitié droite, l'étiquette du viseur passe au-dessus de lui */
+    @media (min-width: 701px) and (max-width: 1023px) {
+      .poste .viseur span { left: 0; top: auto; bottom: calc(100% + 8px); transform: none; }
+    }
+    @media (max-width: 700px) {
+      .poste { --vx: 42%; --vy: 69.2%; --vw: 19%; --vh: 15.2%; }
+      .poste img { aspect-ratio: 1080 / 1349; }
+    }
 
     /* ---------- Presse : une revue en lignes typographiques ---------- */
     .presse { background: var(--nuit); color: var(--blanc); padding: 120px max(20px, 4.4vw) 130px; clip-path: polygon(0 0, 100% var(--pente), 100% 100%, 0 100%); margin-top: calc(var(--pente) * -1); }
@@ -339,6 +361,8 @@
       .academy h2 { font-size: min(1.6rem, 6.5vw); }
       .chiffres b { font-size: 2.5rem; }
       .chiffres span { font-size: .75rem; }
+      .poste figcaption { right: 22px; bottom: 20px; }
+      .poste figcaption span { font-size: .8rem; }
       .revue .ligne { grid-template-columns: 1fr; gap: 10px; }
       .arguments { grid-template-columns: 1fr; }
       .arguments div { padding: 16px 0 0; }
@@ -539,6 +563,16 @@
       </div>
       <a class="btn btn-or" href="#partenaires">Soutenir la saison</a>
     </div>
+    <figure class="poste">
+      <picture>
+        <source type="image/avif" srcset="assets/img/academy-poste-p.avif" media="(max-width: 700px)">
+        <source srcset="assets/img/academy-poste-p.webp" media="(max-width: 700px)">
+        <source type="image/avif" srcset="assets/img/academy-poste-m.avif 1200w, assets/img/academy-poste.avif 2340w" sizes="92vw">
+        <img src="assets/img/academy-poste.webp" srcset="assets/img/academy-poste-m.webp 1200w, assets/img/academy-poste.webp 2340w" sizes="92vw" width="2340" height="1170" loading="lazy" alt="Le poste de pilotage de la Caterham : compteurs, coupe-circuit rouge, chronomètre embarqué et pommeau de la boîte à grille en H">
+      </picture>
+      <span class="viseur" aria-hidden="true"><span>Grille en H</span></span>
+      <figcaption><b>Le poste de pilotage</b><span>Pôle Mécanique d'Alès / 16 juillet</span></figcaption>
+    </figure>
   </section>
 
   <!-- ===== PRESSE ===== -->
