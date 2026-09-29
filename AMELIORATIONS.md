@@ -960,8 +960,8 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   `#partenaires` dans la nav et à `contact.html` dans le mur ; c'est un parcours (le pitch, puis le contact), pas une
   incohérence. **Fausses pistes** : `amsrenova.com` (homonyme francilien), les DMPI trouvés (homonymes). **Toujours
   ouvert, rappel** : la question Facebook du 24/08 (profil en cul-de-sac pour qui n'est pas connecté ; le
-  navigateur de la routine est connecté à ton compte, il ne peut pas trancher, et en anonyme on ne voit qu'un mur
-  de cookies sans profil derrière).
+  navigateur de la routine est connecté à ton compte, mais un Chrome anonyme revérifié le 29/09 affiche toujours
+  « Ce contenu n'est pas disponible pour le moment » derrière le bandeau cookies : le défaut est CONFIRMÉ, inchangé).
 
 - 2026-09-28 bis (retour de Thomas sur la routine du matin) : **le poste de pilotage est RETIRÉ du site.** Son mot :
   « la créativité pour la photo est bonne mais pas pertinent de mettre ça, je n'ai pas encore la voiture ». Un plan de
