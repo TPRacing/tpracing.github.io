@@ -764,6 +764,12 @@ Pour la routine du feed Instagram (`maj-feed-insta-site`, section « Les dernier
   `gpi-incendie.fr` existe mais ne sert qu'un gabarit Webador non publié), AMS Rénov Bâtiment, Les Frang'Ain,
   DMPI, Midas Lyon Tête d'Or. Les 5 tuiles restent des blocs sans lien, ce qui est le motif déjà en place.
   À reprendre au prochain audit de liens, un site peut ouvrir comme celui de SMD l'a fait.
+  **Repris le 29/09** : Midas Lyon Tête d'Or AVAIT une page officielle, ratée le 24/08 parce que midas.fr
+  renvoie 403 à curl (`midas.fr/centres-auto-midas/.../lyon-tete-dor_1614`, 115-117 rue Sully 69006, ouverte
+  dans le navigateur) : tuile liée. Les 4 autres restent sans lien : GPI toujours « Site non publié » Webador,
+  Les Frang'Ain n'a que Facebook et Instagram (96 rue Pierre Poivre, Villars-les-Dombes), `amsrenova.com` est
+  un HOMONYME d'Île-de-France (AMS Rénov Bâtiment est à Parcieux 01600, aucun site), DMPI a des homonymes
+  (Montélimar, Chalamont) et rien ne permet de trancher sans Thomas.
 - [ ] Report SEO, pas traité ce jour : sur pilote.html, contact.html et mentions-legales.html, le JSON-LD
   référence `.../#site` alors que ce nœud n'est défini que sur l'accueil. C'est une pratique courante et
   tolérée, mais un nœud WebSite répété sur chaque page serait plus robuste. À trancher un jour de
@@ -932,6 +938,30 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-09-29 (routine, AXE B : audit, dimension **LIENS INTERNES ET EXTERNES**, pas auditée depuis le 24/08, donc
+  jamais depuis la refonte v3 du 23/09 ; 26/09 A, 27/09 C, 28/09 A). T7 monté, `git pull` : à jour. Périmètre :
+  5 pages, 251 refs internes (liens, srcset, posters, CSS inline, JS), 46 URL externes uniques (143 occurrences),
+  plus styles.css, manifeste, sitemap, robots, llms.txt. **Interne 100 % propre** : 0 fichier absent, 0 ancre
+  morte (la 404 en chemins absolus `/` comprise), 0 asset manquant dans le JS ; canonical et og:url justes sur
+  les 4 pages indexables, 404 en `noindex, follow` et vraie réponse 404 en prod, les 2 fichiers Search Console
+  répondent 200. **Externe** : tous en 200 sauf Facebook (400 anonyme) et le LinkedIn perso (999, anti-robot
+  normal) ; tous les `target="_blank"` portent `rel="noopener"`. Méthode du 24/08 appliquée, car un 200 ne dit pas
+  où l'on arrive : les 13 tuiles partenaires comparées au titre et au texte de leur site (toutes chez le bon
+  partenaire), les 2 articles Le Progrès parlent bien de Thomas, YouTube, Twitch, TikTok et la page LinkedIn de
+  l'asso sont les bons comptes, et les 5 publications Instagram (3 posts du feed de pilote.html, 2 reels MyCitee
+  de l'accueil) lues une à une via leur page `/embed/captioned/` dans le navigateur (curl et headless ne rendent
+  que la coquille, taille identique pour les 5). Libellés internes comparés au titre de la section d'arrivée :
+  tous cohérents. **1 correctif (commit d4aea0a)** : la tuile Midas Lyon Tête d'Or, classée « sans site » le
+  24/08, a une page officielle sur midas.fr ; le 24/08 l'avait ratée parce que midas.fr renvoie 403 à curl.
+  **Leçon** : un 403 sur un outil en ligne de commande ne veut pas dire « pas de site », il faut ouvrir la page
+  dans un vrai navigateur avant de conclure. Tuile liée sur le modèle exact des 13 autres, cellule mesurée
+  identique à ses voisines en 375 et 1280, 0 erreur console. **Examiné et gardé** : « Devenir partenaire » mène à
+  `#partenaires` dans la nav et à `contact.html` dans le mur ; c'est un parcours (le pitch, puis le contact), pas une
+  incohérence. **Fausses pistes** : `amsrenova.com` (homonyme francilien), les DMPI trouvés (homonymes). **Toujours
+  ouvert, rappel** : la question Facebook du 24/08 (profil en cul-de-sac pour qui n'est pas connecté ; le
+  navigateur de la routine est connecté à ton compte, il ne peut pas trancher, et en anonyme on ne voit qu'un mur
+  de cookies sans profil derrière).
 
 - 2026-09-28 bis (retour de Thomas sur la routine du matin) : **le poste de pilotage est RETIRÉ du site.** Son mot :
   « la créativité pour la photo est bonne mais pas pertinent de mettre ça, je n'ai pas encore la voiture ». Un plan de
