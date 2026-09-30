@@ -752,7 +752,7 @@ Pour la routine du feed Instagram (`maj-feed-insta-site`, section « Les dernier
   NAF 3312Z, et le logo de leur site est identique au fichier `smd.webp` de la bande. Leur site date de
   février 2025, soit APRÈS la construction de la bande, ce qui explique le lien de dépannage d'origine.
   Canonique = domaine nu sans www.
-- [ ] **QUESTION THOMAS, lien Facebook en cul-de-sac pour tous les visiteurs.**
+- [x] **QUESTION THOMAS, lien Facebook en cul-de-sac pour tous les visiteurs.** RÉGLÉ le 30/09 (voir Journal).
   `facebook.com/thomas.pne.9` renvoie « Ce contenu n'est pas disponible pour le moment » à toute personne
   non connectée. Ce n'est pas un blocage anti-robot : un profil public témoin s'affiche complètement dans
   la même session de capture, et la version mbasic renvoie une erreur elle aussi. Le lien vit à 7 endroits :
@@ -938,6 +938,18 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-09-30 (HORS ROUTINE, suite de l'audit des liens du 29/09) : **la question Facebook du 24/08 est RÉGLÉE, rien
+  n'a changé sur le site.** Thomas a activé lui-même, dans Paramètres et confidentialité > « Comment les autres peuvent
+  vous trouver et vous contacter », le réglage « moteurs de recherche en dehors de Facebook ». Le basculement par la
+  routine avait été refusé par le garde-fou de Claude Code : les réglages d'un compte personnel restent à Thomas.
+  Vérifié juste après depuis un Chrome vierge, sans session : `facebook.com/thomas.pne.9` passe de 400 et « Ce contenu
+  n'est pas disponible » à **200 avec le profil affiché** (og:title « Thomas Papone », bio « Driver / For TPRacing »,
+  couverture, photo, intro, publications), derrière le bandeau cookies que Facebook impose à tout visiteur européen. Les
+  7 liens Facebook du site (pied des 5 pages, puce du hero et `sameAs` du JSON-LD de pilote.html) mènent donc enfin
+  quelque part. Écarté : un lien `fb://`, qui ne marche que si l'appli est installée et reste mort sur ordinateur ; le
+  lien https actuel ouvre déjà l'appli sur téléphone. **Remarque pour Thomas** : l'intro désormais publique affiche
+  encore « BUT Techniques de Commercialisation, IUT Le Creusot » et « Habite à Le Creusot ».
 
 - 2026-09-29 (routine, AXE B : audit, dimension **LIENS INTERNES ET EXTERNES**, pas auditée depuis le 24/08, donc
   jamais depuis la refonte v3 du 23/09 ; 26/09 A, 27/09 C, 28/09 A). T7 monté, `git pull` : à jour. Périmètre :
