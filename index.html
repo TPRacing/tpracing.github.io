@@ -91,6 +91,9 @@
           pre.rel = 'preload'; pre.as = 'image'; pre.href = 'assets/img/embleme-3d.webp';
           pre.fetchPriority = 'high';
           document.head.appendChild(pre);
+          const tr = document.createElement('link');
+          tr.rel = 'preload'; tr.as = 'image'; tr.href = 'assets/img/intro-traces.svg';
+          document.head.appendChild(tr);
         }
       } catch (e) { document.documentElement.classList.add('intro-off'); }
     })();
@@ -363,8 +366,9 @@
     }
 
     /* ---------- Intro « tracé de circuit » au lancement ----------
-       Une piste se dessine en zigzag façon intro F1, parcourue par une
-       voiture-lumière (comète or) qui passe derrière l'emblème TP ; l'emblème se
+       Trois Caterham viennent de passer : leurs traces de pneus (sculpture réelle
+       relevée sur la photo du test day, dessinée dans Illustrator, grain de gomme
+       Photoshop) se posent l'une après l'autre, la 47 en or en dernier ; l'emblème se
        résout net puis GLISSE se poser exactement à sa place dans le hero, et le
        voile (même fond que le hero) s'efface : atterrissage invisible. */
     html.intro-active { overflow: hidden; }
@@ -385,24 +389,7 @@
     .intro-circuit {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
-    }
-    .intro-circuit .ic-glow,
-    .intro-circuit .ic-trace {
-      fill: none;
-      stroke-linecap: round;
-      stroke-dasharray: 1000;
-      stroke-dashoffset: 1000;
-      animation: ic-dessin 1.5s cubic-bezier(.45, .05, .2, 1) .15s forwards;
-    }
-    .intro-circuit .ic-glow { stroke: #D49726; stroke-width: 11; opacity: .3; filter: blur(6px); }
-    .intro-circuit .ic-trace { stroke: #E8B451; stroke-width: 3.5; }
-    @keyframes ic-dessin { to { stroke-dashoffset: 0; } }
-    .intro-circuit .ic-voiture { animation: ic-vie 1.9s linear forwards; opacity: 0; }
-    @keyframes ic-vie {
-      0%, 6% { opacity: 0; }
-      10% { opacity: 1; }
-      86% { opacity: 1; }
-      100% { opacity: 0; }
+      object-fit: cover;
     }
     .intro-circuit.efface { animation: ic-fade .4s ease .05s forwards; }
     @keyframes ic-fade { to { opacity: 0; } }
@@ -426,23 +413,7 @@
 
   <!-- ===== INTRO AU LANCEMENT (1 fois par session) ===== -->
   <div id="intro" aria-hidden="true">
-    <svg class="intro-circuit" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs>
-        <linearGradient id="ic-queue" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#D49726" stop-opacity="0"/>
-          <stop offset=".72" stop-color="#D49726" stop-opacity=".85"/>
-          <stop offset="1" stop-color="#FFF3D6"/>
-        </linearGradient>
-      </defs>
-      <path class="ic-glow" pathLength="1000" d="M -120,330 C 60,240 190,200 320,300 C 450,400 480,500 620,470 C 720,449 760,360 860,340 C 980,316 1060,430 1180,470 C 1280,505 1380,420 1560,380"/>
-      <path class="ic-trace" pathLength="1000" d="M -120,330 C 60,240 190,200 320,300 C 450,400 480,500 620,470 C 720,449 760,360 860,340 C 980,316 1060,430 1180,470 C 1280,505 1380,420 1560,380"/>
-      <g class="ic-voiture">
-        <ellipse rx="34" ry="4.5" cx="-26" cy="0" fill="url(#ic-queue)"/>
-        <circle r="9" fill="#D49726" opacity=".35"/>
-        <circle r="4.5" fill="#FFF3D6"/>
-        <animateMotion dur="1.5s" begin="0.15s" fill="freeze" rotate="auto" calcMode="spline" keyPoints="0;1" keyTimes="0;1" keySplines="0.45 0.05 0.2 1" path="M -120,330 C 60,240 190,200 320,300 C 450,400 480,500 620,470 C 720,449 760,360 860,340 C 980,316 1060,430 1180,470 C 1280,505 1380,420 1560,380"/>
-      </g>
-    </svg>
+    <img class="intro-circuit" src="assets/img/intro-traces.svg" alt="" width="1440" height="900" loading="lazy">
     <img class="intro-logo" src="assets/img/embleme-3d.webp" alt="" width="780" height="553" loading="lazy">
   </div>
 
