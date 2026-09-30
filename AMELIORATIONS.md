@@ -939,6 +939,25 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-09-30 bis (HORS ROUTINE, demande directe de Thomas : « le tracé est un peu mince et fade », il veut
+  l'impression d'un FLUX, comme si plusieurs roues de Caterham étaient passées, avec la suite Adobe ; aperçu vidéo
+  validé par lui avant mise en ligne). **L'intro change de langage : le filet or de 3,5 px et sa comète deviennent
+  six traces de pneus**, trois voitures qui viennent de passer, deux en blanc cassé discret puis la 47 en or. La
+  sculpture est la VRAIE, relevée sur la photo du pneu de la Caterham du test day (semi-slick, 2 rainures
+  circonférentielles, encoches obliques courtes le long des rainures). Dessin dans Illustrator par script (3 nervures
+  fermées à bords courbes par pneu, environ 200 encoches, fichier `traces-intro.ai` éditable), grain de gomme en amas
+  fait dans Photoshop (bruit gaussien, flou, niveaux), assemblage en un SVG animé autonome
+  `assets/img/intro-traces.svg` : une révélation par voiture (0 / 0,15 / 0,32 s, 0,82 s chacune), fondu d'entrée et
+  de sortie de chaque trace, grain en motif. Il remplace le SVG inline par une `<img>`, préchargée seulement quand
+  l'intro joue. Poids : 81 Ko (36 Ko gzip), une fois par session ; la 1re version pesait 151 Ko, allégée en réduisant
+  les points des bords (40 → 14 par bord) et en retirant les encoches hors du cadre. Mesures : 60 images/s, un seul
+  accroc de 140 ms au décodage du fichier, avant tout mouvement ; 0 erreur console ; la 47 finit à ~1 s, soit
+  0,7 s de pose avec l'emblème avant la sortie (la 1re version finissait juste avant la sortie, resserrée). Sur
+  téléphone, les traces font une bande diagonale sous l'emblème. Sources, scripts et vidéo d'aperçu sur le T7 :
+  `Communication/Refonte design site/Intro traces (30-09)/`. **Pièges** : l'effet Outline Stroke n'a pas pris en
+  script (Illustrator a rempli le tracé ouvert), d'où les nervures construites en formes fermées ; un SVG servi en
+  `<img>` joue ses animations CSS mais ne charge rien d'externe (grain en data URI).
+
 - 2026-09-30 (routine, AXE B : audit, dimension **QUALITÉ VISUELLE / BORDS D'IMAGES**, pas refaite depuis le 04/08,
   donc jamais depuis la refonte v3 et ses DÉTOURAGES posés sur fond marine ou vert ; 27/09 C, 28/09 A, 29/09 B).
   T7 monté, `git pull` : à jour. Périmètre : les 96 images référencées par les 5 pages (plus `collage-origines` de

@@ -220,6 +220,15 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-09-30 bis (intro, demande de Thomas) : **la trace de pneu entre au vocabulaire maison.** Un filet lumineux
+  est un signe générique (n'importe quelle marque tech en a un) ; une empreinte de gomme ne peut venir que d'une
+  voiture qui a roulé. Règles : (1) la sculpture est RELEVÉE sur le vrai pneu de la voiture concernée, jamais un motif
+  de pneu générique ; (2) les traces vont par paires (deux roues d'un même train), c'est ce qui dit « une voiture »
+  et pas « une rayure » ; (3) l'or est réservé à la 47, les autres passages restent en blanc cassé faible, le marine
+  domine ; (4) une trace a de la MATIÈRE (grain de gomme en amas, entrée et sortie en fondu), jamais un aplat net.
+  Pourquoi c'est TPRacing : c'est le seul signe du site qui dit la course par sa preuve physique, et il porte le
+  numéro du pilote par sa couleur.
+
 - 2026-09-30 (axe B, bords d'images) : **un détourage se juge sur SON fond, jamais sur le damier gris de
   l'éditeur.** Le liseré clair autour de Thomas était invisible sur le blanc du prototype et saute aux yeux sur le
   marine du hero. Règle durcie : tout sujet détouré posé sur marine ou vert passe la mesure du liseré (pixels de bord
