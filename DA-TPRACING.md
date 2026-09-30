@@ -220,6 +220,16 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-09-30 (axe B, bords d'images) : **un détourage se juge sur SON fond, jamais sur le damier gris de
+  l'éditeur.** Le liseré clair autour de Thomas était invisible sur le blanc du prototype et saute aux yeux sur le
+  marine du hero. Règle durcie : tout sujet détouré posé sur marine ou vert passe la mesure du liseré (pixels de bord
+  plus clairs que le fond ET que le sujet, composés sur la vraie couleur de la section) avant publication, seuil
+  pratique autour de 15 %. Le remède maison est la décontamination des couleurs de bord (la couleur du sujet repoussée
+  dans ses pixels semi-transparents), jamais une érosion de l'alpha qui amaigrit la silhouette, ni un contour ou une
+  ombre portée ajoutés pour cacher le défaut. Pourquoi c'est TPRacing : la DA repose sur des photos RÉELLES découpées
+  et posées sur la couleur de la charte ; un liseré d'origine trahit le copier-coller et fait basculer ces montages du
+  côté « autocollant » que Thomas rejette.
+
 - 2026-09-28 bis : **ANNULÉ, la figure a été retirée le jour même par Thomas.** Une image dit un fait : un plan
   d'habitacle dit « c'est ma voiture », or la Caterham est encore un objectif à financer. Avant de publier une photo,
   se demander ce qu'elle AFFIRME, pas seulement si elle est belle. L'entrée ci-dessous reste comme mécanique (viseur

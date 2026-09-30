@@ -939,6 +939,37 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-09-30 (routine, AXE B : audit, dimension **QUALITÉ VISUELLE / BORDS D'IMAGES**, pas refaite depuis le 04/08,
+  donc jamais depuis la refonte v3 et ses DÉTOURAGES posés sur fond marine ou vert ; 27/09 C, 28/09 A, 29/09 B).
+  T7 monté, `git pull` : à jour. Périmètre : les 96 images référencées par les 5 pages (plus `collage-origines` de
+  styles.css). Méthode du 04/08 étendue aux fichiers à transparence : (1) scan des bords des photos (suites de lignes
+  uniformes très sombres ou très claires) ; (2) pour les 6 détourages, mesure du LISERÉ : part des pixels du bord,
+  une fois composés sur leur vrai fond de page, plus clairs que le fond ET que l'intérieur voisin du sujet ; îlots
+  d'alpha détachés ; alpha non nul sur le cadre du fichier ; (3) les 5 pages rendues en pleine hauteur (Playwright +
+  Chrome, 1280 et 390, DPR 2) et REGARDÉES par zones, bords zoomés x3 à x6. 0 erreur console, 0 image cassée.
+  **1 DÉFAUT RÉEL, CORRIGÉ (commit 8a9bc92)** : le détourage de Thomas debout (hero de l'accueil, premier écran du
+  site) portait un **liseré gris clair de 1 px tout autour de la combinaison sombre**, reste du ciel d'Alès dans les
+  pixels semi-transparents du bord : 43,6 % des pixels de bord trop clairs, contre 9 à 15 % pour les autres détourages
+  (l'anticrénelage normal). Sur le marine, la silhouette lisait « autocollant découpé ». Remède : décontamination des
+  couleurs de bord depuis le master étalonné (`v3 - prototype (23-09)/a/thomas.webp`, 738 px, identifié comme la vraie
+  source du fichier publié par comparaison au pixel, alors que le PNG `detourage-thomas-debout.png` n'est PAS étalonné),
+  en ne touchant QUE les pixels à la fois semi-transparents et plus clairs que l'intérieur voisin (la couleur prise
+  est celle du sujet à 2 px vers l'intérieur) : le reflet du col et le gant blanc restent intacts. Alpha inchangé,
+  donc silhouette identique au pixel. Redimensionnement en alpha prémultiplié. Liseré : 43,6 % → 10,3 % (desktop),
+  25 % → 2 % (mobile). Fichiers un peu plus légers : 155 Ko → 147 Ko pour les 4 variantes. Vérifié rendu à 1280, 1024 et
+  390 (source AVIF servie, ratio affiché = ratio du fichier, avant/après regardé zoomé).
+  **SUSPECTS RÉFUTÉS après examen** : `embleme-3d` (34 % de bord clair = le biseau éclairé du rendu 3D, voulu) ;
+  `hero-car47-m` (« poussières » = arceau et rétro fins, une seule composante connexe) ; `hero-1987` (alpha résiduel
+  ≤ 34 sur le cadre du fichier, invisible sur le vert, contrôlé en bandes surcontrastées) ; `pilote-regard-p` (bande
+  claire basse = carrosserie floue, et sous la bande cinéma) ; `pilote-simu` (fond low-key, déjà réfuté le 04/08) ;
+  `frise-feed` (bande sombre en haut = piste filée du panoramique) ; logos partenaires sur fond blanc = cellules
+  blanches, aucun cadre visible ; logos PNG serrés au bord = cadrage voulu.
+  **Laissé en l'état, noté** : les deux karts du diptyque ont un léger liseré clair sur les pneus (~10 %, au niveau du
+  bruit d'anticrénelage). `hero-2024` n'a plus de master retrouvé sur le T7 : une reprise se ferait depuis le fichier
+  publié, donc une génération de compression de plus, pour un gain à peine visible. Pas fait. **Écarté** : décontaminer
+  TOUS les pixels semi-transparents (1er essai) : le reflet du col virait en tache noire, d'où le filtre « plus clair
+  que l'intérieur seulement ».
+
 - 2026-09-30 (HORS ROUTINE, suite de l'audit des liens du 29/09) : **la question Facebook du 24/08 est RÉGLÉE, rien
   n'a changé sur le site.** Thomas a activé lui-même, dans Paramètres et confidentialité > « Comment les autres peuvent
   vous trouver et vous contacter », le réglage « moteurs de recherche en dehors de Facebook ». Le basculement par la
