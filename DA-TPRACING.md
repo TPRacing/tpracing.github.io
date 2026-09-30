@@ -220,6 +220,12 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-09-30 ter : **aucun pictogramme en caractère Unicode.** Une flèche, un check, une étoile tapés comme du texte
+  dépendent de la police du visiteur : quand Bebas ou Inter n'ont pas le glyphe, l'iPhone le prend dans sa police
+  d'émojis et le site affiche un carré bleu étranger à la charte. Tout pictogramme est un SVG en `currentColor` ou
+  en or, dessiné avec le vocabulaire maison. La flèche de sortie `.fl` en est le modèle : trait diagonal + équerre
+  d'angle (le bracket or des cadres photo), bouts carrés, épaisseur calée sur les fûts de la Bebas Bold.
+
 - 2026-09-30 bis (intro, demande de Thomas) : **la trace de pneu entre au vocabulaire maison.** Un filet lumineux
   est un signe générique (n'importe quelle marque tech en a un) ; une empreinte de gomme ne peut venir que d'une
   voiture qui a roulé. Règles : (1) la sculpture est RELEVÉE sur le vrai pneu de la voiture concernée, jamais un motif

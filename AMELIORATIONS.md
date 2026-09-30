@@ -939,6 +939,18 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-09-30 ter (HORS ROUTINE, retours de Thomas) : (1) **Liens MyCitee** : Thomas les disait faux. Les 228
+  publications de @myciteemedia parcourues : seules 2 parlent de lui et c'étaient bien celles du site. Le vrai défaut,
+  trouvé en REGARDANT Instagram connecté sur ordinateur : un lien `/reel/ID/` ouvre le fil Reels (`/reels/ID/`), qui
+  enchaîne aussitôt sur la vidéo d'un autre compte ; sur téléphone l'appli ouvre le bon reel, d'où « marche sur
+  téléphone, pas sur ordi ». Liens passés en `/p/ID/` (page de la publication, reste en place), vérifiés connecté et
+  non connecté, ordinateur et téléphone (commit 8309a5d). **Règle : tout lien vers une vidéo Instagram s'écrit en
+  `/p/`, jamais en `/reel/`.** (2) **Flèches ↗ en émoji sur iPhone** : ni Bebas ni Inter n'ont le glyphe, iOS le
+  prenait dans sa police d'émojis (carré bleu). Les 5 flèches (4 dans « Ils parlent de nous », 1 sur la tuile « Tout
+  voir » de pilote.html) deviennent un SVG maison `.fl` dans styles.css : trait diagonal + équerre d'angle or, trait
+  carré calé sur la Bebas Bold, glissé de 3 px au survol, coupé en mouvement réduit (commit acc9126). La routine
+  maj-feed-insta-site a reçu la consigne de ne pas toucher cette flèche.
+
 - 2026-09-30 bis (HORS ROUTINE, demande directe de Thomas : « le tracé est un peu mince et fade », il veut
   l'impression d'un FLUX, comme si plusieurs roues de Caterham étaient passées, avec la suite Adobe ; aperçu vidéo
   validé par lui avant mise en ligne). **L'intro change de langage : le filet or de 3,5 px et sa comète deviennent
