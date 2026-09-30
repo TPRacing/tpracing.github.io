@@ -1019,6 +1019,22 @@ nav .nav-cta:focus-visible {
 /* ---------- Impression / Enregistrer en PDF ----------
    Sortie papier de marque : fond blanc, encre sobre, en-tête logo couleur,
    décor animé retiré. Utile pour un dossier partenaire imprimé ou un PDF. */
+/* ---------- Flèche de sortie maison (30/09) ----------
+   Remplace le caractère ↗ : Bebas et Inter n'ont pas ce glyphe, l'iPhone le
+   dessinait donc avec sa police d'émojis (carré bleu). Trait diagonal + équerre
+   d'angle, le bracket or des cadres photo ; trait carré calé sur les fûts de la
+   Bebas Bold. Au survol, elle avance de 3 px dans le sens qu'elle indique. */
+.fl {
+  display: inline-block; width: .7em; height: .7em;
+  margin-left: .4em; vertical-align: .04em;
+  fill: none; stroke: var(--or); stroke-width: 2.3;
+  stroke-linecap: square; stroke-linejoin: miter;
+  overflow: visible;
+  transition: transform .25s cubic-bezier(.2, .7, .2, 1);
+}
+a:hover .fl, a:focus-visible .fl, .revue .ligne:hover .aller > span .fl { transform: translate(3px, -3px); }
+@media (prefers-reduced-motion: reduce) { .fl { transition: none; } }
+
 @media print {
   /* Économie d'encre : on coupe fonds, dégradés, trames, ombres et halos */
   *, *::before, *::after {
