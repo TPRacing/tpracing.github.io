@@ -76,6 +76,58 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       quotidienne à 10 h, via le Chrome connecté ; validée par Thomas le 17/07)
 
 
+### Idées de la veille 05/10 bis (angle neuf : LE PARTENAIRE, comment une écurie ou un athlète financé montre ses sponsors)
+
+Relance du run du 02/10 (bloqué par la limite d'usage), exécutée en parallèle du run du jour, d'où deux veilles le
+même jour sur deux angles distincts. Sites REGARDÉS en Chrome headless piloté en CDP, 1280 (3 à 5 vues au défilement)
+ET 390 émulé (2 à 3 vues) : sainteloc.com (accueil + /partenaires/), manthey-racing.com, team-malizia.com/category/
+partners (hors sport auto, voile), teamvismaleaseabike.com/partners/ (hors sport auto, cyclisme), art-grandprix.com,
+projet-devenir.com (voile, Violette Dorange). Puis notre bande partenaires capturée de la même façon pour confronter.
+Captures : scratchpad de la session 7af3a317, `veille/shots/` et planches `veille/*_planche.png`.
+
+- [x] **RETENU ET FAIT : le mur partenaires perdait un filet à 1280.** VU en confrontant notre capture à celles du jour
+      (chez ART et Visma chaque logo a sa case nette) : à 1280, DPR 1 et 2, aucune séparation entre les colonnes 5 et 6,
+      MBE et Approtech, AMS Rénov et la boulangerie, Serv'EAU et DMPI semblaient partager une case. Mesuré au pixel
+      (balayage des filets #DCE0E8 sur une capture découpée du mur) : 7 filets verticaux sur 8 à 1280, complets à 1366,
+      1440 et 1680. Cause prouvée : présent avec `prefers-reduced-motion` (pas d'animation), absent avec. Les cases sont
+      animées au défilement (`animation-timeline: view()`), chacune passe sur son propre calque, et à largeur de colonne
+      fractionnaire (137,73 px) le fond blanc d'une case recouvre le filet de sa voisine. Correctif : le blanc passe sur
+      `.mur`, les cases n'ont plus de fond (aspect final identique). Remesuré en prod : 8 filets verticaux et 4
+      horizontaux à 1024 et 1280 (DPR 1 et 2), mobile 390 et 320 sans régression. Pourquoi c'est TPRacing : le mur est
+      la seule place du site où chaque partenaire a SA case, deux marques fondues dans une case, c'est un partenaire mal
+      traité.
+- [ ] **QUESTION THOMAS : nos 18 logos en une seule encre ?** VU : ART (12 logos en gris moyen sur anthracite, sans
+      titre de section, juste avant le pied), Saintéloc (gris sur blanc, sous « Partenaires officiels »), Visma (blanc
+      sur tuiles noires), Malizia (rangs technique et durabilité en blanc sur noir, rang principal en couleurs). Notre mur
+      garde 18 palettes d'origine (bleu GPI, cyan Bobinage, noir Hexagone, rouge DMPI, jaune Midas, rose F3C), la zone la
+      plus bariolée du site. MÉCANISME lu après coup : ce n'est PAS un `filter: grayscale()`, les fichiers eux-mêmes sont
+      redessinés (Saintéloc `logo-globeair-1.png` : tous les pixels opaques à 160/160/160 ; ART
+      `sponsors-artgp-richard-mille.png` : blanc pur 240/240/240 sur transparent, atténué en gris à l'écran). Test :
+      (1) code des écuries pro, oui ; (2) une encre marine = charte ; (3) le marine y gagne, 18 palettes en moins ;
+      (4) ni matière ni effet, de la discipline. MAIS les logos d'origine ont été validés sur le prototype v3 (23/09) et
+      nos partenaires sont des PME locales qui se reconnaissent à leurs couleurs. Rien publié : maquette monochrome
+      marine (fichiers redessinés, pas de filtre CSS) à préparer seulement si Thomas veut la voir.
+- [ ] Recoupement, rien à faire de plus : **le partenaire montré SUR la machine.** VU chez Manthey (aucune section
+      partenaires à l'accueil, les stickers Riedel, Endless, Salomon, KW en gros plan sur l'aile de la 911, BWT sur le
+      podium) et Saintéloc (hero = gros plan boueux de l'Audi, TOTAL et Pirelli lisibles). La photo d'en-tête posée ce
+      matin sur contact.html (kart de Valence couvert des logos) fait déjà ce geste, et l'item « cartes photo
+      partenaires en situation » du backlog en est la suite.
+- [ ] **Ce que vit le partenaire, avant ses logos.** VU chez Saintéloc /partenaires/ : la page s'ouvre sur
+      « Hospitalities » et « Événementiel » illustrés par de vraies photos d'invités sous la tente et sur le muret des
+      stands, les logos ne viennent qu'à la fin. Nos trois arguments (Visibilité contenu, Image et valeurs, Suivi
+      transparent) sont du texte seul. ⏳ Bloqué : demande une vraie photo de partenaires venus sur un circuit avec
+      TPRacing, s'il en existe une (question au Journal). Pourquoi c'est TPRacing : la preuve par la photo réelle, jamais
+      par l'icône.
+- Écartés avec motif : les **tuiles égales par rang** (Visma, Malizia : une tuile identique par logo, rangs Title /
+  Premium / Official) = l'interdit des cartes toutes identiques, et classer publiquement les partenaires par montant
+  n'est pas une décision de la routine (l'ordre actuel vient de Thomas, 23/09) ; le **« Read more » par partenaire**
+  (Visma) = une page par partenaire, nouvelle rubrique interdite ; **Projet DeVenir** porte la même palette marine et
+  or que nous mais rend générique (texte centré sur aplat, actus en colonne) : contre-exemple, la charte ne suffit pas
+  sans la matière.
+- Sites à ne pas reprendre : forwardracingteam.com (rendu qui fait expirer le harnais CDP), racing.porsche.com
+  (consentement dans un shadow DOM, refus impossible par script, captures couvertes), irondames.ch (regardé, aucun
+  partenaire montré, hors angle), violettedorange.com/mes-partenaires (404, redirige vers projet-devenir.com).
+
 ### Idées de la veille 05/10 (angle neuf : LA PAGE CONTACT, comment une marque de course ouvre la page où on lui écrit)
 
 Sites REGARDÉS en 1280 (Chrome headless) ET en 390 (Playwright, mobile émulé) : jotasport.com/contact,
@@ -982,7 +1034,9 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
   Visma ramènent tous les logos à UNE couleur (gris ou blanc), nos 18 logos gardent leurs couleurs d'origine, choix
   validé sur le prototype v3 : QUESTION THOMAS, garder ou essayer une maquette monochrome marine ? (2) Manthey et
   Saintéloc montrent les partenaires SUR la voiture en photo serrée (stickers sales, en situation) plutôt qu'en mur,
-  ce que confirme l'en-tête photo posé ce matin sur contact.html.
+  ce que confirme l'en-tête photo posé ce matin sur contact.html. (3) QUESTION THOMAS : existe-t-il une vraie photo de
+  partenaires venus sur un circuit avec TPRacing ? Saintéloc ouvre sa page partenaires sur ce que vit l'invité, nos
+  trois arguments sont du texte seul. Détail des idées et des sites écartés au backlog, section « veille 05/10 bis ».
 
 - 2026-10-05 (routine, AXE C : veille par captures, angle neuf **LA PAGE CONTACT**, puis implémentation le jour
   même). Cadence : B le 29/09 et le 30/09, C pas faite depuis le 27/09, nouvelle semaine. T7 monté, `git pull` avant

@@ -220,6 +220,17 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-10-05 bis (veille « le partenaire ») : **un filet de grille appartient à la grille, pas à la case.** Le mur
+  partenaires a perdu un filet à 1280 parce que chaque case, animée au défilement, passe sur son propre calque, et
+  qu'à largeur fractionnaire le fond d'une case recouvre au pixel le filet de sa voisine. Règle : dans toute grille à
+  filets dont les cases bougent, le FOND est porté par le conteneur et les cases restent transparentes ; contrôle au
+  pixel à 1280 (la largeur la plus courante) en DPR 1 et 2, et en `prefers-reduced-motion` pour isoler l'animation.
+  Pourquoi c'est TPRacing : le mur est la case de chaque partenaire, une case fondue dans sa voisine se voit comme une
+  erreur de respect, pas comme un détail. Et une observation de veille, pas encore une règle : ART, Saintéloc, Visma
+  et Malizia ramènent les logos de leurs partenaires à UNE encre (fichiers redessinés en gris ou blanc, jamais un
+  filtre CSS) ; notre mur garde les couleurs d'origine par choix validé sur le prototype v3, question ouverte à Thomas.
+  Captures : scratchpad de la session 7af3a317, `veille/shots/` (art, sainteloc_p, visma, malizia, manthey, tp, tp2).
+
 - 2026-10-05 (veille « la page contact ») : **aucune page du site sans photo réelle, et la page qui parle aux
   partenaires montre leurs logos en course.** Vu chez Jota, United Autosports, Kart Republic et Caterham : la page
   contact d'une écurie s'ouvre sur la piste, jamais sur un aplat. Notre réponse ne reprend ni le duotone rouge en
