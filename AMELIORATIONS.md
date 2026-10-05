@@ -76,6 +76,36 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       quotidienne à 10 h, via le Chrome connecté ; validée par Thomas le 17/07)
 
 
+### Idées de la veille 05/10 (angle neuf : LA PAGE CONTACT, comment une marque de course ouvre la page où on lui écrit)
+
+Sites REGARDÉS en 1280 (Chrome headless) ET en 390 (Playwright, mobile émulé) : jotasport.com/contact,
+unitedautosports.com/contact, kartrepublic.com/contact, caterhamcars.com/en/contact, premaracing.com/contact,
+bamfordwatchdepartment.com/pages/contact-us (hors sport auto). Écartés : hitechgp.com (un autre Hitech, société
+informatique, faux site), theopourchaire.com/contact et baltic-watches.com/pages/contact (404),
+ardenmotorsport.com (ne répond pas), mclaren.com/racing/contact (404), tonykart.com/contacts (404),
+locomotive.ca (capture qui ne rend pas sous virtual-time).
+
+- [x] **Une vraie photo de course en tête de la page contact.** VU : 4 sites sur 5 du sport auto (Jota, United
+      Autosports, Kart Republic, Caterham) ouvrent leur contact sur une photo de piste, en desktop ET en téléphone ;
+      contact.html était la seule page du site sans aucune image (constat déjà noté à l'audit DA du 11/08).
+      MÉCANISMES lus après coup : Jota = `background-image` cover + calque couleur de marque en
+      `mix-blend-mode: multiply` (duotone rouge fait en CSS) ; Caterham = bandeau très large 1728x240 en
+      `background-blend-mode: saturation` sur noir, filet couleur de marque qui s'effile sous la nav et sous le
+      bandeau ; United = photo pleine, titre posé dans la photo, en bas à gauche. Pourquoi c'est TPRacing : la page
+      qui parle aux partenaires montre le kart de Valence 2022 couvert de LEURS logos (Midas, Combe, Approtech, MBE,
+      Ramonage Duclos) ; aucune autre marque ne peut poser cette image. FAIT le 05/10 (voir Journal).
+- [ ] Écarté avec motif : le formulaire de contact (United, Caterham, Bamford). Le site n'a aucun backend, un
+      formulaire passerait par un service tiers (données personnelles, requête tierce, mentions légales à
+      reprendre) pour remplacer un mailto qui marche. Contraire à « site léger, 0 requête tierce ».
+- [ ] Écarté avec motif : la carte OpenStreetMap ou Google (Caterham, Hitech). Une association sans local
+      ouvert au public n'a pas d'adresse à montrer ; une carte serait un bloc creux (interdit du 03/08).
+- [ ] Écarté avec motif : le palmarès en pied de page contact (Jota, « 13 podiums en 13 ans au Mans »). Le geste
+      est fort, mais il attend les chiffres validés par Thomas (item « jalons/palmarès » du backlog) ; ne rien
+      préparer de creux d'ici là.
+- [ ] Noté, non retenu pour l'instant : le filet tricolore de Prema (vert, blanc, rouge) entre partenaires et
+      contact. Notre équivalent existe déjà (liseré damier) ; un filet aux couleurs de la charte p25 serait un
+      doublon.
+
 ### Idées de la veille 27/09 (angle neuf : LA MACHINE, comment un constructeur ou un pilote présente son objet)
 
 Sites REGARDÉS en Chrome headless piloté en CDP, 1280 (4 vues au défilement) et 390 (2 vues), captures dans le
@@ -938,6 +968,31 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-10-05 (routine, AXE C : veille par captures, angle neuf **LA PAGE CONTACT**, puis implémentation le jour
+  même). Cadence : B le 29/09 et le 30/09, C pas faite depuis le 27/09, nouvelle semaine. T7 monté, `git pull` avant
+  modif (déjà à jour). 6 sites REGARDÉS (liste et sites morts au backlog, section « Idées de la veille 05/10 ») en
+  1280 et en 390. **Constat de départ, vu sur notre propre capture avant toute veille** : contact.html = un bandeau
+  marine nu + trois cartes blanches identiques, aucune photo ; chez 4 des 5 sites de course regardés, la page contact
+  s'ouvre sur une photo de piste qui survit en téléphone. **Fait** (commit 7265e8b) : (1) montage de marque
+  `contact-tete` depuis CLV_2190 (Valence 2022, la photo de la carte OG contact, le kart couvert des stickers
+  partenaires), duotone marine avec hautes lumières dorées, voile marine 10 %, vignette ; script archivé
+  `/Volumes/ TPT7/TPRacing/contact_tete_build.py`, sources PNG dans `Communication/Refonte design site/contact-tete
+  (05-10)/`. Deux variantes jugées côte à côte : la marine pure était froide et plate, retenue celle aux hautes
+  lumières or (le marine domine toujours, l'or n'est que dans les blancs). (2) Desktop : panneau à droite (46 %),
+  arête gauche en biais (recul de 9vw en haut) portant un liseré or de 3 px, posé SOUS la nav fixe avec le même
+  retrait de 14 px qu'au-dessus d'elle ; le texte s'arrête 48 px avant le pied de l'arête, le titre passe ainsi sur
+  2 lignes. (3) Sous 900 px : bande pleine largeur 16/9 sous le texte, arête haute à la pente maison 2.3vw avec le
+  même liseré. (4) Emblème filigrane de l'en-tête retiré (la photo est la matière, et le logo de la nav est dans le
+  même écran : règle « une seule occurrence du monogramme »). (5) Retirée à l'impression. Poids : 38 Ko AVIF en
+  desktop, 17 Ko en téléphone, 40 Ko en tablette DPR2 (version 1600 px ajoutée après mesure : la bande fait 900 px de
+  large à 900 px de viewport). **Deux défauts attrapés à la vérif, pas dans le code** : la photo démarrait à top 0 et
+  le CASQUE, le sujet, passait derrière la nav ; en téléphone le `top: 98px` du desktop s'appliquait aussi à la bande
+  en `position: relative` et la décalait de 98 px hors de l'en-tête (mesuré : bas de la photo à 683 pour un en-tête
+  de 585). Vérifs : 12 largeurs de 320 à 1680, 0 débordement, 0 erreur console, bonne source servie à chaque palier,
+  arête zoomée au pixel (aucun jour entre liseré et photo). Outillage : le serveur de prévisualisation est refusé en
+  run automatique et `file://` bloque les polices (CORS), donc vérif par Playwright avec `page.route` qui sert le
+  dépôt sous un faux hôte http (script réutilisable dans le scratchpad du jour, recette en mémoire).
 
 - 2026-09-30 ter (HORS ROUTINE, retours de Thomas) : (1) **Liens MyCitee** : Thomas les disait faux. Les 228
   publications de @myciteemedia parcourues : seules 2 parlent de lui et c'étaient bien celles du site. Le vrai défaut,

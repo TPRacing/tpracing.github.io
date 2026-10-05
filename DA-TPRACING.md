@@ -220,6 +220,18 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-10-05 (veille « la page contact ») : **aucune page du site sans photo réelle, et la page qui parle aux
+  partenaires montre leurs logos en course.** Vu chez Jota, United Autosports, Kart Republic et Caterham : la page
+  contact d'une écurie s'ouvre sur la piste, jamais sur un aplat. Notre réponse ne reprend ni le duotone rouge en
+  `multiply` de Jota ni la photo pleine de United : elle se dit avec le vocabulaire maison. **Le panneau photo
+  effilé** : un rectangle photo fer à droite dont l'arête gauche part en biais (silhouette asymétrique, pas une
+  plaque), et l'arête PORTE un liseré or de 3 px, comme les bascules de section portent le damier. En une colonne,
+  le même panneau devient une bande dont l'arête haute prend la pente 2.3vw. Règles : (1) le panneau ne passe
+  jamais sous la nav fixe, le sujet de la photo doit rester entier ; (2) le liseré est un TRAIT, jamais une bande
+  d'or ; (3) sur fond marine, le montage est en duotone marine aux hautes lumières dorées (régime « montage de
+  marque »), pas une photo de reportage en couleurs. Captures de référence : jota.png, united.png, kartrep.png,
+  caterham.png du scratchpad du 05/10.
+
 - 2026-09-30 ter : **aucun pictogramme en caractère Unicode.** Une flèche, un check, une étoile tapés comme du texte
   dépendent de la police du visiteur : quand Bebas ou Inter n'ont pas le glyphe, l'iPhone le prend dans sa police
   d'émojis et le site affiche un carré bleu étranger à la charte. Tout pictogramme est un SVG en `currentColor` ou
