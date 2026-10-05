@@ -1021,6 +1021,26 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-10-05 ter (routine relancée « Try again » après les deux runs C du jour ; AXE B, dimension **PERF ET POIDS
+  RÉELS**, pas auditée depuis le 16/09, donc avant la refonte v3, l'intro aux traces et la photo de contact).
+  Méthode neuve, plus simple que la réimplémentation Python du 16/09 : Playwright (channel chrome) avec
+  `page.route` qui sert le dépôt depuis le disque et COMPTE les octets de chaque fichier réellement demandé par le
+  navigateur, page chargée puis défilée jusqu'en bas (lazy compris), 1280 DPR2 et 390 DPR3. Poids brut (HTML et CSS
+  non compressés) : accueil 655 Ko avant défilement, 851 Ko tout défilé ; pilote 446 puis 1115 Ko en desktop (dont
+  206 Ko de vignettes Insta, gérées par `maj-feed-insta-site`) ; contact 235 Ko ; mentions et 404 environ 193 Ko.
+  En prod (gzip) : accueil 21,5 Ko, pilote 12,5 Ko, CSS 13,5 Ko, intro-traces.svg 36,6 Ko. 0 fichier manquant, 0
+  erreur console, aucune vidéo (le dossier n'existe plus depuis la v3). **1 défaut trouvé et corrigé** (commit
+  d83d8ec) : le logo couleur de la nav était le fichier de 585x503 (26,9 Ko) pour 58x50 affichés, 5 fois trop
+  grand, sur les 5 pages et dans le chemin critique (la refonte v3 avait annulé le recalibrage du 08/08). Nouveau
+  `logo-couleur-degrade-nav.png` 150x129 (9,9 Ko), calé sur le cas le plus exigeant mesuré (42 px de haut en
+  téléphone DPR3 = 126 px), redimensionné en alpha prémultiplié. Le fichier d'origine reste intact (logo du JSON-LD
+  et logo central du mur partenaires, 220 px affichés). Fausse piste écartée : la version quantifiée à 256 couleurs
+  (2,9 Ko) crée des paliers visibles dans le fondu or vers marine du P, gardée en RGBA pleine. Contrôles sains :
+  toutes les images à `srcset` choisissent la bonne variante, le masque de l'emblème (1400 px pour 769 px affichés
+  au maximum) est à la bonne taille. Orphelins : `logo-secondaire-blanc.png` et `logo-secondaire-couleur.png` (31
+  Ko, jamais référencés, aucun coût pour le visiteur), laissés en place. Vérifs : 5 pages x 4 largeurs (320, 390,
+  1280, 1680), logo net à la capture, largeur affichée inchangée (58,1 px), scrollX bloqué à 0 partout.
+
 - 2026-10-05 bis (relance du run du 02/10, bloqué par la limite d'usage hebdomadaire, exécutée en parallèle du run
   du jour ; AXE C, angle **LE PARTENAIRE**, comment une écurie ou un athlète financé montre ses sponsors). Sites
   REGARDÉS en 1280 et 390 (CDP) : sainteloc.com (accueil + /partenaires/), manthey-racing.com, team-malizia.com,
