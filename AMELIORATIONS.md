@@ -969,6 +969,21 @@ Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console av
 
 ## Journal
 
+- 2026-10-05 bis (relance du run du 02/10, bloqué par la limite d'usage hebdomadaire, exécutée en parallèle du run
+  du jour ; AXE C, angle **LE PARTENAIRE**, comment une écurie ou un athlète financé montre ses sponsors). Sites
+  REGARDÉS en 1280 et 390 (CDP) : sainteloc.com (accueil + /partenaires/), manthey-racing.com, team-malizia.com,
+  teamvismaleaseabike.com/partners/, art-grandprix.com, projet-devenir.com. Écartés : forwardracingteam.com (bloque le
+  harnais), racing.porsche.com (fenêtre cookies inaccessible au script), irondames.ch (aucun partenaire montré).
+  **Défaut trouvé chez nous en confrontant** : à 1280 (DPR 1 et 2), le filet entre les colonnes 5 et 6 du mur
+  partenaires disparaissait (deux logos semblaient partager une case). Cause mesurée : les cases animées au défilement
+  passent sur leur propre calque et le fond blanc de l'une recouvrait le filet de sa voisine (filet présent en
+  reduced-motion). Correctif : le blanc passe sur `.mur`, les cases n'ont plus de fond ; filets internes remesurés
+  présents à 1024, 1100, 1180, 1280, 1366. Constats de veille, à instruire (rien publié) : (1) ART, Saintéloc et
+  Visma ramènent tous les logos à UNE couleur (gris ou blanc), nos 18 logos gardent leurs couleurs d'origine, choix
+  validé sur le prototype v3 : QUESTION THOMAS, garder ou essayer une maquette monochrome marine ? (2) Manthey et
+  Saintéloc montrent les partenaires SUR la voiture en photo serrée (stickers sales, en situation) plutôt qu'en mur,
+  ce que confirme l'en-tête photo posé ce matin sur contact.html.
+
 - 2026-10-05 (routine, AXE C : veille par captures, angle neuf **LA PAGE CONTACT**, puis implémentation le jour
   même). Cadence : B le 29/09 et le 30/09, C pas faite depuis le 27/09, nouvelle semaine. T7 monté, `git pull` avant
   modif (déjà à jour). 6 sites REGARDÉS (liste et sites morts au backlog, section « Idées de la veille 05/10 ») en
