@@ -116,10 +116,58 @@
       overflow: hidden;
     }
     .contact-tete .contenu { max-width: 1180px; margin: 0 auto; position: relative; z-index: 1; }
-    /* L'en-tête n'est pas une .section-marine : son emblème filigrane héritait donc du
-       marine à 8 % posé sur un fond marine, autrement dit il était invisible. Il reprend
-       la teinte claire des fonds sombres, comme le hero de la 404. */
-    .contact-tete .embleme-fond { color: rgba(246, 247, 252, .05); }
+    /* Photo d'en-tête (05/10, veille « la page contact ») : Jota, United Autosports,
+       Kart Republic et Caterham ouvrent tous leur page contact sur une VRAIE photo de
+       course, contact.html était la seule page du site sans aucune image. Ici, le kart
+       de Valence 2022 couvert des stickers des partenaires : la page qui parle aux
+       partenaires montre où va leur logo. Montage de marque, donc duotone marine aux
+       hautes lumières dorées (source : /Volumes/ TPT7/TPRacing/contact_tete_build.py).
+       Desktop : panneau à droite, arête gauche effilée en biais, liseré or de 3 px sur
+       l'arête. Sous 900 px : bande pleine largeur sous le texte, arête haute à la pente
+       maison 2.3vw portant le même liseré. L'emblème filigrane de l'en-tête est retiré :
+       la photo est la matière, et le logo de la nav est déjà dans le même écran. */
+    .tete-photo {
+      --k: 9vw;          /* recul de l'arête en haut du panneau */
+      --l: 3px;          /* épaisseur du liseré or */
+      position: absolute;
+      /* sous la nav fixe (14 + 70 px) avec le même retrait de 14 px qu'au-dessus d'elle :
+         partie de 0, la photo passait derrière la barre et le casque, le sujet, disparaissait */
+      top: 98px; right: 0; bottom: 0;
+      width: 46%;
+      pointer-events: none;
+    }
+    .tete-photo::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: var(--or);
+      clip-path: polygon(var(--k) 0, calc(var(--k) + var(--l)) 0, var(--l) 100%, 0 100%);
+      z-index: 1;
+    }
+    .tete-photo picture, .tete-photo img { display: block; width: 100%; height: 100%; }
+    .tete-photo img {
+      object-fit: cover;
+      object-position: 38% 0;
+      clip-path: polygon(calc(var(--k) + var(--l)) 0, 100% 0, 100% 100%, var(--l) 100%);
+    }
+    @media (min-width: 901px) {
+      /* le texte s'arrête 48 px avant le pied de l'arête (54vw) */
+      .contact-tete .contenu > h1, .contact-tete .contenu > .lead { max-width: calc(54vw - max(6vw, 50vw - 590px) - 48px); }
+    }
+    @media (max-width: 900px) {
+      .contact-tete { padding-bottom: 0; }
+      .tete-photo {
+        --k: 2.3vw;
+        position: relative;
+        top: auto; bottom: auto;   /* sinon le top: 98px du desktop décale la bande */
+        width: auto;
+        margin: 34px -6.82% 0;   /* pleine largeur : 6 % du header = 6,82 % de sa boîte de contenu */
+        aspect-ratio: 16 / 9;
+      }
+      .tete-photo::before { clip-path: polygon(0 calc(var(--k) + 0px), 100% 0, 100% var(--l), 0 calc(var(--k) + var(--l))); }
+      .tete-photo img { clip-path: polygon(0 calc(var(--k) + var(--l)), 100% var(--l), 100% 100%, 0 100%); object-position: 40% 45%; }
+    }
+    /* impression : décor retiré, comme le reste du site */
+    @media print { .tete-photo { display: none !important; } }
     .contact-tete h1 { color: var(--blanc); font-size: clamp(1.7rem, 3.6vw, 2.6rem); }
     @media (max-width: 560px) { .contact-tete h1 { font-size: min(5.9vw, 1.7rem); } }
     .contact-tete .lead { color: #aeb6c8; max-width: 640px; margin-top: 18px; }
@@ -264,10 +312,17 @@
 
   <!-- ===== EN-TÊTE ===== -->
   <header class="contact-tete">
-    <svg class="embleme-fond" viewBox="29 38 90 63" style="top: 24px; right: -10%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
     <div class="contenu">
       <h1><span class="hl">Parlons de</span> <span class="hl">votre projet</span></h1>
       <p class="lead">Partenariat, presse ou simple question : l'association répond par email et sur LinkedIn. Un dossier de partenariat détaillé est disponible sur demande.</p>
+    </div>
+    <div class="tete-photo">
+      <picture>
+        <source media="(max-width: 900px)" type="image/avif" srcset="assets/img/contact-tete-m.avif 800w, assets/img/contact-tete-ml.avif 1600w" sizes="100vw">
+        <source media="(max-width: 900px)" type="image/webp" srcset="assets/img/contact-tete-m.webp 800w, assets/img/contact-tete-ml.webp 1600w" sizes="100vw">
+        <source type="image/avif" srcset="assets/img/contact-tete.avif">
+        <img src="assets/img/contact-tete.webp" width="1560" height="785" alt="Thomas en course à Valence en 2022, le kart couvert des logos de ses partenaires" fetchpriority="high">
+      </picture>
     </div>
   </header>
 
