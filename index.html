@@ -307,10 +307,11 @@
     @keyframes pose { from { opacity: 0; transform: translateY(22px) scale(.94); } to { opacity: 1; transform: none; } }
 
     /* ---------- Contact ---------- */
-    #contact { background: var(--nuit); color: var(--blanc); padding: 110px max(20px, 4.4vw); display: flex; flex-wrap: wrap; gap: 30px; align-items: center; justify-content: space-between; }
+    #contact { background: var(--nuit); color: var(--blanc); padding: 110px max(20px, 4.4vw); display: flex; flex-direction: column; gap: 30px; align-items: flex-start; } /* texte empilé à gauche à toutes les largeurs : la droite appartient aux traces (06/10) */
     #contact h2 { margin: 0; color: var(--blanc); font-size: clamp(1.5rem, 3vw, 2.75rem); max-width: 760px; line-height: 1.05; }
     #contact h2 .or { color: var(--or); }
     #contact .coord { display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; }
+    #contact > :not(.traces-fin) { position: relative; z-index: 1; }
     #contact .mail { font-weight: 600; font-size: 1.1rem; color: var(--blanc); border-bottom: 1px solid rgba(246, 247, 252, .35); padding-bottom: 4px; }
 
     /* grain argentique posé sur les scènes sombres */
@@ -339,6 +340,7 @@
       .histoire .recit { top: calc(15vh + 2 * var(--t) + 26px); font-size: .95rem; }
       .annee b { font-size: 1.75rem; }
       .academy, .partenaires, .presse, #contact { padding: 90px 20px 100px; }
+      #contact { padding-bottom: 250px; }
       .academy { grid-template-columns: minmax(0, 1fr); gap: 40px; }
       .academy h2 { font-size: min(1.6rem, 6.5vw); }
       .chiffres b { font-size: 2.5rem; }
@@ -562,6 +564,7 @@
 
   <!-- ===== CONTACT ===== -->
   <section id="contact" class="grain" aria-labelledby="t-contact">
+    <img class="traces-fin" src="assets/img/intro-traces.svg" alt="" width="1440" height="900" loading="lazy" decoding="async">
     <h2 id="t-contact">Envie d'écrire la suite <span class="or">avec nous&nbsp;?</span></h2>
     <div class="coord">
       <span class="mail">contact.tpracing@gmail.com</span>
@@ -648,6 +651,8 @@
         if (revealsLances) return;
         revealsLances = true;
         document.querySelectorAll('.rvl').forEach(el => io.observe(el));
+        // les traces se balaient quand leur SECTION entre à l'écran (l'image fermée n'a pas de surface à mesurer)
+        document.querySelectorAll('.traces-fin').forEach(el => io.observe(el.parentElement));
         entreeHero();
       };
       if (intro && active) {

@@ -213,11 +213,14 @@
     .origine .lien-or { color: var(--marine); font-family: var(--f-label); font-weight: 700; font-size: 1.1rem; letter-spacing: .09em; text-transform: uppercase; text-decoration: none; border-bottom: 2px solid var(--or); padding-bottom: 5px; }
     #instagram { position: relative; z-index: 30; background: var(--blanc); }
     .cta-final-s { position: relative; z-index: 30; }
-    .cta-final { max-width: 720px; margin: 0 auto; text-align: center; }
-    .cta-final h2 { color: var(--blanc); }
-    .cta-final p { color: #aeb6c8; margin: 14px 0 30px; }
+    /* texte à gauche, traces de pneus à droite (06/10) : le bloc centré seul sur son aplat
+       était la dernière composition symétrique du site */
+    .cta-final { max-width: 1180px; margin: 0 auto; position: relative; z-index: 1; }
+    .cta-final h2 { color: var(--blanc); max-width: 640px; }
+    .cta-final p { color: #aeb6c8; margin: 14px 0 30px; max-width: 520px; }
 
     @media (max-width: 900px) {
+      .cta-final-s { padding-bottom: 250px; }
       .hero-pilote { padding: 0 20px calc(var(--bande) + 30px); }
       .parcours-tete { padding: 100px 20px 40px; }
       /* sous 360 px, « Thomas » et « Le parcours » sortaient de l'écran */
@@ -524,6 +527,7 @@
 
   <!-- ===== CTA FINAL ===== -->
   <section class="section-marine diag-haut cta-final-s">
+    <img class="traces-fin" src="assets/img/intro-traces.svg" alt="" width="1440" height="900" loading="lazy" decoding="async">
     <div class="cta-final rvl">
       <h2>La suite s'écrit maintenant</h2>
       <p>Partenaires, passionnés, curieux : le projet avance et tout se partage. Rejoignez l'aventure avant l'entrée en championnat.</p>
@@ -583,6 +587,8 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vu'); io.unobserve(e.target); } });
     }, { threshold: 0.15 });
     document.querySelectorAll('.rvl').forEach(el => io.observe(el));
+    // les traces se balaient quand leur SECTION entre à l'écran (l'image fermée n'a pas de surface à mesurer)
+    document.querySelectorAll('.traces-fin').forEach(el => io.observe(el.parentElement));
 
     // Hero : les bandes noires s'ouvrent comme au cinéma
     requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.add('pret')));
