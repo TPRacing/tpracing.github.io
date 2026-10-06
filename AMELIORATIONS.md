@@ -74,6 +74,10 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [x] Accueil : section « Ils parlent de nous » (2 articles Le Progrès + interview MyCitee en 2 parties)
 - [x] Feed Insta : automatiser le rafraîchissement (tâche planifiée dédiée maj-feed-insta-site,
       quotidienne à 10 h, via le Chrome connecté ; validée par Thomas le 17/07)
+- [x] Les deux sections de clôture (accueil « Envie d'écrire la suite avec nous ? », pilote « La suite s'écrit
+      maintenant ») étaient des plaques marine VIDES : la première laissait sa moitié droite nue, la seconde était le
+      dernier bloc centré-symétrique du site. Elles portent désormais les traces de pneus Caterham de l'intro (même
+      fichier, la 47 en or), texte à gauche. FAIT le 06/10 (voir Journal).
 
 
 ### Idées de la veille 05/10 bis (angle neuf : LE PARTENAIRE, comment une écurie ou un athlète financé montre ses sponsors)
@@ -1020,6 +1024,36 @@ feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
 
 ## Journal
+
+- 2026-10-06 (routine, AXE A : finition design, le dernier jour A datait du 28/09 ; les 3 runs précédents étaient
+  C, C, B). T7 monté, `git pull` à jour, aucun run frère actif (`list_task_runs` : seul ce run en cours). Les 5 pages
+  capturées en 1280 défilé (Playwright + `page.route` sur le dépôt) pour choisir le chantier en REGARDANT. Constat :
+  les deux sections qui FERMENT les pages sont les deux dernières plaques plates du site. Accueil `#contact` : titre
+  et coordonnées à gauche, moitié droite marine nue (et à 1680 la ligne de contact basculait seule à droite, sans
+  rien autour) ; pilote `.cta-final` : titre, phrase et bouton CENTRÉS sur l'aplat, le « layout symétrique sage »
+  de la liste des signaux à bannir. **Fait (commit ce44101, EN LIGNE)** : les deux titres parlent d'« écrire la
+  suite », donc les deux sections reçoivent la même écriture, les traces de pneus Caterham de l'intro du 30/09
+  (`assets/img/intro-traces.svg`, réemployé tel quel, aucun octet neuf sur l'accueil quand l'intro a joué, 36 Ko
+  gzip sur pilote.html, chargé en lazy). Classe partagée `.traces-fin` dans styles.css : moitié droite (64 %),
+  entrée en fondu côté texte par `mask-image`, balayage `clip-path` dans le sens de la course au premier passage à
+  l'écran (coupé en `prefers-reduced-motion`, masqué à l'impression) ; sous 900 px, bande de 240 px sous le texte,
+  grossie x1,7 depuis le bas (sinon l'image entière tient dans 390 px et les traces deviennent des fils), débord
+  latéral rogné par `section:has(> .traces-fin) { overflow-x: clip }`. Texte à gauche partout : pilote `.cta-final`
+  aligné à gauche (h2 640 px, phrase 520 px), accueil `#contact` empilé en colonne à toutes les largeurs.
+  **Vérifs** : 2 pages x 6 largeurs (1680, 1280, 1024, 900, 390, 320) + mouvement réduit, captures relues (pas de
+  trace sous un texte, sous un bouton ni sous « LinkedIn ») ; 5 pages x 2 largeurs : 0 erreur console, 0 requête
+  404, scrollWidth == innerWidth ; prod : build `built`, empreintes identiques dépôt/prod sur index, pilote et
+  styles.css, captures en ligne à 1280 et 390. **Trois pièges trouvés en route, à retenir** : (1) un `clip-path:
+  inset(0 100% 0 0)` de départ rend l'image « invisible » pour Chrome : `loading="lazy"` ne la charge JAMAIS et
+  l'IntersectionObserver ne la signale jamais (constaté : image non chargée à toutes les largeurs, chargée en
+  mouvement réduit) ; correctif : départ à `calc(100% - 1px)` ET observer la SECTION parente, pas l'image (un seuil
+  de 15 % sur 1 px visible n'est jamais atteint) ; (2) à 1680 le `flex-wrap` + `space-between` de `#contact`
+  posait la ligne de contact sur les traces or : on ne voit ça qu'à la plus grande largeur ; (3) sur téléphone, le
+  masque se lit AVANT le grossissement, il faut donc compter le haut de l'image agrandie dans la zone transparente
+  (40 % transparent, opaque à 75 %), sinon les traces remontent derrière le bouton. Fausses pistes écartées : une
+  photo du kart de Valence 2022 en panneau effilé (le site doit parler de la voiture et pas du kart, retour du
+  23/09, et les clichés montrent tous le dossard 324) ; un 47 géant en contour (la DA v3 préfère la vraie plaque 47
+  au 47 géant) ; reprendre le montage du hero (emblème + détourage) en pied de page, ce serait le hero deux fois.
 
 - 2026-10-05 ter (routine relancée « Try again » après les deux runs C du jour ; AXE B, dimension **PERF ET POIDS
   RÉELS**, pas auditée depuis le 16/09, donc avant la refonte v3, l'intro aux traces et la photo de contact).

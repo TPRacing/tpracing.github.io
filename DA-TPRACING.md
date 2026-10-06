@@ -220,6 +220,17 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-10-06 (axe A, les clôtures) : **la trace de pneu signe aussi la FIN des pages, là où le texte parle
+  d'« écrire la suite ».** Les deux sections qui ferment l'accueil et pilote.html étaient des plaques marine vides,
+  l'une centrée-symétrique. Elles reprennent le fichier de l'intro (`intro-traces.svg`, la 47 en or) en moitié
+  droite, entrée en fondu côté texte, balayée dans le sens de la course. Règles qui en sortent : (1) **une trace ne
+  passe JAMAIS sous un texte, un bouton ou un lien** (contrôlé au pixel à 6 largeurs ; le soulignement or d'un lien
+  posé sur une trace or s'y confond) ; (2) l'intro et les clôtures sont les DEUX seules places de la trace : elle
+  ouvre la visite et elle la referme, l'ajouter ailleurs en ferait un motif de fond, l'interdit du damier « rare »
+  vaut pour elle aussi ; (3) **la composition de clôture est asymétrique** : texte à gauche, matière à droite,
+  jamais un bloc centré seul sur son aplat. Pourquoi c'est TPRacing : la phrase dit « écrire la suite », l'image
+  montre une 47 qui vient de passer ; aucune autre marque ne peut poser ces traces-là.
+
 - 2026-10-05 bis (veille « le partenaire ») : **un filet de grille appartient à la grille, pas à la case.** Le mur
   partenaires a perdu un filet à 1280 parce que chaque case, animée au défilement, passe sur son propre calque, et
   qu'à largeur fractionnaire le fond d'une case recouvre au pixel le filet de sa voisine. Règle : dans toute grille à
