@@ -856,7 +856,7 @@ Pour la routine du feed Instagram (`maj-feed-insta-site`, section « Les dernier
   Les Frang'Ain n'a que Facebook et Instagram (96 rue Pierre Poivre, Villars-les-Dombes), `amsrenova.com` est
   un HOMONYME d'Île-de-France (AMS Rénov Bâtiment est à Parcieux 01600, aucun site), DMPI a des homonymes
   (Montélimar, Chalamont) et rien ne permet de trancher sans Thomas.
-- [ ] Report SEO, pas traité ce jour : sur pilote.html, contact.html et mentions-legales.html, le JSON-LD
+- [x] (ÉCARTÉ avec motif le 07/10, voir Journal) Report SEO, pas traité ce jour : sur pilote.html, contact.html et mentions-legales.html, le JSON-LD
   référence `.../#site` alors que ce nœud n'est défini que sur l'accueil. C'est une pratique courante et
   tolérée, mais un nœud WebSite répété sur chaque page serait plus robuste. À trancher un jour de
   dimension SEO.
@@ -1022,8 +1022,59 @@ Pas de crédit photo (sauf mention Thierry Chomel en place). Ne jamais supprimer
 Icônes réseaux au footer de toutes les pages (LinkedIn = asso sur les pages asso, perso sur pilote.html) ;
 feed Insta et chips réseaux du hero seulement sur pilote.html.
 Numéro pilote : 47 uniquement. Vérifier desktop 1280 + mobile 375 + console avant push.
+Titre ou bloc découpé en morceaux (`<span>` en block, `<b>` + `<span>`, flex, `<br>`) : TOUJOURS un espace
+dans le source entre deux morceaux, sinon Google et les lecteurs collent les mots (« Cap sur laCaterham »,
+vu dans les résultats le 07/10). Sonde : parcourir le DOM, pour chaque paire de nœuds voisins dont l'un
+n'est pas `display:inline`, signaler fin de lettre/chiffre collée à un début de lettre/chiffre ; prouver
+l'innocuité visuelle par la géométrie des éléments avant/après (les captures pixel ne sont pas déterministes).
 
 ## Journal
+
+- 2026-10-07 (routine, AXE B : audit, dimension **SEO TECHNIQUE + résultats Google réels**, le dernier passage
+  datait du 23/09 au matin, soit AVANT la refonte v3 du même jour : la v3 n'avait jamais été auditée sous cet
+  angle ; les 3 runs précédents étaient A, B, C). T7 monté, `git pull` à jour, aucun run frère actif.
+  **Ce qu'on VOIT dans Google** (Chrome connecté, `site:tpracing.github.io`, hl=fr) : 2 résultats. L'extrait de
+  l'accueil commence par **« Cap sur laCaterham »** : le h1 de la v3 est fait de deux `<span>` en `display:block`
+  sans espace entre eux, l'écran les montre sur deux lignes mais le texte extrait les colle. La fiche pilote
+  affiche toujours le titre au tiret cadratin retiré le 18/07 (page pas réexplorée depuis près de 3 mois). Le
+  nom de site affiché est « GitHub » et non TPRacing, alors que le nœud WebSite (name + alternateName) est juste
+  sur l'accueil : rien à corriger côté code, Google ne l'a pas encore repris. **Search Console** (compte connecté
+  au Chrome) : 29 clics au total, 2 pages indexées, 0 non indexée, Core Web Vitals sans données (trafic trop
+  faible) ; le sitemap est TOUJOURS en « Impossible de récupérer », dernière lecture le 4 août (9 semaines),
+  fichier servi pourtant sain (200, `application/xml`, XML valide).
+  **CORRIGÉ (commit 56c9b03)** :
+  1. **Texte collé, le défaut et tous ses frères.** Sonde neuve (Playwright) : pour chaque paire de nœuds voisins
+     dont l'un au moins n'est pas `inline`, signaler une lettre ou un chiffre collé à une lettre ou un chiffre.
+     **42 collages** : accueil 22 (h1, h2 « Le volantse transmet » et « La CaterhamAcademy », légendes
+     « 1987Patrice » / « 2026Thomas », chiffres « 170chevaux », « 5rapports », « 12courses », revue de presse
+     « Le Progrès23 avril 2024 », « Partie 1Partie 2 », les 3 arguments partenaires, les 2 boutons du hero) ;
+     pilote.html 20 (le rail de la frise « 2026 Caterham2026 Simu », les 5 étapes « 2026Pôle Mécanique d'Alès /
+     16 juilletTest Caterham Academy... », la ligne « Caterham AcademyPilote47 ») plus le h1 « Thomas<br>Papone »
+     qui donne « ThomasPapone » en textContent. Remède : UN espace dans le source à chaque frontière (et après le
+     `<br>`). Un espace entre deux blocs ou deux éléments flex ne crée aucune boîte, mais je ne l'ai pas supposé :
+     **géométrie de chaque élément (x, y, largeur, hauteur) relevée avant/après sur 6 largeurs (320 à 1680) x 2
+     pages = 0 écart sur 207 + 247 éléments**, référence relevée deux fois pour s'assurer qu'elle était
+     déterministe (les captures pixel ne le sont pas : bande partenaires et grain bougent). Sonde rejouée : 0
+     collage sur les 5 pages ; h1 de toutes les pages relus en textContent ; 0 erreur console en 1280 et 375 ;
+     heros recapturés en 1280 et 390, inchangés. contact, mentions et 404 étaient déjà propres.
+  2. **lastmod du sitemap** : les 4 dates étaient au 23/09 alors que l'accueil et pilote.html ont changé les 05,
+     06 et 07/10 et contact.html le 05/10. Remis aux dates de dernier changement de CONTENU (accueil et pilote
+     07/10, contact 05/10, mentions 23/09 : le commit du 05/10 sur cette page n'a touché que le poids du logo,
+     ce n'est pas un changement de contenu et un lastmod qui bouge pour rien perd la confiance de Google).
+  **Vérifié sain** : 5 pages en 200, une URL inconnue rend la 404 en 404 ; 1 h1 par page, aucun niveau de titre
+  sauté ; titles 27 à 65 caractères, descriptions 128 à 151 ; canonicals justes ; og:site_name sur les 5 pages ;
+  3 cartes OG en 1200x630 ; JSON-LD reparsés sans erreur ; llms.txt cohérent avec la v3 (Gold Kart 47, frise,
+  presse) ; robots.txt inchangé.
+  **Report du 23/09 tranché, écarté avec motif** : le nœud WebSite `#site` référencé sans être redéfini sur les
+  pages secondaires. Google ne lit le WebSite (nom de site) que sur l'accueil, et une référence `@id` vers un
+  nœud d'une autre page est du linked data valide ; le recopier 3 fois ajouterait du texte à maintenir sans
+  rien changer à l'affichage.
+  **Rappel groupé des questions ouvertes (1 fois par semaine)** : (a) **Search Console, toujours à faire par
+  Thomas ou en session avec lui** : Sitemaps > supprimer puis renvoyer `sitemap.xml` (bloqué depuis le 4 août),
+  puis Inspection de l'URL > Demander l'indexation pour `pilote.html` (titre périmé dans Google), `contact.html`
+  et la page d'accueil (pour que l'extrait « laCaterham » soit relu). C'est une action sur le compte, hors
+  mandat de la routine. (b) Logos partenaires en une seule encre (05/10 bis). (c) Les 3 photos sans original
+  retrouvé (22/09).
 
 - 2026-10-06 (routine, AXE A : finition design, le dernier jour A datait du 28/09 ; les 3 runs précédents étaient
   C, C, B). T7 monté, `git pull` à jour, aucun run frère actif (`list_task_runs` : seul ce run en cours). Les 5 pages
