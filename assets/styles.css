@@ -1036,8 +1036,10 @@ a:hover .fl, a:focus-visible .fl, .revue .ligne:hover .aller > span .fl { transf
 @media (prefers-reduced-motion: reduce) { .fl { transition: none; } }
 
 /* Traces de clôture (06/10). Les deux sections qui ferment les pages disent « écrire la
-   suite » : elles portent les traces de pneus Caterham de l'intro (même fichier, sculpture
-   réelle, la 47 en or), comme si les voitures venaient de passer à droite du texte. Avant,
+   suite » : trois traits de lumière fins y filent à droite du texte, la 47 en or et deux
+   blancs (composition Illustrator, traînée, halo et éclat faits dans Photoshop ; traces de
+   pneus jusqu'au 08/10, jugées « trace de tracteur », puis 29 lignes jugées « trop Star
+   Wars » : trois suffisent). Avant,
    deux plaques marine vides, l'une centrée, l'autre à moitié nue : le « template » banni.
    L'image entre par un fondu côté texte (masque), se balaie dans le sens de la course au
    premier passage à l'écran, et tombe en bande sous le texte sur téléphone. */
@@ -1055,15 +1057,13 @@ a:hover .fl, a:focus-visible .fl, .revue .ligne:hover .aller > span .fl { transf
 .js .vu > .traces-fin { clip-path: inset(0 0 0 0); }
 @media (max-width: 900px) {
   .traces-fin {
-    top: auto; bottom: 0; width: 100%; height: 240px;
-    object-position: 50% 50%;
-    /* à 390 px l'image entière tient dans la bande et les traces deviennent des fils :
-       on la grossit depuis le bas, la section rogne ce qui dépasse sur les côtés */
-    scale: 1.7; transform-origin: 62% 100%;
-    /* le masque se lit AVANT le grossissement : 40 % de transparent = le haut de l'image
-       grossie, qui remonterait sinon derrière le bouton et le lien (mesuré à 390) */
-    -webkit-mask-image: linear-gradient(180deg, transparent 0, transparent 40%, #000 75%);
-    mask-image: linear-gradient(180deg, transparent 0, transparent 40%, #000 75%);
+    top: auto; bottom: 0; width: 160%; height: 240px;
+    /* l'image déborde à gauche (la section rogne) : à 390 px elle est servie à 43 % au lieu
+       de 27 %, et la fenêtre verticale à 30 % fait entrer les trois traits, la 47 comprise.
+       Plus de grossissement : l'image reste dans sa bande, sous le bouton et le lien. */
+    object-position: 100% 30%;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 40%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 40%);
   }
 }
 section:has(> .traces-fin) { overflow-x: clip; }

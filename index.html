@@ -91,9 +91,12 @@
           pre.rel = 'preload'; pre.as = 'image'; pre.href = 'assets/img/embleme-3d.webp';
           pre.fetchPriority = 'high';
           document.head.appendChild(pre);
-          const tr = document.createElement('link');
-          tr.rel = 'preload'; tr.as = 'image'; tr.href = 'assets/img/intro-traces.svg';
-          document.head.appendChild(tr);
+          // la version filée (Photoshop) ouvre l'intro : elle passe avec l'emblème
+          ['intro-file-320.webp', 'intro-file-120.webp', 'intro-trainee.webp', 'intro-feux.png'].forEach(n => {
+            const l = document.createElement('link');
+            l.rel = 'preload'; l.as = 'image'; l.href = 'assets/img/' + n;
+            document.head.appendChild(l);
+          });
         }
       } catch (e) { document.documentElement.classList.add('intro-off'); }
     })();
@@ -368,12 +371,16 @@
       .academy, .presse, .partenaires, #contact { clip-path: none !important; margin-top: 0 !important; }
     }
 
-    /* ---------- Intro « tracé de circuit » au lancement ----------
-       Trois Caterham viennent de passer : leurs traces de pneus (sculpture réelle
-       relevée sur la photo du test day, dessinée dans Illustrator, grain de gomme
-       Photoshop) se posent l'une après l'autre, la 47 en or en dernier ; l'emblème se
-       résout net puis GLISSE se poser exactement à sa place dans le hero, et le
-       voile (même fond que le hero) s'efface : atterrissage invisible. */
+    /* ---------- Intro « départ » au lancement (08/10) ----------
+       Codes relevés sur les fermetures de logo F1 2026 et WEC (images extraites des vidéos
+       officielles) : la vitesse est portée par le LOGO lui-même, pas par des lignes autour.
+       L'emblème arrive lancé, filé (flou directionnel fait dans Photoshop) et surexposé, avec
+       sa traînée or ; il freine, prend ses vraies couleurs, puis les 5 rangées de son damier
+       s'allument une à une comme les feux d'un départ F1 et s'éteignent d'un coup : c'est
+       le départ, l'emblème glisse se poser sur le logo de la nav et le voile (même fond que
+       le hero) s'efface. Remplace les traces de pneus du 30/09 puis les lignes de vitesse
+       (« trace de tracteur », puis « trop Star Wars », Thomas). Rien ne bouge avant que les
+       images soient décodées (classe .go posée par le script). */
     html.intro-active { overflow: hidden; }
     html.intro-off #intro { display: none; }
     /* Sans JS, rien ne lève jamais le voile : il masquerait toute la page. */
@@ -389,25 +396,51 @@
         linear-gradient(180deg, #070B1D 0%, #0d1526 68%, var(--marine) 100%);
       background-size: auto, 26px 26px, auto;
     }
-    .intro-circuit {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
+    .intro-scene { position: relative; width: min(380px, 64vw); aspect-ratio: 780 / 553; will-change: transform; }
+    .intro-scene > * { position: absolute; pointer-events: none; opacity: 0; }
+    .intro-logo { inset: 0; width: 100%; height: 100%; }
+    .intro-file { top: 0; height: 100%; left: -25.64%; width: 151.28%; }   /* 1180 / 780, emblème posé à 200 px */
+    .intro-trainee { right: 58%; top: 55%; height: 21%; width: 72vw; transform-origin: 100% 50%; }
+    .intro-trainee.t2 { top: 3%; height: 7%; width: 48vw; right: 30%; filter: grayscale(1) brightness(1.6); }
+    .intro-ombre {
+      inset: 0; background: #070B1D;
+      -webkit-mask: url(assets/img/embleme-3d.webp) center / 100% 100% no-repeat;
+      mask: url(assets/img/embleme-3d.webp) center / 100% 100% no-repeat;
     }
-    .intro-circuit.efface { animation: ic-fade .4s ease .05s forwards; }
-    @keyframes ic-fade { to { opacity: 0; } }
-    .intro-logo {
-      position: relative; z-index: 2;
-      width: min(380px, 64vw); height: auto;
-      opacity: 0;
-      will-change: transform;
-      animation: intro-logo .6s cubic-bezier(.2, .6, .2, 1) .55s forwards;
-    }
-    @keyframes intro-logo {
-      from { opacity: 0; transform: scale(1.08); filter: blur(10px); }
-      60% { opacity: 1; }
-      to { opacity: 1; transform: scale(1); filter: blur(0); }
-    }
+    .intro-feux { inset: 0; width: 100%; height: 100%; overflow: visible; opacity: 1; }
+    .intro-feux g { opacity: 0; }
+    #intro.go .intro-scene { animation: intro-arrivee .72s cubic-bezier(.16, 1, .3, 1) .08s both; }
+    @keyframes intro-arrivee { from { transform: translateX(-62vw); } to { transform: none; } }
+    /* surexposition qui retombe : l'objet arrive chargé de lumière puis prend ses vraies couleurs */
+    #intro.go .intro-logo { animation: intro-net .42s ease-out .42s both, intro-expo .9s ease-out .08s both; }
+    @keyframes intro-net { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes intro-expo { from { filter: brightness(2.1) saturate(.6); } to { filter: none; } }
+    #intro.go .f320 { animation: intro-f320 .5s linear .08s both; }
+    @keyframes intro-f320 { 0% { opacity: 1; filter: brightness(2) saturate(.45); } 55% { opacity: .9; } 100% { opacity: 0; filter: brightness(1.4) saturate(.7); } }
+    #intro.go .f120 { animation: intro-f120 .55s linear .25s both; }
+    @keyframes intro-f120 { 0% { opacity: 0; } 35% { opacity: 1; filter: brightness(1.6); } 100% { opacity: 0; filter: none; } }
+    /* traînée or : part de l'élan or de l'emblème et se rétracte quand il freine */
+    #intro.go .intro-trainee { animation: intro-trainee .9s cubic-bezier(.3, .6, .2, 1) .08s both; }
+    #intro.go .intro-trainee.t2 { animation-delay: .12s; }
+    @keyframes intro-trainee { 0% { transform: scaleX(1); opacity: 1; } 35% { opacity: 1; } 100% { transform: scaleX(0); opacity: 0; } }
+    #intro.go .intro-trainee.t2 { animation-name: intro-trainee2; }
+    @keyframes intro-trainee2 { 0% { transform: scaleX(1); opacity: .55; } 35% { opacity: .55; } 100% { transform: scaleX(0); opacity: 0; } }
+    /* pendant les feux, l'emblème retient son souffle (voile sombre posé sur lui seul) */
+    #intro.go .intro-ombre { animation: intro-ombre 1.6s linear both; }
+    @keyframes intro-ombre { 0%, 50% { opacity: 0; } 57%, 99.9% { opacity: .38; } 100% { opacity: 0; } }
+    /* les 5 feux : de bas en haut (donc de gauche à droite, le damier est en italique), 100 ms
+       d'écart, puis extinction d'un coup à 1,6 s */
+    #intro.go .intro-feux g { animation: 1.6s steps(1, end) both; }
+    #intro.go .intro-feux g:nth-child(1) { animation-name: feu1; }
+    #intro.go .intro-feux g:nth-child(2) { animation-name: feu2; }
+    #intro.go .intro-feux g:nth-child(3) { animation-name: feu3; }
+    #intro.go .intro-feux g:nth-child(4) { animation-name: feu4; }
+    #intro.go .intro-feux g:nth-child(5) { animation-name: feu5; }
+    @keyframes feu1 { 0%, 53.1% { opacity: 0; } 53.2%, 99.9% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes feu2 { 0%, 59.3% { opacity: 0; } 59.4%, 99.9% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes feu3 { 0%, 65.6% { opacity: 0; } 65.7%, 99.9% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes feu4 { 0%, 71.8% { opacity: 0; } 71.9%, 99.9% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes feu5 { 0%, 78.1% { opacity: 0; } 78.2%, 99.9% { opacity: 1; } 100% { opacity: 0; } }
     #intro.fin { opacity: 0; transition: opacity .4s ease; pointer-events: none; }
   </style>
 </head>
@@ -416,8 +449,29 @@
 
   <!-- ===== INTRO AU LANCEMENT (1 fois par session) ===== -->
   <div id="intro" aria-hidden="true">
-    <img class="intro-circuit" src="assets/img/intro-traces.svg" alt="" width="1440" height="900" loading="lazy">
-    <img class="intro-logo" src="assets/img/embleme-3d.webp" alt="" width="780" height="553" loading="lazy">
+    <div class="intro-scene">
+      <img class="intro-trainee t2" src="assets/img/intro-trainee.webp" alt="" width="1024" height="64" loading="lazy">
+      <img class="intro-trainee" src="assets/img/intro-trainee.webp" alt="" width="1024" height="64" loading="lazy">
+      <img class="intro-file f320" src="assets/img/intro-file-320.webp" alt="" width="1180" height="553" loading="lazy">
+      <img class="intro-file f120" src="assets/img/intro-file-120.webp" alt="" width="1180" height="553" loading="lazy">
+      <img class="intro-logo" src="assets/img/embleme-3d.webp" alt="" width="780" height="553" loading="lazy">
+      <div class="intro-ombre"></div>
+      <svg class="intro-feux" viewBox="0 0 780 553" focusable="false">
+        <defs>
+          <filter id="feu-halo" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"/><feGaussianBlur in="SourceGraphic" stdDeviation="22" result="c"/><feMerge><feMergeNode in="c"/><feMergeNode in="c"/><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <clipPath id="feu-r5"><rect x="395" y="103" width="135" height="15"/></clipPath>
+          <clipPath id="feu-r4"><rect x="395" y="79" width="135" height="24"/></clipPath>
+          <clipPath id="feu-r3"><rect x="395" y="56" width="135" height="23"/></clipPath>
+          <clipPath id="feu-r2"><rect x="395" y="32" width="135" height="24"/></clipPath>
+          <clipPath id="feu-r1"><rect x="395" y="16" width="135" height="16"/></clipPath>
+        </defs>
+        <g filter="url(#feu-halo)"><image href="assets/img/intro-feux.png" x="395" y="0" width="135" height="120" clip-path="url(#feu-r5)"/></g>
+        <g filter="url(#feu-halo)"><image href="assets/img/intro-feux.png" x="395" y="0" width="135" height="120" clip-path="url(#feu-r4)"/></g>
+        <g filter="url(#feu-halo)"><image href="assets/img/intro-feux.png" x="395" y="0" width="135" height="120" clip-path="url(#feu-r3)"/></g>
+        <g filter="url(#feu-halo)"><image href="assets/img/intro-feux.png" x="395" y="0" width="135" height="120" clip-path="url(#feu-r2)"/></g>
+        <g filter="url(#feu-halo)"><image href="assets/img/intro-feux.png" x="395" y="0" width="135" height="120" clip-path="url(#feu-r1)"/></g>
+      </svg>
+    </div>
   </div>
 
   <!-- Symbole emblème TP (réutilisé en motif de fond) -->
@@ -564,7 +618,7 @@
 
   <!-- ===== CONTACT ===== -->
   <section id="contact" class="grain" aria-labelledby="t-contact">
-    <img class="traces-fin" src="assets/img/intro-traces.svg" alt="" width="1440" height="900" loading="lazy" decoding="async">
+    <img class="traces-fin" src="assets/img/lignes-fin.svg" alt="" width="1440" height="900" loading="lazy" decoding="async">
     <h2 id="t-contact">Envie d'écrire la suite <span class="or">avec nous&nbsp;?</span></h2>
     <div class="coord">
       <span class="mail">contact.tpracing@gmail.com</span>
@@ -656,35 +710,39 @@
         entreeHero();
       };
       if (intro && active) {
-        // 1) fin du tracé : la piste s'efface, l'emblème glisse se poser sur le logo de la nav
-        setTimeout(() => {
-          intro.querySelector('.intro-circuit').classList.add('efface');
-          const logo = intro.querySelector('.intro-logo');
-          const cible = document.querySelector('nav .logo img');
-          if (logo && cible) {
-            const a = logo.getBoundingClientRect();
-            const b = cible.getBoundingClientRect();
-            const s = (b.height * .66) / a.height;
-            const dx = (b.left + b.width / 2) - (a.left + a.width / 2);
-            const dy = (b.top + b.height * .36) - (a.top + a.height / 2);
-            // figer l'état final AVANT de couper l'animation (sinon retour à opacity 0)
-            logo.style.opacity = '1';
-            logo.style.filter = 'none';
-            logo.style.animation = 'none';
-            requestAnimationFrame(() => {
-              logo.style.transition = 'transform .6s cubic-bezier(.6, .05, .25, 1)';
-              logo.style.transform = 'translate(' + dx.toFixed(1) + 'px, ' + dy.toFixed(1) + 'px) scale(' + s.toFixed(4) + ')';
-            });
-          }
-        }, 1750);
-        // 2) le voile s'efface pendant que le logo se pose (fondu vers le logo de la nav)
-        setTimeout(() => {
-          intro.classList.add('fin');
-          document.documentElement.classList.remove('intro-active');
-          lancerReveals();
-          intro.addEventListener('transitionend', e => { if (e.propertyName === 'opacity' && e.target === intro) intro.remove(); });
-        }, 2250);
-        setTimeout(() => { if (intro.isConnected) intro.remove(); lancerReveals(); }, 4500);
+        const scene = intro.querySelector('.intro-scene');
+        const sortie = () => {
+          // 1) feux éteints : l'emblème glisse se poser sur le logo de la nav
+          setTimeout(() => {
+            const cible = document.querySelector('nav .logo img');
+            if (scene && cible) {
+              const a = scene.getBoundingClientRect();
+              const b = cible.getBoundingClientRect();
+              const s = (b.height * .66) / a.height;
+              const dx = (b.left + b.width / 2) - (a.left + a.width / 2);
+              const dy = (b.top + b.height * .36) - (a.top + a.height / 2);
+              scene.style.animation = 'none';
+              requestAnimationFrame(() => {
+                scene.style.transition = 'transform .6s cubic-bezier(.6, .05, .25, 1)';
+                scene.style.transform = 'translate(' + dx.toFixed(1) + 'px, ' + dy.toFixed(1) + 'px) scale(' + s.toFixed(4) + ')';
+              });
+            }
+          }, 1750);
+          // 2) le voile s'efface pendant que le logo se pose (fondu vers le logo de la nav)
+          setTimeout(() => {
+            intro.classList.add('fin');
+            document.documentElement.classList.remove('intro-active');
+            lancerReveals();
+            intro.addEventListener('transitionend', e => { if (e.propertyName === 'opacity' && e.target === intro) intro.remove(); });
+          }, 2250);
+        };
+        // rien ne bouge avant que l'emblème et sa version filée soient décodés (700 ms au plus)
+        let parti = false;
+        const go = () => { if (parti) return; parti = true; intro.classList.add('go'); sortie(); };
+        const imgs = [...intro.querySelectorAll('.intro-logo, .f320')];
+        Promise.all(imgs.map(i => i.decode().catch(() => {}))).then(go);
+        setTimeout(go, 700);
+        setTimeout(() => { if (intro.isConnected) intro.remove(); lancerReveals(); }, 5200);
       } else {
         if (intro) intro.remove();
         lancerReveals();
