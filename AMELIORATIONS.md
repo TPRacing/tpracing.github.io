@@ -1027,8 +1027,53 @@ dans le source entre deux morceaux, sinon Google et les lecteurs collent les mot
 vu dans les résultats le 07/10). Sonde : parcourir le DOM, pour chaque paire de nœuds voisins dont l'un
 n'est pas `display:inline`, signaler fin de lettre/chiffre collée à un début de lettre/chiffre ; prouver
 l'innocuité visuelle par la géométrie des éléments avant/après (les captures pixel ne sont pas déterministes).
+Élément observé par un IntersectionObserver (`.rvl`, section d'une clôture) : JAMAIS de `clip-path` qui le
+rogne à 100 % (ni à 1 px : ratio 0,0009 < seuil .15), Chrome ne le signale pas et il reste invisible. Balayer
+par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. Et `img.decode()` peut refuser
+une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-10-08 bis (routine, AXE B : audit, dimension **CONSOLE ET JS**, pas auditée depuis le 12/09, donc jamais
+  sur la v3 ni sur l'intro « départ » livrée le jour même ; les 3 jours précédents : A, B, puis la session de
+  Thomas). T7 monté, `git pull` à jour, aucun run frère (le run du 07/10 était la session de l'intro).
+  **Méthode** : Playwright sur le Chrome installé, dépôt servi depuis le disque par `page.route`, 5 pages
+  (dont une URL inconnue pour la 404) x 1280 et 375 x 4 scénarios : normal (intro, défilement complet, jeu
+  des feux de la 404), mouvement réduit, sans JS, réseau lent (images de l'intro retardées de 0,4 et 2 s,
+  état de l'intro relevé toutes les 200 ms). Relevés : erreurs et avertissements console, exceptions,
+  requêtes en échec ou en 4xx, `.rvl` jamais révélés après défilement, textes longs restés à opacité 0.
+  **3 défauts trouvés, CORRIGÉS (commit 8730a33, EN LIGNE)** :
+  1. **« Sur Instagram » (kicker de pilote.html) ne s'affichait JAMAIS**, en 1280 comme en 375. Il porte
+     lui-même `.rvl` et la règle des kickers le rogne en `clip-path: inset(0 100% 0 0)` : surface visible
+     nulle, ratio d'intersection 0, le seuil .15 n'est jamais atteint (même piège que la trace du 06/10).
+     À 1 px de départ le ratio ne vaut que 0,0009, insuffisant. Correctif dans styles.css seulement (la
+     section du feed n'est pas touchée) : `.kicker.rvl` balaie par un **masque** dégradé net glissé de
+     100 % à 0 (même geste, même durée, même retard), qui ne compte pas dans l'intersection (ratio 1
+     mesuré) ; repli sans JS et mouvement réduit mis à jour. `.rvl .kicker` (observé par son parent) garde
+     son clip-path. Vérifié par capture 1280 et état révélé en 375.
+  2. **L'intro n'attendait pas vraiment l'emblème.** `decode()` de `embleme-3d.webp` refuse au hasard
+     (« The source image cannot be decoded », 2 chargements sur 3 dans un essai, l'image arrive pourtant
+     intacte) : course entre `loading="lazy"` et le masque CSS du même fichier (sans le masque ou sans le
+     lazy : 3/3 OK). Le `.catch(() => {})` transformait ce refus en feu vert, donc l'attente ajoutée le
+     matin même sautait une fois sur deux. Un refus renvoie maintenant à l'état réel de l'image
+     (`complete` + `naturalWidth`, sinon attente de `load`/`error`). Le lazy est gardé : il évite de
+     télécharger l'emblème aux visites sans intro.
+  3. **Sur connexion lente, l'intro jouait à vide** : images à 2 s, le repli de 700 ms lançait la
+     chorégraphie sur un voile marine vide pendant environ 1,3 s, l'emblème surgissant en cours de route.
+     À 700 ms sans emblème prêt (ou image en échec), l'intro est désormais **abandonnée** : le voile se
+     lève en 0,4 s, les reveals et l'entrée du hero partent. Relevé après correctif : images à 0 et 0,4 s =
+     intro jouée complète ; à 2 s = voile levé à 0,7 s, aucun temps à vide. Chorégraphie recapturée en
+     temps réel (0,35 / 1 / 1,55 / 2,1 / 3 s) en 1280 et 390 : identique à la version validée.
+  **Vérifié sain** : 0 exception et 0 erreur console sur les 5 pages dans les 4 scénarios (seule la
+  réponse 404 attendue de l'URL inconnue) ; le jeu des feux de la 404 répond (faux départ détecté) ;
+  mouvement réduit = intro jamais jouée, rien de bloqué ; sans JS = `#intro` masqué, tout le contenu
+  visible (le récit de l'histoire reste à 0 en haut de page, c'est une animation pilotée par le
+  défilement en CSS, pas un défaut JS). Prod : build `built` sur 8730a33, 200, marqueurs présents,
+  intro jouée et kicker révélé sur la prod réelle sans erreur. Piège outillage : `git push` depuis le
+  T7 a répondu « cannot lock ref » alors que le push était passé (le dépôt distant était déjà sur le
+  commit) : vérifier `git fetch` + `pages/builds` avant de repousser.
+  **Écarté** : passer `loading="lazy"` en chargement normal sur l'emblème de l'intro (corrige aussi la
+  course) car il serait alors téléchargé à chaque visite, intro ou pas.
 
 - 2026-10-08 (HORS ROUTINE, demandes directes de Thomas, commit d435ec6, EN LIGNE) : **nouvelle intro
   « départ » et clôtures à 3 traits.** Point de départ : les traces de pneus du 30/09 « font trace de
