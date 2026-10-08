@@ -736,12 +736,30 @@
             intro.addEventListener('transitionend', e => { if (e.propertyName === 'opacity' && e.target === intro) intro.remove(); });
           }, 2250);
         };
-        // rien ne bouge avant que l'emblème et sa version filée soient décodés (700 ms au plus)
+        // rien ne bouge avant que l'emblème et sa version filée soient décodés. S'ils ne le sont
+        // pas à 700 ms (connexion lente, image en échec), l'intro est abandonnée et le voile se lève :
+        // la jouer quand même montrait un voile marine vide plus d'une seconde (audit JS du 08/10).
         let parti = false;
         const go = () => { if (parti) return; parti = true; intro.classList.add('go'); sortie(); };
+        const abandon = () => {
+          if (parti) return; parti = true;
+          intro.classList.add('fin');
+          document.documentElement.classList.remove('intro-active');
+          lancerReveals();
+          intro.addEventListener('transitionend', e => { if (e.propertyName === 'opacity' && e.target === intro) intro.remove(); });
+        };
+        // decode() de l'emblème échoue au hasard (« cannot be decoded », 1 chargement sur 2 : course
+        // entre loading="lazy" et le masque CSS qui vise le même fichier) alors que l'image arrive
+        // intacte : un refus renvoie donc à l'état réel de l'image, pas à un échec.
+        const prete = i => i.decode().then(() => true, () => new Promise(ok => {
+          if (i.complete) return ok(i.naturalWidth > 0);
+          i.addEventListener('load', () => ok(true), { once: true });
+          i.addEventListener('error', () => ok(false), { once: true });
+        }));
         const imgs = [...intro.querySelectorAll('.intro-logo, .f320')];
-        Promise.all(imgs.map(i => i.decode().catch(() => {}))).then(go);
-        setTimeout(go, 700);
+        Promise.all(imgs.map(prete))
+          .then(ok => (ok.every(Boolean) ? go : abandon)());
+        setTimeout(abandon, 700);
         setTimeout(() => { if (intro.isConnected) intro.remove(); lancerReveals(); }, 5200);
       } else {
         if (intro) intro.remove();
