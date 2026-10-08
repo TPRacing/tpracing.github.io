@@ -1030,6 +1030,34 @@ l'innocuité visuelle par la géométrie des éléments avant/après (les captur
 
 ## Journal
 
+- 2026-10-08 (HORS ROUTINE, demandes directes de Thomas, commit d435ec6, EN LIGNE) : **nouvelle intro
+  « départ » et clôtures à 3 traits.** Point de départ : les traces de pneus du 30/09 « font trace de
+  tracteur », il veut « plus fin, plus sympa, du style des animations F1 ». Étape 1, deux directions en
+  aperçu vidéo (A trajectoires courbes, B lignes de vitesse inclinées) : Thomas choisit B. Étape 2, « pense
+  à la suite Adobe » : traînées refaites dans Photoshop (`halo.jsx` : flou directionnel 140 px décalé de
+  sa moitié pour que rien ne dépasse devant la tête, halo en mode Écran 5 et 16 px, éclat anamorphique
+  étiré à 1100 %, point chaud, grain), converties en transparence par l'opération inverse du mode Écran
+  (alpha = canal max, couleur divisée par alpha) ; composition posée dans Illustrator (`compose.jsx`) et
+  relue depuis le .ai (`lire.jsx`), assemblée en SVG de 25 Ko. Étape 3, Thomas : « trop Star Wars, il y
+  en a trop, joue plus avec le logo, suis les codes de montage, fais une grande analyse ». Analyse faite
+  en REGARDANT les génériques officiels F1 2026, logo F1 2018, WEC, Formula E et F1 Academy (images
+  extraites par Playwright, détail et codes dans DA-TPRACING.md du 08/10). Prototype validé sur vidéo
+  puis intégré : l'emblème arrive filé et surexposé avec sa traînée or, freine, ses 5 rangées de damier
+  s'allument comme les feux F1 et s'éteignent d'un coup, il se pose sur le logo du menu (même timing
+  qu'avant : pose à 1,75 s, voile levé à 2,25 s). **L'intro ne démarre qu'une fois l'emblème et sa
+  version filée décodés** (classe `.go`, 700 ms au plus), sinon elle pouvait jouer à vide sur une
+  connexion lente. Poids : 4 fichiers préchargés seulement quand l'intro joue (filé 21 + 15 Ko, traînée
+  8 Ko, feux 2 Ko : une seule image, les 5 rangées isolées par clipPath) contre 81 Ko pour l'ancien SVG
+  des traces. Clôtures : `lignes-fin.svg` (21 Ko, 3 traits) ; sur mobile, la bande ne grossit plus
+  (scale 1.7 retiré), l'image s'élargit à 160 % vers la droite avec une fenêtre verticale à 30 % pour que
+  la 47 en or entre dans la bande (avant, le masque ne laissait voir que le quart bas, où il n'y avait que
+  du blanc). Vérifs : intro capturée en temps réel en 1280 et 390, 0 erreur console, fins de page
+  1280 et 390 sur accueil et pilote (bande sous les boutons en mobile : 604 > 594 et 494 > 476), les
+  2 seuls débordements mesurés sont les karts du hero, identiques avant la modification. Prod : build
+  `built` (resté 12 min en deploy côté GitHub sans incident déclaré, il a fini seul), les 5 fichiers
+  en 200, `intro-traces.svg` en 404, marqueurs présents sur les 2 pages. Sources Adobe, planches de
+  veille et aperçus archivés dans `Communication/Refonte design site/Intro depart (08-10)/` sur le T7.
+
 - 2026-10-07 (routine, AXE B : audit, dimension **SEO TECHNIQUE + résultats Google réels**, le dernier passage
   datait du 23/09 au matin, soit AVANT la refonte v3 du même jour : la v3 n'avait jamais été auditée sous cet
   angle ; les 3 runs précédents étaient A, B, C). T7 monté, `git pull` à jour, aucun run frère actif.

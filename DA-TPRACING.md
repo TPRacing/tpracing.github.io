@@ -164,6 +164,12 @@ langage étranger, elle ne passe pas.
 
 ## 3. Interdits (chaque ligne vient d'un rejet réel de Thomas)
 
+- **Les traces de pneus larges et grainées** (« ça fait trace de tracteur », 08/10) puis **la pluie
+  de lignes de vitesse** (29 traits, « trop Star Wars, guerre des étoiles, il y en a trop », 08/10).
+  Leçon tirée des génériques officiels regardés image par image le jour même (F1 2026, logo F1 2018,
+  WEC) : **la vitesse se dit par le SUJET en mouvement (le logo filé, surexposé, qui freine), jamais
+  par un décor de traits autour de lui.** Les traînées n'y vivent qu'une demi-seconde, puis le logo
+  reste seul, net, sur un fond nuit. Dans une composition fixe, 3 traits au maximum.
 - Plaques rectangulaires plates sur fond vide, layout symétrique sage, zéro texture :
   « trop fade, ça fait Claude » (10/07, v1 des overlays ; v1 et v2 du site rejetées pour
   la même raison). Remède : matière (grain, duotone, photo), asymétrie, oversize.
@@ -220,6 +226,31 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-10-08 (intro et clôtures, demandes de Thomas « plus fin, style animations F1 », « utilise la
+  suite Adobe », « joue plus avec le logo », « suis les codes et tendances de montage ») : **le logo est
+  le sujet du mouvement, et son DAMIER devient les feux de départ.** Analyse faite en REGARDANT les
+  vidéos officielles (images extraites toutes les 0,2 à 2,5 s, planches dans
+  `Communication/Refonte design site/Intro depart (08-10)/Veille/`) :
+  (1) F1 2026 (DissEmbargo) : ouverture sur le logo extrudé dont seules les ARÊTES émettent la lumière,
+  la caméra fonce dedans et ses traits flous deviennent la transition ; fermeture inverse, une bande de
+  lumière se résout en logo filé qui refroidit et se pose À PLAT sur un fond nuit, sans aucun effet, en
+  1,5 s. (2) WEC : la voiture fonce, une gerbe de traits de 0,4 s, puis le logo arrive SUREXPOSÉ avec
+  une traînée horizontale qui s'éteint en 0,6 s, et reste sur un fond où l'on devine des tracés de
+  circuit très éteints. (3) Logo F1 2018 (W+K) : le logo projeté en lumière sur l'asphalte, la marque
+  dans le décor de course. (4) F1 Academy 2026 : les traits de vitesse groupés en BLOCS parallèles,
+  jamais éparpillés. (5) Formula E S12 : tunnel radial en ouverture seulement. Codes retenus : la
+  vitesse est portée par le logo lui-même ; les traînées sont éphémères ; surexposition qui retombe ;
+  une seule direction de déplacement ; arrivée en courbe exponentielle et pose franche ; image finale
+  propre. **Traduction TPRacing (en ligne) :** l'emblème arrive filé (flou directionnel 120 et 320 px fait
+  dans Photoshop) et surexposé, traînée or derrière l'élan or, il freine et refroidit ; puis **les
+  5 rangées du damier de l'emblème s'allument une à une, 100 ms d'écart, comme les 5 feux d'un départ
+  F1** (de bas en haut, donc de gauche à droite puisque le damier est en italique), l'emblème
+  s'assombrit légèrement pour que la lumière ressorte, extinction d'un coup = départ, et il se pose sur
+  le logo du menu. Aucun autre site ne peut faire ce geste : il n'existe que parce que l'emblème TP
+  porte un damier de 5 rangées. Clôtures : 3 traits de lumière (la 47 en or + 2 blancs), traînée,
+  halo, éclat anamorphique et grain faits dans Photoshop, composition posée et relue dans Illustrator.
+  Écarté : la radiale « hyperespace » (Formula E, WEC) en continu, et toute ligne qui reste à l'écran
+  autour du logo.
 - 2026-10-06 (axe A, les clôtures) : **la trace de pneu signe aussi la FIN des pages, là où le texte parle
   d'« écrire la suite ».** Les deux sections qui ferment l'accueil et pilote.html étaient des plaques marine vides,
   l'une centrée-symétrique. Elles reprennent le fichier de l'intro (`intro-traces.svg`, la 47 en or) en moitié
