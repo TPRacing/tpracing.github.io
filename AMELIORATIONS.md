@@ -80,6 +80,41 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       fichier, la 47 en or), texte à gauche. FAIT le 06/10 (voir Journal).
 
 
+### Idées de la veille 09/10 (angle neuf : LE PARCOURS, comment un pilote raconte sa trajectoire)
+
+Sites REGARDÉS en Chrome piloté par Playwright, 1280 (6 vues au défilement, ou 14 vues à la molette pour les sites
+à défilement JS) et 390 (6 vues), captures dans le scratchpad du jour : charlesleclerc.com/en/, isackhadjar.com/biography,
+landonorris.com, pierregasly.com/pages/about, georgerussell63.com/about. Mort : oscarpiastri.com/about (404, lien de
+leur propre accueil). Notre frise de pilote.html recapturée dans les mêmes conditions pour comparer.
+
+- [x] **Matière sur le fond des chapitres.** VU chez Leclerc : tout le chapitre « Beginnings » se pose sur un blanc
+      cassé quadrillé de lignes fines LÉGÈREMENT INCLINÉES (papier millimétré cisaillé), si bien que les grands vides
+      entre ses photos décalées ne sont jamais du vide plat. Constaté chez nous dans la même capture : les 5 cartes
+      collantes de la frise (5 x 170vh, la plus longue zone sombre du site) et l'en-tête « Le parcours » étaient le seul
+      marine PLAT du site, sans les pointillés carbone que portent `.section-marine`, le pied de page et la tuile
+      Instagram. Pourquoi c'est TPRacing : on ne copie pas la grille de Leclerc, on applique NOTRE trame (pointillés
+      carbone, 26 px, alpha .035) là où elle manquait. FAIT le 09/10 (commit ce91110).
+- [ ] **QUESTION THOMAS : une phrase à toi pour ouvrir l'étape 2015.** VU chez Leclerc : le chapitre des débuts
+      s'ouvre sur une citation d'enfant en grand corps (« Dad, this is what I want to do when I grow up »), puis la
+      photo de kart, puis seulement le texte. C'est la transmission père-fils, exactement notre « Le volant se
+      transmet ». Si Thomas a une vraie phrase (dite à Patrice après le Volant Bronze 2015, ou un souvenir), elle
+      remplacerait « Le Volant Bronze, en août 2015 » comme accroche de la carte. Pourquoi c'est TPRacing : la seule
+      voix qu'aucun autre site ne peut avoir. ⏳ Bloqué : texte personnel, ne rien inventer.
+- [ ] Noté : **la photo nette au milieu des photos éteintes** (VU chez Norris : les vignettes périphériques en sépia
+      désaturé, la photo centrale seule en couleur, légendes « BARCELONA, 2024 » en capitales minuscules en tête de
+      photo). Chez nous les deux photos d'une carte de frise sont au même régime ; éteindre la petite donnerait un
+      ordre de lecture. Non retenu aujourd'hui : la règle du 10/08 (pas de duotone sur les photos de reportage) et
+      l'étalonnage commun du 22/09 s'y opposent, à reposer seulement si Thomas veut un régime « souvenir » pour les
+      petites.
+- Écartés avec motif : le **défilement vertical converti en horizontal** (Leclerc, Beginnings puis Motorsport en
+  travelling latéral) : notre frise empile déjà les cartes au défilement, deux mécaniques sur une même page seraient
+  un effet de plus ; les **phrases géantes qui traversent la photo floue** (Leclerc « IT'S THE MIND THAT MAKES THE
+  DIFFERENCE ») : slogan anglais, et l'interdit du texte « qui fait IA » (une mention max) ; les **années en bande
+  pleine largeur dégradé bleu** (Hadjar « 2024 », « 2019 - 2021 ») : notre année vit déjà sur l'aplat de la carte,
+  la redire en bande ferait doublon ; le **parcours en article de blog** (Gasly : titres « 2014 · World Series »
+  au point médian, photos toutes au même format, FAQ SEO en pied) et le **mur de texte biographique** (Russell) :
+  contre-exemples, c'est le gabarit que notre frise évite.
+
 ### Idées de la veille 05/10 bis (angle neuf : LE PARTENAIRE, comment une écurie ou un athlète financé montre ses sponsors)
 
 Relance du run du 02/10 (bloqué par la limite d'usage), exécutée en parallèle du run du jour, d'où deux veilles le
@@ -1034,6 +1069,18 @@ une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se v
 
 ## Journal
 
+- 2026-10-09 bis (routine, AXE C : veille par captures, angle neuf **LE PARCOURS**, les deux runs routine précédents
+  étaient des audits B ; commit ce91110, EN LIGNE) : 5 sites de pilotes regardés en 1280 et 390 (Leclerc, Hadjar,
+  Norris, Gasly, Russell ; Piastri /about en 404), plus notre frise recapturée dans les mêmes conditions. Constat qui
+  ne se voyait qu'en mettant les captures côte à côte : chez Leclerc les vides du chapitre portent une trame
+  (quadrillage incliné), chez nous les 5 cartes collantes de la frise et l'en-tête « Le parcours » étaient du marine
+  plat, seul endroit sombre du site sans les pointillés carbone. Corrigé avec NOTRE recette existante (26 px,
+  alpha .035), aucune variante. Vérifié en local 1280 et 375 (0 erreur console, 0 débordement, trame visible au zoom
+  dans les marges de la carte) puis en prod. Sonde étendue aux 5 pages (grands fonds sombres sans trame) : seuls
+  `#academy` et `#presse` de l'accueil en sortent, ils portent le grain `.grain::after` de la v3, RAS. Une question pour Thomas (phrase personnelle pour ouvrir 2015),
+  une idée notée non retenue (photo nette parmi photos éteintes), 4 écartées avec motif, détail au backlog.
+  Outillage : les sites à défilement JS (Lenis et consorts : `scrollHeight` = hauteur de fenêtre) ne se capturent
+  pas par `scrollTo`, il faut de vrais crans de molette (`page.mouse.wheel`), 6 x 250 px entre deux vues.
 - 2026-10-09 (HORS ROUTINE, idée de Thomas sur l'intro du 08/10, commit 7e29d93, EN LIGNE) : « j'aime le
   drapeau à damier qui s'anime, mais mets des traînées qui passent de la gauche du T jusqu'à passer le
   damier pour se diluer dans le virage du P ». Fait : géométrie de l'emblème relevée au pixel (face de la

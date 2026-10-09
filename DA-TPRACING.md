@@ -226,6 +226,20 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-10-09 bis (veille LE PARCOURS, captures 1280 et 390 de charlesleclerc.com, isackhadjar.com,
+  landonorris.com, pierregasly.com, georgerussell63.com) : **aucune zone sombre du site n'est un marine
+  plat ; tout marine visible porte une trame, pointillés carbone ou grain `.grain` de la v3.** Vu chez Leclerc : les
+  vides entre les photos décalées de son chapitre des débuts tiennent parce que le fond porte un
+  quadrillage fin incliné ; chez Gasly et Russell, même quantité de vide sur un fond nu, et c'est
+  exactement ce qui fait gabarit. Chez nous, les 5 cartes collantes de la frise (850vh au total) avaient
+  échappé à la règle « pointillés carbone sur les sections marine » parce qu'elles ne sont pas des
+  `.section-marine` mais des `.carte` à fond variable (`--c-fond`). Leçon de méthode : **une règle de
+  matière se vérifie sur la COULEUR rendue, pas sur la classe** ; chercher tout fond marine ou nuit du
+  site et s'assurer qu'il porte une trame, quelle que soit la classe qui le peint (sonde du jour : tout élément
+  de plus de 60 % de large et d'un demi-écran de haut, fond de luminance < 70, sans `radial-gradient` 1 px ;
+  restent seulement `#academy` et `#presse`, qui ont le grain en `::after`, et deux fonds recouverts). La recette ne se
+  redessine pas (26 px, alpha .035, `radial-gradient(1px, transparent 1.5px)`), le quadrillage incliné de
+  Leclerc n'est pas importé : c'est son vocabulaire, pas le nôtre.
 - 2026-10-09 (intro, idée de Thomas) : **la lumière court SUR le logo et en suit le dessin.** Trois
   traînées entrent à gauche du T, traversent la barre et le damier, puis épousent le virage du P où
   elles se diluent : le logo devient un circuit (ligne droite des stands, puis virage), et le damier
