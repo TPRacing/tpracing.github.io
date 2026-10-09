@@ -1034,6 +1034,19 @@ une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se v
 
 ## Journal
 
+- 2026-10-09 (HORS ROUTINE, idée de Thomas sur l'intro du 08/10, commit 7e29d93, EN LIGNE) : « j'aime le
+  drapeau à damier qui s'anime, mais mets des traînées qui passent de la gauche du T jusqu'à passer le
+  damier pour se diluer dans le virage du P ». Fait : géométrie de l'emblème relevée au pixel (face de la
+  barre de y 18 à 115, damier x 406 à 522, bord extérieur du bol du P à x 760 vers y 140) ; trois couloirs
+  à y 46, 70 et 94 (le central en or chaud, les deux autres blancs) partent dans le vide à gauche du T,
+  filent en ligne droite dans la barre, franchissent le damier puis suivent le bol du P en se resserrant
+  et s'y éteignent. Tête et queue effilée = 4 tirets superposés aux têtes alignées (`pathLength` 1000)
+  plus un halo flou, en SVG dans le repère de l'emblème, 0 octet d'image en plus. Minutage : départ à
+  0,56 / 0,61 / 0,66 s (l'emblème a fini de glisser), 0,62 s de course, les têtes passent le damier vers
+  0,93 s et les feux (décalés de 0,1 s) s'allument juste derrière elles dès 0,95 s, extinction à 1,7 s,
+  pose sur le menu à 1,75 s inchangée. Vérifs : aperçu vidéo puis intro réelle capturée en direct en 1280
+  et 390, 0 erreur console ; prod : build `built`, marqueur présent.
+
 - 2026-10-08 bis (routine, AXE B : audit, dimension **CONSOLE ET JS**, pas auditée depuis le 12/09, donc jamais
   sur la v3 ni sur l'intro « départ » livrée le jour même ; les 3 jours précédents : A, B, puis la session de
   Thomas). T7 monté, `git pull` à jour, aucun run frère (le run du 07/10 était la session de l'intro).

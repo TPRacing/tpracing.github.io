@@ -226,6 +226,11 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-10-09 (intro, idée de Thomas) : **la lumière court SUR le logo et en suit le dessin.** Trois
+  traînées entrent à gauche du T, traversent la barre et le damier, puis épousent le virage du P où
+  elles se diluent : le logo devient un circuit (ligne droite des stands, puis virage), et le damier
+  qu'elles franchissent s'allume derrière elles. Règle : une traînée posée sur un logo suit SES formes
+  (relevées au pixel), jamais une trajectoire arbitraire qui le traverse.
 - 2026-10-08 (intro et clôtures, demandes de Thomas « plus fin, style animations F1 », « utilise la
   suite Adobe », « joue plus avec le logo », « suis les codes et tendances de montage ») : **le logo est
   le sujet du mouvement, et son DAMIER devient les feux de départ.** Analyse faite en REGARDANT les
