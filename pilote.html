@@ -167,7 +167,7 @@
     .p-reseaux .liens a:hover { background: var(--or); color: var(--marine-deep); }
 
     /* ---------- Le parcours : frise inversée, chaque chapitre recouvre le précédent ---------- */
-    .parcours-tete { background: var(--nuit-p); color: var(--blanc); padding: 120px max(20px, 4.4vw) 60px; }
+    .parcours-tete { background: radial-gradient(rgba(246, 247, 252, .035) 1px, transparent 1.5px) 0 0 / 26px 26px, var(--nuit-p); color: var(--blanc); padding: 120px max(20px, 4.4vw) 60px; }
     .parcours-tete h2 { color: var(--blanc); margin: 0; font-size: clamp(2.1rem, 5vw, 4.5rem); line-height: 1; }
     .parcours-tete p { color: var(--gris-c); max-width: 560px; margin-top: 16px; }
     .frise { position: relative; background: var(--nuit-p); color: var(--blanc); padding: 0; }
@@ -177,7 +177,7 @@
     .rail a.actif { color: var(--blanc); }
     .rail a.actif::before { width: 34px; background: var(--rouge); }
     .chapitre { height: 170vh; padding: 0; view-timeline-name: --ch; }
-    .chapitre .carte { position: sticky; top: 0; height: 100svh; padding: 120px max(20px, 4.4vw) 60px 190px; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); grid-template-rows: 1fr auto; background: var(--c-fond, #141B28); box-shadow: 0 -30px 60px -20px rgba(0, 0, 0, .7); }
+    .chapitre .carte { position: sticky; top: 0; height: 100svh; padding: 120px max(20px, 4.4vw) 60px 190px; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); grid-template-rows: 1fr auto; background: radial-gradient(rgba(246, 247, 252, .035) 1px, transparent 1.5px) 0 0 / 26px 26px, var(--c-fond, #141B28); box-shadow: 0 -30px 60px -20px rgba(0, 0, 0, .7); }
     @supports (animation-timeline: view()) {
       .chapitre .carte { animation: recule linear both; animation-timeline: --ch; animation-range: exit 0% exit 100%; }
     }
