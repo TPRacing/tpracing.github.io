@@ -425,12 +425,29 @@
     @keyframes intro-trainee { 0% { transform: scaleX(1); opacity: 1; } 35% { opacity: 1; } 100% { transform: scaleX(0); opacity: 0; } }
     #intro.go .intro-trainee.t2 { animation-name: intro-trainee2; }
     @keyframes intro-trainee2 { 0% { transform: scaleX(1); opacity: .55; } 35% { opacity: .55; } 100% { transform: scaleX(0); opacity: 0; } }
+    /* traînées sur la face de l'emblème (09/10, idée de Thomas) : trois couloirs entrent à gauche
+       du T, filent dans la barre, franchissent le damier (les feux s'allument juste derrière elles)
+       et s'enroulent dans le virage du P, où elles se diluent. Tête et queue effilée = 4 tirets
+       superposés aux têtes alignées sur le même tracé (pathLength 1000), plus un halo flou. */
+    .intro-traits { inset: 0; width: 100%; height: 100%; overflow: visible; opacity: 1; }
+    .intro-traits path { fill: none; stroke-linecap: round; opacity: 0; }
+    @keyframes trait90 { 0% { stroke-dashoffset: 90; opacity: 1; } 62% { opacity: 1; } 100% { stroke-dashoffset: -1000; opacity: 0; } }
+    #intro.go .intro-traits .d90 { stroke-dasharray: 90 3000; animation: trait90 .62s cubic-bezier(.35, .15, .5, 1) both; }
+    @keyframes trait18 { 0% { stroke-dashoffset: 18; opacity: 1; } 62% { opacity: 1; } 100% { stroke-dashoffset: -1000; opacity: 0; } }
+    #intro.go .intro-traits .d18 { stroke-dasharray: 18 3000; animation: trait18 .62s cubic-bezier(.35, .15, .5, 1) both; }
+    @keyframes trait60 { 0% { stroke-dashoffset: 60; opacity: 1; } 62% { opacity: 1; } 100% { stroke-dashoffset: -1000; opacity: 0; } }
+    #intro.go .intro-traits .d60 { stroke-dasharray: 60 3000; animation: trait60 .62s cubic-bezier(.35, .15, .5, 1) both; }
+    @keyframes trait150 { 0% { stroke-dashoffset: 150; opacity: 1; } 62% { opacity: 1; } 100% { stroke-dashoffset: -1000; opacity: 0; } }
+    #intro.go .intro-traits .d150 { stroke-dasharray: 150 3000; animation: trait150 .62s cubic-bezier(.35, .15, .5, 1) both; }
+    @keyframes trait300 { 0% { stroke-dashoffset: 300; opacity: 1; } 62% { opacity: 1; } 100% { stroke-dashoffset: -1000; opacity: 0; } }
+    #intro.go .intro-traits .d300 { stroke-dasharray: 300 3000; animation: trait300 .62s cubic-bezier(.35, .15, .5, 1) both; }
     /* pendant les feux, l'emblème retient son souffle (voile sombre posé sur lui seul) */
-    #intro.go .intro-ombre { animation: intro-ombre 1.6s linear both; }
+    #intro.go .intro-ombre { animation: intro-ombre 1.6s linear .1s both; }
     @keyframes intro-ombre { 0%, 50% { opacity: 0; } 57%, 99.9% { opacity: .38; } 100% { opacity: 0; } }
     /* les 5 feux : de bas en haut (donc de gauche à droite, le damier est en italique), 100 ms
-       d'écart, puis extinction d'un coup à 1,6 s */
-    #intro.go .intro-feux g { animation: 1.6s steps(1, end) both; }
+       d'écart à partir de 0,95 s, juste après le passage des traînées, puis extinction d'un coup
+       à 1,7 s */
+    #intro.go .intro-feux g { animation: 1.6s steps(1, end) .1s both; }
     #intro.go .intro-feux g:nth-child(1) { animation-name: feu1; }
     #intro.go .intro-feux g:nth-child(2) { animation-name: feu2; }
     #intro.go .intro-feux g:nth-child(3) { animation-name: feu3; }
@@ -456,6 +473,30 @@
       <img class="intro-file f120" src="assets/img/intro-file-120.webp" alt="" width="1180" height="553" loading="lazy">
       <img class="intro-logo" src="assets/img/embleme-3d.webp" alt="" width="780" height="553" loading="lazy">
       <div class="intro-ombre"></div>
+      <svg class="intro-traits" viewBox="0 0 780 553" focusable="false">
+        <defs><filter id="trait-halo" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="6"/></filter></defs>
+        <g>
+          <path class="d90" d="M-90 46 L600 46 C690 46 738 84 738 143 C738 204 690 246 606 250" pathLength="1000" stroke="#F6F7FC" stroke-width="14.4" stroke-opacity=".5" filter="url(#trait-halo)" style="animation-delay:0.56s"/>
+          <path class="d18" d="M-90 46 L600 46 C690 46 738 84 738 143 C738 204 690 246 606 250" pathLength="1000" stroke="#F6F7FC" stroke-width="7.20" stroke-opacity="1" style="animation-delay:0.56s"/>
+          <path class="d60" d="M-90 46 L600 46 C690 46 738 84 738 143 C738 204 690 246 606 250" pathLength="1000" stroke="#F6F7FC" stroke-width="5.76" stroke-opacity="0.8" style="animation-delay:0.56s"/>
+          <path class="d150" d="M-90 46 L600 46 C690 46 738 84 738 143 C738 204 690 246 606 250" pathLength="1000" stroke="#F6F7FC" stroke-width="4.32" stroke-opacity="0.45" style="animation-delay:0.56s"/>
+          <path class="d300" d="M-90 46 L600 46 C690 46 738 84 738 143 C738 204 690 246 606 250" pathLength="1000" stroke="#F6F7FC" stroke-width="3.42" stroke-opacity="0.2" style="animation-delay:0.56s"/>
+        </g>
+        <g>
+          <path class="d90" d="M-90 70 L596 70 C672 70 713 101 713 146 C713 191 676 224 612 227" pathLength="1000" stroke="#FFE3A3" stroke-width="17.6" stroke-opacity=".5" filter="url(#trait-halo)" style="animation-delay:0.61s"/>
+          <path class="d18" d="M-90 70 L596 70 C672 70 713 101 713 146 C713 191 676 224 612 227" pathLength="1000" stroke="#FFE3A3" stroke-width="8.80" stroke-opacity="1" style="animation-delay:0.61s"/>
+          <path class="d60" d="M-90 70 L596 70 C672 70 713 101 713 146 C713 191 676 224 612 227" pathLength="1000" stroke="#FFE3A3" stroke-width="7.04" stroke-opacity="0.8" style="animation-delay:0.61s"/>
+          <path class="d150" d="M-90 70 L596 70 C672 70 713 101 713 146 C713 191 676 224 612 227" pathLength="1000" stroke="#FFE3A3" stroke-width="5.28" stroke-opacity="0.45" style="animation-delay:0.61s"/>
+          <path class="d300" d="M-90 70 L596 70 C672 70 713 101 713 146 C713 191 676 224 612 227" pathLength="1000" stroke="#FFE3A3" stroke-width="4.18" stroke-opacity="0.2" style="animation-delay:0.61s"/>
+        </g>
+        <g>
+          <path class="d90" d="M-90 94 L590 94 C652 94 688 117 688 150 C688 181 664 202 622 205" pathLength="1000" stroke="#F6F7FC" stroke-width="12.8" stroke-opacity=".5" filter="url(#trait-halo)" style="animation-delay:0.66s"/>
+          <path class="d18" d="M-90 94 L590 94 C652 94 688 117 688 150 C688 181 664 202 622 205" pathLength="1000" stroke="#F6F7FC" stroke-width="6.40" stroke-opacity="1" style="animation-delay:0.66s"/>
+          <path class="d60" d="M-90 94 L590 94 C652 94 688 117 688 150 C688 181 664 202 622 205" pathLength="1000" stroke="#F6F7FC" stroke-width="5.12" stroke-opacity="0.8" style="animation-delay:0.66s"/>
+          <path class="d150" d="M-90 94 L590 94 C652 94 688 117 688 150 C688 181 664 202 622 205" pathLength="1000" stroke="#F6F7FC" stroke-width="3.84" stroke-opacity="0.45" style="animation-delay:0.66s"/>
+          <path class="d300" d="M-90 94 L590 94 C652 94 688 117 688 150 C688 181 664 202 622 205" pathLength="1000" stroke="#F6F7FC" stroke-width="3.04" stroke-opacity="0.2" style="animation-delay:0.66s"/>
+        </g>
+      </svg>
       <svg class="intro-feux" viewBox="0 0 780 553" focusable="false">
         <defs>
           <filter id="feu-halo" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"/><feGaussianBlur in="SourceGraphic" stdDeviation="22" result="c"/><feMerge><feMergeNode in="c"/><feMergeNode in="c"/><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
