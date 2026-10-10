@@ -79,6 +79,15 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       dernier bloc centré-symétrique du site. Elles portent désormais les traces de pneus Caterham de l'intro (même
       fichier, la 47 en or), texte à gauche. FAIT le 06/10 (voir Journal).
 
+- [x] Les deux pages finissent par la même clôture (titre à gauche, traits de lumière à droite), mais celle de
+      pilote.html entrait par l'arête maison (`.diag-haut` : diagonale 2.3vw + filet or) et celle de l'accueil par un
+      raccord DROIT blanc sur nuit, sans matière. Même objet, même frontière : l'accueil prend `.diag-haut`. Au passage,
+      revue de presse : `text-wrap: balance` sur les titres (veuve « parties » à 1280) et guillemets français à espaces
+      insécables (sans eux, l'équilibrage rejetait « » » en tête de ligne). FAIT le 10/10 (commit 53242c0).
+- [ ] Constat du 10/10, laissé en l'état : le filet or de `.diag-haut` fait 3 px mais le `clip-path` de la section en
+      rogne la moitié haute, il en reste environ 1,5 px visibles (zoom x2 à 1280), sur les DEUX pages. C'est l'état
+      validé depuis le 23/09 ; le passer à 3 px pleins (décaler le filet de 1,5 px sous l'arête) changerait la clôture
+      de pilote.html aussi, à regarder un jour de design avec un avant/après.
 
 ### Idées de la veille 09/10 (angle neuf : LE PARCOURS, comment un pilote raconte sa trajectoire)
 
@@ -1069,6 +1078,23 @@ une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se v
 
 ## Journal
 
+- 2026-10-10 (routine, AXE A : finition design ; les jours précédents : A le 06/10, B les 07 et 08/10, C le 09/10 ;
+  commit 53242c0, EN LIGNE ; relancé par « Try again » après un premier passage interrompu avant toute modif). T7 monté,
+  `git pull` à jour, aucun run frère du jour. Accueil et pilote recapturés fenêtre par fenêtre en 1280 et l'accueil en
+  390 (Playwright, dépôt servi par `page.route` ; la capture pleine page est inutilisable ici : le récit « Le volant se
+  transmet » est piloté par le défilement et reste vide, le mur partenaires aussi). **Constat qui ne se voyait qu'en
+  comparant les deux fins de page** : la clôture de pilote.html entre par la diagonale + filet or (règle v3 n°1, « une
+  frontière se dit par la diagonale et un filet or »), celle de l'accueil par un raccord droit blanc/nuit. **Fait** :
+  `#contact` prend la classe `.diag-haut` de styles.css (aucune recette nouvelle), padding haut compensé de la pente
+  (110 px + 2.3vw, 90 px + 2.3vw sous 760). Revue de presse : `text-wrap: balance` sur `.revue .titre` (le titre MyCitee
+  laissait « parties » seul en ligne 2 à 1280) ; premier essai raté et rattrapé à la capture : l'équilibrage coupait
+  avant « » », les 6 guillemets passent en `&nbsp;` (balayage du texte visible des 5 pages : plus aucun guillemet
+  sécable). **Vérifié** à 320, 375, 768, 1024, 1280, 1680 : filet or présent (`::before` or calculé), titre à la même
+  distance de l'arête qu'avant, 0 élément hors cadre, 0 erreur console ; zooms x2 de l'arête. Prod : build `built` sur
+  53242c0, 200, marqueurs présents. **Constat laissé** (backlog) : le filet de `.diag-haut` n'est visible que sur
+  ~1,5 px de ses 3, sur les deux pages. **Écartés** : poser le filet sur TOUTES les diagonales de l'accueil (5 arêtes,
+  le filet redeviendrait un gabarit, leçon du 09/08) ; redessiner la revue de presse (pas de coupures papier sur le T7,
+  les visuels du Progrès ne sont pas à nous).
 - 2026-10-09 bis (routine, AXE C : veille par captures, angle neuf **LE PARCOURS**, les deux runs routine précédents
   étaient des audits B ; commit ce91110, EN LIGNE) : 5 sites de pilotes regardés en 1280 et 390 (Leclerc, Hadjar,
   Norris, Gasly, Russell ; Piastri /about en 404), plus notre frise recapturée dans les mêmes conditions. Constat qui

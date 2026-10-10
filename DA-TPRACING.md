@@ -385,6 +385,13 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   photo recadrée en tranche portrait par un `cover` a sa propre version portrait, sinon le grain devient
   du flou. Captures : scratchpad du 24/09, `aud/shots` (avant et après).
 
+- 2026-10-10 : **la clôture est un objet, elle a donc UNE frontière.** Les deux pages finissent pareil (titre à
+  gauche, traits de lumière à droite) ; la règle v3 n°1 ne s'appliquait qu'à pilote.html. L'accueil prend la même
+  `.diag-haut` (diagonale 2.3vw + filet or). Ce n'est PAS une licence pour filer toutes les arêtes : les diagonales
+  intermédiaires de l'accueil restent nues, le filet signe l'entrée dans la dernière section. Typo : tout titre
+  équilibré par `text-wrap: balance` exige des espaces insécables dans les guillemets français, sinon « » » part en
+  tête de ligne (vu le 10/10 sur la revue de presse).
+
 - 2026-09-23 bis (REFONTE v3, validée par Thomas sur prototype) : **la DA change de centre de gravité, du
   karting vers la VOITURE.** Règles qui en sortent, à tenir sur toute nouvelle page. (1) **Le damier devient
   RARE** : il reste dans le logo, la pastille des surtitres et le rappel du drapeau, jamais comme bordure,
