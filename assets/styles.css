@@ -585,6 +585,10 @@ nav ul {
   gap: 28px;
   list-style: none;
 }
+/* Un mot de titre plus large que l'écran (320 px + espacement de texte agrandi, WCAG 1.4.12) se
+   coupe au lieu de sortir du cadre ; sans effet tant que le mot tient (break-word ne change pas
+   la largeur minimale, audit a11y 11/10). */
+h1, h2, h3 { overflow-wrap: break-word; }
 nav ul li { display: flex; align-items: center; }
 nav ul li:last-child { align-self: stretch; }
 nav ul a {
@@ -643,6 +647,9 @@ nav .nav-cta:hover { background: var(--or-clair); }
   nav ul { gap: 10px; }
   nav ul a { font-size: .84rem; letter-spacing: .04em; }
   nav .nav-cta { padding: 0 10px; }
+  /* Espacement de texte agrandi par le visiteur (WCAG 1.4.12) : le bouton passe sur deux lignes
+     au lieu d'être rogné au bord droit. Sans réglage, il tient sur une ligne (audit a11y 11/10). */
+  nav .nav-cta { white-space: normal; text-align: center; line-height: 1.05; }
   /* Boutons à libellé long (adresse e-mail, handle) : ils dépassaient le cadre. */
   .btn { font-size: 1rem; letter-spacing: .08em; padding: 12px 20px; max-width: 100%; overflow-wrap: anywhere; }
 }

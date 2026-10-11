@@ -192,7 +192,7 @@
     .carte .an { font-family: var(--f-titre); font-weight: 700; font-size: clamp(2.5rem, 5vw, 4.75rem); font-size: min(clamp(2.5rem, 5vw, 4.75rem), 19.5cqi); line-height: .9; }
     .carte h3 { margin: 0; font-size: 1.75rem; line-height: 1.02; letter-spacing: .06em; }
     .carte .aplat p { margin-top: 8px; font-size: .95rem; line-height: 1.5; }
-    .carte .lieu { font-family: var(--f-label); font-weight: 700; font-size: .95rem; letter-spacing: .12em; text-transform: uppercase; opacity: .8; }
+    .carte .lieu { font-family: var(--f-label); font-weight: 700; font-size: .95rem; letter-spacing: .12em; text-transform: uppercase; }   /* sans opacité : à .8 le marine sur l'or tombait à 4,2:1 (audit a11y 11/10) */
     .carte.miroir { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); }
     .carte.miroir .grande { grid-column: 2; grid-row: 1 / span 2; }
     .carte.miroir .aplat { grid-column: 1; grid-row: 1; }
@@ -224,7 +224,9 @@
       .hero-pilote { padding: 0 20px calc(var(--bande) + 30px); }
       .parcours-tete { padding: 100px 20px 40px; }
       /* sous 360 px, « Thomas » et « Le parcours » sortaient de l'écran */
-      .hero-pilote h1 { font-size: min(2.5rem, 11.4vw); }
+      /* 10,6vw et non 11,4 : à 320 px « THOMAS » débordait déjà sa colonne de 9 px, et de 13 px hors
+         écran avec l'espacement de texte agrandi (WCAG 1.4.12, audit a11y 11/10) */
+      .hero-pilote h1 { font-size: min(2.5rem, 10.6vw); }
       .parcours-tete h2 { font-size: min(2.1rem, 8.6vw); }
       .rail { display: none; }
       .chapitre .carte { padding: 80px 12px 24px; grid-template-columns: 1fr 1fr; grid-template-rows: 1.3fr 1fr; }

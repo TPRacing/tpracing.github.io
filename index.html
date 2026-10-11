@@ -225,7 +225,8 @@
     .histoire h2 .v { color: var(--vert); }
     .histoire .recit { position: absolute; z-index: 5; top: calc(15vh + 2.3em + 9vw); left: 50%; transform: translateX(-50%); width: min(580px, 86vw); text-align: center; color: var(--gris-f); font-size: 1.05rem; line-height: 1.55; }
     .histoire .couleurs { display: block; margin-top: 12px; font-family: var(--f-label); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: .95rem; color: var(--marine); }
-    .histoire .couleurs b { color: var(--vert); }
+    /* le vert charte fait 4,2:1 sur le blanc cassé : à 15 px il descend d'un cran (même teinte, 4,6:1, audit a11y 11/10) */
+    .histoire .couleurs b { color: #3A7C68; }
     .kart { position: absolute; z-index: 2; bottom: 9%; height: min(46vh, 430px); width: auto; max-width: none; }
     .kart.k87 { left: 50%; transform: translateX(-104%); }
     .kart.k20 { left: 50%; transform: translateX(4%); }
@@ -291,7 +292,7 @@
     .partenaires h2 .or { color: var(--or); }
     .partenaires .lead { margin: 0 auto 14px; color: var(--gris-f); max-width: 560px; }
     .fidelite { margin: 0 auto 48px; font-family: var(--f-label); font-weight: 700; font-size: 1.12rem; letter-spacing: .1em; text-transform: uppercase; }
-    .fidelite b { color: #9A6A10; }
+    .fidelite b { color: #8F661A; }   /* or foncé à 4,8:1 (#9A6A10 faisait 4,4:1, audit a11y 11/10) */
     .arguments { max-width: 1100px; margin: 0 auto 56px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; text-align: left; border-top: 2px solid var(--marine); }
     .arguments div { padding: 20px 26px 0 0; }
     .arguments b { display: block; font-family: var(--f-label); font-weight: 700; font-size: 1.3rem; letter-spacing: .06em; text-transform: uppercase; }
@@ -786,6 +787,17 @@
         // la jouer quand même montrait un voile marine vide plus d'une seconde (audit JS du 08/10).
         let parti = false;
         const go = () => { if (parti) return; parti = true; intro.classList.add('go'); sortie(); };
+        // Une touche pendant l'intro (Tab surtout) retire le voile d'un coup : sinon le lien
+        // d'évitement et le logo prennent le focus SOUS le voile pendant 2,5 s (audit a11y 11/10).
+        const couper = () => {
+          document.removeEventListener('keydown', couper, true);
+          parti = true;
+          if (!intro.isConnected) return;
+          intro.remove();
+          document.documentElement.classList.remove('intro-active');
+          lancerReveals();
+        };
+        document.addEventListener('keydown', couper, true);
         const abandon = () => {
           if (parti) return; parti = true;
           intro.classList.add('fin');
