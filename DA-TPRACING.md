@@ -13,6 +13,12 @@ ou le retour de Thomas qui la justifie). Il n'est pas une deuxième charte : la 
 - Couleurs : marine #1E2635 DOMINANT, or #D49726 en ACCENT, blanc cassé #F6F7FC,
   rouge #C13221, vert #3E836E en micro-accent (seul endroit visible : la bande origines).
   Jamais de tout-doré (retour Thomas sur le favicon, mémoire du 17/07).
+- Petit texte sur fond clair (moins de 24 px, ou 18,7 px en gras) : une couleur de la charte qui n'atteint
+  pas 4,5:1 descend d'un cran DANS SA TEINTE, jamais vers une autre couleur, et seulement pour ce texte-là.
+  En place (audit a11y du 11/10) : vert #3A7C68 (4,6:1) pour le mot « vert » de la bande origines, or foncé
+  #8F661A (4,8:1) pour les chiffres de la fidélité. L'or charte sur fond clair reste la question ouverte du
+  15/07 à Thomas. Et pas d'atténuation par `opacity` sur un label posé sur un aplat : la hiérarchie se fait
+  par la typo (opacité .8 = marine à 4,2:1 sur l'or, corrigé le 11/10).
 - Sens des couleurs (p. 25 de la charte, repris par la bande origines) : l'or de Senna,
   le marine de la rigueur, le rouge de la persévérance, le vert des racines Papone.
 - Typos : Korataki 700 pour les titres (police TRÈS large : environ 1,21 em par capitale,

@@ -937,6 +937,38 @@ Pour la routine du feed Instagram (`maj-feed-insta-site`, section « Les dernier
   première tuile, mais si le `:focus-within` disparaissait un jour il faudrait remonter le bouton
   avant la bande.
 
+### Constats de l'audit ACCESSIBILITÉ du 11/10 (5 pages x 1280 et 390, axe-core 4.10 WCAG 2.2 AA + parcours clavier + espacement de texte 1.4.12)
+
+- [x] **Labels de la frise de pilote.html à 4,2:1** (« Simulateur / chaque semaine », « École Actua ») : le
+  marine posé sur l'aplat or était passé à `opacity: .8`. Opacité retirée, 5,96:1. La hiérarchie tient par
+  la typo (Bebas capitales contre titre Korataki), pas par l'atténuation.
+- [x] **Or foncé de « 18 entreprises / 4 présentes »** (`.fidelite b`) : #9A6A10 faisait 4,41:1, passé à
+  #8F661A (4,81:1, la valeur recommandée le 15/07, déjà sur un or foncé, rien d'élargi).
+- [x] **Le mot « vert » de la bande origines** : le vert charte fait 4,2:1 sur le blanc cassé à 15 px. Une
+  nuance plus sombre de la même teinte (#3A7C68, 4,6:1) pour ce seul mot. Le vert du titre « Se transmet »
+  et de la bande reste le vert charte (texte large, 3:1 suffit).
+- [x] **Le focus passait SOUS le voile de l'intro** (WCAG 2.4.11) : un Tab dans les 2,5 premières secondes
+  posait le focus sur « Aller au contenu » puis le logo, couverts par `#intro` (z-index 999). Remède : toute
+  touche pendant l'intro retire le voile d'un coup (pas de fondu, sinon 0,4 s de focus caché encore) et lance
+  les reveals. Le visiteur à la souris ne voit aucun changement.
+- [x] **1.4.12 à 320 px** (line-height 1.5, letter-spacing .12em, word-spacing .16em) : le bouton « Devenir
+  partenaire » sortait de 12 px à droite sur les 5 pages, et « THOMAS » de 13 px sur pilote.html. Le bouton
+  passe sur deux lignes au lieu d'être rogné (`white-space: normal` sous 384 px, sans effet en temps normal) ;
+  le h1 du pilote passe de 11,4vw à 10,6vw sous 360 px, car à 320 px il débordait DÉJÀ sa colonne de 9 px
+  sans aucun réglage (vu par la comparaison de géométrie avec la prod). Garde-fou `overflow-wrap: break-word`
+  sur h1-h3. Premier essai écarté : `overflow-wrap: anywhere` sur ce h1 coupait « THOMA / S » à 320 px en
+  temps normal.
+- [ ] **L'or #D49726 sur fond clair, deux cas qui restent** : « avec nous » du titre « Ils roulent avec nous »
+  (2,38:1, il faut 3:1 même en texte large) et « Le volant, lui, se transmet. » de 404.html (15 px, il faut
+  4,5:1). C'est la question du 15/07 à Thomas, qui couvre donc aussi les TITRES et pas seulement les petits
+  labels. Rien changé.
+- Propre : 0 autre violation axe (noms accessibles, alt, landmarks, ordre des titres, `target-size`), 0
+  animation en cours sous `prefers-reduced-motion` sur les 5 pages, intro coupée en reduced-motion, anneau de
+  focus visible sur chacun des 20 à 42 arrêts de tabulation par page, 0 erreur console. Les arrêts signalés
+  « hors écran » au premier passage étaient le défilement doux pas encore fini (revérifié à 1,5 s, captures).
+  Faux positif écarté : « 1987 / 2026 / Patrice / Thomas » blanc sur blanc selon la sonde, en réalité sur le
+  bandeau vert (pseudo-élément), 4,2:1 en texte large.
+
 ### Constats de l'audit CONSOLE ET JS du 12/09 (5 pages, parcours nominal + interactions + sans JS + instrumentation)
 
 Le défaut principal (bandeau qui démarre seul, sans arrêt possible sur écran tactile) a été corrigé le
@@ -1078,6 +1110,20 @@ une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se v
 
 ## Journal
 
+- 2026-10-11 (routine, AXE B : audit ACCESSIBILITÉ, le précédent datait du 06/09, avant la refonte v3, l'intro
+  « départ » et ses traînées ; les jours précédents : C le 09/10, A le 10/10 ; commit d832a90, EN LIGNE). T7 monté,
+  `git pull` à jour, aucun run frère du jour. Harnais Playwright + `page.route` (dépôt servi sans serveur), axe-core
+  4.10 (cdnjs) en WCAG 2.2 AA + best-practice après défilement complet, parcours clavier Tab par Tab (anneau,
+  élément couvert via `elementFromPoint`, opacité), animations actives sous reduced-motion, feuille 1.4.12 injectée
+  à 1280, 390 et 320. **Corrigé** : 3 contrastes (labels de la frise à opacité .8, or foncé de la fidélité 4,41,
+  mot « vert » 4,2), le focus caché sous le voile de l'intro (une touche le retire), le bouton de nav et
+  « THOMAS » qui sortaient de l'écran à 320 px avec l'espacement agrandi. **Innocuité prouvée** par la géométrie de
+  tous les liens de nav, titres et boutons, local contre prod, 5 pages x 8 largeurs (320 à 1680) : seul écart = le
+  h1 du pilote sous 375 px, voulu (il débordait sa colonne de 9 px à 320 px en prod). Prod : build `built` sur
+  d832a90, 200, marqueurs présents sur les 3 fichiers. **Reste** (backlog) : l'or sur fond clair dans 2 titres et
+  sur la 404, la question du 15/07 couvre donc aussi les titres ; `target="_blank"` non annoncé (06/09). Rappel
+  groupé non refait (le dernier date du 07/10). `collage-origines.webp` toujours modifié et non commité sur le
+  SSD, laissé tel quel.
 - 2026-10-10 (routine, AXE A : finition design ; les jours précédents : A le 06/10, B les 07 et 08/10, C le 09/10 ;
   commit 53242c0, EN LIGNE ; relancé par « Try again » après un premier passage interrompu avant toute modif). T7 monté,
   `git pull` à jour, aucun run frère du jour. Accueil et pilote recapturés fenêtre par fenêtre en 1280 et l'accueil en
