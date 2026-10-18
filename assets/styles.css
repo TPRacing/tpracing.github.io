@@ -690,12 +690,17 @@ section { padding: 92px 6%; position: relative; }
    parent recoupe ce depassement : l'arete visible EST la coupe, au pixel, et un
    ecart d'arrondi de sous-pixel entre les deux pentes reste absorbe. */
 .diag-haut::before {
-  /* (23/09) l'arête porte un filet or de 3 px, le damier se fait rare */
+  /* (23/09) l'arête porte un filet or de 3 px, le damier se fait rare.
+     (18/10) Centré sur la coupe, le filet était rogné de moitié par le clip-path du
+     parent : 1 à 1,9 px visibles selon la page et la largeur. Il passe SOUS la coupe
+     (4 px dont 1 enfoui, pour que l'anticrénelage du bord tombe dans l'or et non dans
+     le marine), et déborde de 6 px de chaque côté : tourné de 1,3 deg, un rectangle
+     de pleine largeur laissait une encoche marine à ses deux extrémités. */
   content: "";
   position: absolute;
-  left: 0; right: 0;
-  top: calc(1.15vw - 1.5px);
-  height: 3px;
+  left: -6px; right: -6px;
+  top: calc(1.15vw - 1px);
+  height: 4px;
   background: var(--or);
   transform: rotate(-1.3175deg);
   pointer-events: none;
