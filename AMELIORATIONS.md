@@ -84,10 +84,11 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       raccord DROIT blanc sur nuit, sans matière. Même objet, même frontière : l'accueil prend `.diag-haut`. Au passage,
       revue de presse : `text-wrap: balance` sur les titres (veuve « parties » à 1280) et guillemets français à espaces
       insécables (sans eux, l'équilibrage rejetait « » » en tête de ligne). FAIT le 10/10 (commit 53242c0).
-- [ ] Constat du 10/10, laissé en l'état : le filet or de `.diag-haut` fait 3 px mais le `clip-path` de la section en
+- [x] Constat du 10/10 : le filet or de `.diag-haut` fait 3 px mais le `clip-path` de la section en
       rogne la moitié haute, il en reste environ 1,5 px visibles (zoom x2 à 1280), sur les DEUX pages. C'est l'état
       validé depuis le 23/09 ; le passer à 3 px pleins (décaler le filet de 1,5 px sous l'arête) changerait la clôture
       de pilote.html aussi, à regarder un jour de design avec un avant/après.
+      FAIT le 18/10 avec l'avant/après mesuré (commit 4f8e37c) : filet sous la coupe, 2,4 à 3,3 px visibles.
 
 ### Idées de la veille 09/10 (angle neuf : LE PARCOURS, comment un pilote raconte sa trajectoire)
 
@@ -1110,6 +1111,22 @@ une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se v
 
 ## Journal
 
+- 2026-10-18 (routine, AXE A : finition design ; les jours précédents : C le 09/10, A le 10/10, B le 11/10, puis pause
+  demandée par Thomas du 12 au 18/10, levée par lui-même le 16/10 ; le run du 17/10 a échoué à la limite d'usage, aucun
+  commit entre le 11 et aujourd'hui ; commit 4f8e37c, EN LIGNE). T7 monté, `git pull` à jour. Item du backlog pris : le
+  filet or de `.diag-haut`, signalé le 10/10 « à regarder un jour de design avec un avant/après ». **Mesuré** (Playwright,
+  dépôt servi par `page.route`, DPR 2, épaisseur dorée intégrée par colonne à 10, 50 et 90 % de la largeur) : le filet de
+  3 px, centré sur la coupe, ne montrait que **1,0 à 1,9 px** selon la page et la largeur (pilote.html à 1680 : 1,0 px,
+  presque un cheveu), donc deux clôtures « identiques » qui ne l'étaient pas. **Premier essai** (filet posé juste sous la
+  coupe, `top: 1.15vw`) : 2,4 à 2,9 px, mais le zoom x5 montre un **liseré gris** au-dessus de l'or, l'anticrénelage du
+  `clip-path` laissant voir le marine. **Retenu** : 4 px dont 1 enfoui sous la coupe (`top: calc(1.15vw - 1px)`), le bord
+  anticrénelé tombe dans l'or ; et `left/right: -6px`, car le zoom des extrémités a montré une **encoche marine** à chaque
+  bout (rectangle pleine largeur tourné de 1,3 deg), présente aussi en prod avant. Résultat : 2,4 à 3,3 px visibles sur
+  les deux pages, bords propres. **Innocuité** : 5 pages x 6 largeurs (320 à 1680), ancienne règle contre nouvelle :
+  `scrollWidth`, nombre d'éléments hors cadre et erreurs console identiques (0 erreur). Prod : build `built` sur 4f8e37c,
+  200, shasum de styles.css identique dépôt/prod, épaisseur remesurée en ligne = valeurs locales. Pas de rappel groupé
+  des questions ouvertes cette fois (dernier le 07/10, la pause a gelé la semaine) : à faire au prochain run.
+  `collage-origines.webp` toujours modifié et non commité sur le SSD, laissé tel quel.
 - 2026-10-11 (routine, AXE B : audit ACCESSIBILITÉ, le précédent datait du 06/09, avant la refonte v3, l'intro
   « départ » et ses traînées ; les jours précédents : C le 09/10, A le 10/10 ; commit d832a90, EN LIGNE). T7 monté,
   `git pull` à jour, aucun run frère du jour. Harnais Playwright + `page.route` (dépôt servi sans serveur), axe-core

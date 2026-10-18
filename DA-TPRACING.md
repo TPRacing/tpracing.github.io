@@ -232,6 +232,12 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-10-18 (finition, mesures au pixel sur nos propres clôtures, avant/après) : **un filet posé sur une coupe
+  `clip-path` vit SOUS la coupe, jamais à cheval.** Centré sur l'arête, le clip en mange la moitié et le reste dépend de
+  l'arrondi : 1 px ici, 1,9 px là, pour le même objet. Il descend donc sous la coupe, avec 1 px enfoui pour que le bord
+  anticrénelé tombe dans l'or (sinon un liseré gris de marine apparaît au-dessus), et il déborde de quelques pixels aux
+  deux bouts, car un rectangle tourné ne touche plus les bords de l'écran. Un trait de la DA se juge à son épaisseur
+  RENDUE, mesurée sur capture, pas à la valeur écrite dans la feuille.
 - 2026-10-09 bis (veille LE PARCOURS, captures 1280 et 390 de charlesleclerc.com, isackhadjar.com,
   landonorris.com, pierregasly.com, georgerussell63.com) : **aucune zone sombre du site n'est un marine
   plat ; tout marine visible porte une trame, pointillés carbone ou grain `.grain` de la v3.** Vu chez Leclerc : les
