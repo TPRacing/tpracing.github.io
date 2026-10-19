@@ -944,3 +944,13 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   plein de 2 px prend le relais en `@media print` ; vérifié en regardant le PDF rendu, pas en le
   supposant. **Règle qui en découle : toute pièce de vocabulaire posée en `background` se double d'un
   équivalent en bordure pour le papier.**
+
+- 2026-10-19 : **Un chiffre de la page est daté, et il vieillit.** Le bloc Academy montrait le calendrier 2026 trois
+  jours après que le dossier sponsoring fut passé au 2027 : un site vivant se met à jour en même temps que les autres
+  supports, pas au prochain audit. Règle : tout chiffre de format ou de calendrier se recoupe avec la source primaire
+  notée en mémoire (`reference_caterham_academy_2027_calendrier`). Et pour la DA : **l'ordre est une donnée** quand il
+  en est une. Les tracés portent leur numéro de meeting (01 à 06, or, Bebas Bold), seul endroit du bloc où l'or passe
+  sur du texte en dehors du titre ; le numéro dit le calendrier sans écrire des dates provisoires. Corollaire technique :
+  un tracé animé par `stroke-dashoffset` doit être remis à 0 sous `prefers-reduced-motion`, couper l'animation seule le
+  laisse invisible (il l'a été depuis la v3).
+

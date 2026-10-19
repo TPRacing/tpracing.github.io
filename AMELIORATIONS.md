@@ -90,6 +90,10 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       de pilote.html aussi, à regarder un jour de design avec un avant/après.
       FAIT le 18/10 avec l'avant/après mesuré (commit 4f8e37c) : filet sous la coupe, 2,4 à 3,3 px visibles.
 
+- [ ] Accueil, tracés d'Alès, Magny-Cours et Lédenon : ils superposent plusieurs variantes de piste (8 chemins pour
+      Alès), contrairement aux 3 tracés du 19/10 qui suivent une seule boucle. Les refaire par la même méthode (graphe des
+      voies OSM, cycle le plus long, contrôle par la longueur officielle) pour que les 6 parlent la même langue.
+
 ### Idées de la veille 09/10 (angle neuf : LE PARCOURS, comment un pilote raconte sa trajectoire)
 
 Sites REGARDÉS en Chrome piloté par Playwright, 1280 (6 vues au défilement, ou 14 vues à la molette pour les sites
@@ -1111,6 +1115,34 @@ une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se v
 
 ## Journal
 
+- 2026-10-19 (routine, AXE A : complétude, correction factuelle ; les jours précédents : C le 09/10, A le 10/10, B le 11/10,
+  A le 18/10 ; donc 2e jour A d'affilée, le maximum : le prochain run doit être C, la veille n'a pas tourné depuis 10 jours ;
+  commit d224262, EN LIGNE). T7 monté, `git pull` à jour. **Constat** en relisant l'accueil avant de choisir l'axe : le bloc
+  Caterham Academy annonçait encore le format **2026** (5 tracés Pau-Arnos, Alès, Nogaro, Magny-Cours, Lédenon et
+  « 12 courses sur ces 5 circuits en 2026 »), alors que la saison visée est 2027 et que le dossier sponsoring a été
+  corrigé le 16/10 sur la source primaire (article Caterham Cars France du 18/09/2026, rouvert le 16/10 : « 12 courses
+  sur 6 circuits », calendrier provisoire Alès, Dijon, Val de Vienne, Haute Saintonge, Magny-Cours, Lédenon). Le site
+  était la dernière pièce restée sur l'ancien format. **Fait** : (1) les 3 tracés nouveaux tirés d'OpenStreetMap
+  (Overpass, `highway=raceway` hors karting, stands et motocross), la boucle retenue étant le cycle le plus long du
+  graphe des voies, contrôlé par sa longueur : Dijon 3 727 m, Val de Vienne 3 780 m, Haute Saintonge 2 228 m, proches
+  des longueurs officielles ; nord en haut, simplification Douglas-Peucker 0,1 unité ; Alès, Magny-Cours et Lédenon
+  repris à l'identique (mêmes chemins, recentrés). (2) Le SVG unique devient une liste ordonnée de 6 SVG : à 375 px
+  l'ancien SVG de 560 unités rendait les noms à environ 7 px, ils font maintenant 11,8 px partout, et la rangée passe
+  à 3 colonnes sous 600 px. (3) Chaque tracé porte son numéro de meeting (01 à 06, or, Bebas Bold) : l'ordre du
+  calendrier est une information, les dates ne sont pas écrites car provisoires. (4) Le chiffre devient « 12 courses
+  sur ces 6 circuits en 2027, calendrier provisoire » (phrase de la source, aucune donnée inventée). **Défaut trouvé au
+  passage et corrigé** : en mouvement réduit, l'animation était coupée mais le pointillé restait décalé (`stroke-dashoffset: 1`),
+  donc les tracés étaient INVISIBLES pour ces visiteurs depuis la v3 ; capture d'avant à l'appui. **Vérifié** : 1280,
+  375, 320, 768, 1680, avec et sans mouvement réduit, 0 erreur console ; éléments hors cadre identiques avant et après
+  (1 ou 2 décoratifs déjà connus) ; zooms des tracés regardés. Prod : build `built` sur d224262, 200, marqueurs présents.
+  **Écartés** : redessiner Alès, Magny-Cours et Lédenon (ils montrent plusieurs variantes de piste superposées, à
+  reprendre un jour avec la même méthode du cycle le plus long, noté au backlog) ; afficher les dates (provisoires).
+  **RAPPEL GROUPÉ DES QUESTIONS OUVERTES (le précédent datait du 07/10)** : (a) Search Console, à faire par Thomas :
+  renvoyer `sitemap.xml`, demander l'indexation de `pilote.html`, `contact.html` et de l'accueil. (b) Logos partenaires
+  en une seule encre (05/10 bis). (c) Les 3 photos sans original retrouvé (22/09). (d) Une phrase personnelle pour ouvrir
+  2015 dans le parcours (09/10). (e) Contraste de l'or sur fond clair, qui couvre aussi 2 titres et la 404 (15/07, 11/10).
+  (f) NOUVEAU : si le calendrier Academy 2027 change (il est provisoire), le bloc de l'accueil est à mettre à jour avec
+  la même recette ; le dire à la routine suffit. `collage-origines.webp` toujours modifié et non commité, laissé tel quel.
 - 2026-10-18 (routine, AXE A : finition design ; les jours précédents : C le 09/10, A le 10/10, B le 11/10, puis pause
   demandée par Thomas du 12 au 18/10, levée par lui-même le 16/10 ; le run du 17/10 a échoué à la limite d'usage, aucun
   commit entre le 11 et aujourd'hui ; commit 4f8e37c, EN LIGNE). T7 monté, `git pull` à jour. Item du backlog pris : le
