@@ -94,6 +94,35 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       Alès), contrairement aux 3 tracés du 19/10 qui suivent une seule boucle. Les refaire par la même méthode (graphe des
       voies OSM, cycle le plus long, contrôle par la longueur officielle) pour que les 6 parlent la même langue.
 
+### Idées de la veille 20/10 (angle neuf : LE CHIFFRE, comment un site de course fait exister ses nombres)
+
+Sites REGARDÉS en Chrome piloté par Playwright (5 vues au défilement progressif, 1280 et 390 en UA mobile, bandeaux
+cookies et modales MASQUÉS par CSS, jamais acceptés), captures dans le scratchpad du jour : formula1.com/en/drivers/lando-norris,
+carlossainz.es, haasf1team.com, alpinef1.com, mercedesamgf1.com, fernandoalonso.com, lewishamilton.com, marcmarquez93.com, vr46.com.
+- [x] **Fiche technique des chiffres de l'Academy (FAIT le 20/10).** VU sur la fiche pilote F1 : les stats ne sont PAS
+  géantes, elles sont tabulaires, libellé minuscule gris au-dessus, valeur en display gras, filet fin entre chaque
+  ligne ; sur téléphone, libellé à gauche et chiffre calé à droite, comme un écran de chronométrage. VU chez Sainz
+  (hero mobile) : « ■ Posición actual / 18.º » et « ■ Próxima carrera / Austin », trois niveaux (puce carrée,
+  libellé en mono 14, valeur en titre h4) ; mécanisme lu dans le code : `before:size-[0.56em] before:bg-current` sur
+  le libellé, données tirées du CMS Prismic (`info[].subheading / heading`). Chez nous, la bande 170 / 5 / 12 était à
+  deux niveaux seulement, tout à la même échelle, et se tassait à 375 px (« H » orphelin, 4 lignes pour le 12).
+  Pourquoi c'est TPRacing : une fiche technique est la grammaire même de la voiture visée, et le mini-damier remplace
+  la puce carrée de Sainz par le damier du logo.
+- [ ] Écarté : **compte à rebours avant le premier meeting** (VU chez Haas : tuiles « 03 00 16 30 DAYS HOURS MINS
+  SECS » posées sur la photo de la course suivante, et carrousel des GP avec tracé dans un cercle pointillé). Pourquoi
+  pas : la Caterham est un OBJECTIF, pas un acquis (retour de Thomas du 28/09), et le calendrier 2027 est provisoire ;
+  un décompte affirmerait les deux. À rouvrir seulement si Thomas est inscrit et le calendrier définitif.
+- [ ] Écarté : **bloc d'état « Prochaine course » dans le hero pilote** (Sainz). Même raison, et le hero porte déjà
+  « Saison 2027 » + « Pilote 47 ».
+- [ ] Idée en réserve, à tester un jour de design : **la flèche à deux pointes entre un libellé et une année** (VU chez
+  Alpine : « OUR PARTNERS ← (filet) → 2026 », filet fin pleine largeur qui relie le titre de section au millésime, Bebas
+  condensé). Pourquoi TPRacing possible : « Ils roulent avec nous ←→ depuis 2022 » dirait la fidélité sans phrase. À
+  passer au test des 4 questions avant (risque : un filet de plus sur une page qui en a déjà).
+- Écarté : le « 93 » incrusté en cartouche penché chez Marquez (« WE ARE 93 GRANDSTAND ») est du texte PEINT dans une
+  bannière image, pas un mécanisme web ; et le 47 a déjà sa forme (contour or géant).
+- Constat transversal : sur 9 sites, AUCUN ne grossit ses statistiques jusqu'au « chiffre géant ». Le géant sert le
+  NUMÉRO d'identité (63, 93, 46), la statistique reste tabulaire. Notre doctrine colle : 47 géant, chiffres en fiche.
+
 ### Idées de la veille 09/10 (angle neuf : LE PARCOURS, comment un pilote raconte sa trajectoire)
 
 Sites REGARDÉS en Chrome piloté par Playwright, 1280 (6 vues au défilement, ou 14 vues à la molette pour les sites
@@ -430,6 +459,8 @@ Sites morts ou trompeurs, à ne pas reprendre dans une prochaine veille : teamdu
 tds-racing.com ne répondent plus ; signatech.fr n'est PAS l'écurie mais une entreprise de signalétique du Loiret.
 Ajoutés le 27/09 : rimac-automobili.com (rendu client, page vide, bloque le harnais), pragacars.com (connexion
 réinitialisée), radical-sportscars.com et radicalsportscars.com (DNS introuvable), brabham.com (certificat invalide).
+Ajoutés le 20/10 : fiawec.com (page blanche sous Chrome piloté, rendu client), tagheuer.com (403 Akamai
+« Access Denied »), imsa.com (403), otkkart.com (pas de réponse), danielricciardo.com (404).
 
 ### Idées de la veille 10/08 (angles neufs : héritage, endurance, rallye, karting industriel, marque hors sport auto, studio primé : sites REGARDÉS, pas lus)
 
@@ -1114,6 +1145,21 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-10-20 (routine, AXE C : veille par captures, angle neuf **LE CHIFFRE** ; les jours précédents : A les 18 et
+  19/10, la veille n'avait pas tourné depuis le 09/10 ; commit 718e2a3). T7 monté, `git pull` à jour. 9 sites
+  REGARDÉS en desktop 1280 et mobile 390 (liste, observations et mécanismes au backlog, section « Idées de la veille
+  20/10 ») ; 5 sites morts ajoutés à la liste. **Fait** : la bande 170 / 5 / 12 du bloc Academy devient une fiche
+  technique, `<dl>` à trois niveaux (libellé or Bebas « Moteur / Boîte / Saison 2027 » précédé d'un mini-damier de
+  12 px à cases de 3 px entières, chiffre, précision), filets verticaux entre colonnes ; sous 600 px, lignes de
+  chronométrage (libellé et précision à gauche, chiffre à droite, filet entre les lignes). Textes inchangés au fond
+  (« en 2027 » passe dans le libellé). **Vérifié** : 1680, 1280, 768, 601, 600, 375, 320, 0 erreur console, rien ne
+  déborde du bloc, éléments hors cadre identiques au 19/10 (1 ou 2 décoratifs connus), zoom du mini-damier regardé
+  (cases de 2,25 px au premier essai, floues en DPR 1, recalées à 3 px). **Écartés** : compte à rebours (Haas) et
+  bloc « Prochaine course » (Sainz), car ils présenteraient la Caterham comme acquise et un calendrier provisoire
+  comme ferme. **Piège outillage** : le `http.server` lancé depuis le T7 a perdu son dossier courant en cours de run
+  (cwd introuvable, toutes les ressources en 404 sauf la page) ; le relancer suffit, à soupçonner dès qu'une page
+  locale perd ses styles. `collage-origines.webp` toujours modifié et non commité, laissé tel quel.
 
 - 2026-10-19 (routine, AXE A : complétude, correction factuelle ; les jours précédents : C le 09/10, A le 10/10, B le 11/10,
   A le 18/10 ; donc 2e jour A d'affilée, le maximum : le prochain run doit être C, la veille n'a pas tourné depuis 10 jours ;

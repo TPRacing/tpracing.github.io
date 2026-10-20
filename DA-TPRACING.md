@@ -91,6 +91,9 @@ langage étranger, elle ne passe pas.
   et UN SEUL mot rempli d'or au scroll par page (règle du 03/08 : le principe charte
   « plein contre contour » animé, avec parcimonie).
 - Chiffres outline or (bande de chiffres, 404 géant).
+- Fiche technique (20/10) : une STATISTIQUE se pose en `<dl>` à trois niveaux, libellé or Bebas à mini-damier
+  (12 px, cases de 3 px entières), chiffre Bebas blanc, précision Inter grise ; filets fins entre colonnes, et sur
+  téléphone lignes de chronométrage, chiffre calé à droite. Le chiffre GÉANT reste réservé au numéro d'identité (47).
 - Grain argentique global (SVG feTurbulence) + pointillés carbone sur les sections marine.
 - Photos : VRAIES photos de Thomas et de la famille, en NOUVEAUX fichiers, originaux jamais
   modifiés. **Et depuis le 22/09, un ÉTALONNAGE MAISON commun aux photos de reportage**
@@ -954,3 +957,12 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   un tracé animé par `stroke-dashoffset` doit être remis à 0 sous `prefers-reduced-motion`, couper l'animation seule le
   laisse invisible (il l'a été depuis la v3).
 
+- 2026-10-20 : **Le géant pour l'identité, la table pour la statistique.** Veille LE CHIFFRE sur 9 sites (fiche pilote
+  formula1.com, carlossainz.es, haasf1team.com, alpinef1.com, mercedesamgf1.com, fernandoalonso.com, lewishamilton.com,
+  marcmarquez93.com, vr46.com), captures 1280 et 390 dans le scratchpad du jour. Aucun ne grossit ses statistiques :
+  la F1 les range en table à filets (libellé minuscule au-dessus, valeur en display), Sainz les pose en trois niveaux
+  avec une puce carrée. Le grand format sert le NUMÉRO (63, 93, 46). Appliqué au bloc Academy : 170 / 5 / 12 passent
+  en fiche technique, la puce carrée de Sainz devient notre mini-damier. Deux règles en sortent. (1) **Une pastille
+  damier réduite se cale sur des cases de pixels ENTIERS** (3 px pour 12 px) : à 2,25 px elle devient une tache floue
+  en DPR 1. (2) **Interdit constaté : aucun élément de « direct » (compte à rebours, prochaine course, position) tant
+  que la saison n'est pas acquise**, même si toutes les écuries en ont : sur ce site, il mentirait.
