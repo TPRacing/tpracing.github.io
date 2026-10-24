@@ -733,7 +733,9 @@ footer a:hover { color: var(--or); }
 footer .foot-liens { display: flex; gap: 22px; flex-wrap: wrap; }
 /* cible tactile : 19 px de haut seulement avant (WCAG 2.5.8 demande 24) */
 footer .foot-bas a { display: inline-block; padding-block: 3px; }
-footer .foot-bas { max-width: 1180px; margin: 0 auto; border-top: 1px solid rgba(246, 247, 252, .14); padding-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; }
+footer .foot-bas { max-width: 1180px; margin: 0 auto; border-top: 1px solid rgba(246, 247, 252, .14); padding-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;
+  /* (24/10) Inter à gauche, lien Bebas à droite : sans ligne de base commune, la moitié droite tombait 4 px plus bas */
+  align-items: baseline; }
 
 /* ---------- Galerie : agrandissement au clic (lightbox) ---------- */
 /* Repère « agrandir » posé sur chaque photo cliquable (injecté en JS) */

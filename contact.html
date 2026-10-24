@@ -236,6 +236,8 @@
       flex-wrap: wrap;
       position: relative;
       z-index: 1;
+      /* (24/10) le biseau du portique de la 404 : c'était le seul aplat marine du site à angles droits */
+      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
     }
     .contact-cta p {
       font-family: var(--f-label);
