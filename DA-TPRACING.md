@@ -11,7 +11,10 @@ ou le retour de Thomas qui la justifie). Il n'est pas une deuxième charte : la 
 ## 1. Fondations (charte, non négociable)
 
 - Couleurs : marine #1E2635 DOMINANT, or #D49726 en ACCENT, blanc cassé #F6F7FC,
-  rouge #C13221, vert #3E836E en micro-accent (seul endroit visible : la bande origines).
+  rouge #C13221, vert #3E836E en micro-accent, qui signe l'HÉRITAGE et rien d'autre : sur l'accueil le titre
+  « se transmet », la bande verte du diptyque et le mot « vert » de la bande origines ; sur pilote.html, « en 1987 »
+  du titre des origines (classe `.v` sur les deux pages ; réécrit le 24/10, la ligne disait encore « seul endroit
+  visible : la bande origines », faux depuis la v3).
   Jamais de tout-doré (retour Thomas sur le favicon, mémoire du 17/07).
 - Petit texte sur fond clair (moins de 24 px, ou 18,7 px en gras) : une couleur de la charte qui n'atteint
   pas 4,5:1 descend d'un cran DANS SA TEINTE, jamais vers une autre couleur, et seulement pour ce texte-là.
@@ -235,6 +238,16 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-10-24 (audit de cohérence, les 5 pages regardées en 1280 et 390, première fois depuis la v3) : **une famille
+  d'objets se juge à sa FORME avant sa couleur.** Le bandeau de fin de contact.html avait la bonne matière (marine,
+  pointillés carbone) et la bonne typo, et lisait pourtant comme la barre « Prêt à commencer ? » de n'importe quel
+  gabarit, parce qu'il était le seul aplat marine du site à quatre angles droits, posé entre des boutons biseautés.
+  Il prend le biseau du portique de la 404 : tout aplat sombre détaché du fond (plaque, bandeau, tuile) a ses deux
+  coins coupés, haut-droit et bas-gauche, comme les boutons. Corollaire de contrôle, à chaque audit de cohérence :
+  inventorier les `clip-path` et chercher l'objet de la famille qui n'en a pas. Deuxième règle, typographique : **deux
+  familles sur une même ligne s'alignent sur la ligne de base**, jamais sur le haut des boîtes (la ligne légale du pied
+  mêlait Inter et Bebas et décrochait de 4 px).
+
 - 2026-10-18 (finition, mesures au pixel sur nos propres clôtures, avant/après) : **un filet posé sur une coupe
   `clip-path` vit SOUS la coupe, jamais à cheval.** Centré sur l'arête, le clip en mange la moitié et le reste dépend de
   l'arrondi : 1 px ici, 1,9 px là, pour le même objet. Il descend donc sous la coupe, avec 1 px enfoui pour que le bord
@@ -438,7 +451,9 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   disait le paragraphe, on retire le paragraphe : la phrase « Patrice a couru dans les années 80,
   Thomas reprend la piste » est devenue deux photos et deux légendes. (2) Un seul aplat or plein
   par écran : l'appel du hero passe en CONTOUR or (recette des boutons « Partie 1 / Partie 2 »),
-  l'aplat reste au bouton de la nav. (3) L'élément trop grand est le titre, 6,78vw, calculé sur
+  l'aplat reste au bouton de la nav. [Note du 24/10 : règle écrite pour le hero du diptyque ; le hero Caterham
+  de la v3, validé tel quel par Thomas, porte un bouton or plein à côté de celui de la nav. Ne pas le « corriger »
+  sans lui.] (3) L'élément trop grand est le titre, 6,78vw, calculé sur
   l'encre de « SE TRANSMET » (13,29 fois la taille de police interlettrage compris). (4) Les
   légendes se placent là où il y a du vide, mesuré sur les détourages : entre les deux casques,
   face à face, jusqu'à 790 px, puis au-dessus des karts. (5) Un détourage recadré dans une gerbe

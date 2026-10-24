@@ -1076,6 +1076,15 @@ sous 12 px, cibles tactiles sous 24 px, résolution réelle des images) puis cap
   emblèmes de fond de contact, mentions et 404 sortent du cadre exprès (rognés), le 404 géant déborde
   de sa colonne exprès (commentaire en place) ; les liens de revue de presse font 24 px (lien couvrant).
 
+### Constats de l'audit de COHÉRENCE DE LA DA du 24/10 (5 pages, 1280 + 390, fenêtre par fenêtre, après la v3)
+
+- [x] Bandeau de fin de contact.html à angles droits, seul aplat marine du site sans biseau : biseau du portique (16 px).
+- [x] Ligne légale du pied décalée de 4 à 5 px entre sa moitié Inter et sa moitié Bebas : `align-items: baseline`.
+- [x] DA-TPRACING.md en retard sur le site à propos du vert (il signe l'héritage sur les deux pages) : règle réécrite.
+- [ ] **QUESTION THOMAS** : « avec nous » en or à la fin de deux titres consécutifs de l'accueil (partenaires, clôture).
+- Réfutés avec motif (voir Journal du 24/10) : double monogramme du pied mobile (04/09), bouton or du hero à côté de
+  celui de la nav (hero v3 validé), aplats colorés des cartes de la frise (code couleur v3 validé).
+
 ### Constats de l'audit PERF du 16/09 (5 pages, poids réel modélisé selon la sélection du navigateur)
 
 Dimension pas auditée en profondeur depuis le 08/08 (5 semaines). Le rig habituel (mesure au
@@ -1145,6 +1154,38 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-10-24 (routine, AXE B : audit, dimension **COHÉRENCE DE LA DA PAGE PAR PAGE**, pas refaite depuis le 11/08, donc
+  jamais depuis la refonte v3 ; les jours précédents : A les 18 et 19/10, C le 20/10, aucun run les 21 à 23/10 ; commit
+  300cc29, EN LIGNE). T7 monté, `git pull` à jour. Les 5 pages capturées fenêtre par fenêtre en 1280 et en 390 (35 +
+  39 vues, Playwright + `page.route` sur le dépôt), puis REGARDÉES en planches et en pleine résolution contre DA-TPRACING.md.
+  **Corrigés** : (1) le bandeau de fin de contact.html (« Envie d'écrire la suite avec nous ? ») était le **seul aplat
+  marine du site à quatre angles droits**, une plaque de gabarit posée sous trois cartes et entre des boutons biseautés.
+  Il prend le biseau du portique de la 404 (16 px, coins haut-droit et bas-gauche), donc la règle déjà en place, rien de
+  redessiné. (2) La ligne légale du pied, sur les 5 pages : Inter à gauche, lien Bebas à droite, la moitié droite tombait
+  **4 à 5 px plus bas** (mesuré : tops 5742 contre 5747 à 1680), le padding de cible tactile du lien poussant la boîte.
+  `align-items: baseline` sur `.foot-bas` : dernières lignes de base identiques au dixième de pixel à 1280 et 1680, rien
+  ne change en dessous de 900 (les deux moitiés y passent l'une sous l'autre). **Vérifié** : 5 pages x 6 largeurs (320 à
+  1680), avant contre après, 0 erreur console, éléments hors cadre identiques ; captures du bandeau en 1280 et 390 et zoom
+  de la ligne légale regardés. Prod : build `built` sur 300cc29, 200, marqueurs présents dans styles.css et contact.html.
+  **Écart de documentation corrigé** : DA-TPRACING.md disait le vert visible « seulement dans la bande origines ». Faux
+  depuis la v3 : il signe l'HÉRITAGE, de façon cohérente sur les deux pages (classe `.v` : « se transmet » et la bande
+  verte du diptyque sur l'accueil, « en 1987 » sur pilote.html). Règle réécrite telle qu'elle se joue.
+  **Réfutés, à ne pas « corriger » un autre jour** : (a) le TP or de la signature au-dessus du logo blanc dans le pied
+  mobile, tranché le 04/09 (écart porté au pas du pied, constant en proportion, aucune largeur seuil) ; (b) le bouton or
+  du hero de l'accueil à côté du bouton or de la nav, contraire à la règle (2) du 22/09 « un seul aplat or par écran »,
+  mais cette règle a été écrite pour le hero du diptyque et le hero Caterham de la v3 a été validé tel quel par Thomas
+  sur prototype : la règle est annotée dans la DA, le hero n'est pas touché ; (c) les cartes de la frise du parcours
+  en aplats or, blanc et rouge, contraires en apparence à « l'or n'est jamais une surface » : c'est le code couleur
+  de la frise v3 validée, et ce sont des plaques posées sur des photos, pas des cartes blanches à barre d'accent.
+  **QUESTION THOMAS (nouvelle)** : deux titres d'affilée de l'accueil finissent sur le même mot en or, « Ils roulent
+  AVEC NOUS » puis « Envie d'écrire la suite AVEC NOUS ? », à moins d'un écran d'écart en 1280. L'écho est-il voulu, ou
+  préfères-tu que l'un des deux change (par exemple « Ils roulent avec nous » garde son or et la clôture passe l'accent
+  sur « la suite ») ? Rien publié sans ton accord. **Piège outillage** : sur ce site le `scroll-behavior: smooth` fait
+  qu'un `window.scrollTo` suivi d'une capture photographie une position intermédiaire (vues en double) ; forcer
+  `scrollBehavior='auto'` et `behavior:'instant'`. Un premier chargement à 1680 a compté 24 éléments hors cadre contre 2,
+  deux reprises donnent 2 : refaire la mesure avant d'y croire. `collage-origines.webp` toujours modifié et non
+  commité, laissé tel quel.
 
 - 2026-10-20 (routine, AXE C : veille par captures, angle neuf **LE CHIFFRE** ; les jours précédents : A les 18 et
   19/10, la veille n'avait pas tourné depuis le 09/10 ; commit 718e2a3). T7 monté, `git pull` à jour. 9 sites
