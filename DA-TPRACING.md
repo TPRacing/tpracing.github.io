@@ -981,3 +981,14 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   damier réduite se cale sur des cases de pixels ENTIERS** (3 px pour 12 px) : à 2,25 px elle devient une tache floue
   en DPR 1. (2) **Interdit constaté : aucun élément de « direct » (compte à rebours, prochaine course, position) tant
   que la saison n'est pas acquise**, même si toutes les écuries en ont : sur ce site, il mentirait.
+
+- 2026-10-25 : **Un tracé de circuit est UN trait, la boucle qu'on court.** Le bloc Academy montrait six circuits dont
+  deux (Alès, 8 chemins ; Lédenon, 3) dessinaient toutes les variantes de piste superposées : à 75 px de large, un
+  enchevêtrement noir au lieu d'une silhouette reconnaissable, et une animation au défilement qui traçait huit morceaux
+  à la fois. Les six passent à la seule boucle de vitesse fermée d'OpenStreetMap, contrôlée par la longueur officielle
+  (Alès 2 498 m pour 2 500, Lédenon 3 138 m pour 3 150, Magny-Cours déjà juste à 4 441 m pour 4 411). Règles : (1)
+  **jamais de variante, de pit lane ni de piste karting dans un tracé de calendrier** ; (2) **un `path` fermé par
+  circuit, sans aller-retour** : Dijon et Val de Vienne repassaient sur un segment déjà tracé (invisible à l'arrêt,
+  mais l'animation `stroke-dashoffset` y marquait une hésitation) ; (3) les six partagent la même projection
+  (équirectangulaire à la latitude moyenne, ajustée au cadre 104 x 96 et centrée), ce qui garde l'échelle de chaque
+  circuit dans sa propre case, comme une page de programme de course.

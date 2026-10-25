@@ -90,9 +90,11 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       de pilote.html aussi, à regarder un jour de design avec un avant/après.
       FAIT le 18/10 avec l'avant/après mesuré (commit 4f8e37c) : filet sous la coupe, 2,4 à 3,3 px visibles.
 
-- [ ] Accueil, tracés d'Alès, Magny-Cours et Lédenon : ils superposent plusieurs variantes de piste (8 chemins pour
+- [x] Accueil, tracés d'Alès, Magny-Cours et Lédenon : ils superposent plusieurs variantes de piste (8 chemins pour
       Alès), contrairement aux 3 tracés du 19/10 qui suivent une seule boucle. Les refaire par la même méthode (graphe des
       voies OSM, cycle le plus long, contrôle par la longueur officielle) pour que les 6 parlent la même langue.
+      FAIT le 25/10 (commit 21a1fbc) : Alès et Lédenon refaits, Magny-Cours était déjà la boucle GP seule ; Dijon et Val de
+      Vienne nettoyés d'un aller-retour parasite.
 
 ### Idées de la veille 20/10 (angle neuf : LE CHIFFRE, comment un site de course fait exister ses nombres)
 
@@ -1154,6 +1156,24 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-10-25 (routine, AXE A : complétude design, item du backlog ; les jours précédents : C le 20/10, B le 24/10 ;
+  commit 21a1fbc, EN LIGNE). T7 monté, `git pull` à jour. **Fait** : les tracés de la Caterham Academy sur l'accueil.
+  Alès superposait 8 chemins (piste de vitesse, raccourcis et morceaux du circuit rallye asphalte) et Lédenon 3 (piste 1,
+  piste club et une liaison) : rendus, ce sont deux pelotes au milieu de quatre silhouettes nettes. Requête Overpass
+  `highway=raceway` sur chaque site : Alès a une voie fermée « Circuit d'Alès » de 2 498 m (officiel 2 500), Lédenon une
+  voie fermée de 3 138 m (officiel 3 150) ; ce sont elles seules qui sont dessinées désormais. **Magny-Cours n'était pas
+  concerné** : sa voie fermée de 4 441 m (officiel 4 411) était déjà la seule tracée, l'item du backlog le comptait à
+  tort ; ma projection régénère son tracé au dixième près (écart de 0,1 unité en x), ce qui a servi de contrôle.
+  **Au passage** : Dijon commençait par un aller-retour sur la ligne droite (retracée en fin de boucle) et Val de Vienne
+  par un éperon de même nature ; retirés, chaque `path` est désormais une boucle simple qui revient à son point de
+  départ. **Vérifié** : rendu isolé des 6 avant/après, puis page réelle (Playwright + `page.route` sur le dépôt) en
+  1280, 375 et 1280 en mouvement réduit : 1 chemin par circuit, `stroke-dashoffset` à 0 une fois le bloc passé, 0 erreur
+  console, éléments hors cadre identiques au relevé du 20/10 (1 à 1280, 2 à 375, décoratifs connus). La plaque or vue
+  au-dessus de Dijon sur la capture 375 était le lien d'évitement révélé par la touche Tab du harnais, pas un défaut.
+  Prod : build `built` sur 21a1fbc, index.html de la prod identique au dépôt (shasum). **Piège outillage** : overpass-api.de
+  et ses miroirs ont répondu 502/504 pendant plusieurs minutes pour Alès ; un `bbox` explicite au lieu d'`around` est
+  passé au retour du serveur. Le Python système n'a pas les certificats (urllib en échec SSL) : passer par curl.
 
 - 2026-10-24 (routine, AXE B : audit, dimension **COHÉRENCE DE LA DA PAGE PAR PAGE**, pas refaite depuis le 11/08, donc
   jamais depuis la refonte v3 ; les jours précédents : A les 18 et 19/10, C le 20/10, aucun run les 21 à 23/10 ; commit
