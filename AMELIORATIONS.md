@@ -934,7 +934,7 @@ Pour la routine du feed Instagram (`maj-feed-insta-site`, section « Les dernier
   À reprendre au prochain audit de liens, un site peut ouvrir comme celui de SMD l'a fait.
   **Repris le 29/09** : Midas Lyon Tête d'Or AVAIT une page officielle, ratée le 24/08 parce que midas.fr
   renvoie 403 à curl (`midas.fr/centres-auto-midas/.../lyon-tete-dor_1614`, 115-117 rue Sully 69006, ouverte
-  dans le navigateur) : tuile liée. Les 4 autres restent sans lien : GPI toujours « Site non publié » Webador,
+  dans le navigateur) : tuile liée. Les 4 autres restent sans lien (reconfirmé le 27/10) : GPI toujours « Site non publié » Webador,
   Les Frang'Ain n'a que Facebook et Instagram (96 rue Pierre Poivre, Villars-les-Dombes), `amsrenova.com` est
   un HOMONYME d'Île-de-France (AMS Rénov Bâtiment est à Parcieux 01600, aucun site), DMPI a des homonymes
   (Montélimar, Chalamont) et rien ne permet de trancher sans Thomas.
@@ -1156,6 +1156,26 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-10-27 (routine, AXE B : audit LIENS, n°3 après le 24/08 et le 29/09 ; les jours précédents : B le 24/10, A le
+  25/10, rien le 26/10 ; commit cf7ec8b, EN LIGNE). T7 non monté : clone dans le scratchpad. **Inventaire** des 5 pages :
+  47 URL externes (dont 17 vers le site lui-même dans le JSON-LD et les og:image), 141 références internes, ancres
+  `#...` croisées entre pages. **Résultat** : 0 asset manquant (HTML, styles.css, reflexes.js, site.webmanifest), 0
+  ancre cassée, tous les `target="_blank"` portent `rel="noopener"`. Les 13 sites partenaires liés répondent 200 et leur
+  `<title>` est bien celui de l'entreprise (aucun domaine parqué ni racheté) ; les 3 pages légères (MBE 3,5 Ko, F3C
+  4 Ko, Combe 7 Ko) ont été lues : vrais sites WordPress ou maison avec leur JSON-LD. Midas répond toujours 403 à curl
+  mais s'ouvre dans le navigateur (titre « Midas LYON TETE D'OR », rue Sully). Les 2 articles du Progrès répondent
+  200 avec leur titre. LinkedIn 999 et Facebook 400 = filtres anti-robot connus ; le profil Facebook n'a pas pu être
+  rejugé en visiteur anonyme (le navigateur de la routine y est connecté), décision du 30/09 inchangée. Partenaires
+  sans lien réexaminés : GPI toujours « Site non publié » Webador, aucun domaine pour Les Frang'Ain, AMS Rénov et DMPI.
+  **Corrigé** : (1) `sitemap.xml` datait l'accueil du 07/10 alors que son contenu a changé les 19, 20 et 25/10
+  (Academy 2027, fiche technique, tracés) → `lastmod` 2026-10-25 ; pilote, contact et mentions laissés à leur date,
+  leurs changements depuis étant visuels ou d'accessibilité, pas de contenu. (2) Le lien de confidentialité GitHub des
+  mentions légales passait par une redirection → URL finale `/en/`. Le `?cbrd=1` de YouTube est une redirection de
+  consentement cookies propre à curl, laissé. Les 5 posts Instagram relèvent de la routine du feed, non touchés.
+  Prod : build `built` sur cf7ec8b, sitemap et mentions de la prod portent les deux corrections. **Piège outillage** :
+  `git push` depuis le clone a semblé figé (invite du trousseau) ; le push était en fait passé, `git -c
+  credential.helper='!gh auth git-credential'` avec `GIT_TERMINAL_PROMPT=0` évite l'attente.
 
 - 2026-10-25 (routine, AXE A : complétude design, item du backlog ; les jours précédents : C le 20/10, B le 24/10 ;
   commit 21a1fbc, EN LIGNE). T7 monté, `git pull` à jour. **Fait** : les tracés de la Caterham Academy sur l'accueil.
