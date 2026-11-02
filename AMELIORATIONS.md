@@ -1076,6 +1076,30 @@ jour même. Ce qui suit a été trouvé et NON corrigé, faute d'être un défau
   l'animation de tableau de bord. À mesurer un jour de dimension adaptée (le prérendu ne se pilote pas
   facilement en CDP : il faut une vraie navigation depuis une page qui déclare la règle).
 
+### Constats de l'audit RENDU À TOUTES LES LARGEURS n°2 du 02/11 (5 pages x 11 largeurs, 320 à 1680)
+
+Mesures automatiques (débordement réel hors ancêtres qui rognent, étendue du texte des titres par
+`Range`, ratios, résolution RÉELLE des fichiers servis, cibles tactiles, console et réseau) sur les 55
+combinaisons, puis captures fenêtre par fenêtre regardées en 320, 600 et 1024, et contrôle des
+gouttières (tout texte à moins de 14 px d'un bord) de 320 à 390.
+- [x] **« Le volant se transmet » à 8 px des bords à 320** (1 px au début de l'écartement, 11 px à 360).
+      Corrigé : `--t: min(1.6rem, calc((100vw - 32px) / 13.8))`, la ligne « se transmet » mesurant 13,8 em
+      au début de l'animation. 390 et plus inchangés (25,6 px).
+- [x] **Pied des 5 pages sous 360 px : la 6e icône (Facebook) seule sur une 2e ligne** (6 x 42 + 5 x 10 =
+      302 px pour 282 utiles à 320). Corrigé : 40 px et 6 px d'écart sous 360 px, une ligne à 320 et 340.
+- [ ] **Page pilote de 600 à 700 px : les versions portrait `-p` (737 à 860 px de large) sont servies à
+      une largeur qui en demande 1 150 à 1 200 en DPR 2** (frise et portrait du hero, 72 à 75 % de la
+      résolution utile). Plage rare (petites tablettes, téléphones en paysage). À faire depuis les
+      ORIGINAUX du T7 (démonté ce jour) : une 2e taille `-pl` ~1 300 px en `srcset` des sources
+      `max-width: 700px`, en AVIF seulement si le poids le justifie.
+- [ ] **Photos de la frise en `object-fit: cover` sur grand écran** : `frise-2015` (1 600 px) en demande
+      2 560 à 2 830 de 768 à 1680 en DPR 2, `pilote-simu` (1 400) 2 070 à 2 830, `frise-kart` 2 160. Les
+      recadrages sont voulus ; à traiter avec l'item précédent si les originaux le permettent.
+- Réfutés : `a.titre.couvre` de la revue à 24 px de haut (lien étiré par `::after` sur toute la ligne) ;
+  « 404 » géant à 11 px du bord (débordement voulu et commenté) ; bande vide de ~250 px sous LinkedIn
+  dans le bandeau de fin de l'accueil sur téléphone (réservée aux traces `lignes-fin`, réglage du 06/10).
+- 0 débordement, 0 titre rogné, 0 erreur console, 0 requête en échec, 0 ratio faux sur les 55 vues.
+
 ### Constats de l'audit RENDU À TOUTES LES LARGEURS du 24/09 (5 pages x 11 largeurs, 320 à 1680, après la refonte v3)
 
 Premier audit de rendu du nouveau squelette (la v3 n'avait été vérifiée qu'en 1280 et 375). Méthode :
@@ -1187,6 +1211,21 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-02 bis (routine, 2e passage du jour, AXE B : audit, dimension **RENDU À TOUTES LES LARGEURS, 320 à
+  1680**, pas refaite depuis le 24/09, la plus ancienne de la rotation ; le passage de 05h10 était un C ; commit
+  63dee37, EN LIGNE). T7 monté au début puis déconnecté en cours de route : travail poursuivi sur un clone du
+  scratchpad (les fichiers non suivis du T7, `_cadre.html` et deux images, n'ont pas été touchés). 5 pages x 11
+  largeurs mesurées, captures regardées, détail dans « Constats de l'audit RENDU n°2 » du backlog. **Corrigé** :
+  titre « Le volant se transmet » ramené à 16 px des bords dès 320 ; 6 icônes du pied sur une ligne sous 360 px
+  (5 pages). **À faire depuis les originaux du T7** : 2e taille des photos portrait `-p` pour 600 à 700 px.
+  **Vérifié** : 55 vues sans débordement, titre rogné, erreur console ni échec réseau ; build `built`, les deux
+  marqueurs en prod. **Pièges** : le lancement Playwright de Chrome se fige (3 min puis échec) ; lancer Chrome
+  soi-même en `--headless --remote-debugging-port` et `connect_over_cdp` ; ne PAS fermer de contexte (`close`
+  bloque ~8 min), un seul contexte et `set_viewport_size` par page ; servir les fichiers par `ctx.route` sans
+  serveur ; `naturalWidth` d'une image en `srcset` w est corrigé de la densité (mesurer via `new Image()`) ;
+  geler les animations (`animation-play-state: paused`) vide les sections à `animation-timeline`, ne pas le
+  faire pour regarder. Prochain run : A ou C.
 
 - 2026-11-02 (routine, AXE C : veille par captures, angle neuf **LA REVUE DE PRESSE** ; les jours précédents : B le 27/10,
   aucun run du 28/10 au 01/11, dernière veille le 20/10 ; commit a8ce96f, EN LIGNE). T7 monté, `git pull` à jour (sitemap
