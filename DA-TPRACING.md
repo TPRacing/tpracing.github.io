@@ -93,6 +93,9 @@ langage étranger, elle ne passe pas.
 - Mots géants Korataki en outline derrière les sections (Héritage, En piste, 47, Presse),
   et UN SEUL mot rempli d'or au scroll par page (règle du 03/08 : le principe charte
   « plein contre contour » animé, avec parcimonie).
+  ⚠️ État au 02/11 : la refonte v3 validée par Thomas (23/09) les a tous retirés, la classe
+  `.mot-geant` reste dans styles.css sans être posée. Ingrédient EN RÉSERVE : le remettre est
+  une décision à soumettre à Thomas, pas une finition.
 - Chiffres outline or (bande de chiffres, 404 géant).
 - Fiche technique (20/10) : une STATISTIQUE se pose en `<dl>` à trois niveaux, libellé or Bebas à mini-damier
   (12 px, cases de 3 px entières), chiffre Bebas blanc, précision Inter grise ; filets fins entre colonnes, et sur
@@ -237,6 +240,13 @@ Les quatre doivent passer. Sinon : écarté, et on note pourquoi au backlog (les
 motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
+
+- 2026-11-02 (veille LA REVUE DE PRESSE, captures 1280 et 390 de mory-sacko.com/presse, williamsf1.com/news,
+  astonmartinf1.com/en-GB/news, charlesleclerc.com/en/news, isackhadjar.com/news) : **une liste de presse est une feuille
+  de temps : chaque ligne porte sa date, la plus récente en tête.** Les cinq le font, de la colonne étroite d'Aston Martin
+  aux petites capitales de Williams. Pas de photo d'article (elles appartiennent aux journaux), pas de numérotation tant
+  que la liste est courte (le « ( 01 ) » de Sacko dit le volume, à 3 lignes il dirait le vide). Sur téléphone, une liste
+  à colonnes s'EMPILE : Sacko garde ses 3 colonnes à 390 et coupe les noms de journaux en deux.
 
 - 2026-10-24 (audit de cohérence, les 5 pages regardées en 1280 et 390, première fois depuis la v3) : **une famille
   d'objets se juge à sa FORME avant sa couleur.** Le bandeau de fin de contact.html avait la bonne matière (marine,

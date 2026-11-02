@@ -96,6 +96,37 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       FAIT le 25/10 (commit 21a1fbc) : Alès et Lédenon refaits, Magny-Cours était déjà la boucle GP seule ; Dijon et Val de
       Vienne nettoyés d'un aller-retour parasite.
 
+### Idées de la veille 02/11 (angle neuf : LA REVUE DE PRESSE, comment un pilote ou une marque montre ce qu'on écrit sur lui)
+
+Sites REGARDÉS (Playwright + Chrome, 5 à 6 vues au défilement, 1280 et 390 en UA mobile, bandeaux masqués par CSS), planches
+dans le scratchpad du jour : theopourchaire.com/actu, charlesleclerc.com/en/news, isackhadjar.com/news, oscarpiastri.com/news,
+williamsf1.com/news, astonmartinf1.com/en-GB/news, mory-sacko.com/presse, ressence.eu/press. Morts ou vides pour la capture
+(non cités dans les idées) : esteban-ocon.com/news (page jamais rendue), urwerk.com/press (écran noir, rendu client),
+pierregasly.com/blogs/news (liste vide), vr46.com (boutique, pas de presse).
+- [x] **Chaque ligne de presse datée, la plus récente en tête (FAIT le 02/11, commit a8ce96f).** VU partout : Williams
+  (« ARTICLE / 26 OCT 2026 » en petites capitales au-dessus du titre), Aston Martin (colonne étroite « ANNOUNCEMENT /
+  27 October 2026 » à gauche, titre à droite), Leclerc (date minuscule au-dessus du titre) ; toutes les listes vont du plus
+  récent au plus ancien. Chez nous, la ligne MyCitee était la seule sans date (« Interview vidéo ») et la revue allait
+  du plus ancien au plus récent, donc l'actualité la plus fraîche (octobre 2025) arrivait en dernier. Date prise sur la
+  page du post (`<time datetime="2025-10-08T17:02:17Z">`), recoupée par le décodage de l'identifiant Instagram. Les trois
+  dates sont en `<time datetime>`. Pourquoi c'est TPRacing : une revue de presse est une feuille de temps, la nôtre a
+  déjà la colonne de libellés Bebas or et le filet entre lignes, il lui manquait seulement la chronologie.
+- Constat qui VALIDE l'existant : mory-sacko.com/presse est la référence de la liste de presse (publication à gauche,
+  titre souligné avec flèche, filets fins, numéro « ( 01 ) » calé à droite, 30 lignes). Notre `.revue` a déjà cette
+  structure, en plus racé (Bebas or, titre Inter 600, balayage or au survol). À 390, Sacko garde ses 3 colonnes et coupe
+  « CHALLENGE / S » et « GEOGRAPHI / C » : notre empilement en une colonne sous 600 px est le bon choix, à garder.
+- [ ] Écarté : **la numérotation « ( 01 ) » de Sacko.** Elle dit le volume (30 articles) ; avec 3 lignes elle soulignerait la
+  minceur. À rouvrir au-delà de 8 articles.
+- [ ] Écarté : **le mot géant « NEWS » en outline italique qui défile** (VU chez Hadjar, bandeau bleu en tête de page). Le
+  mot géant outline appartient au vocabulaire maison, mais la refonte v3 validée par Thomas le 23/09 les a tous retirés
+  (`.mot-geant` n'est plus posé sur aucune page) : les réintroduire est une décision de DA à lui soumettre, pas une veille.
+- [ ] Question pour Thomas : **un kit presse téléchargeable** (VU chez Ressence : chaque nouveauté a ses boutons « Download
+  images » et « Download press release »). Pour TPRacing : logos (couleur, blanc), 4 ou 5 photos HD et une fiche d'une
+  page, en un zip lié depuis la revue ou la page contact. Utile aux journalistes locaux, mais c'est un contenu à
+  valider (photos, texte) : rien préparé tant qu'il n'a pas dit oui.
+- Écarté : les cartes photo à titre incrusté de Pourchaire (titre blanc gras posé sur la photo, pagination jaune) : il faudrait
+  les photos des articles, qui appartiennent aux journaux.
+
 ### Idées de la veille 20/10 (angle neuf : LE CHIFFRE, comment un site de course fait exister ses nombres)
 
 Sites REGARDÉS en Chrome piloté par Playwright (5 vues au défilement progressif, 1280 et 390 en UA mobile, bandeaux
@@ -1156,6 +1187,18 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-02 (routine, AXE C : veille par captures, angle neuf **LA REVUE DE PRESSE** ; les jours précédents : B le 27/10,
+  aucun run du 28/10 au 01/11, dernière veille le 20/10 ; commit a8ce96f, EN LIGNE). T7 monté, `git pull` à jour (sitemap
+  du feed). 8 sites regardés en 1280 et 390, 4 autres morts ou vides (liste au backlog). **Fait** : la revue de presse de
+  l'accueil date toutes ses lignes (MyCitee : 8 octobre 2025, lu sur la page du post) et passe en ordre antichronologique
+  comme toutes les listes vues ; dates en `<time datetime>` ; `lastmod` de l'accueil au 02/11. **Vérifié** : section
+  capturée avant/après en 1280, 390 et 320 (harnais `page.route` sur le dépôt), 0 erreur console, 0 élément hors cadre.
+  **Constat** : notre liste a déjà la structure de la meilleure référence (mory-sacko.com/presse) et elle s'empile mieux
+  qu'elle sur téléphone. **DA** : la ligne « mots géants outline derrière les sections (Héritage, En piste, 47, Presse) »
+  décrivait la v2, ils ne sont plus posés depuis la v3 ; DA-TPRACING.md corrigé. **Question ouverte** : kit presse
+  téléchargeable (voir backlog). **Piège outillage** : macOS n'a pas `timeout`, un `timeout 300 cmd | grep` échoue en
+  silence et fait croire à une capture bloquée.
 
 - 2026-10-27 (routine, AXE B : audit LIENS, n°3 après le 24/08 et le 29/09 ; les jours précédents : B le 24/10, A le
   25/10, rien le 26/10 ; commit cf7ec8b, EN LIGNE). T7 non monté : clone dans le scratchpad. **Inventaire** des 5 pages :
