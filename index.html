@@ -361,7 +361,7 @@
       .kart { height: 25vh; bottom: 22%; }
       .histoire .fond-vert { height: 36%; }
       /* le récit se cale sous les 2 lignes du titre, quelle que soit la largeur (il le chevauchait sous 900 px) */
-      .histoire { --t: min(1.6rem, 7.2vw); }
+      .histoire { --t: min(1.6rem, calc((100vw - 32px) / 13.8)); } /* « se transmet » fait 13,8 em au début de l'écartement : gouttière de 16 px tenue dès 320 (audit rendu 02/11) */
       .histoire h2 { font-size: var(--t); }
       .histoire h2 span { white-space: nowrap; }
       .histoire h2 { animation-name: titre-m; } /* écartement réduit : à .2em le titre sortait de l'écran */

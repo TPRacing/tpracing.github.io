@@ -510,6 +510,8 @@ main ul > li::before {
   transform: translateY(-2px);
 }
 .foot-reso svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+/* 6 x 42 px + 5 x 10 px = 302 px : sous 360 px la 6e icône passait seule à la ligne (audit rendu 02/11) */
+@media (max-width: 359px) { .foot-reso { gap: 6px; } .foot-reso a { width: 40px; height: 40px; } }
 
 h3 { font-family: var(--f-label); font-weight: 700; font-size: 1.45rem; letter-spacing: .07em; text-transform: uppercase; }
 
