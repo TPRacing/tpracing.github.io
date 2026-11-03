@@ -241,6 +241,15 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-11-03 (finition, page pilote de 481 à 700 px, crops à 100 % avant/après et captures du rendu final) : **une
+  photo ne s'agrandit jamais, une taille de plus se TIRE DE L'ORIGINAL, et c'est l'image publiée qui fait foi.** Le
+  cadre se retrouve dans l'original (appariement SIFT, pas à l'œil), l'étalonnage s'apprend du publié vers l'original
+  (LUT 3D) au lieu d'être rejoué, sinon la même photo n'aurait pas la même couleur selon la largeur d'écran. Ce qui a
+  été retouché localement (le simulateur, détouré sur un bleu nuit uni) ne passe pas par une correction globale ni par
+  un filtre guidé (halos clairs autour des cheveux, peau bleuie, vus sur capture) : il lui faut son masque. Gain visible
+  à cette densité : lettrages des casques, gouttes d'eau, grain de peau ; nul sur une photo filée (FEED), qu'on garde
+  pour la cohérence parce qu'elle ne coûte que 15 Ko.
+
 - 2026-11-02 (veille LA REVUE DE PRESSE, captures 1280 et 390 de mory-sacko.com/presse, williamsf1.com/news,
   astonmartinf1.com/en-GB/news, charlesleclerc.com/en/news, isackhadjar.com/news) : **une liste de presse est une feuille
   de temps : chaque ligne porte sa date, la plus récente en tête.** Les cinq le font, de la colonne étroite d'Aston Martin

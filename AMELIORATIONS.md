@@ -836,12 +836,15 @@ garde son panneau Usercentrics malgré la neutralisation et assombrit toute la p
 - [x] **Étalonnage maison des dix photos de reportage** (galerie, cartes disciplines, bande
       partenaires) depuis les originaux pleine résolution retrouvés sur le T7. Recette complète
       au journal de DA du 22/09. Le site en ressort 30 Ko plus léger.
-- [ ] **QUESTION THOMAS : trois photos n'ont pas d'original retrouvé sur le T7**
+- [x] **QUESTION THOMAS : trois photos n'ont pas d'original retrouvé sur le T7**
       (`galerie-leader` « en tête de peloton, Lyon 2020 », `karting-pluie` de la carte Karting,
       `pilote-simu` de la carte Simracing). Elles ont été étalonnées depuis le fichier publié,
       donc avec une génération de compression de plus que les sept autres. Si les originaux
       existent quelque part (iCloud, disque, téléphone), les remettre sur le T7 et je les
       reprends proprement.
+      Refermée sans Thomas le 03/11 : l'original de `pilote-simu` est sur le T7 (Photos Simulateur/
+      GPI Photo/IMG_1189.JPG, retrouvé par appariement SIFT), `galerie-leader` et `karting-pluie` ne
+      sont plus publiées depuis la v3.
 - [ ] Écarté avec motif : pousser l'étalonnage plus loin (force 1,0 et au-delà). Testé et
       regardé en planche : au-delà de 0,8 la photo de pluie perd son gris de pluie, et le
       rendu commence à se voir. Une photo de reportage reste une photo de reportage.
@@ -1087,14 +1090,31 @@ gouttières (tout texte à moins de 14 px d'un bord) de 320 à 390.
       au début de l'animation. 390 et plus inchangés (25,6 px).
 - [x] **Pied des 5 pages sous 360 px : la 6e icône (Facebook) seule sur une 2e ligne** (6 x 42 + 5 x 10 =
       302 px pour 282 utiles à 320). Corrigé : 40 px et 6 px d'écart sous 360 px, une ligne à 320 et 340.
-- [ ] **Page pilote de 600 à 700 px : les versions portrait `-p` (737 à 860 px de large) sont servies à
+- [x] **Page pilote de 600 à 700 px : les versions portrait `-p` (737 à 860 px de large) sont servies à
       une largeur qui en demande 1 150 à 1 200 en DPR 2** (frise et portrait du hero, 72 à 75 % de la
       résolution utile). Plage rare (petites tablettes, téléphones en paysage). À faire depuis les
       ORIGINAUX du T7 (démonté ce jour) : une 2e taille `-pl` ~1 300 px en `srcset` des sources
       `max-width: 700px`, en AVIF seulement si le poids le justifie.
+      FAIT le 03/11 (commit 794011c) : mesuré, le manque commençait dès 481 px (0,53 à 0,94 de 481 à 700).
+      Versions `-pl` (1 360 px, hero 1 302 px = plafond de l'original) pour le hero, Caterham, FEED et
+      karting, servies de 481 à 700 px en `srcset` w + `sizes="calc(100vw - 24px)"` ; sous 480 px le
+      `-p` reste seul (téléphones DPR 2 et 3 inchangés, vérifié). Résultat 0,93 à 1,49. Reste sous 1 :
+      `frise-2015` (original de téléphone 3 552 x 2 000, cadre plafonné à 980 px : +14 % pour +68 Ko,
+      écarté) et `pilote-simu` (voir l'item suivant).
 - [ ] **Photos de la frise en `object-fit: cover` sur grand écran** : `frise-2015` (1 600 px) en demande
       2 560 à 2 830 de 768 à 1680 en DPR 2, `pilote-simu` (1 400) 2 070 à 2 830, `frise-kart` 2 160. Les
       recadrages sont voulus ; à traiter avec l'item précédent si les originaux le permettent.
+      03/11 : les 6 ORIGINAUX sont retrouvés (appariement SIFT sur les 1 129 photos du T7, script
+      `trouve_originaux.py` archivé dans `Communication/Etalonnage site/`) : hero = FEEDRACING/…/DSC02744.jpg
+      (4 240 x 2 832), Caterham = Caterham/TEST DAY/IMG_2163.HEIC (4 032 x 3 024), simu = Photos
+      Simulateur/GPI Photo/IMG_1189.JPG (3 024 x 4 032), FEED = FEEDRACING/…/DSC01929.jpg, karting =
+      LIGUE CHATEAU GAILLARD/CLY_2199.JPG (5 184 x 3 456), 2015 = Volant Bronze Actua/WP_20150828_009.jpg
+      (3 552 x 2 000). Mesures DPR 2 de 768 à 1680 : `pilote-simu` 0,49 à 0,94, `frise-2015` 0,56 à 0,63,
+      hero 0,71 à 0,89, FEED 0,71 à 0,93, karting 0,74. Une 3e taille en `srcset` w ne coûterait qu'aux
+      écrans Retina. ⚠️ `pilote-simu` publié est un DÉTOURAGE sur fond bleu nuit uni : une LUT globale
+      (écart 7,7/255) et un suréchantillonnage guidé (halos autour des cheveux, peau bleuie) ont été
+      essayés et REJETÉS le 03/11 ; il faut un masque (alpha tiré du `-p`, affiné sur l'original) puis
+      l'étalonnage appris sur le seul sujet.
 - Réfutés : `a.titre.couvre` de la revue à 24 px de haut (lien étiré par `::after` sur toute la ligne) ;
   « 404 » géant à 11 px du bord (débordement voulu et commenté) ; bande vide de ~250 px sous LinkedIn
   dans le bandeau de fin de l'accueil sur téléphone (réservée aux traces `lignes-fin`, réglage du 06/10).
@@ -1211,6 +1231,24 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-03 (routine, AXE A : finition, l'item du backlog laissé ouvert le 02/11 faute de T7 ; les jours
+  précédents : C puis B le 02/11 ; commit 794011c, EN LIGNE). Sur demande de Thomas en cours de run, la
+  routine elle-même a été remise à jour (pièges du T7 et des fichiers locaux à ne pas committer, push par
+  `gh auth git-credential`, recette de vérification Chrome CDP + Playwright puisque `preview_start` est
+  refusé en run planifié, mots géants en réserve, intro aux 5 feux AIMÉE, traces de pneus REJETÉES pour
+  l'intro). **Fait** : les 6 originaux de la page pilote retrouvés sur le T7 par appariement SIFT (1 129
+  photos, dont celui du simulateur, noté introuvable depuis le 22/09) ; versions `-pl` pour le hero,
+  Caterham, FEED et karting, même cadre que le `-p` (localisé dans l'original, rotation < 0,01°), même
+  étalonnage (LUT 3D apprise de l'original vers le `-p` publié, écart 1,5 à 2,8/255), AVIF q56
+  (indiscernable de q62 à 100 %, 17 % plus léger). Servies de 481 à 700 px : 0,93 à 1,49 de la
+  résolution utile au lieu de 0,53 à 0,94. Poids : +276 Ko d'AVIF pour un écran de cette plage qui
+  parcourt toute la page, rien pour les autres. `lastmod` de la page pilote au 03/11. **Vérifié** :
+  mesures DPR 1, 2 et 3 de 390 à 768 (téléphones et DPR 1 toujours sur le `-p`), 0 erreur console,
+  0 débordement, captures à 600 et 700 regardées dont un crop à 100 % ; build `built`, marqueur et
+  fichier `-pl` servis en prod. **Fausses pistes** : `frise-2015` (photo de téléphone, cadre plafonné
+  à 980 px) ; `pilote-simu` (détourage publié, LUT puis guided filter rejetés sur capture, voir backlog).
+  **Prochain** : la 3e taille Retina des photos de la frise (originaux et mesures notés au backlog).
 
 - 2026-11-02 bis (routine, 2e passage du jour, AXE B : audit, dimension **RENDU À TOUTES LES LARGEURS, 320 à
   1680**, pas refaite depuis le 24/09, la plus ancienne de la rotation ; le passage de 05h10 était un C ; commit
