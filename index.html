@@ -265,8 +265,10 @@
     .circuits span { order: 2; margin-top: 3px; text-wrap: balance; }
     .circuits svg { display: block; width: 100%; max-width: 104px; height: auto; overflow: visible; }
     .circuits path { fill: none; stroke: var(--or); stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+    /* Audit du 03/11 : le tracé finissait à cover 55 %, soit une fois la rangée passée dans la moitié HAUTE de l'écran ;
+       rangée centrée, les 6 boucles restaient ouvertes d'environ 10 %. Même plage que le mur des partenaires : fermé dans le tiers bas. */
     @supports (animation-timeline: view()) {
-      .circuits path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace linear both; animation-timeline: view(); animation-range: entry 20% cover 55%; }
+      .circuits path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace linear both; animation-timeline: view(); animation-range: entry 10% cover 35%; }
     }
     @keyframes trace { to { stroke-dashoffset: 0; } }
     /* Fiche technique (veille du 20/10, fiche pilote formula1.com et hero de carlossainz.es) : trois niveaux au lieu de deux,
