@@ -871,6 +871,23 @@ garde son panneau Usercentrics malgré la neutralisation et assombrit toute la p
 - [ ] Mesuré et laissé : padding de carte 30/26 sur contact contre 26/24 sur l'accueil. 4 px,
       et les deux familles ne se voient jamais dans le même écran.
 
+### Constats de l'audit QUALITÉ VISUELLE n°3 du 03/11 (5 pages x 1280 et 390 en DPR 2, 88 fichiers image scannés)
+
+- [x] **Tracés Academy ouverts rangée centrée** (accueil) : `animation-range: entry 20% cover 55%` → `entry 10% cover 35%`.
+  Avant : dashoffset 0,05 à 0,10 rangée au centre de l'écran en 1280, 0,07 à 0,10 pour la 2e rangée en 390. Après : 0
+  dès 60 % de la hauteur. Commit 8b2511e.
+- [x] Contrôle neuf : **chaque AVIF comparé à son repli WebP** (40 paires) : mêmes dimensions, décalage moyen < 1/255,
+  écart absolu moyen 1 à 5/255, détail fin équivalent. Un navigateur sans AVIF voit la même image.
+- [x] Réfuté : **bande sombre de 7 px au bord gauche de `contact-tete`** (desktop seulement, les `-m`/`-ml` n'en ont pas).
+  Invisible : le panneau est plus haut que le ratio du fichier, `object-fit: cover` à 38 % rogne ~80 px à gauche, et le
+  `clip-path` en biais masque de toute façon les 3 premiers pixels. Ne pas recompresser pour ça.
+- [x] Réfutés (déjà vus le 30/09 ou attendus) : alpha résiduel 1 à 34 sur le cadre des détourages hero (invisible) ;
+  bande basse de `pilote-regard-pl` (17 px, la même que le `-p`, sous la bande cinéma) ; haut uni de `pilote-simu-p`
+  (fond low-key) ; marges blanches des logos partenaires (cellules blanches) ; titre « Le volant se transmet » pâle sur
+  une vue = scène épinglée en cours d'animation, voulu.
+- [x] Non audité exprès : les assets de l'intro aux 5 feux (montrés 1 s, filés, AIMÉS par Thomas) et les posts Instagram
+  (routine maj-feed-insta-site).
+
 ### Constats de l'audit de COHÉRENCE DE LA DA du 11/08 (5 pages regardées, desktop 1280 + mobile 390)
 
 Corrigés le jour même :
@@ -1231,6 +1248,18 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-03 bis (routine, 2e passage du jour, AXE B : audit, dimension **QUALITÉ VISUELLE / BORDS D'IMAGES**, la plus
+  ancienne de la rotation, pas refaite depuis le 30/09 ; le passage du matin était un A, le 02/11 un C puis un B ; commit
+  8b2511e, EN LIGNE). T7 monté, `git pull` à jour. Détail dans « Constats de l'audit QUALITÉ VISUELLE n°3 » du backlog.
+  **Corrigé** : les 6 tracés Academy de l'accueil finissaient de se dessiner à `cover 55%`, donc seulement une fois la
+  rangée passée dans la moitié haute de l'écran ; rangée centrée, chaque boucle restait ouverte de 5 à 10 % (mesuré par
+  `stroke-dashoffset`, vu sur capture), ce qui défaisait le travail du 25/10 (« une boucle fermée chacun »). Plage passée à
+  `entry 10% cover 35%`, la même que le mur des partenaires : boucles fermées dès que la rangée atteint 60 % de la hauteur
+  d'écran, en 1280 comme en 390. Mouvement réduit inchangé (animation coupée, tracé plein). **Vérifié** : mesures avant/après
+  à 5 positions de scroll x 2 largeurs, capture regardée, 0 erreur console ; build et prod contrôlés en fin de run.
+  **RAS ailleurs** : 40 paires AVIF/WebP cohérentes (même taille, écart moyen < 1/255 par canal), 0 image cassée sur
+  5 pages x 2 largeurs, bords et détourages regardés zoomés. Fausses pistes listées au backlog. Prochain run : A ou C.
 
 - 2026-11-03 (routine, AXE A : finition, l'item du backlog laissé ouvert le 02/11 faute de T7 ; les jours
   précédents : C puis B le 02/11 ; commit 794011c, EN LIGNE). Sur demande de Thomas en cours de run, la

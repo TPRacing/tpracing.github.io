@@ -241,6 +241,13 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-11-03 bis (audit qualité visuelle, tracés Academy mesurés à 5 positions de scroll et regardés avant/après) : **un
+  dessin au scroll doit être FINI là où l'on s'arrête pour le lire**, c'est-à-dire avant que l'objet n'atteigne le milieu
+  de l'écran. Une animation qui ne se termine qu'en haut d'écran laisse au lecteur un état intermédiaire, et pour un tracé
+  de circuit cet état dit « circuit cassé ». Règle maison : les révélations au scroll se terminent à `cover 35%` (mur des
+  partenaires, tracés Academy) ; seules les scènes épinglées (« Le volant se transmet ») ont le droit d'utiliser toute
+  leur course.
+
 - 2026-11-03 (finition, page pilote de 481 à 700 px, crops à 100 % avant/après et captures du rendu final) : **une
   photo ne s'agrandit jamais, une taille de plus se TIRE DE L'ORIGINAL, et c'est l'image publiée qui fait foi.** Le
   cadre se retrouve dans l'original (appariement SIFT, pas à l'œil), l'étalonnage s'apprend du publié vers l'original
