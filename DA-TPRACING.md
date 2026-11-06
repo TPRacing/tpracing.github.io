@@ -1024,3 +1024,8 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   mais l'animation `stroke-dashoffset` y marquait une hésitation) ; (3) les six partagent la même projection
   (équirectangulaire à la latitude moyenne, ajustée au cadre 104 x 96 et centrée), ce qui garde l'échelle de chaque
   circuit dans sa propre case, comme une page de programme de course.
+
+- 2026-11-06 : **Un mouvement d'ouverture se joue en `transform`, jamais en `height`.** Les bandes cinéma du hero pilote donnaient à elles seules un CLS de 0,105 sur
+  téléphone. Le passage en `scaleY` donne le même geste à l'œil et 0,000 en prod. Règles : (1) **l'échelle fermée déborde d'une marge** (`51 / 11` et non `50 / 11`) : un transform
+  n'est pas calé sur le pixel, deux aplats bord à bord laissent passer un fil de la photo ; (2) un aplat seul s'étire sans perte, une image non ; (3) **un `sizes` se déduit de la largeur mesurée
+  sur plusieurs formats** : les images du montage suivent sa hauteur, plafonnée, pas la largeur de l'écran.

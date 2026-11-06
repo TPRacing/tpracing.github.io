@@ -1179,6 +1179,14 @@ sous 12 px, cibles tactiles sous 24 px, résolution réelle des images) puis cap
 - Réfutés avec motif (voir Journal du 24/10) : double monogramme du pied mobile (04/09), bouton or du hero à côté de
   celui de la nav (hero v3 validé), aplats colorés des cartes de la frise (code couleur v3 validé).
 
+### Constats de l'audit PERF du 06/11 (mesure sur la prod, 5 pages)
+
+Corrigé le jour même, voir Journal. Restes de faible valeur, à faire seulement s'ils tombent sur la route d'un autre chantier :
+- [ ] `frise-caterham-volant` et `frise-kart-gold` (900 px, 49 et 61 Ko) servis à DPR 1 pour 331 et 396 px : une taille 540w ferait gagner environ 50 Ko au scroll desktop DPR 1.
+- [ ] `pilote-simu` : `sizes` à 96vw pour 87vw réels à 768 DPR 2 (prend le `-xl` de 139 Ko, besoin 1 340 px). Mesurer de 481 à 900 px avant de corriger.
+- [ ] `contact-tete` desktop sans `srcset` (ratio 2,5 à 1280 DPR 1, 37 Ko) : le `-m` a un autre cadre, il faudrait une 3e taille au cadre desktop. Gain faible.
+- [ ] Longue tâche de 359 ms vue une fois sur mentions-legales (téléphone, CPU x4) : à revérifier.
+
 ### Constats de l'audit PERF du 16/09 (5 pages, poids réel modélisé selon la sélection du navigateur)
 
 Dimension pas auditée en profondeur depuis le 08/08 (5 semaines). Le rig habituel (mesure au
@@ -1249,6 +1257,29 @@ une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se v
 
 ## Journal
 
+- 2026-11-06 bis (routine, 2e passage du jour, AXE B : audit, dimension **PERF / POIDS RÉELS**, pas auditée depuis le 16/09 ; les
+  jours précédents : A plus tôt ce jour, A puis B le 03/11 ; commit 2952f3b, EN LIGNE). T7 monté. **Méthode neuve : mesure sur la PROD**,
+  Chrome CDP + Playwright, LCP, CLS et longues tâches par PerformanceObserver, octets réels par `Network.loadingFinished` (remplace la
+  modélisation du 16/09, Resource Timing restant inutilisable) ; téléphone 390 DPR 3 en 4G lente (1,6 Mb/s, 150 ms, CPU x4), 1280 DPR 1,
+  1680 DPR 2, 5 pages. **Défaut n°1, invisible à l'œil depuis la v3 : CLS de la page pilote 0,105 sur téléphone (au-dessus du seuil 0,1),
+  0,065 à 0,068 sur ordinateur.** Les bandes cinéma du hero s'ouvraient en `height` : l'arête haute de la bande basse montait, un
+  décalage compté à chaque image. Passées en `transform: scaleY` : **CLS 0,000 aux 3 formats en prod**, même ouverture à l'œil. Mon
+  1er essai à `50 / 11` laissait un fil de la photo entre les deux bandes fermées (un transform n'est pas calé sur le pixel), vu sur
+  capture, d'où `51 / 11` ; couture contrôlée fermée à 1280, 375 (écart de couleur limité au grain de 6-7 sur 255).
+  **Défaut n°2 : les préchargements de l'intro partaient 500 ms trop tard en 4G lente.** Le script suivait la feuille de style, or un
+  script attend la CSS qui le précède. Déplacé avant : l'emblème est prêt à 1 980 ms au lieu de 2 870 ms, les préchargements partent à 1 208 ms au lieu de 1 795 ms.
+  **Défaut n°3 : `sizes` faux au hero de l'accueil**, pilote affiché 171 px à 1280 et déclaré 22vw (282 px) : ratio 3,3, 39 Ko au lieu de 15. Sizes
+  réécrits sur 16 largeurs mesurées (l'image suit la hauteur du montage plafonné à 840 px : pilote `min(17vw, 281px)`, voiture `min(49.5vw, 830px)`,
+  karts `min(65vh, 604px)` et `min(69vh, 641px)`). **Tailles `-ml` ajoutées** (voiture 1200w 60 Ko au lieu de 97, 1987 1100w 28 au lieu de 47, 2024 1150w
+  49 au lieu de 84) : c'est le trou entre `-m` et plein pour un téléphone DPR 3 et un écran 1920 DPR 1. Comparaison à 100 % avec l'actuel regardée : pas d'écart visible.
+  **`embleme-masque.png` (47 Ko) → WebP sans perte, 19 Ko**, alpha identique au pixel (différence 0), PNG retiré du dépôt (il reste dans l'historique git).
+  **Résultat en prod** (une mesure par configuration, donc ordre de grandeur) : accueil téléphone, 1er écran 404 → 339 Ko, LCP 3 392 → 3 020 ms ; sans intro 337 → 273 Ko ; scroll
+  complet 819 → 703 Ko ; 1280 DPR 1 438 → 386 Ko. **Vérifié avant push** : 5 pages jusqu'à 7 formats, 0 erreur console, 0 débordement, CLS 0, fichier servi lu pour chaque image.
+  **Réfutés** : `embleme-3d.webp` demandé 3 fois = artefact du cache désactivé, 0 Ko en cache normal ; LCP accueil 2,5-2,7 s sur ordinateur = la durée de
+  l'intro 5 feux, voulue et AIMÉE, sans intro 1,1 à 1,3 s dont environ 1 s de connexion à froid : **ne pas y toucher** ; vidéos différées, 0 octet au chargement. **Sain** : aucune requête externe, TBT
+  faible. **Vu une seule fois, non creusé** : longue tâche de 359 ms sur mentions-legales au téléphone (CPU x4), pas de script lourd sur cette page, à revérifier au prochain audit.
+  **Piège de capture** : `page.screenshot` de Playwright rétablit le viewport du contexte et ignore `Emulation.setDeviceMetricsOverride` ; capturer par `Page.captureScreenshot`. Le LCP de la page pilote reste le H1 et non la photo plein cadre (image à faible détail ignorée par Chrome), sans conséquence.
+  Prochain run : C ou A (veille depuis le 02/11).
 - 2026-11-06 (routine, AXE A : finition, l'item annoncé le 03/11 ; les jours précédents : A puis B le 03/11, B et C le 02/11 ;
   commit 3e2e647, EN LIGNE). T7 monté, `git pull` à jour. **Fait** : 3e taille `-xl` pour le hero et les 5 photos de la frise de
   pilote.html, servie seulement quand l'écran en a besoin. **Mesure** : à 1680 en DPR 2, on passe de 0,49 (simu), 0,52 (2015),
