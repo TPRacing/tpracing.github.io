@@ -241,6 +241,12 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-11-06 (finition, page pilote sur Retina, crops à 100 % avant/après sur 6 photos) : **une photo retouchée ne se ré-étalonne
+  pas, on lui rend son détail.** Sur le simulateur détouré et la photo de téléphone de 2015, refaire l'étalonnage depuis l'original
+  changeait l'image (blancs brûlés, bruit dur, halos autour des cheveux). Garder les couleurs du fichier publié et n'y ajouter que le
+  détail fin de l'original, à l'intérieur du sujet, garde la photo que Thomas a validée, en plus net. Règle maison : **une version de
+  plus grande taille doit être la même image**, écart après réduction contrôlé et regardé, jamais une nouvelle interprétation.
+
 - 2026-11-03 bis (audit qualité visuelle, tracés Academy mesurés à 5 positions de scroll et regardés avant/après) : **un
   dessin au scroll doit être FINI là où l'on s'arrête pour le lire**, c'est-à-dire avant que l'objet n'atteigne le milieu
   de l'écran. Une animation qui ne se termine qu'en haut d'écran laisse au lecteur un état intermédiaire, et pour un tracé

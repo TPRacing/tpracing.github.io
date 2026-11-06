@@ -1118,7 +1118,7 @@ gouttières (tout texte à moins de 14 px d'un bord) de 320 à 390.
       `-p` reste seul (téléphones DPR 2 et 3 inchangés, vérifié). Résultat 0,93 à 1,49. Reste sous 1 :
       `frise-2015` (original de téléphone 3 552 x 2 000, cadre plafonné à 980 px : +14 % pour +68 Ko,
       écarté) et `pilote-simu` (voir l'item suivant).
-- [ ] **Photos de la frise en `object-fit: cover` sur grand écran** : `frise-2015` (1 600 px) en demande
+- [x] **Photos de la frise en `object-fit: cover` sur grand écran** (FAIT le 06/11, commit 3e2e647, voir Journal) : `frise-2015` (1 600 px) en demande
       2 560 à 2 830 de 768 à 1680 en DPR 2, `pilote-simu` (1 400) 2 070 à 2 830, `frise-kart` 2 160. Les
       recadrages sont voulus ; à traiter avec l'item précédent si les originaux le permettent.
       03/11 : les 6 ORIGINAUX sont retrouvés (appariement SIFT sur les 1 129 photos du T7, script
@@ -1164,7 +1164,7 @@ sous 12 px, cibles tactiles sous 24 px, résolution réelle des images) puis cap
       `cover`, même étalonnage, depuis les originaux) servies sous 700 px : 0,94 à 1,17 de la
       résolution utile, 19 à 78 Ko en AVIF.
 - [x] **Lien « Mentions légales » du pied de page : cible de 19 px de haut** (5 pages). Passé à 25 px.
-- [ ] À 1280, la carte karting prend `frise-kart-m` (800 px) pour un besoin de 931 px (0,86) : passer
+- [x] (FAIT le 06/11 : `sizes` recalé sur le besoin réel, karting 1,72 à 1280 en DPR 1) À 1280, la carte karting prend `frise-kart-m` (800 px) pour un besoin de 931 px (0,86) : passer
       son `sizes` à 73vw coûterait 78 Ko de plus pour 14 %, laissé en l'état.
 - RAS : 0 erreur console, 0 requête en échec, 0 débordement horizontal sur les 55 combinaisons ; les
   emblèmes de fond de contact, mentions et 404 sortent du cadre exprès (rognés), le 404 géant déborde
@@ -1248,6 +1248,29 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-06 (routine, AXE A : finition, l'item annoncé le 03/11 ; les jours précédents : A puis B le 03/11, B et C le 02/11 ;
+  commit 3e2e647, EN LIGNE). T7 monté, `git pull` à jour. **Fait** : 3e taille `-xl` pour le hero et les 5 photos de la frise de
+  pilote.html, servie seulement quand l'écran en a besoin. **Mesure** : à 1680 en DPR 2, on passe de 0,49 (simu), 0,52 (2015),
+  0,61 (karting), 0,71 (hero, FEED), 0,74 (Caterham) à 0,84 ou plus partout (hero 0,95, simu et FEED 0,99, Caterham 1,02, karting et
+  2015 0,84) ; à 1280 et 1440 en DPR 2, tout est au-dessus de 1. **Deux recettes** : LUT 3D du 03/11 pour hero, FEED, karting
+  et Caterham (`fabrique_xl.py`) ; **transfert de détail** pour simu et 2015 (`fabrique_detail.py`, tous deux dans
+  `Communication/Etalonnage site/`) : le fichier publié agrandi garde exactement ses couleurs, seul le détail fin de luminance
+  vient de l'original, recalé SIFT puis ECC, et pour le simu seulement à l'intérieur du sujet, donc le fond bleu nuit reste uni
+  et il n'y a aucun halo (l'impasse du 03/11 est levée). **`sizes` corrigés** : ils décrivaient la boîte, pas l'image recadrée
+  en `cover`. Une photo paysage dans une boîte haute demande environ 1,5 fois la hauteur de la carte, laquelle suit `100vh - 180px`.
+  Hero `max(100vw, 150vh)`, karting `max(48vw, 150vh - 270px)`, Caterham `max(44vw, 123vh - 220px)`, FEED et 2015 corrigés
+  aussi de 701 à 900 px (tablette portrait : FEED 0,73 → 1,02, 2015 0,49 → 0,80, hero 0,78 → 1,04). **Poids** : +343 Ko
+  d'AVIF pour un écran Retina à partir de 1440 qui parcourt toute la page (+85 Ko seulement au-dessus de la ligne de flottaison),
+  sous le plafond de 500 Ko ; rien pour les téléphones ; DPR 1 inchangé jusqu'à 1280, sauf le karting (+78 Ko, 0,86 → 1,72 à 1280 x 800). Exception mesurée : 1920 en DPR 1 prend
+  simu et 2015 en `-xl` (besoin 1 646 px pour des fichiers de 1 400 et 1 600), soit environ +130 Ko, accepté. AVIF q48 pour karting,
+  Caterham et 2015 après comparaison à 100 % avec q56 : pas de différence visible, 30 % de moins. **Vérifié** : 9 combinaisons
+  largeur x DPR (390 à 1920) par Chrome CDP, fichier choisi et résolution réelle lus par `new Image()`, 0 débordement, 0 erreur
+  console, captures du rendu regardées, crops à 100 % avant/après regardés sur les 6 photos. **Fausses pistes** : LUT sur 2015
+  (blancs brûlés, bruit de téléphone rendu dur, rejetée à l'œil) ; `sizes` fixe `1080px` pour le karting (faux : la carte suit la
+  hauteur de l'écran). **Noté** : le visage de `pilote-simu` publié reste aplati par l'étalonnage d'origine, le détail ne le rattrape
+  pas ; les -pl restent absents pour simu et 2015 de 481 à 700 px (0,75), le transfert de détail peut les fabriquer un prochain A.
+  Rappel groupé des questions à Thomas : kit presse (02/11), « avec nous » en or sur 2 titres (24/10), logos en une encre (05/10). Prochain run : C ou B.
 
 - 2026-11-03 bis (routine, 2e passage du jour, AXE B : audit, dimension **QUALITÉ VISUELLE / BORDS D'IMAGES**, la plus
   ancienne de la rotation, pas refaite depuis le 30/09 ; le passage du matin était un A, le 02/11 un C puis un B ; commit
