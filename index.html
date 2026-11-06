@@ -35,6 +35,36 @@
   <link rel="preload" href="assets/fonts/korataki-bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/bebas-neue-pro-bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <!-- Intro : décision AVANT le premier rendu (pas de flash), 1 fois par session, jamais en mouvement réduit.
+       Placé AVANT la feuille de style : un script qui la suit attend qu'elle soit chargée, et les préchargements
+       de l'intro partaient alors 500 ms après les autres en 4G lente (mesuré le 06/11). -->
+  <script>
+    (function () {
+      try {
+        // Page pré-rendue (Speculation Rules) = le visiteur navigue déjà dans le site : pas d'intro
+        if (document.prerendering || sessionStorage.getItem('tp_intro') || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          if (document.prerendering) sessionStorage.setItem('tp_intro', '1');
+          document.documentElement.classList.add('intro-off');
+        } else {
+          sessionStorage.setItem('tp_intro', '1');
+          document.documentElement.classList.add('intro-active');
+          // L'emblème n'est préchargé que quand l'intro joue : depuis le hero « La transmission »
+          // (22/09), il n'apparaît plus ailleurs, et un préchargement prioritaire systématique
+          // passait devant les deux karts du hero, la vraie image principale de la page.
+          const pre = document.createElement('link');
+          pre.rel = 'preload'; pre.as = 'image'; pre.href = 'assets/img/embleme-3d.webp';
+          pre.fetchPriority = 'high';
+          document.head.appendChild(pre);
+          // la version filée (Photoshop) ouvre l'intro : elle passe avec l'emblème
+          ['intro-file-320.webp', 'intro-file-120.webp', 'intro-trainee.webp', 'intro-feux.png'].forEach(n => {
+            const l = document.createElement('link');
+            l.rel = 'preload'; l.as = 'image'; l.href = 'assets/img/' + n;
+            document.head.appendChild(l);
+          });
+        }
+      } catch (e) { document.documentElement.classList.add('intro-off'); }
+    })();
+  </script>
   <link rel="stylesheet" href="assets/styles.css">
 
   <!-- Navigation instantanée : pré-rendu des pages internes au survol d'un lien
@@ -70,35 +100,6 @@
         var a = self.navigation && navigation.activation;
         typer(e, a && a.from && a.from.url, location.href);
       });
-    })();
-  </script>
-
-  <!-- Intro : décision AVANT le premier rendu (pas de flash), 1 fois par session, jamais en mouvement réduit -->
-  <script>
-    (function () {
-      try {
-        // Page pré-rendue (Speculation Rules) = le visiteur navigue déjà dans le site : pas d'intro
-        if (document.prerendering || sessionStorage.getItem('tp_intro') || matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          if (document.prerendering) sessionStorage.setItem('tp_intro', '1');
-          document.documentElement.classList.add('intro-off');
-        } else {
-          sessionStorage.setItem('tp_intro', '1');
-          document.documentElement.classList.add('intro-active');
-          // L'emblème n'est préchargé que quand l'intro joue : depuis le hero « La transmission »
-          // (22/09), il n'apparaît plus ailleurs, et un préchargement prioritaire systématique
-          // passait devant les deux karts du hero, la vraie image principale de la page.
-          const pre = document.createElement('link');
-          pre.rel = 'preload'; pre.as = 'image'; pre.href = 'assets/img/embleme-3d.webp';
-          pre.fetchPriority = 'high';
-          document.head.appendChild(pre);
-          // la version filée (Photoshop) ouvre l'intro : elle passe avec l'emblème
-          ['intro-file-320.webp', 'intro-file-120.webp', 'intro-trainee.webp', 'intro-feux.png'].forEach(n => {
-            const l = document.createElement('link');
-            l.rel = 'preload'; l.as = 'image'; l.href = 'assets/img/' + n;
-            document.head.appendChild(l);
-          });
-        }
-      } catch (e) { document.documentElement.classList.add('intro-off'); }
     })();
   </script>
 
@@ -190,8 +191,8 @@
     .montage img { max-width: none; }
     .plaque {
       left: 7.3%; top: 4.3%; width: 91.5%; aspect-ratio: 1400 / 968; overflow: hidden;
-      -webkit-mask: url(assets/img/embleme-masque.png) center / 100% 100% no-repeat;
-      mask: url(assets/img/embleme-masque.png) center / 100% 100% no-repeat;
+      -webkit-mask: url(assets/img/embleme-masque.webp) center / 100% 100% no-repeat;
+      mask: url(assets/img/embleme-masque.webp) center / 100% 100% no-repeat;
       background: linear-gradient(160deg, #E2A63C 0%, var(--or) 45%, #B67C16 100%);
       transform: translate(calc(var(--px) * -10px), calc(var(--py) * -8px));
     }
@@ -583,13 +584,13 @@
     <div class="montage" id="montage" aria-hidden="true">
       <div class="plaque"></div>
       <picture>
-        <source type="image/avif" srcset="assets/img/hero-thomas-m.avif 250w, assets/img/hero-thomas.avif 564w" sizes="(max-width: 900px) 40vw, 22vw">
-        <img class="thomas" src="assets/img/hero-thomas.webp" srcset="assets/img/hero-thomas-m.webp 250w, assets/img/hero-thomas.webp 564w" sizes="(max-width: 900px) 40vw, 22vw" width="564" height="1400" alt="">
+        <source type="image/avif" srcset="assets/img/hero-thomas-m.avif 250w, assets/img/hero-thomas.avif 564w" sizes="(max-width: 900px) min(32vw, 281px), min(17vw, 281px)">
+        <img class="thomas" src="assets/img/hero-thomas.webp" srcset="assets/img/hero-thomas-m.webp 250w, assets/img/hero-thomas.webp 564w" sizes="(max-width: 900px) min(32vw, 281px), min(17vw, 281px)" width="564" height="1400" alt="">
       </picture>
       <div class="ombre"></div>
       <picture>
-        <source type="image/avif" srcset="assets/img/hero-car47-m.avif 760w, assets/img/hero-car47.avif 1640w" sizes="(max-width: 900px) 92vw, 46vw">
-        <img class="voiture" id="voiture" src="assets/img/hero-car47.webp" srcset="assets/img/hero-car47-m.webp 760w, assets/img/hero-car47.webp 1640w" sizes="(max-width: 900px) 92vw, 46vw" width="1640" height="1017" alt="" fetchpriority="high">
+        <source type="image/avif" srcset="assets/img/hero-car47-m.avif 760w, assets/img/hero-car47-ml.avif 1200w, assets/img/hero-car47.avif 1640w" sizes="(max-width: 900px) min(92vw, 830px), min(49.5vw, 830px)">
+        <img class="voiture" id="voiture" src="assets/img/hero-car47.webp" srcset="assets/img/hero-car47-m.webp 760w, assets/img/hero-car47-ml.webp 1200w, assets/img/hero-car47.webp 1640w" sizes="(max-width: 900px) min(92vw, 830px), min(49.5vw, 830px)" width="1640" height="1017" alt="" fetchpriority="high">
       </picture>
     </div>
   </header>
@@ -604,12 +605,12 @@
       <p class="recit">Chez les Papone, la piste se transmet. Patrice a couru en karting puis en Formule Ford. En 2021, père et fils fondent TPRacing pour porter Thomas jusqu'à la course automobile.
         <span class="couleurs">L'or de Senna / le marine de la rigueur / le rouge de la persévérance / le <b>vert</b> des racines Papone</span></p>
       <picture>
-        <source type="image/avif" srcset="assets/img/hero-1987-m.avif 786w, assets/img/hero-1987.avif 1543w" sizes="(max-width: 900px) 36vh, 60vh">
-        <img class="kart k87" src="assets/img/hero-1987.webp" srcset="assets/img/hero-1987-m.webp 786w, assets/img/hero-1987.webp 1543w" sizes="(max-width: 900px) 36vh, 60vh" width="1543" height="1100" loading="lazy" alt="Patrice Papone de face au volant de son kart, Championnat de France 1987">
+        <source type="image/avif" srcset="assets/img/hero-1987-m.avif 786w, assets/img/hero-1987-ml.avif 1100w, assets/img/hero-1987.avif 1543w" sizes="(max-width: 900px) 36vh, min(65vh, 604px)">
+        <img class="kart k87" src="assets/img/hero-1987.webp" srcset="assets/img/hero-1987-m.webp 786w, assets/img/hero-1987-ml.webp 1100w, assets/img/hero-1987.webp 1543w" sizes="(max-width: 900px) 36vh, min(65vh, 604px)" width="1543" height="1100" loading="lazy" alt="Patrice Papone de face au volant de son kart, Championnat de France 1987">
       </picture>
       <picture>
-        <source type="image/avif" srcset="assets/img/hero-2024-m.avif 835w, assets/img/hero-2024.avif 1639w" sizes="(max-width: 900px) 38vh, 66vh">
-        <img class="kart k20" src="assets/img/hero-2024.webp" srcset="assets/img/hero-2024-m.webp 835w, assets/img/hero-2024.webp 1639w" sizes="(max-width: 900px) 38vh, 66vh" width="1639" height="1100" loading="lazy" alt="Thomas Papone de face au volant de son Gold Kart numéro 47, aux couleurs des partenaires">
+        <source type="image/avif" srcset="assets/img/hero-2024-m.avif 835w, assets/img/hero-2024-ml.avif 1150w, assets/img/hero-2024.avif 1639w" sizes="(max-width: 900px) 38vh, min(69vh, 641px)">
+        <img class="kart k20" src="assets/img/hero-2024.webp" srcset="assets/img/hero-2024-m.webp 835w, assets/img/hero-2024-ml.webp 1150w, assets/img/hero-2024.webp 1639w" sizes="(max-width: 900px) 38vh, min(69vh, 641px)" width="1639" height="1100" loading="lazy" alt="Thomas Papone de face au volant de son Gold Kart numéro 47, aux couleurs des partenaires">
       </picture>
       <div class="annee a87"><b>1987</b> Patrice</div>
       <div class="annee a20"><b>2026</b> Thomas</div>
