@@ -295,7 +295,7 @@
 
     /* ---------- Presse : une revue en lignes typographiques ---------- */
     .presse { background: var(--nuit); color: var(--blanc); padding: 120px max(20px, 4.4vw) 130px; clip-path: polygon(0 0, 100% var(--pente), 100% 100%, 0 100%); margin-top: calc(var(--pente) * -1); }
-    .presse h2 { color: var(--blanc); margin: 0 0 40px; font-size: clamp(1.6rem, 3.4vw, 3rem); }
+    .presse h2 { color: var(--blanc); margin: 0 0 40px; font-size: clamp(min(1.6rem, calc((100vw - 32px) / 13.8)), 3.4vw, 3rem); }
     .presse h2 .or { color: var(--or); }
     .revue { border-top: 1px solid rgba(246, 247, 252, .18); }
     .revue .ligne { display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; gap: 28px; align-items: center; padding: 26px 0; border-bottom: 1px solid rgba(246, 247, 252, .18); position: relative; transition: padding .25s; }
@@ -311,7 +311,7 @@
 
     /* ---------- Partenaires : logos d'origine, jamais recolorés ---------- */
     .partenaires { background: var(--blanc); color: var(--marine); padding: 130px max(20px, 4.4vw) 140px; text-align: center; clip-path: polygon(0 0, 100% var(--pente), 100% 100%, 0 100%); margin-top: calc(var(--pente) * -1); }
-    .partenaires h2 { margin: 0 0 12px; font-size: clamp(1.6rem, 3.4vw, 3rem); }
+    .partenaires h2 { margin: 0 0 12px; font-size: clamp(min(1.6rem, calc((100vw - 32px) / 13.8)), 3.4vw, 3rem); }
     .partenaires h2 .or { color: var(--or); }
     .partenaires .lead { margin: 0 auto 14px; color: var(--gris-f); max-width: 560px; }
     .fidelite { margin: 0 auto 48px; font-family: var(--f-label); font-weight: 700; font-size: 1.12rem; letter-spacing: .1em; text-transform: uppercase; }
