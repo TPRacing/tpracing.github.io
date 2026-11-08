@@ -96,6 +96,45 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       FAIT le 25/10 (commit 21a1fbc) : Alès et Lédenon refaits, Magny-Cours était déjà la boucle GP seule ; Dijon et Val de
       Vienne nettoyés d'un aller-retour parasite.
 
+### Idées de la veille 08/11 (angle neuf : L'INTERTITRE, comment une section de site de course s'annonce)
+
+Méthode : 9 sites capturés en 1280 et 390 (Chrome CDP + Playwright, 5 vues par site + pied, bandeaux de
+consentement masqués par CSS, jamais acceptés ; défilement à la molette quand la bannière verrouille la page).
+Regardés : mclaren.com/racing, ferrari.com/formula1, visacashapprb.com, toyotagazooracing.com, m-sport.co.uk,
+rapha.cc, kartrepublic.com. Puis notre accueil et notre page pilote capturés titre par titre pour comparer.
+
+- [ ] Écarté : **la numérotation « 01 / WHAT WE DO » de M-Sport** (VU : numéro bleu, slash, capitales
+  étendues, colonne de gauche alignée à droite, filet bleu vertical de 2 px, puis chapeau dont la 1re phrase
+  est en gras ; 01 à 04 sur la page). C'est exactement le surtitre-rubrique rejeté par Thomas le 09/08. Même
+  verdict pour **la barre oblique rouge de Toyota Gazoo Racing** (« / NEWS », « / OUR STORY », « / OFFICIAL SNS »
+  en capitales italiques espacées) : une étiquette de rubrique avec un slash devant reste une étiquette.
+- [ ] Écarté : **le titre en deux GRAISSES de McLaren** (« UP NEXT » en noir gras / « McLAREN RACING » en gris
+  regular, même taille, puis « 2026 » en petit avec le speedmark orange). Nous faisons déjà la même bascule par
+  la COULEUR (blanc ou marine puis or), dans une seule graisse de Korataki : une 2e graisse demanderait une
+  2e fonte et casserait la règle « le sport auto écrit épais ».
+- [ ] Écarté : **l'ellipse tracée à la main autour de « CREATOR PLATFORM »** (VCARB). Langage street et
+  graffiti, étranger au vocabulaire maison. Retenu en revanche, et déjà chez nous : leurs titres géants très
+  serrés suivis d'un filet gris pleine largeur (« DRIVERS », « SHOP THE CORE COLLECTION ») recoupent nos
+  filets de la revue de presse.
+- [ ] Recoupement, rien à faire : **le logo dans des brackets d'angle** (VU chez Kart Republic, page d'accueil
+  réduite à un splash, logo KR dans un cadre ouvert à 2 coins). Confirme nos brackets.
+- [x] **Contre-exemple FAIT le jour même : une police TRÈS large ne tient pas un plancher fixe en mobile.**
+  VU chez M-Sport en 390 : leur capitale étendue (de la famille de notre Korataki) garde sa taille desktop,
+  « 01 / WHAT WE DO », « 02 / EVALUATION CENTRE », « 03 / CAREERS » et « 04 / NEWS » sortent à droite de
+  l'écran, le hero « EXPERT ENGINEERING » aussi. Mesuré chez nous : à 320 px, « Ils parlent de nous » et
+  « Ils roulent avec nous » passaient sur 3 lignes, parce que leur `clamp(1.6rem, …)` ne descendait jamais
+  sous 25,6 px. Corrigé (commit d0552da) : plancher `min(1.6rem, calc((100vw - 32px) / 13.8))`, la formule
+  du 02/11 pour « Le volant se transmet ». 2 lignes de 320 à 430, rien ne change de 390 à 1680.
+- [ ] **QUESTION THOMAS : 3 titres trop longs pour un téléphone**, que la taille seule ne sauve pas (la règle
+  « 2 lignes maximum » oblige à reformuler, c'est donc à toi) :
+  « Envie d'écrire la suite avec nous ? » (accueil) = **4 lignes à 375**, 3 à 390-430 ;
+  « Tout a commencé en 1987 » (pilote) = 3 lignes jusqu'à 430 (« TOUT A / COMMENCÉ / EN 1987 ») ;
+  « La suite s'écrit maintenant » (pilote) = 3 lignes jusqu'à 375. Pistes, à valider ou remplacer :
+  « La suite, avec vous ? », « Né en 1987 » ou « Depuis 1987 », « La suite s'écrit ». Rien publié.
+  Sites morts ou bloquants du jour (à ne pas reprendre) : ducati.com/ww/en/racing (403 Akamai « Access Denied »),
+  motorsports.porsche.com (bannière de consentement hors DOM, rien d'autre ne s'affiche sans accepter),
+  aimeleondore.com (page blanche sous Chrome piloté).
+
 ### Idées de la veille 02/11 (angle neuf : LA REVUE DE PRESSE, comment un pilote ou une marque montre ce qu'on écrit sur lui)
 
 Sites REGARDÉS (Playwright + Chrome, 5 à 6 vues au défilement, 1280 et 390 en UA mobile, bandeaux masqués par CSS), planches
@@ -1257,6 +1296,18 @@ une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se v
 
 ## Journal
 
+- 2026-11-08 (routine, AXE C : veille par captures, angle neuf **L'INTERTITRE**, comment une section s'annonce ; les jours
+  précédents : A puis B le 06/11, A puis B le 03/11, dernière veille le 02/11 ; commit d0552da, EN LIGNE). T7 monté, `git pull`
+  à jour. 9 sites ouverts, 7 regardés en 1280 et 390 (McLaren, Ferrari, VCARB, Toyota Gazoo Racing, M-Sport, Rapha, Kart
+  Republic), puis nos 9 titres de section capturés un par un. **Constat central** : la moitié des écuries s'annoncent par
+  une étiquette de rubrique numérotée ou slashée (M-Sport « 01 / », TGR « / NEWS »). C'est le surtitre-rubrique déjà rejeté
+  par Thomas le 09/08, la veille le confirme comme signature de gabarit, ÉCARTÉ. **Fait** : M-Sport en 390 laisse ses
+  capitales étendues sortir de l'écran, ce qui m'a fait mesurer nos titres sur 6 largeurs : à 320 px « Ils parlent de nous » et
+  « Ils roulent avec nous » passaient sur 3 lignes (plancher fixe 1,6 rem). Corrigé par le plancher calé sur la largeur du
+  02/11, vérifié en local de 320 à 1680 (2 lignes jusqu'à 430, tailles inchangées au-dessus de 390, console vide) puis en
+  prod. **Question pour Thomas** (backlog, veille 08/11) : 3 titres que seule une reformulation ramène à 2 lignes sur
+  téléphone, dont « Envie d'écrire la suite avec nous ? » à 4 lignes à 375. Fausses pistes : Porsche Motorsport (consentement
+  hors DOM, on n'accepte pas), Ducati (403), Aimé Leon Dore (page blanche). Prochain run : A ou B.
 - 2026-11-06 bis (routine, 2e passage du jour, AXE B : audit, dimension **PERF / POIDS RÉELS**, pas auditée depuis le 16/09 ; les
   jours précédents : A plus tôt ce jour, A puis B le 03/11 ; commit 2952f3b, EN LIGNE). T7 monté. **Méthode neuve : mesure sur la PROD**,
   Chrome CDP + Playwright, LCP, CLS et longues tâches par PerformanceObserver, octets réels par `Network.loadingFinished` (remplace la

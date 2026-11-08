@@ -1029,3 +1029,16 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   téléphone. Le passage en `scaleY` donne le même geste à l'œil et 0,000 en prod. Règles : (1) **l'échelle fermée déborde d'une marge** (`51 / 11` et non `50 / 11`) : un transform
   n'est pas calé sur le pixel, deux aplats bord à bord laissent passer un fil de la photo ; (2) un aplat seul s'étire sans perte, une image non ; (3) **un `sizes` se déduit de la largeur mesurée
   sur plusieurs formats** : les images du montage suivent sa hauteur, plafonnée, pas la largeur de l'écran.
+
+- 2026-11-08 : **Une capitale très large se dimensionne sur la largeur de l'écran, jamais avec un plancher fixe.** Veille
+  L'INTERTITRE (mclaren.com/racing, ferrari.com/formula1, visacashapprb.com, toyotagazooracing.com, m-sport.co.uk, rapha.cc,
+  kartrepublic.com ; captures 1280 et 390 dans le scratchpad du jour). Contre-exemple VU chez M-Sport en 390 : leur capitale
+  étendue, de la même famille que notre Korataki, garde sa taille et sort de l'écran sur les 4 intertitres. Chez nous, le
+  `clamp(1.6rem, …)` des titres presse et partenaires donnait 3 lignes à 320 px. Règles : (1) **tout titre Korataki a un
+  plancher `min(<taille>, calc((100vw - 32px) / 13.8))`**, soit environ 13,8 capitales par ligne utile ; (2) **la coupure
+  doit tomber sur la bascule de couleur** (blanc puis or, une ligne chacun), c'est elle qui fait lire le titre en deux temps ;
+  (3) quand même ce plancher laisse 3 lignes, on ne descend pas la taille sous ~20 px : on REFORMULE, avec l'accord de
+  Thomas. Et l'interdit du 09/08 sort renforcé : la numérotation « 01 / » de M-Sport et la barre oblique de TGR devant
+  « / NEWS » sont deux variantes du surtitre-rubrique. Chez une écurie qui a 40 pages, elles servent à se repérer ; sur nos
+  5 pages, elles ne seraient qu'un gabarit.
+
