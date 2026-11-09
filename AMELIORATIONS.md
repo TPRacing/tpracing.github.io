@@ -1296,6 +1296,42 @@ une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se v
 
 ## Journal
 
+- 2026-11-09 (routine, AXE B : audit, dimension **SEO TECHNIQUE + résultats Google réels**, pas refaite depuis le
+  07/10 ; les 2 runs précédents étaient B puis C). T7 non monté : clone du scratchpad (le T7 aura 2 commits de retard,
+  `git pull` à son retour).
+  **Ce qu'on VOIT dans Google** (Chrome connecté, hl=fr) : `site:tpracing.github.io` = 2 résultats, et les deux défauts
+  du 07/10 sont résorbés : l'extrait de l'accueil lit « Cap sur la Caterham » (plus « laCaterham ») et la fiche pilote
+  porte le titre actuel. « Thomas Papone pilote » : pilote.html 1er, accueil 2e, devant Instagram, Le Progrès, Kartcom,
+  LinkedIn, MyCitee. Le nom de site affiché reste « GitHub » (côté Google, rien à corriger dans le code).
+  **Search Console** : 3 mois = 15 clics, 91 impressions, CTR 16,5 %, position moyenne 6,8 ; requêtes « tpracing »
+  (7 clics / 12 impressions), « papone », « tp racing ». 2 pages indexées, 0 non indexée : contact.html et
+  mentions-legales.html ne sont même pas DÉCOUVERTES, alors qu'elles sont liées depuis le menu et le pied des 5 pages.
+  Le sitemap est TOUJOURS en « Impossible de récupérer », dernière lecture le 4 août (14 semaines), fichier servi sain
+  (200, `application/xml`).
+  **CORRIGÉ (commit 226e165, EN LIGNE)** : la sonde « texte collé » du 07/10, réécrite (elle doit compter les nœuds
+  d'espace comme séparateurs, sinon tout le site sort en faux positif), trouve 3 collages sur l'accueil, nés avec la
+  fiche technique Academy (commit 718e2a3, après l'audit du 07/10) : « Moteur170 chevaux », « Boîte5 rapports »,
+  « Saison 202712 courses » (`</dt><dd>` sans espace). Un espace posé entre `</dt>` et `<dd>` ; géométrie de chaque
+  élément de la fiche relevée avant/après à 320, 375, 390, 768, 1024, 1280, 1680 = identique. Sonde rejouée : 0
+  collage sur les 5 pages, 0 erreur console.
+  **Vérifié sain** : titles 27 à 65 caractères, descriptions 102 à 151, 1 h1 par page, aucun niveau sauté, canonicals
+  justes, 404 en noindex, JSON-LD reparsés (6 blocs), 0 image sans alt (les 2 `<img>` de pilote.html sont dans un
+  commentaire du feed), 0 id en double, 0 ancre morte, 0 fichier local manquant, `lang="fr"` partout. Sitemap : lastmod
+  de l'accueil (02/11) et du pilote (06/11) = derniers changements de CONTENU ; les commits plus récents (03, 06, 08/11
+  sur l'accueil, 24/10 sur contact, 27/10 sur les mentions) sont de la mise en forme ou un lien technique, laissés
+  tels quels (même doctrine que le 07/10).
+  **Écarté, avec motif** : ajouter la fiche Kartcom (`kartcom.com/pilot/papone-thomas/`, un seul résultat : Ligue
+  Rhône-Alpes, Lavilledieu, 08/03/2020, P14 en finale Nationale) au `sameAs` du nœud Person : identité très probable
+  mais non confirmée, et un `sameAs` affirme que c'est la même personne. Question à Thomas ci-dessous.
+  **Rappel groupé des questions ouvertes (1 fois par semaine)** : (a) **Search Console, à faire par Thomas** (action
+  sur le compte, hors mandat de la routine) : Sitemaps > supprimer puis renvoyer `sitemap.xml` (bloqué depuis le 4
+  août), puis Inspection de l'URL > Demander l'indexation pour `contact.html` et `mentions-legales.html` (jamais
+  découvertes). (b) La fiche Kartcom 2020 (Lavilledieu, P14) est-elle bien la tienne ? Si oui, elle rejoint le
+  `sameAs`. (c) Sporteed.fr présente TPRacing en « Moto cross » (fiche annuaire de Lapeyrouse) : à corriger sur leur
+  site par l'association si tu le souhaites. (d) Les 3 titres à reformuler soumis le 08/11 (« Envie d'écrire la suite
+  avec nous ? », « Tout a commencé en 1987 », « La suite s'écrit maintenant » trop longs en mobile). (e) Kit presse
+  téléchargeable (02/11). Prochain run : A ou C.
+
 - 2026-11-08 (routine, AXE C : veille par captures, angle neuf **L'INTERTITRE**, comment une section s'annonce ; les jours
   précédents : A puis B le 06/11, A puis B le 03/11, dernière veille le 02/11 ; commit d0552da, EN LIGNE). T7 monté, `git pull`
   à jour. 9 sites ouverts, 7 regardés en 1280 et 390 (McLaren, Ferrari, VCARB, Toyota Gazoo Racing, M-Sport, Rapha, Kart
