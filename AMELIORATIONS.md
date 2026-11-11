@@ -460,7 +460,7 @@ Actionnables sans contenu de Thomas :
       (le volet diagonal s'inverse) + morph galerie→lightbox en same-document (la micro-tâche du 21/07, faite dans le
       même chantier) — source : developer.chrome.com/blog/view-transitions-in-2025 (Firefox 144 = same-document Baseline,
       SANS les types → enhancement) — FAIT 05/08
-- [ ] Séparateurs SVG dans le marquee : glyphe or trait fin (damier/chevron) entre les mots, façon signalétique de bord de
+- [x] ~~Séparateurs SVG dans le marquee~~ SANS OBJET le 11/11 (aucun `.marquee` posé depuis la v3) : glyphe or trait fin (damier/chevron) entre les mots, façon signalétique de bord de
       piste — source : trionn.com (croix SVG inline entre les .marquee-text-item, vérifié dans le HTML)
 - [ ] Labels Bebas « décodés » façon écran de chronométrage au premier reveal (~400 ms, cycle A-Z/0-9, JAMAIS sur les titres
       Korataki, coupé en reduced-motion) — source : cadillacf1team.com (composant ScrambleText, vérifié dans le HTML)
@@ -1221,8 +1221,8 @@ sous 12 px, cibles tactiles sous 24 px, résolution réelle des images) puis cap
 ### Constats de l'audit PERF du 06/11 (mesure sur la prod, 5 pages)
 
 Corrigé le jour même, voir Journal. Restes de faible valeur, à faire seulement s'ils tombent sur la route d'un autre chantier :
-- [ ] `frise-caterham-volant` et `frise-kart-gold` (900 px, 49 et 61 Ko) servis à DPR 1 pour 331 et 396 px : une taille 540w ferait gagner environ 50 Ko au scroll desktop DPR 1.
-- [ ] `pilote-simu` : `sizes` à 96vw pour 87vw réels à 768 DPR 2 (prend le `-xl` de 139 Ko, besoin 1 340 px). Mesurer de 481 à 900 px avant de corriger.
+- [x] `frise-caterham-volant` et `frise-kart-gold` : FAIT 11/11 (commit 2ada1bc). Mesure corrigée : en `cover`, le besoin réel à DPR 1 est de 354 à 603 px (et non 331/396, qui étaient les boîtes), donc une taille 600w (et non 540w) : 27 et 29 Ko AVIF au lieu de 49 et 61, ratio ≥ 1,04 à toutes les largeurs DPR 1. Reste connu : à DPR 2 desktop, 0,75 à 0,93 (le 900 publié est le plus grand fichier existant ; originaux sur le T7).
+- [x] `pilote-simu` : FAIT 11/11 (commit 2ada1bc). Mesuré : le `sizes` 96vw était JUSTE (boîte 744 px à 768 = 97vw) ; le vrai défaut était le trou entre 1400w et 2800w. Ajout d'une taille `-l` 2000w (110 Ko au lieu du `-xl` 139 Ko) de 768 à 1024 DPR 2 et à 1680 DPR 1. Et le `-pl` 1360w qui manquait (0,64 à 0,94 de 481 à 700 DPR 2 → 1,01 à 1,49), sans original : le cadre du `-p` est retrouvé DANS le `-xl` par SIFT (x 484-2314, y 0-3734, échelle 2,128), écart au `-p` < 1,2/255 une fois réduit. `frise-2015` n'a pas de `-pl` possible : le `-xl` (2600 px) n'offre pas plus de pixels que le `-p` sur ce cadre portrait, limite de la photo source de 2015.
 - [ ] `contact-tete` desktop sans `srcset` (ratio 2,5 à 1280 DPR 1, 37 Ko) : le `-m` a un autre cadre, il faudrait une 3e taille au cadre desktop. Gain faible.
 - [ ] Longue tâche de 359 ms vue une fois sur mentions-legales (téléphone, CPU x4) : à revérifier.
 
@@ -1295,6 +1295,20 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-11 (routine, AXE A : complétude technique, les deux restes « tailles d'image » de l'audit perf du 06/11 et le
+  `-pl` simu resté ouvert depuis le 03/11 ; les 2 runs précédents étaient C puis B). T7 non monté : clone du scratchpad
+  (le T7 aura 3 commits de retard, `git pull` à son retour).
+  **Fait (commit 2ada1bc, EN LIGNE)** : sur pilote.html, (1) `pilote-simu-pl` 1360w servi de 481 à 700 px comme les
+  autres `-pl` (ratio DPR 2 de 0,64-0,94 à 1,01-1,49), tiré du `-xl` par recadrage SIFT, sans original ; (2)
+  `pilote-simu-l` 2000w entre le 1400 et le `-xl` 2800 (768-1024 DPR 2 et 1680 DPR 1 : 110 Ko au lieu de 139) ; (3)
+  `frise-caterham-volant-m` et `frise-kart-gold-m` en 600w (27 + 29 Ko au lieu de 49 + 61 à DPR 1, qualité AVIF calée
+  sur celle des 900 publiés, planche zoom x2 regardée). Re-mesure 13 largeurs x DPR 1 et 2 : plus aucun ratio < 1 à
+  DPR 1, plus de sur-livraison x1,9. 0 erreur console, 0 débordement à 375, 560, 1280 ; captures regardées.
+  **Corrigé dans le backlog** : l'audit du 06/11 lisait la BOÎTE (331/396 px) et non l'image recadrée en `cover` (354 à
+  603 px) ; et le `sizes` 96vw de la simu n'était pas faux. **Écarté** : `-pl` de `frise-2015` (la source de 2015 n'a
+  pas plus de pixels que le `-p` sur ce cadre) ; séparateurs SVG du marquee (ligne 463) SANS OBJET, la v3 ne pose plus
+  de marquee. Pas de question nouvelle à Thomas (rappel groupé fait le 09/11).
 
 - 2026-11-09 (routine, AXE B : audit, dimension **SEO TECHNIQUE + résultats Google réels**, pas refaite depuis le
   07/10 ; les 2 runs précédents étaient B puis C). T7 non monté : clone du scratchpad (le T7 aura 2 commits de retard,
