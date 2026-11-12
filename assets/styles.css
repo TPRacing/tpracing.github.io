@@ -515,7 +515,12 @@ main ul > li::before {
 
 h3 { font-family: var(--f-label); font-weight: 700; font-size: 1.45rem; letter-spacing: .07em; text-transform: uppercase; }
 
-.lead { color: var(--gris); max-width: 720px; font-size: 1.02rem; }
+/* Chapeau : le premier texte sous un titre de tête. Veille du 12/11 (le texte courant) : chez Charles
+   Leclerc le chapeau vaut 1,5 fois le texte courant et prend l'encre du titre ; le nôtre faisait 1,02 rem
+   en gris, soit le texte courant à 2 % près (« tout à la même échelle », signal de gabarit). Il passe
+   à environ 1,28 fois le corps et prend une couleur de la CHARTE (marine sur clair, blanc cassé sur
+   sombre), le gris restant au texte courant. Mesure gardée sous 45 signes par ligne. */
+.lead { color: var(--marine); max-width: 34em; font-size: clamp(1.1rem, .94rem + .5vw, 1.28rem); line-height: 1.55; text-wrap: balance; }
 .lead strong { color: var(--encre); }
 
 /* ---------- Boutons ---------- */
@@ -672,7 +677,7 @@ section { padding: 92px 6%; position: relative; }
   color: var(--blanc);
 }
 .section-marine h2 { color: var(--blanc); }
-.section-marine .lead { color: #aeb6c8; }
+.section-marine .lead { color: var(--blanc); }
 .section-marine .lead strong { color: var(--blanc); }
 
 /* pente unique du site : celle du marquee (1,3 deg = 2.3vw sur 100vw) */

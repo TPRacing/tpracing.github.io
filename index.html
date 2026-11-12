@@ -183,7 +183,7 @@
     .hero h1 { margin: 0; color: var(--blanc); font-size: clamp(1.9rem, 3.6vw, 3.4rem); line-height: 1.03; letter-spacing: 0; }
     .hero h1 span { display: block; white-space: nowrap; }
     .hero h1 .or { color: var(--or); }
-    .hero .texte p { margin-top: 24px; color: var(--gris-c); max-width: 440px; }
+    .hero .texte p { margin-top: 24px; color: var(--blanc); max-width: 440px; }
     .hero .actions { margin-top: 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 26px; }
     .montage { position: relative; width: 100%; max-width: 840px; aspect-ratio: 820 / 740; justify-self: end; margin-bottom: -120px; z-index: 5; --px: 0; --py: 0; }
     /* les <picture> sont en display: contents (styles.css) : on positionne les images elles-mêmes */
@@ -313,7 +313,7 @@
     .partenaires { background: var(--blanc); color: var(--marine); padding: 130px max(20px, 4.4vw) 140px; text-align: center; clip-path: polygon(0 0, 100% var(--pente), 100% 100%, 0 100%); margin-top: calc(var(--pente) * -1); }
     .partenaires h2 { margin: 0 0 12px; font-size: clamp(min(1.6rem, calc((100vw - 32px) / 13.8)), 3.4vw, 3rem); }
     .partenaires h2 .or { color: var(--or); }
-    .partenaires .lead { margin: 0 auto 14px; color: var(--gris-f); max-width: 560px; }
+    .partenaires .lead { margin: 0 auto 14px; max-width: 560px; }
     .fidelite { margin: 0 auto 48px; font-family: var(--f-label); font-weight: 700; font-size: 1.12rem; letter-spacing: .1em; text-transform: uppercase; }
     .fidelite b { color: #8F661A; }   /* or foncé à 4,8:1 (#9A6A10 faisait 4,4:1, audit a11y 11/10) */
     .arguments { max-width: 1100px; margin: 0 auto 56px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; text-align: left; border-top: 2px solid var(--marine); }
@@ -359,7 +359,6 @@
          et poussait tout le bloc hors de l'écran sous 360 px (titres et texte rognés) */
       .hero { grid-template-columns: minmax(0, 1fr); padding: 100px 20px 0; gap: 10px; min-height: auto; }
       .hero h1 { font-size: min(1.9rem, 7.6vw); }
-      .hero .texte p { font-size: .95rem; }
       .montage { justify-self: center; margin-bottom: -60px; }
       .kart { height: 25vh; bottom: 22%; }
       .histoire .fond-vert { height: 36%; }
@@ -578,7 +577,7 @@
   <header class="hero grain">
     <div class="texte">
       <h1><span>Cap sur la</span> <span class="or">Caterham</span></h1>
-      <p>Association de sport automobile. Après le karting et la monoplace, Thomas Papone prépare son entrée en Caterham Academy.</p>
+      <p class="lead">Association de sport automobile. Après le karting et la monoplace, Thomas Papone prépare son entrée en Caterham Academy.</p>
       <div class="actions"><a class="btn btn-or" href="#partenaires">Devenir partenaire</a> <a class="lien-or" href="pilote.html">Voir le parcours</a></div>
     </div>
     <div class="montage" id="montage" aria-hidden="true">
