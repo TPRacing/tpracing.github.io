@@ -177,6 +177,12 @@ langage étranger, elle ne passe pas.
   une pièce. Ordre de préférence, désormais : (1) lier le mouvement au lecteur,
   (2) le supprimer, (3) lui donner une commande visible.
 
+- **Trois niveaux de texte, pas deux** (veille du 12/11, Leclerc regardé en 1280 et 390) : titre Korataki ; puis le
+  CHAPEAU (`.lead`), Inter environ 1,28 fois le corps, interligne 1,55, lignes équilibrées (`text-wrap: balance`), au plus
+  45 signes, et en couleur de la CHARTE (marine sur clair, blanc cassé sur sombre) ; puis le texte courant, Inter 16 px,
+  interligne 1,75, en gris, au plus 75 signes par ligne. Un seul chapeau par section, toujours juste sous le titre. Un
+  chapeau qui a la taille et la couleur du texte courant n'est pas un chapeau : c'est le signal « tout à la même échelle ».
+
 ## 3. Interdits (chaque ligne vient d'un rejet réel de Thomas)
 
 - **Les traces de pneus larges et grainées** (« ça fait trace de tracteur », 08/10) puis **la pluie
@@ -240,6 +246,13 @@ Les quatre doivent passer. Sinon : écarté, et on note pourquoi au backlog (les
 motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
+
+- 2026-11-12 (veille LE TEXTE COURANT, 6 sites regardés et mesurés, puis nos 5 pages) : **la hiérarchie se joue aussi
+  sous le titre.** Charles Leclerc ouvre chaque chapitre par un chapeau 1,5 fois plus grand que le texte et à l'encre du
+  titre ; McLaren Heritage, Leica et Rapha montrent l'inverse (colonne de 81 à 87 signes, ou sérif à 12 px) et lisent
+  « page de blog ». Chez nous, `.lead` était le texte courant à 2 % près. Règle maison posée en section 2 : trois niveaux,
+  le chapeau prend une couleur de la charte, le gris reste au texte courant. Écartés : papier millimétré (langage étranger),
+  texte de graisse 100 (illisible en petit), filet coloré court sous les titres (gabarit corporate).
 
 - 2026-11-06 (finition, page pilote sur Retina, crops à 100 % avant/après sur 6 photos) : **une photo retouchée ne se ré-étalonne
   pas, on lui rend son détail.** Sur le simulateur détouré et la photo de téléphone de 2015, refaire l'étalonnage depuis l'original

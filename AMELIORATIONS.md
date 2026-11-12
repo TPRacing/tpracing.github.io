@@ -96,6 +96,39 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       FAIT le 25/10 (commit 21a1fbc) : Alès et Lédenon refaits, Magny-Cours était déjà la boucle GP seule ; Dijon et Val de
       Vienne nettoyés d'un aller-retour parasite.
 
+### Idées de la veille 12/11 (angle neuf : LE TEXTE COURANT, comment un site de course met en page ce qu'il raconte)
+
+Méthode : Chrome CDP + Playwright, 1280 et 390, vues calées sur les deux plus longs paragraphes de chaque page (et non
+plus à des hauteurs fixes), bandeaux de consentement masqués par CSS, jamais acceptés ; chaque paragraphe mesuré
+(police, taille, interligne, graisse, couleur, largeur, signes par ligne). Regardés : charlesleclerc.com,
+mclaren.com/racing/heritage, prodrive.com/about-us, leicawelt.com (hors sport, marque forte), rapha.cc/fr/fr/journal,
+singervehicledesign.com. Puis nos 5 pages mesurées de la même façon. **Morts ou écartés** : tudorwatch.com (Access
+Denied Akamai), hagerty.com/media (403 CloudFront), astonmartinf1.com/en-GB/team (404), sodikart.com/fr (modale réseaux
+qui couvre la page), pierregasly.com (boutique, aucun texte), lando.com (Edward Lando, pas le pilote), williamsf1.com/heritage
+(rien ne se rend hors défilement réel).
+
+- [x] **Le chapeau, vrai palier entre le titre et le texte courant** (VU chez Charles Leclerc, chapitre « The Driver » :
+      le premier paragraphe sous le kicker est en encre pleine à environ 22 px, le texte courant suit à 15 px en colonne
+      de 37 signes, soit un écart de 1,5 ; mécanisme : deux classes de paragraphe, aucun effet). **Chez nous** : `.lead`
+      valait 1,02 rem en gris, le texte courant 1 rem en gris, donc la même chose à 2 % près, le signal « tout à la même
+      échelle » de la liste des gabarits. **Pourquoi c'est TPRacing** : c'est le chapeau de la presse sportive (L'Équipe,
+      Autohebdo), et le site cite cette presse dans « Ils parlent de nous » ; le chapeau prend une couleur de la CHARTE
+      (marine sur clair, blanc cassé sur sombre) et laisse le gris au seul texte courant. FAIT le 12/11 (voir Journal).
+- [ ] **Une colonne étroite accolée à une petite photo d'archive** (VU chez Leclerc : texte courant de 283 px, 37
+      signes, à côté d'une vignette plus petite que le bloc de texte ; en 390, la colonne garde une marge droite d'environ
+      80 px, le texte ne va jamais bord à bord). Pourquoi c'est TPRacing : la frise de pilote.html (2015, karting, Caterham)
+      pourrait porter un récit court par photo. **BLOQUÉ contenu** : ces textes sont personnels, à écrire par Thomas.
+- **Écarté : le papier millimétré en fond** (VU chez Leclerc, grille fine grise sous tout le site). Langage étranger (ni
+  damier ni grain), et le grain argentique tient déjà la matière.
+- **Écarté : le texte très fin blanc sur marine** (VU chez Prodrive : Plus Jakarta Sans graisse 100, 16 px, 65 signes) :
+  lisible sur capture seulement en grand, et Inter n'est chargé qu'en 400 et plus. Le **filet court coloré sous chaque
+  titre** du même site est une signature de gabarit corporate, écarté aussi.
+- **Contre-exemples mesurés** (règle tirée, voir DA) : McLaren Heritage en colonne unique de 81 signes, gris, 18 px (page
+  de blog générique) ; Leica, chapeau centré de 87 signes (l'œil perd la ligne suivante) ; Rapha Journal, sérif à 12 px.
+  Singer confirme l'inverse utile : texte courant gris minuscule face à un titre condensé géant, le contraste d'échelle
+  fait le luxe. **Nos mesures** : texte courant Inter 16 px, interligne 1,75, 36 à 62 signes, sauf le paragraphe des
+  origines de pilote.html (73 signes à 1280) et la ligne d'association de contact.html (une seule phrase, sans objet).
+
 ### Idées de la veille 08/11 (angle neuf : L'INTERTITRE, comment une section de site de course s'annonce)
 
 Méthode : 9 sites capturés en 1280 et 390 (Chrome CDP + Playwright, 5 vues par site + pied, bandeaux de
@@ -1295,6 +1328,19 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-12 (routine, AXE C : veille par captures, angle neuf **LE TEXTE COURANT** ; les jours précédents : C le 08/11, B
+  le 09/11, A le 11/11 ; commit 3a5bb76, EN LIGNE). T7 non monté : clone du scratchpad (le T7 aura 5 commits de retard,
+  `git pull` à son retour). 13 sites ouverts, 6 regardés en 1280 et 390 avec leurs paragraphes mesurés (Leclerc, McLaren
+  Heritage, Prodrive, Leica Welt, Rapha Journal, Singer), puis nos 5 pages mesurées de la même façon. **Constat central** :
+  chez Leclerc le chapeau vaut 1,5 fois le texte courant et prend l'encre du titre ; notre `.lead` faisait 1,02 rem en
+  gris, le texte courant à 2 % près. **Fait** : le chapeau devient un vrai palier, `clamp(1.1rem, .94rem + .5vw, 1.28rem)`
+  (20,5 px à 1280, 17,6 px en téléphone), interligne 1,55, `text-wrap: balance`, couleur de la charte (marine sur clair,
+  blanc cassé sur sombre) ; posé sur le hero de l'accueil (classe `lead` ajoutée), « Ils roulent avec nous », l'en-tête de
+  contact et la 404. Vérifié en local à 1280x900, 1280x720 (boutons du hero visibles à 606 px), 390, 320 : 0 erreur
+  console, débordements identiques à la prod (images du kart et SVG décoratifs rognés), lignes équilibrées regardées.
+  Fausses pistes : 7 sites morts ou hors sujet (liste au backlog). Pas de question nouvelle à Thomas. Prochain run : B
+  (accessibilité non auditée depuis le 11/10) ou A.
 
 - 2026-11-11 (routine, AXE A : complétude technique, les deux restes « tailles d'image » de l'audit perf du 06/11 et le
   `-pl` simu resté ouvert depuis le 03/11 ; les 2 runs précédents étaient C puis B). T7 non monté : clone du scratchpad
