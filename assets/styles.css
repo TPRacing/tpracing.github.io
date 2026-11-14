@@ -585,6 +585,14 @@ nav .logo img { height: 50px; width: auto; }
 /* les logos portent width/height (anti-CLS) : sans ceci, max-width:100% + parent
    dimensionné par le contenu = pourcentage cyclique, largeur effondrée à 0 */
 nav .logo img, footer img { max-width: none; }
+/* Contraste forcé (Windows) : les fonds passent à la couleur système, pas les images.
+   La règle de la charte suit le fond réel : logo blanc sur fond sombre, couleur sur fond clair. */
+@media (forced-colors: active) and (prefers-color-scheme: dark) {
+  nav .logo img { content: url(logo-blanc.png); }
+}
+@media (forced-colors: active) and (prefers-color-scheme: light) {
+  footer img[src$="logo-blanc.png"] { content: url(logo-couleur-degrade-nav.png); }
+}
 nav ul {
   display: flex;
   align-items: center;
