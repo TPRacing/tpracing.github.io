@@ -1055,3 +1055,12 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   « / NEWS » sont deux variantes du surtitre-rubrique. Chez une écurie qui a 40 pages, elles servent à se repérer ; sur nos
   5 pages, elles ne seraient qu'un gabarit.
 
+- 15/11 (audit accessibilité, pas de veille) : **deux règles durcies par la mesure.** (1) Un libellé ATTÉNUÉ sur fond
+  sombre (étape inactive, état secondaire) ne descend jamais sous 60 % de blanc cassé : le rail de la frise de
+  pilote.html était à 38 % (3,4:1 sur le marine des chapitres, capture `rail_avant_1.png` de l'audit), il passe à 60 %
+  (6:1). La hiérarchie actif/inactif tient par le trait rouge de 34 px et le blanc plein, pas par l'effacement du texte.
+  (2) La règle « logo couleur sur clair, blanc sur sombre » suit le fond RÉEL, y compris quand c'est le système qui le
+  choisit : en contraste forcé Windows les fonds deviennent noirs ou blancs mais les images restent telles quelles, le
+  logo couleur de l'en-tête finissait en T marine sur noir. Remède `content: url()` dans
+  `@media (forced-colors: active) and (prefers-color-scheme: dark|light)`, sans toucher au rendu normal.
+

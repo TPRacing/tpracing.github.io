@@ -1098,6 +1098,22 @@ Pour la routine du feed Instagram (`maj-feed-insta-site`, section « Les dernier
   première tuile, mais si le `:focus-within` disparaissait un jour il faudrait remonter le bouton
   avant la bande.
 
+### Constats de l'audit ACCESSIBILITÉ du 15/11 (5 pages x 1280 et 390, axe-core 4.10.2 WCAG 2.2 AA + contraste au pixel + parcours clavier + contraste forcé + mouvement réduit)
+
+- [x] **Étapes inactives du rail de la frise (pilote.html) à 3,4:1** (`.rail a`, 15 px, blanc cassé à 38 % sur le marine
+  des chapitres). Passé à 60 % : 6:1 sur #1E2635, 6,5:1 sur #141B28. L'étape active reste blanc plein + trait rouge 34 px.
+- [x] **Contraste forcé Windows, jamais audité avant** : les fonds passent aux couleurs système, pas les images. En thème
+  sombre le logo couleur de l'en-tête finissait en T marine sur noir ; en thème clair le logo blanc du pied aurait
+  disparu sur blanc. `content: url()` sous `(forced-colors: active) and (prefers-color-scheme: …)` : logo blanc sur fond
+  sombre, couleur sur fond clair, rendu normal inchangé (vérifié dans les 3 modes, captures). Le reste tient en contraste
+  forcé : boutons biseautés lisibles en plaque, titres sur aplat, focus visibles.
+- [ ] **L'or sur clair** (« avec nous », 2,37:1 ; « Le volant, lui, se transmet. » de la 404, 2,37:1) : toujours la
+  question du 15/07 à Thomas, rien changé.
+- Propre : 0 autre violation axe ; les 2 alertes sur « Le volant / se transmet » de l'accueil sont un artefact
+  (titre lu avant sa révélation au scroll), mesuré en place au pixel il passe. Parcours Tab : 42/35/24/23/22 arrêts en
+  1280 et 40/28/22/21/20 en 390, anneau visible partout, aucun focus couvert ni hors écran, aucune cible < 24 px. 0
+  animation en cours sous `prefers-reduced-motion`, 0 erreur console.
+
 ### Constats de l'audit ACCESSIBILITÉ du 11/10 (5 pages x 1280 et 390, axe-core 4.10 WCAG 2.2 AA + parcours clavier + espacement de texte 1.4.12)
 
 - [x] **Labels de la frise de pilote.html à 4,2:1** (« Simulateur / chaque semaine », « École Actua ») : le
@@ -1328,6 +1344,16 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-15 (routine, AXE B : audit **ACCESSIBILITÉ**, le précédent datait du 11/10 ; les jours précédents : C le 08/11,
+  B le 09/11, A le 11/11, C le 12/11 ; commit 444e54a, EN LIGNE). T7 non monté : clone du scratchpad (le T7 aura 8 commits
+  de retard, `git pull` à son retour). axe-core 4.10.2 sur 5 pages x 1280/390, contraste mesuré au pixel sur les 221
+  nœuds ambigus, parcours Tab complet, puis une dimension NEUVE : le contraste forcé Windows. **Corrigé** : étapes
+  inactives du rail de la frise 3,4 → 6:1 ; logo de l'en-tête et du pied selon le fond réel en contraste forcé (blanc
+  sur sombre, couleur sur clair). Vérifié : les 3 modes capturés et regardés, 0 erreur console, 0 animation en mouvement
+  réduit, débordements identiques (décors rognés connus). Faux positif écarté : « Le volant se transmet » lu par axe
+  avant sa révélation. Reste : l'or sur clair (question du 15/07). Rappel groupé des questions ouvertes : fait le 09/11,
+  pas de nouvelle question. Prochain run : A ou C.
 
 - 2026-11-12 (routine, AXE C : veille par captures, angle neuf **LE TEXTE COURANT** ; les jours précédents : C le 08/11, B
   le 09/11, A le 11/11 ; commit 3a5bb76, EN LIGNE). T7 non monté : clone du scratchpad (le T7 aura 5 commits de retard,
