@@ -176,11 +176,51 @@
       max-width: 1180px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      /* (15/11) Trois cartes identiques au même format = l'interdit « template » de la DA.
+         Les canaux ont un ORDRE : l'email porte les dossiers, il prend toute la largeur
+         et son adresse devient l'élément trop grand de l'écran ; LinkedIn et les réseaux
+         se rangent dessous, deux par deux. (Essai écarté le jour même : l'email en
+         grande case sur deux rangées laissait 280 px de blanc plat au milieu de la carte.) */
+      grid-template-columns: 1fr 1fr;
       gap: 22px;
       position: relative;
       z-index: 1;
     }
+    .contact-une { grid-column: 1 / -1; display: flex; }
+    .contact-une .contact-carte {
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-rows: auto 1fr;
+      column-gap: 48px;
+      row-gap: 10px;
+      align-items: start;
+      padding: 38px 40px 36px;
+    }
+    .contact-une .contact-carte:hover { transform: none; box-shadow: none; }
+    .contact-une .contact-carte p { flex: none; max-width: 44ch; }
+    .contact-une h2 { font-size: 1.7rem; }
+    /* L'adresse elle-même est le lien : Bebas épais, encre marine, soulignée d'or,
+       calée en bas à droite face au texte. Le <wbr> place la coupure avant
+       l'arobase quand la ligne manque de place. */
+    .contact-adresse {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      align-self: end;
+      font-family: var(--f-label);
+      font-size: clamp(1.7rem, .9rem + 2.3vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      color: var(--marine);
+      text-decoration: underline;
+      text-decoration-color: var(--or);
+      text-decoration-thickness: 3px;
+      text-underline-offset: .18em;
+      overflow-wrap: anywhere;
+      transition: color .2s ease;
+    }
+    .contact-adresse:hover { color: var(--or); }
     .contact-carte {
       background: #fff;
       border: 1px solid rgba(30, 38, 53, .1);
@@ -256,36 +296,15 @@
     }
     .contact-info a { color: var(--marine); text-decoration: underline; text-decoration-color: rgba(212, 151, 38, .6); text-underline-offset: 3px; }
     .contact-info a:hover { color: var(--or); }
-    @media (max-width: 900px) { .contact-grille { grid-template-columns: 1fr; } }
-
-    /* Ligne d'action alignée d'une carte à l'autre (22/09). Tant que chaque carte
-       était une colonne flex isolée, la place du bouton suivait la longueur du
-       paragraphe : à 1280 px le bouton de la carte « Par email » tombait 34 px plus
-       bas que les deux autres, et l'écart changeait à chaque largeur. Or la règle
-       maison, tirée du contre-exemple de circuit-dijon-prenois.com le 19/08, dit
-       qu'une grille de cartes s'égalise sur la ligne des actions, pas sur le haut
-       du texte. Les trois cartes partagent donc les MÊMES rangées (titre, texte,
-       action, note) via subgrid : la rangée du texte prend la hauteur du plus long
-       des trois, et les boutons se posent sur une seule ligne.
-       Support vérifié sur caniuse le 22/09 : Chrome 117, Edge 117, Safari 16,
-       iOS Safari 16, Firefox 71, soit les quatre moteurs, donc un signe de DA que
-       l'iPhone rend aussi. Le @supports garde l'ancienne colonne flex en repli, et
-       la règle ne s'applique qu'au-dessus de 900 px : en une seule colonne, chaque
-       carte redevient indépendante et le gap de 22 px sépare les cartes entre elles.
-       La carte sans note laisse sa 4e rangée vide : un vide en pied de carte se
-       lit, un bouton désaligné se voit. */
-    @media (min-width: 901px) {
-      @supports (grid-template-rows: subgrid) {
-        .contact-grille { row-gap: 12px; }
-        .contact-carte {
-          display: grid;
-          grid-template-rows: subgrid;
-          grid-row: span 4;
-          gap: 0;
-        }
-        .contact-carte p { flex: none; }
-      }
+    @media (max-width: 900px) {
+      .contact-grille { grid-template-columns: 1fr; }
+      .contact-une .contact-carte { display: flex; padding: 32px 24px 28px; }
+      .contact-adresse { margin-top: 10px; align-self: flex-start; }
     }
+
+    /* (15/11) Le subgrid du 22/09 alignait les boutons de trois cartes posées côte à côte.
+       Depuis que l'email tient la grande case et que les deux autres s'empilent, aucune
+       rangée de boutons ne se compare plus horizontalement : la règle est retirée. */
   </style>
 </head>
 <body>
@@ -333,10 +352,12 @@
     <svg class="embleme-fond embleme-fond--or" viewBox="29 38 90 63" style="bottom: -50px; left: -12%;" aria-hidden="true"><use href="#tp-embleme"/></svg>
 
     <div class="contact-grille">
-      <div class="contact-carte rvl">
-        <h2>Par email</h2>
-        <p>Le canal des dossiers et des demandes détaillées : partenariat, presse, organisation. Écrivez-nous, on vous répond.</p>
-        <a class="btn btn-marine" href="mailto:contact.tpracing@gmail.com">contact.tpracing<wbr>@gmail.com</a>
+      <div class="frame contact-une rvl">
+        <div class="contact-carte">
+          <h2>Par email</h2>
+          <p>Le canal des dossiers et des demandes détaillées : partenariat, presse, organisation. Écrivez-nous, on vous répond.</p>
+          <a class="contact-adresse" href="mailto:contact.tpracing@gmail.com">contact.tpracing<wbr>@gmail.com</a>
+        </div>
       </div>
       <div class="contact-carte rvl" data-d="1">
         <h2>Sur LinkedIn</h2>
