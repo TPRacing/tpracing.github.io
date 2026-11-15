@@ -247,6 +247,13 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-11-15 (axe A, contact.html) : **une rangée de cartes égales dit « ces choses se valent » ; si elles ne se valent
+  pas, la mise en page doit le dire.** Les 3 canaux de contact étaient 3 cartes identiques alors que l'email porte les
+  dossiers. Règle : quand des éléments voisins ont un ORDRE, le premier prend la largeur et son contenu le plus concret
+  (ici l'adresse elle-même) devient l'élément trop grand ; il garde la famille (liseré marine ouvert d'or) et reçoit les
+  brackets `.frame` existants, pas une variante. Contre-épreuve vue à la capture : agrandir une carte en HAUTEUR sans
+  contenu à y mettre crée du blanc plat ; on agrandit en LARGEUR, là où le texte et l'objet peuvent se faire face.
+
 - 2026-11-12 (veille LE TEXTE COURANT, 6 sites regardés et mesurés, puis nos 5 pages) : **la hiérarchie se joue aussi
   sous le titre.** Charles Leclerc ouvre chaque chapitre par un chapeau 1,5 fois plus grand que le texte et à l'encre du
   titre ; McLaren Heritage, Leica et Rapha montrent l'inverse (colonne de 81 à 87 signes, ou sérif à 12 px) et lisent

@@ -96,6 +96,17 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
       FAIT le 25/10 (commit 21a1fbc) : Alès et Lédenon refaits, Magny-Cours était déjà la boucle GP seule ; Dijon et Val de
       Vienne nettoyés d'un aller-retour parasite.
 
+### Chantier du 15/11 (axe A) : les canaux de contact.html prennent un ordre
+
+- [x] **Les 3 cartes de contact étaient identiques au même format**, l'interdit « template » de la DA (constat en
+      REGARDANT les 5 pages à 1280 le matin, pas tiré du backlog). Les canaux n'ont pourtant pas le même rôle : l'email
+      porte les dossiers de partenariat. Fait (commit 27c9e51) : la carte email devient un bandeau pleine largeur, texte
+      à gauche, l'adresse elle-même en Bebas 44 px marine soulignée d'or à droite (le lien, plus de bouton), cadre à
+      brackets d'angle `.frame` ; LinkedIn et réseaux se rangent dessous, deux par deux, boutons toujours sur une ligne.
+      Textes inchangés. Le subgrid du 22/09 est retiré (plus de rangée de trois à aligner).
+- [ ] Écarté le jour même : l'email en grande case sur deux rangées à gauche (1,3fr / 1fr). Regardé à 1280 : 280 px de
+      blanc plat au milieu de la carte, la « plaque sur fond vide » de la liste des interdits.
+
 ### Idées de la veille 12/11 (angle neuf : LE TEXTE COURANT, comment un site de course met en page ce qu'il raconte)
 
 Méthode : Chrome CDP + Playwright, 1280 et 390, vues calées sur les deux plus longs paragraphes de chaque page (et non
@@ -1344,6 +1355,16 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-15, 2e run (routine du jour, AXE A : finition design ; le run de 00 h 35 était le B de la veille au soir, les
+  précédents C le 12/11, A le 11/11 ; commit 27c9e51, EN LIGNE). T7 non monté : clone du scratchpad (le T7 aura 10
+  commits de retard, `git pull` à son retour). Journée ouverte en REGARDANT les 5 pages à 1280 en CDP. Constat :
+  contact.html alignait encore 3 cartes blanches identiques, l'interdit « cartes toutes identiques ». **Fait** : l'email
+  passe en bandeau pleine largeur, son adresse devient l'élément trop grand de l'écran (Bebas 44 px à 1280, 27 px en
+  téléphone, coupure avant l'arobase à 320), brackets d'angle or de la galerie ; LinkedIn et réseaux dessous. Vérifié à
+  1680, 1280, 1024, 901, 900, 768, 390, 320 : 0 erreur console, aucun libellé rogné (`scrollWidth` contre
+  `clientWidth`), seul débordement l'emblème décoratif déjà connu, boutons des deux petites cartes sur une ligne.
+  Fausse piste : la grande case sur deux rangées (blanc plat). Pas de question nouvelle. Prochain run : C ou B.
 
 - 2026-11-15 (routine, AXE B : audit **ACCESSIBILITÉ**, le précédent datait du 11/10 ; les jours précédents : C le 08/11,
   B le 09/11, A le 11/11, C le 12/11 ; commit 444e54a, EN LIGNE). T7 non monté : clone du scratchpad (le T7 aura 8 commits
