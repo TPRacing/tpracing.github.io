@@ -1162,7 +1162,7 @@ Pour la routine du feed Instagram (`maj-feed-insta-site`, section « Les dernier
 Le défaut principal (bandeau qui démarre seul, sans arrêt possible sur écran tactile) a été corrigé le
 jour même. Ce qui suit a été trouvé et NON corrigé, faute d'être un défaut actif aujourd'hui.
 
-- [ ] **Ordre de fragilité dans le bloc de script d'index.html.** Onze fonctionnalités y vivent dans UN
+- [x] (16/11 : caduc, le bloc v3 n'a plus ces déréférencements) **Ordre de fragilité dans le bloc de script d'index.html.** Onze fonctionnalités y vivent dans UN
   seul `<script>` : bandeau, ligne de course, intro, compteurs, parallax, barre de nav, vidéo, emblème
   incliné, commande de la bande partenaires, lightbox. Une exception qui s'échappe de l'une **tue
   silencieusement toutes celles qui suivent** — le bloc entier cesse de s'exécuter. Or deux
@@ -1172,7 +1172,7 @@ jour même. Ce qui suit a été trouvé et NON corrigé, faute d'être un défau
   téléphone, posé le 06/09) et de TOUTE la lightbox. Rien ne casse aujourd'hui, les éléments existent sur
   les 5 pages ; le problème est l'ordre, qui met le plus fragile devant le plus important. Remède
   possible : deux gardes, ou couper le bloc en plusieurs `<script>` pour que la casse reste locale.
-- [ ] **Lightbox : deux tableaux indexés ensemble mais construits différemment.** `vues` est bâti par
+- [x] (16/11 : caduc, la lightbox a disparu avec la v3) **Lightbox : deux tableaux indexés ensemble mais construits différemment.** `vues` est bâti par
   `.map(...).filter(Boolean)`, qui SAUTE toute figure sans `<img>` dans son `.frame` ; il est ensuite
   indexé par le rang de `figures`, qui, lui, ne saute rien. Aujourd'hui 6 figures pour 6 vues, tout est
   aligné. Le jour où une figure de galerie n'a pas d'image, toutes les suivantes ouvrent la MAUVAISE
@@ -1183,11 +1183,11 @@ jour même. Ce qui suit a été trouvé et NON corrigé, faute d'être un défau
   (comparaison au caractère près), mais chaque correctif futur est à appliquer cinq fois, et le seul
   fichier JS externe du site (`assets/js/reflexes.js`, sur la 404) prouve que le socle existe déjà.
   À arbitrer : un `assets/js/socle.js` économiserait ~4 Ko de HTML mais ajoute une requête.
-- [ ] **Compteurs : repli sur `document.body`.** `new IntersectionObserver(...).observe(blocs[0] || document.body)`
+- [x] (16/11 : caduc, plus de compteurs) **Compteurs : repli sur `document.body`.** `new IntersectionObserver(...).observe(blocs[0] || document.body)`
   — si `.chiffres .num-outline` venait à disparaître, l'observateur se poserait sur `<body>` et
   `compte()` ferait un `parseInt` de tout le texte de la page. Sans effet visible (le garde `if (!fin)`
   rattrape), mais le repli ne veut rien dire : il vaudrait mieux ne rien observer.
-- [ ] **Speculation Rules : ce qui tourne AVANT la visite.** Les 5 pages déclarent
+- [x] (16/11 : corrigé, commit d29177b, les entrées attendent `prerenderingchange`) **Speculation Rules : ce qui tourne AVANT la visite.** Les 5 pages déclarent
   `prerender` en `eagerness: moderate` sur `/*` : la page préchargée exécute tout son JavaScript avant
   que le visiteur n'y arrive. L'intro s'en protège explicitement (`document.prerendering`), mais les
   compteurs de la bande chiffres, eux, sont déclenchés par un IntersectionObserver et peuvent avoir
@@ -1355,6 +1355,31 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-16 (routine, AXE B : audit, dimension **CONSOLE ET JS**, pas auditée depuis le 08/10 ; les jours précédents :
+  C le 12/11, B puis A le 15/11 ; commit d29177b, EN LIGNE). T7 non monté : clone du scratchpad (le T7 aura 12 commits
+  de retard, `git pull` à son retour). **Méthode** : Playwright CDP, dépôt servi par `route`, 5 pages (dont une URL
+  inconnue pour la 404) x 1280 et 375 x 4 scénarios : normal (intro, défilement complet), mouvement réduit, sans JS, et
+  un scénario NEUF, **stockage bloqué** (`sessionStorage` et `localStorage` qui lèvent une SecurityError, comme en
+  navigation privée stricte). Puis trois mesures neuves : requestAnimationFrame compté au repos, retour arrière
+  (bfcache), trace CDP des repeints au repos. **Sain** : 0 exception, 0 erreur console hors la 404 attendue, aucun
+  `.rvl` oublié, aucun texte resté invisible, sur les 40 cas ; sans JS tout s'affiche ; stockage bloqué = intro sautée
+  proprement, rien de cassé ; 0 appel rAF en 3 s de repos sur les 5 pages ; retour arrière et avance servis par le
+  bfcache (`pageshow` persisted = true). **2 défauts trouvés, CORRIGÉS** :
+  1. **pilote.html repeignait la page 61 fois par seconde au repos** (183 images en 3 s, trace CDP) : le halo du point
+     rouge « Saison 2027 » pulsait en `box-shadow`. Il devient un `::after` animé en `transform` + `opacity` : 0
+     repeint, même dessin au pixel (5 instants de la boucle comparés à la prod, écart max 3/255), anneau fixe conservé
+     en mouvement réduit.
+  2. **Les entrées de page se jouaient pendant le pré-rendu** (le constat « Speculation Rules » laissé ouvert le
+     12/09) : survoler un lien pré-rend la page cible, et l'entrée de la Caterham (accueil), les bandes cinéma
+     (pilote) et les apparitions du haut de contact.html partaient hors écran. Elles attendent désormais
+     `prerenderingchange`. **Le pré-rendu ne se mesure pas en CDP** : `PrerenderingDisabledByDevTools` sur toute session
+     attachée (Playwright, et même websocket brut sans émulation ni script injecté, essayé sur la prod). Vérifié par un
+     pré-rendu SIMULÉ (`document.prerendering` vrai puis événement à 3 s) : rien ne part avant, tout part après.
+  **Constats du 12/09 relus** : la lightbox et les compteurs n'existent plus dans le code (items caducs, cochés) ; la
+  fragilité d'ordre du bloc de script a disparu avec la v3 (accueil sans `navbar` ni `closest('.hero')` non gardé).
+  Reste ouvert : le code recopié sur 5 fichiers (ligne de course, barre de nav), toujours sans divergence.
+  Rappel groupé des questions ouvertes : fait le 09/11, pas de nouvelle question. Prochain run : A ou C.
 
 - 2026-11-15, 2e run (routine du jour, AXE A : finition design ; le run de 00 h 35 était le B de la veille au soir, les
   précédents C le 12/11, A le 11/11 ; commit 27c9e51, EN LIGNE). T7 non monté : clone du scratchpad (le T7 aura 10

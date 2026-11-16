@@ -1071,3 +1071,12 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   logo couleur de l'en-tête finissait en T marine sur noir. Remède `content: url()` dans
   `@media (forced-colors: active) and (prefers-color-scheme: dark|light)`, sans toucher au rendu normal.
 
+- 2026-11-16 (audit console et JS, pas de veille) : **un mouvement qui tourne en boucle se joue en `transform` et
+  `opacity`, jamais en `box-shadow`.** Le point rouge « Saison 2027 » du hero de pilote.html pulsait par un `box-shadow`
+  animé : trace CDP de 3 s au repos, 183 images repeintes (61 par seconde) tant que le hero restait à l'écran, contre 0
+  sur l'accueil et le contact. Le halo devient un calque à part (`::after`) qui grandit et s'efface : 0 repeint, et le
+  dessin est le même au pixel (planche `dot_planche.png` du scratchpad, écart maximal 3/255 à 5 instants de la boucle).
+  Corollaire : **une entrée de page ne se joue que devant le visiteur.** Les pages sont pré-rendues au survol d'un lien
+  (Speculation Rules) ; l'entrée de la Caterham, les bandes cinéma du hero pilote et les apparitions du haut de contact
+  se jouaient donc hors écran et le visiteur arrivait sur un hero figé. Elles attendent `prerenderingchange`.
+
