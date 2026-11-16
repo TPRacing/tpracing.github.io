@@ -155,9 +155,13 @@
     .hero-pilote .contenu-h { position: relative; z-index: 3; }
     .hero-pilote h1 { margin: 0; color: var(--blanc); font-size: clamp(2.5rem, 7vw, 6.75rem); line-height: .92; }
     .hero-pilote .sous { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 12px 30px; align-items: center; }
-    .direct { display: inline-flex; align-items: center; gap: 10px; font-family: var(--f-label); font-weight: 700; font-size: 1.06rem; letter-spacing: .1em; text-transform: uppercase; }
-    .direct::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--rouge); box-shadow: 0 0 0 4px rgba(193, 50, 33, .25); animation: pulse 2s infinite; }
-    @keyframes pulse { 50% { box-shadow: 0 0 0 9px rgba(193, 50, 33, 0); } }
+    .direct { position: relative; display: inline-flex; align-items: center; gap: 10px; font-family: var(--f-label); font-weight: 700; font-size: 1.06rem; letter-spacing: .1em; text-transform: uppercase; }
+    .direct::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--rouge); }
+    /* Le halo qui pulse est un calque à part animé en transform + opacity (composité) : l'ancien box-shadow
+       animé repeignait la page 61 fois par seconde tant que le hero restait à l'écran (audit JS du 16/11).
+       Même dessin : anneau de 4 px à 25 % au repos (échelle 1,8), 9 px et transparent à mi-course (2,8). */
+    .direct::after { content: ""; position: absolute; left: 0; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: rgba(193, 50, 33, .25); transform: scale(1.8); animation: pulse 2s infinite; pointer-events: none; }
+    @keyframes pulse { 50% { transform: scale(2.8); opacity: 0; } }
     .num { font-family: var(--f-label); font-weight: 700; font-size: 1.06rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gris-c); }
     .num b { font-family: var(--f-titre); font-size: 2.1rem; color: var(--or); vertical-align: -4px; margin-left: 6px; }
 
@@ -250,7 +254,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .js .hero-pilote .bande { transform: none; }
-      .direct::before { animation: none; }
+      .direct::after { animation: none; }
       .chapitre .carte { animation: none !important; }
     }
     @media print {
@@ -596,7 +600,11 @@
     document.querySelectorAll('.traces-fin').forEach(el => io.observe(el.parentElement));
 
     // Hero : les bandes noires s'ouvrent comme au cinéma
-    requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.add('pret')));
+    // Ouverture des bandes du hero. Page pré-rendue au survol d'un lien (Speculation Rules) : elle attend
+    // l'arrivée réelle du visiteur, sinon elle se jouait hors écran (audit JS du 16/11).
+    const ouvrir = () => requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.add('pret')));
+    if (document.prerendering) document.addEventListener('prerenderingchange', ouvrir, { once: true });
+    else ouvrir();
 
     // Frise : les vidéos ne jouent qu'à l'écran
     (function () {

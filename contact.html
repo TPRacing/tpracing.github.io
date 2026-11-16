@@ -439,7 +439,10 @@
       const io = new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vu'); io.unobserve(e.target); } });
       }, { threshold: 0.15 });
-      document.querySelectorAll('.rvl').forEach(el => io.observe(el));
+      // Page pré-rendue au survol d'un lien : les apparitions du haut de page attendent l'arrivée réelle (audit JS du 16/11)
+      const lancer = () => document.querySelectorAll('.rvl').forEach(el => io.observe(el));
+      if (document.prerendering) document.addEventListener('prerenderingchange', lancer, { once: true });
+      else lancer();
     })();
   </script>
 </body>

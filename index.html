@@ -849,7 +849,10 @@
         setTimeout(() => { if (intro.isConnected) intro.remove(); lancerReveals(); }, 5200);
       } else {
         if (intro) intro.remove();
-        lancerReveals();
+        // Page pré-rendue au survol d'un lien (Speculation Rules) : l'entrée du hero attend que le
+        // visiteur arrive vraiment, sinon elle se jouait hors écran et il trouvait un hero figé (audit JS du 16/11).
+        if (document.prerendering) document.addEventListener('prerenderingchange', lancerReveals, { once: true });
+        else lancerReveals();
       }
     })();
 
