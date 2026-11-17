@@ -100,6 +100,10 @@ langage étranger, elle ne passe pas.
 - Fiche technique (20/10) : une STATISTIQUE se pose en `<dl>` à trois niveaux, libellé or Bebas à mini-damier
   (12 px, cases de 3 px entières), chiffre Bebas blanc, précision Inter grise ; filets fins entre colonnes, et sur
   téléphone lignes de chronométrage, chiffre calé à droite. Le chiffre GÉANT reste réservé au numéro d'identité (47).
+- Légende en lisière (17/11) : une photo qui a besoin d'être NOMMÉE (année, discipline) porte sa légende sur son bord
+  gauche, verticale, lue de bas en haut comme l'impression du bord d'un négatif : Bebas Bold .8rem marine, interlettrage
+  .16em, « année / discipline », puis un filet or de 2 px qui monte et s'éteint. Ni sous la photo (registre presse), ni
+  dessus (on salit l'image). Posée sur les photos héritage de pilote.html ; pas de crédit photo dedans (règle charte).
 - Grain argentique global (SVG feTurbulence) + pointillés carbone sur les sections marine.
 - Photos : VRAIES photos de Thomas et de la famille, en NOUVEAUX fichiers, originaux jamais
   modifiés. **Et depuis le 22/09, un ÉTALONNAGE MAISON commun aux photos de reportage**
@@ -246,6 +250,18 @@ Les quatre doivent passer. Sinon : écarté, et on note pourquoi au backlog (les
 motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
+
+- 2026-11-17 (veille LA LÉGENDE PHOTO, captures 1280 et 390 de magnumphotos.com, hodinkee.com, the-race.com,
+  formula1.com, goodwood.com/grr, petrolicious.com, motorsportmagazine.com, 24h-lemans.com, mclaren.com/racing/heritage) :
+  **une légende de site de course n'est pas une phrase de magazine, c'est une étiquette.** VU : Magnum et Hodinkee
+  légendent en phrase, sous la photo, gris, calée au bord gauche de l'image (registre éditorial) ; Le Mans en capitales
+  condensées 14 px à 50 % de blanc, légende à gauche et crédit à droite sur la même ligne (`figcaption` en flex
+  `justify-content: space-between`) ; Motor Sport pose le crédit À LA VERTICALE contre le bord droit de la photo
+  (`position: absolute; right: 0; bottom: 0` + `transform: rotate(-90deg)`, 10,8 px italique gris) ; The Race,
+  Goodwood, Petrolicious et McLaren ne légendent pas. Retenu : le geste vertical de Motor Sport, dit avec nos mots
+  (Bebas Bold, slash, filet or) et réservé à ce qu'il faut nommer. Mécanisme maison : `writing-mode: vertical-rl` +
+  `rotate(180deg)` dans une colonne de grille de la `figure`, ce qui laisse la légende hors de l'image et à sa hauteur
+  exacte. ⚠️ `picture` est en `display: contents` sur le site : c'est l'`img` qu'on place dans la grille.
 
 - 2026-11-15 (axe A, contact.html) : **une rangée de cartes égales dit « ces choses se valent » ; si elles ne se valent
   pas, la mise en page doit le dire.** Les 3 canaux de contact étaient 3 cartes identiques alors que l'email porte les

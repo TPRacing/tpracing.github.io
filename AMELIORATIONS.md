@@ -107,6 +107,24 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [ ] Écarté le jour même : l'email en grande case sur deux rangées à gauche (1,3fr / 1fr). Regardé à 1280 : 280 px de
       blanc plat au milieu de la carte, la « plaque sur fond vide » de la liste des interdits.
 
+### Idées de la veille 17/11 (angle neuf : LA LÉGENDE PHOTO, comment un site de course nomme ce que montre une image)
+
+Sites REGARDÉS en 1280 et 390 (planches dans le scratchpad du jour) : Magnum, Hodinkee, The Race, Formula 1, Goodwood
+GRR, Petrolicious, Motor Sport Magazine, 24h du Mans, McLaren Heritage. Morts ou bloquants : classicdriver.com (403),
+motorsportimages.com (403) ; en mobile, Petrolicious et Motor Sport font pendre la capture Playwright (DPR 2).
+
+- [x] **Légende en lisière des photos héritage de pilote.html** (VU chez Motor Sport : crédit vertical contre le bord
+      de la photo, `rotate(-90deg)` en absolu). Les deux photos de Patrice (kart 1987, Formule Ford 1988) n'étaient
+      pas nommées : on ne savait pas laquelle était laquelle sans lire l'alt. Pourquoi c'est TPRacing : la date EST le
+      propos de la section (« Tout a commencé en 1987 »), et l'impression verticale en bord d'image est celle des
+      négatifs, la matière argentique du site. FAIT le 17/11 (commit e281600).
+- [ ] Noté, non retenu : **la légende en capitales condensées, légende à gauche et crédit à droite** (Le Mans). Notre
+      label Bebas est déjà ce registre ; mais le site n'a pas de crédit à poser (règle charte) et ses photos de frise
+      ont déjà leur aplat « lieu / date ». À reprendre seulement si une galerie revient.
+- [ ] Écarté : **la légende-phrase grise sous l'image** (Magnum, Hodinkee). Registre de magazine, elle ajouterait du
+      texte courant gris à des pages qui en ont peu (règle « texte minimal »).
+- [ ] Constat : 4 sites sur 9 ne légendent pas du tout. Ne pas légender par principe : seulement ce qu'il faut nommer.
+
 ### Idées de la veille 12/11 (angle neuf : LE TEXTE COURANT, comment un site de course met en page ce qu'il raconte)
 
 Méthode : Chrome CDP + Playwright, 1280 et 390, vues calées sur les deux plus longs paragraphes de chaque page (et non
@@ -1355,6 +1373,16 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-17 (routine, AXE C : veille, angle neuf **LA LÉGENDE PHOTO** ; les jours précédents : C le 12/11, B puis A le
+  15/11, B le 16/11 ; commit e281600, EN LIGNE). T7 monté : `git pull` fait d'abord, il a rattrapé ses 12 commits de
+  retard. 9 sites regardés (détail dans la section d'idées du 17/11). **Fait** : les deux photos de Patrice sur
+  pilote.html prennent une légende verticale en lisière, « 1987 / Karting » et « 1988 / Formule Ford » (faits déjà dans
+  l'alt et le texte, pas de contenu nouveau), Bebas Bold marine et filet or qui monte. Vérifié à 1280, 375 et 320 :
+  0 erreur console, aucun débordement, image réduite de 300 à 277 px en desktop (la `sizes` reste couvrante).
+  Fausse piste corrigée à la capture : la grille de la `figure` ciblait `picture`, qui est en `display: contents`,
+  la légende tombait au-dessus de la photo. DA enrichie (vocabulaire + journal). Pas de question nouvelle. Prochain
+  run : A ou B.
 
 - 2026-11-16 (routine, AXE B : audit, dimension **CONSOLE ET JS**, pas auditée depuis le 08/10 ; les jours précédents :
   C le 12/11, B puis A le 15/11 ; commit d29177b, EN LIGNE). T7 non monté : clone du scratchpad (le T7 aura 12 commits
