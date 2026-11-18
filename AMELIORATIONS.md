@@ -1090,6 +1090,8 @@ Pour la routine du feed Instagram (`maj-feed-insta-site`, section « Les dernier
   Les Frang'Ain n'a que Facebook et Instagram (96 rue Pierre Poivre, Villars-les-Dombes), `amsrenova.com` est
   un HOMONYME d'Île-de-France (AMS Rénov Bâtiment est à Parcieux 01600, aucun site), DMPI a des homonymes
   (Montélimar, Chalamont) et rien ne permet de trancher sans Thomas.
+  **Reconfirmé le 18/11** : GPI toujours « Site non publié » Webador (403) ; `dmpi.fr` = DMPI de Montélimar (Drôme,
+  fournitures industrie, TP et agriculture, créée en 2008), homonyme probable, non lié sans l'accord de Thomas.
 - [x] (ÉCARTÉ avec motif le 07/10, voir Journal) Report SEO, pas traité ce jour : sur pilote.html, contact.html et mentions-legales.html, le JSON-LD
   référence `.../#site` alors que ce nœud n'est défini que sur l'accueil. C'est une pratique courante et
   tolérée, mais un nœud WebSite répété sur chaque page serait plus robuste. À trancher un jour de
@@ -1373,6 +1375,22 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-18 (routine, AXE B : audit, dimension **LIENS INTERNES ET EXTERNES**, n°4, pas auditée depuis le 27/10 ; les
+  jours précédents : B le 16/11, C le 17/11 ; commit e832cc1, EN LIGNE). T7 monté, `git pull` à jour. **Inventaire** :
+  5 pages, 47 URL externes (dont 17 vers le site lui-même), 319 références internes (HTML, `srcset`, `url()` de
+  styles.css, chemins de reflexes.js, icônes du webmanifest, liens de llms.txt, robots.txt et sitemap.xml). **Sain** :
+  0 asset manquant, 0 ancre cassée, tous les `target="_blank"` portent `rel="noopener"`. Les 14 sites partenaires liés
+  répondent 200 avec le `<title>` de l'entreprise (Hexagone Motors et SMD bien distincts) ; Midas 403 à curl mais ouvert
+  dans le navigateur (115-117 rue Sully, inchangé) ; les 2 articles du Progrès 200 avec leur titre ; les 2 posts MyCitee
+  de la revue de presse (8 et 9 octobre 2025) ouverts dans le navigateur, toujours en ligne ; LinkedIn = mur de
+  connexion en anonyme (la page existe), Facebook 400 anti-robot connu ; YouTube, TikTok, Twitch, Instagram 200.
+  Partenaires sans lien réexaminés : rien de neuf (détail dans la section du 24/08). **Corrigé** : (1) `sitemap.xml`
+  datait l'accueil du 02/11 et pilote du 06/11, alors que le texte lu par Google a changé le 09/11 (fiche Academy) et
+  le 17/11 (légendes 1987/1988) → 2026-11-09 et 2026-11-17 ; contact laissé au 05/10 (le 15/11 n'a changé que la mise en
+  page). (2) `llms.txt` annonçait « les cinq circuits de la saison » alors que l'accueil en montre six (calendrier
+  2027) → corrigé. Prod : build `built` sur e832cc1, sitemap et llms.txt de la prod portent les deux corrections.
+  Aucun rendu touché, DA inchangée. Prochain run : A ou C.
 
 - 2026-11-17 (routine, AXE C : veille, angle neuf **LA LÉGENDE PHOTO** ; les jours précédents : C le 12/11, B puis A le
   15/11, B le 16/11 ; commit e281600, EN LIGNE). T7 monté : `git pull` fait d'abord, il a rattrapé ses 12 commits de
