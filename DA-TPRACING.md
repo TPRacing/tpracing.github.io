@@ -1096,3 +1096,14 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   (Speculation Rules) ; l'entrée de la Caterham, les bandes cinéma du hero pilote et les apparitions du haut de contact
   se jouaient donc hors écran et le visiteur arrivait sur un hero figé. Elles attendent `prerenderingchange`.
 
+
+- 2026-11-19 (finition, axe A) : **tout lien qui quitte le site porte la flèche `.fl`, bouton compris.** Inventaire des
+  liens externes à texte : 3 n'en avaient pas (« Page de l'association » et « @thomaspaponeracing » sur contact.html,
+  « LinkedIn » de la clôture de l'accueil). Sur l'aplat or, la flèche prend l'encre du libellé (`.btn-or .fl { stroke:
+  currentColor }`), sinon or sur or = invisible ; sur marine et sur fond sombre elle reste or. Exceptions assumées :
+  les icônes réseaux (l'icône dit déjà la sortie), les titres de presse dont la ligne entière porte déjà « Lire ↗ »,
+  et les liens dans le texte courant des mentions légales (une flèche au milieu d'une phrase hache la lecture).
+  Corollaire, **le zéro de tête** : dans une rangée de chiffres Bebas, un chiffre seul se complète d'un 0 en retrait
+  (blanc cassé à 32 %, `aria-hidden`) façon écran de chronométrage. « 05 rapports » s'aligne sur la numérotation 01-06
+  des circuits juste au-dessus et prend la carrure de 170 et 12. Source : williamsgptech.com (« 05 Decades »), veille
+  du 05/10. Le zéro reste en retrait : la donnée, c'est le 5. Captures : ch1280b.png, ch375b.png, c1280h.png du scratchpad.

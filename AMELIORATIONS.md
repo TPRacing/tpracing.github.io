@@ -460,7 +460,7 @@ Retenu et FAIT le jour même (voir Journal du 21/09) :
 
 Reporté au backlog, non implémenté aujourd'hui (nécessite un jour de design à froid pour
 choisir où) :
-- [ ] Étendre le glissé de flèche du 21/09 aux autres flèches externes du site si l'inventaire
+- [x] [FAIT 19/11 : flèche `.fl` ajoutée aux 3 liens externes qui ne l'avaient pas, voir Journal] Étendre le glissé de flèche du 21/09 aux autres flèches externes du site si l'inventaire
       en révèle d'autres hors de la zone interdite (à vérifier : liens LinkedIn/email de
       contact.html, CTA partenaires).
 
@@ -570,7 +570,7 @@ Actionnables sans contenu de Thomas :
 - [ ] `shape()` (Baseline 2026) : successeur lisible de `clip-path: polygon()` pour les biseaux maison ; à instruire en
       même temps que `corner-shape`, la même famille de problèmes (le clip actuel rogne outline et ombres) —
       source : web.dev/baseline/2026
-- [ ] Chiffres à zéro de tête façon plaque de châssis (« 05 décennies ») sur la bande de chiffres animée : le zéro
+- [x] [FAIT 19/11 : « 05 » rapports, zéro en retrait] Chiffres à zéro de tête façon plaque de châssis (« 05 décennies ») sur la bande de chiffres animée : le zéro
       transforme un compteur en donnée d'ingénieur, très proche de l'esprit Bebas de la charte —
       source : williamsgptech.com (« 05 Decades of motorsport engineering pedigree »)
 
@@ -1375,6 +1375,19 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-19 (routine, AXE A : finition et complétude, deux items ouverts du backlog ; les jours précédents : B le 18/11,
+  C le 17/11 ; commit dfa5539, EN LIGNE). T7 non monté : clone du scratchpad (le T7, à jour le 18/11, aura 2 commits de
+  retard, `git pull` à son retour). **Fait** : (1) inventaire des liens externes à texte des 5 pages : 3 sans la flèche
+  de sortie maison `.fl` (contact.html : « Page de l'association » sur bouton or, « @thomaspaponeracing » sur bouton
+  marine ; accueil : « LinkedIn » de la clôture) → flèche ajoutée, avec `.btn-or .fl { stroke: currentColor }` pour
+  qu'elle reste visible sur l'aplat or ; elle glisse de 3 px au survol comme les autres. (2) Bande de chiffres de la
+  Caterham : « 5 » rapports devient « 05 », le zéro en blanc cassé à 32 % et `aria-hidden` (lecteur d'écran : « 5 »),
+  aligné sur la numérotation 01-06 des circuits juste au-dessus. Vérifié en CDP (Playwright, route `tp.local`) à 1280,
+  375 et 320, survol compris : 0 erreur console, aucun débordement hors le kart décoratif `k20` déjà connu, libellés
+  sur une ligne. **Laissés sans flèche, avec motif** : icônes réseaux, titres presse (la ligne porte déjà « Lire »),
+  liens dans le texte des mentions légales, puces réseaux du hero pilote. DA enrichie (entrée 19/11). Pas de question
+  nouvelle. Prochain run : C ou B.
 
 - 2026-11-18 (routine, AXE B : audit, dimension **LIENS INTERNES ET EXTERNES**, n°4, pas auditée depuis le 27/10 ; les
   jours précédents : B le 16/11, C le 17/11 ; commit e832cc1, EN LIGNE). T7 monté, `git pull` à jour. **Inventaire** :
