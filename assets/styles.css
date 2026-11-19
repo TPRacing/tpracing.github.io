@@ -1071,6 +1071,8 @@ nav .nav-cta:focus-visible {
   overflow: visible;
   transition: transform .25s cubic-bezier(.2, .7, .2, 1);
 }
+/* Sur l'aplat or, la flèche prend l'encre du libellé (or sur or = invisible). */
+.btn-or .fl { stroke: currentColor; }
 a:hover .fl, a:focus-visible .fl, .revue .ligne:hover .aller > span .fl { transform: translate(3px, -3px); }
 @media (prefers-reduced-motion: reduce) { .fl { transition: none; } }
 

@@ -282,6 +282,9 @@
     .chiffres dt::before { content: ""; width: 12px; height: 12px; flex-shrink: 0; margin-top: -1px; background: repeating-conic-gradient(var(--or) 0% 25%, transparent 0% 50%); background-size: 6px 6px; }
     .chiffres dd { margin: 12px 0 0; }
     .chiffres b { display: block; font-family: var(--f-label); font-weight: 700; font-size: 3.4rem; line-height: 1; }
+    /* Zéro de tête façon écran de chronométrage (19/11) : « 05 » s'aligne sur la numérotation 01-06 des circuits
+       juste au-dessus et donne au chiffre la carrure de 170 et 12 ; le zéro reste en retrait, la donnée c'est le 5. */
+    .chiffres b .zt { display: inline; margin: 0; font: inherit; color: rgba(246, 247, 252, .32); }
     .chiffres span { font-size: .88rem; color: var(--gris-c); line-height: 1.4; display: block; margin-top: 4px; text-wrap: pretty; }
     @media (max-width: 600px) {
       .chiffres { grid-template-columns: minmax(0, 1fr); border-bottom: 1px solid rgba(246, 247, 252, .14); }
@@ -637,7 +640,7 @@
       </ol>
       <dl class="chiffres">
         <div><dt>Moteur</dt> <dd><b>170</b> <span>chevaux, 2.0 atmosphérique</span></dd></div>
-        <div><dt>Boîte</dt> <dd><b>5</b> <span>rapports, grille en&nbsp;H</span></dd></div>
+        <div><dt>Boîte</dt> <dd><b><span class="zt" aria-hidden="true">0</span>5</b> <span>rapports, grille en&nbsp;H</span></dd></div>
         <div><dt>Saison 2027</dt> <dd><b>12</b> <span>courses sur ces 6 circuits, calendrier provisoire</span></dd></div>
       </dl>
       <a class="btn btn-or" href="#partenaires">Soutenir la saison</a>
@@ -698,7 +701,7 @@
     <div class="coord">
       <span class="mail">contact.tpracing@gmail.com</span>
       <a class="btn btn-or" href="contact.html">Contacter l'association</a>
-      <a class="lien-or" href="https://www.linkedin.com/company/tpracing/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="lien-or" href="https://www.linkedin.com/company/tpracing/" target="_blank" rel="noopener">LinkedIn<svg class="fl" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M1.6 10.4 9.5 2.5"/><path d="M3.9 1.5h6.6v6.6"/></svg></a>
     </div>
   </section>
 
