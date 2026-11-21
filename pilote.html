@@ -217,9 +217,10 @@
     /* Légende en lisière, comme l'impression du bord d'un négatif : verticale, lue de bas en haut, un filet or qui s'éteint vers le haut */
     .origine figure { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: stretch; }
     .origine figure img { grid-column: 2; grid-row: 1; }
-    .origine figcaption { grid-column: 1; grid-row: 1; writing-mode: vertical-rl; transform: rotate(180deg); display: flex; align-items: center; gap: 10px; font-family: var(--f-label); font-weight: 700; font-size: .8rem; line-height: 1; letter-spacing: .16em; text-transform: uppercase; color: var(--marine); white-space: nowrap; }
+    .origine figcaption { grid-column: 1; grid-row: 1; writing-mode: vertical-rl; transform: rotate(180deg); display: flex; align-items: center; gap: 8px; font-family: var(--f-label); font-weight: 700; font-size: .8rem; line-height: 1; letter-spacing: .16em; text-transform: uppercase; color: var(--marine); white-space: nowrap; contain: inline-size; }
+    @media (max-width: 359px) { .origine figcaption { letter-spacing: .1em; } }
     .origine figcaption b { font-weight: 700; color: var(--marine); }
-    .origine figcaption::after { content: ''; flex: 1; width: 2px; min-height: 24px; background: linear-gradient(to bottom, var(--or), rgb(212 151 38 / 0)); }
+    .origine figcaption::after { content: ''; flex: 1; width: 2px; min-height: 12px; background: linear-gradient(to bottom, var(--or), rgb(212 151 38 / 0)); }
     .origine h2 { margin: 0; font-size: clamp(1.6rem, 3.4vw, 3rem); line-height: 1.02; }
     .origine h2 .v { color: var(--vert); }
     .origine p { color: var(--gris-f); max-width: 560px; margin: 16px 0 22px; }
