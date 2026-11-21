@@ -1376,6 +1376,24 @@ une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se v
 
 ## Journal
 
+- 2026-11-21 (routine, AXE B : audit, dimension **RENDU À TOUTES LES LARGEURS, 320 à 1680**, n°2, pas auditée depuis
+  le 24/09 ; les jours précédents : A le 19/11, B le 18/11, C le 17/11 ; commit 141ad94, EN LIGNE). T7 non monté : clone
+  du scratchpad (le T7, à jour le 18/11, aura 3 commits de retard, `git pull` à son retour). **Méthode** : Playwright CDP,
+  dépôt servi par `route`, cache désactivé, 5 pages x 11 largeurs (320, 360, 390, 414, 600, 768, 900, 1024, 1280, 1440,
+  1680) après défilement complet ; par vue : éléments hors viewport non rognés par un parent, texte coupé, corps < 11,5 px,
+  cibles tactiles < 24 px sous 768, ratio affiché des images hors `object-fit` ; puis captures ÉCRAN PAR ÉCRAN en
+  défilant (accueil, pilote, contact à 320 et 1680, 404 et mentions à 320) regardées une à une. **Défaut trouvé et
+  corrigé** : la photo 1988 de pilote.html (« Tout a commencé en 1987 ») était ÉTIRÉE en hauteur, ratio 1,686 au lieu de
+  1,786 de 1024 à 1680 et 1,564 au lieu de 1,782 à 320 : sa légende verticale « 1988 / Formule Ford » (164 px avec le
+  filet) est plus haute que la photo (155 px), la rangée de grille s'allongeait et l'image avec. Régression du 17/11.
+  Correctif : `contain: inline-size` sur la légende (en `vertical-rl` l'axe inline est la hauteur, elle ne compte plus
+  dans la rangée et prend la hauteur de la photo), filet minimal 24 → 12 px, écart 10 → 8 px, interlettrage .1em sous
+  360 px. Après : ratios justes à toutes les largeurs (écart < 0,6 %), légende contenue dans la photo (vérifié en
+  capture à 320 et 1280). **Propre** : 0 débordement horizontal sur les 55 combinaisons, 0 texte coupé, 0 corps trop
+  petit, 0 erreur console. Faux positif : lien presse de 24 px à 600 (le `::after` de `.couvre` étend la cible à toute la
+  ligne). Rappel de méthode : les captures pleine page vident les sections à `animation-timeline`, il faut défiler
+  écran par écran. DA enrichie (règle durcie de la légende en lisière). Pas de question nouvelle. Prochain run : C ou A.
+
 - 2026-11-19 (routine, AXE A : finition et complétude, deux items ouverts du backlog ; les jours précédents : B le 18/11,
   C le 17/11 ; commit dfa5539, EN LIGNE). T7 non monté : clone du scratchpad (le T7, à jour le 18/11, aura 2 commits de
   retard, `git pull` à son retour). **Fait** : (1) inventaire des liens externes à texte des 5 pages : 3 sans la flèche

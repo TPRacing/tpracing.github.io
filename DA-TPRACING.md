@@ -104,6 +104,10 @@ langage étranger, elle ne passe pas.
   gauche, verticale, lue de bas en haut comme l'impression du bord d'un négatif : Bebas Bold .8rem marine, interlettrage
   .16em, « année / discipline », puis un filet or de 2 px qui monte et s'éteint. Ni sous la photo (registre presse), ni
   dessus (on salit l'image). Posée sur les photos héritage de pilote.html ; pas de crédit photo dedans (règle charte).
+  RÈGLE DURCIE (21/11) : la légende ne pilote JAMAIS la hauteur de la photo. Elle porte `contain: inline-size` (en
+  écriture verticale l'axe « inline » est la hauteur) et prend la hauteur de l'image, son filet se raccourcit (min 12 px).
+  Sans ça, « 1988 / Formule Ford » (164 px) étirait la photo de 6 à 12 %. Une légende plus longue que la photo n'est
+  pas posable : raccourcir le texte, pas la photo.
 - Grain argentique global (SVG feTurbulence) + pointillés carbone sur les sections marine.
 - Photos : VRAIES photos de Thomas et de la famille, en NOUVEAUX fichiers, originaux jamais
   modifiés. **Et depuis le 22/09, un ÉTALONNAGE MAISON commun aux photos de reportage**
@@ -250,6 +254,11 @@ Les quatre doivent passer. Sinon : écarté, et on note pourquoi au backlog (les
 motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
+
+- 2026-11-21 (audit RENDU À TOUTES LES LARGEURS, pas de veille) : la légende en lisière du 17/11 déformait la photo 1988
+  qu'elle devait servir (rangée de grille étirée par la légende verticale, visage du pilote écrasé). Corrigé et règle
+  durcie dans la section 2. Leçon de méthode : un nouvel ingrédient se vérifie aussi par l'audit des RATIOS d'images, pas
+  seulement à l'œil, l'écart de 6 % ne se voyait pas sur la capture du jour de pose.
 
 - 2026-11-17 (veille LA LÉGENDE PHOTO, captures 1280 et 390 de magnumphotos.com, hodinkee.com, the-race.com,
   formula1.com, goodwood.com/grr, petrolicious.com, motorsportmagazine.com, 24h-lemans.com, mclaren.com/racing/heritage) :
