@@ -490,7 +490,7 @@ Section RÉCUPÉRÉE le 27/07 : elle était restée non commitée sur le T7 depu
 - [ ] Contact en 3 portes PARTENARIAT / PRESSE / COMMUNAUTÉ (mailto pré-remplis) + email cliquer-copier flash « COPIÉ » — premaracing.com + Podium/studio San Rita (Awwwards SOTD 27/06/2026) [recoupe « contact 2 canaux » de la veille 26/07 : fusionner au moment de faire]
 - [ ] Galerie en planche-contact argentique 35 mm (bandes perforées SVG, numéros de vue « TP-47 / 03A », ±0,5° de rotation) — tendance « Imperfection is in » (lummi.ai/blog/2026-design-trend) ; prolonge le grain + récit héritage
 - [ ] T et P révélés en contour or dans un intertitre plein (« TRANSMETTRE LA PASSION ») ± manifeste 3 piliers — Team WRT « WE ARE A TEAM » (w-racingteam.com) + G2/100 Thieves ; vérifier la zone de protection T-P de la charte
-- [ ] Micro-tâches (trop petites pour une journée, à glisser dans un prochain chantier) : ~~text-wrap balance/pretty~~ [FAIT 26/07] ; ~~Speculation Rules~~ [FAIT 26/07] ; popover natif ancré sur les logos partenaires [repris au backlog 26/07] ; ~~morph View Transition intra-page de la lightbox~~ [FAIT 05/08] ; accordéon details/summary stylé pour mentions légales ; microcopie « voix radio d'écurie »
+- [ ] Micro-tâches (trop petites pour une journée, à glisser dans un prochain chantier) : ~~text-wrap balance/pretty~~ [FAIT 26/07] ; ~~Speculation Rules~~ [FAIT 26/07] ; popover natif ancré sur les logos partenaires [repris au backlog 26/07] ; ~~morph View Transition intra-page de la lightbox~~ [FAIT 05/08] ; ~~accordéon details/summary stylé pour mentions légales~~ [ÉCARTÉ 22/11 : 7 sections courtes, replier le texte légal gênerait la lecture et la recherche Ctrl+F, aucun gain] ; microcopie « voix radio d'écurie »
 
 ### Idées de la veille 26/07 (workflow 5 éclaireurs : écuries hors F1 vues, pilotes pros, sites primés, tendances 2026, plateforme web — chaque source fetchée avant citation)
 
@@ -1375,6 +1375,20 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-22 (routine, AXE A : finition et complétude, page mentions-legales.html, la seule jamais reprise depuis la v3 ;
+  les jours précédents : B le 21/11, A le 19/11, B le 18/11, C le 17/11 ; commit 2ee65d4). T7 monté, `git pull` fait (3
+  commits rattrapés, T7 À JOUR). **Regardé** en 1280 et 375, écran par écran, puis texte relu contre le code. **Trouvé et
+  corrigé** : (1) la date affichée « Dernière mise à jour / 17 juillet 2026 » (et le `dateModified` du JSON-LD) était
+  périmée : le paragraphe Cookies a changé le 06/08 puis le 18/08 (retrait du jeu, « Une seule information ») sans que
+  la date suive ; passée au 22 novembre 2026, date du changement de texte de ce jour, `lastmod` du sitemap aligné ; (2)
+  « liens vers des plateformes externes (Instagram, LinkedIn, sites de presse) » oubliait TikTok, YouTube, Twitch,
+  Facebook et les 14 sites partenaires : devient « des sites externes (réseaux sociaux, sites des partenaires, articles
+  de presse) ». **Contrôlé et juste** : aucune ressource externe chargée sur les 5 pages (polices, images, vidéos servies
+  par le site), seul `sessionStorage` `tp_intro` est écrit (index.html), ce que dit le paragraphe Cookies. **Écarté** :
+  l'accordéon `details/summary` de la micro-liste du 26/07 (7 sections courtes, replier du texte légal gêne la lecture
+  et Ctrl+F) ; un sommaire numéroté (la numérotation « 01 / » est interdite par la DA depuis le 09/08). Vérifié : 375 et
+  1280, 0 erreur console. DA non touchée. Pas de question nouvelle. Prochain run : C ou B.
 
 - 2026-11-21 (routine, AXE B : audit, dimension **RENDU À TOUTES LES LARGEURS, 320 à 1680**, n°2, pas auditée depuis
   le 24/09 ; les jours précédents : A le 19/11, B le 18/11, C le 17/11 ; commit 141ad94, EN LIGNE). T7 non monté : clone
