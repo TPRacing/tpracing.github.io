@@ -1398,8 +1398,10 @@ une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se v
   région, description de Thomas, `dateModified` du profil ; lastmod au 23/11. Non contrôlé ce jour : résultats Google réels
   et Search Console (WebSearch est géolocalisé US et ne voit pas le site ; dernier relevé le 09/11). **Consigne permanente
   ajoutée à la routine : ligne SEO à chaque run, vraie passe SEO chaque semaine.**
-  **Toujours en attente de Thomas** : renvoyer sitemap.xml dans Search Console et demander l'indexation de contact.html et
-  mentions-legales.html. Prochain run : B (Google réel + Search Console) ou A.
+  **Search Console (fait à la demande de Thomas, même jour)** : sitemap.xml renvoyé (date passée au 23/11, état encore
+  « Impossible de récupérer », jamais lu), indexation demandée et acceptée (file prioritaire) pour contact.html et
+  mentions-legales.html, que Google ne connaissait pas du tout. À relire vers le 30/11. Si le sitemap reste bloqué :
+  supprimer l'entrée puis la recréer (pas fait, demande l'accord de Thomas). Prochain run : B (Google réel + Search Console) ou A.
 
 - 2026-11-22 (routine, AXE A : finition et complétude, page mentions-legales.html, la seule jamais reprise depuis la v3 ;
   les jours précédents : B le 21/11, A le 19/11, B le 18/11, C le 17/11 ; commit 2ee65d4). T7 monté, `git pull` fait (3
