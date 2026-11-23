@@ -107,6 +107,17 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [ ] Écarté le jour même : l'email en grande case sur deux rangées à gauche (1,3fr / 1fr). Regardé à 1280 : 280 px de
       blanc plat au milieu de la carte, la « plaque sur fond vide » de la liste des interdits.
 
+### Idées de la veille 23/11 (angle neuf : LE CALENDRIER, comment un site de course présente ses manches et ses circuits)
+Regardés en 1280 et 390 : IndyCar, Formule E, Spa, Magny-Cours, MotoGP et F1 (ces deux-là en partie masqués par le
+bandeau cookies). Échec : WEC (consentement), caterhamcars /calendar (renvoie à l'accueil), imsa et williamsf1 /schedule
+(404). lemans.org (ACO) regardé mais sans calendrier sur l'accueil.
+- [x] **Le nom du lieu porte la case** (VU : IndyCar en capitales larges noires et ville en petit, Formule E nom plus gros
+      que « R01 · 16 January 2027 », MotoGP « 1 THAILAND » chiffre maigre et nom gras). Chez nous numéro et nom étaient à la
+      même taille, le nom en gris. Pourquoi c'est TPRacing : les six tracés or sont les vrais circuits 2027. FAIT 23/11.
+- [ ] Écarté : compte à rebours « 103 DAYS » (IndyCar, Formule E). Calendrier provisoire, Caterham = objectif.
+- [ ] Écarté : case avec photo du lieu (Formule E, IndyCar). Nous n'avons pas roulé sur ces circuits, la photo serait d'emprunt.
+- [ ] Noté : le « Coming soon » franc de Magny-Cours pour son calendrier 2027. Notre « calendrier provisoire » joue ce rôle.
+
 ### Idées de la veille 17/11 (angle neuf : LA LÉGENDE PHOTO, comment un site de course nomme ce que montre une image)
 
 Sites REGARDÉS en 1280 et 390 (planches dans le scratchpad du jour) : Magnum, Hodinkee, The Race, Formula 1, Goodwood
@@ -1375,6 +1386,20 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-23 (routine, AXE C : veille par captures, angle neuf **LE CALENDRIER**, plus une passe SEO demandée par Thomas
+  le jour même ; derniers axes A 22/11, B 21/11). T7 monté, à jour. **Fait** : rangée des six circuits de l'accueil, nom du
+  lieu en blanc cassé .88rem (il était gris .74rem, comme le numéro) ; défaut trouvé en mesurant : de 901 à 1199 px les six
+  colonnes tombaient à 48 px, « Saintonge » dépassait de sa case → 3 colonnes dans cette plage. Mesuré de 320 à 1680 (10
+  largeurs) : aucun nom hors case, 0 erreur console.
+  **SEO** : titre de pilote.html « Thomas Papone - Pilote de sport automobile | TPRacing » ; descriptions accueil et contact
+  ancrées dans l'Ain (le lieu n'apparaissait dans aucune) ; `max-image-preview:large` sur accueil, pilote et contact ;
+  JSON-LD : Patrice ajouté aux fondateurs (seul Thomas y était, alors que la page dit « père et fils fondent TPRacing »),
+  région, description de Thomas, `dateModified` du profil ; lastmod au 23/11. Non contrôlé ce jour : résultats Google réels
+  et Search Console (WebSearch est géolocalisé US et ne voit pas le site ; dernier relevé le 09/11). **Consigne permanente
+  ajoutée à la routine : ligne SEO à chaque run, vraie passe SEO chaque semaine.**
+  **Toujours en attente de Thomas** : renvoyer sitemap.xml dans Search Console et demander l'indexation de contact.html et
+  mentions-legales.html. Prochain run : B (Google réel + Search Console) ou A.
 
 - 2026-11-22 (routine, AXE A : finition et complétude, page mentions-legales.html, la seule jamais reprise depuis la v3 ;
   les jours précédents : B le 21/11, A le 19/11, B le 18/11, C le 17/11 ; commit 2ee65d4). T7 monté, `git pull` fait (3

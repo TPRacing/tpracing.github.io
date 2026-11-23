@@ -255,6 +255,11 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- 2026-11-23 (veille LE CALENDRIER, captures de indycar.com/Schedule, fiaformulae.com/en/calendar, motogp.com/en/calendar) :
+  **dans une rangée de circuits, le NOM du lieu est la donnée, le numéro de manche l'annonce.** Nom Bebas Bold .88rem blanc
+  cassé, numéro .74rem or, tracé or au-dessus. Un tracé ne descend pas sous 75 px de case : en dessous la rangée passe de 6
+  à 3 colonnes. Ni photo de lieu d'emprunt, ni compte à rebours.
+
 - 2026-11-21 (audit RENDU À TOUTES LES LARGEURS, pas de veille) : la légende en lisière du 17/11 déformait la photo 1988
   qu'elle devait servir (rangée de grille étirée par la légende verticale, visage du pilote écrasé). Corrigé et règle
   durcie dans la section 2. Leçon de méthode : un nouvel ingrédient se vérifie aussi par l'audit des RATIOS d'images, pas
