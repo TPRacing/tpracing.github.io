@@ -6,8 +6,9 @@
 
   <!-- ✏️ SEO : titre affiché dans Google + onglet du navigateur -->
   <title>TPRacing - Thomas Papone Racing | Association de sport automobile</title>
-  <meta name="description" content="TPRacing, association de sport automobile fondée en 2021 par un père pilote et son fils. Après le karting et la monoplace, cap sur la Caterham Academy.">
+  <meta name="description" content="TPRacing, association de sport automobile de l'Ain fondée en 2021 par un père pilote et son fils. Karting, monoplace et cap sur la Caterham Academy.">
 
+  <meta name="robots" content="max-image-preview:large">
   <link rel="canonical" href="https://tpracing.github.io/">
   <meta property="og:site_name" content="TPRacing">
   <meta property="og:title" content="TPRacing - Thomas Papone Racing">
@@ -120,9 +121,11 @@
     "image": "https://tpracing.github.io/assets/img/og-accueil.jpg",
     "email": "contact.tpracing@gmail.com",
     "contactPoint": { "@type": "ContactPoint", "email": "contact.tpracing@gmail.com", "url": "https://tpracing.github.io/contact.html", "contactType": "customer service" },
-    "address": { "@type": "PostalAddress", "addressLocality": "Lapeyrouse", "postalCode": "01330", "addressCountry": "FR" },
-    "founder": { "@type": "Person", "@id": "https://tpracing.github.io/pilote.html#thomas-papone", "name": "Thomas Papone", "jobTitle": "Pilote, co-fondateur" },
-    "member": { "@type": "Person", "@id": "https://tpracing.github.io/#patrice-papone", "name": "Patrice Papone", "jobTitle": "Président" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Lapeyrouse", "postalCode": "01330", "addressRegion": "Auvergne-Rhône-Alpes", "addressCountry": "FR" },
+    "founder": [
+      { "@type": "Person", "@id": "https://tpracing.github.io/#patrice-papone", "name": "Patrice Papone", "jobTitle": "Président" },
+      { "@type": "Person", "@id": "https://tpracing.github.io/pilote.html#thomas-papone", "name": "Thomas Papone", "jobTitle": "Pilote, co-fondateur", "url": "https://tpracing.github.io/pilote.html" }
+    ],
     "sameAs": [ "https://www.linkedin.com/company/tpracing/" ]
   }
   </script>
@@ -263,7 +266,7 @@
     .circuits { list-style: none; margin: 30px 0 8px; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 22px 14px; counter-reset: manche; }
     .circuits li { counter-increment: manche; display: flex; flex-direction: column; align-items: center; text-align: center; font: 700 .74rem/1.15 var(--f-label); letter-spacing: .1em; text-transform: uppercase; color: var(--gris-c); }
     .circuits li::before { content: counter(manche, decimal-leading-zero); order: 1; margin-top: 12px; color: var(--or); }
-    .circuits span { order: 2; margin-top: 3px; text-wrap: balance; }
+    .circuits span { order: 2; margin-top: 4px; text-wrap: balance; font-size: .88rem; letter-spacing: .06em; color: var(--blanc); } /* le NOM du lieu porte la case, le numéro de manche l'annonce (veille du 23/11) */
     .circuits svg { display: block; width: 100%; max-width: 104px; height: auto; overflow: visible; }
     .circuits path { fill: none; stroke: var(--or); stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
     /* Audit du 03/11 : le tracé finissait à cover 55 %, soit une fois la rangée passée dans la moitié HAUTE de l'écran ;
@@ -356,7 +359,7 @@
     @media (min-width: 901px) and (max-width: 1279px) {
       .hero { grid-template-columns: minmax(0, max(420px, 41vw)) minmax(0, 1fr); padding-right: 28px; }
     }
-    @media (max-width: 600px) { .circuits { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 600px), (min-width: 901px) and (max-width: 1199px) { .circuits { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
     @media (max-width: 900px) {
       /* minmax(0, 1fr) : une piste 1fr prend la largeur min-content des titres en nowrap
          et poussait tout le bloc hors de l'écran sous 360 px (titres et texte rognés) */
