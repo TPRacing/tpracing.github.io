@@ -1387,6 +1387,31 @@ une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se v
 
 ## Journal
 
+- 2026-11-24 (routine, AXE B : audit, dimension **SEO, résultats Google réels + Search Console**, dernier relevé le 09/11 ;
+  derniers axes C 23/11, A 22/11). T7 monté, à jour. **Vu dans Google** (Chrome connecté, donc résultats personnalisés,
+  Dijon) : `contact.html` et `mentions-legales.html` sont INDEXÉES, un jour après la demande du 23/11 ; la description
+  neuve de contact (Lapeyrouse, Ain) est déjà affichée, celle de l'accueil et le titre neuf du pilote pas encore.
+  « tpracing » : 1er, avec des liens annexes pour la première fois (Contact, Mentions légales ; pas encore Le pilote,
+  choix de Google). « thomas papone pilote » : pilote.html 1er, accueil 2e, puis Kartcom et Le Progrès. `site:` montre
+  3 pages (accueil, contact, mentions), la page pilote n'y figure pas mais sort bien 1re sur sa requête. Hors du haut de
+  la 1re page sur « pilote karting lyon association » (Actua, RLTeam, Team Kart R) et « caterham academy france 2027
+  pilote » (Caterham, Facebook) : requêtes tenues par les acteurs en titre, rien à forcer. Nom de site affiché : toujours
+  « GitHub » (côté Google). **Search Console** : sitemap toujours « Impossible de récupérer », envoyé le 23/11, jamais
+  lu ; fichier servi sain (200, application/xml). Les performances n'ont pas pu être lues (connexion Chrome coupée).
+  **Corrigé** : le zéro décoratif de « 05 rapports » (19/11) était un vrai caractère en `aria-hidden`, que les moteurs
+  lisent : « 05 rapports ». Passé en `::before` avec texte de rechange vide ; le texte de la page dit « 5 », rendu regardé
+  à 320, 375 et 1280, 0 erreur console. **Core Web Vitals** (prod, 390, mesure locale) : CLS 0 sur 4 pages ; LCP 0,36 à
+  0,45 s, sauf accueil 3,0 s en première visite (la Caterham attend la fin de l'intro des 5 feux, aimée par Thomas :
+  pas touché). **Écarté** : « Le parcours de Thomas » au lieu de « Voir le parcours » (ancre plus descriptive) : essayé,
+  passe à la ligne à 375 et pousse la voiture de 40 px. SEO : fait (ci-dessus), lastmod inchangés, aucun texte visible
+  modifié. DA non touchée.
+  **Rappel groupé des questions ouvertes (dernier le 09/11)** : (a) NOUVELLE : un 3e article du Progrès existe, jamais
+  cité sur le site, « Sport auto : Thomas Papone vise encore plus haut pour sa saison 2025 » (29/09/2024,
+  https://www.leprogres.fr/sport/2024/09/29/sport-auto-thomas-papone-vise-encore-plus-haut-pour-sa-saison-2025 , ouvert
+  dans Chrome). L'ajouter à la revue de presse ? Pas publié d'office : il annonce un objectif de finale au Volant F4
+  qui n'est plus le cap du site. (b) Sitemap : supprimer puis recréer l'entrée dans Search Console, si toujours bloqué
+  le 30/11 ? (c) Fiche Kartcom 2020 bien la tienne ? (d) Les 3 titres longs en mobile. (e) Kit presse. Prochain run : A ou C.
+
 - 2026-11-23 (routine, AXE C : veille par captures, angle neuf **LE CALENDRIER**, plus une passe SEO demandée par Thomas
   le jour même ; derniers axes A 22/11, B 21/11). T7 monté, à jour. **Fait** : rangée des six circuits de l'accueil, nom du
   lieu en blanc cassé .88rem (il était gris .74rem, comme le numéro) ; défaut trouvé en mesurant : de 901 à 1199 px les six
