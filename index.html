@@ -228,9 +228,15 @@
     .histoire h2 span { display: block; }
     .histoire h2 .v { color: var(--vert); }
     .histoire .recit { position: absolute; z-index: 5; top: calc(15vh + 2.3em + 9vw); left: 50%; transform: translateX(-50%); width: min(580px, 86vw); text-align: center; color: var(--gris-f); font-size: 1.05rem; line-height: 1.55; }
-    .histoire .couleurs { display: block; margin-top: 12px; font-family: var(--f-label); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: .95rem; color: var(--marine); }
+    .histoire .couleurs { display: block; margin-top: 12px; font-family: var(--f-label); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: .95rem; color: var(--marine); text-wrap: balance; /* deux lignes égales : la 1re passait derrière le casque de Patrice (25/11) */ }
     /* le vert charte fait 4,2:1 sur le blanc cassé : à 15 px il descend d'un cran (même teinte, 4,6:1, audit a11y 11/10) */
     .histoire .couleurs b { color: #3A7C68; }
+    /* portable en fenêtre basse (1366 x 768 moins les barres) : le récit tombait sur les casques et sur le vert (25/11) */
+    @media (min-width: 901px) and (max-height: 719px) {
+      .histoire { --tb: min(4.6vw, 7vh); }
+      .histoire h2 { font-size: var(--tb); }
+      .histoire .recit { top: calc(15vh + 2 * var(--tb) + 14px); }
+    }
     .kart { position: absolute; z-index: 2; bottom: 9%; height: min(46vh, 430px); width: auto; max-width: none; }
     .kart.k87 { left: 50%; transform: translateX(-104%); }
     .kart.k20 { left: 50%; transform: translateX(4%); }
