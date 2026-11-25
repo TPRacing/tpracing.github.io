@@ -255,6 +255,11 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- **25/11, texte au-dessus d'un montage** : une ligne posée au niveau des têtes tient dans l'espace ENTRE les silhouettes,
+  en lignes équilibrées (`text-wrap: balance`), jamais dessus. Une scène en 100svh se règle aussi en HAUTEUR : la regarder
+  à 600, 640 et 720 px de haut, pas seulement par largeurs. Un label sur plusieurs lignes a son propre interligne (1,3),
+  et ne commence jamais une ligne par un slash.
+
 - 2026-11-23 (veille LE CALENDRIER, captures de indycar.com/Schedule, fiaformulae.com/en/calendar, motogp.com/en/calendar) :
   **dans une rangée de circuits, le NOM du lieu est la donnée, le numéro de manche l'annonce.** Nom Bebas Bold .88rem blanc
   cassé, numéro .74rem or, tracé or au-dessus. Un tracé ne descend pas sous 75 px de case : en dessous la rangée passe de 6

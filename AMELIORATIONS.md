@@ -1387,6 +1387,19 @@ une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se v
 
 ## Journal
 
+- 2026-11-25 (routine, AXE A : finitions, vues en regardant les pages ; derniers axes B 24/11, C 23/11). T7 débranché en
+  cours de run, fini sur un clone. **Accueil, « Le volant se transmet »** : la phrase des couleurs passait sur le casque de
+  Patrice à 1280 (« L'or » recouvert). Elle tient en deux lignes égales (`text-wrap: balance`), entre les deux casques. Sous
+  720 px de haut (portable 1366 x 768, barres déduites), le récit tombait sur les casques et les couleurs sur l'aplat vert,
+  presque illisibles : titre borné à 7vh et récit calé dessous. Regardé de 901 à 1680 de large, 600 à 1050 de haut, plus
+  390 et 320. **Pilote** : le lieu des chapitres héritait de l'interligne du texte courant (25 px pour 15 px de corps) et
+  commençait une ligne par « / » à 390 : interligne 1,3, lignes équilibrées, « Château-Gaillard » insécable (interlettrage
+  resserré sous 380 px, sinon il sortait de sa colonne à 320). **404** : surtitre « En attendant » retiré (zéro surtitre,
+  redit par Thomas le 23/11). 0 erreur console, 0 débordement sur les pages touchées.
+  Écarté : le surtitre « Sur Instagram » de pilote.html, dans la section de maj-feed-insta-site, pas touché.
+  **Question à Thomas** : la 404 vouvoie (« La page que vous cherchez ») puis tutoie dans le jeu (« Teste tes réflexes »),
+  alors que le reste du site vouvoie. Passer le jeu au vouvoiement ?
+  SEO : aucun titre, description ni donnée structurée modifié, h1 et h2 inchangés, lastmod inchangés (mise en page).
 - 2026-11-24 (routine, AXE B : audit, dimension **SEO, résultats Google réels + Search Console**, dernier relevé le 09/11 ;
   derniers axes C 23/11, A 22/11). T7 monté, à jour. **Vu dans Google** (Chrome connecté, donc résultats personnalisés,
   Dijon) : `contact.html` et `mentions-legales.html` sont INDEXÉES, un jour après la demande du 23/11 ; la description
