@@ -762,6 +762,16 @@
       maj();
     })();
 
+    // (26/11) Nav : la section lue se souligne en or, comme la page courante sur pilote et contact
+    (function () {
+      const liens = [...document.querySelectorAll('nav ul a[href^="#"]:not(.nav-cta)')];
+      const spy = new IntersectionObserver(es => es.forEach(e => {
+        const a = liens.find(l => l.getAttribute('href') === '#' + e.target.id);
+        if (a) a.classList.toggle('active', e.isIntersecting);
+      }), { rootMargin: '-45% 0px -54% 0px' });
+      liens.forEach(a => { const s = document.querySelector(a.getAttribute('href')); if (s) spy.observe(s); });
+    })();
+
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vu'); io.unobserve(e.target); } });
     }, { threshold: 0.15 });
