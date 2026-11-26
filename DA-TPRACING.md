@@ -255,6 +255,11 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- **26/11, « vous êtes ici » vaut pour toutes les pages** (audit de cohérence n°3) : le soulignement or de la nav
+  signale la page courante sur pilote.html et contact.html ; sur l'accueil, dont les liens pointent vers des sections, il
+  signale la SECTION lue (bande au milieu de l'écran, IntersectionObserver), et rien hors des sections nommées. Même
+  trait, même règle `.active`. Corollaire : un libellé de navigation garde sa forme (label Bebas Bold) sur la page qu'il
+  désigne, même quand il cesse d'être un lien (pied de mentions-legales.html). Captures : v-all.png, P-*.png du scratchpad.
 - **25/11, texte au-dessus d'un montage** : une ligne posée au niveau des têtes tient dans l'espace ENTRE les silhouettes,
   en lignes équilibrées (`text-wrap: balance`), jamais dessus. Une scène en 100svh se règle aussi en HAUTEUR : la regarder
   à 600, 640 et 720 px de haut, pas seulement par largeurs. Un label sur plusieurs lignes a son propre interligne (1,3),

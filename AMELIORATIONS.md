@@ -1387,6 +1387,23 @@ une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se v
 
 ## Journal
 
+- 2026-11-26 (routine, AXE B : audit, dimension **COHÉRENCE DE LA DA PAGE PAR PAGE**, n°3, pas refaite depuis le 24/10 ;
+  derniers axes A 25/11, B 24/11, C 23/11 ; commit a2c517c). T7 absent, run sur un clone du scratchpad. Les 5 pages
+  capturées écran par écran en 1280 et en 390 (98 vues), regardées en planches puis en zooms (boutons, puces réseaux,
+  cartes de contact, pieds) contre DA-TPRACING.md. **Corrigés** : (1) la nav dit où l'on est sur pilote.html et
+  contact.html (soulignement or de la page courante), jamais sur l'accueil, la page la plus longue : « L'association »
+  et « Le projet Caterham » y pointent vers des sections, rien ne s'allumait. Elles se soulignent maintenant quand leur
+  section passe au milieu de l'écran (même trait or, même règle CSS `.active`, rien de redessiné ; mouvement lié au
+  geste du lecteur). Hors de ces deux sections (hero, presse, partenaires, clôture), rien n'est souligné. Les deux liens
+  sont masqués sous 820 px, donc sans effet sur téléphone. (2) Le pied de mentions-legales.html écrivait « Mentions
+  légales » en Inter dans la phrase, alors que les 4 autres pages posent un label Bebas Bold : même label, sans lien,
+  `aria-current="page"`. Mesuré : police, corps, couleur et boîte identiques à contact.html au dixième de pixel en 1280
+  et 390. 0 erreur console. **Regardé et propre** : biseaux des puces réseaux de pilote.html et des boutons de la 404 et
+  de contact, brackets de la carte email, liseré des cartes de contact, frise du parcours (codes couleurs validés), pied
+  des 5 pages (page courante retirée de la liste, cohérent). **Réfutés, à ne pas reprendre** : « TPRACING » en
+  capitales dans la ligne légale de contact et dans les mentions = nom déclaré de l'association, pas une faute de marque.
+  SEO : aucun titre, description, h1 ni JSON-LD modifié ; `aria-current` ajouté au libellé du pied ; lastmod inchangés
+  (aucun mot changé).
 - 2026-11-25 (routine, AXE A : finitions, vues en regardant les pages ; derniers axes B 24/11, C 23/11). T7 débranché en
   cours de run, fini sur un clone. **Accueil, « Le volant se transmet »** : la phrase des couleurs passait sur le casque de
   Patrice à 1280 (« L'or » recouvert). Elle tient en deux lignes égales (`text-wrap: balance`), entre les deux casques. Sous
