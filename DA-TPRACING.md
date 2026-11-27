@@ -255,6 +255,13 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
 
 ## 5. Journal de DA (une entrée par jour qui touche au design, avec sources)
 
+- **27/11, le premier écran sur téléphone ne s'arrête pas sur un vide** (veille, 8 sites en 390) : chez Baltic, Manthey
+  et Tony Kart le hero mobile est plus court que l'écran (Baltic le fixe à 571 px, `h-[571px] md:h-screen`) et la section
+  suivante entre, titre lisible. Règle maison qui en sort : un premier écran mobile se ferme soit par la section suivante qui
+  entre (accueil, contact), soit par une fermeture DESSINÉE (bande cinéma du pilote), jamais par une marge vide. Interdit
+  confirmé chez Tony Kart : un titre blanc en ombre portée sur une photo non teintée devient illisible dès qu'un logo passe
+  derrière. Captures : veille/zoom1.png, zoom2.png, nous844.png, nous667.png du scratchpad du 27/11.
+
 - **26/11, « vous êtes ici » vaut pour toutes les pages** (audit de cohérence n°3) : le soulignement or de la nav
   signale la page courante sur pilote.html et contact.html ; sur l'accueil, dont les liens pointent vers des sections, il
   signale la SECTION lue (bande au milieu de l'écran, IntersectionObserver), et rien hors des sections nommées. Même

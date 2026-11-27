@@ -107,6 +107,41 @@ charte stricte, jamais de tiret décoratif, site léger. Cocher + consigner au J
 - [ ] Écarté le jour même : l'email en grande case sur deux rangées à gauche (1,3fr / 1fr). Regardé à 1280 : 280 px de
       blanc plat au milieu de la carte, la « plaque sur fond vide » de la liste des interdits.
 
+### Idées de la veille 27/11 (angle neuf : LE PREMIER ÉCRAN SUR TÉLÉPHONE, ce qu'un site de course montre en 390 x 844 avant le premier geste)
+Regardés en 390 (DPR 1, user-agent iPhone, bandeaux cookies refusés) puis en 1280, 3 vues chacun : charlesleclerc.com,
+oscarpiastri.com, verstappen.com, premaracing.com, manthey-racing.com, tonykart.com, birelart.com, baltic-watches.com.
+Morts pour la capture : landonorris.com en 390 (« Please rotate your device », site pensé paysage), kartrepublic.com
+(page d'attente de 1 234 px, rien à juger). Puis nos 5 pages en 390 x 844 et 390 x 667, comparées.
+- [ ] Recoupement, rien à faire : **le premier écran s'arrête avant le bas et laisse entrer la section suivante.** VU chez
+      Baltic (hero de 571 px fixé en mobile, `h-[571px] md:h-screen`, le titre « DES MONTRES INSPIRÉES » entre en entier
+      sous le hero), Manthey et Tony Kart. Chez nous : l'accueil le fait déjà (la Caterham déborde du hero, le titre de « Le
+      volant se transmet » entre en bas), contact aussi (la carte email entre). pilote.html ferme son premier écran par la
+      bande cinéma basse (93 px de nuit), choix validé de la v3 : laissé.
+- [ ] Idée en réserve, À SOUMETTRE À THOMAS : **le numéro en matrice de points façon tour de chronométrage.** VU chez Piastri :
+      le 81 dessiné en points bleus allumés sur une trame de points éteints, sous la bio (`canvas` de 334 x 188). Pourquoi
+      ce pourrait être TPRacing : la trame de points existe déjà dans l'emblème TP de l'accueil, et le panneau lumineux
+      parle de course. Mais le 47 est une marque en Korataki (contour or, plein or), le passer en points c'est changer de
+      lettre, donc test n°2 douteux : pas sans accord, et seulement comme variante d'un seul endroit.
+- [ ] Recoupement : **la signature manuscrite posée sur le portrait** (VU chez Piastri, blanc sur photo plein cadre, sous
+      « STAY READY. STAY FOCUSED. STAY FAST. ») = l'item signature du backlog, toujours en ATTENTE d'un scan de Thomas.
+- [ ] Recoupement : **la date en titre** (VU chez Baltic, « UNE NOUVELLE SILHOUETTE / 1ER DÉCEMBRE » en très grand dans le
+      hero) = l'item « la prochaine échéance s'écrit en phrase », toujours en ATTENTE d'une date réelle.
+- [ ] Constat qui durcit une règle existante : **écrire sur une photo sans la teinter, c'est perdre le titre.** VU chez
+      Tony Kart en 390 : titres blancs en ombre portée sur photos claires et logos (« OTK Kart Group dà il benvenuto a LA
+      Motorsport » illisible sur les logos). Règle DA du 10/08 « on teinte quand on écrit dessus » confirmée par l'échec.
+
+Écartées, avec le motif :
+- **Le damier pixelisé qui balaie le texte** (VU chez Leclerc : rectangles noirs en cascade qui passent sur la bio pendant
+  la transition). Le damier est rare depuis la v3, et un mouvement automatique qui recouvre le texte va contre la règle
+  du 12/09 sur le mouvement. Test n°4 : un effet.
+- **« EXPLORE MORE » et trois chevrons vers le bas** (VU chez Verstappen). Nos chevrons de vitesse disent la vitesse, pas
+  « faites défiler » ; un indicateur de défilement est un signal de gabarit, et nos premiers écrans montrent déjà la suite.
+- **Le hero en carte encadrée de marge** (VU chez Manthey en 390 : la photo posée dans un bloc noir avec 16 px de bord). C'est
+  la plaque sur fond vide de la liste des interdits.
+- **Le mot géant coupé par les deux bords** (VU chez Leclerc, « HARD WORK » en condensé blanc sur gros plan de l'œil).
+  Bel exemple de « un élément trop grand par écran », mais notre élément trop grand existe déjà sur chaque premier écran
+  (Caterham, nom du pilote, 404 en contour) : rien à ajouter.
+
 ### Idées de la veille 23/11 (angle neuf : LE CALENDRIER, comment un site de course présente ses manches et ses circuits)
 Regardés en 1280 et 390 : IndyCar, Formule E, Spa, Magny-Cours, MotoGP et F1 (ces deux-là en partie masqués par le
 bandeau cookies). Échec : WEC (consentement), caterhamcars /calendar (renvoie à l'accueil), imsa et williamsf1 /schedule
@@ -918,7 +953,7 @@ Retenues :
       plutôt qu'un filet neutre. ⏳ Non implémenté aujourd'hui : c'est une modification du seul
       micro-geste validé de la nav (soulignement or, backlog du 10/07), à regarder à froid un jour de
       design, avec un avant/après.
-- [ ] **La barre qui ne change jamais d'état** (VU chez Caterham : même fond noir plein en haut de page
+- [x] (27/11 : caduc, le flou de la nav a disparu avec la refonte v3 du 23/09) **La barre qui ne change jamais d'état** (VU chez Caterham : même fond noir plein en haut de page
       et à 2 814 px). Chez nous la nav est transparente sur le hero puis devient un plateau blanc cassé
       à 95 % avec `backdrop-filter: blur(9px)`. À 95 % d'opacité le flou n'a presque rien à flouter :
       c'est un effet qui coûte une couche de composition et ne se voit pas, donc « un effet, pas de la
@@ -1387,6 +1422,16 @@ une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se v
 
 ## Journal
 
+- 2026-11-27 (routine, AXE C : veille, angle neuf **LE PREMIER ÉCRAN SUR TÉLÉPHONE** ; derniers axes B 26/11, A 25/11,
+  B 24/11, C 23/11). T7 monté, `git pull` fait (2 commits rattrapés, T7 À JOUR). 8 sites regardés en 390 puis 1280
+  (Leclerc, Piastri, Verstappen, Prema, Manthey, Tony Kart, Birel, Baltic), 3 vues chacun, bandeaux cookies refusés
+  avant capture ; puis nos 5 pages en 390 x 844 et 390 x 667. Constat d'ensemble : nos premiers écrans tiennent la
+  comparaison (un élément trop grand chacun, la section suivante qui entre sur l'accueil et le contact, la bande cinéma
+  qui ferme le pilote). **Aucune modification du site** : rien ne passait le test des 4 questions sans contenu ou accord de
+  Thomas (détail et motifs au backlog, « Idées de la veille 27/11 »). Item du 08/09 « la barre qui ne change jamais
+  d'état » coché caduc : le `backdrop-filter: blur(9px)` de la nav a été retiré par la refonte v3 (6e67299).
+  **Question à Thomas** : le 47 en matrice de points façon tour de chronométrage (vu chez Piastri), à un seul endroit ?
+  SEO : rien modifié, RAS (vraie passe faite le 24/11, prochaine relecture Search Console du sitemap vers le 30/11).
 - 2026-11-26 (routine, AXE B : audit, dimension **COHÉRENCE DE LA DA PAGE PAR PAGE**, n°3, pas refaite depuis le 24/10 ;
   derniers axes A 25/11, B 24/11, C 23/11 ; commit a2c517c). T7 absent, run sur un clone du scratchpad. Les 5 pages
   capturées écran par écran en 1280 et en 390 (98 vues), regardées en planches puis en zooms (boutons, puces réseaux,
