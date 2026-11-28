@@ -746,6 +746,13 @@ footer img { height: 52px; width: auto; }
 footer a { color: var(--blanc); text-decoration: none; font-family: var(--f-label); font-weight: 700; letter-spacing: .1em; font-size: 1.02rem; text-transform: uppercase; }
 footer a:hover { color: var(--or); }
 footer .foot-liens { display: flex; gap: 22px; flex-wrap: wrap; }
+/* (28/11) Sur téléphone, 4 ou 5 liens ne tiennent pas sur une ligne : le retour à la ligne laissait
+   un lien orphelin différent selon la page (« Contact » sur l'accueil, « Partenaires » sur contact).
+   Deux colonnes alignées, le même tableau sur les 5 pages. */
+@media (max-width: 600px) {
+  footer .foot-liens { display: grid; grid-template-columns: repeat(2, max-content); gap: 8px 34px; }
+  footer .foot-liens a { display: inline-block; padding-block: 3px; }
+}
 /* cible tactile : 19 px de haut seulement avant (WCAG 2.5.8 demande 24) */
 footer .foot-bas a { display: inline-block; padding-block: 3px; }
 /* (26/11) Sur la page des mentions, le libellé reste un label Bebas comme sur les 4 autres pages, sans être un lien */

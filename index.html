@@ -328,6 +328,7 @@
     .partenaires h2 .or { color: var(--or); }
     .partenaires .lead { margin: 0 auto 14px; max-width: 560px; }
     .fidelite { margin: 0 auto 48px; font-family: var(--f-label); font-weight: 700; font-size: 1.12rem; letter-spacing: .1em; text-transform: uppercase; }
+    .fidelite span { white-space: nowrap; }   /* (28/11) une seule coupure possible, au slash : en 390 la ligne cassait « présentes à / chaque saison » */
     .fidelite b { color: #8F661A; }   /* or foncé à 4,8:1 (#9A6A10 faisait 4,4:1, audit a11y 11/10) */
     .arguments { max-width: 1100px; margin: 0 auto 56px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; text-align: left; border-top: 2px solid var(--marine); }
     .arguments div { padding: 20px 26px 0 0; }
@@ -675,7 +676,7 @@
   <section class="partenaires" id="partenaires" aria-labelledby="t-part">
     <h2 id="t-part">Ils roulent <span class="or">avec nous</span></h2>
     <p class="lead">Des artisans, des PME et des groupes de la région accompagnent le projet depuis ses débuts. Et vous, pourquoi pas&nbsp;?</p>
-    <p class="fidelite"><b>18</b> entreprises depuis 2022 / <b>4</b> présentes à chaque saison</p>
+    <p class="fidelite"><span><b>18</b> entreprises depuis 2022 /</span> <span><b>4</b> présentes à chaque saison</span></p>
     <div class="arguments">
       <div><b>Visibilité contenu</b> <span>Votre marque vit dans l'histoire publiée autour du projet : posts, vidéos, coulisses. Pas seulement sur un sticker.</span></div>
       <div><b>Image et valeurs</b> <span>Un projet familial, authentique et rigoureux : la progression d'un jeune pilote qui se construit sans raccourcis.</span></div>
@@ -742,7 +743,7 @@
     </div>
     <div class="foot-bas">
       <span>© 2026 TPRacing - Thomas Papone Racing. Tous droits réservés.</span>
-      <span>Association de sport automobile, Lapeyrouse, France / <a href="mentions-legales.html" style="color:inherit">Mentions légales</a></span>
+      <span>Association de sport automobile, Lapeyrouse,&nbsp;France / <a href="mentions-legales.html" style="color:inherit">Mentions légales</a></span>
     </div>
   </footer>
 
