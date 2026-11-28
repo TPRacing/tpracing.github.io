@@ -1018,6 +1018,22 @@ garde son panneau Usercentrics malgré la neutralisation et assombrit toute la p
 - [ ] Mesuré et laissé : padding de carte 30/26 sur contact contre 26/24 sur l'accueil. 4 px,
       et les deux familles ne se voient jamais dans le même écran.
 
+### Constats de l'audit QUALITÉ VISUELLE n°4 du 28/11 (5 pages x 1280 et 390 en DPR 2, 75 vues, 22 fichiers image neufs depuis le 03/11)
+
+- [x] **Pied sur téléphone : un lien orphelin, différent selon la page** (« Contact » seul sur l'accueil, « Partenaires » seul
+  sur contact.html, « Contact » seul entre 481 et 580 px sur mentions et 404). Sous 600 px, grille de 2 colonnes alignées,
+  `padding-block: 3px` (cible 35 px de haut). Commit 7c04fb7.
+- [x] **Ligne de fidélité des partenaires coupée « présentes à / chaque saison »** en 390 : deux moitiés insécables, la
+  coupure tombe au slash (320 à 430 : 2 lignes nettes ; dès 480 : 1 ligne). « Lapeyrouse, France » insécable au pied des 5
+  pages. Commit 7c04fb7.
+- [x] Contrôlé propre : les 22 fichiers ajoutés depuis le 03/11 (tailles -xl, -l, -pl, -ml, frise 600w) n'ont aucune bande
+  incrustée (seuls le fond low-key de `pilote-simu` et la marge transparente du détourage `hero-car47-ml` sortent au scan,
+  voulus) ; leurs 13 paires AVIF/WebP ont mêmes dimensions et écart moyen 1 à 5/255 ; toutes les images affichées ont une
+  résolution effective ≥ 2,3 à DPR 2 une fois chargées (les 4 alertes à 1,2-1,45 étaient l'attribut `src` de repli lu avant
+  le chargement paresseux du `<picture>` : artefact de mesure, à filtrer la prochaine fois) ; 0 erreur console sur les 10 cas.
+- [x] Réfuté : « débordement » de `.kart.k20` (scène « Le volant se transmet ») à toutes les largeurs, rogné par son parent,
+  déjà classé faux positif le 21/11.
+
 ### Constats de l'audit QUALITÉ VISUELLE n°3 du 03/11 (5 pages x 1280 et 390 en DPR 2, 88 fichiers image scannés)
 
 - [x] **Tracés Academy ouverts rangée centrée** (accueil) : `animation-range: entry 20% cover 55%` → `entry 10% cover 35%`.
@@ -1421,6 +1437,18 @@ par `mask` (le masque ne compte pas dans l'intersection) ou observer un parent. 
 une image saine (course `loading="lazy"` + même fichier en CSS) : un refus se vérifie par `complete/naturalWidth`.
 
 ## Journal
+
+- 2026-11-28 (routine, AXE B : audit, dimension **QUALITÉ VISUELLE**, n°4, la plus ancienne de la rotation (03/11) ;
+  derniers axes C 27/11, B 26/11, A 25/11 ; commit 7c04fb7). T7 monté, À JOUR. Backlog relu pour un axe A : tout ce qui
+  reste est bloqué sur Thomas ou caduc (la bande partenaires défilante et son bouton pause n'existent plus depuis la v3 :
+  items 556/608 et 1173 à requalifier sur le mur au prochain jour A), d'où un jour B. 22 fichiers image neufs scannés
+  (bords, paires AVIF/WebP), 5 pages capturées écran par écran en 1280 et 390 en DPR 2 (75 vues, planches puis zooms),
+  résolution effective mesurée sur chaque image. Images : propres. **Corrigés (typographie des petites largeurs)** :
+  le menu du pied laissait un lien orphelin différent selon la page → tableau de 2 colonnes sous 600 px ; la ligne de
+  fidélité coupait « présentes à / chaque saison » → coupure au slash seulement ; « Lapeyrouse, France » insécable.
+  Vérifié 5 pages x 7 largeurs (320 à 1280) : rangées attendues, 0 erreur JS ; en prod : build `built`, marqueurs vus.
+  SEO : aucun texte changé (insécable seulement), title, descriptions, JSON-LD et `lastmod` inchangés, RAS. Prochaine
+  relecture Search Console du sitemap vers le 30/11.
 
 - 2026-11-27 (routine, AXE C : veille, angle neuf **LE PREMIER ÉCRAN SUR TÉLÉPHONE** ; derniers axes B 26/11, A 25/11,
   B 24/11, C 23/11). T7 monté, `git pull` fait (2 commits rattrapés, T7 À JOUR). 8 sites regardés en 390 puis 1280

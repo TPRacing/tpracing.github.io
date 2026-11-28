@@ -1138,3 +1138,13 @@ motivés valent autant que les idées retenues, ils empêchent de re-proposer).
   (blanc cassé à 32 %, `aria-hidden`) façon écran de chronométrage. « 05 rapports » s'aligne sur la numérotation 01-06
   des circuits juste au-dessus et prend la carrure de 170 et 12. Source : williamsgptech.com (« 05 Decades »), veille
   du 05/10. Le zéro reste en retrait : la donnée, c'est le 5. Captures : ch1280b.png, ch375b.png, c1280h.png du scratchpad.
+
+- 2026-11-28 (audit qualité visuelle n°4, axe B) : **une rangée de labels qui ne tient pas sur une ligne se range en
+  tableau, jamais en retour à la ligne libre.** Sur téléphone, le menu du pied laissait un lien seul sur sa 2e ligne,
+  et pas le même selon la page (« Contact » sur l'accueil, « Partenaires » sur contact.html) : la marque d'une liste
+  qui subit sa largeur. Sous 600 px, les liens passent en grille de 2 colonnes alignées à gauche (`repeat(2,
+  max-content)`, 8 px / 34 px) : le même tableau sur les 5 pages, la rigueur d'alignement de la charte. Corollaire,
+  **un label Bebas ne se coupe qu'à son séparateur** : « 18 entreprises depuis 2022 / 4 présentes à chaque saison »
+  cassait « présentes à / chaque saison » en 390 ; chaque moitié est maintenant insécable (`white-space: nowrap`), la
+  coupure tombe au slash, tenue jusqu'à 320. Même logique dans le texte : « Lapeyrouse, France » insécable au pied.
+  Captures : z1.png, z2.png (avant), z5.png (après) du scratchpad.
